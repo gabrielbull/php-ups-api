@@ -1,0 +1,22 @@
+{
+    "name": "gavroche/ups",
+    "type": "library",
+    "description": "UPS Api PHP Wrapper",
+    "keywords": ["ups", "api", "wrapper"],
+    "homepage": "https://github.com/gavroche/ups",
+    "license": "GPL-2.0",
+    "authors": [
+        {
+            "name": "Gabriel Bull",
+            "email": "gavroche.bull@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "autoload": {
+        "psr-0" : {
+            "UPS" : "src/"
+        }
+    }
+}
