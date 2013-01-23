@@ -50,11 +50,11 @@ abstract class Ups {
 		// Create the AccessRequest element
 		$accessRequest = $xml->appendChild($xml->createElement("AccessRequest"));
 		$accessRequest->setAttribute('xml:lang','en-US');
-        
-        $accessRequest->appendChild($xml->createElement("AccessLicenseNumber", $this->accessKey));
-        $accessRequest->appendChild($xml->createElement("UserId", $this->userId));
-        $accessRequest->appendChild($xml->createElement("Password", $this->password));
-        
+		
+		$accessRequest->appendChild($xml->createElement("AccessLicenseNumber", $this->accessKey));
+		$accessRequest->appendChild($xml->createElement("UserId", $this->userId));
+		$accessRequest->appendChild($xml->createElement("Password", $this->password));
+		
 		return $xml->saveXML();
 	}
 
@@ -67,7 +67,7 @@ abstract class Ups {
 	 * @return  SimpleXMLElement
 	 */
 	protected function request($access, $request, $endpointurl) {
-		//create Post request
+		// Create POST request
 		$form = [
 			'http' => [
 				'method' => 'POST',

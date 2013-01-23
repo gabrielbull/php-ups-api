@@ -3,9 +3,9 @@
 namespace ups;
 
 use DOMDocument,
-	Exception,
-	SimpleXMLElement,
-	ArrayObject;
+    Exception,
+    SimpleXMLElement,
+    ArrayObject;
 
 /**
  * QuantumView Wrapper
@@ -97,8 +97,8 @@ class QuantumView extends Ups {
 		$quantumViewRequest = $xml->appendChild($xml->createElement("QuantumViewRequest"));
 		$quantumViewRequest->setAttribute('xml:lang','en-US');
         
-        // Create the SubscriptionRequest element
-        if (null !== $this->name || null !== $this->beginDateTime || null !== $this->fileName) {
+		// Create the SubscriptionRequest element
+		if (null !== $this->name || null !== $this->beginDateTime || null !== $this->fileName) {
 			$subscriptionRequest = $quantumViewRequest->appendChild($xml->createElement("SubscriptionRequest"));
 			
 			// Subscription name
@@ -116,9 +116,9 @@ class QuantumView extends Ups {
 			} else if(null !== $this->fileName) {
 				$subscriptionRequest->appendChild($xml->createElement("FileName", $this->fileName));
 			}
-        }
-        
-        // Create the Bookmark element
+		}
+		
+		// Create the Bookmark element
 		if (null !== $this->bookmark) {
 			$quantumViewRequest->appendChild($xml->createElement("Bookmark", $this->bookmark));
 		}

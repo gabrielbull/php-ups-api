@@ -21,11 +21,9 @@ class Autoloader {
 	 * @param   string
 	 */
 	static public function autoload($class) {
-		if (strpos($class, 'ups\\') !== 0) return;
-		else {
-			if (file_exists($file = dirname(__FILE__) . '/' . strtolower(preg_replace('!^ups\\\!', '', $class)) . '.php')) {
-				require $file;
-			}
+		if (0 !== strpos($class, 'ups\\')) return;
+		else if (file_exists($file = dirname(__FILE__) . '/' . strtolower(preg_replace('!^ups\\\!', '', $class)) . '.php')) {
+			require $file;
 		}
 	}
 }

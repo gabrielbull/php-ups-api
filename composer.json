@@ -16,7 +16,7 @@
     },
     "autoload": {
         "psr-0" : {
-            "UPS" : "src/"
+            "UPS" : "lib/"
         }
     }
 }
