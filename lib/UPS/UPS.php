@@ -68,13 +68,13 @@ abstract class Ups {
 	 */
 	protected function request($access, $request, $endpointurl) {
 		// Create POST request
-		$form = [
-			'http' => [
+		$form = array(
+			'http' => array(
 				'method' => 'POST',
 				'header' => 'Content-type: application/x-www-form-urlencoded',
 				'content' => $access . $request
-			]
-		];
+			)
+		);
 				
 		$request = stream_context_create($form);
 
@@ -94,5 +94,15 @@ abstract class Ups {
 		}
 		
 		throw new Exception("Failure: Response is invalid.");
+	}
+	
+	/**
+	 * Convert XMLSimpleObject to stdClass object
+	 * 
+	 * @param   SimpleXMLElement
+	 * @return  stdClass
+	 */
+	protected function convertXmlObject(SimpleXMLElement $xmlObject) {		
+		return json_decode(json_encode($xmlObject));
 	}
 }

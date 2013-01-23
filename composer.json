@@ -3,7 +3,7 @@
     "type": "library",
     "description": "UPS Api PHP Wrapper",
     "keywords": ["ups", "api", "wrapper"],
-    "homepage": "https://github.com/gavroche/ups",
+    "homepage": "https://github.com/gavroche/ups-php",
     "license": "GPL-2.0",
     "authors": [
         {
@@ -12,7 +12,7 @@
         }
     ],
     "require": {
-        "php": ">=5.4.0"
+        "php": ">=5.3"
     },
     "autoload": {
         "psr-0" : {

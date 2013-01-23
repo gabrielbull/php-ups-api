@@ -12,7 +12,7 @@ class Autoloader {
 	 * Register the autoloader
 	 */
 	static public function register() {
-		spl_autoload_register([new self, 'autoload']);
+		spl_autoload_register(array(new self, 'autoload'));
 	}
 
 	/**

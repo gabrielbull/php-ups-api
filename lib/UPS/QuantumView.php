@@ -4,11 +4,10 @@ namespace ups;
 
 use DOMDocument,
     Exception,
-    SimpleXMLElement,
     ArrayObject;
 
 /**
- * QuantumView Wrapper
+ * Quantum View API Wrapper
  *
  * @package ups
  */
@@ -76,9 +75,9 @@ class QuantumView extends Ups {
 	}
 	
 	/**
-	 * Return true if request has a bookmark
+	 * Return the bookmark
 	 * 
-	 * @return  bool
+	 * @return  string
 	 */
 	public function getBookmark() {
 		return $this->responseBookmark;
@@ -133,39 +132,26 @@ class QuantumView extends Ups {
 	/**
 	 * Fromat the response
 	 * 
-	 * @return  string
+	 * @return  ArrayObject
 	 */
 	private function formatResponse() {
-		$eventsException = ['FileName', 'StatusType'];
+		$eventsException = array('FileName', 'StatusType');
 		$response = new ArrayObject;
 		
 		// Loop subscription files
 		foreach($this->response->QuantumViewEvents->SubscriptionEvents->SubscriptionFile as $subcriptionFile) {
 			foreach($subcriptionFile as $eventName => $event) {
 				if (!in_array($eventName, $eventsException)) {
-					$eventObject = new ArrayObject;
-					$eventObject->offsetSet('Event', $eventName);
-					$event = $this->convertXmlObject($eventObject, $event);
+					$event = $this->convertXmlObject($event);
+					$event = (object) array_merge(
+						array('Event' => $eventName), 
+						(array) $event
+					);
 					$response->append($event);
 				}
 			}
 		}
 		
 		return $response;
-	}
-	
-	/**
-	 * Convert XMLSimpleObject to ArrayObject
-	 * 
-	 * @param   XMLSimpleObject
-	 * @return  ArrayObject
-	 */
-	private function convertXmlObject($arrayObject, $xmlObject) {		
-		foreach($xmlObject as $key=>$value) {
-			if ($value instanceof SimpleXMLElement) $value = $this->convertXmlObject(new ArrayObject, $value);
-			$arrayObject->offsetSet($key, $value);
-		}
-		
-		return $arrayObject;
 	}
 }

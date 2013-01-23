@@ -11,7 +11,7 @@ To use the UPS APIs, you have to [request an access key from UPS](https://www.up
 
 ## Requirements
 
-This library uses PHP 5.4.0+.
+This library uses PHP 5.3+.
 
 ## QuantumView Class
 
@@ -52,3 +52,38 @@ QuantumView parameters are:
 _If you provide a `beginDateTime`, but no `endDateTime`, the `endDateTime` will default to the current date time._
 
 _To use the `fileName` parameter, do not provide a `beginDateTime`._
+
+
+## Tracking Class
+
+The Tracking Class allow you to track a shipment using the UPS Tracking API. 
+
+### Example
+
+```php
+$tracking = new ups\Tracking(
+	$accessKey,
+	$userId,
+	$password
+);
+
+try {
+	$shipment = $tracking->track('TRACKING NUMBER');
+		
+	foreach($shipment->Package->Activity as $activity) {
+		var_dump($activity);
+	}
+	
+} catch (Exception $e) {
+	var_dump($e);
+}
+```
+
+### Parameters
+
+Tracking parameters are:
+
+ * `trackingNumber` The package’s tracking number.
+ * `requestOption` Optional processing. For Mail Innovations the only valid options are Last Activity and All activity.
+
+
