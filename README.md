@@ -32,6 +32,7 @@ try {
 	
 	foreach($events as $event) {
 		// Your code here
+		echo $event->Type;
 	}
 	
 } catch (Exception $e) {

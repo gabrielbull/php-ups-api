@@ -144,7 +144,7 @@ class QuantumView extends Ups {
 				if (!in_array($eventName, $eventsException)) {
 					$event = $this->convertXmlObject($event);
 					$event = (object) array_merge(
-						array('Event' => $eventName), 
+						array('Type' => $eventName), 
 						(array) $event
 					);
 					$response->append($event);

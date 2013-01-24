@@ -1,9 +1,9 @@
 {
-    "name": "gavroche/ups",
+    "name": "gavroche/ups-api",
     "type": "library",
-    "description": "UPS Api PHP Wrapper",
-    "keywords": ["ups", "api", "wrapper"],
-    "homepage": "https://github.com/gavroche/ups-php",
+    "description": "UPS API PHP Wrapper",
+    "keywords": ["ups", "api", "wrapper", "quantum view", "tracking"],
+    "homepage": "https://github.com/gavroche/ups-api-php",
     "license": "GPL-2.0",
     "authors": [
         {
