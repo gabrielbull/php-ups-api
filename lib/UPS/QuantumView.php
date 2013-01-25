@@ -4,7 +4,8 @@ namespace ups;
 
 use DOMDocument,
     Exception,
-    ArrayObject;
+    ArrayObject,
+    SimpleXMLElement;
 
 /**
  * Quantum View API Wrapper
@@ -17,8 +18,6 @@ class QuantumView extends Ups {
 	private $endpointurl = 'https://onlinetools.ups.com/ups.app/xml/QVEvents';
 	
 	private $responseBookmark;
-	
-	public $response;
 	
 	/**
 	 * Get a QuantumView subscription
@@ -48,19 +47,19 @@ class QuantumView extends Ups {
 		$access = $this->createAccess();
 		$request = $this->createRequest();
 		
-		$this->response = $this->request($access, $request, $this->endpointurl);
+		$response = $this->request($access, $request, $this->endpointurl);
 		
-		if ($this->response->Response->ResponseStatusCode == 0) {
+		if ($response->Response->ResponseStatusCode == 0) {
 			throw new Exception(
-				"Failure ({$this->response->Response->Error->ErrorSeverity}): {$this->response->Response->Error->ErrorDescription}", 
-				(int) $this->response->Response->Error->ErrorCode
+				"Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}", 
+				(int) $response->Response->Error->ErrorCode
 			);
 		} else {
-			if (isset($this->response->Bookmark)) {
-				$this->responseBookmark = $this->response->Bookmark;
+			if (isset($response->Bookmark)) {
+				$this->responseBookmark = $response->Bookmark;
 			}
 			
-			return $this->formatResponse();
+			return $this->formatResponse($response);
 		}
 	}
 	
@@ -132,14 +131,15 @@ class QuantumView extends Ups {
 	/**
 	 * Fromat the response
 	 * 
+	 * @param   SimpleXMLElement
 	 * @return  ArrayObject
 	 */
-	private function formatResponse() {
+	private function formatResponse(SimpleXMLElement $response) {
 		$eventsException = array('FileName', 'StatusType');
-		$response = new ArrayObject;
+		$output = new ArrayObject;
 		
 		// Loop subscription files
-		foreach($this->response->QuantumViewEvents->SubscriptionEvents->SubscriptionFile as $subcriptionFile) {
+		foreach($response->QuantumViewEvents->SubscriptionEvents->SubscriptionFile as $subcriptionFile) {
 			foreach($subcriptionFile as $eventName => $event) {
 				if (!in_array($eventName, $eventsException)) {
 					$event = $this->convertXmlObject($event);
@@ -147,11 +147,11 @@ class QuantumView extends Ups {
 						array('Type' => $eventName), 
 						(array) $event
 					);
-					$response->append($event);
+					$output->append($event);
 				}
 			}
 		}
 		
-		return $response;
+		return $output;
 	}
 }

@@ -14,6 +14,8 @@ use DOMDocument,
 abstract class Ups {
 	protected $accessKey, $userId, $password;
 	
+	public $response;
+	
 	/**
 	 * Constructor
 	 *
@@ -86,6 +88,7 @@ abstract class Ups {
 		fclose($handle);
 
 		if($response != false) {
+			$this->response = $response;
 			$response = new SimpleXMLElement($response);
 			
 			if (isset($response->Response->ResponseStatusCode)) {

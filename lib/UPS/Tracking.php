@@ -2,7 +2,8 @@
 
 namespace ups;
 
-use DOMDocument;
+use DOMDocument,
+    SimpleXMLElement;
 
 /**
  * Tracking API Wrapper
@@ -13,8 +14,6 @@ class Tracking extends Ups {
 	private $trackingNumber, $requestOption;
 	
 	private $endpointurl = 'https://onlinetools.ups.com/ups.app/xml/Track';
-	
-	public $response;
 	
 	/**
 	 * Get a QuantumView subscription
@@ -31,15 +30,15 @@ class Tracking extends Ups {
 		$access = $this->createAccess();
 		$request = $this->createRequest();
 				
-		$this->response = $this->request($access, $request, $this->endpointurl);
+		$response = $this->request($access, $request, $this->endpointurl);
 		
-		if ($this->response->Response->ResponseStatusCode == 0) {
+		if ($response->Response->ResponseStatusCode == 0) {
 			throw new Exception(
-				"Failure ({$this->response->Response->Error->ErrorSeverity}): {$this->response->Response->Error->ErrorDescription}", 
-				(int) $this->response->Response->Error->ErrorCode
+				"Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}", 
+				(int) $response->Response->Error->ErrorCode
 			);
 		} else {
-			return $this->formatResponse();
+			return $this->formatResponse($response);
 		}
 	}
 	
@@ -75,9 +74,10 @@ class Tracking extends Ups {
 	/**
 	 * Fromat the response
 	 * 
+	 * @param   SimpleXMLElement
 	 * @return  stdClass
 	 */
-	private function formatResponse() {
-		return $this->convertXmlObject($this->response->Shipment);
+	private function formatResponse(SimpleXMLElement $response) {
+		return $this->convertXmlObject($response->Shipment);
 	}
 }
