@@ -3,7 +3,8 @@
 namespace ups;
 
 use DOMDocument,
-    SimpleXMLElement;
+    SimpleXMLElement,
+    Exception;
 
 /**
  * Tracking API Wrapper

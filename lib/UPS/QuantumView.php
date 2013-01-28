@@ -3,9 +3,9 @@
 namespace ups;
 
 use DOMDocument,
-    Exception,
     ArrayObject,
-    SimpleXMLElement;
+    SimpleXMLElement,
+    Exception;
 
 /**
  * Quantum View API Wrapper
