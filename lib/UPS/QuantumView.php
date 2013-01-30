@@ -79,7 +79,7 @@ class QuantumView extends Ups {
 	 * @return  string
 	 */
 	public function getBookmark() {
-		return $this->responseBookmark;
+		return (string) $this->responseBookmark;
 	}
 	
 	/**
