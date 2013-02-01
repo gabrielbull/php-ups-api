@@ -1,6 +1,6 @@
 <?php
 
-namespace ups;
+namespace UPS;
 
 use DOMDocument,
     SimpleXMLElement,
@@ -11,7 +11,7 @@ use DOMDocument,
  *
  * @package ups
  */
-abstract class Ups {
+abstract class UPS {
 	protected $accessKey, $userId, $password;
 	
 	public $response;

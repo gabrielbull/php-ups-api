@@ -1,6 +1,6 @@
 <?php
 
-namespace ups;
+namespace UPS;
 
 /**
  * Autoloads UPS classes
@@ -21,7 +21,7 @@ class Autoloader {
 	 * @param   string
 	 */
 	static public function autoload($class) {
-		if (0 !== strpos($class, 'ups\\')) return;
+		if (0 !== strpos($class, 'UPS\\')) return;
 		else if (file_exists($file = dirname(__FILE__) . '/' . strtolower(preg_replace('!^ups\\\!', '', $class)) . '.php')) {
 			require $file;
 		}

@@ -20,7 +20,7 @@ The QuantumView Class allow you to request a Quantum View Data subscription.
 ### Example
 
 ```php
-$quantumView = new ups\QuantumView(
+$quantumView = new UPS\QuantumView(
 	$accessKey,
 	$userId,
 	$password
@@ -62,7 +62,7 @@ The Tracking Class allow you to track a shipment using the UPS Tracking API.
 ### Example
 
 ```php
-$tracking = new ups\Tracking(
+$tracking = new UPS\Tracking(
 	$accessKey,
 	$userId,
 	$password

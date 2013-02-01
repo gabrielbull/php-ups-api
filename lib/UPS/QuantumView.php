@@ -1,6 +1,6 @@
 <?php
 
-namespace ups;
+namespace UPS;
 
 use DOMDocument,
     ArrayObject,
@@ -12,7 +12,7 @@ use DOMDocument,
  *
  * @package ups
  */
-class QuantumView extends Ups {
+class QuantumView extends UPS {
 	private $name, $beginDateTime, $endDateTime, $fileName, $bookmark;
 	
 	private $endpointurl = 'https://onlinetools.ups.com/ups.app/xml/QVEvents';

@@ -1,6 +1,6 @@
 <?php
 
-namespace ups;
+namespace UPS;
 
 use DOMDocument,
     SimpleXMLElement,
@@ -11,7 +11,7 @@ use DOMDocument,
  *
  * @package ups
  */
-class Tracking extends Ups {
+class Tracking extends UPS {
 	private $trackingNumber, $requestOption;
 	
 	private $endpointurl = 'https://onlinetools.ups.com/ups.app/xml/Track';
