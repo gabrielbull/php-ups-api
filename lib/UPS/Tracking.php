@@ -14,7 +14,7 @@ use DOMDocument,
 class Tracking extends UPS {
 	private $trackingNumber, $requestOption;
 	
-	private $endpointurl = 'https://onlinetools.ups.com/ups.app/xml/Track';
+	protected $endpoint = '/Track';
 	
 	/**
 	 * Get a QuantumView subscription
@@ -31,7 +31,7 @@ class Tracking extends UPS {
 		$access = $this->createAccess();
 		$request = $this->createRequest();
 				
-		$response = $this->request($access, $request, $this->endpointurl);
+		$response = $this->request($access, $request, $this->compileEndpointUrl());
 		
 		if ($response->Response->ResponseStatusCode == 0) {
 			throw new Exception(

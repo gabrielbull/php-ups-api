@@ -15,7 +15,7 @@ use DOMDocument,
 class QuantumView extends UPS {
 	private $name, $beginDateTime, $endDateTime, $fileName, $bookmark;
 	
-	private $endpointurl = 'https://onlinetools.ups.com/ups.app/xml/QVEvents';
+	protected $endpoint = '/QVEvents';
 	
 	private $responseBookmark;
 	
@@ -47,7 +47,7 @@ class QuantumView extends UPS {
 		$access = $this->createAccess();
 		$request = $this->createRequest();
 		
-		$response = $this->request($access, $request, $this->endpointurl);
+		$response = $this->request($access, $request, $this->compileEndpointUrl());
 		
 		if ($response->Response->ResponseStatusCode == 0) {
 			throw new Exception(

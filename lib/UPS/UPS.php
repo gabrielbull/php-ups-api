@@ -13,7 +13,10 @@ use DOMDocument,
  */
 abstract class UPS {
 	protected $accessKey, $userId, $password;
-	
+	protected $useIntegration = false;
+	protected $productionBaseUrl = 'https://onlinetools.ups.com/ups.app/xml';
+	protected $integrationBaseUrl = 'https://wwwcie.ups.com/ups.app/xml';
+
 	public $response;
 	
 	/**
@@ -22,11 +25,13 @@ abstract class UPS {
 	 * @param   string  $accessKey  UPS License Access Key
 	 * @param   string  $userId     UPS User ID
 	 * @param   string  $password   UPS User Password
+	 * @param   boolean $integration Determine if we should use production or CIE URLs.
 	 */
-	public function __construct($accessKey, $userId, $password) {
+	public function __construct($accessKey, $userId, $password, $useIntegration = false) {
 		$this->accessKey = $accessKey;
 		$this->userId = $userId;
 		$this->password = $password;
+		$this->useIntegration = $useIntegration;
 	}
 	
 	/**
@@ -107,5 +112,16 @@ abstract class UPS {
 	 */
 	protected function convertXmlObject(SimpleXMLElement $xmlObject) {		
 		return json_decode(json_encode($xmlObject));
+	}
+
+	/**
+	 * Compiles the final endpoint URL for the request.
+	 *
+	 * @return string
+	 */
+	protected function compileEndpointUrl() {
+		$base = ($this->useIntegration ? $this->integrationBaseUrl : $this->productionBaseUrl);
+
+		return $base . $this->endpoint;
 	}
 }
