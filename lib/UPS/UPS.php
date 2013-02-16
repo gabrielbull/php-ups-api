@@ -18,7 +18,7 @@ abstract class UPS {
 	protected $integrationBaseUrl = 'https://wwwcie.ups.com/ups.app/xml';
 
 	public $response;
-	
+
 	/**
 	 * Constructor
 	 *
@@ -33,7 +33,7 @@ abstract class UPS {
 		$this->password = $password;
 		$this->useIntegration = $useIntegration;
 	}
-	
+
 	/**
 	 * Format a Unix timestamp or a date time with a Y-m-d H:i:s format into a YYYYMMDDHHmmss format required by UPS.
 	 *
@@ -41,10 +41,13 @@ abstract class UPS {
 	 * @return  string
 	 */
 	protected function formatDateTime($timestamp) {
-		if (!is_numeric($timestamp)) $timestamp = strtotime($timestamp);		
+		if (!is_numeric($timestamp)) {
+			$timestamp = strtotime($timestamp);
+		}
+
 		return date('YmdHis', $timestamp);
 	}
-	
+
 	/**
 	 * Create the access request
 	 * 
@@ -85,17 +88,17 @@ abstract class UPS {
 				
 		$request = stream_context_create($form);
 
-		if(!$handle = fopen($endpointurl, 'rb', false, $request)) {
+		if (!$handle = fopen($endpointurl, 'rb', false, $request)) {
 			throw new Exception("Failure: Connection to Endpoint URL failed.");
 		}
-		
+
 		$response = stream_get_contents($handle);
 		fclose($handle);
 
-		if($response != false) {
+		if ($response != false) {
 			$this->response = $response;
 			$response = new SimpleXMLElement($response);
-			
+
 			if (isset($response->Response->ResponseStatusCode)) {
 				return $response;
 			}
@@ -103,14 +106,14 @@ abstract class UPS {
 		
 		throw new Exception("Failure: Response is invalid.");
 	}
-	
+
 	/**
 	 * Convert XMLSimpleObject to stdClass object
 	 * 
 	 * @param   SimpleXMLElement
 	 * @return  stdClass
 	 */
-	protected function convertXmlObject(SimpleXMLElement $xmlObject) {		
+	protected function convertXmlObject(SimpleXMLElement $xmlObject) {
 		return json_decode(json_encode($xmlObject));
 	}
 
