@@ -148,11 +148,12 @@ abstract class UPS {
 	/**
 	 * Compiles the final endpoint URL for the request.
 	 *
+	 * @param  string The URL segment to build in to the endpoint
 	 * @return string
 	 */
-	protected function compileEndpointUrl() {
+	protected function compileEndpointUrl($segment) {
 		$base = ($this->useIntegration ? $this->integrationBaseUrl : $this->productionBaseUrl);
 
-		return $base . $this->endpoint;
+		return $base . $segment;
 	}
 }

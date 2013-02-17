@@ -53,7 +53,7 @@ class QuantumView extends UPS {
 		$access = $this->createAccess();
 		$request = $this->createRequest();
 		
-		$response = $this->request($access, $request, $this->compileEndpointUrl());
+		$response = $this->request($access, $request, $this->compileEndpointUrl($this->endpoint));
 		
 		if ($response->Response->ResponseStatusCode == 0) {
 			throw new Exception(
