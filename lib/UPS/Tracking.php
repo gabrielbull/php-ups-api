@@ -51,19 +51,22 @@ class Tracking extends UPS {
 		$xml = new DOMDocument();
 		$xml->formatOutput = true;
 
-		// Create the QuantumViewRequest element
 		$trackRequest = $xml->appendChild($xml->createElement("TrackRequest"));
 		$trackRequest->setAttribute('xml:lang','en-US');
 
-		// Create the Request element
 		$request = $trackRequest->appendChild($xml->createElement("Request"));
+
+		if (null !== $this->context) {
+			$node = $xml->importNode($this->createTransactionNode(), true);
+			$request->appendChild($node);
+		}
+
 		$request->appendChild($xml->createElement("RequestAction", "Track"));
 
 		if (null !== $this->requestOption) {
 			$request->appendChild($xml->createElement("RequestOption", $this->requestOption));
 		}
 
-		// Add tracking number
 		if (null !== $this->trackingNumber) {
 			$trackRequest->appendChild($xml->createElement("TrackingNumber", $this->trackingNumber));
 		}

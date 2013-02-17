@@ -132,6 +132,12 @@ class QuantumView extends UPS {
 
 		// Create the Request element
 		$request = $quantumViewRequest->appendChild($xml->createElement("Request"));
+
+		if (null !== $this->context) {
+			$node = $xml->importNode($this->createTransactionNode(), true);
+			$request->appendChild($node);
+		}
+
 		$request->appendChild($xml->createElement("RequestAction", "QVEvents"));
 
 		return $xml->saveXML();

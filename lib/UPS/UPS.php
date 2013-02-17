@@ -13,9 +13,13 @@ use DOMDocument,
  */
 abstract class UPS {
 	protected $accessKey, $userId, $password;
-	protected $useIntegration = false;
+
 	protected $productionBaseUrl = 'https://onlinetools.ups.com/ups.app/xml';
 	protected $integrationBaseUrl = 'https://wwwcie.ups.com/ups.app/xml';
+
+	protected $useIntegration = false;
+
+	protected $context;
 
 	public $response;
 
@@ -32,6 +36,15 @@ abstract class UPS {
 		$this->userId = $userId;
 		$this->password = $password;
 		$this->useIntegration = $useIntegration;
+	}
+
+	/**
+	 * Sets the transaction / context value
+	 *
+	 * @param string $context The transaction "guidlikesubstance" value
+	 */
+	public function setContext($context) {
+		$this->context = $context;
 	}
 
 	/**
@@ -66,6 +79,21 @@ abstract class UPS {
 		$accessRequest->appendChild($xml->createElement("Password", $this->password));
 		
 		return $xml->saveXML();
+	}
+
+	/**
+	 * Creates the TransactionReference node for a request
+	 *
+	 * @return DomDocument
+	 */
+	protected function createTransactionNode() {
+		$xml = new DOMDocument;
+		$xml->formatOutput = true;
+
+		$trxRef = $xml->appendChild($xml->createElement('TransactionReference'));
+		$trxRef->appendChild($xml->createElement('CustomerContext', $this->context));
+
+		return $trxRef->cloneNode(true);
 	}
 
 	/**
