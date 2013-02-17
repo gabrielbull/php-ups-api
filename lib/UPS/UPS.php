@@ -13,22 +13,40 @@ use DOMDocument,
  */
 abstract class UPS {
 	protected $accessKey, $userId, $password;
-	
+
+	protected $productionBaseUrl = 'https://onlinetools.ups.com/ups.app/xml';
+	protected $integrationBaseUrl = 'https://wwwcie.ups.com/ups.app/xml';
+
+	protected $useIntegration = false;
+
+	protected $context;
+
 	public $response;
-	
+
 	/**
 	 * Constructor
 	 *
 	 * @param   string  $accessKey  UPS License Access Key
 	 * @param   string  $userId     UPS User ID
 	 * @param   string  $password   UPS User Password
+	 * @param   boolean $integration Determine if we should use production or CIE URLs.
 	 */
-	public function __construct($accessKey, $userId, $password) {
+	public function __construct($accessKey, $userId, $password, $useIntegration = false) {
 		$this->accessKey = $accessKey;
 		$this->userId = $userId;
 		$this->password = $password;
+		$this->useIntegration = $useIntegration;
 	}
-	
+
+	/**
+	 * Sets the transaction / context value
+	 *
+	 * @param string $context The transaction "guidlikesubstance" value
+	 */
+	public function setContext($context) {
+		$this->context = $context;
+	}
+
 	/**
 	 * Format a Unix timestamp or a date time with a Y-m-d H:i:s format into a YYYYMMDDHHmmss format required by UPS.
 	 *
@@ -36,10 +54,13 @@ abstract class UPS {
 	 * @return  string
 	 */
 	protected function formatDateTime($timestamp) {
-		if (!is_numeric($timestamp)) $timestamp = strtotime($timestamp);		
+		if (!is_numeric($timestamp)) {
+			$timestamp = strtotime($timestamp);
+		}
+
 		return date('YmdHis', $timestamp);
 	}
-	
+
 	/**
 	 * Create the access request
 	 * 
@@ -58,6 +79,21 @@ abstract class UPS {
 		$accessRequest->appendChild($xml->createElement("Password", $this->password));
 		
 		return $xml->saveXML();
+	}
+
+	/**
+	 * Creates the TransactionReference node for a request
+	 *
+	 * @return DomDocument
+	 */
+	protected function createTransactionNode() {
+		$xml = new DOMDocument;
+		$xml->formatOutput = true;
+
+		$trxRef = $xml->appendChild($xml->createElement('TransactionReference'));
+		$trxRef->appendChild($xml->createElement('CustomerContext', $this->context));
+
+		return $trxRef->cloneNode(true);
 	}
 
 	/**
@@ -80,17 +116,17 @@ abstract class UPS {
 				
 		$request = stream_context_create($form);
 
-		if(!$handle = fopen($endpointurl, 'rb', false, $request)) {
+		if (!$handle = fopen($endpointurl, 'rb', false, $request)) {
 			throw new Exception("Failure: Connection to Endpoint URL failed.");
 		}
-		
+
 		$response = stream_get_contents($handle);
 		fclose($handle);
 
-		if($response != false) {
+		if ($response != false) {
 			$this->response = $response;
 			$response = new SimpleXMLElement($response);
-			
+
 			if (isset($response->Response->ResponseStatusCode)) {
 				return $response;
 			}
@@ -98,14 +134,26 @@ abstract class UPS {
 		
 		throw new Exception("Failure: Response is invalid.");
 	}
-	
+
 	/**
 	 * Convert XMLSimpleObject to stdClass object
 	 * 
 	 * @param   SimpleXMLElement
 	 * @return  stdClass
 	 */
-	protected function convertXmlObject(SimpleXMLElement $xmlObject) {		
+	protected function convertXmlObject(SimpleXMLElement $xmlObject) {
 		return json_decode(json_encode($xmlObject));
+	}
+
+	/**
+	 * Compiles the final endpoint URL for the request.
+	 *
+	 * @param  string The URL segment to build in to the endpoint
+	 * @return string
+	 */
+	protected function compileEndpointUrl($segment) {
+		$base = ($this->useIntegration ? $this->integrationBaseUrl : $this->productionBaseUrl);
+
+		return $base . $segment;
 	}
 }
