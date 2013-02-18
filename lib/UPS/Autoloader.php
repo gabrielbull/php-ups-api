@@ -22,7 +22,7 @@ class Autoloader {
 	 */
 	static public function autoload($class) {
 		if (0 !== strpos($class, 'UPS\\')) return;
-		else if (file_exists($file = dirname(__FILE__) . '/' . strtolower(preg_replace('!^ups\\\!', '', $class)) . '.php')) {
+		else if (file_exists($file = dirname(__FILE__) . '/' . strtolower(preg_replace('!^UPS\\\!i', '', $class)) . '.php')) {
 			require $file;
 		}
 	}
