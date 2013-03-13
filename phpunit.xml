@@ -1,0 +1,21 @@
+<phpunit backupGlobals="false"
+         backupStaticAttributes="false"
+         bootstrap="test/bootstrap.php"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         processIsolation="true"
+         stopOnFailure="false"
+         syntaxCheck="false">
+  <testsuites>
+    <testsuite name="UPS Api Test Suite">
+      <directory>./test/UPS/</directory>
+    </testsuite>
+  </testsuites>
+  <php>
+      <var name="UPS_ACCESS_KEY" value="xxxxxxxxxxxxxx" />
+      <var name="UPS_USER_ID" value="xxxxxxxxxxxxxx" />
+      <var name="UPS_PASSWORD" value="xxxxxxxxxxxxxx" />
+  </php>
+</phpunit>
