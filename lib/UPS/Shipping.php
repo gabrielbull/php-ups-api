@@ -63,6 +63,48 @@ class Shipping extends UPS {
 	}
 
 	/**
+	 * Create a Shipment Accept request (generate a shipping label)
+	 *
+	 * @param  string $shipmentDigest The UPS Shipment Digest received from a ShipConfirm request.
+	 * @return stdClass
+	 */
+	public function accept($shipmentDigest) {
+		$request = $this->createAcceptRequest($shipmentDigest);
+		$response = $this->request($this->createAccess(), $request, $this->compileEndpointUrl($this->shipAcceptEndpoint));
+
+		if ($response->Response->ResponseStatusCode == 0) {
+			throw new Exception(
+				"Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}", 
+				(int) $response->Response->Error->ErrorCode
+			);
+		} else {
+			return $this->formatResponse($response->ShipmentResults);
+		}
+	}
+
+	/**
+	 * Creates a ShipAccept request
+	 *
+	 * @see UPS\Shipping->accept for parameters
+	 * @return string
+	 */
+	private function createAcceptRequest($shipmentDigest) {
+		$xml = new DOMDocument();
+		$xml->formatOutput = true;
+
+		$container = $xml->appendChild($xml->createElement('ShipmentAcceptRequest'));
+		$request = $container->appendChild($xml->createElement('Request'));
+
+		$node = $xml->importNode($this->createTransactionNode(), true);
+		$request->appendChild($node);
+
+		$request->appendChild($xml->createElement('RequestAction', 'ShipAccept'));
+		$request->appendChild($xml->createElement('ShipmentDigest', $shipmentDigest));
+
+		return $xml->saveXML();
+	}
+
+	/**
 	 * Void a shipping label / request
 	 *
 	 * @param  mixed $shipmentData string|array Either the UPS Shipment Identification Number or an array of
