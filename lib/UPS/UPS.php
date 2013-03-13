@@ -91,7 +91,10 @@ abstract class UPS {
 		$xml->formatOutput = true;
 
 		$trxRef = $xml->appendChild($xml->createElement('TransactionReference'));
-		$trxRef->appendChild($xml->createElement('CustomerContext', $this->context));
+
+		if (null !== $this->context) {
+			$trxRef->appendChild($xml->createElement('CustomerContext', $this->context));
+		}
 
 		return $trxRef->cloneNode(true);
 	}
