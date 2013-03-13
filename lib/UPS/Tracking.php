@@ -56,10 +56,8 @@ class Tracking extends UPS {
 
 		$request = $trackRequest->appendChild($xml->createElement("Request"));
 
-		if (null !== $this->context) {
-			$node = $xml->importNode($this->createTransactionNode(), true);
-			$request->appendChild($node);
-		}
+		$node = $xml->importNode($this->createTransactionNode(), true);
+		$request->appendChild($node);
 
 		$request->appendChild($xml->createElement("RequestAction", "Track"));
 
