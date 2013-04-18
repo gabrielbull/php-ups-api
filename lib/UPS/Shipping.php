@@ -75,11 +75,11 @@ class Shipping extends UPS {
 		// Page 47
 		$shipmentNode = $container->appendChild($xml->createElement('Shipment'));
 
-		if ($shipment->Description) {
+		if (isset($shipment->Description)) {
 			$shipmentNode->appendChild($xml->createElement('Description', $shipment->Description));
 		}
 
-		if ($shipment->ReturnService) {
+		if (isset($shipment->ReturnService)) {
 			$node = $shipmentNode->appendChild($xml->createElement('ReturnService'));
 
 			$node->appendChild($xml->createElement('Code', $shipment->ReturnService->Code));
@@ -93,29 +93,29 @@ class Shipping extends UPS {
 
 		$shipperNode->appendChild($xml->createElement('Name', $shipment->Shipper->Name));
 
-		if ($shipment->Shipper->AttentionName) {
+		if (isset($shipment->Shipper->AttentionName)) {
 			$shipperNode->appendChild($xml->createElement('AttentionName', $shipment->Shipper->AttentionName));
 		}
 
-		if ($shipment->Shipper->CompanyDisplayableName) {
+		if (isset($shipment->Shipper->CompanyDisplayableName)) {
 			$shipperNode->appendChild($xml->createElement('CompanyDisplayableName', $shipment->Shipper->CompanyDisplayableName));
 		}
 
 		$shipperNode->appendChild($xml->createElement('ShipperNumber', $shipment->Shipper->ShipperNumber));
 
-		if ($shipment->Shipper->TaxIdentificationNumber) {
+		if (isset($shipment->Shipper->TaxIdentificationNumber)) {
 			$shipperNode->appendChild($xml->createElement('TaxIdentificationNumber', $shipment->Shipper->TaxIdentificationNumber));
 		}
 
-		if ($shipment->Shipper->PhoneNumber) {
+		if (isset($shipment->Shipper->PhoneNumber)) {
 			$shipperNode->appendChild($xml->createElement('PhoneNumber', $shipment->Shipper->PhoneNumber));
 		}
 
-		if ($shipment->Shipper->FaxNumber) {
+		if (isset($shipment->Shipper->FaxNumber)) {
 			$shipperNode->appendChild($xml->createElement('FaxNumber', $shipment->Shipper->FaxNumber));
 		}
 
-		if ($shipment->Shipper->EMailAddress) {
+		if (isset($shipment->Shipper->EMailAddress)) {
 			$shipperNode->appendChild($xml->createElement('EMailAddress', $shipment->Shipper->EMailAddress));
 		}
 
@@ -126,35 +126,35 @@ class Shipping extends UPS {
 
 		$shipToNode->appendChild($xml->createElement('CompanyName', $shipment->ShipTo->CompanyName));
 
-		if ($shipment->ShipTo->AttentionName) {
+		if (isset($shipment->ShipTo->AttentionName)) {
 			$shipToNode->appendChild($xml->createElement('AttentionName', $shipment->ShipTo->AttentionName));
 		}
 
-		if ($shipment->ShipTo->PhoneNumber) {
+		if (isset($shipment->ShipTo->PhoneNumber)) {
 			$shipToNode->appendChild($xml->createElement('PhoneNumber', $shipment->ShipTo->PhoneNumber));
 		}
 
-		if ($shipment->ShipTo->FaxNumber) {
+		if (isset($shipment->ShipTo->FaxNumber)) {
 			$shipToNode->appendChild($xml->createElement('FaxNumber', $shipment->ShipTo->FaxNumber));
 		}
 
-		if ($shipment->ShipTo->EMailAddress) {
+		if (isset($shipment->ShipTo->EMailAddress)) {
 			$shipToNode->appendChild($xml->createElement('EMailAddress', $shipment->ShipTo->EMailAddress));
 		}
 
 		$addressNode = $xml->importNode($this->compileAddressNode($shipment->ShipTo->Address), true);
 
-		if ($shipment->ShipTo->ResidentialAddress) {
+		if (isset($shipment->ShipTo->ResidentialAddress)) {
 			$addressNode->appendChild($xml->createElement('ResidentialAddress'));
 		}
 
-		if ($shipment->ShipTo->LocationID) {
+		if (isset($shipment->ShipTo->LocationID)) {
 			$addressNode->appendChild($xml->createElement('LocationID', strtoupper($shipment->ShipTo->LocationID)));
 		}
 
 		$shipToNode->appendChild($addressNode);
 
-		if ($shipment->ShipFrom) {
+		if (isset($shipment->ShipFrom)) {
 			$shipFromNode = $shipmentNode->appendChild($xml->createElement('ShipFrom'));
 
 			$shipFromNode->appendChild($xml->createElement('CompanyName', $shipment->ShipFrom->CompanyName));
@@ -175,7 +175,7 @@ class Shipping extends UPS {
 			$shipFromNode->appendChild($addressNode);
 		}
 
-		if ($shipment->SoldTo) {
+		if (isset($shipment->SoldTo)) {
 			$soldToNode = $shipmentNode->appendChild($xml->createElement('SoldTo'));
 
 			if ($shipment->SoldTo->Option) {
@@ -202,7 +202,7 @@ class Shipping extends UPS {
 			}
 		}
 
-		if ($shipment->PaymentInformation) {
+		if (isset($shipment->PaymentInformation)) {
 			$paymentNode = $shipmentNode->appendChild($xml->createElement('PaymentInformation'));
 
 			if ($shipment->PaymentInformation->Prepaid) {
@@ -255,22 +255,22 @@ class Shipping extends UPS {
 			//$paymentNode = $shipmentNode->appendChild($xml->createElement('ItemizedPaymentInformation'));
 		}
 
-		if ($shipment->GoodsNotInFreeCirculationIndicator) {
+		if (isset($shipment->GoodsNotInFreeCirculationIndicator)) {
 			$shipmentNode->appendChild($xml->createElement('GoodsNotInFreeCirculationIndicator'));
 		}
 
-		if ($shipment->MovementReferenceNumber) {
+		if (isset($shipment->MovementReferenceNumber)) {
 			$shipmentNode->appendChild($xml->createElement('MovementReferenceNumber', $shipment->MovementReferenceNumber));
 		}
 
 		$serviceNode = $shipmentNode->appendChild($xml->createElement('Service'));
 		$serviceNode->appendChild($xml->createElement('Code', $shipment->Service->Code));
 
-		if ($shipment->Service->Description) {
+		if (isset($shipment->Service->Description)) {
 			$serviceNode->appendChild($xml->createElement('Description', $shipment->Service->Description));
 		}
 
-		if ($shipment->InvoiceLineTotal) {
+		if (isset($shipment->InvoiceLineTotal)) {
 			$node = $shipmentNode->appendChild($xml->createElement('InvoiceLineTotal'));
 
 			if ($shipment->InvoiceLineTotal->CurrencyCode) {
@@ -280,7 +280,7 @@ class Shipping extends UPS {
 			$node->appendChild($xml->createElement('MonetaryValue', $shipment->InvoiceLineTotal->MonetaryValue));
 		}
 
-		if ($shipment->NumOfPiecesInShipment) {
+		if (isset($shipment->NumOfPiecesInShipment)) {
 			$shipmentNode->appendChild($xml->createElement('NumOfPiecesInShipment', $shipment->NumOfPiecesInShipment));
 		}
 
@@ -290,28 +290,28 @@ class Shipping extends UPS {
 			$ptNode = $node->appendChild($xml->createElement('PackagingType'));
 			$ptNode->appendChild($xml->createElement('Code', $package->PackagingType->Code));
 
-			if ($package->PackagingType->Description) {
+			if (isset($package->PackagingType->Description)) {
 				$ptNode->appendChild($xml->createElement('Description', $package->PackagingType->Description));
 			}
 
 			$pwNode = $node->appendChild($xml->createElement('PackageWeight'));
 			$umNode = $pwNode->appendChild($xml->createElement('UnitOfMeasurement'));
 
-			if ($package->PackageWeight->UnitOfMeasurement->Code) {
+			if (isset($package->PackageWeight->UnitOfMeasurement->Code)) {
 				$umNode->appendChild($xml->createElement('Code', $package->PackageWeight->UnitOfMeasurement->Code));
 			}
 
-			if ($package->PackageWeight->UnitOfMeasurement->Description) {
+			if (isset($package->PackageWeight->UnitOfMeasurement->Description)) {
 				$umNode->appendChild($xml->createElement('Description', $package->PackageWeight->UnitOfMeasurement->Description));
 			}
 
 			$pwNode->appendChild($xml->createElement('Weight', $package->PackageWeight->Weight));
 
-			if ($package->LargePackageIndicator) {
+			if (isset($package->LargePackageIndicator)) {
 				$node->appendChild($xml->createElement('LargePackageIndicator'));
 			}
 
-			if ($package->ReferenceNumber) {
+			if (isset($package->ReferenceNumber)) {
 				$refNode = $node->appendChild($xml->createElement('ReferenceNumber'));
 
 				if ($package->ReferenceNumber->BarCodeIndicator) {
@@ -322,26 +322,26 @@ class Shipping extends UPS {
 				$refNode->appendChild($xml->createElement('Value', $package->ReferenceNumber->Value));
 			}
 
-			if ($package->AdditionalHandling) {
+			if (isset($package->AdditionalHandling)) {
 				$refNode->appendChild($xml->createElement('AdditionalHandling'));
 			}
 		}
 
-		if ($labelSpecificationOpts) {
+		if ($labelSpecOpts) {
 			$labelSpec = $container->appendChild($xml->createElement('LabelSpecification'));
 
 			$node = $labelSpec->appendChild($xml->createElement('LabelPrintMethod'));
 			$node->appendChild($xml->createElement('Code', $labelSpecOpts->LabelPrintMethod->Code));
 
-			if ($labelSpecOpts->LabelPrintMethod->Description) {
+			if (isset($labelSpecOpts->LabelPrintMethod->Description)) {
 				$node->appendChild($xml->createElement('Description', $labelSpecOpts->LabelPrintMethod->Description));
 			}
 
-			if ($labelSpecOpts->HTTPUserAgent) {
+			if (isset($labelSpecOpts->HTTPUserAgent)) {
 				$labelSpec->appendChild($xml->createElement('HTTPUserAgent', $labelSpecOpts->HTTPUserAgent));
 			}
 
-			if ($labelSpecOpts->LabelStockSize) {
+			if (isset($labelSpecOpts->LabelStockSize)) {
 				$stock = $labelSpec->appendChild($xml->createElement('LabelStockSize'));
 
 				$stock->appendChild($xml->createElement('Height', $labelSpecOpts->LabelStockSize->Height));
@@ -349,15 +349,15 @@ class Shipping extends UPS {
 			}
 
 			$node = $labelSpec->appendChild($xml->createElement('LabelImageFormat'));
-			$node->appendChild($xml->createElement('Code', $labelSpecificationOpts->ImageFormat->Code));
+			$node->appendChild($xml->createElement('Code', $labelSpecOpts->ImageFormat->Code));
 
-			if ($labelSpecOpts->ImageFormat->Description) {
+			if (isset($labelSpecOpts->ImageFormat->Description)) {
 				$node->appendChild($xml->createElement('Description', $labelSpecOpts->ImageFormat->Description));
 			}
 
-			if ($labelSpecOpts->Instruction) {
+			if (isset($labelSpecOpts->Instruction)) {
 				$node = $labelSpec->appendChild($xml->createElement('Instruction'));
-				$node->appendChild($xml->createElement('Code', $labelSpecificationOpts->Instruction->Code));
+				$node->appendChild($xml->createElement('Code', $labelSpecOpts->Instruction->Code));
 
 				if ($labelSpecOpts->Instruction->Description) {
 					$node->appendChild($xml->createElement('Description', $labelSpecOpts->Instruction->Description));
@@ -598,25 +598,25 @@ class Shipping extends UPS {
 
 		$node->appendChild($xml->createElement('AddressLine1', $address->AddressLine1));
 
-		if ($address->AddressLine2) {
+		if (isset($address->AddressLine2)) {
 			$node->appendChild($xml->createElement('AddressLine2', $address->AddressLine2));
 		}
 
-		if ($address->AddressLine3) {
+		if (isset($address->AddressLine3)) {
 			$node->appendChild($xml->createElement('AddressLine3', $address->AddressLine3));
 		}
 
 		$node->appendChild($xml->createElement('City', $address->City));
 
-		if ($address->StateProvinceCode) {
+		if (isset($address->StateProvinceCode)) {
 			$node->appendChild($xml->createElement('StateProvinceCode', $address->StateProvinceCode));
 		}
 
-		if ($address->PostalCode) {
+		if (isset($address->PostalCode)) {
 			$node->appendChild($xml->createElement('PostalCode', $address->PostalCode));
 		}
 
-		if ($address->CountryCode) {
+		if (isset($address->CountryCode)) {
 			$node->appendChild($xml->createElement('CountryCode', $address->CountryCode));
 		}
 
