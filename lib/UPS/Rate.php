@@ -23,16 +23,37 @@ class Rate extends UPS
     {
         $this->requestOption = "Shop";
 
-        $request = $this->createRequest($shipment);
-        $response = $this->request($this->createAccess(), $request, $this->compileEndpointUrl($this->endpoint));
-
-        return $this->formatResponse($response);
+        return $this->sendRequest($shipment);
     }
 
-    public function getRate()
+    public function getRate($shipment)
     {
         $this->requestOption = "Rate";
 
+        return $this->sendRequest($shipment);
+    }
+
+    /**
+     * Creates and sends a request for the given shipment. This handles checking for
+     * errors in the response back from UPS
+     *
+     * @param $shipment
+     * @return stdClass
+     * @throws \Exception
+     */
+    private function sendRequest($shipment)
+    {
+        $request = $this->createRequest($shipment);
+        $response = $this->request($this->createAccess(), $request, $this->compileEndpointUrl($this->endpoint));
+
+        if ($response->Response->ResponseStatusCode == 0) {
+            throw new Exception(
+                "Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}",
+                (int) $response->Response->Error->ErrorCode
+            );
+        } else {
+            return $this->formatResponse($response);
+        }
     }
 
 	/**
@@ -58,6 +79,13 @@ class Rate extends UPS
         $request->appendChild($xml->createElement("RequestOption", $this->requestOption));
 
         $shipmentNode = $trackRequest->appendChild($xml->createElement('Shipment'));
+
+        // Support specifying an individual service
+        if (isset($shipment->Service)) {
+            $serviceNode = $shipmentNode->appendChild($xml->createElement('Service'));
+            Utilities::appendChild($shipment->Service, 'Code', $serviceNode);
+            Utilities::appendChild($shipment->Service, 'Description', $serviceNode);
+        }
 
         if (isset($shipment->Shipper)) {
             $shipper = $shipmentNode->appendChild($xml->createElement("Shipper"));
