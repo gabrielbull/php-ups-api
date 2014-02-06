@@ -1,7 +1,7 @@
-UPS API PHP Wrapper
+PHP UPS API Wrapper
 ===================
 
-Copyright 2013, Gabriel Bull, Licensed under the GNU GENERAL PUBLIC LICENSE.
+[![Build Status](https://travis-ci.org/gabrielbull/php-ups-api.png)](https://travis-ci.org/gabrielbull/php-ups-api)
 
 This library is aimed at wrapping all the UPS APIs into a simple to use PHP Library. It currently only covers the Quantum View® and Tracking APIs, but feel free to contribute.
 
@@ -12,6 +12,18 @@ To use the UPS APIs, you have to [request an access key from UPS](https://www.up
 ## Requirements
 
 This library uses PHP 5.3+.
+
+## Installation
+
+It is recommended that you install the PHP UPS API Wrapper library [through composer](http://getcomposer.org).
+
+```JSON
+{
+    "require": {
+        "gabrielbull/ups-api": "dev-master"
+    }
+}
+```
 
 ## QuantumView Class
 
