@@ -1,14 +1,14 @@
 {
-    "name": "gabrielbull/ups-api",
+    "name": "sebvergnes/ups-api",
     "type": "library",
     "description": "UPS API PHP Wrapper",
     "keywords": ["ups", "api", "wrapper", "quantum view", "tracking"],
-    "homepage": "https://github.com/gabrielbull/ups-api-php",
+    "homepage": "https://github.com/sebvergnes/ups-api-php",
     "license": "GPL-2.0",
     "authors": [
         {
-            "name": "Gabriel Bull",
-            "email": "me@gabrielbull.com"
+            "name": "Sebastien Vergnes",
+            "email": "sebastien@vergnes.eu"
         }
     ],
     "require": {

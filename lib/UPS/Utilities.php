@@ -5,14 +5,14 @@ namespace UPS;
 class Utilities
 {
     /**
-   	 * Generates a standard <Address> node for requests
-   	 *
-   	 * @param  stdClass $address    An address data structure
-   	 * @param \DOMNode  $element
-   	 */
+     * Generates a standard <Address> node for requests
+     *
+     * @param  stdClass $address    An address data structure
+     * @param \DOMNode  $element
+     */
     static public function addAddressNode(&$address, \DOMNode $element)
     {
-   		$node = $element->appendChild($element->ownerDocument->createElement('Address'));
+        $node = $element->appendChild($element->ownerDocument->createElement('Address'));
         self::appendChild($address, "AddressLine1", $node);
         self::appendChild($address, "AddressLine2", $node);
         self::appendChild($address, "AddressLine3", $node);
@@ -20,7 +20,22 @@ class Utilities
         self::appendChild($address, "StateProvinceCode", $node);
         self::appendChild($address, "PostalCode", $node);
         self::appendChild($address, "CountryCode", $node);
-   	}
+    }
+
+    /**
+     * Generates an artifact <Address> node for requests
+     *
+     * @param  stdClass $address    An address data structure
+     * @param \DOMNode  $element
+     */
+    static public function addAddressArtifactNode(&$address, \DOMNode $element)
+    {
+        $node = $element->appendChild($element->ownerDocument->createElement('AddressArtifactFormat'));
+        self::appendChild($address, "CountryCode", $node);
+        self::appendChild($address, "PoliticalDivision1", $node);
+        self::appendChild($address, "PoliticalDivision2", $node);
+        self::appendChild($address, "PostcodePrimaryLow", $node);
+    }
 
     /**
      * Adds location information including company name, attention name and address
