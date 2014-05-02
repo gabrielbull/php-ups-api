@@ -7,6 +7,10 @@
     "license": "GPL-2.0",
     "authors": [
         {
+            "name": "Gabriel Bull",
+            "email": "me@gabrielbull.com"
+        },
+        {
             "name": "Sebastien Vergnes",
             "email": "sebastien@vergnes.eu"
         }
