@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: sebastienvergnes
- * Date: 30/04/14
- * Time: 17:30
- */
 
 namespace UPS\Entity;
 
