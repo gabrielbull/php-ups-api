@@ -5,6 +5,7 @@ namespace UPS;
 use DOMDocument,
     SimpleXMLElement,
     Exception;
+use UPS\Entity\TimeInTransitRequest;
 
 /**
  * TimeInTransit API Wrapper
@@ -14,8 +15,6 @@ use DOMDocument,
  */
 class TimeInTransit extends UPS
 {
-    private $trackingNumber;
-
     protected $endpoint = '/TimeInTransit';
 
     public function getTimeInTransit($shipment)
@@ -27,14 +26,13 @@ class TimeInTransit extends UPS
      * Creates and sends a request for the given shipment. This handles checking for
      * errors in the response back from UPS
      *
-     * @param $shipment
-     * @return stdClass
+     * @param $timeInTransitRequest
+     * @return TimeInTransitRequest
      * @throws \Exception
      */
-    private function sendRequest($shipment)
+    private function sendRequest($timeInTransitRequest)
     {
-        $request = $this->createRequest($shipment);
-        print_r ($request);
+        $request = $this->createRequest($timeInTransitRequest);
         $response = $this->request($this->createAccess(), $request, $this->compileEndpointUrl($this->endpoint));
 
         if ($response->Response->ResponseStatusCode == 0) {
@@ -50,10 +48,10 @@ class TimeInTransit extends UPS
     /**
      * Create the TimeInTransit request
      *
-     * @param stdClass $shipment The shipment details. Refer to the UPS documentation for available structure
+     * @param TimeInTransitRequest $timeInTransitRequest The request details. Refer to the UPS documentation for available structure
      * @return  string
      */
-    private function createRequest($shipment)
+    private function createRequest($timeInTransitRequest)
     {
         $xml = new DOMDocument();
         $xml->formatOutput = true;
@@ -69,35 +67,35 @@ class TimeInTransit extends UPS
         $request->appendChild($xml->createElement("RequestAction", "TimeInTransit"));
 
         $transitFromNode = $trackRequest->appendChild($xml->createElement('TransitFrom'));
-        if (isset($shipment->TransitFrom)) {
-            Utilities::addAddressArtifactNode($shipment->TransitFrom, $transitFromNode);
+        if (isset($timeInTransitRequest->TransitFrom)) {
+            Utilities::addAddressArtifactNode($timeInTransitRequest->TransitFrom, $transitFromNode);
         }
 
         $transitToNode = $trackRequest->appendChild($xml->createElement('TransitTo'));
-        if (isset($shipment->TransitTo)) {
-            Utilities::addAddressArtifactNode($shipment->TransitTo, $transitToNode);
+        if (isset($timeInTransitRequest->TransitTo)) {
+            Utilities::addAddressArtifactNode($timeInTransitRequest->TransitTo, $transitToNode);
         }
 
         $shipmentWeightNode = $trackRequest->appendChild($xml->createElement('ShipmentWeight'));
-        if (isset($shipment->ShipmentWeight)) {
-            $shipmentWeightNode->appendChild($xml->createElement("Weight", $shipment->ShipmentWeight->Weight));
+        if (isset($timeInTransitRequest->ShipmentWeight)) {
+            $shipmentWeightNode->appendChild($xml->createElement("Weight", $timeInTransitRequest->ShipmentWeight->Weight));
             $uom = $shipmentWeightNode->appendChild($xml->createElement("UnitOfMeasurement"));
-            $uom->appendChild($xml->createElement("Code", $shipment->ShipmentWeight->UnitOfMeasurement->Code));
-            $uom->appendChild($xml->createElement("Description", $shipment->ShipmentWeight->UnitOfMeasurement->Description));
+            $uom->appendChild($xml->createElement("Code", $timeInTransitRequest->ShipmentWeight->UnitOfMeasurement->Code));
+            $uom->appendChild($xml->createElement("Description", $timeInTransitRequest->ShipmentWeight->UnitOfMeasurement->Description));
         }
 
-        if (isset($shipment->TotalPackagesInShipment)) {
-            $trackRequest->appendChild($xml->createElement("TotalPackagesInShipment", $shipment->TotalPackagesInShipment));
+        if (isset($timeInTransitRequest->TotalPackagesInShipment)) {
+            $trackRequest->appendChild($xml->createElement("TotalPackagesInShipment", $timeInTransitRequest->TotalPackagesInShipment));
         }
 
         $invoiceLineTotalNode = $trackRequest->appendChild($xml->createElement('InvoiceLineTotal'));
-        if (isset($shipment->InvoiceLineTotal)) {
-            $invoiceLineTotalNode->appendChild($xml->createElement("CurrencyCode", $shipment->InvoiceLineTotal->CurrencyCode));
-            $invoiceLineTotalNode->appendChild($xml->createElement("MonetaryValue", $shipment->InvoiceLineTotal->MonetaryValue));
+        if (isset($timeInTransitRequest->InvoiceLineTotal)) {
+            $invoiceLineTotalNode->appendChild($xml->createElement("CurrencyCode", $timeInTransitRequest->InvoiceLineTotal->CurrencyCode));
+            $invoiceLineTotalNode->appendChild($xml->createElement("MonetaryValue", $timeInTransitRequest->InvoiceLineTotal->MonetaryValue));
         }
 
-        if (isset($shipment->PickupDate)) {
-            $trackRequest->appendChild($xml->createElement("PickupDate", $shipment->PickupDate));
+        if (isset($timeInTransitRequest->PickupDate)) {
+            $trackRequest->appendChild($xml->createElement("PickupDate", $timeInTransitRequest->PickupDate));
         }
 
         $trackRequest->appendChild($xml->createElement("DocumentsOnlyIndicator"));

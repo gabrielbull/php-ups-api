@@ -5,6 +5,7 @@ namespace UPS;
 use DOMDocument,
     SimpleXMLElement,
     Exception;
+use UPS\Entity\RateRequest;
 
 /**
  * Rate API Wrapper
@@ -14,36 +15,35 @@ use DOMDocument,
  */
 class Rate extends UPS
 {
-	private $trackingNumber;
     private $requestOption;
 
-	protected $endpoint = '/Rate';
+    protected $endpoint = '/Rate';
 
-    public function shopRates($shipment)
+    public function shopRates($rateRequest)
     {
         $this->requestOption = "Shop";
 
-        return $this->sendRequest($shipment);
+        return $this->sendRequest($rateRequest);
     }
 
-    public function getRate($shipment)
+    public function getRate($rateRequest)
     {
         $this->requestOption = "Rate";
 
-        return $this->sendRequest($shipment);
+        return $this->sendRequest($rateRequest);
     }
 
     /**
      * Creates and sends a request for the given shipment. This handles checking for
      * errors in the response back from UPS
      *
-     * @param $shipment
-     * @return stdClass
+     * @param $rateRequest
+     * @return RateRequest
      * @throws \Exception
      */
-    private function sendRequest($shipment)
+    private function sendRequest($rateRequest)
     {
-        $request = $this->createRequest($shipment);
+        $request = $this->createRequest($rateRequest);
         $response = $this->request($this->createAccess(), $request, $this->compileEndpointUrl($this->endpoint));
 
         if ($response->Response->ResponseStatusCode == 0) {
@@ -56,26 +56,28 @@ class Rate extends UPS
         }
     }
 
-	/**
-	 * Create the Rate request
-	 *
-     * @param stdClass $shipment The shipment details. Refer to the UPS documentation for available structure
-	 * @return  string
-	 */
-    private function createRequest($shipment)
+    /**
+     * Create the Rate request
+     *
+     * @param RateRequest $rateRequest The request details. Refer to the UPS documentation for available structure
+     * @return  string
+     */
+    private function createRequest($rateRequest)
     {
-		$xml = new DOMDocument();
-		$xml->formatOutput = true;
+        $shipment = $rateRequest->Shipment;
 
-		$trackRequest = $xml->appendChild($xml->createElement("RatingServiceSelectionRequest"));
-		$trackRequest->setAttribute('xml:lang','en-US');
+        $xml = new DOMDocument();
+        $xml->formatOutput = true;
 
-		$request = $trackRequest->appendChild($xml->createElement("Request"));
+        $trackRequest = $xml->appendChild($xml->createElement("RatingServiceSelectionRequest"));
+        $trackRequest->setAttribute('xml:lang','en-US');
 
-		$node = $xml->importNode($this->createTransactionNode(), true);
-		$request->appendChild($node);
+        $request = $trackRequest->appendChild($xml->createElement("Request"));
 
-		$request->appendChild($xml->createElement("RequestAction", "Rate"));
+        $node = $xml->importNode($this->createTransactionNode(), true);
+        $request->appendChild($node);
+
+        $request->appendChild($xml->createElement("RequestAction", "Rate"));
         $request->appendChild($xml->createElement("RequestOption", $this->requestOption));
 
         $shipmentNode = $trackRequest->appendChild($xml->createElement('Shipment'));
@@ -111,20 +113,20 @@ class Rate extends UPS
 
         Utilities::addPackages($shipment, $shipmentNode);
 
-		return $xml->saveXML();
-	}
+        return $xml->saveXML();
+    }
 
-	/**
-	 * Format the response
-	 *
-	 * @param   SimpleXMLElement    $response
-	 * @return  stdClass
-	 */
+    /**
+     * Format the response
+     *
+     * @param   SimpleXMLElement    $response
+     * @return  stdClass
+     */
     private function formatResponse(SimpleXMLElement $response)
     {
         // We don't need to return data regarding the response to the user
         unset($response->Response);
 
-		return $this->convertXmlObject($response);
-	}
+        return $this->convertXmlObject($response);
+    }
 }
