@@ -1,7 +1,7 @@
 PHP UPS API Wrapper
 ===================
 
-[![Build Status](https://travis-ci.org/gabrielbull/php-ups-api.png)](https://travis-ci.org/gabrielbull/php-ups-api)
+[![Build Status](https://travis-ci.org/sebvergnes/php-ups-api.png)](https://travis-ci.org/sebvergnes/php-ups-api)
 
 This library is aimed at wrapping all the UPS APIs into a simple to use PHP Library. It currently only covers the Quantum View® and Tracking APIs, but feel free to contribute.
 
@@ -20,7 +20,7 @@ It is recommended that you install the PHP UPS API Wrapper library [through comp
 ```JSON
 {
     "require": {
-        "gabrielbull/ups-api": "dev-master"
+        "sebvergnes/ups-api": "dev-master"
     }
 }
 ```
@@ -32,11 +32,7 @@ The QuantumView Class allow you to request a Quantum View Data subscription.
 ### Example
 
 ```php
-$quantumView = new UPS\QuantumView(
-	$accessKey,
-	$userId,
-	$password
-);
+$quantumView = new UPS\QuantumView($accessKey, $userId, $password);
 
 try {
 	// Get the subscription for all events for the last hour
@@ -74,11 +70,7 @@ The Tracking Class allow you to track a shipment using the UPS Tracking API.
 ### Example
 
 ```php
-$tracking = new UPS\Tracking(
-	$accessKey,
-	$userId,
-	$password
-);
+$tracking = new UPS\Tracking($accessKey, $userId, $password);
 
 try {
 	$shipment = $tracking->track('TRACKING NUMBER');
@@ -100,3 +92,46 @@ Tracking parameters are:
  * `requestOption` Optional processing. For Mail Innovations the only valid options are Last Activity and All activity.
 
 
+## Rate Class
+
+The Rate Class allow you to get shipment rates using the UPS Rate API.
+
+### Example
+```php
+$rates = new Rate($access, $userid, $passwd);
+
+try {
+    $shopRates = $rates->shopRates($request);
+
+	foreach($shopRates as $rates) {
+		var_dump($rates);
+	}
+
+} catch (Exception $e) {
+    var_dump($e);
+}
+```
+### Parameters
+
+
+## TimeInTransit Class
+
+The TimeInTransit Class allow you to get all transit times using the UPS TimeInTransit API.
+
+### Example
+```php
+$timeInTransit = new TimeInTransit($access, $userid, $passwd);
+
+try {
+    $times = $timeInTransit->getTimeInTransit($request);
+
+	foreach($times->ServiceSummary as $serviceSummary) {
+		var_dump($serviceSummary);
+	}
+
+} catch (Exception $e) {
+    var_dump($e);
+}
+```
+
+### Parameters

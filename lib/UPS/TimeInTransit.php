@@ -6,6 +6,7 @@ use DOMDocument,
     SimpleXMLElement,
     Exception;
 use UPS\Entity\TimeInTransitRequest;
+use UPS\Entity\TimeInTransitResponse;
 
 /**
  * TimeInTransit API Wrapper
@@ -115,6 +116,8 @@ class TimeInTransit extends UPS
         // We don't need to return data regarding the response to the user
         unset($response->Response);
 
-        return $this->convertXmlObject($response);
+        $result  = $this->convertXmlObject($response);
+
+        return new TimeInTransitResponse( $result->TransitResponse );
     }
 }

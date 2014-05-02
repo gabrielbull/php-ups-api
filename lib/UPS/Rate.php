@@ -6,6 +6,7 @@ use DOMDocument,
     SimpleXMLElement,
     Exception;
 use UPS\Entity\RateRequest;
+use UPS\Entity\RateResponse;
 
 /**
  * Rate API Wrapper
@@ -127,6 +128,8 @@ class Rate extends UPS
         // We don't need to return data regarding the response to the user
         unset($response->Response);
 
-        return $this->convertXmlObject($response);
+        $result =  $this->convertXmlObject($response);
+
+        return new RateResponse( $result );
     }
 }

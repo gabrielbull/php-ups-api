@@ -29,9 +29,22 @@ class Service {
     const S_UPSWW_EXPRESSFREIGHT = '96';
 
     public $Code;
+    public $Description;
 
-    function __construct() {
+    function __construct( $response =  null ) {
         $this->Code = self::S_GROUND;
+
+        if ( null != $response ) {
+            if ( isset( $response->Code) ) {
+                $this->Code = $response->Code;
+            }
+
+            if ( isset( $response->Description) ) {
+                $this->Description = $response->Description;
+            }
+
+        }
+
     }
 
     public function getName() {

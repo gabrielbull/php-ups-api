@@ -4,52 +4,25 @@ namespace UPS\Entity;
 
 
 class RateResponse {
-    public $Service;
-    public $RateShipmentWarning;
-    public $BillingWeight;
-    public $TransportationCharges;
-    public $ServiceOptionsCharges;
-    public $TotalCharges;
-    public $GuaranteedDaysToDelivery;
-    public $ScheduledDeliveryTime;
-    public $RatedPackage;
+    public $RatedShipment;
 
     function __construct( $response = null ) {
-        $this->Service = new Service();
-        $this->BillingWeight = new BillingWeight();
-        $this->TransportationCharges = new Charges();
-        $this->ServiceOptionsCharges = new Charges();
-        $this->TotalCharges = new Charges();
+        $this->RatedShipment = array();
 
         if ( null != $response ) {
-            if ( isset( $response->Service ) ) {
-                $this->Service->Code = $response->Service->Code;
-            }
-            if ( isset( $response->RatedShipmentWarning ) ) {
-                $this->RateShipmentWarning = $response->RatedShipmentWarning;
-            }
-            if ( isset( $response->BillingWeight ) ) {
-                $this->BillingWeight->Weight = $response->BillingWeight->Weight;
-                $this->BillingWeight->UnitOfMeasurement->Code = $response->BillingWeight->UnitOfMeasurement->Code;
-            }
-            if ( isset( $response->TransportationCharges ) ) {
-                $this->TransportationCharges->CurrencyCode = $response->TransportationCharges->CurrencyCode;
-                $this->TransportationCharges->MonetaryValue = $response->TransportationCharges->MonetaryValue;
-            }
-            if ( isset( $response->ServiceOptionsCharges ) ) {
-                $this->ServiceOptionsCharges->CurrencyCode = $response->ServiceOptionsCharges->CurrencyCode;
-                $this->ServiceOptionsCharges->MonetaryValue = $response->ServiceOptionsCharges->MonetaryValue;
-            }
-            if ( isset( $response->TotalCharges ) ) {
-                $this->TotalCharges->CurrencyCode = $response->TotalCharges->CurrencyCode;
-                $this->TotalCharges->MonetaryValue = $response->TotalCharges->MonetaryValue;
+            if ( isset( $response->RatedShipment ) ) {
+                if ( is_array( $response->RatedShipment )) {
+                    foreach ($response->RatedShipment as $ratedShipment )   {
+                        $this->RatedShipment[] = new RatedShipment( $ratedShipment );
+                    }
+                }
+                else {
+                    $this->RatedShipment[] = new RatedShipment( $response->RatedShipment );
+                }
             }
 
         }
 
     }
 
-    public function getServiceName() {
-        return $this->Service->getName();
-    }
 }

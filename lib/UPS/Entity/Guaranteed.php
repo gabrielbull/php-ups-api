@@ -9,7 +9,13 @@ class Guaranteed {
 
     public $Code;
 
-    function __construct() {
+    function __construct( $response = null ) {
         $this->Code = self::G_NO;
+
+        if ( null != $response ){
+            if ( isset( $response->Code ) ) {
+                $this->Code = $response->Code;
+            }
+        }
     }
 } 

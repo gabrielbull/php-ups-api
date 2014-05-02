@@ -15,8 +15,17 @@ class UnitOfMeasurement {
     public $Code;
     public $Description;
 
-    function __construct() {
+    function __construct( $response = null ) {
         $this->Code = self::UOM_LBS;
         $this->Description = '';
+
+        if ( null != $response ) {
+            if ( isset( $response->Code ) ) {
+                $this->Code = $response->Code;
+            }
+            if ( isset( $response->Description ) ) {
+                $this->Description = $response->Description;
+            }
+        }
     }
 } 
