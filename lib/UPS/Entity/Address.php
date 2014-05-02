@@ -13,6 +13,9 @@ class Address {
     public $CountryCode;
     public $PoliticalDivision1;
     public $PoliticalDivision2;
+    public $PoliticalDivision3;
     public $PostcodePrimaryLow;
+    public $PostcodePrimaryHigh;
+    public $ResidentialAddressIndicator;
 
 } 
