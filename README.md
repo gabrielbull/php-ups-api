@@ -101,7 +101,7 @@ The Rate Class allow you to get shipment rates using the UPS Rate API.
 $rates = new Rate($access, $userid, $passwd);
 
 try {
-    $shopRates = $rates->shopRates($request);
+    $shopRates = $rates->shopRates($rateRequest);
 
 	foreach($shopRates as $rates) {
 		var_dump($rates);
@@ -113,6 +113,8 @@ try {
 ```
 ### Parameters
 
+ * `rateRequest` Mandatory. rateRequest Object with shipment details
+
 
 ## TimeInTransit Class
 
@@ -123,7 +125,7 @@ The TimeInTransit Class allow you to get all transit times using the UPS TimeInT
 $timeInTransit = new TimeInTransit($access, $userid, $passwd);
 
 try {
-    $times = $timeInTransit->getTimeInTransit($request);
+    $times = $timeInTransit->getTimeInTransit($timeInTransitequest);
 
 	foreach($times->ServiceSummary as $serviceSummary) {
 		var_dump($serviceSummary);
@@ -135,3 +137,5 @@ try {
 ```
 
 ### Parameters
+
+ * `timeInTransitRequest` Mandatory. timeInTransitRequest Object with shipment details
