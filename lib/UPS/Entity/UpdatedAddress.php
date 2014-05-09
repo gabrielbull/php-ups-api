@@ -3,7 +3,7 @@
 namespace UPS\Entity;
 
 
-class Address {
+class UpdatedAddress {
     public $AddressLine1;
     public $AddressLine2;
     public $AddressLine3;
@@ -25,7 +25,6 @@ class Address {
     public $StreetType;
     public $StreetSuffix;
     public $BuildingName;
-    public $AttentionName;
     public $AddressExtendedInformation;
 
     function __construct( $response = null ) {
@@ -96,12 +95,9 @@ class Address {
             if ( isset( $response->BuildingName ) ) {
                 $this->BuildingName = $response->BuildingName;
             }
-            if ( isset( $response->AttentionName ) ) {
-                $this->AttentionName = $response->AttentionName;
-            }
             if ( isset( $response->AddressExtendedInformation ) ) {
                 foreach ( $response->AddressExtendedInformation as $AddressExtendedInformation) {
-                    $this->AddressExtendedInformation[] = new ServiceSummary($AddressExtendedInformation);
+                    $this->AddressExtendedInformation[] = new AddressExtendedInformation($AddressExtendedInformation);
                 }
             }
 
