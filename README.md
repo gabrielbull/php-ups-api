@@ -100,3 +100,49 @@ Tracking parameters are:
  * `requestOption` Optional processing. For Mail Innovations the only valid options are Last Activity and All activity.
 
 
+## Rate Class
+
+Get the rates for a shipment using the UPS Rate API. 
+
+### Example
+
+```php
+$rate = new UPS\Rate(
+	$accessKey,
+	$userId,
+	$password
+);
+
+try {
+    $shipment = new \stdClass();
+    $shipment->Shipper->Address->PostalCode = '99205';
+    $shipment->ShipTo = new \stdClass();
+    $shipment->ShipTo->CompanyName = 'Test ShipTo';
+    $shipment->ShipTo->Address = new \stdClass();
+    $shipment->ShipTo->Address->PostalCode = '99004';
+
+    $shipment->Service = new \stdClass();
+    $shipment->Service->Code = '03';
+
+    $package = new \stdClass();
+    $package->PackagingType = new \stdClass();
+    $package->PackagingType->Code = '02';
+    $package->PackageWeight = new \stdClass();
+    $package->PackageWeight->Weight = '10';
+    $shipment->Package = array(
+        $package,
+    );
+
+    var_dump($rate->getRate($shipment));
+
+} catch (Exception $e) {
+    var_dump($e);
+}
+```
+
+### Parameters
+
+This Rate class is not finished yet! Parameter should be maintain when it will be finished.
+
+
+
