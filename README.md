@@ -1,7 +1,7 @@
 PHP UPS API Wrapper
 ===================
 
-[![Build Status](https://travis-ci.org/sebvergnes/php-ups-api.png)](https://travis-ci.org/sebvergnes/php-ups-api)
+[![Build Status](https://travis-ci.org/gabrielbull/php-ups-api.png)](https://travis-ci.org/gabrielbull/php-ups-api)
 
 This library is aimed at wrapping all the UPS APIs into a simple to use PHP Library. It currently only covers the Quantum View® and Tracking APIs, but feel free to contribute.
 
@@ -20,7 +20,7 @@ It is recommended that you install the PHP UPS API Wrapper library [through comp
 ```JSON
 {
     "require": {
-        "sebvergnes/ups-api": "dev-master"
+        "gabrielbull/ups-api": "dev-master"
     }
 }
 ```
@@ -97,23 +97,46 @@ Tracking parameters are:
 The Rate Class allow you to get shipment rates using the UPS Rate API.
 
 ### Example
+
 ```php
-$rates = new Rate($access, $userid, $passwd);
+$rate = new UPS\Rate(
+	$accessKey,
+	$userId,
+	$password
+);
 
 try {
-    $shopRates = $rates->shopRates($rateRequest);
+    $shipment = new \stdClass();
+    $shipment->Shipper->Address->PostalCode = '99205';
+    $shipment->ShipTo = new \stdClass();
+    $shipment->ShipTo->CompanyName = 'Test ShipTo';
+    $shipment->ShipTo->Address = new \stdClass();
+    $shipment->ShipTo->Address->PostalCode = '99004';
+
+    $shipment->Service = new \stdClass();
+    $shipment->Service->Code = '03';
+
+    $package = new \stdClass();
+    $package->PackagingType = new \stdClass();
+    $package->PackagingType->Code = '02';
+    $package->PackageWeight = new \stdClass();
+    $package->PackageWeight->Weight = '10';
+    $shipment->Package = array(
+        $package,
+    );
 
 	foreach($shopRates as $rates) {
-		var_dump($rates);
+    var_dump($rate->getRate($shipment));
 	}
 
 } catch (Exception $e) {
     var_dump($e);
 }
 ```
+
 ### Parameters
 
- * `rateRequest` Mandatory. rateRequest Object with shipment details
+This Rate class is not finished yet! Parameter should be maintain when it will be finished.
 
 
 ## TimeInTransit Class
