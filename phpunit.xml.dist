@@ -12,9 +12,4 @@
             <directory>./tests/Ups/</directory>
         </testsuite>
     </testsuites>
-    <php>
-        <var name="UPS_ACCESS_KEY" value="xxxxxxxxxxxxxx"/>
-        <var name="UPS_USER_ID" value="xxxxxxxxxxxxxx"/>
-        <var name="UPS_PASSWORD" value="xxxxxxxxxxxxxx"/>
-    </php>
 </phpunit>

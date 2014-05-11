@@ -49,7 +49,7 @@ abstract class Ups
     protected $context;
 
     /**
-     * @var
+     * @deprecated
      */
     public $response;
 

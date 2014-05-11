@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<TrackRequest xml:lang="en-US">
+    <Request>
+        <TransactionReference/>
+        <RequestAction>Track</RequestAction>
+        <RequestOption>activity</RequestOption>
+    </Request>
+    <TrackingNumber>1Z12345E0000000000</TrackingNumber>
+</TrackRequest>
