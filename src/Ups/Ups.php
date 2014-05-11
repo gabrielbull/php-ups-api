@@ -8,6 +8,9 @@ use stdClass;
 
 abstract class Ups
 {
+    const PRODUCTION_BASE_URL = 'https://onlinetools.ups.com/ups.app/xml';
+    const INTEGRATION_BASE_URL = 'https://wwwcie.ups.com/ups.app/xml';
+
     /**
      * @var string
      */
@@ -25,11 +28,13 @@ abstract class Ups
 
     /**
      * @var string
+     * @deprecated
      */
     protected $productionBaseUrl = 'https://onlinetools.ups.com/ups.app/xml';
 
     /**
      * @var string
+     * @deprecated
      */
     protected $integrationBaseUrl = 'https://wwwcie.ups.com/ups.app/xml';
 
@@ -51,12 +56,12 @@ abstract class Ups
     /**
      * Constructor
      *
-     * @param string $accessKey UPS License Access Key
-     * @param string $userId UPS User ID
-     * @param string $password UPS User Password
+     * @param string|null $accessKey UPS License Access Key
+     * @param string|null $userId UPS User ID
+     * @param string|null $password UPS User Password
      * @param bool $useIntegration Determine if we should use production or CIE URLs.
      */
-    public function __construct($accessKey, $userId, $password, $useIntegration = false)
+    public function __construct($accessKey = null, $userId = null, $password = null, $useIntegration = false)
     {
         $this->accessKey = $accessKey;
         $this->userId = $userId;
@@ -80,7 +85,7 @@ abstract class Ups
      * @param string
      * @return string
      */
-    protected function formatDateTime($timestamp)
+    public function formatDateTime($timestamp)
     {
         if (!is_numeric($timestamp)) {
             $timestamp = strtotime($timestamp);

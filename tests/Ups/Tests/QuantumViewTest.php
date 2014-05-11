@@ -2,21 +2,44 @@
 namespace Ups\Tests;
 
 use Ups;
+use Exception;
 use PHPUnit_Framework_TestCase;
 
 class QuantumViewTest extends PHPUnit_Framework_TestCase
 {
     public function testCreateRequest()
     {
-        echo '';
+        $quantumView = new Ups\QuantumView();
+        $quantumView->setRequest($request = new RequestMock());
+        $time = time() - 3600;
+        $timeFormatted = $quantumView->formatDateTime($time);
+        try {
+            $quantumView->getSubscription(null, $time, $time);
+        } catch (Exception $e) {}
+
+        $this->assertEquals(
+            $request->getRequestXml(),
+            $request->getExpectedRequestXml('/QVEvents/Request1.xml', [$timeFormatted, $timeFormatted])
+        );
+
+        $quantumView->setContext('unit test');
+        try {
+            $quantumView->getSubscription(null, $time, $time);
+        } catch (Exception $e) {}
+
+        $this->assertEquals(
+            $request->getRequestXml(),
+            $request->getExpectedRequestXml('/QVEvents/Request2.xml', [$timeFormatted, $timeFormatted])
+        );
     }
 
-    public function testSubscription()
+    public function testGetSubscription()
     {
-        $quantumView = new Ups\QuantumView($GLOBALS['UPS_ACCESS_KEY'], $GLOBALS['UPS_USER_ID'], $GLOBALS['UPS_PASSWORD']);
+        $quantumView = new Ups\QuantumView();
+        $quantumView->setRequest(new RequestMock('/QVEvents/Response1.xml'));
 
         // Get the subscription for all events for the last hour
-        $events = $quantumView->getSubscription(null, (time() - 48 * 3600));
+        $events = $quantumView->getSubscription(null, (time() - 3600));
 
         // Test response
         $this->assertInstanceOf('ArrayObject', $events);
@@ -31,7 +54,7 @@ class QuantumViewTest extends PHPUnit_Framework_TestCase
         $quantumView = new Ups\QuantumView($GLOBALS['UPS_ACCESS_KEY'], $GLOBALS['UPS_USER_ID'], $GLOBALS['UPS_PASSWORD']);
         $quantumView->setContext('unit test');
         // Get the subscription for all events for the last hour
-        $quantumView->getSubscription(null, (time() - 3600));
+        $quantumView->getSubscription(null, (time() - 24 * 6 * 3600));
 
         // Test context
         $this->assertRegExp('{<CustomerContext>.?unit test.?</CustomerContext>}msU', $quantumView->response);

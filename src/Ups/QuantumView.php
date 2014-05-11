@@ -16,6 +16,17 @@ class QuantumView extends Ups
     const ENDPOINT = '/QVEvents';
 
     /**
+     * @var RequestInterface
+     */
+    private $request;
+
+    /**
+     * @var ResponseInterface
+     * todo: make private
+     */
+    public $response;
+
+    /**
      * @var string
      */
     private $name;
@@ -46,6 +57,21 @@ class QuantumView extends Ups
     private $responseBookmark;
 
     /**
+     * @param string|null $accessKey UPS License Access Key
+     * @param string|null $userId UPS User ID
+     * @param string|null $password UPS User Password
+     * @param bool $useIntegration Determine if we should use production or CIE URLs.
+     * @param RequestInterface $request
+     */
+    public function __construct($accessKey = null, $userId = null, $password = null, $useIntegration = false, RequestInterface $request = null)
+    {
+        if (null !== $request) {
+            $this->setRequest($request);
+        }
+        parent::__construct($accessKey, $userId, $password, $useIntegration);
+    }
+
+    /**
      * Get a QuantumView subscription
      *
      * @param string $name Name of subscription requested by user.
@@ -69,7 +95,7 @@ class QuantumView extends Ups
 
         // If user provided a begin date time but no end date time, we assume the end date time is now
         if (null !== $beginDateTime && null === $endDateTime) {
-            $endDateTime = date('YmdHis');
+            $endDateTime = $this->formatDateTime(time());
         }
 
         $this->name = $name;
@@ -82,9 +108,13 @@ class QuantumView extends Ups
         $access = $this->createAccess();
         $request = $this->createRequest();
 
-        $response = $this->request($access, $request, $this->compileEndpointUrl(self::ENDPOINT));
+        $response = $this->getRequest()->request($access, $request, $this->compileEndpointUrl(self::ENDPOINT))->getResponse();
 
-        if ($response->Response->ResponseStatusCode == 0) {
+        if (null === $response) {
+            throw new Exception("Failure (0): Unknown error", 0);
+        }
+
+        if ($response instanceof ResponseInterface && $response->Response->ResponseStatusCode == 0) {
             throw new Exception(
                 "Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}",
                 (int)$response->Response->Error->ErrorCode
@@ -199,5 +229,44 @@ class QuantumView extends Ups
         }
 
         return $output;
+    }
+
+    /**
+     * @return RequestInterface
+     */
+    public function getRequest()
+    {
+        if (null === $this->request) {
+            $this->request = new Request;
+        }
+        return $this->request;
+    }
+
+    /**
+     * @param RequestInterface $request
+     * @return $this
+     */
+    public function setRequest(RequestInterface $request)
+    {
+        $this->request = $request;
+        return $this;
+    }
+
+    /**
+     * @return ResponseInterface
+     */
+    public function getResponse()
+    {
+        return $this->response;
+    }
+
+    /**
+     * @param ResponseInterface $response
+     * @return $this
+     */
+    public function setResponse(ResponseInterface $response)
+    {
+        $this->response = $response;
+        return $this;
     }
 }

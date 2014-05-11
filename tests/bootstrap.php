@@ -27,5 +27,7 @@ spl_autoload_register(function ($class) {
     }
 });
 
+define('FILES', __DIR__ . "/Ups/Tests/_files");
+
 require_once __DIR__ . "/../src/Ups/Autoloader.php";
 Ups\Autoloader::register();

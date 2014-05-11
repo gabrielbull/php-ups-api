@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<QuantumViewRequest xml:lang="en-US">
+    <SubscriptionRequest>
+        <DateTimeRange>
+            <BeginDateTime>%s</BeginDateTime>
+            <EndDateTime>%s</EndDateTime>
+        </DateTimeRange>
+    </SubscriptionRequest>
+    <Request>
+        <TransactionReference/>
+        <RequestAction>QVEvents</RequestAction>
+    </Request>
+</QuantumViewRequest>
