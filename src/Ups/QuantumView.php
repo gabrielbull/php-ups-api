@@ -108,13 +108,14 @@ class QuantumView extends Ups
         $access = $this->createAccess();
         $request = $this->createRequest();
 
-        $response = $this->getRequest()->request($access, $request, $this->compileEndpointUrl(self::ENDPOINT))->getResponse();
+        $this->response = $this->getRequest()->request($access, $request, $this->compileEndpointUrl(self::ENDPOINT));
+        $response = $this->response->getResponse();
 
         if (null === $response) {
             throw new Exception("Failure (0): Unknown error", 0);
         }
 
-        if ($response instanceof ResponseInterface && $response->Response->ResponseStatusCode == 0) {
+        if ($response instanceof SimpleXMLElement && $response->Response->ResponseStatusCode == 0) {
             throw new Exception(
                 "Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}",
                 (int)$response->Response->Error->ErrorCode

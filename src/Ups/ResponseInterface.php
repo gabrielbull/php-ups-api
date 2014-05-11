@@ -5,6 +5,23 @@ use SimpleXMLElement;
 
 interface ResponseInterface
 {
-    public function setResponse(SimpleXMLElement $response);
+    /**
+     * @return SimpleXMLElement
+     */
     public function getResponse();
+
+    /**
+     * @param SimpleXMLElement $response
+     */
+    public function setResponse(SimpleXMLElement $response);
+
+    /**
+     * @return string
+     */
+    public function getText();
+
+    /**
+     * @param string $text
+     */
+    public function setText($text);
 }

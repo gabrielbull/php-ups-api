@@ -56,9 +56,10 @@ class Request implements RequestInterface
         fclose($handle);
 
         if ($response != false) {
+            $text = $response;
             $response = new SimpleXMLElement($response);
             if (isset($response->Response) && isset($response->Response->ResponseStatusCode)) {
-                return (new Response)->setResponse($response);
+                return (new Response)->setText($text)->setResponse($response);
             }
         }
 

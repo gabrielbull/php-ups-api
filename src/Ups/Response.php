@@ -6,9 +6,22 @@ use SimpleXMLElement;
 class Response implements ResponseInterface
 {
     /**
+     * @var string
+     */
+    protected $text;
+
+    /**
      * @var SimpleXMLElement
      */
     protected $reponse;
+
+    /**
+     * @return SimpleXMLElement
+     */
+    public function getResponse()
+    {
+        return $this->reponse;
+    }
 
     /**
      * @param SimpleXMLElement $response
@@ -21,10 +34,20 @@ class Response implements ResponseInterface
     }
 
     /**
-     * @return SimpleXMLElement
+     * @return string
      */
-    public function getResponse()
+    public function getText()
     {
-        return $this->reponse;
+        return $this->text;
+    }
+
+    /**
+     * @param string $text
+     * @return $this
+     */
+    public function setText($text)
+    {
+        $this->text = $text;
+        return $this;
     }
 }

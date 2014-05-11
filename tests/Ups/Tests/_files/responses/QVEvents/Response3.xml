@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<QuantumViewResponse>
+    <Response>
+        <TransactionReference></TransactionReference>
+        <ResponseStatusCode>1</ResponseStatusCode>
+        <ResponseStatusDescription>Success</ResponseStatusDescription>
+    </Response>
+    <QuantumViewEvents>
+        <SubscriberID>myname</SubscriberID>
+        <SubscriptionEvents>
+            <Name>TestNotifications</Name>
+            <Number>6B7205649DC3BFC6</Number>
+            <SubscriptionStatus>
+                <Code>A</Code>
+                <Description>Active</Description>
+            </SubscriptionStatus>
+            <DateRange>
+                <BeginDate>20140505123441</BeginDate>
+                <EndDate>20140511123441</EndDate>
+            </DateRange>
+            <SubscriptionFile>
+                <FileName>140505_130607001</FileName>
+                <StatusType>
+                    <Code>R</Code>
+                    <Description>Read</Description>
+                </StatusType>
+                <Delivery>
+                    <PackageReferenceNumber>
+                        <Value>MY_PACKAGE_REF</Value>
+                    </PackageReferenceNumber>
+                    <ShipmentReferenceNumber>
+                        <Value>MY_PACKAGE_REF</Value>
+                    </ShipmentReferenceNumber>
+                    <ShipperNumber>SHIPPER_NUMBER</ShipperNumber>
+                    <TrackingNumber>1ZF96A000000000000</TrackingNumber>
+                    <Date>20140505</Date>
+                    <Time>115800</Time>
+                    <ActivityLocation>
+                        <AddressArtifactFormat>
+                            <PoliticalDivision2>CITY_NAME</PoliticalDivision2>
+                            <PoliticalDivision1>NY</PoliticalDivision1>
+                            <CountryCode>US</CountryCode>
+                        </AddressArtifactFormat>
+                    </ActivityLocation>
+                    <DeliveryLocation>
+                        <AddressArtifactFormat>
+                            <StreetNumberLow>1000</StreetNumberLow>
+                            <StreetName>STREET NAME</StreetName>
+                            <StreetType>STREET</StreetType>
+                            <PoliticalDivision2>NEW YORK</PoliticalDivision2>
+                            <PoliticalDivision1>NY</PoliticalDivision1>
+                            <CountryCode>US</CountryCode>
+                            <PostcodePrimaryLow>10006</PostcodePrimaryLow>
+                            <ResidentialAddressIndicator/>
+                        </AddressArtifactFormat>
+                        <Description>FRONT DESK</Description>
+                        <SignedForByName>MY NAME</SignedForByName>
+                    </DeliveryLocation>
+                    <BillToAccount>
+                        <Option>01</Option>
+                        <Number>ACCOUNT_NUMBER</Number>
+                    </BillToAccount>
+                </Delivery>
+            </SubscriptionFile>
+        </SubscriptionEvents>
+    </QuantumViewEvents>
+    <Bookmark>I3btAry3RydFAvioq9Bb3sTLBGPgYB0kZ4CSsgXCMua4NJd0OLtaI60WCfLRVF33</Bookmark>
+</QuantumViewResponse>

@@ -7,6 +7,11 @@ use SimpleXMLElement;
 class ResponseMock implements ResponseInterface
 {
     /**
+     * @var string
+     */
+    protected $text;
+
+    /**
      * @var SimpleXMLElement
      */
     protected $response;
@@ -27,5 +32,23 @@ class ResponseMock implements ResponseInterface
     public function getResponse()
     {
         return $this->response;
+    }
+
+    /**
+     * @return string
+     */
+    public function getText()
+    {
+        return $this->text;
+    }
+
+    /**
+     * @param string $text
+     * @return $this
+     */
+    public function setText($text)
+    {
+        $this->text = $text;
+        return $this;
     }
 }

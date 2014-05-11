@@ -38,7 +38,6 @@ class QuantumViewTest extends PHPUnit_Framework_TestCase
         $quantumView = new Ups\QuantumView();
         $quantumView->setRequest(new RequestMock('/QVEvents/Response1.xml'));
 
-        // Get the subscription for all events for the last hour
         $events = $quantumView->getSubscription(null, (time() - 3600));
 
         // Test response
@@ -51,34 +50,23 @@ class QuantumViewTest extends PHPUnit_Framework_TestCase
 
     public function testSubscriptionContext()
     {
-        $quantumView = new Ups\QuantumView($GLOBALS['UPS_ACCESS_KEY'], $GLOBALS['UPS_USER_ID'], $GLOBALS['UPS_PASSWORD']);
+        $quantumView = new Ups\QuantumView();
+        $quantumView->setRequest(new RequestMock('/QVEvents/Response2.xml'));
         $quantumView->setContext('unit test');
-        // Get the subscription for all events for the last hour
         $quantumView->getSubscription(null, (time() - 24 * 6 * 3600));
 
-        // Test context
-        $this->assertRegExp('{<CustomerContext>.?unit test.?</CustomerContext>}msU', $quantumView->response);
+        $response = $quantumView->getResponse()->getResponse();
+        $this->assertEquals('unit test', (string)$response->Response->TransactionReference->CustomerContext);
     }
 
     public function testSubscriptionBookmark()
     {
         $quantumView = new Ups\QuantumView($GLOBALS['UPS_ACCESS_KEY'], $GLOBALS['UPS_USER_ID'], $GLOBALS['UPS_PASSWORD']);
+        $quantumView->setRequest(new RequestMock('/QVEvents/Response3.xml'));
 
-        // Get the subscription for all events for the last 6 days
-        $events = $quantumView->getSubscription(null, (time() - 518400));
+        $quantumView->getSubscription(null, (time() - 518400));
 
-        if ($quantumView->hasBookmark()) {
-            $bookmark = $quantumView->getBookmark();
-
-            $this->assertStringMatchesFormat('%a', $bookmark);
-
-            // Get the subscription with the bookmark
-            $quantumView = new Ups\QuantumView($GLOBALS['UPS_ACCESS_KEY'], $GLOBALS['UPS_USER_ID'], $GLOBALS['UPS_PASSWORD']);
-            $reponse = $quantumView->getSubscription(null, (time() - 518400), null, null, $bookmark);
-
-            // Test response
-            $this->assertInstanceOf('ArrayObject', $events);
-            $this->assertObjectHasAttribute('Type', reset($events));
-        }
+        $this->assertTrue($quantumView->hasBookmark());
+        $this->assertEquals('I3btAry3RydFAvioq9Bb3sTLBGPgYB0kZ4CSsgXCMua4NJd0OLtaI60WCfLRVF33', $quantumView->getBookmark());
     }
 }
