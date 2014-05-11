@@ -1,23 +1,22 @@
 <?php
+namespace Ups\Entity;
 
-namespace UPS\Entity;
-
-
-class RateResponse {
+class RateResponse
+{
     public $RatedShipment;
 
-    function __construct( $response = null ) {
+    function __construct($response = null)
+    {
         $this->RatedShipment = array();
 
-        if ( null != $response ) {
-            if ( isset( $response->RatedShipment ) ) {
-                if ( is_array( $response->RatedShipment )) {
-                    foreach ($response->RatedShipment as $ratedShipment )   {
-                        $this->RatedShipment[] = new RatedShipment( $ratedShipment );
+        if (null != $response) {
+            if (isset($response->RatedShipment)) {
+                if (is_array($response->RatedShipment)) {
+                    foreach ($response->RatedShipment as $ratedShipment) {
+                        $this->RatedShipment[] = new RatedShipment($ratedShipment);
                     }
-                }
-                else {
-                    $this->RatedShipment[] = new RatedShipment( $response->RatedShipment );
+                } else {
+                    $this->RatedShipment[] = new RatedShipment($response->RatedShipment);
                 }
             }
 

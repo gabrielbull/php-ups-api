@@ -1,9 +1,8 @@
 <?php
+namespace Ups\Entity;
 
-namespace UPS\Entity;
-
-
-class TimeInTransitRequest {
+class TimeInTransitRequest
+{
     public $TransitFrom;
     public $TransitTo;
     public $ShipmentWeight;
@@ -12,7 +11,8 @@ class TimeInTransitRequest {
     public $PickupDate;
     public $DocumentsOnlyIndicator;
 
-    function __construct() {
+    function __construct()
+    {
         $this->TransitFrom = new Address();
         $this->TransitTo = new Address();
         $this->ShipmentWeight = new ShipmentWeight();

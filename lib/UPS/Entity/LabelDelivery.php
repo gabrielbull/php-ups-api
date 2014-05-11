@@ -1,16 +1,16 @@
 <?php
+namespace Ups\Entity;
 
-namespace UPS\Entity;
-
-
-class LabelDelivery {
+class LabelDelivery
+{
     public $LabelLinkIndicator;
 
-    function __construct( $response = null ) {
+    function __construct($response = null)
+    {
         $this->LabelLinkIndicator = null;
 
-        if ( null != $response ) {
-            if ( isset( $response->LabelLinkIndicator ) ) {
+        if (null != $response) {
+            if (isset($response->LabelLinkIndicator)) {
                 $this->LabelLinkIndicator = true;
             }
         }

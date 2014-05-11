@@ -1,20 +1,20 @@
 <?php
+namespace Ups\Entity;
 
-namespace UPS\Entity;
-
-
-class COD {
+class COD
+{
     public $CODCode;
     public $CODAmount;
 
-    function __construct( $response = null ) {
+    function __construct($response = null)
+    {
         $this->CODAmount = new CODAmount();
 
-        if ( null != $response ) {
-            if ( isset( $response->CODCode ) ) {
+        if (null != $response) {
+            if (isset($response->CODCode)) {
                 $this->CODCode = $response->CODCode;
             }
-            if ( isset( $response->CODAmount ) ) {
+            if (isset($response->CODAmount)) {
                 $this->CODAmount = new CODAmount($response->CODAmount);
             }
         }

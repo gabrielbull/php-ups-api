@@ -1,9 +1,8 @@
 <?php
+namespace Ups\Entity;
 
-namespace UPS\Entity;
-
-
-class SubscriptionFile {
+class SubscriptionFile
+{
     public $FileName;
     public $StatusType;
     public $Manifest;
@@ -12,7 +11,8 @@ class SubscriptionFile {
     public $Delivery;
     public $Generic;
 
-    function __construct( $response = null ) {
+    function __construct($response = null)
+    {
         $this->StatusType = new StatusType();
         $this->Manifest = new Manifest();
         $this->Origin = new Origin();
@@ -20,26 +20,26 @@ class SubscriptionFile {
         $this->Delivery = new Delivery();
         $this->Generic = new Generic();
 
-        if ( null != $response ) {
-            if ( isset( $response->FileName ) ) {
+        if (null != $response) {
+            if (isset($response->FileName)) {
                 $this->FileName = $response->FileName;
             }
-            if ( isset( $response->StatusType ) ) {
+            if (isset($response->StatusType)) {
                 $this->StatusType = new StatusType($response->StatusType);
             }
-            if ( isset( $response->Manifest ) ) {
+            if (isset($response->Manifest)) {
                 $this->Manifest = new Manifest($response->Manifest);
             }
-            if ( isset( $response->Origin ) ) {
+            if (isset($response->Origin)) {
                 $this->Origin = new Origin($response->Origin);
             }
-            if ( isset( $response->Exception ) ) {
+            if (isset($response->Exception)) {
                 $this->Exception = new Exception($response->Exception);
             }
-            if ( isset( $response->Delivery ) ) {
+            if (isset($response->Delivery)) {
                 $this->Delivery = new Delivery($response->Delivery);
             }
-            if ( isset( $response->Generic ) ) {
+            if (isset($response->Generic)) {
                 $this->Generic = new Generic($response->Generic);
             }
         }

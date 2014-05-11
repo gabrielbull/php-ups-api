@@ -1,25 +1,25 @@
 <?php
+namespace Ups\Entity;
 
-namespace UPS\Entity;
-
-
-class TrackingCandidate {
+class TrackingCandidate
+{
     public $TrackingNumber;
     public $DestinationPostalCode;
     public $DestinationCountryCode;
     public $PickupDateRange;
 
-    function __construct( $response = null ) {
-        if ( isset( $response->TrackingNumber ) ) {
+    function __construct($response = null)
+    {
+        if (isset($response->TrackingNumber)) {
             $this->TrackingNumber = $response->TrackingNumber;
         }
-        if ( isset( $response->DestinationPostalCode ) ) {
+        if (isset($response->DestinationPostalCode)) {
             $this->DestinationPostalCode = $response->DestinationPostalCode;
         }
-        if ( isset( $response->DestinationCountryCode ) ) {
+        if (isset($response->DestinationCountryCode)) {
             $this->DestinationCountryCode = $response->DestinationCountryCode;
         }
-        if ( isset( $response->PickupDateRange ) ) {
+        if (isset($response->PickupDateRange)) {
             $this->PickupDateRange = new PickupDateRange($response->PickupDateRange);
         }
     }

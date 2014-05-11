@@ -1,14 +1,14 @@
 <?php
+namespace Ups\Entity;
 
-namespace UPS\Entity;
-
-
-class LabelImageFormat {
+class LabelImageFormat
+{
     public $Code;
 
-    function __construct( $response = null ) {
-        if ( null != $response ) {
-            if ( isset( $response->Code ) ) {
+    function __construct($response = null)
+    {
+        if (null != $response) {
+            if (isset($response->Code)) {
                 $this->Code = $response->Code;
             }
         }

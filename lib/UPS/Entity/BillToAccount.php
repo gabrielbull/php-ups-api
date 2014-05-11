@@ -1,9 +1,8 @@
 <?php
+namespace Ups\Entity;
 
-namespace UPS\Entity;
-
-
-class BillToAccount {
+class BillToAccount
+{
     const BTA_SHIPPER = '01';
     const BTA_CONSIGNEEBILLING = '02';
     const BTA_THIRDPARTY = '03';
@@ -12,12 +11,13 @@ class BillToAccount {
     public $Option;
     public $Number;
 
-    function __construct( $response = null ) {
-        if ( null != $response ) {
-            if ( isset( $response->Option ) ) {
+    function __construct($response = null)
+    {
+        if (null != $response) {
+            if (isset($response->Option)) {
                 $this->Option = $response->Option;
             }
-            if ( isset( $response->Number ) ) {
+            if (isset($response->Number)) {
                 $this->Number = $response->Number;
             }
         }

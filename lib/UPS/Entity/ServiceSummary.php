@@ -1,29 +1,29 @@
 <?php
+namespace Ups\Entity;
 
-namespace UPS\Entity;
-
-
-class ServiceSummary {
+class ServiceSummary
+{
     public $Service;
     public $Guaranteed;
     public $EstimatedArrival;
     public $SaturdayDelivery;
     public $SaturdayDeliveryDisclaimer;
 
-    function __construct( $response = null ) {
+    function __construct($response = null)
+    {
         $this->Service = new Service();
         $this->Guaranteed = new Guaranteed();
         $this->EstimatedArrival = new EstimatedArrival();
 
-        if ( null != $response ) {
-            if ( isset( $response->Service ) ) {
-                $this->Service = new Service( $response->Service );
+        if (null != $response) {
+            if (isset($response->Service)) {
+                $this->Service = new Service($response->Service);
             }
-            if ( isset( $response->Guaranteed) ) {
-                $this->Guaranteed = new Guaranteed( $response->Guaranteed );
+            if (isset($response->Guaranteed)) {
+                $this->Guaranteed = new Guaranteed($response->Guaranteed);
             }
-            if ( isset( $response->EstimatedArrival) ) {
-                $this->EstimatedArrival = new EstimatedArrival( $response->EstimatedArrival );
+            if (isset($response->EstimatedArrival)) {
+                $this->EstimatedArrival = new EstimatedArrival($response->EstimatedArrival);
             }
         }
     }

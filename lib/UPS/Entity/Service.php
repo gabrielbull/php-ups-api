@@ -1,9 +1,8 @@
 <?php
+namespace Ups\Entity;
 
-namespace UPS\Entity;
-
-
-class Service {
+class Service
+{
     // Valid domestic values
     const S_AIR_1DAYEARLYAM = '14';
     const S_AIR_1DAY = '01';
@@ -22,7 +21,7 @@ class Service {
 
     // Valid Poland to Poland same day values
     const S_UPSTODAY_STANDARD = '82';
-    const S_UPSTODAY_DEDICATEDCOURIER ='83';
+    const S_UPSTODAY_DEDICATEDCOURIER = '83';
     const S_UPSTODAY_INTERCITY = '84';
     const S_UPSTODAY_EXPRESS = '85';
     const S_UPSTODAY_EXPRESSSAVER = '86';
@@ -31,15 +30,16 @@ class Service {
     public $Code;
     public $Description;
 
-    function __construct( $response =  null ) {
+    function __construct($response = null)
+    {
         $this->Code = self::S_GROUND;
 
-        if ( null != $response ) {
-            if ( isset( $response->Code) ) {
+        if (null != $response) {
+            if (isset($response->Code)) {
                 $this->Code = $response->Code;
             }
 
-            if ( isset( $response->Description) ) {
+            if (isset($response->Description)) {
                 $this->Description = $response->Description;
             }
 
@@ -47,7 +47,8 @@ class Service {
 
     }
 
-    public function getName() {
-        return 'shipping.service.code'.$this->Code;
+    public function getName()
+    {
+        return 'shipping.service.code' . $this->Code;
     }
 } 

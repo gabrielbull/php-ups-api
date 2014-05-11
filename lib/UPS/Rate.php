@@ -1,10 +1,10 @@
 <?php
+namespace Ups;
 
-namespace UPS;
-
-use DOMDocument,
-    SimpleXMLElement,
-    Exception;
+use DOMDocument;
+use SimpleXMLElement;
+use Exception;
+use stdClass;
 use UPS\Entity\RateRequest;
 use UPS\Entity\RateResponse;
 
@@ -14,12 +14,20 @@ use UPS\Entity\RateResponse;
  * @package ups
  * @author Michael Williams <michael.williams@limelyte.com>
  */
-class Rate extends UPS
+class Rate extends Ups
 {
+    const ENDPOINT = '/Rate';
+
+    /**
+     * @var string
+     */
     private $requestOption;
 
-    protected $endpoint = '/Rate';
-
+    /**
+     * @param $rateRequest
+     * @return RateRequest
+     * @throws Exception
+     */
     public function shopRates($rateRequest)
     {
         $this->requestOption = "Shop";
@@ -27,6 +35,11 @@ class Rate extends UPS
         return $this->sendRequest($rateRequest);
     }
 
+    /**
+     * @param $rateRequest
+     * @return RateRequest
+     * @throws Exception
+     */
     public function getRate($rateRequest)
     {
         $this->requestOption = "Rate";
@@ -40,17 +53,17 @@ class Rate extends UPS
      *
      * @param $rateRequest
      * @return RateRequest
-     * @throws \Exception
+     * @throws Exception
      */
     private function sendRequest($rateRequest)
     {
         $request = $this->createRequest($rateRequest);
-        $response = $this->request($this->createAccess(), $request, $this->compileEndpointUrl($this->endpoint));
+        $response = $this->request($this->createAccess(), $request, $this->compileEndpointUrl(self::ENDPOINT));
 
         if ($response->Response->ResponseStatusCode == 0) {
             throw new Exception(
                 "Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}",
-                (int) $response->Response->Error->ErrorCode
+                (int)$response->Response->Error->ErrorCode
             );
         } else {
             return $this->formatResponse($response);
@@ -61,7 +74,7 @@ class Rate extends UPS
      * Create the Rate request
      *
      * @param RateRequest $rateRequest The request details. Refer to the UPS documentation for available structure
-     * @return  string
+     * @return string
      */
     private function createRequest($rateRequest)
     {
@@ -71,7 +84,7 @@ class Rate extends UPS
         $xml->formatOutput = true;
 
         $trackRequest = $xml->appendChild($xml->createElement("RatingServiceSelectionRequest"));
-        $trackRequest->setAttribute('xml:lang','en-US');
+        $trackRequest->setAttribute('xml:lang', 'en-US');
 
         $request = $trackRequest->appendChild($xml->createElement("Request"));
 
@@ -120,16 +133,16 @@ class Rate extends UPS
     /**
      * Format the response
      *
-     * @param   SimpleXMLElement    $response
-     * @return  stdClass
+     * @param SimpleXMLElement $response
+     * @return stdClass
      */
     private function formatResponse(SimpleXMLElement $response)
     {
         // We don't need to return data regarding the response to the user
         unset($response->Response);
 
-        $result =  $this->convertXmlObject($response);
+        $result = $this->convertXmlObject($response);
 
-        return new RateResponse( $result );
+        return new RateResponse($result);
     }
 }

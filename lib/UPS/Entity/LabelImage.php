@@ -1,9 +1,8 @@
 <?php
+namespace Ups\Entity;
 
-namespace UPS\Entity;
-
-
-class LabelImage {
+class LabelImage
+{
     public $LabelImageFormat;
     public $GraphicImage;
     public $HTMLImage;
@@ -11,11 +10,12 @@ class LabelImage {
     public $InternationalSignatureGraphicImage;
     public $URL;
 
-    function __construct( $response = null ) {
+    function __construct($response = null)
+    {
         $this->LabelImageFormat = new LabelImageFormat();
 
-        if ( null != $response ) {
-            if ( isset( $response->LabelImageFormat ) ) {
+        if (null != $response) {
+            if (isset($response->LabelImageFormat)) {
                 $this->LabelImageFormat = new LabelImageFormat($response->LabelImageFormat);
             }
         }

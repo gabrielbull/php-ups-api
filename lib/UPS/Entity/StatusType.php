@@ -1,19 +1,19 @@
 <?php
+namespace Ups\Entity;
 
-namespace UPS\Entity;
-
-
-class StatusType {
+class StatusType
+{
     public $Code;
     public $Description;
 
-    function __construct( $response = null ) {
-        if ( null != $response ) {
-            if ( isset( $response->Code ) ) {
+    function __construct($response = null)
+    {
+        if (null != $response) {
+            if (isset($response->Code)) {
                 $this->Code = $response->Code;
             }
         }
-        if ( isset( $response->Description ) ) {
+        if (isset($response->Description)) {
             $this->Description = $response->Description;
         }
     }

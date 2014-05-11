@@ -1,9 +1,8 @@
 <?php
+namespace Ups\Entity;
 
-namespace UPS\Entity;
-
-
-class PickupType {
+class PickupType
+{
     const PKT_DAILY = '01';
     const PKT_CUSTOMERCOUNTER = '03';
     const PKT_ONETIME = '06';
@@ -14,7 +13,8 @@ class PickupType {
     public $Code;
     public $Description;
 
-    function __construct() {
+    function __construct()
+    {
         $this->Code = self::PKT_DAILY;
     }
 } 

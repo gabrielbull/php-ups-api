@@ -1,44 +1,45 @@
 <?php
+namespace Ups\Entity;
 
-namespace UPS\Entity;
-
-
-class RatedPackage {
+class RatedPackage
+{
     public $Weight;
     public $BillingWeight;
     public $TransportationCharges;
     public $ServiceOptionsCharges;
     public $TotalCharges;
 
-    function __construct( $response = null ) {
+    function __construct($response = null)
+    {
         $this->BillingWeight = new BillingWeight();
         $this->TransportationCharges = new Charges();
         $this->ServiceOptionsCharges = new Charges();
         $this->TotalCharges = new Charges();
         $this->Weight = '0.0';
 
-        if ( null != $response ) {
-            if ( isset( $response->Weight ) ) {
+        if (null != $response) {
+            if (isset($response->Weight)) {
                 $this->Weight = $response->Weight;
             }
-            if ( isset( $response->BillingWeight ) ) {
-                $this->BillingWeight = new BillingWeight( $response->BillingWeight );
+            if (isset($response->BillingWeight)) {
+                $this->BillingWeight = new BillingWeight($response->BillingWeight);
             }
-            if ( isset( $response->TransportationCharges ) ) {
-                $this->TransportationCharges = new Charges( $response->TransportationCharges );
+            if (isset($response->TransportationCharges)) {
+                $this->TransportationCharges = new Charges($response->TransportationCharges);
             }
-            if ( isset( $response->ServiceOptionsCharges ) ) {
-               $this->ServiceOptionsCharges = new Charges( $response->ServiceOptionsCharges );
+            if (isset($response->ServiceOptionsCharges)) {
+                $this->ServiceOptionsCharges = new Charges($response->ServiceOptionsCharges);
             }
-            if ( isset( $response->TotalCharges ) ) {
-                $this->TotalCharges = new Charges( $response->TotalCharges );
+            if (isset($response->TotalCharges)) {
+                $this->TotalCharges = new Charges($response->TotalCharges);
             }
 
         }
 
     }
 
-    public function getServiceName() {
+    public function getServiceName()
+    {
         return $this->Service->getName();
     }
 }

@@ -1,19 +1,19 @@
 <?php
+namespace Ups\Entity;
 
-namespace UPS\Entity;
-
-
-class Guaranteed {
+class Guaranteed
+{
     const G_YES = 'Y';
     const G_NO = 'N';
 
     public $Code;
 
-    function __construct( $response = null ) {
+    function __construct($response = null)
+    {
         $this->Code = self::G_NO;
 
-        if ( null != $response ){
-            if ( isset( $response->Code ) ) {
+        if (null != $response) {
+            if (isset($response->Code)) {
                 $this->Code = $response->Code;
             }
         }

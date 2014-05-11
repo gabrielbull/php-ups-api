@@ -1,20 +1,20 @@
 <?php
+namespace Ups\Entity;
 
-namespace UPS\Entity;
-
-
-class FailureNotification {
+class FailureNotification
+{
     public $FailedEmailAddress;
     public $FailureNotificationCode;
 
-    function __construct( $response = null ) {
+    function __construct($response = null)
+    {
         $this->FailureNotificationCode = new FailureNotificationCode();
 
-        if ( null != $response ) {
-            if ( isset( $response->FailedEmailAddress ) ) {
+        if (null != $response) {
+            if (isset($response->FailedEmailAddress)) {
                 $this->FailedEmailAddress = $response->FailedEmailAddress;
             }
-            if ( isset( $response->FailureNotificationCode ) ) {
+            if (isset($response->FailureNotificationCode)) {
                 $this->FailureNotificationCode = new FailureNotificationCode($response->FailureNotificationCode);
             }
         }

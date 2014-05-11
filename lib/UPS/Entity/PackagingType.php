@@ -1,9 +1,8 @@
 <?php
+namespace Ups\Entity;
 
-namespace UPS\Entity;
-
-
-class PackagingType {
+class PackagingType
+{
     const PT_UNKONW = '00';
     const PT_UPSLETTER = '01';
     const PT_PACKAGE = '02';
@@ -20,7 +19,8 @@ class PackagingType {
     public $Code;
     public $Description;
 
-    function __construct() {
+    function __construct()
+    {
         $this->Code = self::PT_UNKONW;
     }
 } 

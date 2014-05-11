@@ -1,18 +1,18 @@
 <?php
+namespace Ups\Entity;
 
-namespace UPS\Entity;
-
-
-class Activity {
+class Activity
+{
     public $Date;
     public $Time;
 
-    function __construct( $response = null ) {
-        if ( null != $response ) {
-            if ( isset( $response->Date ) ) {
+    function __construct($response = null)
+    {
+        if (null != $response) {
+            if (isset($response->Date)) {
                 $this->Date = $response->Date;
             }
-            if ( isset( $response->Time ) ) {
+            if (isset($response->Time)) {
                 $this->Time = $response->Time;
             }
         }

@@ -1,9 +1,8 @@
 <?php
+namespace Ups\Entity;
 
-namespace UPS\Entity;
-
-
-class LabelRecoveryRequest {
+class LabelRecoveryRequest
+{
     public $LabelSpecification;
     public $Translate;
     public $LabelDelivery;
@@ -11,7 +10,8 @@ class LabelRecoveryRequest {
     public $ReferenceNumber;
     public $ShipperNumber;
 
-    function __construct( $request = null ) {
+    function __construct($request = null)
+    {
         $this->LabelSpecification = new LabelSpecification();
         $this->Translate = new Translate();
         $this->LabelDelivery = new LabelDelivery();

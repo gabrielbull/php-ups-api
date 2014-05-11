@@ -1,9 +1,8 @@
 <?php
+namespace Ups\Entity;
 
-namespace UPS\Entity;
-
-
-class Shipper {
+class Shipper
+{
     public $Name;
     public $AttentionName;
     public $TaxIdentificationNumber;
@@ -17,30 +16,31 @@ class Shipper {
      */
     public $Address;
 
-    function __construct( $response = null ) {
-        if ( null != $response ) {
-            if ( isset( $response->Name ) ) {
+    function __construct($response = null)
+    {
+        if (null != $response) {
+            if (isset($response->Name)) {
                 $this->Name = $response->Name;
             }
-            if ( isset( $response->AttentionName ) ) {
+            if (isset($response->AttentionName)) {
                 $this->AttentionName = $response->AttentionName;
             }
-            if ( isset( $response->TaxIdentificationNumber ) ) {
+            if (isset($response->TaxIdentificationNumber)) {
                 $this->TaxIdentificationNumber = $response->TaxIdentificationNumber;
             }
-            if ( isset( $response->PhoneNumber ) ) {
+            if (isset($response->PhoneNumber)) {
                 $this->PhoneNumber = $response->PhoneNumber;
             }
-            if ( isset( $response->FaxNumber ) ) {
+            if (isset($response->FaxNumber)) {
                 $this->FaxNumber = $response->FaxNumber;
             }
-            if ( isset( $response->ShipperNumber ) ) {
+            if (isset($response->ShipperNumber)) {
                 $this->ShipperNumber = $response->ShipperNumber;
             }
-            if ( isset( $response->EMailAddress ) ) {
+            if (isset($response->EMailAddress)) {
                 $this->EMailAddress = $response->EMailAddress;
             }
-            if ( isset( $response->Address ) ) {
+            if (isset($response->Address)) {
                 $this->Address = new Address($response->Address);
             }
         }

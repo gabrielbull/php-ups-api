@@ -1,22 +1,22 @@
 <?php
+namespace Ups\Entity;
 
-namespace UPS\Entity;
-
-
-class AddressExtendedInformation {
+class AddressExtendedInformation
+{
     public $Type;
     public $Low;
     public $High;
 
-    function __construct( $response = null ) {
-        if ( null != $response ) {
-            if ( isset( $response->Type ) ) {
+    function __construct($response = null)
+    {
+        if (null != $response) {
+            if (isset($response->Type)) {
                 $this->Type = $response->Type;
             }
-            if ( isset( $response->Low ) ) {
+            if (isset($response->Low)) {
                 $this->Low = $response->Low;
             }
-            if ( isset( $response->High ) ) {
+            if (isset($response->High)) {
                 $this->High = $response->High;
             }
         }

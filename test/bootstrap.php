@@ -1,6 +1,6 @@
 <?php
 
-namespace UPS;
+namespace Ups;
 
 date_default_timezone_set('America/New_York');
 

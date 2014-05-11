@@ -1,9 +1,8 @@
 <?php
+namespace Ups\Entity;
 
-namespace UPS\Entity;
-
-
-class RatedShipment {
+class RatedShipment
+{
     public $Service;
     public $RateShipmentWarning;
     public $BillingWeight;
@@ -15,7 +14,8 @@ class RatedShipment {
     public $RatedPackage;
     public $SurCharges;
 
-    function __construct( $response = null ) {
+    function __construct($response = null)
+    {
         $this->Service = new Service();
         $this->BillingWeight = new BillingWeight();
         $this->TransportationCharges = new Charges();
@@ -24,44 +24,42 @@ class RatedShipment {
         $this->RatedPackage = array();
         $this->SurCharges = array();
 
-        if ( null != $response ) {
-            if ( isset( $response->Service ) ) {
+        if (null != $response) {
+            if (isset($response->Service)) {
                 $this->Service->Code = $response->Service->Code;
             }
-            if ( isset( $response->RatedShipmentWarning ) ) {
+            if (isset($response->RatedShipmentWarning)) {
                 $this->RateShipmentWarning = $response->RatedShipmentWarning;
             }
-            if ( isset( $response->BillingWeight ) ) {
-                $this->BillingWeight = new BillingWeight( $response->BillingWeight );
+            if (isset($response->BillingWeight)) {
+                $this->BillingWeight = new BillingWeight($response->BillingWeight);
             }
-            if ( isset( $response->TransportationCharges ) ) {
-                $this->TransportationCharges = new Charges( $response->TransportationCharges );
+            if (isset($response->TransportationCharges)) {
+                $this->TransportationCharges = new Charges($response->TransportationCharges);
             }
-            if ( isset( $response->ServiceOptionsCharges ) ) {
-                $this->ServiceOptionsCharges = new Charges( $response->ServiceOptionsCharges );
+            if (isset($response->ServiceOptionsCharges)) {
+                $this->ServiceOptionsCharges = new Charges($response->ServiceOptionsCharges);
             }
-            if ( isset( $response->TotalCharges ) ) {
-                $this->TotalCharges = new Charges( $response->TotalCharges );
+            if (isset($response->TotalCharges)) {
+                $this->TotalCharges = new Charges($response->TotalCharges);
             }
-            if ( isset( $response->RatedPackage ) ) {
-                if ( is_array( $response->RatedPackage )) {
-                    foreach( $response->RatedPackage as $ratedPackage) {
-                        $this->RatedPackage[] = new RatedPackage( $ratedPackage );
+            if (isset($response->RatedPackage)) {
+                if (is_array($response->RatedPackage)) {
+                    foreach ($response->RatedPackage as $ratedPackage) {
+                        $this->RatedPackage[] = new RatedPackage($ratedPackage);
                     }
-                }
-                else {
-                    $this->RatedPackage[] = new RatedPackage( $response->RatedPackage );
+                } else {
+                    $this->RatedPackage[] = new RatedPackage($response->RatedPackage);
                 }
             }
 
-            if ( isset( $response->SurCharges ) ) {
-                if ( is_array( $response->SurCharges )) {
-                    foreach( $response->SurCharges as $surCharges) {
-                        $this->SurCharges[] = new Charges( $surCharges );
+            if (isset($response->SurCharges)) {
+                if (is_array($response->SurCharges)) {
+                    foreach ($response->SurCharges as $surCharges) {
+                        $this->SurCharges[] = new Charges($surCharges);
                     }
-                }
-                else {
-                    $this->SurCharges[] = new Charges( $response->SurCharges );
+                } else {
+                    $this->SurCharges[] = new Charges($response->SurCharges);
                 }
             }
 
@@ -69,7 +67,8 @@ class RatedShipment {
 
     }
 
-    public function getServiceName() {
+    public function getServiceName()
+    {
         return $this->Service->getName();
     }
 }

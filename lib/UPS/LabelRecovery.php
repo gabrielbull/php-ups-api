@@ -1,12 +1,12 @@
 <?php
+namespace Ups;
 
-namespace UPS;
-
-use DOMDocument,
-    SimpleXMLElement,
-    Exception;
+use DOMDocument;
+use SimpleXMLElement;
+use Exception;
+use stdClass;
 use UPS\Entity\LabelRecoveryRequest;
-use UPS\Entity\LabelRecoveryResponse;
+use Ups\Entity\LabelRecoveryResponse;
 
 /**
  * LabelRecovery API Wrapper
@@ -14,10 +14,15 @@ use UPS\Entity\LabelRecoveryResponse;
  * @package ups
  * @author Sebastien Vergnes <sebastien@vergnes.eu>
  */
-class LabelRecovery extends UPS
+class LabelRecovery extends Ups
 {
-    protected $endpoint = '/LabelRecovery';
+    const ENDPOINT = '/LabelRecovery';
 
+    /**
+     * @param $shipment
+     * @return LabelRecoveryRequest
+     * @throws Exception
+     */
     public function getLabelRecovery($shipment)
     {
         return $this->sendRequest($shipment);
@@ -29,17 +34,17 @@ class LabelRecovery extends UPS
      *
      * @param $labelRecoveryRequest
      * @return LabelRecoveryRequest
-     * @throws \Exception
+     * @throws Exception
      */
     private function sendRequest($labelRecoveryRequest)
     {
         $request = $this->createRequest($labelRecoveryRequest);
-        $response = $this->request($this->createAccess(), $request, $this->compileEndpointUrl($this->endpoint));
+        $response = $this->request($this->createAccess(), $request, $this->compileEndpointUrl(self::ENDPOINT));
 
         if ($response->Response->ResponseStatusCode == 0) {
             throw new Exception(
                 "Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}",
-                (int) $response->Response->Error->ErrorCode
+                (int)$response->Response->Error->ErrorCode
             );
         } else {
             return $this->formatResponse($response);
@@ -50,7 +55,7 @@ class LabelRecovery extends UPS
      * Create the LabelRecovery request
      *
      * @param LabelRecoveryRequest $labelRecoveryRequest The request details. Refer to the UPS documentation for available structure
-     * @return  string
+     * @return string
      */
     private function createRequest($labelRecoveryRequest)
     {
@@ -58,7 +63,7 @@ class LabelRecovery extends UPS
         $xml->formatOutput = true;
 
         $trackRequest = $xml->appendChild($xml->createElement("LabelRecoveryRequest"));
-        $trackRequest->setAttribute('xml:lang','en-US');
+        $trackRequest->setAttribute('xml:lang', 'en-US');
 
         $request = $trackRequest->appendChild($xml->createElement("Request"));
 
@@ -105,16 +110,16 @@ class LabelRecovery extends UPS
     /**
      * Format the response
      *
-     * @param   SimpleXMLElement    $response
-     * @return  stdClass
+     * @param SimpleXMLElement $response
+     * @return stdClass
      */
     private function formatResponse(SimpleXMLElement $response)
     {
         // We don't need to return data regarding the response to the user
         unset($response->Response);
 
-        $result  = $this->convertXmlObject($response);
+        $result = $this->convertXmlObject($response);
 
-        return new LabelRecoveryResponse( $result->LabelRecoveryResponse );
+        return new LabelRecoveryResponse($result->LabelRecoveryResponse);
     }
 }

@@ -1,9 +1,8 @@
 <?php
+namespace Ups\Entity;
 
-namespace UPS\Entity;
-
-
-class RateRequest {
+class RateRequest
+{
     /**
      * @var PickupType
      */
@@ -14,7 +13,8 @@ class RateRequest {
      */
     public $Shipment;
 
-    function __construct( $request = null ) {
+    function __construct($request = null)
+    {
         $this->PickupType = new PickupType();
         $this->Shipment = new Shipment();
     }

@@ -1,9 +1,8 @@
 <?php
+namespace Ups\Entity;
 
-namespace UPS\Entity;
-
-
-class DimensionalWeight {
+class DimensionalWeight
+{
     /**
      * @var UnitOfMeasurement
      */
@@ -11,7 +10,8 @@ class DimensionalWeight {
 
     public $Weight;
 
-    function __construct() {
+    function __construct()
+    {
         $this->UnitOfMeasurement = new UnitOfMeasurement();
     }
 

@@ -1,9 +1,8 @@
 <?php
+namespace Ups\Entity;
 
-namespace UPS\Entity;
-
-
-class Shipment {
+class Shipment
+{
     public $Description;
 
     /**
@@ -33,7 +32,8 @@ class Shipment {
 
     public $ShipmentServiceOptions;
 
-    function __construct() {
+    function __construct()
+    {
         $this->Package = array();
     }
 } 

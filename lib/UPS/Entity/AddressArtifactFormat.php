@@ -1,16 +1,16 @@
 <?php
+namespace Ups\Entity;
 
-namespace UPS\Entity;
-
-
-class AddressArtifactFormat {
+class AddressArtifactFormat
+{
     public $AddressArtifactFormat;
 
-    function __construct( $response = null ) {
-        if ( null != $response ) {
+    function __construct($response = null)
+    {
+        if (null != $response) {
 
-            if ( isset( $response->AddressArtifactFormat ) ) {
-                $this->AddressArtifactFormat = new Address( $response->AddressArtifactFormat );
+            if (isset($response->AddressArtifactFormat)) {
+                $this->AddressArtifactFormat = new Address($response->AddressArtifactFormat);
             }
         }
     }

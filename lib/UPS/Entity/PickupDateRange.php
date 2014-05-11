@@ -1,19 +1,19 @@
 <?php
+namespace Ups\Entity;
 
-namespace UPS\Entity;
-
-
-class PickupDateRange {
+class PickupDateRange
+{
     public $BeginDate;
     public $EndDate;
 
-    function __construct( $response = null ) {
-        if ( null != $response ) {
-            if ( isset( $response->BeginDate ) ) {
+    function __construct($response = null)
+    {
+        if (null != $response) {
+            if (isset($response->BeginDate)) {
                 $this->BeginDate = $response->BeginDate;
             }
         }
-        if ( isset( $response->EndDate ) ) {
+        if (isset($response->EndDate)) {
             $this->EndDate = $response->EndDate;
         }
     }

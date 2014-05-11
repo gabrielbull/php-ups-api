@@ -1,25 +1,25 @@
 <?php
+namespace Ups\Entity;
 
-namespace UPS\Entity;
-
-
-class LabelRecoveryResponse {
+class LabelRecoveryResponse
+{
     public $ShipmentIdentificationNumber;
     public $LabelResults;
     public $TrackingCandidate;
 
-    function __construct( $response = null ) {
+    function __construct($response = null)
+    {
         $this->LabelResults = new LabelResults();
 
-        if ( null != $response ) {
-            if ( isset( $response->ShipmentIdentificationNumber ) ) {
+        if (null != $response) {
+            if (isset($response->ShipmentIdentificationNumber)) {
                 $this->ShipmentIdentificationNumber = $response->ShipmentIdentificationNumber;
             }
-            if ( isset( $response->LabelResults ) ) {
-                $this->LabelResults = new LabelResults( $response->LabelResults );
+            if (isset($response->LabelResults)) {
+                $this->LabelResults = new LabelResults($response->LabelResults);
             }
-            if ( isset( $response->TrackingCandidate ) ) {
-                $this->TrackingCandidate = new TrackingCandidate( $response->TrackingCandidate );
+            if (isset($response->TrackingCandidate)) {
+                $this->TrackingCandidate = new TrackingCandidate($response->TrackingCandidate);
             }
 
         }

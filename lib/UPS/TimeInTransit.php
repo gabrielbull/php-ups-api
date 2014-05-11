@@ -1,10 +1,9 @@
 <?php
+namespace Ups;
 
-namespace UPS;
-
-use DOMDocument,
-    SimpleXMLElement,
-    Exception;
+use DOMDocument;
+use SimpleXMLElement;
+use Exception;
 use UPS\Entity\TimeInTransitRequest;
 use UPS\Entity\TimeInTransitResponse;
 
@@ -14,11 +13,16 @@ use UPS\Entity\TimeInTransitResponse;
  * @package ups
  * @author Sebastien Vergnes <sebastien@vergnes.eu>
  */
-class TimeInTransit extends UPS
+class TimeInTransit extends Ups
 {
-    protected $endpoint = '/TimeInTransit';
+    const ENDPOINT = '/TimeInTransit';
 
-    public function getTimeInTransit($shipment)
+    /**
+     * @param TimeInTransitRequest $shipment
+     * @return TimeInTransitRequest
+     * @throws Exception
+     */
+    public function getTimeInTransit(TimeInTransitRequest $shipment)
     {
         return $this->sendRequest($shipment);
     }
@@ -27,19 +31,19 @@ class TimeInTransit extends UPS
      * Creates and sends a request for the given shipment. This handles checking for
      * errors in the response back from UPS
      *
-     * @param $timeInTransitRequest
+     * @param TimeInTransitRequest $timeInTransitRequest
      * @return TimeInTransitRequest
-     * @throws \Exception
+     * @throws Exception
      */
-    private function sendRequest($timeInTransitRequest)
+    private function sendRequest(TimeInTransitRequest $timeInTransitRequest)
     {
         $request = $this->createRequest($timeInTransitRequest);
-        $response = $this->request($this->createAccess(), $request, $this->compileEndpointUrl($this->endpoint));
+        $response = $this->request($this->createAccess(), $request, $this->compileEndpointUrl(self::ENDPOINT));
 
         if ($response->Response->ResponseStatusCode == 0) {
             throw new Exception(
                 "Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}",
-                (int) $response->Response->Error->ErrorCode
+                (int)$response->Response->Error->ErrorCode
             );
         } else {
             return $this->formatResponse($response);
@@ -50,15 +54,15 @@ class TimeInTransit extends UPS
      * Create the TimeInTransit request
      *
      * @param TimeInTransitRequest $timeInTransitRequest The request details. Refer to the UPS documentation for available structure
-     * @return  string
+     * @return string
      */
-    private function createRequest($timeInTransitRequest)
+    private function createRequest(TimeInTransitRequest $timeInTransitRequest)
     {
         $xml = new DOMDocument();
         $xml->formatOutput = true;
 
         $trackRequest = $xml->appendChild($xml->createElement("TimeInTransitRequest"));
-        $trackRequest->setAttribute('xml:lang','en-US');
+        $trackRequest->setAttribute('xml:lang', 'en-US');
 
         $request = $trackRequest->appendChild($xml->createElement("Request"));
 
@@ -101,23 +105,22 @@ class TimeInTransit extends UPS
 
         $trackRequest->appendChild($xml->createElement("DocumentsOnlyIndicator"));
 
-
         return $xml->saveXML();
     }
 
     /**
      * Format the response
      *
-     * @param   SimpleXMLElement    $response
-     * @return  stdClass
+     * @param SimpleXMLElement $response
+     * @return TimeInTransitRequest
      */
     private function formatResponse(SimpleXMLElement $response)
     {
         // We don't need to return data regarding the response to the user
         unset($response->Response);
 
-        $result  = $this->convertXmlObject($response);
+        $result = $this->convertXmlObject($response);
 
-        return new TimeInTransitResponse( $result->TransitResponse );
+        return new TimeInTransitResponse($result->TransitResponse);
     }
 }

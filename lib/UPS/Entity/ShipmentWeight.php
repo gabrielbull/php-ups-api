@@ -1,9 +1,8 @@
 <?php
+namespace Ups\Entity;
 
-namespace UPS\Entity;
-
-
-class ShipmentWeight {
+class ShipmentWeight
+{
     /**
      * @var UnitOfMeasurement
      */
@@ -11,14 +10,15 @@ class ShipmentWeight {
 
     public $Weight;
 
-    function __construct($response = null) {
+    function __construct($response = null)
+    {
         $this->UnitOfMeasurement = new UnitOfMeasurement();
 
-        if ( null != $response ) {
-            if ( isset( $response->UnitOfMeasurement ) ) {
-                $this->UnitOfMeasurement = new UnitOfMeasurement( $response->UnitOfMeasurement );
+        if (null != $response) {
+            if (isset($response->UnitOfMeasurement)) {
+                $this->UnitOfMeasurement = new UnitOfMeasurement($response->UnitOfMeasurement);
             }
-            if ( isset( $response->Weight ) ) {
+            if (isset($response->Weight)) {
                 $this->Weight = $response->Weight;
             }
         }

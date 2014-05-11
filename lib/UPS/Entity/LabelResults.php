@@ -1,21 +1,21 @@
 <?php
+namespace Ups\Entity;
 
-namespace UPS\Entity;
-
-
-class LabelResults {
+class LabelResults
+{
     public $TrackingNumber;
     public $LabelImage;
     public $Receipt;
 
-    function __construct( $response = null ) {
+    function __construct($response = null)
+    {
         $this->LabelImage = new LabelImage();
 
-        if ( null != $response ) {
-            if ( isset( $response->TrackingNumber ) ) {
+        if (null != $response) {
+            if (isset($response->TrackingNumber)) {
                 $this->TrackingNumber = $response->TrackingNumber;
             }
-            if ( isset( $response->LabelImage ) ) {
+            if (isset($response->LabelImage)) {
                 $this->LabelImage = new LabelImage($response->LabelImage);
             }
         }

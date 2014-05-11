@@ -1,6 +1,6 @@
 <?php
 
-namespace UPS\Tests;
+namespace Ups\Tests;
 
 use UPS\Rate;
 

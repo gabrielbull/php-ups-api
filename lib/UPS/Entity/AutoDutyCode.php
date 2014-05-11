@@ -1,9 +1,8 @@
 <?php
+namespace Ups\Entity;
 
-namespace UPS\Entity;
-
-
-class AutoDutyCode {
+class AutoDutyCode
+{
     const ADC_DUTIABLE = '01';
     const ADC_NONDUTIABLE = '02';
     const ADC_LOWVALUE = '03';
@@ -14,6 +13,7 @@ class AutoDutyCode {
     const ADC_LINERELEASE = '08';
     const ADC_SECTION321LOWVALUE = '09';
 
-    function __construct() {
+    function __construct()
+    {
     }
 } 

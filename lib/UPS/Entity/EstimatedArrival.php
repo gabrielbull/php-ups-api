@@ -1,9 +1,8 @@
 <?php
+namespace Ups\Entity;
 
-namespace UPS\Entity;
-
-
-class EstimatedArrival {
+class EstimatedArrival
+{
     const EA_MONDAY = 'MON';
     const EA_TUESDAY = 'TUE';
     const EA_WEDNESDAY = 'WEB';
@@ -24,39 +23,40 @@ class EstimatedArrival {
     public $CustomerCenterCutoff;
     public $RestDays;
 
-    function __construct( $response = null ) {
-        if ( null != $response ) {
-            if ( isset( $response->BusinessTransitDays) ) {
+    function __construct($response = null)
+    {
+        if (null != $response) {
+            if (isset($response->BusinessTransitDays)) {
                 $this->BusinessTransitDays = $response->BusinessTransitDays;
             }
-            if ( isset( $response->Time) ) {
+            if (isset($response->Time)) {
                 $this->Time = $response->Time;
             }
-            if ( isset( $response->PickupDate) ) {
+            if (isset($response->PickupDate)) {
                 $this->PickupDate = $response->PickupDate;
             }
-            if ( isset( $response->PickupTime) ) {
+            if (isset($response->PickupTime)) {
                 $this->PickupTime = $response->PickupTime;
             }
-            if ( isset( $response->HolidayCount) ) {
+            if (isset($response->HolidayCount)) {
                 $this->HolidayCount = $response->HolidayCount;
             }
-            if ( isset( $response->DelayCount) ) {
+            if (isset($response->DelayCount)) {
                 $this->DelayCount = $response->DelayCount;
             }
-            if ( isset( $response->Date) ) {
+            if (isset($response->Date)) {
                 $this->Date = $response->Date;
             }
-            if ( isset( $response->DayOfWeek) ) {
+            if (isset($response->DayOfWeek)) {
                 $this->DayOfWeek = $response->DayOfWeek;
             }
-            if ( isset( $response->TotalTransitDays) ) {
+            if (isset($response->TotalTransitDays)) {
                 $this->TotalTransitDays = $response->TotalTransitDays;
             }
-            if ( isset( $response->CustomerCenterCutoff) ) {
+            if (isset($response->CustomerCenterCutoff)) {
                 $this->CustomerCenterCutoff = $response->CustomerCenterCutoff;
             }
-            if ( isset( $response->RestDays) ) {
+            if (isset($response->RestDays)) {
                 $this->RestDays = $response->RestDays;
             }
         }

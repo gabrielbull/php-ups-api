@@ -1,20 +1,20 @@
 <?php
+namespace Ups\Entity;
 
-namespace UPS\Entity;
-
-
-class LabelSpecification {
+class LabelSpecification
+{
     public $HTTPUserAgent;
     public $LabelImageFormat;
 
-    function __construct( $response = null ) {
+    function __construct($response = null)
+    {
         $this->LabelImageFormat = new LabelImageFormat();
 
-        if ( null != $response ) {
-            if ( isset( $response->HTTPUserAgent ) ) {
+        if (null != $response) {
+            if (isset($response->HTTPUserAgent)) {
                 $this->HTTPUserAgent = $response->HTTPUserAgent;
             }
-            if ( isset( $response->LabelImageFormat ) ) {
+            if (isset($response->LabelImageFormat)) {
                 $this->LabelImageFormat = new LabelImageFormat($response->LabelImageFormat);
             }
         }

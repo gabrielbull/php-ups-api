@@ -1,26 +1,26 @@
 <?php
+namespace Ups\Entity;
 
-namespace UPS\Entity;
-
-
-class ReferenceNumber {
+class ReferenceNumber
+{
     public $Number;
     public $Code;
     public $Value;
     public $BarCodeIndicator;
 
-    function __construct( $response = null ) {
-        if ( null != $response ) {
-            if ( isset( $response->BarCodeIndicator ) ) {
+    function __construct($response = null)
+    {
+        if (null != $response) {
+            if (isset($response->BarCodeIndicator)) {
                 $this->BarCodeIndicator = $response->BarCodeIndicator;
             }
-            if ( isset( $response->Number ) ) {
+            if (isset($response->Number)) {
                 $this->Number = $response->Number;
             }
-            if ( isset( $response->Code ) ) {
+            if (isset($response->Code)) {
                 $this->Code = $response->Code;
             }
-            if ( isset( $response->Value ) ) {
+            if (isset($response->Value)) {
                 $this->Value = $response->Value;
             }
         }
