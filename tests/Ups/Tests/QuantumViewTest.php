@@ -61,7 +61,7 @@ class QuantumViewTest extends PHPUnit_Framework_TestCase
 
     public function testSubscriptionBookmark()
     {
-        $quantumView = new Ups\QuantumView($GLOBALS['UPS_ACCESS_KEY'], $GLOBALS['UPS_USER_ID'], $GLOBALS['UPS_PASSWORD']);
+        $quantumView = new Ups\QuantumView();
         $quantumView->setRequest(new RequestMock('/QVEvents/Response3.xml'));
 
         $quantumView->getSubscription(null, (time() - 518400));
