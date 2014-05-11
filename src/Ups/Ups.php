@@ -137,34 +137,14 @@ abstract class Ups
      * @param string $endpointurl The UPS API Endpoint URL
      * @return SimpleXMLElement
      * @throws Exception
+     * @deprecated Untestable
      */
     protected function request($access, $request, $endpointurl)
     {
-        // Create POST request
-        $form = array(
-            'http' => array(
-                'method' => 'POST',
-                'header' => 'Content-type: application/x-www-form-urlencoded',
-                'content' => $access . $request
-            )
-        );
-
-        $request = stream_context_create($form);
-
-        if (!$handle = fopen($endpointurl, 'rb', false, $request)) {
-            throw new Exception("Failure: Connection to Endpoint URL failed.");
-        }
-
-        $response = stream_get_contents($handle);
-        fclose($handle);
-
-        if ($response != false) {
-            $this->response = $response;
-            $response = new SimpleXMLElement($response);
-
-            if (isset($response->Response->ResponseStatusCode)) {
-                return $response;
-            }
+        $response = (new Request)->request($access, $request, $endpointurl);
+        if ($response->getResponse() instanceof SimpleXMLElement) {
+            $this->response = $response->getResponse();
+            return $response->getResponse();
         }
 
         throw new Exception("Failure: Response is invalid.");

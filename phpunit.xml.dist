@@ -5,17 +5,16 @@
          convertErrorsToExceptions="true"
          convertNoticesToExceptions="true"
          convertWarningsToExceptions="true"
-         processIsolation="true"
          stopOnFailure="false"
          syntaxCheck="false">
-  <testsuites>
-    <testsuite name="UPS API Test Suite">
-      <directory>./tests/Ups/</directory>
-    </testsuite>
-  </testsuites>
-  <php>
-      <var name="UPS_ACCESS_KEY" value="xxxxxxxxxxxxxx" />
-      <var name="UPS_USER_ID" value="xxxxxxxxxxxxxx" />
-      <var name="UPS_PASSWORD" value="xxxxxxxxxxxxxx" />
-  </php>
+    <testsuites>
+        <testsuite name="UPS API Test Suite">
+            <directory>./tests/Ups/</directory>
+        </testsuite>
+    </testsuites>
+    <php>
+        <var name="UPS_ACCESS_KEY" value="xxxxxxxxxxxxxx"/>
+        <var name="UPS_USER_ID" value="xxxxxxxxxxxxxx"/>
+        <var name="UPS_PASSWORD" value="xxxxxxxxxxxxxx"/>
+    </php>
 </phpunit>

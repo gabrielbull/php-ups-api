@@ -6,12 +6,17 @@ use PHPUnit_Framework_TestCase;
 
 class QuantumViewTest extends PHPUnit_Framework_TestCase
 {
+    public function testCreateRequest()
+    {
+        echo '';
+    }
+
     public function testSubscription()
     {
         $quantumView = new Ups\QuantumView($GLOBALS['UPS_ACCESS_KEY'], $GLOBALS['UPS_USER_ID'], $GLOBALS['UPS_PASSWORD']);
 
         // Get the subscription for all events for the last hour
-        $events = $quantumView->getSubscription(null, (time() - 3600));
+        $events = $quantumView->getSubscription(null, (time() - 48 * 3600));
 
         // Test response
         $this->assertInstanceOf('ArrayObject', $events);
