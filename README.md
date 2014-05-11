@@ -3,19 +3,40 @@ PHP UPS API Wrapper
 
 [![Build Status](https://travis-ci.org/gabrielbull/php-ups-api.png)](https://travis-ci.org/gabrielbull/php-ups-api)
 
-This library is aimed at wrapping all the UPS APIs into a simple to use PHP Library. It currently only covers the Quantum View® and Tracking APIs, but feel free to contribute.
+This library is aimed at wrapping all the UPS API into a simple to use PHP Library. It currently covers the Quantum View®,
+Tracking API, Shipping API, Rating API and Time in Transit API, but feel free to contribute.
 
-## UPS APIs
+## Table Of Content
 
-To use the UPS APIs, you have to [request an access key from UPS](https://www.ups.com/upsdeveloperkit). For every request, you will have to provide the Access Key, your UPS user ID and password.
+1. [Requirements](#requirements)
+2. [Installation](#installation)
+3. [QuantumView Class](#quantumview-class)
+    * [Example](#quantumview-class-example)
+    * [Parameters](#quantumview-class-parameters)
+4. [Tracking Class](#tracking-class)
+    * [Example](#tracking-class-example)
+    * [Parameters](#tracking-class-parameters)
+5. [Rate Class](#rate-class)
+    * [Example](#rate-class-example)
+    * [Parameters](#rate-class-parameters)
+6. [TimeInTransit Class](#timeintransit-class)
+    * [Example](#timeintransit-class-example)
+    * [Parameters](#timeintransit-class-parameters)
+7. [Shipping Class](#shipping-class)
 
+<a name="requirements"></a>
 ## Requirements
 
 This library uses PHP 5.3+.
 
+To use the UPS API, you have to [request an access key from UPS](https://www.ups.com/upsdeveloperkit). For every request,
+you will have to provide the Access Key, your UPS User ID and Password.
+
+<a name="installation"></a>
 ## Installation
 
-It is recommended that you install the PHP UPS API Wrapper library [through composer](http://getcomposer.org).
+It is recommended that you install the PHP UPS API Wrapper library [through composer](http://getcomposer.org/). To do so,
+add the following lines to your ``composer.json`` file.
 
 ```JSON
 {
@@ -25,10 +46,12 @@ It is recommended that you install the PHP UPS API Wrapper library [through comp
 }
 ```
 
+<a name="quantumview-class"></a>
 ## QuantumView Class
 
 The QuantumView Class allow you to request a Quantum View Data subscription. 
 
+<a name="quantumview-class-example"></a>
 ### Example
 
 ```php
@@ -48,6 +71,7 @@ try {
 }
 ```
 
+<a name="quantumview-class-parameters"></a>
 ### Parameters
 
 QuantumView parameters are:
@@ -62,11 +86,12 @@ _If you provide a `beginDateTime`, but no `endDateTime`, the `endDateTime` will 
 
 _To use the `fileName` parameter, do not provide a `beginDateTime`._
 
-
+<a name="tracking-class"></a>
 ## Tracking Class
 
 The Tracking Class allow you to track a shipment using the UPS Tracking API. 
 
+<a name="tracking-class-example"></a>
 ### Example
 
 ```php
@@ -84,6 +109,7 @@ try {
 }
 ```
 
+<a name="tracking-class-parameters"></a>
 ### Parameters
 
 Tracking parameters are:
@@ -91,11 +117,12 @@ Tracking parameters are:
  * `trackingNumber` The package’s tracking number.
  * `requestOption` Optional processing. For Mail Innovations the only valid options are Last Activity and All activity.
 
-
+<a name="rate-class"></a>
 ## Rate Class
 
 The Rate Class allow you to get shipment rates using the UPS Rate API.
 
+<a name="rate-class-example"></a>
 ### Example
 
 ```php
@@ -106,44 +133,46 @@ $rate = new UPS\Rate(
 );
 
 try {
-    $shipment = new \stdClass();
+    $shipment = new stdClass();
     $shipment->Shipper->Address->PostalCode = '99205';
-    $shipment->ShipTo = new \stdClass();
+    $shipment->ShipTo = new stdClass();
     $shipment->ShipTo->CompanyName = 'Test ShipTo';
-    $shipment->ShipTo->Address = new \stdClass();
+    $shipment->ShipTo->Address = new stdClass();
     $shipment->ShipTo->Address->PostalCode = '99004';
 
-    $shipment->Service = new \stdClass();
+    $shipment->Service = new stdClass();
     $shipment->Service->Code = '03';
 
-    $package = new \stdClass();
-    $package->PackagingType = new \stdClass();
+    $package = new stdClass();
+    $package->PackagingType = new stdClass();
     $package->PackagingType->Code = '02';
-    $package->PackageWeight = new \stdClass();
+    $package->PackageWeight = new stdClass();
     $package->PackageWeight->Weight = '10';
     $shipment->Package = array(
         $package,
     );
 
-	foreach($shopRates as $rates) {
     var_dump($rate->getRate($shipment));
-	}
 
 } catch (Exception $e) {
     var_dump($e);
 }
 ```
-
+<a name="rate-class-parameters"></a>
 ### Parameters
 
-This Rate class is not finished yet! Parameter should be maintain when it will be finished.
+ * `rateRequest` Mandatory. rateRequest Object with shipment details
 
+This Rate class is not finished yet! Parameter should be added when it will be finished.
 
+<a name="timeintransit-class"></a>
 ## TimeInTransit Class
 
 The TimeInTransit Class allow you to get all transit times using the UPS TimeInTransit API.
 
+<a name="timeintransit-class-example"></a>
 ### Example
+
 ```php
 $timeInTransit = new TimeInTransit($access, $userid, $passwd);
 
@@ -159,6 +188,12 @@ try {
 }
 ```
 
+<a name="timeintransit-class-parameters"></a>
 ### Parameters
 
  * `timeInTransitRequest` Mandatory. timeInTransitRequest Object with shipment details
+
+<a name="shipping-class"></a>
+## Shipping Class
+
+Documentation for this class is coming.
