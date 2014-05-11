@@ -2,9 +2,13 @@ PHP UPS API Wrapper
 ===================
 
 [![Build Status](https://travis-ci.org/gabrielbull/php-ups-api.png)](https://travis-ci.org/gabrielbull/php-ups-api)
+[![Latest Stable Version](https://poser.pugx.org/gabrielbull/ups-api/v/stable.png)](https://packagist.org/packages/gabrielbull/ups-api)
+[![Total Downloads](https://poser.pugx.org/gabrielbull/ups-api/downloads.png)](https://packagist.org/packages/gabrielbull/ups-api)
+[![Latest Unstable Version](https://poser.pugx.org/gabrielbull/ups-api/v/unstable.png)](https://packagist.org/packages/gabrielbull/ups-api)
+[![License](https://poser.pugx.org/gabrielbull/ups-api/license.png)](https://packagist.org/packages/gabrielbull/ups-api)
 
 This library is aimed at wrapping all the UPS API into a simple to use PHP Library. It currently covers the Quantum View®,
-Tracking API, Shipping API, Rating API and Time in Transit API, but feel free to contribute.
+Tracking API, Shipping API, Rating API and Time in Transit API. Feel free to contribute.
 
 ## Table Of Content
 
@@ -55,7 +59,7 @@ The QuantumView Class allow you to request a Quantum View Data subscription.
 ### Example
 
 ```php
-$quantumView = new UPS\QuantumView($accessKey, $userId, $password);
+$quantumView = new Ups\QuantumView($accessKey, $userId, $password);
 
 try {
 	// Get the subscription for all events for the last hour
@@ -95,7 +99,7 @@ The Tracking Class allow you to track a shipment using the UPS Tracking API.
 ### Example
 
 ```php
-$tracking = new UPS\Tracking($accessKey, $userId, $password);
+$tracking = new Ups\Tracking($accessKey, $userId, $password);
 
 try {
 	$shipment = $tracking->track('TRACKING NUMBER');
@@ -126,7 +130,7 @@ The Rate Class allow you to get shipment rates using the UPS Rate API.
 ### Example
 
 ```php
-$rate = new UPS\Rate(
+$rate = new Ups\Rate(
 	$accessKey,
 	$userId,
 	$password
@@ -174,7 +178,7 @@ The TimeInTransit Class allow you to get all transit times using the UPS TimeInT
 ### Example
 
 ```php
-$timeInTransit = new TimeInTransit($access, $userid, $passwd);
+$timeInTransit = new Ups\TimeInTransit($access, $userid, $passwd);
 
 try {
     $times = $timeInTransit->getTimeInTransit($timeInTransitequest);

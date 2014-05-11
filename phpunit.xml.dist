@@ -1,6 +1,6 @@
 <phpunit backupGlobals="false"
          backupStaticAttributes="false"
-         bootstrap="test/bootstrap.php"
+         bootstrap="tests/bootstrap.php"
          colors="true"
          convertErrorsToExceptions="true"
          convertNoticesToExceptions="true"
@@ -9,8 +9,8 @@
          stopOnFailure="false"
          syntaxCheck="false">
   <testsuites>
-    <testsuite name="UPS Api Test Suite">
-      <directory>./test/UPS/</directory>
+    <testsuite name="UPS API Test Suite">
+      <directory>./tests/Ups/</directory>
     </testsuite>
   </testsuites>
   <php>

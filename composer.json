@@ -1,10 +1,10 @@
 {
-    "name": "sebvergnes/ups-api",
+    "name": "gabrielbull/ups-api",
     "type": "library",
     "description": "UPS API PHP Wrapper",
-    "keywords": ["ups", "api", "wrapper", "quantum view", "tracking"],
-    "homepage": "https://github.com/sebvergnes/ups-api-php",
-    "license": "GPL-2.0",
+    "keywords": ["ups", "api", "wrapper", "quantum view", "tracking", "shipping", "rate", "rating", "time in transit"],
+    "homepage": "https://github.com/gabrielbull/php-ups-api",
+    "license": "MIT",
     "authors": [
         {
             "name": "Gabriel Bull",
@@ -22,9 +22,12 @@
     "require": {
         "php": ">=5.3"
     },
+    "require-dev": {
+        "phpunit/phpunit": "4.*"
+    },
     "autoload": {
-        "psr-0" : {
-            "UPS" : "lib/"
+        "psr-4": {
+            "Ups\\": "src/Ups"
         }
     }
 }
