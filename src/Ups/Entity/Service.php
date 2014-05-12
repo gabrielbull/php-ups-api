@@ -27,28 +27,79 @@ class Service
     const S_UPSTODAY_EXPRESSSAVER = '86';
     const S_UPSWW_EXPRESSFREIGHT = '96';
 
-    public $Code;
+    /** @deprecated */
+    public $Code = self::S_GROUND;
+    /** @deprecated */
     public $Description;
 
-    function __construct($response = null)
+    /**
+     * @var string
+     */
+    private $code = self::S_GROUND;
+
+    /**
+     * @var string
+     */
+    private $description;
+
+    /**
+     * @param null|object $attributes
+     */
+    public function __construct($attributes = null)
     {
-        $this->Code = self::S_GROUND;
-
-        if (null != $response) {
-            if (isset($response->Code)) {
-                $this->Code = $response->Code;
+        if (null !== $attributes) {
+            if (isset($attributes->Code)) {
+                $this->setCode($attributes->Code);
             }
-
-            if (isset($response->Description)) {
-                $this->Description = $response->Description;
+            if (isset($attributes->Description)) {
+                $this->setDescription($attributes->Description);
             }
-
         }
-
     }
 
+    /**
+     * @return string
+     */
     public function getName()
     {
-        return 'shipping.service.code' . $this->Code;
+        return 'shipping.service.code' . $this->getCode();
     }
-} 
+
+    /**
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * @param string $code
+     * @return $this
+     */
+    public function setCode($code)
+    {
+        $this->Code = $code;
+        $this->code = $code;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     * @return $this
+     */
+    public function setDescription($description)
+    {
+        $this->Description = $description;
+        $this->description = $description;
+        return $this;
+    }
+}

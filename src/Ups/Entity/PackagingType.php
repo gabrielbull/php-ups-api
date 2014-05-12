@@ -16,11 +16,56 @@ class PackagingType
     const PT_EXPRESSBOX_MD = '2b';
     const PT_EXPRESSBOX_L = '2c';
 
-    public $Code;
+    /** @deprecated */
+    public $Code = self::PT_UNKONW;
+    /** @deprecated */
     public $Description;
 
-    function __construct()
+    /**
+     * @var string
+     */
+    private $code = self::PT_UNKONW;
+
+    /**
+     * @var string
+     */
+    private $description;
+
+    /**
+     * @return string
+     */
+    public function getCode()
     {
-        $this->Code = self::PT_UNKONW;
+        return $this->code;
     }
-} 
+
+    /**
+     * @param string $code
+     * @return $this
+     */
+    public function setCode($code)
+    {
+        $this->Code = $code;
+        $this->code = $code;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     * @return $this
+     */
+    public function setDescription($description)
+    {
+        $this->Description = $description;
+        $this->description = $description;
+        return $this;
+    }
+}

@@ -3,47 +3,247 @@ namespace Ups\Entity;
 
 class Shipper
 {
+    /** @deprecated */
     public $Name;
+    /** @deprecated */
     public $AttentionName;
+    /** @deprecated */
     public $TaxIdentificationNumber;
+    /** @deprecated */
     public $PhoneNumber;
+    /** @deprecated */
     public $FaxNumber;
+    /** @deprecated */
     public $ShipperNumber;
+    /** @deprecated */
     public $EMailAddress;
+    /** @deprecated */
+    public $Address;
+
+    /**
+     * @var string
+     */
+    protected $name;
+
+    /**
+     * @var string
+     */
+    protected $attentionName;
+
+    /**
+     * @var string
+     */
+    protected $taxIdentificationNumber;
+
+    /**
+     * @var string
+     */
+    protected $phoneNumber;
+
+    /**
+     * @var string
+     */
+    protected $faxNumber;
+
+    /**
+     * @var string
+     */
+    protected $shipperNumber;
+
+    /**
+     * @var string
+     */
+    protected $emailAddress;
 
     /**
      * @var Address
      */
-    public $Address;
+    protected $address;
 
-    function __construct($response = null)
+    /**
+     * @param null|object $attributes
+     */
+    public function __construct($attributes = null)
     {
-        if (null != $response) {
-            if (isset($response->Name)) {
-                $this->Name = $response->Name;
+        $this->address = new Address();
+
+        if (null !== $attributes) {
+            if (isset($attributes->Name)) {
+                $this->setName($attributes->Name);
             }
-            if (isset($response->AttentionName)) {
-                $this->AttentionName = $response->AttentionName;
+            if (isset($attributes->AttentionName)) {
+                $this->setAttentionName($attributes->AttentionName);
             }
-            if (isset($response->TaxIdentificationNumber)) {
-                $this->TaxIdentificationNumber = $response->TaxIdentificationNumber;
+            if (isset($attributes->TaxIdentificationNumber)) {
+                $this->setTaxIdentificationNumber($attributes->TaxIdentificationNumber);
             }
-            if (isset($response->PhoneNumber)) {
-                $this->PhoneNumber = $response->PhoneNumber;
+            if (isset($attributes->PhoneNumber)) {
+                $this->setPhoneNumber($attributes->PhoneNumber);
             }
-            if (isset($response->FaxNumber)) {
-                $this->FaxNumber = $response->FaxNumber;
+            if (isset($attributes->FaxNumber)) {
+                $this->setFaxNumber($attributes->FaxNumber);
             }
-            if (isset($response->ShipperNumber)) {
-                $this->ShipperNumber = $response->ShipperNumber;
+            if (isset($attributes->ShipperNumber)) {
+                $this->setShipperNumber($attributes->ShipperNumber);
             }
-            if (isset($response->EMailAddress)) {
-                $this->EMailAddress = $response->EMailAddress;
+            if (isset($attributes->EMailAddress)) {
+                $this->setEmailAddress($attributes->EMailAddress);
             }
-            if (isset($response->Address)) {
-                $this->Address = new Address($response->Address);
+            if (isset($attributes->Address)) {
+                $this->setAddress(new Address($attributes->Address));
             }
         }
     }
 
-} 
+    /**
+     * @return Address
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * @param Address $address
+     * @return $this
+     */
+    public function setAddress(Address $address)
+    {
+        $this->Address = $address;
+        $this->address = $address;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAttentionName()
+    {
+        return $this->attentionName;
+    }
+
+    /**
+     * @param string $attentionName
+     * @return $this
+     */
+    public function setAttentionName($attentionName)
+    {
+        $this->AttentionName = $attentionName;
+        $this->attentionName = $attentionName;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmailAddress()
+    {
+        return $this->emailAddress;
+    }
+
+    /**
+     * @param string $emailAddress
+     * @return $this
+     */
+    public function setEmailAddress($emailAddress)
+    {
+        $this->EMailAddress = $emailAddress;
+        $this->emailAddress = $emailAddress;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFaxNumber()
+    {
+        return $this->faxNumber;
+    }
+
+    /**
+     * @param string $faxNumber
+     * @return $this
+     */
+    public function setFaxNumber($faxNumber)
+    {
+        $this->FaxNumber = $faxNumber;
+        $this->faxNumber = $faxNumber;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     * @return $this
+     */
+    public function setName($name)
+    {
+        $this->Name = $name;
+        $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPhoneNumber()
+    {
+        return $this->phoneNumber;
+    }
+
+    /**
+     * @param string $phoneNumber
+     * @return $this
+     */
+    public function setPhoneNumber($phoneNumber)
+    {
+        $this->PhoneNumber = $phoneNumber;
+        $this->phoneNumber = $phoneNumber;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getShipperNumber()
+    {
+        return $this->shipperNumber;
+    }
+
+    /**
+     * @param string $shipperNumber
+     * @return $this
+     */
+    public function setShipperNumber($shipperNumber)
+    {
+        $this->ShipperNumber = $shipperNumber;
+        $this->shipperNumber = $shipperNumber;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTaxIdentificationNumber()
+    {
+        return $this->taxIdentificationNumber;
+    }
+
+    /**
+     * @param string $taxIdentificationNumber
+     * @return $this
+     */
+    public function setTaxIdentificationNumber($taxIdentificationNumber)
+    {
+        $this->TaxIdentificationNumber = $taxIdentificationNumber;
+        $this->taxIdentificationNumber = $taxIdentificationNumber;
+        return $this;
+    }
+}
