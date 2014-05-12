@@ -1,7 +1,11 @@
 <?php
 namespace Ups\Entity;
 
-class UnitOfMeasurement
+use DOMDocument;
+use DOMElement;
+use Ups\NodeInterface;
+
+class UnitOfMeasurement implements NodeInterface
 {
     // PackageWeight
     const UOM_LBS = 'LBS'; // Pounds (defalut)
@@ -39,6 +43,18 @@ class UnitOfMeasurement
                 $this->setDescription($attributes->Description);
             }
         }
+    }
+
+    /**
+     * @param null|DOMDocument $document
+     * @return DOMElement
+     */
+    public function toNode(DOMDocument $document = null)
+    {
+        $node = $document->createElement('UnitOfMeasurement');
+        $node->appendChild($document->createElement('Code', $this->getCode()));
+        $node->appendChild($document->createElement('Description', $this->getDescription()));
+        return $node;
     }
 
     /**

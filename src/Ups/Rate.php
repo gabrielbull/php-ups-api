@@ -106,7 +106,7 @@ class Rate extends Ups
     {
         $shipment = $rateRequest->getShipment();
 
-        $xml = new DOMDocument();
+        $document = $xml = new DOMDocument();
         $xml->formatOutput = true;
 
         /** @var DOMElement $trackRequest */
@@ -121,31 +121,33 @@ class Rate extends Ups
         $request->appendChild($xml->createElement("RequestAction", "Rate"));
         $request->appendChild($xml->createElement("RequestOption", $this->requestOption));
 
+        $trackRequest->appendChild($rateRequest->getPickupType()->toNode($document));
+
         $shipmentNode = $trackRequest->appendChild($xml->createElement('Shipment'));
 
         // Support specifying an individual service
         $service = $shipment->getService();
         if (isset($service)) {
-            $shipmentNode->appendChild($service->toNode());
+            $shipmentNode->appendChild($service->toNode($document));
         }
 
         $shipper = $shipment->getShipper();
         if (isset($shipper)) {
-            $shipmentNode->appendChild($shipper->toNode());
+            $shipmentNode->appendChild($shipper->toNode($document));
         }
 
         $shipFrom = $shipment->getShipFrom();
         if (isset($shipFrom)) {
-            $shipmentNode->appendChild($shipFrom->toNode());
+            $shipmentNode->appendChild($shipFrom->toNode($document));
         }
 
         $shipTo = $shipment->getShipTo();
         if (isset($shipTo)) {
-            $shipmentNode->appendChild($shipTo->toNode());
+            $shipmentNode->appendChild($shipTo->toNode($document));
         }
 
         foreach ($shipment->getPackages() as $package) {
-            $shipmentNode->appendChild($package->toNode());
+            $shipmentNode->appendChild($package->toNode($document));
         }
 
         return $xml->saveXML();

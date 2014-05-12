@@ -137,27 +137,23 @@ $rate = new Ups\Rate(
 );
 
 try {
-    $shipment = new stdClass();
-    $shipment->Shipper->Address->PostalCode = '99205';
-    $shipment->ShipTo = new stdClass();
-    $shipment->ShipTo->CompanyName = 'Test ShipTo';
-    $shipment->ShipTo->Address = new stdClass();
-    $shipment->ShipTo->Address->PostalCode = '99004';
+    $shipment = new Shipment();
 
-    $shipment->Service = new stdClass();
-    $shipment->Service->Code = '03';
+    $shipperAddress = $shipment->getShipper()->getAddress();
+    $shipperAddress->setPostalCode('99205');
 
-    $package = new stdClass();
-    $package->PackagingType = new stdClass();
-    $package->PackagingType->Code = '02';
-    $package->PackageWeight = new stdClass();
-    $package->PackageWeight->Weight = '10';
-    $shipment->Package = array(
-        $package,
-    );
+    $shipTo = $shipment->getShipTo();
+    $shipTo->setCompanyName('Test Ship To');
+    $shipToAddress = $shipTo->getAddress();
+    $shipToAddress->setPostalCode('99205');
+
+    $package = new Package();
+    $package->getPackagingType()->setCode(PackagingType::PT_PACKAGE);
+    $package->getPackageWeight()->setWeight(10);
+
+    $shipment->addPackage($package);
 
     var_dump($rate->getRate($shipment));
-
 } catch (Exception $e) {
     var_dump($e);
 }

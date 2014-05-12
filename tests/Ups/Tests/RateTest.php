@@ -1,8 +1,13 @@
 <?php
 namespace Ups\Tests;
 
+use Ups\Entity\Package;
+use Ups\Entity\PackagingType;
+use Ups\Entity\Service;
+use Ups\Entity\Shipment;
 use Ups\Rate;
 use PHPUnit_Framework_TestCase;
+use stdClass;
 
 /**
  * Rate Class Tests

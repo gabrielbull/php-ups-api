@@ -1,6 +1,7 @@
 <?php
 namespace Ups\Entity;
 
+use DOMDocument;
 use DOMElement;
 use Ups\NodeInterface;
 
@@ -129,17 +130,22 @@ class ShipTo implements NodeInterface
     }
 
     /**
+     * @param null|DOMDocument $document
      * @return DOMElement
      */
-    public function toNode()
+    public function toNode(DOMDocument $document = null)
     {
-        $node = new DOMElement('ShipTo');
-        $node->appendChild(new DOMElement('CompanyName', $this->getCompanyName()));
-        $node->appendChild(new DOMElement('AttentionName', $this->getAttentionName()));
+        if (null === $document) {
+            $document = new DOMDocument();
+        }
+
+        $node = $document->createElement('ShipTo');
+        $node->appendChild($document->createElement('CompanyName', $this->getCompanyName()));
+        $node->appendChild($document->createElement('AttentionName', $this->getAttentionName()));
 
         $address = $this->getAddress();
         if (isset($address)) {
-            $node->appendChild($address->toNode());
+            $node->appendChild($address->toNode($document));
         }
 
         return $node;

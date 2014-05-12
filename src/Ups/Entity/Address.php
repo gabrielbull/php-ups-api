@@ -1,6 +1,7 @@
 <?php
 namespace Ups\Entity;
 
+use DOMDocument;
 use DOMElement;
 use Ups\NodeInterface;
 
@@ -253,18 +254,23 @@ class Address implements NodeInterface
     }
 
     /**
+     * @param null|DOMDocument $document
      * @return DOMElement
      */
-    public function toNode()
+    public function toNode(DOMDocument $document = null)
     {
-        $node = new DOMElement('Address');
-        $node->appendChild(new DOMElement('AddressLine1', $this->getAddressLine1()));
-        $node->appendChild(new DOMElement('AddressLine2', $this->getAddressLine2()));
-        $node->appendChild(new DOMElement('AddressLine3', $this->getAddressLine3()));
-        $node->appendChild(new DOMElement('City', $this->getCity()));
-        $node->appendChild(new DOMElement('StateProvinceCode', $this->getStateProvinceCode()));
-        $node->appendChild(new DOMElement('PostalCode', $this->getPostalCode()));
-        $node->appendChild(new DOMElement('CountryCode', $this->getCountryCode()));
+        if (null === $document) {
+            $document = new DOMDocument();
+        }
+
+        $node = $document->createElement('Address');
+        $node->appendChild($document->createElement('AddressLine1', $this->getAddressLine1()));
+        $node->appendChild($document->createElement('AddressLine2', $this->getAddressLine2()));
+        $node->appendChild($document->createElement('AddressLine3', $this->getAddressLine3()));
+        $node->appendChild($document->createElement('City', $this->getCity()));
+        $node->appendChild($document->createElement('StateProvinceCode', $this->getStateProvinceCode()));
+        $node->appendChild($document->createElement('PostalCode', $this->getPostalCode()));
+        $node->appendChild($document->createElement('CountryCode', $this->getCountryCode()));
         return $node;
     }
 

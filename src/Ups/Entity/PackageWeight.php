@@ -1,6 +1,7 @@
 <?php
 namespace Ups\Entity;
 
+use DOMDocument;
 use DOMElement;
 use Ups\NodeInterface;
 
@@ -28,14 +29,18 @@ class PackageWeight implements NodeInterface
     }
 
     /**
+     * @param null|DOMDocument $document
      * @return DOMElement
      */
-    public function toNode()
+    public function toNode(DOMDocument $document = null)
     {
-        $node = new DOMElement('PackageWeight');
-        $node->appendChild(new DOMElement('Weight', $this->getWeight()));
-        $node->appendChild(new DOMElement('Code', $this->getUnitOfMeasurement()->getCode()));
-        $node->appendChild(new DOMElement('Description', $this->getUnitOfMeasurement()->getDescription()));
+        if (null === $document) {
+            $document = new DOMDocument();
+        }
+
+        $node = $document->createElement('PackageWeight');
+        $node->appendChild($document->createElement('Weight', $this->getWeight()));
+        $node->appendChild($this->getUnitOfMeasurement()->toNode($document));
         return $node;
     }
 

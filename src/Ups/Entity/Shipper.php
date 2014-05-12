@@ -1,6 +1,7 @@
 <?php
 namespace Ups\Entity;
 
+use DOMDocument;
 use DOMElement;
 use Ups\NodeInterface;
 
@@ -99,20 +100,25 @@ class Shipper implements NodeInterface
     }
 
     /**
+     * @param null|DOMDocument $document
      * @return DOMElement
      */
-    public function toNode()
+    public function toNode(DOMDocument $document = null)
     {
-        $node = new DOMElement('Shipper');
+        if (null === $document) {
+            $document = new DOMDocument();
+        }
+
+        $node = $document->createElement('Shipper');
 
         $shipperNumber = $this->getShipperNumber();
         if (isset($shipperNumber)) {
-            $node->appendChild(new DOMElement('ShipperNumber', $shipperNumber));
+            $node->appendChild($document->createElement('ShipperNumber', $shipperNumber));
         }
 
         $address = $this->getAddress();
         if (isset($address)) {
-            $node->appendChild($address->toNode());
+            $node->appendChild($address->toNode($document));
         }
 
         return $node;
