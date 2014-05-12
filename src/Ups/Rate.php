@@ -2,11 +2,13 @@
 namespace Ups;
 
 use DOMDocument;
+use DOMElement;
 use SimpleXMLElement;
 use Exception;
 use stdClass;
-use UPS\Entity\RateRequest;
-use UPS\Entity\RateResponse;
+use Ups\Entity\RateRequest;
+use Ups\Entity\RateResponse;
+use Ups\Entity\Shipment;
 
 /**
  * Rate API Wrapper
@@ -17,6 +19,17 @@ use UPS\Entity\RateResponse;
 class Rate extends Ups
 {
     const ENDPOINT = '/Rate';
+
+    /**
+     * @var RequestInterface
+     */
+    private $request;
+
+    /**
+     * @var ResponseInterface
+     * todo: make private
+     */
+    public $response;
 
     /**
      * @var string
@@ -42,6 +55,12 @@ class Rate extends Ups
      */
     public function getRate($rateRequest)
     {
+        if ($rateRequest instanceof Shipment) {
+            $shipment = $rateRequest;
+            $rateRequest = new RateRequest();
+            $rateRequest->setShipment($shipment);
+        }
+
         $this->requestOption = "Rate";
 
         return $this->sendRequest($rateRequest);
@@ -51,14 +70,21 @@ class Rate extends Ups
      * Creates and sends a request for the given shipment. This handles checking for
      * errors in the response back from UPS
      *
-     * @param $rateRequest
+     * @param RateRequest $rateRequest
      * @return RateRequest
      * @throws Exception
      */
-    private function sendRequest($rateRequest)
+    private function sendRequest(RateRequest $rateRequest)
     {
         $request = $this->createRequest($rateRequest);
-        $response = $this->request($this->createAccess(), $request, $this->compileEndpointUrl(self::ENDPOINT));
+        //$response = $this->request($this->createAccess(), $request, $this->compileEndpointUrl(self::ENDPOINT));
+
+        $this->response = $this->getRequest()->request($this->createAccess(), $request, $this->compileEndpointUrl(self::ENDPOINT));
+        $response = $this->response->getResponse();
+
+        if (null === $response) {
+            throw new Exception("Failure (0): Unknown error", 0);
+        }
 
         if ($response->Response->ResponseStatusCode == 0) {
             throw new Exception(
@@ -76,13 +102,14 @@ class Rate extends Ups
      * @param RateRequest $rateRequest The request details. Refer to the UPS documentation for available structure
      * @return string
      */
-    private function createRequest($rateRequest)
+    private function createRequest(RateRequest $rateRequest)
     {
-        $shipment = $rateRequest->Shipment;
+        $shipment = $rateRequest->getShipment();
 
         $xml = new DOMDocument();
         $xml->formatOutput = true;
 
+        /** @var DOMElement $trackRequest */
         $trackRequest = $xml->appendChild($xml->createElement("RatingServiceSelectionRequest"));
         $trackRequest->setAttribute('xml:lang', 'en-US');
 
@@ -97,35 +124,29 @@ class Rate extends Ups
         $shipmentNode = $trackRequest->appendChild($xml->createElement('Shipment'));
 
         // Support specifying an individual service
-        if (isset($shipment->Service)) {
-            $serviceNode = $shipmentNode->appendChild($xml->createElement('Service'));
-            Utilities::appendChild($shipment->Service, 'Code', $serviceNode);
-            Utilities::appendChild($shipment->Service, 'Description', $serviceNode);
+        $service = $shipment->getService();
+        if (isset($service)) {
+            $shipmentNode->appendChild($service->toNode());
         }
 
-        if (isset($shipment->Shipper)) {
-            $shipper = $shipmentNode->appendChild($xml->createElement("Shipper"));
-
-            if (isset($shipment->Shipper->ShipperNumber)) {
-                $shipper->appendChild($xml->createElement("ShipperNumber", $shipment->Shipper->ShipperNumber));
-            }
-
-            if (isset($shipment->Shipper->Address)) {
-                Utilities::addAddressNode($shipment->Shipper->Address, $shipper);
-            }
+        $shipper = $shipment->getShipper();
+        if (isset($shipper)) {
+            $shipmentNode->appendChild($shipper->toNode());
         }
 
-        if (isset($shipment->ShipFrom)) {
-            $shipFrom = $shipmentNode->appendChild($xml->createElement("ShipFrom"));
-            Utilities::addLocationInformation($shipment->ShipFrom, $shipFrom);
+        $shipFrom = $shipment->getShipFrom();
+        if (isset($shipFrom)) {
+            $shipmentNode->appendChild($shipFrom->toNode());
         }
 
-        if (isset($shipment->ShipTo)) {
-            $shipTo = $shipmentNode->appendChild($xml->createElement("ShipTo"));
-            Utilities::addLocationInformation($shipment->ShipTo, $shipTo);
+        $shipTo = $shipment->getShipTo();
+        if (isset($shipTo)) {
+            $shipmentNode->appendChild($shipTo->toNode());
         }
 
-        Utilities::addPackages($shipment, $shipmentNode);
+        foreach ($shipment->getPackages() as $package) {
+            $shipmentNode->appendChild($package->toNode());
+        }
 
         return $xml->saveXML();
     }
@@ -144,5 +165,45 @@ class Rate extends Ups
         $result = $this->convertXmlObject($response);
 
         return new RateResponse($result);
+    }
+
+
+    /**
+     * @return RequestInterface
+     */
+    public function getRequest()
+    {
+        if (null === $this->request) {
+            $this->request = new Request;
+        }
+        return $this->request;
+    }
+
+    /**
+     * @param RequestInterface $request
+     * @return $this
+     */
+    public function setRequest(RequestInterface $request)
+    {
+        $this->request = $request;
+        return $this;
+    }
+
+    /**
+     * @return ResponseInterface
+     */
+    public function getResponse()
+    {
+        return $this->response;
+    }
+
+    /**
+     * @param ResponseInterface $response
+     * @return $this
+     */
+    public function setResponse(ResponseInterface $response)
+    {
+        $this->response = $response;
+        return $this;
     }
 }

@@ -1,7 +1,10 @@
 <?php
 namespace Ups\Entity;
 
-class Shipper
+use DOMElement;
+use Ups\NodeInterface;
+
+class Shipper implements NodeInterface
 {
     /** @deprecated */
     public $Name;
@@ -93,6 +96,26 @@ class Shipper
                 $this->setAddress(new Address($attributes->Address));
             }
         }
+    }
+
+    /**
+     * @return DOMElement
+     */
+    public function toNode()
+    {
+        $node = new DOMElement('Shipper');
+
+        $shipperNumber = $this->getShipperNumber();
+        if (isset($shipperNumber)) {
+            $node->appendChild(new DOMElement('ShipperNumber', $shipperNumber));
+        }
+
+        $address = $this->getAddress();
+        if (isset($address)) {
+            $node->appendChild($address->toNode());
+        }
+
+        return $node;
     }
 
     /**

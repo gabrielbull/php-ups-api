@@ -115,7 +115,7 @@ class QuantumView extends Ups
             throw new Exception("Failure (0): Unknown error", 0);
         }
 
-        if ($response instanceof SimpleXMLElement && $response->Response->ResponseStatusCode == 0) {
+        if ($response->Response->ResponseStatusCode == 0) {
             throw new Exception(
                 "Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}",
                 (int)$response->Response->Error->ErrorCode

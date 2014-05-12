@@ -1,7 +1,10 @@
 <?php
 namespace Ups\Entity;
 
-class Address
+use DOMElement;
+use Ups\NodeInterface;
+
+class Address implements NodeInterface
 {
     /** @deprecated */
     public $AddressLine1;
@@ -247,6 +250,22 @@ class Address
                 $this->setAddressExtendedInformation($addressExtendedInformation);
             }
         }
+    }
+
+    /**
+     * @return DOMElement
+     */
+    public function toNode()
+    {
+        $node = new DOMElement('Address');
+        $node->appendChild(new DOMElement('AddressLine1', $this->getAddressLine1()));
+        $node->appendChild(new DOMElement('AddressLine2', $this->getAddressLine2()));
+        $node->appendChild(new DOMElement('AddressLine3', $this->getAddressLine3()));
+        $node->appendChild(new DOMElement('City', $this->getCity()));
+        $node->appendChild(new DOMElement('StateProvinceCode', $this->getStateProvinceCode()));
+        $node->appendChild(new DOMElement('PostalCode', $this->getPostalCode()));
+        $node->appendChild(new DOMElement('CountryCode', $this->getCountryCode()));
+        return $node;
     }
 
     /**

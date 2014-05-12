@@ -11,6 +11,7 @@ class Utilities
      *
      * @param stdClass $address An address data structure
      * @param DOMNode $element
+     * @deprecated Use NodeInterface on entities instead
      */
     static public function addAddressNode(&$address, DOMNode $element)
     {
@@ -29,6 +30,7 @@ class Utilities
      *
      * @param stdClass $address An address data structure
      * @param DOMNode $element
+     * @deprecated Use NodeInterface on entities instead
      */
     static public function addAddressArtifactNode(&$address, DOMNode $element)
     {
@@ -44,6 +46,7 @@ class Utilities
      *
      * @param $location
      * @param DOMNode $locationNode
+     * @deprecated Use NodeInterface on entities instead
      */
     static public function addLocationInformation($location, DOMNode $locationNode)
     {
@@ -58,6 +61,7 @@ class Utilities
     /**
      * @param $shipment
      * @param DOMNode $node
+     * @deprecated Use NodeInterface on entities instead
      */
     static public function addPackages($shipment, DOMNode $node)
     {
@@ -90,6 +94,7 @@ class Utilities
      * @param stdClass $object The object to get values from
      * @param string $propertyName The property name to access
      * @param DOMNode $node The node to add the child to
+     * @deprecated Use NodeInterface on entities instead
      */
     static public function appendChild($object, $propertyName, DOMNode $node)
     {

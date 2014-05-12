@@ -1,7 +1,10 @@
 <?php
 namespace Ups\Entity;
 
-class PackageWeight
+use DOMElement;
+use Ups\NodeInterface;
+
+class PackageWeight implements NodeInterface
 {
     /** @deprecated */
     public $UnitOfMeasurement;
@@ -22,6 +25,18 @@ class PackageWeight
     public function __construct()
     {
         $this->setUnitOfMeasurement(new UnitOfMeasurement);
+    }
+
+    /**
+     * @return DOMElement
+     */
+    public function toNode()
+    {
+        $node = new DOMElement('PackageWeight');
+        $node->appendChild(new DOMElement('Weight', $this->getWeight()));
+        $node->appendChild(new DOMElement('Code', $this->getUnitOfMeasurement()->getCode()));
+        $node->appendChild(new DOMElement('Description', $this->getUnitOfMeasurement()->getDescription()));
+        return $node;
     }
 
     /**

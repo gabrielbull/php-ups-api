@@ -1,7 +1,10 @@
 <?php
 namespace Ups\Entity;
 
-class Service
+use DOMElement;
+use Ups\NodeInterface;
+
+class Service implements NodeInterface
 {
     // Valid domestic values
     const S_AIR_1DAYEARLYAM = '14';
@@ -55,6 +58,17 @@ class Service
                 $this->setDescription($attributes->Description);
             }
         }
+    }
+
+    /**
+     * @return DOMElement
+     */
+    public function toNode()
+    {
+        $node = new DOMElement('Shipper');
+        $node->appendChild(new DOMElement('Code', $this->getCode()));
+        $node->appendChild(new DOMElement('Description', $this->getDescription()));
+        return $node;
     }
 
     /**

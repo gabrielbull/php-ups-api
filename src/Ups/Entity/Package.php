@@ -1,7 +1,10 @@
 <?php
 namespace Ups\Entity;
 
-class Package
+use DOMElement;
+use Ups\NodeInterface;
+
+class Package implements NodeInterface
 {
     const PKG_OVERSIZE1 = '1';
     const PKG_OVERSIZE2 = '2';
@@ -126,6 +129,22 @@ class Package
                 $this->setActivities($activities);
             }
         }
+    }
+
+    /**
+     * @return DOMElement
+     */
+    public function toNode()
+    {
+        $node = new DOMElement('Package');
+
+        $packagingType = $this->getPackagingType();
+        if (isset($packagingType)) {
+            $node->appendChild($packagingType->toNode());
+        }
+
+        $node->appendChild($this->getPackageWeight()->toNode());
+        return $node;
     }
 
     /**

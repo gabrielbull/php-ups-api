@@ -94,7 +94,7 @@ class Shipment
     }
 
     /**
-     * @return Package
+     * @return Package[]
      */
     public function getPackages()
     {

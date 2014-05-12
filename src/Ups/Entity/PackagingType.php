@@ -1,7 +1,10 @@
 <?php
 namespace Ups\Entity;
 
-class PackagingType
+use DOMElement;
+use Ups\NodeInterface;
+
+class PackagingType implements NodeInterface
 {
     const PT_UNKONW = '00';
     const PT_UPSLETTER = '01';
@@ -30,6 +33,17 @@ class PackagingType
      * @var string
      */
     private $description;
+
+    /**
+     * @return DOMElement
+     */
+    public function toNode()
+    {
+        $node = new DOMElement('PackagingType');
+        $node->appendChild(new DOMElement('Code', $this->getCode()));
+        $node->appendChild(new DOMElement('Description', $this->getDescription()));
+        return $node;
+    }
 
     /**
      * @return string
