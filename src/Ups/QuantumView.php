@@ -52,11 +52,6 @@ class QuantumView extends Ups
     private $bookmark;
 
     /**
-     * @var string
-     */
-    private $responseBookmark;
-
-    /**
      * @param string|null $accessKey UPS License Access Key
      * @param string|null $userId UPS User ID
      * @param string|null $password UPS User Password
@@ -122,35 +117,13 @@ class QuantumView extends Ups
             );
         } else {
             if (isset($response->Bookmark)) {
-                $this->responseBookmark = $response->Bookmark;
+                $this->setBookmark((string)$response->Bookmark);
+            } else {
+                $this->setBookmark(null);
             }
 
             return $this->formatResponse($response);
         }
-    }
-
-    /**
-     * Return true if request has a bookmark
-     *
-     * @return bool
-     */
-    public function hasBookmark()
-    {
-        if (null !== $this->responseBookmark) {
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * Return the bookmark
-     *
-     * @return string
-     */
-    public function getBookmark()
-    {
-        return (string)$this->responseBookmark;
     }
 
     /**
@@ -230,6 +203,36 @@ class QuantumView extends Ups
         }
 
         return $output;
+    }
+
+    /**
+     * Return true if request has a bookmark
+     *
+     * @return bool
+     */
+    public function hasBookmark()
+    {
+        return null !== $this->bookmark;
+    }
+
+    /**
+     * Return the bookmark
+     *
+     * @return string|null
+     */
+    public function getBookmark()
+    {
+        return $this->bookmark;
+    }
+
+    /**
+     * @param string|null $bookmark
+     * @return $this
+     */
+    public function setBookmark($bookmark)
+    {
+        $this->bookmark = $bookmark;
+        return $this;
     }
 
     /**
