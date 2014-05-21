@@ -71,7 +71,7 @@ class Service implements NodeInterface
             $document = new DOMDocument();
         }
 
-        $node = $document->createElement('Shipper');
+        $node = $document->createElement('Service');
         $node->appendChild($document->createElement('Code', $this->getCode()));
         $node->appendChild($document->createElement('Description', $this->getDescription()));
         return $node;
