@@ -5,7 +5,7 @@ use DOMDocument;
 use SimpleXMLElement;
 use Exception;
 use stdClass;
-use UPS\Entity\LabelRecoveryRequest;
+use Ups\Entity\LabelRecoveryRequest;
 use Ups\Entity\LabelRecoveryResponse;
 
 /**

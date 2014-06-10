@@ -4,8 +4,8 @@ namespace Ups;
 use DOMDocument;
 use SimpleXMLElement;
 use Exception;
-use UPS\Entity\TimeInTransitRequest;
-use UPS\Entity\TimeInTransitResponse;
+use Ups\Entity\TimeInTransitRequest;
+use Ups\Entity\TimeInTransitResponse;
 
 /**
  * TimeInTransit API Wrapper

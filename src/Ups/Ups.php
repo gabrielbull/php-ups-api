@@ -146,7 +146,8 @@ abstract class Ups
      */
     protected function request($access, $request, $endpointurl)
     {
-        $response = (new Request)->request($access, $request, $endpointurl);
+        $requestInstance = new Request;
+        $response = $requestInstance->request($access, $request, $endpointurl);
         if ($response->getResponse() instanceof SimpleXMLElement) {
             $this->response = $response->getResponse();
             return $response->getResponse();
