@@ -6,6 +6,7 @@ class ShipmentServiceOptions
     public $SaturdayPickup;
     public $SaturdayDelivery;
     public $CallTagARS;
+    public $NegotiatedRatesIndicator;
 
     function __construct($response = null)
     {
@@ -21,7 +22,9 @@ class ShipmentServiceOptions
             if (isset($response->CallTagARS)) {
                 $this->CallTagARS = new CallTagARS($response->CallTagARS);
             }
-
+            if (isset($response->NegotiatedRatesIndicator)) {
+                $this->NegotiatedRatesIndicator = $response->NegotiatedRatesIndicator;
+            }
         }
     }
 }
