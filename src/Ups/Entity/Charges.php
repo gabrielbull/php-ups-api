@@ -16,7 +16,7 @@ class Charges
                 $this->CurrencyCode = $response->CurrencyCode;
             }
             if (isset($response->MonetaryValue)) {
-                $this->MonetaryValue = $response->MonetaryValue;
+                $this->MonetaryValue = (float)$response->MonetaryValue;
             }
             if (isset($response->Code)) {
                 $this->Code = $response->Code;
