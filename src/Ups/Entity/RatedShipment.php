@@ -26,7 +26,7 @@ class RatedShipment
 
         if (null != $response) {
             if (isset($response->Service)) {
-                $this->Service->Code = $response->Service->Code;
+                $this->Service->setCode($response->Service->Code);
             }
             if (isset($response->RatedShipmentWarning)) {
                 $this->RateShipmentWarning = $response->RatedShipmentWarning;
