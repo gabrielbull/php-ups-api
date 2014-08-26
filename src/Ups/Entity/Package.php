@@ -305,6 +305,12 @@ class Package implements NodeInterface
         return $this;
     }
 
+    public function removeReferenceNumber()
+    {
+        $this->ReferenceNumber = null;
+        $this->referenceNumber = null;
+    }
+
     /**
      * @return string
      */
