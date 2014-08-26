@@ -43,6 +43,13 @@ class Rate extends Ups
      */
     public function shopRates($rateRequest)
     {
+
+        if ($rateRequest instanceof Shipment) {
+            $shipment = $rateRequest;
+            $rateRequest = new RateRequest();
+            $rateRequest->setShipment($shipment);
+        }
+
         $this->requestOption = "Shop";
 
         return $this->sendRequest($rateRequest);
