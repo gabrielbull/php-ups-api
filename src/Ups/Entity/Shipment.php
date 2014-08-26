@@ -17,6 +17,13 @@ class Shipment
     public $Package = array();
     /** @deprecated */
     public $ShipmentServiceOptions;
+    /** @deprecated */
+    public $PaymentInformation;
+
+    /**
+     * @var PaymentInformation
+     */
+    public $paymentInformation;
 
     /**
      * @var string
@@ -204,6 +211,25 @@ class Shipment
     {
         $this->Shipper = $shipper;
         $this->shipper = $shipper;
+        return $this;
+    }
+
+    /**
+     * @return PaymentInformation
+     */
+    public function getPaymentInformation()
+    {
+        return $this->paymentInformation;
+    }
+
+    /**
+     * @param PaymentInformation $paymentInformation
+     * @return $this
+     */
+    public function setPaymentInformation(PaymentInformation $paymentInformation)
+    {
+        $this->PaymentInformation = $paymentInformation;
+        $this->paymentInformation = $paymentInformation;
         return $this;
     }
 }
