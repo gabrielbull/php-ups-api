@@ -264,13 +264,28 @@ class Address implements NodeInterface
         }
 
         $node = $document->createElement('Address');
-        $node->appendChild($document->createElement('AddressLine1', $this->getAddressLine1()));
-        $node->appendChild($document->createElement('AddressLine2', $this->getAddressLine2()));
-        $node->appendChild($document->createElement('AddressLine3', $this->getAddressLine3()));
-        $node->appendChild($document->createElement('City', $this->getCity()));
-        $node->appendChild($document->createElement('StateProvinceCode', $this->getStateProvinceCode()));
-        $node->appendChild($document->createElement('PostalCode', $this->getPostalCode()));
-        $node->appendChild($document->createElement('CountryCode', $this->getCountryCode()));
+        if ($this->getAddressLine1()) {
+            $node->appendChild($document->createElement('AddressLine1', $this->getAddressLine1()));
+        }
+
+        if ($this->getAddressLine2()) {
+            $node->appendChild($document->createElement('AddressLine2', $this->getAddressLine2()));
+        }
+        if ($this->getAddressLine3()) {
+            $node->appendChild($document->createElement('AddressLine3', $this->getAddressLine3()));
+        }
+        if ($this->getCity()) {
+            $node->appendChild($document->createElement('City', $this->getCity()));
+        }
+        if ($this->getStateProvinceCode()) {
+            $node->appendChild($document->createElement('StateProvinceCode', $this->getStateProvinceCode()));
+        }
+        if ($this->getPostalCode()) {
+            $node->appendChild($document->createElement('PostalCode', $this->getPostalCode()));
+        }
+        if ($this->getCountryCode()) {
+            $node->appendChild($document->createElement('CountryCode', $this->getCountryCode()));
+        }
         return $node;
     }
 
