@@ -18,8 +18,11 @@ class ShipFrom extends Shipper implements NodeInterface
         }
 
         $node = $document->createElement('ShipFrom');
-        $node->appendChild($document->createElement('CompanyName', null)); // fixme replace null by CompanyName
-        $node->appendChild($document->createElement('AttentionName', $this->getAttentionName()));
+//        $node->appendChild($document->createElement('CompanyName', null)); // fixme replace null by CompanyName
+        if ($this->getAttentionName()) {
+            $node->appendChild($document->createElement('AttentionName', $this->getAttentionName()));
+        }
+
 
         $address = $this->getAddress();
         if (isset($address)) {
