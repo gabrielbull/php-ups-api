@@ -23,7 +23,12 @@ class Shipment
     /**
      * @var PaymentInformation
      */
-    public $paymentInformation;
+    private $paymentInformation;
+
+    /**
+     * @var RateInformation
+     */
+    private $rateInformation;
 
     /**
      * @var string
@@ -67,6 +72,7 @@ class Shipment
         $this->shipTo = new ShipTo();
         $this->shipmentServiceOptions = new ShipmentServiceOptions();
         $this->service = new Service();
+        $this->rateInformation = null;
     }
 
     /**
@@ -231,5 +237,20 @@ class Shipment
         $this->PaymentInformation = $paymentInformation;
         $this->paymentInformation = $paymentInformation;
         return $this;
+    }
+
+    /**
+     * If called, returned prices will include negotiated rates (discounts will be applied)
+     */
+    public function showNegotiatedRates() {
+        $this->rateInformation = new RateInformation();
+        $this->rateInformation->setNegotiatedRatesIndicator(true);
+    }
+
+    /**
+     * @return null|RateInformation
+     */
+    public function getRateInformation() {
+        return $this->rateInformation;
     }
 }

@@ -153,6 +153,11 @@ class Rate extends Ups
             $shipmentNode->appendChild($shipTo->toNode($document));
         }
 
+        $rateInformation = $shipment->getRateInformation();
+        if ($rateInformation !== null) {
+            $shipmentNode->appendChild($rateInformation->toNode($document));
+        }
+
         foreach ($shipment->getPackages() as $package) {
             $shipmentNode->appendChild($package->toNode($document));
         }
