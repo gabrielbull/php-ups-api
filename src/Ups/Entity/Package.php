@@ -144,13 +144,10 @@ class Package implements NodeInterface
 
         $node = $document->createElement('Package');
 
-        $packagingType = $this->getPackagingType();
-        if (isset($packagingType)) {
-            $node->appendChild($packagingType->toNode($document));
-        }
-
+        $node->appendChild($this->getPackagingType()->toNode($document));
         $node->appendChild($this->getPackageWeight()->toNode($document));
         $node->appendChild($this->getDimensions()->toNode($document));
+        $node->appendChild($this->getPackageServiceOptions()->toNode($document));
         return $node;
     }
 
