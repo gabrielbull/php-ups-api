@@ -150,6 +150,7 @@ class Package implements NodeInterface
         }
 
         $node->appendChild($this->getPackageWeight()->toNode($document));
+        $node->appendChild($this->getDimensions()->toNode($document));
         return $node;
     }
 
