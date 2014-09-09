@@ -7,7 +7,7 @@ use Ups\NodeInterface;
 
 class Service implements NodeInterface
 {
-    // Valid domestic values
+	// Valid domestic values
     const S_AIR_1DAYEARLYAM = '14';
     const S_AIR_1DAY = '01';
     const S_AIR_1DAYSAVER = '13';
@@ -29,10 +29,23 @@ class Service implements NodeInterface
     const S_UPSTODAY_INTERCITY = '84';
     const S_UPSTODAY_EXPRESS = '85';
     const S_UPSTODAY_EXPRESSSAVER = '86';
-    const S_UPSWW_EXPRESSFREIGHT = '96';
+	const S_UPSWW_EXPRESSFREIGHT = '96';
 
-    /** @deprecated */
-    public $Code = self::S_GROUND;
+	private $serviceNames = [
+		'01' => 'UPS Next Day Air',
+		'02' => 'UPS Second Day Air',
+		'03' => 'UPS Ground',
+		'07' => 'UPS Worldwide Express',
+		'08' => 'UPS Worldwide Expedited',
+		'11' => 'UPS Standard',
+		'12' => 'UPS Three-Day Select',
+		'13' => 'Next Day Air Saver',
+		'14' => 'UPS Next Day Air Early AM',
+		'54' => 'UPS Worldwide Express Plus',
+		'59' => 'UPS Second Day Air AM',
+		'65' => 'UPS Saver'
+	];
+
     /** @deprecated */
     public $Description;
 
@@ -82,7 +95,7 @@ class Service implements NodeInterface
      */
     public function getName()
     {
-        return 'shipping.service.code' . $this->getCode();
+        return $this->serviceNames[$this->getCode()];
     }
 
     /**
@@ -99,7 +112,6 @@ class Service implements NodeInterface
      */
     public function setCode($code)
     {
-        $this->Code = $code;
         $this->code = $code;
         return $this;
     }

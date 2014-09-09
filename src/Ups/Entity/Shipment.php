@@ -17,6 +17,18 @@ class Shipment
     public $Package = array();
     /** @deprecated */
     public $ShipmentServiceOptions;
+    /** @deprecated */
+    public $PaymentInformation;
+
+    /**
+     * @var PaymentInformation
+     */
+    private $paymentInformation;
+
+    /**
+     * @var RateInformation
+     */
+    private $rateInformation;
 
     /**
      * @var string
@@ -55,11 +67,12 @@ class Shipment
 
     public function __construct()
     {
-        $this->shipper = new Shipper();
-        $this->shipFrom = new ShipFrom();
-        $this->shipTo = new ShipTo();
-        $this->shipmentServiceOptions = new ShipmentServiceOptions();
-        $this->service = new Service();
+        $this->setShipper(new Shipper());
+        $this->setShipFrom(new ShipFrom());
+        $this->setShipTo(new ShipTo());
+        $this->setShipmentServiceOptions(new ShipmentServiceOptions());
+        $this->setService(new Service());
+        $this->rateInformation = null;
     }
 
     /**
@@ -205,5 +218,39 @@ class Shipment
         $this->Shipper = $shipper;
         $this->shipper = $shipper;
         return $this;
+    }
+
+    /**
+     * @return PaymentInformation
+     */
+    public function getPaymentInformation()
+    {
+        return $this->paymentInformation;
+    }
+
+    /**
+     * @param PaymentInformation $paymentInformation
+     * @return $this
+     */
+    public function setPaymentInformation(PaymentInformation $paymentInformation)
+    {
+        $this->PaymentInformation = $paymentInformation;
+        $this->paymentInformation = $paymentInformation;
+        return $this;
+    }
+
+    /**
+     * If called, returned prices will include negotiated rates (discounts will be applied)
+     */
+    public function showNegotiatedRates() {
+        $this->rateInformation = new RateInformation();
+        $this->rateInformation->setNegotiatedRatesIndicator(true);
+    }
+
+    /**
+     * @return null|RateInformation
+     */
+    public function getRateInformation() {
+        return $this->rateInformation;
     }
 }

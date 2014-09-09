@@ -63,7 +63,7 @@ class Generic
                 }
             }
             if (isset($response->Service)) {
-                $this->Service->Code = $response->Service->Code;
+                $this->Service->setCode($response->Service->Code);
             }
             if (isset($response->Activity)) {
                 $this->Activity = new Activity($response->Activity);
