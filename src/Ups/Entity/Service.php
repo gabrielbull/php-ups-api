@@ -31,7 +31,7 @@ class Service implements NodeInterface
     const S_UPSTODAY_EXPRESSSAVER = '86';
 	const S_UPSWW_EXPRESSFREIGHT = '96';
 
-	private $serviceNames = [
+	private $serviceNames = array(
 		'01' => 'UPS Next Day Air',
 		'02' => 'UPS Second Day Air',
 		'03' => 'UPS Ground',
@@ -44,7 +44,7 @@ class Service implements NodeInterface
 		'54' => 'UPS Worldwide Express Plus',
 		'59' => 'UPS Second Day Air AM',
 		'65' => 'UPS Saver'
-	];
+    );
 
     /** @deprecated */
     public $Description;
