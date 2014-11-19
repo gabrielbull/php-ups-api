@@ -303,6 +303,11 @@ class Shipping extends Ups
             $shipmentNode->appendChild($xml->createElement('NumOfPiecesInShipment', $shipment->NumOfPiecesInShipment));
         }
 
+        if (isset($shipment->RateInformation)) {
+            $node = $shipmentNode->appendChild($xml->createElement('RateInformation'));
+            $node->appendChild($xml->createElement('NegotiatedRatesIndicator'));
+        }
+
         foreach ($shipment->Package as &$package) {
             $node = $shipmentNode->appendChild($xml->createElement('Package'));
 
@@ -490,9 +495,9 @@ class Shipping extends Ups
         $request->appendChild($xml->createElement('RequestAction', '1'));
 
         if (is_string($shipmentData)) {
-            $request->appendChild($xml->createElement('ShipmentIdentificationNumber', strtoupper($shipmentData)));
+            $container->appendChild($xml->createElement('ShipmentIdentificationNumber', strtoupper($shipmentData)));
         } else {
-            $expanded = $request->appendChild($xml->createElement('ExpandedVoidShipment'));
+            $expanded = $container->appendChild($xml->createElement('ExpandedVoidShipment'));
             $expanded->appendChild($xml->createElement('ShipmentIdentificationNumber', strtoupper($shipmentData['shipmentId'])));
 
             if (array_key_exists('trackingNumbers', $shipmentData)) {
