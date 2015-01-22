@@ -36,7 +36,7 @@ class Shipping extends Ups
     /**
      * @var string
      */
-    private $recoverLabelEndoint = '/LabelRecovery';
+    private $recoverLabelEndpoint = '/LabelRecovery';
 
     /**
      * Create a Shipment Confirm request (generate a digest)
