@@ -178,15 +178,15 @@ class Shipping extends Ups
 
             $shipFromNode->appendChild($xml->createElement('CompanyName', $shipment->ShipFrom->CompanyName));
 
-            if ($shipment->ShipFrom->AttentionName) {
+            if (isset($shipment->ShipFrom->AttentionName)) {
                 $shipFromNode->appendChild($xml->createElement('AttentionName', $shipment->ShipFrom->AttentionName));
             }
 
-            if ($shipment->ShipFrom->PhoneNumber) {
+            if (isset($shipment->ShipFrom->PhoneNumber)) {
                 $shipFromNode->appendChild($xml->createElement('PhoneNumber', $shipment->ShipFrom->PhoneNumber));
             }
 
-            if ($shipment->ShipFrom->FaxNumber) {
+            if (isset($shipment->ShipFrom->FaxNumber)) {
                 $shipFromNode->appendChild($xml->createElement('FaxNumber', $shipment->ShipFrom->FaxNumber));
             }
 
@@ -197,25 +197,25 @@ class Shipping extends Ups
         if (isset($shipment->SoldTo)) {
             $soldToNode = $shipmentNode->appendChild($xml->createElement('SoldTo'));
 
-            if ($shipment->SoldTo->Option) {
+            if (isset($shipment->SoldTo->Option)) {
                 $soldToNode->appendChild($xml->createElement('Option', $shipment->SoldTo->Option));
             }
 
             $soldToNode->appendChild($xml->createElement('CompanyName', $shipment->SoldTo->CompanyName));
 
-            if ($shipment->SoldTo->AttentionName) {
+            if (isset($shipment->SoldTo->AttentionName)) {
                 $soldToNode->appendChild($xml->createElement('AttentionName', $shipment->SoldTo->AttentionName));
             }
 
-            if ($shipment->SoldTo->PhoneNumber) {
+            if (isset($shipment->SoldTo->PhoneNumber)) {
                 $soldToNode->appendChild($xml->createElement('PhoneNumber', $shipment->SoldTo->PhoneNumber));
             }
 
-            if ($shipment->SoldTo->FaxNumber) {
+            if (isset($shipment->SoldTo->FaxNumber)) {
                 $soldToNode->appendChild($xml->createElement('FaxNumber', $shipment->SoldTo->FaxNumber));
             }
 
-            if ($shipment->SoldTo->Address) {
+            if (isset($shipment->SoldTo->Address)) {
                 $addressNode = $xml->importNode($this->compileAddressNode($shipment->SoldTo->Address), true);
                 $soldToNode->appendChild($addressNode);
             }
