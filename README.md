@@ -1,11 +1,10 @@
 PHP UPS API Wrapper
 ===================
 
-[![Build Status](https://travis-ci.org/gabrielbull/php-ups-api.svg)](https://travis-ci.org/gabrielbull/php-ups-api)
-[![Latest Stable Version](https://poser.pugx.org/gabrielbull/ups-api/v/stable.png)](https://packagist.org/packages/gabrielbull/ups-api)
-[![Total Downloads](https://poser.pugx.org/gabrielbull/ups-api/downloads.png)](https://packagist.org/packages/gabrielbull/ups-api)
-[![Latest Unstable Version](https://poser.pugx.org/gabrielbull/ups-api/v/unstable.png)](https://packagist.org/packages/gabrielbull/ups-api)
-[![License](https://poser.pugx.org/gabrielbull/ups-api/license.png)](https://packagist.org/packages/gabrielbull/ups-api)
+[![Build Status](https://travis-ci.org/gabrielbull/php-ups-api/master.svg?style=flat)](https://travis-ci.org/gabrielbull/php-ups-api)
+[![Latest Stable Version](http://img.shields.io/packagist/v/gabrielbull/ups-api.svg?style=flat)](https://packagist.org/packages/gabrielbull/ups-api)
+[![Total Downloads](https://img.shields.io/packagist/dt/gabrielbull/ups-api.svg?style=flat)](https://packagist.org/packages/gabrielbull/ups-api)
+[![License](https://img.shields.io/packagist/l/gabrielbull/ups-api.svg?style=flat)](https://packagist.org/packages/gabrielbull/ups-api)
 
 This library is aimed at wrapping all the UPS API into a simple to use PHP Library. It currently covers the Quantum View®,
 Tracking API, Shipping API, Rating API and Time in Transit API. Feel free to contribute.
