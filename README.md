@@ -1,7 +1,7 @@
 PHP UPS API Wrapper
 ===================
 
-[![Build Status](https://travis-ci.org/gabrielbull/php-ups-api/master.svg?style=flat)](https://travis-ci.org/gabrielbull/php-ups-api)
+[![Build Status](https://api.travis-ci.org/gabrielbull/php-ups-api.svg?branch=master)](https://travis-ci.org/gabrielbull/php-ups-api)
 [![Latest Stable Version](http://img.shields.io/packagist/v/gabrielbull/ups-api.svg?style=flat)](https://packagist.org/packages/gabrielbull/ups-api)
 [![Total Downloads](https://img.shields.io/packagist/dt/gabrielbull/ups-api.svg?style=flat)](https://packagist.org/packages/gabrielbull/ups-api)
 [![License](https://img.shields.io/packagist/l/gabrielbull/ups-api.svg?style=flat)](https://packagist.org/packages/gabrielbull/ups-api)
