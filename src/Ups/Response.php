@@ -13,14 +13,14 @@ class Response implements ResponseInterface
     /**
      * @var SimpleXMLElement
      */
-    protected $reponse;
+    protected $response;
 
     /**
      * @return SimpleXMLElement
      */
     public function getResponse()
     {
-        return $this->reponse;
+        return $this->response;
     }
 
     /**
@@ -29,7 +29,7 @@ class Response implements ResponseInterface
      */
     public function setResponse(SimpleXMLElement $response)
     {
-        $this->reponse = $response;
+        $this->response = $response;
         return $this;
     }
 
