@@ -15,7 +15,7 @@ class Charges
             if (isset($response->CurrencyCode)) {
                 $this->CurrencyCode = $response->CurrencyCode;
             }
-            if (isset($response->MonetaryValue)) {
+            if (isset($response->MonetaryValue) && !$response->MonetaryValue instanceof \stdClass) {
                 $this->MonetaryValue = (float)$response->MonetaryValue;
             }
             if (isset($response->Code)) {
@@ -29,4 +29,4 @@ class Charges
             }
         }
     }
-} 
+}
