@@ -73,7 +73,7 @@ class Package implements NodeInterface
     private $largePackage;
 
     /**
-     * @var Dimensions
+     * @var Dimensions|null
      */
     private $dimensions;
 
@@ -89,7 +89,6 @@ class Package implements NodeInterface
     {
         $this->setPackagingType(new PackagingType);
         $this->setReferenceNumber(new ReferenceNumber);
-        $this->setDimensions(new Dimensions);
         $this->setPackageWeight(new PackageWeight);
         $this->setPackageServiceOptions(new PackageServiceOptions);
 
@@ -146,7 +145,9 @@ class Package implements NodeInterface
 
         $node->appendChild($this->getPackagingType()->toNode($document));
         $node->appendChild($this->getPackageWeight()->toNode($document));
-        $node->appendChild($this->getDimensions()->toNode($document));
+        if (null !== $this->getDimensions()) {
+            $node->appendChild($this->getDimensions()->toNode($document));
+        }
         $node->appendChild($this->getPackageServiceOptions()->toNode($document));
         return $node;
     }
