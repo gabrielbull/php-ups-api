@@ -191,7 +191,7 @@ class Package implements NodeInterface
     }
 
     /**
-     * @return Dimensions
+     * @return Dimensions|null
      */
     public function getDimensions()
     {
