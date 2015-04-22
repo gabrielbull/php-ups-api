@@ -31,7 +31,7 @@ class Request implements RequestInterface
      * @throws Exception
      * todo: make access, request and endpointurl nullable to make the testable
      */
-    public function request($access, $request, $endpointurl)
+    public function request($access, $request, $endpointurl, $log = null)
     {
         $this->setAccess($access);
         $this->setRequest($request);
@@ -46,6 +46,10 @@ class Request implements RequestInterface
             )
         );
 
+        if($log instanceof LogInterface) {
+            $log->request($this->getAccess() . $this->getRequest(), $endpointurl);
+        }
+
         $request = stream_context_create($form);
 
         if (!$handle = fopen($this->getEndpointUrl(), 'rb', false, $request)) {
@@ -54,6 +58,10 @@ class Request implements RequestInterface
 
         $response = stream_get_contents($handle);
         fclose($handle);
+
+        if($log instanceof LogInterface) {
+            $log->response($response, $endpointurl);
+        }
 
         if ($response != false) {
             $text = $response;

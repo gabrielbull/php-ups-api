@@ -7,9 +7,10 @@ interface RequestInterface
      * @param string $access The access request xml
      * @param string $request The request xml
      * @param string $endpointurl The UPS API Endpoint URL
+     * @param object $log Object to log request & response into
      * @return ResponseInterface
      */
-    public function request($access, $request, $endpointurl);
+    public function request($access, $request, $endpointurl, $log = null);
 
     /**
      * @param $access

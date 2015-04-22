@@ -67,7 +67,7 @@ class Tracking extends Ups
         $access = $this->createAccess();
         $request = $this->createRequest();
 
-        $this->response = $this->getRequest()->request($access, $request, $this->compileEndpointUrl(self::ENDPOINT));
+        $this->response = $this->getRequest()->request($access, $request, $this->compileEndpointUrl(self::ENDPOINT), $this->log);
         $response = $this->response->getResponse();
 
         if (null === $response) {
