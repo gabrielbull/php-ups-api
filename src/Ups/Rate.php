@@ -86,7 +86,7 @@ class Rate extends Ups
         $request = $this->createRequest($rateRequest);
         //$response = $this->request($this->createAccess(), $request, $this->compileEndpointUrl(self::ENDPOINT));
 
-        $this->response = $this->getRequest()->request($this->createAccess(), $request, $this->compileEndpointUrl(self::ENDPOINT));
+        $this->response = $this->getRequest()->request($this->createAccess(), $request, $this->compileEndpointUrl(self::ENDPOINT), $this->log);
         $response = $this->response->getResponse();
 
         if (null === $response) {

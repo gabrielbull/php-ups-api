@@ -54,19 +54,26 @@ abstract class Ups
     public $response;
 
     /**
+     * @var object
+     */
+    protected $log;
+
+    /**
      * Constructor
      *
      * @param string|null $accessKey UPS License Access Key
      * @param string|null $userId UPS User ID
      * @param string|null $password UPS User Password
      * @param bool $useIntegration Determine if we should use production or CIE URLs.
+     * @param object Logger object
      */
-    public function __construct($accessKey = null, $userId = null, $password = null, $useIntegration = false)
+    public function __construct($accessKey = null, $userId = null, $password = null, $useIntegration = false, LogInterface $log = null)
     {
         $this->accessKey = $accessKey;
         $this->userId = $userId;
         $this->password = $password;
         $this->useIntegration = $useIntegration;
+        $this->log = $log;
     }
 
     /**
@@ -147,7 +154,7 @@ abstract class Ups
     protected function request($access, $request, $endpointurl)
     {
         $requestInstance = new Request;
-        $response = $requestInstance->request($access, $request, $endpointurl);
+        $response = $requestInstance->request($access, $request, $endpointurl, $this->log);
         if ($response->getResponse() instanceof SimpleXMLElement) {
             $this->response = $response->getResponse();
             return $response->getResponse();
