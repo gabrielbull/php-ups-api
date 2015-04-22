@@ -60,12 +60,16 @@ class Rate extends Ups
      * @return RateRequest
      * @throws Exception
      */
-    public function getRate($rateRequest)
+    public function getRate($rateRequest, $pickupType = NULL)
     {
         if ($rateRequest instanceof Shipment) {
             $shipment = $rateRequest;
             $rateRequest = new RateRequest();
             $rateRequest->setShipment($shipment);
+
+            if($pickupType instanceof PickupType) {
+            	$rateRequest->setPickupType($pickupType);
+            }
         }
 
         $this->requestOption = "Rate";
