@@ -65,6 +65,7 @@ abstract class Ups
      * @param string|null $userId UPS User ID
      * @param string|null $password UPS User Password
      * @param bool $useIntegration Determine if we should use production or CIE URLs.
+     * @param object Logger object
      */
     public function __construct($accessKey = null, $userId = null, $password = null, $useIntegration = false, LogInterface $log = null)
     {
