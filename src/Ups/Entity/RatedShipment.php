@@ -13,6 +13,10 @@ class RatedShipment
     public $ScheduledDeliveryTime;
     public $RatedPackage;
     public $SurCharges;
+    /**
+     * @var NegotiatedRates|null
+     */
+    public $NegotiatedRates;
 
     function __construct($response = null)
     {
@@ -61,6 +65,10 @@ class RatedShipment
                 } else {
                     $this->SurCharges[] = new Charges($response->SurCharges);
                 }
+            }
+
+            if (isset($response->NegotiatedRates)) {
+                $this->NegotiatedRates = new NegotiatedRates($response->NegotiatedRates);
             }
 
         }
