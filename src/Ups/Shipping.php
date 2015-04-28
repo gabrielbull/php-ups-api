@@ -176,7 +176,7 @@ class Shipping extends Ups
         if (isset($shipment->ShipFrom)) {
             $shipFromNode = $shipmentNode->appendChild($xml->createElement('ShipFrom'));
 
-            $shipFromNode->appendChild($xml->createElement('CompanyName', $shipment->ShipFrom->CompanyName));
+            $shipFromNode->appendChild($xml->createElement('CompanyName', $shipment->ShipFrom->getCompanyName()));
 
             if (isset($shipment->ShipFrom->AttentionName)) {
                 $shipFromNode->appendChild($xml->createElement('AttentionName', $shipment->ShipFrom->AttentionName));
