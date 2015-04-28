@@ -441,7 +441,7 @@ class Shipping extends Ups
         $request->appendChild($node);
 
         $request->appendChild($xml->createElement('RequestAction', 'ShipAccept'));
-        $container->appendChild($xml->createElement('ShipmentDigest', $shipmentDigest));
+        $container->appendChild($xml->createElement('ShipmentDigest', $shipmentDigest->ShipmentDigest));
 
         return $xml->saveXML();
     }
