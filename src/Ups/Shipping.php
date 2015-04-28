@@ -89,7 +89,7 @@ class Shipping extends Ups
         $request->appendChild($node);
 
         $request->appendChild($xml->createElement('RequestAction', 'ShipConfirm'));
-        $request->appendChild($xml->createElement('RequestOption', $validation ? : ''));
+        $request->appendChild($xml->createElement('RequestOption', $validation ? : 'nonvalidate'));
 
         // Page 47
         $shipmentNode = $container->appendChild($xml->createElement('Shipment'));
@@ -308,7 +308,7 @@ class Shipping extends Ups
             $node->appendChild($xml->createElement('NegotiatedRatesIndicator'));
         }
 
-        foreach ($shipment->Package as &$package) {
+        foreach ($shipment->getPackages() as &$package) {
             $node = $shipmentNode->appendChild($xml->createElement('Package'));
 
             $ptNode = $node->appendChild($xml->createElement('PackagingType'));
@@ -398,7 +398,6 @@ class Shipping extends Ups
                 $node->appendChild($xml->createElement('Description', $receiptSpecOpts->ImageFormat->Description));
             }
         }
-
         return $xml->saveXML();
     }
 
