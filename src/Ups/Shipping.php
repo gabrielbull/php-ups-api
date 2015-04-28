@@ -283,7 +283,7 @@ class Shipping extends Ups
         }
 
         $serviceNode = $shipmentNode->appendChild($xml->createElement('Service'));
-        $serviceNode->appendChild($xml->createElement('Code', $shipment->Service->Code));
+        $serviceNode->appendChild($xml->createElement('Code', $shipment->Service->getCode()));
 
         if (isset($shipment->Service->Description)) {
             $serviceNode->appendChild($xml->createElement('Description', $shipment->Service->Description));
