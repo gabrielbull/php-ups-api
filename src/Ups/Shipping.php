@@ -331,7 +331,7 @@ class Shipping extends Ups
                 $node->appendChild($xml->createElement('LargePackageIndicator'));
             }
 
-            if (isset($package->ReferenceNumber)) {
+            if (isset($package->ReferenceNumber) && isset($package->ReferenceNumber->Code) && isset($package->ReferenceNumber->Value)) {
                 $refNode = $node->appendChild($xml->createElement('ReferenceNumber'));
 
                 if ($package->ReferenceNumber->BarCodeIndicator) {
