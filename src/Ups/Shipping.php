@@ -163,10 +163,6 @@ class Shipping extends Ups
 
         $addressNode = $xml->importNode($this->compileAddressNode($shipment->ShipTo->Address), true);
 
-        if (isset($shipment->ShipTo->ResidentialAddress)) {
-            $addressNode->appendChild($xml->createElement('ResidentialAddress'));
-        }
-
         if (isset($shipment->ShipTo->LocationID)) {
             $addressNode->appendChild($xml->createElement('LocationID', strtoupper($shipment->ShipTo->LocationID)));
         }
@@ -654,6 +650,10 @@ class Shipping extends Ups
 
         if (isset($address->CountryCode)) {
             $node->appendChild($xml->createElement('CountryCode', $address->CountryCode));
+        }
+
+        if(isset($address->ResidentialAddressIndicator)) {
+            $node->appendChild($xml->createElement('ResidentialAddress'));
         }
 
         return $node->cloneNode(true);
