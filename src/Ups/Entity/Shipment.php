@@ -61,6 +61,11 @@ class Shipment
     private $returnService;
 
     /**
+     * @var bool
+     */
+    private $documentsOnly;
+
+    /**
      * @var Package[]
      */
     private $packages = array();
@@ -108,6 +113,24 @@ class Shipment
     {
         $this->Description = $description;
         $this->description = $description;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getDocumentsOnly()
+    {
+        return $this->documentsOnly;
+    }
+
+    /**
+     * @param bool $documentsOnly
+     * @return $this
+     */
+    public function setDocumentsOnly($documentsOnly)
+    {
+        $this->documentsOnly = $documentsOnly;
         return $this;
     }
 
