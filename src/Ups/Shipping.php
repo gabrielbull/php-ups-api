@@ -98,14 +98,15 @@ class Shipping extends Ups
             $shipmentNode->appendChild($xml->createElement('Description', $shipment->Description));
         }
 
-        if (isset($shipment->ReturnService)) {
+        $returnService = $shipment->getReturnService();
+        if (isset($returnService)) {
             $node = $shipmentNode->appendChild($xml->createElement('ReturnService'));
 
-            $node->appendChild($xml->createElement('Code', $shipment->ReturnService->Code));
+            $node->appendChild($xml->createElement('Code', $returnService->Code));
+        }
 
-            if ($shipment->ReturnService->DocumentsOnly) {
-                $node->appendChild($xml->createElement('DocumentsOnly'));
-            }
+        if (isset($shipment->ReturnService->DocumentsOnly)) {
+            $shipmentNode->appendChild($xml->createElement('DocumentsOnly'));
         }
 
         $shipperNode = $shipmentNode->appendChild($xml->createElement('Shipper'));
