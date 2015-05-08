@@ -98,14 +98,15 @@ class Shipping extends Ups
             $shipmentNode->appendChild($xml->createElement('Description', $shipment->Description));
         }
 
-        if (isset($shipment->ReturnService)) {
+        $returnService = $shipment->getReturnService();
+        if (isset($returnService)) {
             $node = $shipmentNode->appendChild($xml->createElement('ReturnService'));
 
-            $node->appendChild($xml->createElement('Code', $shipment->ReturnService->Code));
+            $node->appendChild($xml->createElement('Code', $returnService->getCode()));
+        }
 
-            if ($shipment->ReturnService->DocumentsOnly) {
-                $node->appendChild($xml->createElement('DocumentsOnly'));
-            }
+        if ($shipment->getDocumentsOnly()) {
+            $shipmentNode->appendChild($xml->createElement('DocumentsOnly'));
         }
 
         $shipperNode = $shipmentNode->appendChild($xml->createElement('Shipper'));
@@ -306,6 +307,10 @@ class Shipping extends Ups
 
         foreach ($shipment->getPackages() as &$package) {
             $node = $shipmentNode->appendChild($xml->createElement('Package'));
+
+            if(isset($package->Description)) {
+                $node->appendChild($xml->createElement('Description', $package->Description));
+            }
 
             $ptNode = $node->appendChild($xml->createElement('PackagingType'));
             $ptNode->appendChild($xml->createElement('Code', $package->PackagingType->Code));
