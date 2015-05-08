@@ -162,6 +162,11 @@ class Rate extends Ups
             $shipmentNode->appendChild($package->toNode($document));
         }
 
+        $shipmentServiceOptions = $shipment->getShipmentServiceOptions();
+        if(isset($shipmentServiceOptions)) {
+            $shipmentNode->appendChild($shipmentServiceOptions->toNode($xml));
+        }
+
         return $xml->saveXML();
     }
 
