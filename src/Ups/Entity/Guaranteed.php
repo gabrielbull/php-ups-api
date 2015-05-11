@@ -7,6 +7,7 @@ class Guaranteed
     const G_NO = 'N';
 
     public $Code;
+    public $Description;
 
     function __construct($response = null)
     {
@@ -15,6 +16,9 @@ class Guaranteed
         if (null != $response) {
             if (isset($response->Code)) {
                 $this->Code = $response->Code;
+            }
+            if (isset($response->Description)) {
+                $this->Description = $response->Description;
             }
         }
     }
