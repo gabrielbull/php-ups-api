@@ -103,7 +103,9 @@ class TimeInTransit extends Ups
             $trackRequest->appendChild($xml->createElement("PickupDate", $timeInTransitRequest->PickupDate));
         }
 
-        $trackRequest->appendChild($xml->createElement("DocumentsOnlyIndicator"));
+        if(isset($timeInTransitRequest->DocumentsOnlyIndicator)) {
+            $trackRequest->appendChild($xml->createElement("DocumentsOnlyIndicator"));
+        }
 
         return $xml->saveXML();
     }
