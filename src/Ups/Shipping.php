@@ -352,6 +352,11 @@ class Shipping extends Ups
             }
         }
 
+        $shipmentServiceOptions = $shipment->getShipmentServiceOptions();
+        if(isset($shipmentServiceOptions)) {
+            $shipmentNode->appendChild($shipmentServiceOptions->toNode($xml));
+        }
+
         if ($labelSpecOpts) {
             $labelSpec = $container->appendChild($xml->createElement('LabelSpecification'));
 
