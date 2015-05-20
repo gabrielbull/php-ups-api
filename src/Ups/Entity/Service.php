@@ -31,7 +31,7 @@ class Service implements NodeInterface
     const S_UPSTODAY_EXPRESSSAVER = '86';
 	const S_UPSWW_EXPRESSFREIGHT = '96';
 
-	private $serviceNames = array(
+	private static $serviceNames = array(
 		'01' => 'UPS Next Day Air',
 		'02' => 'UPS Second Day Air',
 		'03' => 'UPS Ground',
@@ -75,6 +75,14 @@ class Service implements NodeInterface
     }
 
     /**
+     * @return array
+     */
+    public static function getServices()
+    {
+        return self::$serviceNames;
+    }
+
+    /**
      * @param null|DOMDocument $document
      * @return DOMElement
      */
@@ -95,7 +103,7 @@ class Service implements NodeInterface
      */
     public function getName()
     {
-        return $this->serviceNames[$this->getCode()];
+        return self::$serviceNames[$this->getCode()];
     }
 
     /**

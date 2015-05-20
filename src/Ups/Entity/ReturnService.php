@@ -25,7 +25,7 @@ class ReturnService implements NodeInterface
     const PACK_AND_COLLECT_SERVICE_3_ATTEMPT_BOX_4 = 19;
     const PACK_AND_COLLECT_SERVICE_3_ATTEMPT_BOX_5 = 20;
 
-    private $serviceNames = array(
+    private static $serviceNames = array(
         2 => 'UPS Print and Mail (PNM)',
         3 => 'UPS Return Service 1-Attempt (RS1)',
         5 => 'UPS Return Service 3-Attempt (RS3)',
@@ -62,6 +62,14 @@ class ReturnService implements NodeInterface
     }
 
     /**
+     * @return array
+     */
+    public static function getServices()
+    {
+        return self::$serviceNames;
+    }
+
+    /**
      * @param null|DOMDocument $document
      * @return DOMElement
      */
@@ -81,7 +89,7 @@ class ReturnService implements NodeInterface
      */
     public function getName()
     {
-        return $this->serviceNames[$this->getCode()];
+        return self::$serviceNames[$this->getCode()];
     }
 
     /**
