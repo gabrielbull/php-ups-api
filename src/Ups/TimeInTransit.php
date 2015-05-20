@@ -73,12 +73,12 @@ class TimeInTransit extends Ups
 
         $transitFromNode = $trackRequest->appendChild($xml->createElement('TransitFrom'));
         if (isset($timeInTransitRequest->TransitFrom)) {
-            Utilities::addAddressArtifactNode($timeInTransitRequest->TransitFrom, $transitFromNode);
+            $transitFromNode->appendChild($timeInTransitRequest->TransitFrom->toNode($xml));
         }
 
         $transitToNode = $trackRequest->appendChild($xml->createElement('TransitTo'));
-        if (isset($timeInTransitRequest->TransitTo)) {
-            Utilities::addAddressArtifactNode($timeInTransitRequest->TransitTo, $transitToNode);
+        if (isset($timeInTransitRequest->TransitFrom)) {
+            $transitToNode->appendChild($timeInTransitRequest->TransitFrom->toNode($xml));
         }
 
         $shipmentWeightNode = $trackRequest->appendChild($xml->createElement('ShipmentWeight'));
