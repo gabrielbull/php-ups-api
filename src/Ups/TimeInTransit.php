@@ -72,13 +72,15 @@ class TimeInTransit extends Ups
         $request->appendChild($xml->createElement("RequestAction", "TimeInTransit"));
 
         $transitFromNode = $trackRequest->appendChild($xml->createElement('TransitFrom'));
-        if (isset($timeInTransitRequest->TransitFrom)) {
-            $transitFromNode->appendChild($timeInTransitRequest->TransitFrom->toNode($xml));
+        $address = $timeInTransitRequest->getTransitFrom();
+        if (isset($address)) {
+            $transitFromNode->appendChild($address->toNode($xml));
         }
 
         $transitToNode = $trackRequest->appendChild($xml->createElement('TransitTo'));
-        if (isset($timeInTransitRequest->TransitFrom)) {
-            $transitToNode->appendChild($timeInTransitRequest->TransitFrom->toNode($xml));
+        $address = $timeInTransitRequest->getTransitTo();
+        if (isset($address)) {
+            $transitToNode->appendChild($address->toNode($xml));
         }
 
         $shipmentWeightNode = $trackRequest->appendChild($xml->createElement('ShipmentWeight'));
@@ -89,21 +91,24 @@ class TimeInTransit extends Ups
             $uom->appendChild($xml->createElement("Description", $timeInTransitRequest->ShipmentWeight->UnitOfMeasurement->Description));
         }
 
-        if (isset($timeInTransitRequest->TotalPackagesInShipment)) {
-            $trackRequest->appendChild($xml->createElement("TotalPackagesInShipment", $timeInTransitRequest->TotalPackagesInShipment));
+        $packages = $timeInTransitRequest->getTotalPackagesInShipment();
+        if (isset($packages)) {
+            $trackRequest->appendChild($xml->createElement("TotalPackagesInShipment", $packages));
         }
 
         $invoiceLineTotalNode = $trackRequest->appendChild($xml->createElement('InvoiceLineTotal'));
-        if (isset($timeInTransitRequest->InvoiceLineTotal)) {
-            $invoiceLineTotalNode->appendChild($xml->createElement("CurrencyCode", $timeInTransitRequest->InvoiceLineTotal->CurrencyCode));
-            $invoiceLineTotalNode->appendChild($xml->createElement("MonetaryValue", $timeInTransitRequest->InvoiceLineTotal->MonetaryValue));
+        $invoiceLineTotal = $timeInTransitRequest->getInvoiceLineTotal();
+        if (isset($invoiceLineTotal)) {
+            $invoiceLineTotalNode->appendChild($invoiceLineTotal->toNode($xml));
         }
 
-        if (isset($timeInTransitRequest->PickupDate)) {
-            $trackRequest->appendChild($xml->createElement("PickupDate", $timeInTransitRequest->PickupDate));
+        $pickupDate = $timeInTransitRequest->getPickupDate();
+        if ($pickupDate) {
+            $trackRequest->appendChild($xml->createElement("PickupDate", $pickupDate->format('Ymd')));
         }
 
-        if(isset($timeInTransitRequest->DocumentsOnlyIndicator)) {
+        $indicator = $timeInTransitRequest->getDocumentsOnlyIndicator();
+        if($indicator) {
             $trackRequest->appendChild($xml->createElement("DocumentsOnlyIndicator"));
         }
 
