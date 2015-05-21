@@ -83,12 +83,9 @@ class TimeInTransit extends Ups
             $transitToNode->appendChild($address->toNode($xml));
         }
 
-        $shipmentWeightNode = $trackRequest->appendChild($xml->createElement('ShipmentWeight'));
-        if (isset($timeInTransitRequest->ShipmentWeight)) {
-            $shipmentWeightNode->appendChild($xml->createElement("Weight", $timeInTransitRequest->ShipmentWeight->Weight));
-            $uom = $shipmentWeightNode->appendChild($xml->createElement("UnitOfMeasurement"));
-            $uom->appendChild($xml->createElement("Code", $timeInTransitRequest->ShipmentWeight->UnitOfMeasurement->Code));
-            $uom->appendChild($xml->createElement("Description", $timeInTransitRequest->ShipmentWeight->UnitOfMeasurement->Description));
+        $weight = $timeInTransitRequest->getShipmentWeight();
+        if (isset($weight)) {
+            $trackRequest->appendChild($weight->toNode($xml));
         }
 
         $packages = $timeInTransitRequest->getTotalPackagesInShipment();
@@ -96,10 +93,9 @@ class TimeInTransit extends Ups
             $trackRequest->appendChild($xml->createElement("TotalPackagesInShipment", $packages));
         }
 
-        $invoiceLineTotalNode = $trackRequest->appendChild($xml->createElement('InvoiceLineTotal'));
         $invoiceLineTotal = $timeInTransitRequest->getInvoiceLineTotal();
         if (isset($invoiceLineTotal)) {
-            $invoiceLineTotalNode->appendChild($invoiceLineTotal->toNode($xml));
+            $trackRequest->appendChild($invoiceLineTotal->toNode($xml));
         }
 
         $pickupDate = $timeInTransitRequest->getPickupDate();
