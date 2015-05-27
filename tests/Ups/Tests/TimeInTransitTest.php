@@ -45,7 +45,7 @@ class TimeInTransitTest extends PHPUnit_Framework_TestCase
         $data->setInvoiceLineTotal($invoiceLineTotal);
 
         // Pickup date
-        $data->setPickupDate(new \DateTime);
+        $data->setPickupDate(new \DateTime('2015-05-23'));
 
         try {
             // Get data
