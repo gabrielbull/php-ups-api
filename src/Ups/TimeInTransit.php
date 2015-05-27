@@ -15,6 +15,9 @@ use Ups\Entity\TimeInTransitResponse;
  */
 class TimeInTransit extends Ups
 {
+
+    private $request;
+
     const ENDPOINT = '/TimeInTransit';
 
     /**
