@@ -10,6 +10,8 @@ class Shipment
     /** @deprecated */
     public $ShipTo;
     /** @deprecated */
+    public $SoldTo;
+    /** @deprecated */
     public $ShipFrom;
     /** @deprecated */
     public $Service;
@@ -44,6 +46,11 @@ class Shipment
      * @var ShipTo;
      */
     private $shipTo;
+
+    /**
+     * @var SoldTo
+     */
+    private $soldTo;
 
     /**
      * @var ShipFrom
@@ -225,6 +232,25 @@ class Shipment
     {
         $this->ShipTo = $shipTo;
         $this->shipTo = $shipTo;
+        return $this;
+    }
+
+    /**
+     * @return SoldTo
+     */
+    public function getSoldTo()
+    {
+        return $this->soldTo;
+    }
+
+    /**
+     * @param SoldTo $soldTo
+     * @return $this
+     */
+    public function setSoldTo(SoldTo $soldTo)
+    {
+        $this->SoldTo = $soldTo;
+        $this->soldTo = $soldTo;
         return $this;
     }
 

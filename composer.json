@@ -27,6 +27,10 @@
     {
       "name": "Michael Williams",
       "email": "michael.williams@limelyte.com"
+    },
+    {
+      "name": "Stefan Doorn",
+      "email": "stefan@efectos.nl"
     }
   ],
   "require": {

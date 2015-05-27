@@ -7,11 +7,14 @@ use Ups\NodeInterface;
 
 class ShipmentServiceOptions implements NodeInterface
 {
+
     public $SaturdayPickup;
     public $SaturdayDelivery;
     public $CallTagARS;
     public $NegotiatedRatesIndicator;
     public $DirectDeliveryOnlyIndicator;
+
+    private $internationalForms;
 
     function __construct($response = null)
     {
@@ -32,6 +35,9 @@ class ShipmentServiceOptions implements NodeInterface
             }
             if(isset($response->DirectDeliveryOnlyIndicator)) {
                 $this->DirectDeliveryOnlyIndicator = $response->DirectDeliveryOnlyIndicator;
+            }
+            if(isset($response->InternationalForms)) {
+                $this->setInternationalForms($response->InternationalForms);
             }
         }
     }
@@ -60,7 +66,27 @@ class ShipmentServiceOptions implements NodeInterface
             $node->appendChild($document->createElement('SaturdayDelivery'));
         }
 
+        if(isset($this->internationalForms)) {
+            $node->appendChild($this->internationalForms->toNode($document));
+        }
+
         return $node;
+    }
+
+    /**
+     * @param InternationalForms $data
+     */
+    public function setInternationalForms(InternationalForms $data)
+    {
+        $this->internationalForms = $data;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getInternationalForms()
+    {
+        return $this->internationalForms;
     }
 
 }
