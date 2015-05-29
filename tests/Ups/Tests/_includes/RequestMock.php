@@ -1,6 +1,7 @@
 <?php
 namespace Ups\Tests;
 
+use Psr\Log\LoggerInterface;
 use SimpleXMLElement;
 use Ups\RequestInterface;
 use Ups\ResponseInterface;
@@ -31,10 +32,16 @@ class RequestMock implements RequestInterface
     private $responsePath;
 
     /**
+     * @var LoggerInterface
+     */
+    protected $logger;
+
+    /**
      * @param string|null $responsePath
      */
-    public function __construct($responsePath = null)
+    public function __construct(LoggerInterface $logger = null, $responsePath = null)
     {
+        $this->logger = $logger;
         $this->responsePath = $responsePath;
     }
 

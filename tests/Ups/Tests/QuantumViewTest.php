@@ -36,7 +36,7 @@ class QuantumViewTest extends PHPUnit_Framework_TestCase
     public function testGetSubscription()
     {
         $quantumView = new Ups\QuantumView();
-        $quantumView->setRequest(new RequestMock('/QVEvents/Response1.xml'));
+        $quantumView->setRequest(new RequestMock(null, '/QVEvents/Response1.xml'));
 
         $events = $quantumView->getSubscription(null, (time() - 3600));
 
@@ -51,7 +51,7 @@ class QuantumViewTest extends PHPUnit_Framework_TestCase
     public function testSubscriptionContext()
     {
         $quantumView = new Ups\QuantumView();
-        $quantumView->setRequest(new RequestMock('/QVEvents/Response2.xml'));
+        $quantumView->setRequest(new RequestMock(null, '/QVEvents/Response2.xml'));
         $quantumView->setContext('unit test');
         $quantumView->getSubscription(null, (time() - 24 * 6 * 3600));
 
@@ -62,7 +62,7 @@ class QuantumViewTest extends PHPUnit_Framework_TestCase
     public function testSubscriptionBookmark()
     {
         $quantumView = new Ups\QuantumView();
-        $quantumView->setRequest(new RequestMock('/QVEvents/Response3.xml'));
+        $quantumView->setRequest(new RequestMock(null, '/QVEvents/Response3.xml'));
 
         $quantumView->getSubscription(null, (time() - 518400));
 

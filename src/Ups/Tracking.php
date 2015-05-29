@@ -2,6 +2,7 @@
 namespace Ups;
 
 use DOMDocument;
+use Psr\Log\LoggerInterface;
 use SimpleXMLElement;
 use Exception;
 use stdClass;
@@ -42,13 +43,14 @@ class Tracking extends Ups
      * @param string|null $password UPS User Password
      * @param bool $useIntegration Determine if we should use production or CIE URLs.
      * @param RequestInterface $request
+     * @param LoggerInterface PSR3 compatible logger (optional)
      */
-    public function __construct($accessKey = null, $userId = null, $password = null, $useIntegration = false, RequestInterface $request = null)
+    public function __construct($accessKey = null, $userId = null, $password = null, $useIntegration = false, RequestInterface $request = null, LoggerInterface $logger = null)
     {
         if (null !== $request) {
             $this->setRequest($request);
         }
-        parent::__construct($accessKey, $userId, $password, $useIntegration);
+        parent::__construct($accessKey, $userId, $password, $useIntegration, $logger);
     }
 
     /**
@@ -132,7 +134,7 @@ class Tracking extends Ups
     public function getRequest()
     {
         if (null === $this->request) {
-            $this->request = new Request;
+            $this->request = new Request($this->logger);
         }
         return $this->request;
     }

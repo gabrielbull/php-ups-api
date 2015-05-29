@@ -74,7 +74,7 @@ class TimeInTransitTest extends PHPUnit_Framework_TestCase
     public function testRequest()
     {
         $tit = new Ups\TimeInTransit();
-        $tit->setRequest($request = new RequestMock('/TimeInTransit/Response1.xml'));
+        $tit->setRequest($request = new RequestMock(null, '/TimeInTransit/Response1.xml'));
         $times = $tit->getTimeInTransit(new Ups\Entity\TimeInTransitRequest);
 
         // Test response

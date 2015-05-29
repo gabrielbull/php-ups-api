@@ -24,7 +24,7 @@ class TrackingTest extends PHPUnit_Framework_TestCase
     public function testTrack()
     {
         $tracking = new Ups\Tracking();
-        $tracking->setRequest($request = new RequestMock('/Track/Response1.xml'));
+        $tracking->setRequest($request = new RequestMock(null, '/Track/Response1.xml'));
         $shipment = $tracking->track('1Z12345E0000000000');
 
         // Test response
@@ -35,7 +35,7 @@ class TrackingTest extends PHPUnit_Framework_TestCase
     public function testTrackContext()
     {
         $tracking = new Ups\Tracking();
-        $tracking->setRequest($request = new RequestMock('/Track/Response2.xml'));
+        $tracking->setRequest($request = new RequestMock(null, '/Track/Response2.xml'));
         $tracking->setContext('unit test');
         $tracking->track('1Z12345E0000000000');
         $response = $tracking->getResponse()->getResponse();

@@ -2,11 +2,13 @@
 namespace Ups;
 
 use DOMDocument;
+use Psr\Log\LoggerAwareInterface;
+use Psr\Log\LoggerInterface;
 use SimpleXMLElement;
 use Exception;
 use stdClass;
 
-abstract class Ups
+abstract class Ups implements LoggerAwareInterface
 {
     const PRODUCTION_BASE_URL = 'https://onlinetools.ups.com/ups.app/xml';
     const INTEGRATION_BASE_URL = 'https://wwwcie.ups.com/ups.app/xml';
@@ -54,19 +56,26 @@ abstract class Ups
     public $response;
 
     /**
+     * @var LoggerInterface
+     */
+    protected $logger;
+
+    /**
      * Constructor
      *
      * @param string|null $accessKey UPS License Access Key
      * @param string|null $userId UPS User ID
      * @param string|null $password UPS User Password
      * @param bool $useIntegration Determine if we should use production or CIE URLs.
+     * @param LoggerInterface PSR3 compatible logger (optional)
      */
-    public function __construct($accessKey = null, $userId = null, $password = null, $useIntegration = false)
+    public function __construct($accessKey = null, $userId = null, $password = null, $useIntegration = false, LoggerInterface $logger = null)
     {
         $this->accessKey = $accessKey;
         $this->userId = $userId;
         $this->password = $password;
         $this->useIntegration = $useIntegration;
+        $this->logger = $logger;
     }
 
     /**
@@ -77,6 +86,22 @@ abstract class Ups
     public function setContext($context)
     {
         $this->context = $context;
+    }
+
+    /**
+     * @param LoggerInterface $logger
+     */
+    public function setLogger(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+    }
+
+    /**
+     * @return LoggerInterface
+     */
+    public function getLogger()
+    {
+        return $this->logger;
     }
 
     /**
@@ -146,7 +171,7 @@ abstract class Ups
      */
     protected function request($access, $request, $endpointurl)
     {
-        $requestInstance = new Request;
+        $requestInstance = new Request($this->logger);
         $response = $requestInstance->request($access, $request, $endpointurl);
         if ($response->getResponse() instanceof SimpleXMLElement) {
             $this->response = $response->getResponse();
