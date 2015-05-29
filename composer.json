@@ -35,7 +35,7 @@
   ],
   "require": {
     "php": ">=5.3",
-    "psr/log": "dev-master"
+    "psr/log": "~1.0"
   },
   "require-dev": {
     "phpunit/phpunit": "~4"
