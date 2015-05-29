@@ -26,6 +26,7 @@ Tracking API, Shipping API, Rating API and Time in Transit API. Feel free to con
     * [Example](#timeintransit-class-example)
     * [Parameters](#timeintransit-class-parameters)
 7. [Shipping Class](#shipping-class)
+8. [Logging](#logging)
 
 <a name="requirements"></a>
 ## Requirements
@@ -247,6 +248,26 @@ try {
  * `timeInTransitRequest` Mandatory. timeInTransitRequest Object with shipment details, see example above.
 
 <a name="shipping-class"></a>
-## Shipping Class
+## Shipping Class. 
 
 Documentation for this class is coming.
+
+<a name="logging"></a>
+## Logging
+
+All constructors take a [PSR-3](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md) compatible logger.
+ 
+Besides that, the main UPS class has a public method `setLogger` to set it after the constructor ran.
+
+Requests & responses are logged at DEBUG level. More severe problems (e.g. no connection) are logged with higher severity.
+
+### Example using [Monolog](https://github.com/Seldaek/monolog)
+
+````
+    // Create logger
+    $log = new \Monolog\Logger('ups');
+    $log->pushHandler(new \Monolog\Handler\StreamHandler('logs/ups.log', \Monolog\Logger::DEBUG));
+
+    // Create Rate object + insert logger
+    $rate = new Ups\Rate($key, $username, $password, $useIntegration, $log);
+````
