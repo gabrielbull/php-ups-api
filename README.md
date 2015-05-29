@@ -264,10 +264,10 @@ Requests & responses are logged at DEBUG level. More severe problems (e.g. no co
 ### Example using [Monolog](https://github.com/Seldaek/monolog)
 
 ````
-    // Create logger
-    $log = new \Monolog\Logger('ups');
-    $log->pushHandler(new \Monolog\Handler\StreamHandler('logs/ups.log', \Monolog\Logger::DEBUG));
+// Create logger
+$log = new \Monolog\Logger('ups');
+$log->pushHandler(new \Monolog\Handler\StreamHandler('logs/ups.log', \Monolog\Logger::DEBUG));
 
-    // Create Rate object + insert logger
-    $rate = new Ups\Rate($key, $username, $password, $useIntegration, $log);
+// Create Rate object + insert logger
+$rate = new Ups\Rate($key, $username, $password, $useIntegration, $log);
 ````
