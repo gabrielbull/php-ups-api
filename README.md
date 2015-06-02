@@ -259,7 +259,7 @@ All constructors take a [PSR-3](https://github.com/php-fig/fig-standards/blob/ma
  
 Besides that, the main UPS class has a public method `setLogger` to set it after the constructor ran.
 
-Requests & responses are logged at DEBUG level. More severe problems (e.g. no connection) are logged with higher severity.
+Requests & responses (including XML, no access keys) are logged at DEBUG level. At INFO level only the event is reported, not the XML content. More severe problems (e.g. no connection) are logged with higher severity.
 
 ### Example using [Monolog](https://github.com/Seldaek/monolog)
 
