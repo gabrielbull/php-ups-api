@@ -69,7 +69,8 @@ class Request implements RequestInterface, LoggerAwareInterface
         // Log request
         if($this->logger) {
             $id = (new \DateTime)->format('YmdHisu');
-            $this->logger->debug('Request To UPS API', array('id' => $id, 'request' => $this->getRequest(), 'endpointurl' => $this->getEndpointUrl()));
+            $this->logger->info('Request To UPS API', array('id' => $id, 'endpointurl' => $this->getEndpointUrl()));
+            $this->logger->debug('Request: ' . $this->getRequest(), array('id' => $id, 'endpointurl' => $this->getEndpointUrl()));
         }
 
         // Create POST request
@@ -85,7 +86,7 @@ class Request implements RequestInterface, LoggerAwareInterface
 
         if (!$handle = fopen($this->getEndpointUrl(), 'rb', false, $request)) {
             if($this->logger) {
-                $this->logger->alert('Connection to UPS API failed', array('endpointurl' => $this->getEndpointUrl()));
+                $this->logger->alert('Connection to UPS API failed', array('id' => $id, 'endpointurl' => $this->getEndpointUrl()));
             }
 
             throw new Exception("Failure: Connection to Endpoint URL failed.");
@@ -95,7 +96,8 @@ class Request implements RequestInterface, LoggerAwareInterface
         fclose($handle);
 
         if($this->logger) {
-            $this->logger->debug('Response from UPS API', array('id' => $id, 'response' => $response));
+            $this->logger->info('Response from UPS API', array('id' => $id, 'endpointurl' => $this->getEndpointUrl()));
+            $this->logger->debug('Response: ' . $response, array('id' => $id, 'endpointurl' => $this->getEndpointUrl()));
         }
 
         if ($response != false) {
