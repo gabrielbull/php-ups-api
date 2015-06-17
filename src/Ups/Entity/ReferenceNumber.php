@@ -1,7 +1,11 @@
 <?php
 namespace Ups\Entity;
 
-class ReferenceNumber
+use Ups\NodeInterface;
+use DOMDocument;
+use DOMElement;
+
+class ReferenceNumber implements NodeInterface
 {
     public $Number;
     public $Code;
@@ -24,5 +28,26 @@ class ReferenceNumber
                 $this->Value = $response->Value;
             }
         }
+    }
+
+    /**
+     * @param null|DOMDocument $document
+     * @return DOMElement
+     */
+    public function toNode(DOMDocument $document = null)
+    {
+        if (null === $document) {
+            $document = new DOMDocument();
+        }
+
+        $node = $document->createElement('ReferenceNumber');
+
+        if($this->BarCodeIndicator) {
+            $node->appendChild($document->createElement('BarCodeIndicator'));
+        }
+        $node->appendChild($document->createElement('Code', $this->Code));
+        $node->appendChild($document->createElement('Value', $this->Value));
+
+        return $node;
     }
 } 

@@ -78,6 +78,11 @@ class Shipment
     private $packages = array();
 
     /**
+     * @var ReferenceNumber
+     */
+    private $referenceNumber;
+
+    /**
      * @var ShipmentServiceOptions
      */
     private $shipmentServiceOptions;
@@ -121,6 +126,24 @@ class Shipment
         $this->Description = $description;
         $this->description = $description;
         return $this;
+    }
+
+    /**
+     * @param ReferenceNumber $referenceNumber
+     * @return $this
+     */
+    public function setReferenceNumber(ReferenceNumber $referenceNumber)
+    {
+        $this->referenceNumber = $referenceNumber;
+        return $this;
+    }
+
+    /**
+     * @return ReferenceNumber
+     */
+    public function getReferenceNumber()
+    {
+        return $this->referenceNumber;
     }
 
     /**
