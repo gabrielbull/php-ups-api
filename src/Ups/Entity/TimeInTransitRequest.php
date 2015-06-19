@@ -60,7 +60,7 @@ class TimeInTransitRequest
 
     public function getTransitTo()
     {
-        return $this->transitFrom;
+        return $this->transitTo;
     }
 
     public function setShipmentWeight(ShipmentWeight $shipmentWeight)
