@@ -15,6 +15,7 @@ class ShipmentServiceOptions implements NodeInterface
     public $DirectDeliveryOnlyIndicator;
 
     private $internationalForms;
+    private $notifications = array();
 
     function __construct($response = null)
     {
@@ -70,6 +71,12 @@ class ShipmentServiceOptions implements NodeInterface
             $node->appendChild($this->internationalForms->toNode($document));
         }
 
+        if(!empty($this->notifications)) {
+            foreach($this->notifications as $notification) {
+                $node->appendChild($notification->toNode($document));
+            }
+        }
+
         return $node;
     }
 
@@ -87,6 +94,28 @@ class ShipmentServiceOptions implements NodeInterface
     public function getInternationalForms()
     {
         return $this->internationalForms;
+    }
+
+    /**
+     * @param Notification $notification
+     */
+    public function addNotification(Notification $notification)
+    {
+        $this->notifications[] = $notification;
+
+        if(count($this->notifications) > 3) {
+            throw new \Exception('Maximum 3 notifications allowed');
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getNotifications()
+    {
+        return $this->notifications;
     }
 
 }
