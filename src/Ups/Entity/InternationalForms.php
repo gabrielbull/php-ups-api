@@ -124,6 +124,11 @@ class InternationalForms implements NodeInterface
     private $products = array();
 
     /**
+     * @var Discount
+     */
+    private $discount;
+
+    /**
      * @return array
      */
     public static function getTypes()
@@ -188,6 +193,24 @@ class InternationalForms implements NodeInterface
     }
 
     /**
+     * @param $discount Discount
+     * @return $this
+     */
+    public function setDiscount(Discount $discount)
+    {
+        $this->discount = $discount;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDiscount()
+    {
+        return $this->discount;
+    }
+
+    /**
      * @param Product $product
      * @return $this
      */
@@ -240,6 +263,9 @@ class InternationalForms implements NodeInterface
         }
         if($this->getCurrencyCode() !== null) {
             $node->appendChild($document->createElement('CurrencyCode', $this->getCurrencyCode()));
+        }
+        if($this->getDiscount() !== null) {
+            $node->appendChild($this->getDiscount()->toNode($document));
         }
         foreach($this->products as $product) {
             $node->appendChild($product->toNode($document));
