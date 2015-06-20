@@ -92,8 +92,8 @@ try {
 Adress Validation parameters are:
 
  * `address` Address object as constructed in example
- * `requestOption` One of the three request options
- * `maxSuggestion` Maximum number of suggestions to be returned. Max = 
+ * `requestOption` One of the three request options. See documentation. Default = Address Validation.
+ * `maxSuggestion` Maximum number of suggestions to be returned. Max = 50
 
 <a name="quantumview-class"></a>
 ## QuantumView Class
