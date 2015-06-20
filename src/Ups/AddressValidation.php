@@ -22,22 +22,22 @@ class AddressValidation extends Ups
 
     /**
      * @var ResponseInterface
-     * // todo make private
+     * @todo make private
      */
     public $response;
 
     /**
-        * @var int
+     * @var int
      */
     private $requestOption; 
     
     /**
-        * @var address
+     * @var address
      */
     private $address;
     
     /**
-        * @var int
+     * @var int
      */
     private $maxSuggestion;
     
