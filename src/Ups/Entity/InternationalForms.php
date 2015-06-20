@@ -129,6 +129,11 @@ class InternationalForms implements NodeInterface
     private $discount;
 
     /**
+     * @var FreightCharges
+     */
+    private $freightCharges;
+
+    /**
      * @return array
      */
     public static function getTypes()
@@ -193,6 +198,24 @@ class InternationalForms implements NodeInterface
     }
 
     /**
+     * @param $freightCharges FreightCharges
+     * @return $this
+     */
+    public function setFreightCharges(FreightCharges $freightCharges)
+    {
+        $this->freightCharges = $freightCharges;
+        return $this;
+    }
+
+    /**
+     * @return FreightCharges
+     */
+    public function getFreightCharges()
+    {
+        return $this->freightCharges;
+    }
+
+    /**
      * @param $discount Discount
      * @return $this
      */
@@ -203,7 +226,7 @@ class InternationalForms implements NodeInterface
     }
 
     /**
-     * @return string
+     * @return Discount
      */
     public function getDiscount()
     {
@@ -266,6 +289,9 @@ class InternationalForms implements NodeInterface
         }
         if($this->getDiscount() !== null) {
             $node->appendChild($this->getDiscount()->toNode($document));
+        }
+        if($this->getFreightCharges() !== null) {
+            $node->appendChild($this->getFreightCharges()->toNode($document));
         }
         foreach($this->products as $product) {
             $node->appendChild($product->toNode($document));
