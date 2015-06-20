@@ -86,7 +86,12 @@ class Unit implements NodeInterface
      */
     public function setValue($value)
     {
-        $this->value = $value;
+        $this->value = number_format($value, 6);
+
+        if(strlen((string) $this->value) > 19) {
+            throw new \Exception('Value too long');
+        }
+
         return $this;
     }
 
