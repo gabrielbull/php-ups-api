@@ -40,6 +40,13 @@ class AddressValidation extends Ups
      * @var int
      */
     private $maxSuggestion;
+
+    /**
+     * Request Options
+     */
+    const REQUEST_OPTION_ADDRESS_VALIDATION = 1;
+    const REQUEST_OPTION_ADDRESS_CLASSIFICATION = 2;
+    const REQUEST_OPTION_ADDRESS_VALIDATION_AND_CLASSIFICATION = 3;
     
     /**
      * @param string|null $accessKey UPS License Access Key
@@ -57,17 +64,26 @@ class AddressValidation extends Ups
         parent::__construct($accessKey, $userId, $password, $useIntegration, $logger);
     }
 
-    
+
     /**
-     * Get package address suggestions from UPS
+     * Get address suggestions from UPS
      *
-     * @param Ups\Entity\Address $address The address to validate on street level.
-     * @param string $requestOption Optional processing. For Mail Innovations the only valid options are Last Activity and All activity.
+     * @param $address
+     * @param int $requestOption
+     * @param int $maxSuggestion
      * @return stdClass
      * @throws Exception
      */
-    public function validate($address, $requestOption = 1, $maxSuggestion = 5)
+    public function validate($address, $requestOption = self::REQUEST_OPTION_ADDRESS_VALIDATION, $maxSuggestion = 15)
     {
+        if($maxSuggestion > 50) {
+            throw new \Exception('Maximum of 50 suggestions allowed');
+        }
+
+        if(!in_array($requestOption, range(1, 3))) {
+            throw new \Exception('Invalid request option supplied');
+        }
+
         $this->address = $address;
         $this->requestOption = $requestOption;
         $this->maxSuggestion = $maxSuggestion;
@@ -95,8 +111,6 @@ class AddressValidation extends Ups
     
     /**
      * Create the XAV request
-     *
-     * @todo Use Address toNode()
      *
      * @return string
      */

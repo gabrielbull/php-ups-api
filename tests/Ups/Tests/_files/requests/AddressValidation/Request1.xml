@@ -5,7 +5,7 @@
         <RequestAction>XAV</RequestAction>
         <RequestOption>1</RequestOption>
     </Request>
-    <MaximumListSize>5</MaximumListSize>
+    <MaximumListSize>15</MaximumListSize>
     <AddressKeyFormat>
         <ConsigneeName>Test Test</ConsigneeName>
         <BuildingName>Building 1</BuildingName>
