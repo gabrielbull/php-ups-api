@@ -47,13 +47,14 @@ class AddressValidation extends Ups
      * @param string|null $password UPS User Password
      * @param bool $useIntegration Determine if we should use production or CIE URLs.
      * @param RequestInterface $request
+     * @param LoggerInterface PSR3 compatible logger (optional)
      */
-    public function __construct($accessKey = null, $userId = null, $password = null, $useIntegration = false, RequestInterface $request = null)
+    public function __construct($accessKey = null, $userId = null, $password = null, $useIntegration = false, RequestInterface $request = null, LoggerInterface $logger = null)
     {
         if (null !== $request) {
             $this->setRequest($request);
         }
-        parent::__construct($accessKey, $userId, $password, $useIntegration);
+        parent::__construct($accessKey, $userId, $password, $useIntegration, $logger);
     }
 
     
@@ -94,6 +95,8 @@ class AddressValidation extends Ups
     
     /**
      * Create the XAV request
+     *
+     * @todo Use Address toNode()
      *
      * @return string
      */
