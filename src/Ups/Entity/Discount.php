@@ -46,8 +46,13 @@ class Discount implements NodeInterface
      * @param $var
      */
     public function setMonetaryValue($var) {
-        $this->MonetaryValue = $var;
-        $this->monetaryValue = $var;
+        $this->monetaryValue = round($var, 2); // Max 2 decimals places
+
+        if(strlen((string) $this->monetaryValue) > 15) {
+            throw new \Exception('Value too long');
+        }
+
+        return $this;
     }
 
 } 
