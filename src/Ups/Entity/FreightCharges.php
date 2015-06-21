@@ -48,6 +48,10 @@ class FreightCharges implements NodeInterface
     public function setMonetaryValue($var) {
         $this->monetaryValue = round($var, 2); // Max 2 decimals places
 
+        if($this->monetaryValue < 0) {
+            throw new \Exception('Freight charges cannot be negative');
+        }
+
         if(strlen((string) $this->monetaryValue) > 15) {
             throw new \Exception('Value too long');
         }
