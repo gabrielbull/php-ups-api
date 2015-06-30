@@ -286,6 +286,9 @@ class Address implements NodeInterface
         if ($this->getCountryCode()) {
             $node->appendChild($document->createElement('CountryCode', $this->getCountryCode()));
         }
+        if($this->getResidentialAddressIndicator()) {
+            $node->appendChild($document->createElement('ResidentialAddressIndicator'));
+        }
         return $node;
     }
 
