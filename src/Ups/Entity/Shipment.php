@@ -348,4 +348,13 @@ class Shipment
     public function getRateInformation() {
         return $this->rateInformation;
     }
+
+    /**
+     * @param RateInformation $rateInformation
+     * @return $this
+     */
+    public function setRateInformation(RateInformation $rateInformation) {
+        $this->rateInformation = $rateInformation;
+        return $this;
+    }
 }
