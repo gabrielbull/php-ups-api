@@ -68,7 +68,8 @@ class Request implements RequestInterface, LoggerAwareInterface
 
         // Log request
         if($this->logger) {
-            $id = (new \DateTime)->format('YmdHisu');
+            $date = new \DateTime;
+            $id = $date->format('YmdHisu');
             $this->logger->info('Request To UPS API', array('id' => $id, 'endpointurl' => $this->getEndpointUrl()));
             $this->logger->debug('Request: ' . $this->getRequest(), array('id' => $id, 'endpointurl' => $this->getEndpointUrl()));
         }
