@@ -6,6 +6,7 @@ use SimpleXMLElement;
 use Exception;
 use InvalidArgumentException;
 use stdClass;
+use Psr\Log\LoggerInterface;
 
 /**
  * Package Shipping API Wrapper
@@ -38,6 +39,24 @@ class Shipping extends Ups
      */
     private $recoverLabelEndpoint = '/LabelRecovery';
 
+    private $request;
+
+    /**
+     * @param string|null $accessKey UPS License Access Key
+     * @param string|null $userId UPS User ID
+     * @param string|null $password UPS User Password
+     * @param bool $useIntegration Determine if we should use production or CIE URLs.
+     * @param RequestInterface $request
+     * @param LoggerInterface PSR3 compatible logger (optional)
+     */
+    public function __construct($accessKey = null, $userId = null, $password = null, $useIntegration = false, RequestInterface $request = null, LoggerInterface $logger = null)
+    {
+        if (null !== $request) {
+            $this->setRequest($request);
+        }
+        parent::__construct($accessKey, $userId, $password, $useIntegration, $logger);
+    }
+
     /**
      * Create a Shipment Confirm request (generate a digest)
      *
@@ -51,16 +70,19 @@ class Shipping extends Ups
     public function confirm($validation, $shipment, $labelSpecOpts = null, $receiptSpecOpts = null)
     {
         $request = $this->createConfirmRequest($validation, $shipment, $labelSpecOpts, $receiptSpecOpts);
+        $this->response = $this->getRequest()->request($this->createAccess(), $request, $this->compileEndpointUrl($this->shipConfirmEndpoint));
+        $response = $this->response->getResponse();
 
-        $response = $this->request($this->createAccess(), $request, $this->compileEndpointUrl($this->shipConfirmEndpoint));
+        if (null === $response) {
+            throw new Exception("Failure (0): Unknown error", 0);
+        }
 
-        if ($response->Response->ResponseStatusCode == 0) {
+        if ($response instanceof SimpleXMLElement && $response->Response->ResponseStatusCode == 0) {
             throw new Exception(
-                "Failure ({$response->Response->Error->ErrorCode}: {$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}",
+                "Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}",
                 (int)$response->Response->Error->ErrorCode
             );
         } else {
-            unset($response->Response);
             return $this->formatResponse($response);
         }
     }
@@ -422,9 +444,14 @@ class Shipping extends Ups
     public function accept($shipmentDigest)
     {
         $request = $this->createAcceptRequest($shipmentDigest);
-        $response = $this->request($this->createAccess(), $request, $this->compileEndpointUrl($this->shipAcceptEndpoint));
+        $this->response = $this->getRequest()->request($this->createAccess(), $request, $this->compileEndpointUrl($this->shipAcceptEndpoint));
+        $response = $this->response->getResponse();
 
-        if ($response->Response->ResponseStatusCode == 0) {
+        if (null === $response) {
+            throw new Exception("Failure (0): Unknown error", 0);
+        }
+
+        if ($response instanceof SimpleXMLElement && $response->Response->ResponseStatusCode == 0) {
             throw new Exception(
                 "Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}",
                 (int)$response->Response->Error->ErrorCode
@@ -671,5 +698,44 @@ class Shipping extends Ups
         }
 
         return $node->cloneNode(true);
+    }
+
+    /**
+     * @return RequestInterface
+     */
+    public function getRequest()
+    {
+        if (null === $this->request) {
+            $this->request = new Request($this->logger);
+        }
+        return $this->request;
+    }
+
+    /**
+     * @param RequestInterface $request
+     * @return $this
+     */
+    public function setRequest(RequestInterface $request)
+    {
+        $this->request = $request;
+        return $this;
+    }
+
+    /**
+     * @return ResponseInterface
+     */
+    public function getResponse()
+    {
+        return $this->response;
+    }
+
+    /**
+     * @param ResponseInterface $response
+     * @return $this
+     */
+    public function setResponse(ResponseInterface $response)
+    {
+        $this->response = $response;
+        return $this;
     }
 }
