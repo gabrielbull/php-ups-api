@@ -5,6 +5,7 @@ use DOMDocument;
 use SimpleXMLElement;
 use Exception;
 use stdClass;
+use Psr\Log\LoggerInterface;
 
 /**
  * Address Validation API Wrapper
