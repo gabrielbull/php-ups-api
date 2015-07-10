@@ -499,7 +499,8 @@ class Shipping extends Ups
         }
 
         $request = $this->createVoidRequest($shipmentData);
-        $response = $this->request($this->createAccess(), $request, $this->compileEndpointUrl($this->voidEndpoint));
+        $this->response = $this->getRequest()->request($this->createAccess(), $request, $this->compileEndpointUrl($this->voidEndpoint));
+        $response = $this->response->getResponse();
 
         if ($response->Response->ResponseStatusCode == 0) {
             throw new Exception(
