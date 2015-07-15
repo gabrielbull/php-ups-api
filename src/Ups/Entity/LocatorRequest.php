@@ -17,6 +17,11 @@ class LocatorRequest
     private $translate;
 
     /**
+     * @var LocationSearchCriteria
+     */
+    private $locationSearchCriteria;
+
+    /**
      * @var
      */
     private $unitOfMeasurement;
@@ -25,6 +30,22 @@ class LocatorRequest
     {
         $this->setOriginAddress(new OriginAddress);
         $this->setTranslate(new Translate);
+    }
+
+    /**
+     * @return LocationSearchCriteria
+     */
+    public function getLocationSearchCriteria()
+    {
+        return $this->locationSearchCriteria;
+    }
+
+    /**
+     * @param LocationSearchCriteria $locationSearchCriteria
+     */
+    public function setLocationSearchCriteria($locationSearchCriteria)
+    {
+        $this->locationSearchCriteria = $locationSearchCriteria;
     }
 
     /**
