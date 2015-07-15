@@ -42,7 +42,7 @@ class LocationSearchCriteria implements NodeInterface
         $node = $document->createElement('LocationSearchCriteria');
 
         if($this->getAccessPointSearch()) {
-            $node->appendChild($document->createElement('AccessPointSearch', $this->getAccessPointSearch()));
+            $node->appendChild($this->getAccessPointSearch()->toNode($document));
         }
 
         return $node;
