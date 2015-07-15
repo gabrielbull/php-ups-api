@@ -110,7 +110,9 @@ class Locator extends Ups
         $trackRequest->appendChild($locatorRequest->getTranslate()->toNode($xml));
 
         // Unit of measurement
-        $trackRequest->appendChild($locatorRequest->getUnitOfMeasurement()->toNode($xml));
+        if($locatorRequest->getUnitOfMeasurement()) {
+            $trackRequest->appendChild($locatorRequest->getUnitOfMeasurement()->toNode($xml));
+        }
 
         // LocationSearchCriteria
         if($locatorRequest->getLocationSearchCriteria()) {
