@@ -58,6 +58,16 @@ class Shipment
     private $shipFrom;
 
     /**
+     * @var AlternateDeliveryAddress
+     */
+    private $alternateDeliveryAddress;
+
+    /**
+     * @var ShipmentIndicationType
+     */
+    private $shipmentIndicationType;
+
+    /**
      * @var Service
      */
     private $service;
@@ -95,6 +105,38 @@ class Shipment
         $this->setShipmentServiceOptions(new ShipmentServiceOptions());
         $this->setService(new Service());
         $this->rateInformation = null;
+    }
+
+    /**
+     * @return ShipmentIndicationType
+     */
+    public function getShipmentIndicationType()
+    {
+        return $this->shipmentIndicationType;
+    }
+
+    /**
+     * @param ShipmentIndicationType $shipmentIndicationType
+     */
+    public function setShipmentIndicationType(ShipmentIndicationType $shipmentIndicationType)
+    {
+        $this->shipmentIndicationType = $shipmentIndicationType;
+    }
+
+    /**
+     * @return AlternateDeliveryAddress
+     */
+    public function getAlternateDeliveryAddress()
+    {
+        return $this->alternateDeliveryAddress;
+    }
+
+    /**
+     * @param AlternateDeliveryAddress $alternateDeliveryAddress
+     */
+    public function setAlternateDeliveryAddress(AlternateDeliveryAddress $alternateDeliveryAddress)
+    {
+        $this->alternateDeliveryAddress = $alternateDeliveryAddress;
     }
 
     /**

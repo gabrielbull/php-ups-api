@@ -153,9 +153,19 @@ class Rate extends Ups
             $shipmentNode->appendChild($shipTo->toNode($document));
         }
 
+        $alternateDeliveryAddress = $shipment->getAlternateDeliveryAddress();
+        if (isset($alternateDeliveryAddress)) {
+            $shipmentNode->appendChild($alternateDeliveryAddress->toNode($document));
+        }
+
         $rateInformation = $shipment->getRateInformation();
         if ($rateInformation !== null) {
             $shipmentNode->appendChild($rateInformation->toNode($document));
+        }
+
+        $shipmentIndicationType = $shipment->getShipmentIndicationType();
+        if (isset($shipmentIndicationType)) {
+            $shipmentNode->appendChild($shipmentIndicationType->toNode($document));
         }
 
         foreach ($shipment->getPackages() as $package) {
