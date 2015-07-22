@@ -14,6 +14,11 @@ class LocationSearchCriteria implements NodeInterface
     private $accessPointSearch;
 
     /**
+     * @var
+     */
+    private $maximumListSize;
+
+    /**
      * @return string
      */
     public function getAccessPointSearch()
@@ -45,7 +50,32 @@ class LocationSearchCriteria implements NodeInterface
             $node->appendChild($this->getAccessPointSearch()->toNode($document));
         }
 
+        if($this->getMaximumListSize()) {
+            $node->appendChild($document->createElement('MaximumListSize', $this->getMaximumListSize()));
+        }
+
         return $node;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getMaximumListSize()
+    {
+        return $this->maximumListSize;
+    }
+
+    /**
+     * @param mixed $maximumListSize
+     */
+    public function setMaximumListSize($maximumListSize)
+    {
+        $maximumListSize = (int) $maximumListSize;
+
+        if($maximumListSize < 1 || $maximumListSize > 50) {
+            throw new \Exception('Maximum list size: If present, indicates the maximum number of locations the client wishes to receive in response; ranges from 1 to 50 with a default value of 10');
+        }
+
+        $this->maximumListSize = $maximumListSize;
+    }
 }
