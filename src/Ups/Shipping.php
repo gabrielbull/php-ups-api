@@ -352,6 +352,11 @@ class Shipping extends Ups
                 $umNode->appendChild($xml->createElement('Description', $package->PackageWeight->UnitOfMeasurement->Description));
             }
 
+            $dimensions = $package->getDimensions();
+            if (isset($dimensions)) {
+                $node->appendChild($dimensions->toNode($xml));
+            }
+
             $pwNode->appendChild($xml->createElement('Weight', $package->PackageWeight->Weight));
 
             if (isset($package->LargePackageIndicator)) {
