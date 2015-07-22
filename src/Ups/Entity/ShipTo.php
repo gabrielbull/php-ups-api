@@ -114,7 +114,7 @@ class ShipTo implements NodeInterface
             if (isset($attributes->PhoneNumber)) {
                 $this->setPhoneNumber($attributes->PhoneNumber);
             }
-            if (isset($attributesTaxIdentificationNumber)) {
+            if (isset($attributes->TaxIdentificationNumber)) {
                 $this->setTaxIdentificationNumber($attributes->TaxIdentificationNumber);
             }
             if (isset($attributes->FaxNumber)) {
