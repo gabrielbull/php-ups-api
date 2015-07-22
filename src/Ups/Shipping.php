@@ -240,6 +240,11 @@ class Shipping extends Ups
             }
         }
 
+        $alternate = $shipment->getAlternateDeliveryAddress();
+        if (isset($alternate)) {
+            $shipmentNode->appendChild($alternate->toNode($xml));
+        }
+
         if (isset($shipment->PaymentInformation)) {
             $paymentNode = $shipmentNode->appendChild($xml->createElement('PaymentInformation'));
 
