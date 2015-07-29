@@ -289,7 +289,7 @@ class Shipping extends Ups
             } else if ($shipment->PaymentInformation->ConsigneeBilled) {
                 $paymentNode->appendChild($xml->createElement('ConsigneeBilled'));
             }
-        } else if ($shipment->ItemizedPaymentInformation) {
+        } else if (isset($shipment->ItemizedPaymentInformation)) {
             //$paymentNode = $shipmentNode->appendChild($xml->createElement('ItemizedPaymentInformation'));
         }
 
