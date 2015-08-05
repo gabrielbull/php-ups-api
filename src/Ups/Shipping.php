@@ -427,6 +427,11 @@ class Shipping extends Ups
             }
         }
 
+        $shipmentIndicationType = $shipment->getShipmentIndicationType();
+        if(isset($shipmentIndicationType)) {
+            $shipmentNode->appendChild($shipmentIndicationType->toNode($xml));
+        }
+
         if ($receiptSpecOpts) {
             $receiptSpec = $container->appendChild($xml->createElement('ReceiptSpecification'));
             $node = $receiptSpec->appendChild($xml->createElement('ImageFormat'));
