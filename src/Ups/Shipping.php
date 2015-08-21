@@ -240,6 +240,11 @@ class Shipping extends Ups
             }
         }
 
+        $alternate = $shipment->getAlternateDeliveryAddress();
+        if (isset($alternate)) {
+            $shipmentNode->appendChild($alternate->toNode($xml));
+        }
+
         if (isset($shipment->PaymentInformation)) {
             $paymentNode = $shipmentNode->appendChild($xml->createElement('PaymentInformation'));
 
@@ -425,6 +430,11 @@ class Shipping extends Ups
                     $node->appendChild($xml->createElement('Description', $labelSpecOpts->Instruction->Description));
                 }
             }
+        }
+
+        $shipmentIndicationType = $shipment->getShipmentIndicationType();
+        if(isset($shipmentIndicationType)) {
+            $shipmentNode->appendChild($shipmentIndicationType->toNode($xml));
         }
 
         if ($receiptSpecOpts) {

@@ -20,6 +20,11 @@ class Notification implements NodeInterface
     private $emailMessage;
 
     /**
+     * @var
+     */
+    private $locale;
+
+    /**
      * Notification Codes from documentation
      */
     const CODE_RETURN_OR_LABEL_CREATION = '2'; // Only returns
@@ -46,8 +51,29 @@ class Notification implements NodeInterface
         if($this->getEmailMessage() !== null) {
             $node->appendChild($this->emailMessage->toNode($document));
         }
+        if($this->getLocale() !== null) {
+            $node->appendChild($this->locale->toNode($document));
+        }
 
         return $node;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLocale()
+    {
+        return $this->locale;
+    }
+
+    /**
+     * @param mixed $locale
+     * @return Notification
+     */
+    public function setLocale($locale)
+    {
+        $this->locale = $locale;
+        return $this;
     }
 
     /**
