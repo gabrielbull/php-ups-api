@@ -91,4 +91,25 @@ class TimeInTransitTest extends PHPUnit_Framework_TestCase
         $this->assertAttributeCount(3, 'ServiceSummary', $times);
     }
 
+
+    public function testRequestOddCharacter()
+    {
+        $tit = new Ups\TimeInTransit();
+        $tit->setRequest($request = new RequestMock(null, '/TimeInTransit/Response2.xml'));
+        $times = $tit->getTimeInTransit(new Ups\Entity\TimeInTransitRequest);
+
+        // Test response
+        $this->assertInstanceOf('\Ups\Entity\TimeInTransitResponse', $times);
+        $this->assertInstanceOf('\Ups\Entity\AddressArtifactFormat', $times->TransitFrom);
+        $this->assertInstanceOf('\Ups\Entity\AddressArtifactFormat', $times->TransitTo);
+        $this->assertInstanceOf('\Ups\Entity\ShipmentWeight', $times->ShipmentWeight);
+        $this->assertInstanceOf('\Ups\Entity\Charges', $times->InvoiceLineTotal);
+        $this->assertInstanceOf('\Ups\Entity\ServiceSummary', $times->ServiceSummary[0]);
+        $this->assertInternalType('string', $times->Disclaimer);
+        $this->assertObjectHasAttribute('PickupDate', $times);
+        $this->assertObjectHasAttribute('MaximumListSize', $times);
+        $this->assertObjectHasAttribute('ServiceSummary', $times);
+        $this->assertAttributeCount(3, 'ServiceSummary', $times);
+    }
+
 }
