@@ -88,13 +88,13 @@ class Request implements RequestInterface, LoggerAwareInterface
 
         try {
             $client = new Guzzle();
+
             $response = $client->post(
                 $this->getEndpointUrl(),
                 [
-                    'http' => [
-                        'method' => 'POST',
-                        'header' => 'Content-type: application/x-www-form-urlencoded',
-                        'content' => $this->getAccess() . $this->getRequest()
+                    'body' => $this->getAccess() . $this->getRequest(),
+                    'headers' => [
+                        'Content-type' => 'application/x-www-form-urlencoded',
                     ]
                 ]
             );
