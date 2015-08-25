@@ -42,7 +42,7 @@ Tracking API, Shipping API, Rating API and Time in Transit API. Feel free to con
 <a name="requirements"></a>
 ## Requirements
 
-This library uses PHP 5.3+.
+This library uses PHP 5.5+.
 
 To use the UPS API, you have to [request an access key from UPS](https://www.ups.com/upsdeveloperkit). For every request,
 you will have to provide the Access Key, your UPS User ID and Password.
@@ -50,15 +50,11 @@ you will have to provide the Access Key, your UPS User ID and Password.
 <a name="installation"></a>
 ## Installation
 
-It is recommended that you install the PHP UPS API Wrapper library [through composer](http://getcomposer.org/). To do so,
-add the following lines to your ``composer.json`` file.
+It is recommended that you install the PHP UPS API library [through composer](http://getcomposer.org/). To do so,
+run the Composer command to install the latest stable version of PHP UPS API:
 
-```JSON
-{
-    "require": {
-        "gabrielbull/ups-api": "dev-master"
-    }
-}
+```shell
+composer require gabrielbull/ups-api
 ```
 
 <a name="addressvalidation-class"></a>
