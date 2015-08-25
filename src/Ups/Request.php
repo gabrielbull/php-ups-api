@@ -4,6 +4,7 @@ namespace Ups;
 
 use DateTime;
 use Exception;
+use GuzzleHttp\Exception\ConnectException;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use SimpleXMLElement;
@@ -95,6 +96,7 @@ class Request implements RequestInterface, LoggerAwareInterface
                     'body' => $this->getAccess() . $this->getRequest(),
                     'headers' => [
                         'Content-type' => 'application/x-www-form-urlencoded',
+                        'Accept-Charset' => 'UTF-8'
                     ]
                 ]
             );
@@ -111,7 +113,8 @@ class Request implements RequestInterface, LoggerAwareInterface
             }
 
             if ($response->getStatusCode() === 200) {
-                $xml = new SimpleXMLElement($response->getBody());
+                $body = $response->getBody();
+                $xml = new SimpleXMLElement($body);
                 if (isset($xml->Response) && isset($xml->Response->ResponseStatusCode)) {
                     $responseInstance = new Response;
                     return $responseInstance->setText($response->getBody())->setResponse($xml);
@@ -119,6 +122,15 @@ class Request implements RequestInterface, LoggerAwareInterface
             }
 
             throw new InvalidResponseException("Failure: Response is invalid.");
+        } catch (ConnectException $e) {
+            if ($this->logger) {
+                $this->logger->alert('Connection to endpoint failed', [
+                    'id' => $id,
+                    'endpointurl' => $this->getEndpointUrl()
+                ]);
+            }
+
+            throw new EndpointConnectionException("Failure: Connection to Endpoint URL failed.");
         } catch (InvalidResponseException $e) {
             if ($this->logger) {
                 $this->logger->critical('UPS Response is invalid', ['id' => $id]);
@@ -127,13 +139,13 @@ class Request implements RequestInterface, LoggerAwareInterface
             throw $e;
         } catch (Exception $e) {
             if ($this->logger) {
-                $this->logger->alert('Connection to UPS API failed', [
+                $this->logger->alert($e->getMessage(), [
                     'id' => $id,
                     'endpointurl' => $this->getEndpointUrl()
                 ]);
             }
 
-            throw new EndpointConnectionException("Failure: Connection to Endpoint URL failed.");
+            throw $e;
         }
     }
 
