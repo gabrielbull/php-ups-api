@@ -103,7 +103,7 @@ class Request implements RequestInterface, LoggerAwareInterface
 
         if ($response != false) {
             $text = $response;
-            $response = new SimpleXMLElement($response);
+            $response = new SimpleXMLElement(utf8_encode($response));
             if (isset($response->Response) && isset($response->Response->ResponseStatusCode)) {
                 $responseInstance = new Response;
                 return $responseInstance->setText($text)->setResponse($response);
