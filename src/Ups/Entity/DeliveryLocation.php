@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 class DeliveryLocation
@@ -8,7 +9,7 @@ class DeliveryLocation
     public $Description;
     public $SignedForByName;
 
-    function __construct($response = null)
+    public function __construct($response = null)
     {
         $this->AddressArtifactFormat = new AddressArtifactFormat();
 
@@ -27,4 +28,4 @@ class DeliveryLocation
             }
         }
     }
-} 
+}

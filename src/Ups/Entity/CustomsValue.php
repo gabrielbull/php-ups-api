@@ -1,11 +1,12 @@
 <?php
+
 namespace Ups\Entity;
 
 class CustomsValue
 {
     public $MonetaryValue;
 
-    function __construct($response = null)
+    public function __construct($response = null)
     {
         if (null != $response) {
             if (isset($response->MonetaryValue)) {
@@ -13,4 +14,4 @@ class CustomsValue
             }
         }
     }
-} 
+}

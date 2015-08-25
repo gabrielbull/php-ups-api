@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 class ImageFormat
@@ -7,7 +8,7 @@ class ImageFormat
 
     public $Code;
 
-    function __construct($response = null)
+    public function __construct($response = null)
     {
         if (null != $response) {
             if (isset($response->Code)) {
@@ -15,4 +16,4 @@ class ImageFormat
             }
         }
     }
-} 
+}

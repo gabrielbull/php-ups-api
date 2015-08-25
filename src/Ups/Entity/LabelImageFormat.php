@@ -1,11 +1,12 @@
 <?php
+
 namespace Ups\Entity;
 
 class LabelImageFormat
 {
     public $Code;
 
-    function __construct($response = null)
+    public function __construct($response = null)
     {
         if (null != $response) {
             if (isset($response->Code)) {
@@ -13,4 +14,4 @@ class LabelImageFormat
             }
         }
     }
-} 
+}

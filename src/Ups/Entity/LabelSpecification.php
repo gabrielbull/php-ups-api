@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 class LabelSpecification
@@ -6,7 +7,7 @@ class LabelSpecification
     public $HTTPUserAgent;
     public $LabelImageFormat;
 
-    function __construct($response = null)
+    public function __construct($response = null)
     {
         $this->LabelImageFormat = new LabelImageFormat();
 
@@ -19,4 +20,4 @@ class LabelSpecification
             }
         }
     }
-} 
+}

@@ -1,13 +1,12 @@
 <?php
+
 namespace Ups\Entity;
 
 use DOMDocument;
-use DOMElement;
 use Ups\NodeInterface;
 
 class Translate implements NodeInterface
 {
-
     /**
      * @deprecated
      */
@@ -28,7 +27,7 @@ class Translate implements NodeInterface
     private $code;
     private $locale;
 
-    function __construct($response = null)
+    public function __construct($response = null)
     {
         if (null != $response) {
             if (isset($response->LanguageCode)) {
@@ -56,15 +55,15 @@ class Translate implements NodeInterface
 
         $node->appendChild($document->createElement('LanguageCode', $this->getLanguageCode()));
 
-        if($this->getCode()) {
+        if ($this->getCode()) {
             $node->appendChild($document->createElement('Code', $this->getCode()));
         }
 
-        if($this->getDialectCode()) {
+        if ($this->getDialectCode()) {
             $node->appendChild($document->createElement('DialectCode', $this->getDialectCode()));
         }
 
-        if($this->getLocale()) {
+        if ($this->getLocale()) {
             $node->appendChild($document->createElement('Locale', $this->getLocale()));
         }
 
@@ -137,6 +136,4 @@ class Translate implements NodeInterface
     {
         $this->locale = $locale;
     }
-
-
-} 
+}

@@ -1,9 +1,10 @@
 <?php
+
 namespace Ups\Entity;
 
-use Ups\NodeInterface;
 use DOMDocument;
 use DOMElement;
+use Ups\NodeInterface;
 
 class InsuredValue implements NodeInterface
 {
@@ -15,7 +16,7 @@ class InsuredValue implements NodeInterface
     private $currencyCode;
     private $monetaryValue;
 
-    function __construct($response = null)
+    public function __construct($response = null)
     {
         if (null != $response) {
             if (isset($response->CurrencyCode)) {
@@ -29,6 +30,7 @@ class InsuredValue implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
+     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -44,22 +46,25 @@ class InsuredValue implements NodeInterface
         return $node;
     }
 
-    public function getCurrencyCode() {
+    public function getCurrencyCode()
+    {
         return $this->currencyCode;
     }
 
-    public function setCurrencyCode($var) {
+    public function setCurrencyCode($var)
+    {
         $this->CurrencyCode = $var;
         $this->currencyCode = $var;
     }
 
-    public function getMonetaryValue() {
+    public function getMonetaryValue()
+    {
         return $this->monetaryValue;
     }
 
-    public function setMonetaryValue($var) {
+    public function setMonetaryValue($var)
+    {
         $this->MonetaryValue = $var;
         $this->monetaryValue = $var;
     }
-
-} 
+}

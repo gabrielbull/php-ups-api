@@ -1,17 +1,17 @@
 <?php
+
 namespace Ups\Entity;
 
-use Ups\NodeInterface;
 use DOMDocument;
 use DOMElement;
+use Ups\NodeInterface;
 
 class InvoiceLineTotal implements NodeInterface
 {
-
     private $currencyCode;
     private $monetaryValue;
 
-    function __construct($response = null)
+    public function __construct($response = null)
     {
         if (null != $response) {
             if (isset($response->CurrencyCode)) {
@@ -25,6 +25,7 @@ class InvoiceLineTotal implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
+     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -57,11 +58,10 @@ class InvoiceLineTotal implements NodeInterface
 
     public function setMonetaryValue($var)
     {
-        if(!is_numeric($var)) {
+        if (!is_numeric($var)) {
             throw new \Exception('Monetary value should be a numeric value');
         }
 
         $this->monetaryValue = $var;
     }
-
-} 
+}

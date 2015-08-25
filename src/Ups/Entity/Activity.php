@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 class Activity
@@ -6,7 +7,7 @@ class Activity
     public $Date;
     public $Time;
 
-    function __construct($response = null)
+    public function __construct($response = null)
     {
         if (null != $response) {
             if (isset($response->Date)) {
@@ -17,4 +18,4 @@ class Activity
             }
         }
     }
-} 
+}

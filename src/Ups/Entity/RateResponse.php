@@ -1,13 +1,14 @@
 <?php
+
 namespace Ups\Entity;
 
 class RateResponse
 {
     public $RatedShipment;
 
-    function __construct($response = null)
+    public function __construct($response = null)
     {
-        $this->RatedShipment = array();
+        $this->RatedShipment = [];
 
         if (null != $response) {
             if (isset($response->RatedShipment)) {
@@ -19,9 +20,6 @@ class RateResponse
                     $this->RatedShipment[] = new RatedShipment($response->RatedShipment);
                 }
             }
-
         }
-
     }
-
 }

@@ -1,11 +1,9 @@
 <?php
+
 namespace Ups\Entity;
-use DateTime;
-use Exception;
 
 class LocatorRequest
 {
-
     /**
      * @var
      */
@@ -26,10 +24,10 @@ class LocatorRequest
      */
     private $unitOfMeasurement;
 
-    function __construct()
+    public function __construct()
     {
-        $this->setOriginAddress(new OriginAddress);
-        $this->setTranslate(new Translate);
+        $this->setOriginAddress(new OriginAddress());
+        $this->setTranslate(new Translate());
     }
 
     /**
@@ -95,6 +93,4 @@ class LocatorRequest
     {
         $this->unitOfMeasurement = $unitOfMeasurement;
     }
-
-
-} 
+}

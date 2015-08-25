@@ -1,11 +1,12 @@
 <?php
+
 namespace Ups\Entity;
+
 use DateTime;
 use Exception;
 
 class TimeInTransitRequest
 {
-
     private $transitFrom;
     private $transitTo;
     private $shipmentWeight;
@@ -14,13 +15,13 @@ class TimeInTransitRequest
     private $pickupDate;
     private $documentsOnlyIndicator = false;
 
-    function __construct()
+    public function __construct()
     {
-        $this->setTransitFrom(new AddressArtifactFormat);
-        $this->setTransitTo(new AddressArtifactFormat);
-        $this->setShipmentWeight(new ShipmentWeight);
-        $this->setInvoiceLineTotal(new InvoiceLineTotal);
-        $this->setPickupDate(new DateTime);
+        $this->setTransitFrom(new AddressArtifactFormat());
+        $this->setTransitTo(new AddressArtifactFormat());
+        $this->setShipmentWeight(new ShipmentWeight());
+        $this->setInvoiceLineTotal(new InvoiceLineTotal());
+        $this->setPickupDate(new DateTime());
     }
 
     public function setDocumentsOnlyIndicator()
@@ -75,7 +76,7 @@ class TimeInTransitRequest
 
     public function setTotalPackagesInShipment($amount)
     {
-        if(!is_integer($amount) || $amount < 0) {
+        if (!is_int($amount) || $amount < 0) {
             throw new Exception('Amount of packages should be integer and above 0');
         }
 
@@ -96,5 +97,4 @@ class TimeInTransitRequest
     {
         return $this->invoiceLineTotal;
     }
-
-} 
+}

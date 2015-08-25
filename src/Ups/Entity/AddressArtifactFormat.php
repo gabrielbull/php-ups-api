@@ -1,13 +1,12 @@
 <?php
+
 namespace Ups\Entity;
 
 use DOMDocument;
 use DOMElement;
-use Ups\NodeInterface;
 
 class AddressArtifactFormat extends Address
 {
-
     /**
      * @var string
      */
@@ -29,6 +28,7 @@ class AddressArtifactFormat extends Address
 
     /**
      * @param null|DOMDocument $document
+     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -39,10 +39,10 @@ class AddressArtifactFormat extends Address
 
         $node = $document->createElement('AddressArtifactFormat');
 
-        for($i = 1; $i <= 3; $i++) {
+        for ($i = 1; $i <= 3; $i++) {
             $line = $this->{'getPoliticalDivision'.$i}();
             if ($line) {
-                $node->appendChild($document->createElement('PoliticalDivision' . $i, $line));
+                $node->appendChild($document->createElement('PoliticalDivision'.$i, $line));
             }
         }
 
@@ -72,12 +72,13 @@ class AddressArtifactFormat extends Address
 
     /**
      * @param string $country
+     *
      * @return $this
      */
     public function setCountry($country)
     {
         $this->country = $country;
+
         return $this;
     }
-
 }

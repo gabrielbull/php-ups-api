@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 class TrackingCandidate
@@ -8,7 +9,7 @@ class TrackingCandidate
     public $DestinationCountryCode;
     public $PickupDateRange;
 
-    function __construct($response = null)
+    public function __construct($response = null)
     {
         if (isset($response->TrackingNumber)) {
             $this->TrackingNumber = $response->TrackingNumber;
@@ -23,5 +24,4 @@ class TrackingCandidate
             $this->PickupDateRange = new PickupDateRange($response->PickupDateRange);
         }
     }
-
 }

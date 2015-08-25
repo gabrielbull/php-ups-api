@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 use DOMDocument;
@@ -9,6 +10,7 @@ class ShipFrom extends Shipper implements NodeInterface
 {
     /**
      * @param null|DOMDocument $document
+     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -19,7 +21,7 @@ class ShipFrom extends Shipper implements NodeInterface
 
         $node = $document->createElement('ShipFrom');
 
-        if($this->getCompanyName()) {
+        if ($this->getCompanyName()) {
             $node->appendChild($document->createElement('CompanyName', $this->getCompanyName()));
         }
 

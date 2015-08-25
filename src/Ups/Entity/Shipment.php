@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 class Shipment
@@ -16,7 +17,7 @@ class Shipment
     /** @deprecated */
     public $Service;
     /** @deprecated */
-    public $Package = array();
+    public $Package = [];
     /** @deprecated */
     public $ShipmentServiceOptions;
     /** @deprecated */
@@ -85,7 +86,7 @@ class Shipment
     /**
      * @var Package[]
      */
-    private $packages = array();
+    private $packages = [];
 
     /**
      * @var ReferenceNumber
@@ -141,6 +142,7 @@ class Shipment
 
     /**
      * @param Package $package
+     *
      * @return $this
      */
     public function addPackage(Package $package)
@@ -148,6 +150,7 @@ class Shipment
         $packages = $this->getPackages();
         $packages[] = $package;
         $this->setPackages($packages);
+
         return $this;
     }
 
@@ -161,22 +164,26 @@ class Shipment
 
     /**
      * @param string $description
+     *
      * @return $this
      */
     public function setDescription($description)
     {
         $this->Description = $description;
         $this->description = $description;
+
         return $this;
     }
 
     /**
      * @param ReferenceNumber $referenceNumber
+     *
      * @return $this
      */
     public function setReferenceNumber(ReferenceNumber $referenceNumber)
     {
         $this->referenceNumber = $referenceNumber;
+
         return $this;
     }
 
@@ -198,11 +205,13 @@ class Shipment
 
     /**
      * @param bool $documentsOnly
+     *
      * @return $this
      */
     public function setDocumentsOnly($documentsOnly)
     {
         $this->documentsOnly = $documentsOnly;
+
         return $this;
     }
 
@@ -216,12 +225,14 @@ class Shipment
 
     /**
      * @param Package[] $packages
+     *
      * @return $this
      */
     public function setPackages(array $packages)
     {
         $this->Package = $packages;
         $this->packages = $packages;
+
         return $this;
     }
 
@@ -235,12 +246,14 @@ class Shipment
 
     /**
      * @param Service $service
+     *
      * @return $this
      */
     public function setService(Service $service)
     {
         $this->Service = $service;
         $this->service = $service;
+
         return $this;
     }
 
@@ -254,11 +267,13 @@ class Shipment
 
     /**
      * @param ReturnService $returnService
+     *
      * @return $this
      */
     public function setReturnService(ReturnService $returnService)
     {
         $this->returnService = $returnService;
+
         return $this;
     }
 
@@ -272,12 +287,14 @@ class Shipment
 
     /**
      * @param ShipFrom $shipFrom
+     *
      * @return $this
      */
     public function setShipFrom(ShipFrom $shipFrom)
     {
         $this->ShipFrom = $shipFrom;
         $this->shipFrom = $shipFrom;
+
         return $this;
     }
 
@@ -291,12 +308,14 @@ class Shipment
 
     /**
      * @param ShipTo $shipTo
+     *
      * @return $this
      */
     public function setShipTo(ShipTo $shipTo)
     {
         $this->ShipTo = $shipTo;
         $this->shipTo = $shipTo;
+
         return $this;
     }
 
@@ -310,12 +329,14 @@ class Shipment
 
     /**
      * @param SoldTo $soldTo
+     *
      * @return $this
      */
     public function setSoldTo(SoldTo $soldTo)
     {
         $this->SoldTo = $soldTo;
         $this->soldTo = $soldTo;
+
         return $this;
     }
 
@@ -329,12 +350,14 @@ class Shipment
 
     /**
      * @param ShipmentServiceOptions $shipmentServiceOptions
+     *
      * @return $this
      */
     public function setShipmentServiceOptions(ShipmentServiceOptions $shipmentServiceOptions)
     {
         $this->ShipmentServiceOptions = $shipmentServiceOptions;
         $this->shipmentServiceOptions = $shipmentServiceOptions;
+
         return $this;
     }
 
@@ -348,12 +371,14 @@ class Shipment
 
     /**
      * @param Shipper $shipper
+     *
      * @return $this
      */
     public function setShipper(Shipper $shipper)
     {
         $this->Shipper = $shipper;
         $this->shipper = $shipper;
+
         return $this;
     }
 
@@ -367,19 +392,22 @@ class Shipment
 
     /**
      * @param PaymentInformation $paymentInformation
+     *
      * @return $this
      */
     public function setPaymentInformation(PaymentInformation $paymentInformation)
     {
         $this->PaymentInformation = $paymentInformation;
         $this->paymentInformation = $paymentInformation;
+
         return $this;
     }
 
     /**
-     * If called, returned prices will include negotiated rates (discounts will be applied)
+     * If called, returned prices will include negotiated rates (discounts will be applied).
      */
-    public function showNegotiatedRates() {
+    public function showNegotiatedRates()
+    {
         $this->rateInformation = new RateInformation();
         $this->rateInformation->setNegotiatedRatesIndicator(true);
     }
@@ -387,16 +415,20 @@ class Shipment
     /**
      * @return null|RateInformation
      */
-    public function getRateInformation() {
+    public function getRateInformation()
+    {
         return $this->rateInformation;
     }
 
     /**
      * @param RateInformation $rateInformation
+     *
      * @return $this
      */
-    public function setRateInformation(RateInformation $rateInformation) {
+    public function setRateInformation(RateInformation $rateInformation)
+    {
         $this->rateInformation = $rateInformation;
+
         return $this;
     }
 }

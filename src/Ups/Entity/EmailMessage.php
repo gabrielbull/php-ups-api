@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 use DOMDocument;
@@ -7,11 +8,10 @@ use Ups\NodeInterface;
 
 class EmailMessage implements NodeInterface
 {
-
     /**
      * @var array
      */
-    private $emailAddresses = array();
+    private $emailAddresses = [];
 
     /**
      * @var string
@@ -44,7 +44,7 @@ class EmailMessage implements NodeInterface
     private $subjectCode;
 
     /**
-     * Subject codes
+     * Subject codes.
      */
     const SUBJECT_CODE_SHIPMENT_REFERENCE_NR1 = '01';
     const SUBJECT_CODE_SHIPMENT_REFERENCE_NR2 = '02';
@@ -54,6 +54,7 @@ class EmailMessage implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
+     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -64,31 +65,31 @@ class EmailMessage implements NodeInterface
 
         $node = $document->createElement('EMailMessage');
 
-        foreach($this->getEmailAddresses() as $email) {
+        foreach ($this->getEmailAddresses() as $email) {
             $node->appendChild($document->createElement('EMailAddress', $email));
         }
 
-        if($this->getUndeliverableEmailAddress() !== null) {
+        if ($this->getUndeliverableEmailAddress() !== null) {
             $node->appendChild($document->createElement('UndeliverableEMailAddress', $this->getUndeliverableEmailAddress()));
         }
 
-        if($this->getFromEmailAddress() !== null) {
+        if ($this->getFromEmailAddress() !== null) {
             $node->appendChild($document->createElement('FromEMailAddress', $this->getFromEmailAddress()));
         }
 
-        if($this->getFromName() !== null) {
+        if ($this->getFromName() !== null) {
             $node->appendChild($document->createElement('FromName', $this->getFromName()));
         }
 
-        if($this->getMemo() !== null) {
+        if ($this->getMemo() !== null) {
             $node->appendChild($document->createElement('Memo', $this->getMemo()));
         }
 
-        if($this->getSubject() !== null) {
+        if ($this->getSubject() !== null) {
             $node->appendChild($document->createElement('Subject', $this->getSubject()));
         }
 
-        if($this->getSubjectCode() !== null) {
+        if ($this->getSubjectCode() !== null) {
             $node->appendChild($document->createElement('SubjectCode', $this->getSubjectCode()));
         }
 
@@ -108,7 +109,7 @@ class EmailMessage implements NodeInterface
      */
     public function setEmailAddresses(array $emailAddresses)
     {
-        if(count($emailAddresses) > 5) {
+        if (count($emailAddresses) > 5) {
             throw new \Exception('Maximum of 5 emailaddresses allowed');
         }
 
@@ -176,7 +177,7 @@ class EmailMessage implements NodeInterface
      */
     public function setMemo($memo)
     {
-        if(strlen($memo) > 50) {
+        if (strlen($memo) > 50) {
             throw new \Exception('Memo should maximum be 50 chars');
         }
 
@@ -196,7 +197,7 @@ class EmailMessage implements NodeInterface
      */
     public function setSubject($subject)
     {
-        if(strlen($subject) > 50) {
+        if (strlen($subject) > 50) {
             throw new \Exception('Subject should maximum be 50 chars');
         }
 
@@ -218,5 +219,4 @@ class EmailMessage implements NodeInterface
     {
         $this->subjectCode = $subjectCode;
     }
-
 }

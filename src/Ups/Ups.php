@@ -1,11 +1,12 @@
 <?php
+
 namespace Ups;
 
 use DOMDocument;
+use Exception;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use SimpleXMLElement;
-use Exception;
 use stdClass;
 
 abstract class Ups implements LoggerAwareInterface
@@ -30,12 +31,14 @@ abstract class Ups implements LoggerAwareInterface
 
     /**
      * @var string
+     *
      * @deprecated
      */
     protected $productionBaseUrl = 'https://onlinetools.ups.com/ups.app/xml';
 
     /**
      * @var string
+     *
      * @deprecated
      */
     protected $integrationBaseUrl = 'https://wwwcie.ups.com/ups.app/xml';
@@ -61,12 +64,12 @@ abstract class Ups implements LoggerAwareInterface
     protected $logger;
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param string|null $accessKey UPS License Access Key
-     * @param string|null $userId UPS User ID
-     * @param string|null $password UPS User Password
-     * @param bool $useIntegration Determine if we should use production or CIE URLs.
+     * @param string|null $accessKey      UPS License Access Key
+     * @param string|null $userId         UPS User ID
+     * @param string|null $password       UPS User Password
+     * @param bool        $useIntegration Determine if we should use production or CIE URLs.
      * @param LoggerInterface PSR3 compatible logger (optional)
      */
     public function __construct($accessKey = null, $userId = null, $password = null, $useIntegration = false, LoggerInterface $logger = null)
@@ -79,7 +82,7 @@ abstract class Ups implements LoggerAwareInterface
     }
 
     /**
-     * Sets the transaction / context value
+     * Sets the transaction / context value.
      *
      * @param string $context The transaction "guidlikesubstance" value
      */
@@ -108,6 +111,7 @@ abstract class Ups implements LoggerAwareInterface
      * Format a Unix timestamp or a date time with a Y-m-d H:i:s format into a YYYYMMDDHHmmss format required by UPS.
      *
      * @param string
+     *
      * @return string
      */
     public function formatDateTime($timestamp)
@@ -120,7 +124,7 @@ abstract class Ups implements LoggerAwareInterface
     }
 
     /**
-     * Create the access request
+     * Create the access request.
      *
      * @return string
      */
@@ -130,24 +134,24 @@ abstract class Ups implements LoggerAwareInterface
         $xml->formatOutput = true;
 
         // Create the AccessRequest element
-        $accessRequest = $xml->appendChild($xml->createElement("AccessRequest"));
+        $accessRequest = $xml->appendChild($xml->createElement('AccessRequest'));
         $accessRequest->setAttribute('xml:lang', 'en-US');
 
-        $accessRequest->appendChild($xml->createElement("AccessLicenseNumber", $this->accessKey));
-        $accessRequest->appendChild($xml->createElement("UserId", $this->userId));
-        $accessRequest->appendChild($xml->createElement("Password", $this->password));
+        $accessRequest->appendChild($xml->createElement('AccessLicenseNumber', $this->accessKey));
+        $accessRequest->appendChild($xml->createElement('UserId', $this->userId));
+        $accessRequest->appendChild($xml->createElement('Password', $this->password));
 
         return $xml->saveXML();
     }
 
     /**
-     * Creates the TransactionReference node for a request
+     * Creates the TransactionReference node for a request.
      *
      * @return DomDocument
      */
     protected function createTransactionNode()
     {
-        $xml = new DOMDocument;
+        $xml = new DOMDocument();
         $xml->formatOutput = true;
 
         $trxRef = $xml->appendChild($xml->createElement('TransactionReference'));
@@ -160,13 +164,16 @@ abstract class Ups implements LoggerAwareInterface
     }
 
     /**
-     * Send request to UPS
+     * Send request to UPS.
      *
-     * @param string $access The access request xml
-     * @param string $request The request xml
+     * @param string $access      The access request xml
+     * @param string $request     The request xml
      * @param string $endpointurl The UPS API Endpoint URL
-     * @return SimpleXMLElement
+     *
      * @throws Exception
+     *
+     * @return SimpleXMLElement
+     *
      * @deprecated Untestable
      */
     protected function request($access, $request, $endpointurl)
@@ -175,16 +182,18 @@ abstract class Ups implements LoggerAwareInterface
         $response = $requestInstance->request($access, $request, $endpointurl);
         if ($response->getResponse() instanceof SimpleXMLElement) {
             $this->response = $response->getResponse();
+
             return $response->getResponse();
         }
 
-        throw new Exception("Failure: Response is invalid.");
+        throw new Exception('Failure: Response is invalid.');
     }
 
     /**
-     * Convert XMLSimpleObject to stdClass object
+     * Convert XMLSimpleObject to stdClass object.
      *
      * @param SimpleXMLElement $xmlObject
+     *
      * @return stdClass
      */
     protected function convertXmlObject(SimpleXMLElement $xmlObject)
@@ -196,12 +205,13 @@ abstract class Ups implements LoggerAwareInterface
      * Compiles the final endpoint URL for the request.
      *
      * @param string $segment The URL segment to build in to the endpoint
+     *
      * @return string
      */
     protected function compileEndpointUrl($segment)
     {
         $base = ($this->useIntegration ? $this->integrationBaseUrl : $this->productionBaseUrl);
 
-        return $base . $segment;
+        return $base.$segment;
     }
 }

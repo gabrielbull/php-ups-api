@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 class CODAmount
@@ -6,7 +7,7 @@ class CODAmount
     public $CurrencyCode;
     public $MonetaryValue;
 
-    function __construct($response = null)
+    public function __construct($response = null)
     {
         if (null != $response) {
             if (isset($response->CurrencyCode)) {
@@ -17,4 +18,4 @@ class CODAmount
             }
         }
     }
-} 
+}

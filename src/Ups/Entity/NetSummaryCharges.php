@@ -4,7 +4,6 @@ namespace Ups\Entity;
 
 class NetSummaryCharges
 {
-
     /**
      * @var Charges
      */
@@ -15,7 +14,7 @@ class NetSummaryCharges
      */
     public $TotalChargesWithTaxes;
 
-    function __construct($response = null)
+    public function __construct($response = null)
     {
         $this->GrandTotal = new Charges();
 
@@ -28,5 +27,4 @@ class NetSummaryCharges
             }
         }
     }
-
 }

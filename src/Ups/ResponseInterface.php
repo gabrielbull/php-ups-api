@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups;
 
 use SimpleXMLElement;

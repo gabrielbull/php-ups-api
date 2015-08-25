@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 class Manifest
@@ -37,7 +38,7 @@ class Manifest
     public $HoldForPickupAtUPSAccessPoint;
     public $UAPAddress;
 
-    function __construct($response = null)
+    public function __construct($response = null)
     {
         $this->Shipper = new Shipper();
         $this->ReferenceNumber = new ReferenceNumber();

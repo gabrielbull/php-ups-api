@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 use DOMDocument;
@@ -8,7 +9,6 @@ use Ups\NodeInterface;
 // @todo Extend with more notification options (e.g. VoiceMessage)
 class Notification implements NodeInterface
 {
-
     /**
      * @var
      */
@@ -25,7 +25,7 @@ class Notification implements NodeInterface
     private $locale;
 
     /**
-     * Notification Codes from documentation
+     * Notification Codes from documentation.
      */
     const CODE_RETURN_OR_LABEL_CREATION = '2'; // Only returns
     const CODE_QV_IN_TRANSIT = '5'; // Only forward shipments
@@ -37,6 +37,7 @@ class Notification implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
+     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -48,10 +49,10 @@ class Notification implements NodeInterface
         $node = $document->createElement('Notification');
 
         $node->appendChild($document->createElement('NotificationCode', $this->getNotificationCode()));
-        if($this->getEmailMessage() !== null) {
+        if ($this->getEmailMessage() !== null) {
             $node->appendChild($this->emailMessage->toNode($document));
         }
-        if($this->getLocale() !== null) {
+        if ($this->getLocale() !== null) {
             $node->appendChild($this->locale->toNode($document));
         }
 
@@ -68,11 +69,13 @@ class Notification implements NodeInterface
 
     /**
      * @param mixed $locale
+     *
      * @return Notification
      */
     public function setLocale($locale)
     {
         $this->locale = $locale;
+
         return $this;
     }
 
@@ -107,5 +110,4 @@ class Notification implements NodeInterface
     {
         $this->emailMessage = $emailMessage;
     }
-
 }

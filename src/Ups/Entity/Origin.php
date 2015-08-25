@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 class Origin
@@ -14,7 +15,7 @@ class Origin
     public $ScheduledDeliveryDate;
     public $ScheduledDeliveryTime;
 
-    function __construct($response = null)
+    public function __construct($response = null)
     {
         $this->PackageReferenceNumber = new PackageReferenceNumber();
         $this->ShipmentReferenceNumber = new ShipmentReferenceNumber();
@@ -64,8 +65,6 @@ class Origin
             if (isset($response->ScheduledDeliveryTime)) {
                 $this->ScheduledDeliveryTime = $response->ScheduledDeliveryTime;
             }
-
         }
     }
-
 }

@@ -1,13 +1,12 @@
 <?php
+
 namespace Ups\Entity;
 
 use DOMDocument;
-use DOMElement;
 use Ups\NodeInterface;
 
 class GeoCode implements NodeInterface
 {
-
     private $latitude;
     private $longitude;
 
@@ -56,6 +55,4 @@ class GeoCode implements NodeInterface
     {
         $this->longitude = $longitude;
     }
-
-
 }

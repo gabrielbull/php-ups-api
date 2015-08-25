@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 use DOMDocument;
@@ -131,6 +132,7 @@ class ShipTo implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
+     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -161,12 +163,14 @@ class ShipTo implements NodeInterface
 
     /**
      * @param Address $address
+     *
      * @return $this
      */
     public function setAddress(Address $address)
     {
         $this->Address = $address;
         $this->address = $address;
+
         return $this;
     }
 
@@ -180,12 +184,14 @@ class ShipTo implements NodeInterface
 
     /**
      * @param string $attentionName
+     *
      * @return $this
      */
     public function setAttentionName($attentionName)
     {
         $this->AttentionName = $attentionName;
         $this->attentionName = $attentionName;
+
         return $this;
     }
 
@@ -199,12 +205,14 @@ class ShipTo implements NodeInterface
 
     /**
      * @param string $bookmark
+     *
      * @return $this
      */
     public function setBookmark($bookmark)
     {
         $this->Bookmark = $bookmark;
         $this->bookmark = $bookmark;
+
         return $this;
     }
 
@@ -218,12 +226,14 @@ class ShipTo implements NodeInterface
 
     /**
      * @param string $companyName
+     *
      * @return $this
      */
     public function setCompanyName($companyName)
     {
         $this->CompanyName = $companyName;
         $this->companyName = $companyName;
+
         return $this;
     }
 
@@ -237,12 +247,14 @@ class ShipTo implements NodeInterface
 
     /**
      * @param string $emailAddress
+     *
      * @return $this
      */
     public function setEmailAddress($emailAddress)
     {
         $this->EMailAddress = $emailAddress;
         $this->emailAddress = $emailAddress;
+
         return $this;
     }
 
@@ -256,12 +268,14 @@ class ShipTo implements NodeInterface
 
     /**
      * @param string $faxNumber
+     *
      * @return $this
      */
     public function setFaxNumber($faxNumber)
     {
         $this->FaxNumber = $faxNumber;
         $this->faxNumber = $faxNumber;
+
         return $this;
     }
 
@@ -275,12 +289,14 @@ class ShipTo implements NodeInterface
 
     /**
      * @param string $locationId
+     *
      * @return $this
      */
     public function setLocationId($locationId)
     {
         $this->LocationID = $locationId;
         $this->locationId = $locationId;
+
         return $this;
     }
 
@@ -294,12 +310,14 @@ class ShipTo implements NodeInterface
 
     /**
      * @param string $phoneNumber
+     *
      * @return $this
      */
     public function setPhoneNumber($phoneNumber)
     {
         $this->PhoneNumber = $phoneNumber;
         $this->phoneNumber = $phoneNumber;
+
         return $this;
     }
 
@@ -313,12 +331,14 @@ class ShipTo implements NodeInterface
 
     /**
      * @param string $receivingAddressName
+     *
      * @return $this
      */
     public function setReceivingAddressName($receivingAddressName)
     {
         $this->ReceivingAddressName = $receivingAddressName;
         $this->receivingAddressName = $receivingAddressName;
+
         return $this;
     }
 
@@ -332,12 +352,14 @@ class ShipTo implements NodeInterface
 
     /**
      * @param string $shipperAssignedIdentificationNumber
+     *
      * @return $this
      */
     public function setShipperAssignedIdentificationNumber($shipperAssignedIdentificationNumber)
     {
         $this->ShipperAssignedIdentificationNumber = $shipperAssignedIdentificationNumber;
         $this->shipperAssignedIdentificationNumber = $shipperAssignedIdentificationNumber;
+
         return $this;
     }
 
@@ -351,12 +373,14 @@ class ShipTo implements NodeInterface
 
     /**
      * @param string $taxIdentificationNumber
+     *
      * @return $this
      */
     public function setTaxIdentificationNumber($taxIdentificationNumber)
     {
         $this->TaxIdentificationNumber = $taxIdentificationNumber;
         $this->taxIdentificationNumber = $taxIdentificationNumber;
+
         return $this;
     }
 }

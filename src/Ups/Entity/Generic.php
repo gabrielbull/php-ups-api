@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 class Generic
@@ -24,7 +25,7 @@ class Generic
     public $FailureNotification;
     public $Bookmark;
 
-    function __construct($response = null)
+    public function __construct($response = null)
     {
         $this->ShipmentReferenceNumber = new ShipmentReferenceNumber();
         $this->PackageReferenceNumber = new PackageReferenceNumber();
@@ -83,8 +84,6 @@ class Generic
             if (isset($response->Bookmark)) {
                 $this->Bookmark = $response->Bookmark;
             }
-
         }
     }
-
 }

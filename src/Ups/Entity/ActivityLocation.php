@@ -1,11 +1,12 @@
 <?php
+
 namespace Ups\Entity;
 
 class ActivityLocation
 {
     public $AddressArtifactFormat;
 
-    function __construct($response = null)
+    public function __construct($response = null)
     {
         $this->AddressArtifactFormat = new AddressArtifactFormat();
 
@@ -15,4 +16,4 @@ class ActivityLocation
             }
         }
     }
-} 
+}

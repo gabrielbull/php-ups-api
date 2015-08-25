@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 use DOMDocument;
@@ -7,9 +8,8 @@ use Ups\NodeInterface;
 
 class AccessPointSearch implements NodeInterface
 {
-
     /**
-     * Access Point Status Codes
+     * Access Point Status Codes.
      */
     const STATUS_ACTIVE_AVAILABLE = '01';
     const STATUS_ACTIVE_UNAVAILABLE = '07';
@@ -31,6 +31,7 @@ class AccessPointSearch implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
+     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -41,15 +42,15 @@ class AccessPointSearch implements NodeInterface
 
         $node = $document->createElement('AccessPointSearch');
 
-        if($this->getAccessPointStatus()) {
+        if ($this->getAccessPointStatus()) {
             $node->appendChild($document->createElement('AccessPointStatus', $this->getAccessPointStatus()));
         }
 
-        if($this->getPublicAccessPointId()) {
+        if ($this->getPublicAccessPointId()) {
             $node->appendChild($document->createElement('PublicAccessPointID', $this->getPublicAccessPointId()));
         }
 
-        if($this->getAccountNumber()) {
+        if ($this->getAccountNumber()) {
             $node->appendChild($document->createElement('AccountNumber', $this->getAccountNumber()));
         }
 
@@ -103,5 +104,4 @@ class AccessPointSearch implements NodeInterface
     {
         $this->accessPointStatus = $accessPointStatus;
     }
-
 }

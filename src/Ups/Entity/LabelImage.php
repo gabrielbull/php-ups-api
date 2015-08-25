@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 class LabelImage
@@ -10,7 +11,7 @@ class LabelImage
     public $InternationalSignatureGraphicImage;
     public $URL;
 
-    function __construct($response = null)
+    public function __construct($response = null)
     {
         $this->LabelImageFormat = new LabelImageFormat();
 
@@ -20,4 +21,4 @@ class LabelImage
             }
         }
     }
-} 
+}

@@ -1,9 +1,10 @@
 <?php
+
 namespace Ups\Entity;
 
-use Ups\NodeInterface;
 use DOMDocument;
 use DOMElement;
+use Ups\NodeInterface;
 
 class ReferenceNumber implements NodeInterface
 {
@@ -28,7 +29,7 @@ class ReferenceNumber implements NodeInterface
     public $BarCodeIndicator;
 
     /**
-     * Codes
+     * Codes.
      */
     const CODE_ACCOUNTS_RECEIVABLE_CUSTOMER_ACCOUNT = 'AJ';
     const CODE_APPROPRIATION_NUMBER = 'AT';
@@ -119,7 +120,7 @@ class ReferenceNumber implements NodeInterface
     /**
      * @param null $response
      */
-    function __construct($response = null)
+    public function __construct($response = null)
     {
         if (null != $response) {
             if (isset($response->BarCodeIndicator)) {
@@ -139,6 +140,7 @@ class ReferenceNumber implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
+     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -149,7 +151,7 @@ class ReferenceNumber implements NodeInterface
 
         $node = $document->createElement('ReferenceNumber');
 
-        if($this->getBarCodeIndicator()) {
+        if ($this->getBarCodeIndicator()) {
             $node->appendChild($document->createElement('BarCodeIndicator'));
         }
         $node->appendChild($document->createElement('Code', $this->getCode()));
@@ -157,4 +159,4 @@ class ReferenceNumber implements NodeInterface
 
         return $node;
     }
-} 
+}

@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 class RatedShipment
@@ -18,15 +19,15 @@ class RatedShipment
      */
     public $NegotiatedRates;
 
-    function __construct($response = null)
+    public function __construct($response = null)
     {
         $this->Service = new Service();
         $this->BillingWeight = new BillingWeight();
         $this->TransportationCharges = new Charges();
         $this->ServiceOptionsCharges = new Charges();
         $this->TotalCharges = new Charges();
-        $this->RatedPackage = array();
-        $this->SurCharges = array();
+        $this->RatedPackage = [];
+        $this->SurCharges = [];
 
         if (null != $response) {
             if (isset($response->Service)) {
@@ -70,9 +71,7 @@ class RatedShipment
             if (isset($response->NegotiatedRates)) {
                 $this->NegotiatedRates = new NegotiatedRates($response->NegotiatedRates);
             }
-
         }
-
     }
 
     public function getServiceName()

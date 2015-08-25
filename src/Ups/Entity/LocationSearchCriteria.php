@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 use DOMDocument;
@@ -7,7 +8,6 @@ use Ups\NodeInterface;
 
 class LocationSearchCriteria implements NodeInterface
 {
-
     /**
      * @var string
      */
@@ -36,6 +36,7 @@ class LocationSearchCriteria implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
+     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -46,11 +47,11 @@ class LocationSearchCriteria implements NodeInterface
 
         $node = $document->createElement('LocationSearchCriteria');
 
-        if($this->getAccessPointSearch()) {
+        if ($this->getAccessPointSearch()) {
             $node->appendChild($this->getAccessPointSearch()->toNode($document));
         }
 
-        if($this->getMaximumListSize()) {
+        if ($this->getMaximumListSize()) {
             $node->appendChild($document->createElement('MaximumListSize', $this->getMaximumListSize()));
         }
 
@@ -72,7 +73,7 @@ class LocationSearchCriteria implements NodeInterface
     {
         $maximumListSize = (int) $maximumListSize;
 
-        if($maximumListSize < 1 || $maximumListSize > 50) {
+        if ($maximumListSize < 1 || $maximumListSize > 50) {
             throw new \Exception('Maximum list size: If present, indicates the maximum number of locations the client wishes to receive in response; ranges from 1 to 50 with a default value of 10');
         }
 

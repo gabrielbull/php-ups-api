@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 class QuantumViewResponse
@@ -6,7 +7,7 @@ class QuantumViewResponse
     public $QuantumViewEvents;
     public $Bookmark;
 
-    function __construct($response = null)
+    public function __construct($response = null)
     {
         if (null != $response) {
             if (isset($response->QuantumViewEvents)) {
@@ -15,8 +16,6 @@ class QuantumViewResponse
             if (isset($response->Bookmark)) {
                 $this->Bookmark = $response->Bookmark;
             }
-
         }
     }
-
-} 
+}

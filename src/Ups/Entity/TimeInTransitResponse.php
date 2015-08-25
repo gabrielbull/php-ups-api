@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 class TimeInTransitResponse
@@ -14,13 +15,13 @@ class TimeInTransitResponse
     public $ServiceSummary;
     public $MaximumListSize;
 
-    function __construct($response = null)
+    public function __construct($response = null)
     {
         $this->TransitFrom = new Address();
         $this->TransitTo = new Address();
         $this->ShipmentWeight = new ShipmentWeight();
         $this->InvoiceLineTotal = new Charges();
-        $this->ServiceSummary = array();
+        $this->ServiceSummary = [];
 
         if (null != $response) {
             if (isset($response->PickupDate)) {
@@ -55,8 +56,6 @@ class TimeInTransitResponse
             if (isset($response->MaximumListSize)) {
                 $this->MaximumListSize = $response->MaximumListSize;
             }
-
         }
     }
-
-} 
+}

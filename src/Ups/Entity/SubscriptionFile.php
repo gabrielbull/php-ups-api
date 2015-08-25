@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 class SubscriptionFile
@@ -11,7 +12,7 @@ class SubscriptionFile
     public $Delivery;
     public $Generic;
 
-    function __construct($response = null)
+    public function __construct($response = null)
     {
         $this->StatusType = new StatusType();
         $this->Manifest = new Manifest();
@@ -44,4 +45,4 @@ class SubscriptionFile
             }
         }
     }
-} 
+}

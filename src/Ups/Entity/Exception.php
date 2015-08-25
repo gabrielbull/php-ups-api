@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 class Exception
@@ -19,10 +20,10 @@ class Exception
     public $ActivityLocation;
     public $BillToAccount;
 
-    function __construct($response = null)
+    public function __construct($response = null)
     {
-        $this->PackageReferenceNumber = array();
-        $this->ShipmentReferenceNumber = array();
+        $this->PackageReferenceNumber = [];
+        $this->ShipmentReferenceNumber = [];
         $this->Resolution = new Resolution();
         $this->ActivityLocation = new ActivityLocation();
         $this->BillToAccount = new BillToAccount();
@@ -77,7 +78,6 @@ class Exception
             if (isset($response->BillToAccount)) {
                 $this->BillToAccount = new BillToAccount($response->BillToAccount);
             }
-
         }
     }
-} 
+}

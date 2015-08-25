@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 use DOMDocument;
@@ -80,17 +81,17 @@ class Package implements NodeInterface
     /**
      * @var Activity[]
      */
-    private $activities = array();
+    private $activities = [];
 
     /**
      * @param null|object $attributes
      */
     public function __construct($attributes = null)
     {
-        $this->setPackagingType(new PackagingType);
-        $this->setReferenceNumber(new ReferenceNumber);
-        $this->setPackageWeight(new PackageWeight);
-        $this->setPackageServiceOptions(new PackageServiceOptions);
+        $this->setPackagingType(new PackagingType());
+        $this->setReferenceNumber(new ReferenceNumber());
+        $this->setPackageWeight(new PackageWeight());
+        $this->setPackageServiceOptions(new PackageServiceOptions());
 
         if (null !== $attributes) {
             if (isset($attributes->PackageWeight)) {
@@ -133,6 +134,7 @@ class Package implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
+     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -149,6 +151,7 @@ class Package implements NodeInterface
             $node->appendChild($this->getDimensions()->toNode($document));
         }
         $node->appendChild($this->getPackageServiceOptions()->toNode($document));
+
         return $node;
     }
 
@@ -162,12 +165,14 @@ class Package implements NodeInterface
 
     /**
      * @param Activity[] $activities
+     *
      * @return $this
      */
     public function setActivities($activities)
     {
         $this->Activity = $activities;
         $this->activities = $activities;
+
         return $this;
     }
 
@@ -181,12 +186,14 @@ class Package implements NodeInterface
 
     /**
      * @param string $description
+     *
      * @return $this
      */
     public function setDescription($description)
     {
         $this->Description = $description;
         $this->description = $description;
+
         return $this;
     }
 
@@ -200,12 +207,14 @@ class Package implements NodeInterface
 
     /**
      * @param Dimensions $dimensions
+     *
      * @return $this
      */
     public function setDimensions(Dimensions $dimensions)
     {
         $this->Dimensions = $dimensions;
         $this->dimensions = $dimensions;
+
         return $this;
     }
 
@@ -219,12 +228,14 @@ class Package implements NodeInterface
 
     /**
      * @param string $largePackage
+     *
      * @return $this
      */
     public function setLargePackage($largePackage)
     {
         $this->LargePackage = $largePackage;
         $this->largePackage = $largePackage;
+
         return $this;
     }
 
@@ -238,12 +249,14 @@ class Package implements NodeInterface
 
     /**
      * @param PackageServiceOptions $packageServiceOptions
+     *
      * @return $this
      */
     public function setPackageServiceOptions(PackageServiceOptions $packageServiceOptions)
     {
         $this->PackageServiceOptions = $packageServiceOptions;
         $this->packageServiceOptions = $packageServiceOptions;
+
         return $this;
     }
 
@@ -257,12 +270,14 @@ class Package implements NodeInterface
 
     /**
      * @param PackageWeight $packageWeight
+     *
      * @return $this
      */
     public function setPackageWeight(PackageWeight $packageWeight)
     {
         $this->PackageWeight = $packageWeight;
         $this->packageWeight = $packageWeight;
+
         return $this;
     }
 
@@ -276,12 +291,14 @@ class Package implements NodeInterface
 
     /**
      * @param PackagingType $packagingType
+     *
      * @return $this
      */
     public function setPackagingType(PackagingType $packagingType)
     {
         $this->PackagingType = $packagingType;
         $this->packagingType = $packagingType;
+
         return $this;
     }
 
@@ -295,12 +312,14 @@ class Package implements NodeInterface
 
     /**
      * @param ReferenceNumber $referenceNumber
+     *
      * @return $this
      */
     public function setReferenceNumber(ReferenceNumber $referenceNumber)
     {
         $this->ReferenceNumber = $referenceNumber;
         $this->referenceNumber = $referenceNumber;
+
         return $this;
     }
 
@@ -320,12 +339,14 @@ class Package implements NodeInterface
 
     /**
      * @param string $trackingNumber
+     *
      * @return $this
      */
     public function setTrackingNumber($trackingNumber)
     {
         $this->TrackingNumber = $trackingNumber;
         $this->trackingNumber = $trackingNumber;
+
         return $this;
     }
 
@@ -339,12 +360,14 @@ class Package implements NodeInterface
 
     /**
      * @param string $upsPremiumCareIndicator
+     *
      * @return $this
      */
     public function setUpsPremiumCareIndicator($upsPremiumCareIndicator)
     {
         $this->UPSPremiumCareIndicator = $upsPremiumCareIndicator;
         $this->upsPremiumCareIndicator = $upsPremiumCareIndicator;
+
         return $this;
     }
 }

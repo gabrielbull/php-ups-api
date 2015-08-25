@@ -1,9 +1,10 @@
 <?php
+
 namespace Ups\Entity;
 
-use Ups\NodeInterface;
 use DOMDocument;
 use DOMElement;
+use Ups\NodeInterface;
 
 class PackageServiceOptions implements NodeInterface
 {
@@ -24,9 +25,8 @@ class PackageServiceOptions implements NodeInterface
     private $hazardousMaterialsCode;
     private $holdForPickup;
 
-    function __construct($response = null)
+    public function __construct($response = null)
     {
-
         if (null != $response) {
             if (isset($response->COD)) {
                 $this->setCOD(new COD($response->COD));
@@ -48,6 +48,7 @@ class PackageServiceOptions implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
+     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -65,49 +66,58 @@ class PackageServiceOptions implements NodeInterface
         return $node;
     }
 
-    public function getInsuredValue() {
+    public function getInsuredValue()
+    {
         return $this->insuredValue;
     }
 
-    public function setInsuredValue($var) {
+    public function setInsuredValue($var)
+    {
         $this->InsuredValue = $var;
         $this->insuredValue = $var;
     }
 
-    public function getCOD() {
+    public function getCOD()
+    {
         return $this->cod;
     }
 
-    public function setCOD($var) {
+    public function setCOD($var)
+    {
         $this->COD = $var;
-        $this->cod= $var;
+        $this->cod = $var;
     }
 
-    public function getEarliestDeliveryTime() {
+    public function getEarliestDeliveryTime()
+    {
         return $this->earliestDeliveryTime;
     }
 
-    public function setEarliestDeliveryTime($var) {
+    public function setEarliestDeliveryTime($var)
+    {
         $this->earliestDeliveryTime = $var;
         $this->EarliestDeliveryTime = $var;
     }
 
-    public function getHazardousMaterialsCode() {
+    public function getHazardousMaterialsCode()
+    {
         return $this->hazardousMaterialsCode;
     }
 
-    public function setHazardousMaterialsCode($var) {
+    public function setHazardousMaterialsCode($var)
+    {
         $this->HazardousMaterialsCode = $var;
         $this->hazardousMaterialsCode = $var;
     }
 
-    public function getHoldForPickup() {
+    public function getHoldForPickup()
+    {
         return $this->holdForPickup;
     }
 
-    public function setHoldForPickup($var) {
+    public function setHoldForPickup($var)
+    {
         $this->HoldForPickup = $var;
         $this->holdForPickup = $var;
     }
-
 }

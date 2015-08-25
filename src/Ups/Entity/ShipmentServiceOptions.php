@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 use DOMDocument;
@@ -7,7 +8,6 @@ use Ups\NodeInterface;
 
 class ShipmentServiceOptions implements NodeInterface
 {
-
     public $SaturdayPickup;
     public $SaturdayDelivery;
     public $CallTagARS;
@@ -15,9 +15,9 @@ class ShipmentServiceOptions implements NodeInterface
     public $DirectDeliveryOnlyIndicator;
 
     private $internationalForms;
-    private $notifications = array();
+    private $notifications = [];
 
-    function __construct($response = null)
+    public function __construct($response = null)
     {
         $this->CallTagARS = new CallTagARS();
 
@@ -34,10 +34,10 @@ class ShipmentServiceOptions implements NodeInterface
             if (isset($response->NegotiatedRatesIndicator)) {
                 $this->NegotiatedRatesIndicator = $response->NegotiatedRatesIndicator;
             }
-            if(isset($response->DirectDeliveryOnlyIndicator)) {
+            if (isset($response->DirectDeliveryOnlyIndicator)) {
                 $this->DirectDeliveryOnlyIndicator = $response->DirectDeliveryOnlyIndicator;
             }
-            if(isset($response->InternationalForms)) {
+            if (isset($response->InternationalForms)) {
                 $this->setInternationalForms($response->InternationalForms);
             }
         }
@@ -45,6 +45,7 @@ class ShipmentServiceOptions implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
+     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -55,24 +56,24 @@ class ShipmentServiceOptions implements NodeInterface
 
         $node = $document->createElement('ShipmentServiceOptions');
 
-        if(isset($this->DirectDeliveryOnlyIndicator)) {
+        if (isset($this->DirectDeliveryOnlyIndicator)) {
             $node->appendChild($document->createElement('DirectDeliveryOnlyIndicator'));
         }
 
-        if(isset($this->SaturdayPickup)) {
+        if (isset($this->SaturdayPickup)) {
             $node->appendChild($document->createElement('SaturdayPickup'));
         }
 
-        if(isset($this->SaturdayDelivery)) {
+        if (isset($this->SaturdayDelivery)) {
             $node->appendChild($document->createElement('SaturdayDelivery'));
         }
 
-        if(isset($this->internationalForms)) {
+        if (isset($this->internationalForms)) {
             $node->appendChild($this->internationalForms->toNode($document));
         }
 
-        if(!empty($this->notifications)) {
-            foreach($this->notifications as $notification) {
+        if (!empty($this->notifications)) {
+            foreach ($this->notifications as $notification) {
                 $node->appendChild($notification->toNode($document));
             }
         }
@@ -103,7 +104,7 @@ class ShipmentServiceOptions implements NodeInterface
     {
         $this->notifications[] = $notification;
 
-        if(count($this->notifications) > 3) {
+        if (count($this->notifications) > 3) {
             throw new \Exception('Maximum 3 notifications allowed');
         }
 
@@ -117,5 +118,4 @@ class ShipmentServiceOptions implements NodeInterface
     {
         return $this->notifications;
     }
-
 }

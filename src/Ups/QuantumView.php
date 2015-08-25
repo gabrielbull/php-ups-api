@@ -1,16 +1,15 @@
 <?php
+
 namespace Ups;
 
-use DOMDocument;
 use ArrayObject;
+use DOMDocument;
+use Exception;
 use Psr\Log\LoggerInterface;
 use SimpleXMLElement;
-use Exception;
 
 /**
- * Quantum View API Wrapper
- *
- * @package ups
+ * Quantum View API Wrapper.
  */
 class QuantumView extends Ups
 {
@@ -23,7 +22,7 @@ class QuantumView extends Ups
 
     /**
      * @var ResponseInterface
-     * todo: make private
+     *                        todo: make private
      */
     public $response;
 
@@ -53,10 +52,10 @@ class QuantumView extends Ups
     private $bookmark;
 
     /**
-     * @param string|null $accessKey UPS License Access Key
-     * @param string|null $userId UPS User ID
-     * @param string|null $password UPS User Password
-     * @param bool $useIntegration Determine if we should use production or CIE URLs.
+     * @param string|null      $accessKey      UPS License Access Key
+     * @param string|null      $userId         UPS User ID
+     * @param string|null      $password       UPS User Password
+     * @param bool             $useIntegration Determine if we should use production or CIE URLs.
      * @param RequestInterface $request
      * @param LoggerInterface PSR3 compatible logger (optional)
      */
@@ -69,15 +68,17 @@ class QuantumView extends Ups
     }
 
     /**
-     * Get a QuantumView subscription
+     * Get a QuantumView subscription.
      *
-     * @param string $name Name of subscription requested by user.
+     * @param string $name          Name of subscription requested by user.
      * @param string $beginDateTime Beginning date time for the retrieval criteria of the subscriptions. Format: Y-m-d H:i:s or Unix timestamp.
-     * @param string $endDateTime Ending date time for the retrieval criteria of the subscriptions. Format: Y-m-d H:i:s or Unix timestamp.
-     * @param string $fileName File name of specific subscription requested by user.
-     * @param string $bookmark Bookmarks the file for next retrieval.
-     * @return ArrayObject
+     * @param string $endDateTime   Ending date time for the retrieval criteria of the subscriptions. Format: Y-m-d H:i:s or Unix timestamp.
+     * @param string $fileName      File name of specific subscription requested by user.
+     * @param string $bookmark      Bookmarks the file for next retrieval.
+     *
      * @throws Exception
+     *
+     * @return ArrayObject
      */
     public function getSubscription($name = null, $beginDateTime = null, $endDateTime = null, $fileName = null, $bookmark = null)
     {
@@ -109,17 +110,17 @@ class QuantumView extends Ups
         $response = $this->response->getResponse();
 
         if (null === $response) {
-            throw new Exception("Failure (0): Unknown error", 0);
+            throw new Exception('Failure (0): Unknown error', 0);
         }
 
         if ($response->Response->ResponseStatusCode == 0) {
             throw new Exception(
                 "Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}",
-                (int)$response->Response->Error->ErrorCode
+                (int) $response->Response->Error->ErrorCode
             );
         } else {
             if (isset($response->Bookmark)) {
-                $this->setBookmark((string)$response->Bookmark);
+                $this->setBookmark((string) $response->Bookmark);
             } else {
                 $this->setBookmark(null);
             }
@@ -129,7 +130,7 @@ class QuantumView extends Ups
     }
 
     /**
-     * Create the QuantumView request
+     * Create the QuantumView request.
      *
      * @return string
      */
@@ -139,65 +140,66 @@ class QuantumView extends Ups
         $xml->formatOutput = true;
 
         // Create the QuantumViewRequest element
-        $quantumViewRequest = $xml->appendChild($xml->createElement("QuantumViewRequest"));
+        $quantumViewRequest = $xml->appendChild($xml->createElement('QuantumViewRequest'));
         $quantumViewRequest->setAttribute('xml:lang', 'en-US');
 
         // Create the SubscriptionRequest element
         if (null !== $this->name || null !== $this->beginDateTime || null !== $this->fileName) {
-            $subscriptionRequest = $quantumViewRequest->appendChild($xml->createElement("SubscriptionRequest"));
+            $subscriptionRequest = $quantumViewRequest->appendChild($xml->createElement('SubscriptionRequest'));
 
             // Subscription name
             if (null !== $this->name) {
-                $subscriptionRequest->appendChild($xml->createElement("Name", $this->name));
+                $subscriptionRequest->appendChild($xml->createElement('Name', $this->name));
             }
 
             // Date Time Range
             if (null !== $this->beginDateTime) {
-                $dateTimeRange = $subscriptionRequest->appendChild($xml->createElement("DateTimeRange"));
-                $dateTimeRange->appendChild($xml->createElement("BeginDateTime", $this->beginDateTime));
-                $dateTimeRange->appendChild($xml->createElement("EndDateTime", $this->endDateTime));
+                $dateTimeRange = $subscriptionRequest->appendChild($xml->createElement('DateTimeRange'));
+                $dateTimeRange->appendChild($xml->createElement('BeginDateTime', $this->beginDateTime));
+                $dateTimeRange->appendChild($xml->createElement('EndDateTime', $this->endDateTime));
 
                 // File name
-            } else if (null !== $this->fileName) {
-                $subscriptionRequest->appendChild($xml->createElement("FileName", $this->fileName));
+            } elseif (null !== $this->fileName) {
+                $subscriptionRequest->appendChild($xml->createElement('FileName', $this->fileName));
             }
         }
 
         // Create the Bookmark element
         if (null !== $this->bookmark) {
-            $quantumViewRequest->appendChild($xml->createElement("Bookmark", $this->bookmark));
+            $quantumViewRequest->appendChild($xml->createElement('Bookmark', $this->bookmark));
         }
 
         // Create the Request element
-        $request = $quantumViewRequest->appendChild($xml->createElement("Request"));
+        $request = $quantumViewRequest->appendChild($xml->createElement('Request'));
 
         $node = $xml->importNode($this->createTransactionNode(), true);
         $request->appendChild($node);
 
-        $request->appendChild($xml->createElement("RequestAction", "QVEvents"));
+        $request->appendChild($xml->createElement('RequestAction', 'QVEvents'));
 
         return $xml->saveXML();
     }
 
     /**
-     * Format the response
+     * Format the response.
      *
      * @param SimpleXMLElement $response
+     *
      * @return ArrayObject
      */
     private function formatResponse(SimpleXMLElement $response)
     {
-        $eventsException = array('FileName', 'StatusType');
-        $output = new ArrayObject;
+        $eventsException = ['FileName', 'StatusType'];
+        $output = new ArrayObject();
 
         // Loop subscription files
         foreach ($response->QuantumViewEvents->SubscriptionEvents->SubscriptionFile as $subcriptionFile) {
             foreach ($subcriptionFile as $eventName => $event) {
                 if (!in_array($eventName, $eventsException)) {
                     $event = $this->convertXmlObject($event);
-                    $event = (object)array_merge(
-                        array('Type' => $eventName),
-                        (array)$event
+                    $event = (object) array_merge(
+                        ['Type' => $eventName],
+                        (array) $event
                     );
                     $output->append($event);
                 }
@@ -208,7 +210,7 @@ class QuantumView extends Ups
     }
 
     /**
-     * Return true if request has a bookmark
+     * Return true if request has a bookmark.
      *
      * @return bool
      */
@@ -218,7 +220,7 @@ class QuantumView extends Ups
     }
 
     /**
-     * Return the bookmark
+     * Return the bookmark.
      *
      * @return string|null
      */
@@ -229,11 +231,13 @@ class QuantumView extends Ups
 
     /**
      * @param string|null $bookmark
+     *
      * @return $this
      */
     public function setBookmark($bookmark)
     {
         $this->bookmark = $bookmark;
+
         return $this;
     }
 
@@ -245,16 +249,19 @@ class QuantumView extends Ups
         if (null === $this->request) {
             $this->request = new Request($this->logger);
         }
+
         return $this->request;
     }
 
     /**
      * @param RequestInterface $request
+     *
      * @return $this
      */
     public function setRequest(RequestInterface $request)
     {
         $this->request = $request;
+
         return $this;
     }
 
@@ -268,11 +275,13 @@ class QuantumView extends Ups
 
     /**
      * @param ResponseInterface $response
+     *
      * @return $this
      */
     public function setResponse(ResponseInterface $response)
     {
         $this->response = $response;
+
         return $this;
     }
 }

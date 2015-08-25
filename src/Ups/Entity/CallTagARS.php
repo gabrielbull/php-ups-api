@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 class CallTagARS
@@ -15,7 +16,7 @@ class CallTagARS
     public $Number;
     public $Code;
 
-    function __construct($response = null)
+    public function __construct($response = null)
     {
         if (null != $response) {
             if (isset($response->Number)) {
@@ -26,4 +27,4 @@ class CallTagARS
             }
         }
     }
-} 
+}

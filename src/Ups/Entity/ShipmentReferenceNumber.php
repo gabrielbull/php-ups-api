@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 class ShipmentReferenceNumber
@@ -8,7 +9,7 @@ class ShipmentReferenceNumber
     public $Code;
     public $Value;
 
-    function __construct($response = null)
+    public function __construct($response = null)
     {
         if (null != $response) {
             if (isset($response->Number)) {
@@ -25,4 +26,4 @@ class ShipmentReferenceNumber
             }
         }
     }
-} 
+}

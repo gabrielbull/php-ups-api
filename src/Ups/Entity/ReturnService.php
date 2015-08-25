@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 use DOMDocument;
@@ -7,7 +8,6 @@ use Ups\NodeInterface;
 
 class ReturnService implements NodeInterface
 {
-
     const PRINT_AND_MAIL_PNM = 2;
     const RETURN_SERVICE_1_ATTEMPT_RS1 = 3;
     const RETURN_SERVICE_3_ATTEMPT_RS3 = 5;
@@ -25,12 +25,12 @@ class ReturnService implements NodeInterface
     const PACK_AND_COLLECT_SERVICE_3_ATTEMPT_BOX_4 = 19;
     const PACK_AND_COLLECT_SERVICE_3_ATTEMPT_BOX_5 = 20;
 
-    private static $serviceNames = array(
-        2 => 'UPS Print and Mail (PNM)',
-        3 => 'UPS Return Service 1-Attempt (RS1)',
-        5 => 'UPS Return Service 3-Attempt (RS3)',
-        8 => 'UPS Electronic Return Label (ERL)',
-        9 => 'UPS Print Return Label (PRL)',
+    private static $serviceNames = [
+        2  => 'UPS Print and Mail (PNM)',
+        3  => 'UPS Return Service 1-Attempt (RS1)',
+        5  => 'UPS Return Service 3-Attempt (RS3)',
+        8  => 'UPS Electronic Return Label (ERL)',
+        9  => 'UPS Print Return Label (PRL)',
         10 => 'UPS Exchange Print Return Label',
         11 => 'UPS Pack & Collect Service 1-Attempt Box 1',
         12 => 'UPS Pack & Collect Service 1-Attempt Box 2',
@@ -41,11 +41,11 @@ class ReturnService implements NodeInterface
         17 => 'UPS Pack & Collect Service 3-Attempt Box 2',
         18 => 'UPS Pack & Collect Service 3-Attempt Box 3',
         19 => 'UPS Pack & Collect Service 3-Attempt Box 4',
-        20 => 'UPS Pack & Collect Service 3-Attempt Box 5'
-    );
+        20 => 'UPS Pack & Collect Service 3-Attempt Box 5',
+    ];
 
     /**
-     * @var integer
+     * @var int
      */
     private $code;
 
@@ -71,6 +71,7 @@ class ReturnService implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
+     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -81,6 +82,7 @@ class ReturnService implements NodeInterface
 
         $node = $document->createElement('ReturnService');
         $node->appendChild($document->createElement('Code', $this->getCode()));
+
         return $node;
     }
 
@@ -93,7 +95,7 @@ class ReturnService implements NodeInterface
     }
 
     /**
-     * @return integer
+     * @return int
      */
     public function getCode()
     {
@@ -102,12 +104,13 @@ class ReturnService implements NodeInterface
 
     /**
      * @param string $code
+     *
      * @return $this
      */
     public function setCode($code)
     {
         $this->code = $code;
+
         return $this;
     }
-
 }

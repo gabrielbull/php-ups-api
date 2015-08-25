@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 use DOMDocument;
@@ -7,7 +8,6 @@ use Ups\NodeInterface;
 
 class Locale implements NodeInterface
 {
-
     /**
      * @var string
      */
@@ -20,6 +20,7 @@ class Locale implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
+     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -46,11 +47,13 @@ class Locale implements NodeInterface
 
     /**
      * @param string $language
+     *
      * @return Locale
      */
     public function setLanguage($language)
     {
         $this->language = $language;
+
         return $this;
     }
 
@@ -64,12 +67,13 @@ class Locale implements NodeInterface
 
     /**
      * @param string $dialect
+     *
      * @return Locale
      */
     public function setDialect($dialect)
     {
         $this->dialect = $dialect;
+
         return $this;
     }
-
 }

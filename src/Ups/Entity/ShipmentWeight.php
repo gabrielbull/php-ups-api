@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 use DOMDocument;
@@ -7,13 +8,12 @@ use Ups\NodeInterface;
 
 class ShipmentWeight implements NodeInterface
 {
-
     private $unitOfMeasurement;
     private $weight;
 
-    function __construct($response = null)
+    public function __construct($response = null)
     {
-        $this->setUnitOfMeasurement(new UnitOfMeasurement);
+        $this->setUnitOfMeasurement(new UnitOfMeasurement());
 
         if (null != $response) {
             if (isset($response->UnitOfMeasurement)) {
@@ -27,6 +27,7 @@ class ShipmentWeight implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
+     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -38,6 +39,7 @@ class ShipmentWeight implements NodeInterface
         $node = $document->createElement('ShipmentWeight');
         $node->appendChild($document->createElement('Weight', $this->getWeight()));
         $node->appendChild($this->getUnitOfMeasurement()->toNode($document));
+
         return $node;
     }
 
@@ -60,5 +62,4 @@ class ShipmentWeight implements NodeInterface
     {
         return $this->unitOfMeasurement;
     }
-
-} 
+}

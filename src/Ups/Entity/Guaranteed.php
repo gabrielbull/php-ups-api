@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 class Guaranteed
@@ -9,7 +10,7 @@ class Guaranteed
     public $Code;
     public $Description;
 
-    function __construct($response = null)
+    public function __construct($response = null)
     {
         $this->Code = self::G_NO;
 
@@ -22,4 +23,4 @@ class Guaranteed
             }
         }
     }
-} 
+}

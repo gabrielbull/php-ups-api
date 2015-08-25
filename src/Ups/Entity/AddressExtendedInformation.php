@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 class AddressExtendedInformation
@@ -7,7 +8,7 @@ class AddressExtendedInformation
     public $Low;
     public $High;
 
-    function __construct($response = null)
+    public function __construct($response = null)
     {
         if (null != $response) {
             if (isset($response->Type)) {
@@ -21,4 +22,4 @@ class AddressExtendedInformation
             }
         }
     }
-} 
+}

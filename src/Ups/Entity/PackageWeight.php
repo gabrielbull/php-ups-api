@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 use DOMDocument;
@@ -25,11 +26,12 @@ class PackageWeight implements NodeInterface
 
     public function __construct()
     {
-        $this->setUnitOfMeasurement(new UnitOfMeasurement);
+        $this->setUnitOfMeasurement(new UnitOfMeasurement());
     }
 
     /**
      * @param null|DOMDocument $document
+     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -41,6 +43,7 @@ class PackageWeight implements NodeInterface
         $node = $document->createElement('PackageWeight');
         $node->appendChild($document->createElement('Weight', $this->getWeight()));
         $node->appendChild($this->getUnitOfMeasurement()->toNode($document));
+
         return $node;
     }
 
@@ -54,12 +57,14 @@ class PackageWeight implements NodeInterface
 
     /**
      * @param UnitOfMeasurement $unitOfMeasurement
+     *
      * @return $this
      */
     public function setUnitOfMeasurement(UnitOfMeasurement $unitOfMeasurement)
     {
         $this->UnitOfMeasurement = $unitOfMeasurement;
         $this->unitOfMeasurement = $unitOfMeasurement;
+
         return $this;
     }
 
@@ -73,12 +78,14 @@ class PackageWeight implements NodeInterface
 
     /**
      * @param string $weight
+     *
      * @return $this
      */
     public function setWeight($weight)
     {
         $this->Weight = $weight;
         $this->weight = $weight;
+
         return $this;
     }
 }

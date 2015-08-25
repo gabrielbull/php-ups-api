@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 use DOMDocument;
@@ -7,7 +8,6 @@ use Ups\NodeInterface;
 
 class ShipmentIndicationType implements NodeInterface
 {
-
     /**
      * @var
      */
@@ -19,13 +19,14 @@ class ShipmentIndicationType implements NodeInterface
     private $description;
 
     /**
-     * Codes
+     * Codes.
      */
     const CODE_HOLD_FOR_PICKUP_ACCESS_POINT = '01';
     const CODE_ACCESS_POINT_DELIVERY = '02';
 
     /**
      * @param null|DOMDocument $document
+     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -38,7 +39,7 @@ class ShipmentIndicationType implements NodeInterface
 
         $node->appendChild($document->createElement('Code', $this->getCode()));
 
-        if($this->getDescription()) {
+        if ($this->getDescription()) {
             $node->appendChild($document->createElement('Description', $this->getDescription()));
         }
 
@@ -76,5 +77,4 @@ class ShipmentIndicationType implements NodeInterface
     {
         $this->description = $description;
     }
-
 }

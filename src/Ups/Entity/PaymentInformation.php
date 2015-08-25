@@ -2,14 +2,12 @@
 
 namespace Ups\Entity;
 
-
-class PaymentInformation {
-
+class PaymentInformation
+{
     public $Prepaid;
 
-    function __construct($type = 'prepaid', $attributes = null)
+    public function __construct($type = 'prepaid', $attributes = null)
     {
-
         switch ($type) {
             case 'prepaid':
                 $this->Prepaid = new \stdClass();
@@ -22,6 +20,5 @@ class PaymentInformation {
             default:
                 //TODO
         }
-
     }
-} 
+}

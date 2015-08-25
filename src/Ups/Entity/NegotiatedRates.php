@@ -4,13 +4,12 @@ namespace Ups\Entity;
 
 class NegotiatedRates
 {
-
     /**
      * @var NetSummaryCharges
      */
     public $NetSummaryCharges;
 
-    function __construct($response = null)
+    public function __construct($response = null)
     {
         $this->NetSummaryCharges = new NetSummaryCharges();
 
@@ -20,5 +19,4 @@ class NegotiatedRates
             }
         }
     }
-
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 class PackageReferenceNumber
@@ -8,7 +9,7 @@ class PackageReferenceNumber
     public $Code;
     public $Value;
 
-    function __construct($response = null)
+    public function __construct($response = null)
     {
         if (null != $response) {
             if (isset($response->Number)) {
@@ -25,4 +26,4 @@ class PackageReferenceNumber
             }
         }
     }
-} 
+}

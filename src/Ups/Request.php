@@ -4,6 +4,7 @@ namespace Ups;
 
 use DateTime;
 use Exception;
+use GuzzleHttp\Client as Guzzle;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\TransferException;
@@ -12,7 +13,6 @@ use Psr\Log\LoggerInterface;
 use SimpleXMLElement;
 use Ups\Exception\EndpointConnectionException;
 use Ups\Exception\InvalidResponseException;
-use GuzzleHttp\Client as Guzzle;
 
 class Request implements RequestInterface, LoggerAwareInterface
 {
@@ -59,14 +59,16 @@ class Request implements RequestInterface, LoggerAwareInterface
     }
 
     /**
-     * Send request to UPS
+     * Send request to UPS.
      *
-     * @param string $access The access request xml
-     * @param string $request The request xml
+     * @param string $access      The access request xml
+     * @param string $request     The request xml
      * @param string $endpointurl The UPS API Endpoint URL
-     * @return ResponseInterface
+     *
      * @throws Exception
-     * todo: make access, request and endpointurl nullable to make the testable
+     *                   todo: make access, request and endpointurl nullable to make the testable
+     *
+     * @return ResponseInterface
      */
     public function request($access, $request, $endpointurl)
     {
@@ -77,15 +79,15 @@ class Request implements RequestInterface, LoggerAwareInterface
         // Log request
         $id = null;
         if ($this->logger) {
-            $date = new DateTime;
+            $date = new DateTime();
             $id = $date->format('YmdHisu');
             $this->logger->info('Request To UPS API', [
-                'id' => $id,
-                'endpointurl' => $this->getEndpointUrl()
+                'id'          => $id,
+                'endpointurl' => $this->getEndpointUrl(),
             ]);
-            $this->logger->debug('Request: ' . $this->getRequest(), [
-                'id' => $id,
-                'endpointurl' => $this->getEndpointUrl()
+            $this->logger->debug('Request: '.$this->getRequest(), [
+                'id'          => $id,
+                'endpointurl' => $this->getEndpointUrl(),
             ]);
         }
 
@@ -95,23 +97,23 @@ class Request implements RequestInterface, LoggerAwareInterface
             $response = $client->post(
                 $this->getEndpointUrl(),
                 [
-                    'body' => $this->getAccess() . $this->getRequest(),
+                    'body'    => $this->getAccess().$this->getRequest(),
                     'headers' => [
-                        'Content-type' => 'application/x-www-form-urlencoded; charset=utf-8',
-                        'Accept-Charset' => 'UTF-8'
+                        'Content-type'   => 'application/x-www-form-urlencoded; charset=utf-8',
+                        'Accept-Charset' => 'UTF-8',
                     ],
-                    'http_errors' => true
+                    'http_errors' => true,
                 ]
             );
 
             if ($this->logger) {
                 $this->logger->info('Response from UPS API', [
-                    'id' => $id,
-                    'endpointurl' => $this->getEndpointUrl()
+                    'id'          => $id,
+                    'endpointurl' => $this->getEndpointUrl(),
                 ]);
-                $this->logger->debug('Response: ' . $response->getBody(), [
-                    'id' => $id,
-                    'endpointurl' => $this->getEndpointUrl()
+                $this->logger->debug('Response: '.$response->getBody(), [
+                    'id'          => $id,
+                    'endpointurl' => $this->getEndpointUrl(),
                 ]);
             }
 
@@ -123,38 +125,37 @@ class Request implements RequestInterface, LoggerAwareInterface
                 }
 
                 $xml = new SimpleXMLElement($body);
-                if(isset($xml->Response) && isset($xml->Response->ResponseStatusCode)) {
+                if (isset($xml->Response) && isset($xml->Response->ResponseStatusCode)) {
                     if ($xml->Response->ResponseStatusCode == 1) {
-                        $responseInstance = new Response;
+                        $responseInstance = new Response();
+
                         return $responseInstance->setText($body)->setResponse($xml);
+                    } elseif ($xml->Response->ResponseStatusCode == 0) {
+                        throw new InvalidResponseException('Failure: '.$xml->Response->Error->ErrorDescription.' ('.$xml->Response->Error->ErrorCode.')');
                     }
-                    elseif ($xml->Response->ResponseStatusCode == 0) {
-                        throw new InvalidResponseException('Failure: ' . $xml->Response->Error->ErrorDescription . ' (' . $xml->Response->Error->ErrorCode . ')');
-                    }
-                }
-                else {
+                } else {
                     throw new InvalidResponseException('Failure: response is in an unexpected format.');
                 }
             }
         } catch (ConnectException $e) { // A GuzzleHttp\Exception\ConnectException exception is thrown in the event of a networking error.
             if ($this->logger) {
                 $this->logger->alert('Connection to endpoint failed', [
-                    'id' => $id,
-                    'endpointurl' => $this->getEndpointUrl()
+                    'id'          => $id,
+                    'endpointurl' => $this->getEndpointUrl(),
                 ]);
             }
 
-            throw new EndpointConnectionException("Failure: Connection to Endpoint URL failed.");
+            throw new EndpointConnectionException('Failure: Connection to Endpoint URL failed.');
         } catch (TransferException $e) { // GuzzleHttp\Exception\TransferException. Catching this exception will catch any exception that can be thrown while transferring requests.
             // Includes the ConnectException, but we want separate errors
             if ($this->logger) {
                 $this->logger->alert('Transfer from endpoint failed', [
-                    'id' => $id,
-                    'endpointurl' => $this->getEndpointUrl()
+                    'id'          => $id,
+                    'endpointurl' => $this->getEndpointUrl(),
                 ]);
             }
 
-            throw new EndpointConnectionException("Failure: Transfer from endpoint failed.");
+            throw new EndpointConnectionException('Failure: Transfer from endpoint failed.');
         } catch (ClientException $e) { // A GuzzleHttp\Exception\ClientException is thrown for 400 level errors if the http_errors request option is set to true.
             throw $e;
         } catch (InvalidResponseException $e) {
@@ -166,8 +167,8 @@ class Request implements RequestInterface, LoggerAwareInterface
         } catch (Exception $e) {
             if ($this->logger) {
                 $this->logger->alert($e->getMessage(), [
-                    'id' => $id,
-                    'endpointurl' => $this->getEndpointUrl()
+                    'id'          => $id,
+                    'endpointurl' => $this->getEndpointUrl(),
                 ]);
             }
 
@@ -177,11 +178,13 @@ class Request implements RequestInterface, LoggerAwareInterface
 
     /**
      * @param $access
+     *
      * @return $this
      */
     public function setAccess($access)
     {
         $this->access = $access;
+
         return $this;
     }
 
@@ -195,11 +198,13 @@ class Request implements RequestInterface, LoggerAwareInterface
 
     /**
      * @param $request
+     *
      * @return $this
      */
     public function setRequest($request)
     {
         $this->request = $request;
+
         return $this;
     }
 
@@ -213,11 +218,13 @@ class Request implements RequestInterface, LoggerAwareInterface
 
     /**
      * @param $endpointUrl
+     *
      * @return $this
      */
     public function setEndpointUrl($endpointUrl)
     {
         $this->endpointUrl = $endpointUrl;
+
         return $this;
     }
 

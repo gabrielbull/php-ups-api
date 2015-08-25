@@ -1,9 +1,10 @@
 <?php
+
 namespace Ups\Tests;
 
-use Ups;
 use Exception;
 use PHPUnit_Framework_TestCase;
+use Ups;
 
 class TimeInTransitTest extends PHPUnit_Framework_TestCase
 {
@@ -12,25 +13,25 @@ class TimeInTransitTest extends PHPUnit_Framework_TestCase
         $tit = new Ups\TimeInTransit();
         $tit->setRequest($request = new RequestMock());
 
-        $data = new \Ups\Entity\TimeInTransitRequest;
+        $data = new \Ups\Entity\TimeInTransitRequest();
 
         // Addresses
-        $from = new \Ups\Entity\AddressArtifactFormat;
+        $from = new \Ups\Entity\AddressArtifactFormat();
         $from->setPoliticalDivision3('Amsterdam');
         $from->setPostcodePrimaryLow('1000AA');
         $from->setCountryCode('NL');
         $data->setTransitFrom($from);
 
-        $to = new \Ups\Entity\AddressArtifactFormat;
+        $to = new \Ups\Entity\AddressArtifactFormat();
         $to->setPoliticalDivision3('Amsterdam');
         $to->setPostcodePrimaryLow('1000AA');
         $to->setCountryCode('NL');
         $data->setTransitTo($to);
 
         // Weight
-        $shipmentWeight = new \Ups\Entity\ShipmentWeight;
+        $shipmentWeight = new \Ups\Entity\ShipmentWeight();
         $shipmentWeight->setWeight(5.00);
-        $unit = new \Ups\Entity\UnitOfMeasurement;
+        $unit = new \Ups\Entity\UnitOfMeasurement();
         $unit->setCode(\Ups\Entity\UnitOfMeasurement::UOM_KGS);
         $shipmentWeight->setUnitOfMeasurement($unit);
         $data->setShipmentWeight($shipmentWeight);
@@ -39,7 +40,7 @@ class TimeInTransitTest extends PHPUnit_Framework_TestCase
         $data->setTotalPackagesInShipment(2);
 
         // InvoiceLines
-        $invoiceLineTotal = new \Ups\Entity\InvoiceLineTotal;
+        $invoiceLineTotal = new \Ups\Entity\InvoiceLineTotal();
         $invoiceLineTotal->setMonetaryValue(100.00);
         $invoiceLineTotal->setCurrencyCode('EUR');
         $data->setInvoiceLineTotal($invoiceLineTotal);
@@ -50,7 +51,8 @@ class TimeInTransitTest extends PHPUnit_Framework_TestCase
         try {
             // Get data
             $times = $tit->getTimeInTransit($data);
-        } catch (Exception $e) {}
+        } catch (Exception $e) {
+        }
 
         $this->assertEquals(
             $request->getRequestXml(),
@@ -63,7 +65,8 @@ class TimeInTransitTest extends PHPUnit_Framework_TestCase
         try {
             // Get data
             $times = $tit->getTimeInTransit($data);
-        } catch (Exception $e) {}
+        } catch (Exception $e) {
+        }
 
         $this->assertEquals(
             $request->getRequestXml(),
@@ -75,7 +78,7 @@ class TimeInTransitTest extends PHPUnit_Framework_TestCase
     {
         $tit = new Ups\TimeInTransit();
         $tit->setRequest($request = new RequestMock(null, '/TimeInTransit/Response1.xml'));
-        $times = $tit->getTimeInTransit(new Ups\Entity\TimeInTransitRequest);
+        $times = $tit->getTimeInTransit(new Ups\Entity\TimeInTransitRequest());
 
         // Test response
         $this->assertInstanceOf('\Ups\Entity\TimeInTransitResponse', $times);
@@ -91,12 +94,11 @@ class TimeInTransitTest extends PHPUnit_Framework_TestCase
         $this->assertAttributeCount(3, 'ServiceSummary', $times);
     }
 
-
     public function testRequestOddCharacterParse()
     {
         $tit = new Ups\TimeInTransit();
         $tit->setRequest($request = new RequestMock(null, '/TimeInTransit/Response2.xml'));
-        $times = $tit->getTimeInTransit(new Ups\Entity\TimeInTransitRequest);
+        $times = $tit->getTimeInTransit(new Ups\Entity\TimeInTransitRequest());
 
         // Test response
         $this->assertInstanceOf('\Ups\Entity\TimeInTransitResponse', $times);
@@ -116,12 +118,10 @@ class TimeInTransitTest extends PHPUnit_Framework_TestCase
     {
         $tit = new Ups\TimeInTransit();
         $tit->setRequest($request = new RequestMock(null, '/TimeInTransit/Response2.xml'));
-        $times = $tit->getTimeInTransit(new Ups\Entity\TimeInTransitRequest);
-
+        $times = $tit->getTimeInTransit(new Ups\Entity\TimeInTransitRequest());
 
         // Test response
 
         $this->assertContains('Ë', $times->TransitTo->PoliticalDivision3);
     }
-
 }

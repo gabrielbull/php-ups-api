@@ -1,9 +1,10 @@
 <?php
+
 namespace Ups\Tests;
 
-use Ups;
 use Exception;
 use PHPUnit_Framework_TestCase;
+use Ups;
 
 class QuantumViewTest extends PHPUnit_Framework_TestCase
 {
@@ -15,7 +16,8 @@ class QuantumViewTest extends PHPUnit_Framework_TestCase
         $timeFormatted = $quantumView->formatDateTime($time);
         try {
             $quantumView->getSubscription(null, $time, $time);
-        } catch (Exception $e) {}
+        } catch (Exception $e) {
+        }
 
         $this->assertEquals(
             $request->getRequestXml(),
@@ -25,7 +27,8 @@ class QuantumViewTest extends PHPUnit_Framework_TestCase
         $quantumView->setContext('unit test');
         try {
             $quantumView->getSubscription(null, $time, $time);
-        } catch (Exception $e) {}
+        } catch (Exception $e) {
+        }
 
         $this->assertEquals(
             $request->getRequestXml(),
@@ -56,7 +59,7 @@ class QuantumViewTest extends PHPUnit_Framework_TestCase
         $quantumView->getSubscription(null, (time() - 24 * 6 * 3600));
 
         $response = $quantumView->getResponse()->getResponse();
-        $this->assertEquals('unit test', (string)$response->Response->TransactionReference->CustomerContext);
+        $this->assertEquals('unit test', (string) $response->Response->TransactionReference->CustomerContext);
     }
 
     public function testSubscriptionBookmark()

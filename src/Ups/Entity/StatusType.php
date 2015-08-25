@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 class StatusType
@@ -6,7 +7,7 @@ class StatusType
     public $Code;
     public $Description;
 
-    function __construct($response = null)
+    public function __construct($response = null)
     {
         if (null != $response) {
             if (isset($response->Code)) {
@@ -17,4 +18,4 @@ class StatusType
             $this->Description = $response->Description;
         }
     }
-} 
+}

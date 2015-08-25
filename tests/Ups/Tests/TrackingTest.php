@@ -1,9 +1,10 @@
 <?php
+
 namespace Ups\Tests;
 
-use Ups;
 use Exception;
 use PHPUnit_Framework_TestCase;
+use Ups;
 
 class TrackingTest extends PHPUnit_Framework_TestCase
 {
@@ -13,7 +14,8 @@ class TrackingTest extends PHPUnit_Framework_TestCase
         $tracking->setRequest($request = new RequestMock());
         try {
             $tracking->track('1Z12345E0000000000');
-        } catch (Exception $e) {}
+        } catch (Exception $e) {
+        }
 
         $this->assertEquals(
             $request->getRequestXml(),

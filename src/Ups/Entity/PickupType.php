@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 use DOMDocument;
@@ -10,9 +11,9 @@ class PickupType implements NodeInterface
     const PKT_DAILY = '01';
     const PKT_CUSTOMERCOUNTER = '03';
     const PKT_ONETIME = '06';
-    const PKT_AIR_ONCALL = "07";
-    const PKT_LETTERCENTER = "19";
-    const PKT_AIR_SERVICECENTER = "20";
+    const PKT_AIR_ONCALL = '07';
+    const PKT_LETTERCENTER = '19';
+    const PKT_AIR_SERVICECENTER = '20';
 
     /** @deprecated */
     public $Code = self::PKT_DAILY;
@@ -31,6 +32,7 @@ class PickupType implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
+     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -42,6 +44,7 @@ class PickupType implements NodeInterface
         $node = $document->createElement('PickupType');
         $node->appendChild($document->createElement('Code', $this->getCode()));
         $node->appendChild($document->createElement('Description', $this->getDescription()));
+
         return $node;
     }
 
@@ -55,11 +58,13 @@ class PickupType implements NodeInterface
 
     /**
      * @param string $code
+     *
      * @return $this
      */
     public function setCode($code)
     {
         $this->code = $code;
+
         return $this;
     }
 
@@ -73,11 +78,13 @@ class PickupType implements NodeInterface
 
     /**
      * @param string $description
+     *
      * @return $this
      */
     public function setDescription($description)
     {
         $this->description = $description;
+
         return $this;
     }
 }

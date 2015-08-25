@@ -1,8 +1,9 @@
 <?php
+
 namespace Ups\Tests;
 
-use Ups\ResponseInterface;
 use SimpleXMLElement;
+use Ups\ResponseInterface;
 
 class ResponseMock implements ResponseInterface
 {
@@ -18,11 +19,13 @@ class ResponseMock implements ResponseInterface
 
     /**
      * @param SimpleXMLElement $response
+     *
      * @return $this
      */
     public function setResponse(SimpleXMLElement $response)
     {
         $this->response = $response;
+
         return $this;
     }
 
@@ -44,11 +47,13 @@ class ResponseMock implements ResponseInterface
 
     /**
      * @param string $text
+     *
      * @return $this
      */
     public function setText($text)
     {
         $this->text = $text;
+
         return $this;
     }
 }

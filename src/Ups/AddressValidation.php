@@ -1,16 +1,16 @@
 <?php
+
 namespace Ups;
 
 use DOMDocument;
-use SimpleXMLElement;
 use Exception;
-use stdClass;
 use Psr\Log\LoggerInterface;
+use SimpleXMLElement;
+use stdClass;
+use Ups\Entity\Address;
 
 /**
- * Address Validation API Wrapper
- *
- * @package ups
+ * Address Validation API Wrapper.
  */
 class AddressValidation extends Ups
 {
@@ -23,6 +23,7 @@ class AddressValidation extends Ups
 
     /**
      * @var ResponseInterface
+     *
      * @todo make private
      */
     public $response;
@@ -30,30 +31,30 @@ class AddressValidation extends Ups
     /**
      * @var int
      */
-    private $requestOption; 
-    
+    private $requestOption;
+
     /**
-     * @var address
+     * @var Address
      */
     private $address;
-    
+
     /**
      * @var int
      */
     private $maxSuggestion;
 
     /**
-     * Request Options
+     * Request Options.
      */
     const REQUEST_OPTION_ADDRESS_VALIDATION = 1;
     const REQUEST_OPTION_ADDRESS_CLASSIFICATION = 2;
     const REQUEST_OPTION_ADDRESS_VALIDATION_AND_CLASSIFICATION = 3;
-    
+
     /**
-     * @param string|null $accessKey UPS License Access Key
-     * @param string|null $userId UPS User ID
-     * @param string|null $password UPS User Password
-     * @param bool $useIntegration Determine if we should use production or CIE URLs.
+     * @param string|null      $accessKey      UPS License Access Key
+     * @param string|null      $userId         UPS User ID
+     * @param string|null      $password       UPS User Password
+     * @param bool             $useIntegration Determine if we should use production or CIE URLs.
      * @param RequestInterface $request
      * @param LoggerInterface PSR3 compatible logger (optional)
      */
@@ -65,23 +66,24 @@ class AddressValidation extends Ups
         parent::__construct($accessKey, $userId, $password, $useIntegration, $logger);
     }
 
-
     /**
-     * Get address suggestions from UPS
+     * Get address suggestions from UPS.
      *
      * @param $address
      * @param int $requestOption
      * @param int $maxSuggestion
-     * @return stdClass
+     *
      * @throws Exception
+     *
+     * @return stdClass
      */
     public function validate($address, $requestOption = self::REQUEST_OPTION_ADDRESS_VALIDATION, $maxSuggestion = 15)
     {
-        if($maxSuggestion > 50) {
+        if ($maxSuggestion > 50) {
             throw new \Exception('Maximum of 50 suggestions allowed');
         }
 
-        if(!in_array($requestOption, range(1, 3))) {
+        if (!in_array($requestOption, range(1, 3))) {
             throw new \Exception('Invalid request option supplied');
         }
 
@@ -96,22 +98,21 @@ class AddressValidation extends Ups
         $response = $this->response->getResponse();
 
         if (null === $response) {
-            throw new Exception("Failure (0): Unknown error", 0);
+            throw new Exception('Failure (0): Unknown error', 0);
         }
 
         if ($response instanceof SimpleXMLElement && $response->Response->ResponseStatusCode == 0) {
             throw new Exception(
                 "Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}",
-                (int)$response->Response->Error->ErrorCode
+                (int) $response->Response->Error->ErrorCode
             );
         } else {
             return $this->formatResponse($response);
         }
     }
-    
-    
+
     /**
-     * Create the XAV request
+     * Create the XAV request.
      *
      * @return string
      */
@@ -120,63 +121,64 @@ class AddressValidation extends Ups
         $xml = new DOMDocument();
         $xml->formatOutput = true;
 
-        $avRequest = $xml->appendChild($xml->createElement("AddressValidationRequest"));
+        $avRequest = $xml->appendChild($xml->createElement('AddressValidationRequest'));
         $avRequest->setAttribute('xml:lang', 'en-US');
 
-        $request = $avRequest->appendChild($xml->createElement("Request"));
+        $request = $avRequest->appendChild($xml->createElement('Request'));
 
         $node = $xml->importNode($this->createTransactionNode(), true);
         $request->appendChild($node);
 
-        $request->appendChild($xml->createElement("RequestAction", "XAV"));
+        $request->appendChild($xml->createElement('RequestAction', 'XAV'));
 
         if (null !== $this->requestOption) {
-            $request->appendChild($xml->createElement("RequestOption", $this->requestOption));
+            $request->appendChild($xml->createElement('RequestOption', $this->requestOption));
         }
-        
+
         if (null !== $this->maxSuggestion) {
-            $avRequest->appendChild($xml->createElement("MaximumListSize", $this->maxSuggestion));
+            $avRequest->appendChild($xml->createElement('MaximumListSize', $this->maxSuggestion));
         }
-        
+
         if (null !== $this->address) {
-            $addressNode = $avRequest->appendChild($xml->createElement("AddressKeyFormat"));
-            
-            if($this->address->getAttentionName()) {
-                $addressNode->appendChild($xml->createElement("ConsigneeName", $this->address->getAttentionName()));
-            }            
-            if($this->address->getBuildingName()) {
-                $addressNode->appendChild($xml->createElement("BuildingName", $this->address->getBuildingName()));
-            }            
-            if($this->address->getAddressLine1()) {
-                $addressNode->appendChild($xml->createElement("AddressLine", $this->address->getAddressLine1()));
-            }             
-            if($this->address->getAddressLine2()) {
-                $addressNode->appendChild($xml->createElement("AddressLine", $this->address->getAddressLine2()));
-            }            
-            if($this->address->getAddressLine3()) {
-                $addressNode->appendChild($xml->createElement("AddressLine", $this->address->getAddressLine3()));
-            }            
-            if($this->address->getStateProvinceCode()) {
-                $addressNode->appendChild($xml->createElement("PoliticalDivision2", $this->address->getStateProvinceCode()));
-            }            
-            if($this->address->getCity()) {
-                $addressNode->appendChild($xml->createElement("PoliticalDivision1", $this->address->getCity()));
-            }            
-            if($this->address->getCountryCode()) {
-                $addressNode->appendChild($xml->createElement("CountryCode", $this->address->getCountryCode()));
+            $addressNode = $avRequest->appendChild($xml->createElement('AddressKeyFormat'));
+
+            if ($this->address->getAttentionName()) {
+                $addressNode->appendChild($xml->createElement('ConsigneeName', $this->address->getAttentionName()));
             }
-            if($this->address->getPostalCode()) {
-                $addressNode->appendChild($xml->createElement("PostcodePrimaryLow", $this->address->getPostalCode()));
+            if ($this->address->getBuildingName()) {
+                $addressNode->appendChild($xml->createElement('BuildingName', $this->address->getBuildingName()));
+            }
+            if ($this->address->getAddressLine1()) {
+                $addressNode->appendChild($xml->createElement('AddressLine', $this->address->getAddressLine1()));
+            }
+            if ($this->address->getAddressLine2()) {
+                $addressNode->appendChild($xml->createElement('AddressLine', $this->address->getAddressLine2()));
+            }
+            if ($this->address->getAddressLine3()) {
+                $addressNode->appendChild($xml->createElement('AddressLine', $this->address->getAddressLine3()));
+            }
+            if ($this->address->getStateProvinceCode()) {
+                $addressNode->appendChild($xml->createElement('PoliticalDivision2', $this->address->getStateProvinceCode()));
+            }
+            if ($this->address->getCity()) {
+                $addressNode->appendChild($xml->createElement('PoliticalDivision1', $this->address->getCity()));
+            }
+            if ($this->address->getCountryCode()) {
+                $addressNode->appendChild($xml->createElement('CountryCode', $this->address->getCountryCode()));
+            }
+            if ($this->address->getPostalCode()) {
+                $addressNode->appendChild($xml->createElement('PostcodePrimaryLow', $this->address->getPostalCode()));
             }
         }
-        
+
         return $xml->saveXML();
     }
 
     /**
-     * Format the response
+     * Format the response.
      *
      * @param SimpleXMLElement $response
+     *
      * @return stdClass
      */
     private function formatResponse(SimpleXMLElement $response)
@@ -190,18 +192,21 @@ class AddressValidation extends Ups
     public function getRequest()
     {
         if (null === $this->request) {
-            $this->request = new Request;
+            $this->request = new Request();
         }
+
         return $this->request;
     }
 
     /**
      * @param RequestInterface $request
+     *
      * @return $this
      */
     public function setRequest(RequestInterface $request)
     {
         $this->request = $request;
+
         return $this;
     }
 
@@ -215,11 +220,13 @@ class AddressValidation extends Ups
 
     /**
      * @param ResponseInterface $response
+     *
      * @return $this
      */
     public function setResponse(ResponseInterface $response)
     {
         $this->response = $response;
+
         return $this;
     }
 }

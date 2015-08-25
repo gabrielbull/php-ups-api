@@ -1,11 +1,12 @@
 <?php
+
 namespace Ups\Entity;
 
 class LabelDelivery
 {
     public $LabelLinkIndicator;
 
-    function __construct($response = null)
+    public function __construct($response = null)
     {
         $this->LabelLinkIndicator = null;
 
@@ -15,4 +16,4 @@ class LabelDelivery
             }
         }
     }
-} 
+}

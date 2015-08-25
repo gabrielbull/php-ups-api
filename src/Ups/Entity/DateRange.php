@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 class DateRange
@@ -6,7 +7,7 @@ class DateRange
     public $BeginDate;
     public $EndDate;
 
-    function __construct($response = null)
+    public function __construct($response = null)
     {
         if (null != $response) {
             if (isset($response->BeginDate)) {

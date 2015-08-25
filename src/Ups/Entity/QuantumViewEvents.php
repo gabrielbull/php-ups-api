@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 class QuantumViewEvents
@@ -6,13 +7,13 @@ class QuantumViewEvents
     public $SubscriberID;
     public $SubscriptionEvents;
 
-    function __construct($response = null)
+    public function __construct($response = null)
     {
-        $this->SubscriptionEvents = array();
+        $this->SubscriptionEvents = [];
 
         if (null != $response) {
             if (isset($response->SubscriberID)) {
-                $this->SubscriberID = new $response->SubscriberID;
+                $this->SubscriberID = new $response->SubscriberID();
             }
         }
         if (isset($response->SubscriptionEvents)) {
@@ -25,4 +26,4 @@ class QuantumViewEvents
             }
         }
     }
-} 
+}

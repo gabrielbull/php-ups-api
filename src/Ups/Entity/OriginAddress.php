@@ -1,13 +1,12 @@
 <?php
+
 namespace Ups\Entity;
 
 use DOMDocument;
-use DOMElement;
 use Ups\NodeInterface;
 
 class OriginAddress implements NodeInterface
 {
-
     private $landmarkCode;
     private $phoneNumber;
     private $geoCode;
@@ -29,11 +28,11 @@ class OriginAddress implements NodeInterface
             $node->appendChild($this->getGeoCode()->toNode($document));
         }
 
-        if($this->getAddressKeyFormat()) {
+        if ($this->getAddressKeyFormat()) {
             $node->appendChild($this->getAddressKeyFormat()->toNode($document));
         }
 
-        if($this->getMaximumListSize()) {
+        if ($this->getMaximumListSize()) {
             $node->appendChild($document->createElement('MaximumListSize', $this->getMaximumListSize()));
         }
 
@@ -55,7 +54,7 @@ class OriginAddress implements NodeInterface
     {
         $maximumListSize = (int) $maximumListSize;
 
-        if($maximumListSize < 1 || $maximumListSize > 50) {
+        if ($maximumListSize < 1 || $maximumListSize > 50) {
             throw new \Exception('Maximum list size: If present, indicates the maximum number of locations the client wishes to receive in response; ranges from 1 to 50 with a default value of 10');
         }
 
@@ -125,5 +124,4 @@ class OriginAddress implements NodeInterface
     {
         $this->phoneNumber = $phoneNumber;
     }
-
 }

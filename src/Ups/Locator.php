@@ -1,22 +1,20 @@
 <?php
+
 namespace Ups;
 
 use DOMDocument;
+use Exception;
 use Psr\Log\LoggerInterface;
 use SimpleXMLElement;
-use Exception;
 use Ups\Entity\LocatorRequest;
-use Ups\Entity\LocatorResponse;
 
 /**
- * Locator API Wrapper
+ * Locator API Wrapper.
  *
- * @package ups
  * @author Stefan Doorn <stefan@efectos.nl>
  */
 class Locator extends Ups
 {
-
     private $request;
 
     const ENDPOINT = '/Locator';
@@ -32,10 +30,10 @@ class Locator extends Ups
     const OPTION_UPS_ACCESS_POINT_LOCATIONS = 64;
 
     /**
-     * @param string|null $accessKey UPS License Access Key
-     * @param string|null $userId UPS User ID
-     * @param string|null $password UPS User Password
-     * @param bool $useIntegration Determine if we should use production or CIE URLs.
+     * @param string|null      $accessKey      UPS License Access Key
+     * @param string|null      $userId         UPS User ID
+     * @param string|null      $password       UPS User Password
+     * @param bool             $useIntegration Determine if we should use production or CIE URLs.
      * @param RequestInterface $request
      * @param LoggerInterface PSR3 compatible logger (optional)
      */
@@ -47,7 +45,6 @@ class Locator extends Ups
         parent::__construct($accessKey, $userId, $password, $useIntegration, $logger);
     }
 
-
     public function getLocations(LocatorRequest $request, $requestOption = self::OPTION_UPS_ACCESS_POINT_LOCATIONS)
     {
         return $this->sendRequest($request, $requestOption);
@@ -55,11 +52,13 @@ class Locator extends Ups
 
     /**
      * Creates and sends a request for the given shipment. This handles checking for
-     * errors in the response back from UPS
+     * errors in the response back from UPS.
      *
      * @param TimeInTransitRequest $timeInTransitRequest
-     * @return TimeInTransitRequest
+     *
      * @throws Exception
+     *
+     * @return TimeInTransitRequest
      */
     private function sendRequest(LocatorRequest $request, $requestOption)
     {
@@ -68,13 +67,13 @@ class Locator extends Ups
         $response = $this->response->getResponse();
 
         if (null === $response) {
-            throw new Exception("Failure (0): Unknown error", 0);
+            throw new Exception('Failure (0): Unknown error', 0);
         }
 
         if ($response instanceof SimpleXMLElement && $response->Response->ResponseStatusCode == 0) {
             throw new Exception(
                 "Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}",
-                (int)$response->Response->Error->ErrorCode
+                (int) $response->Response->Error->ErrorCode
             );
         } else {
             return $this->formatResponse($response);
@@ -82,9 +81,10 @@ class Locator extends Ups
     }
 
     /**
-     * Create the TimeInTransit request
+     * Create the TimeInTransit request.
      *
      * @param TimeInTransitRequest $timeInTransitRequest The request details. Refer to the UPS documentation for available structure
+     *
      * @return string
      */
     private function createRequest(LocatorRequest $locatorRequest, $requestOption)
@@ -92,16 +92,16 @@ class Locator extends Ups
         $xml = new DOMDocument();
         $xml->formatOutput = true;
 
-        $trackRequest = $xml->appendChild($xml->createElement("LocatorRequest"));
+        $trackRequest = $xml->appendChild($xml->createElement('LocatorRequest'));
         $trackRequest->setAttribute('xml:lang', 'en-US');
 
-        $request = $trackRequest->appendChild($xml->createElement("Request"));
+        $request = $trackRequest->appendChild($xml->createElement('Request'));
 
         $node = $xml->importNode($this->createTransactionNode(), true);
         $request->appendChild($node);
 
-        $request->appendChild($xml->createElement("RequestAction", "Locator"));
-        $request->appendChild($xml->createElement("RequestOption", $requestOption));
+        $request->appendChild($xml->createElement('RequestAction', 'Locator'));
+        $request->appendChild($xml->createElement('RequestOption', $requestOption));
 
         // Origin Address
         $trackRequest->appendChild($locatorRequest->getOriginAddress()->toNode($xml));
@@ -110,12 +110,12 @@ class Locator extends Ups
         $trackRequest->appendChild($locatorRequest->getTranslate()->toNode($xml));
 
         // Unit of measurement
-        if($locatorRequest->getUnitOfMeasurement()) {
+        if ($locatorRequest->getUnitOfMeasurement()) {
             $trackRequest->appendChild($locatorRequest->getUnitOfMeasurement()->toNode($xml));
         }
 
         // LocationSearchCriteria
-        if($locatorRequest->getLocationSearchCriteria()) {
+        if ($locatorRequest->getLocationSearchCriteria()) {
             $trackRequest->appendChild($locatorRequest->getLocationSearchCriteria()->toNode($xml));
         }
 
@@ -125,6 +125,7 @@ class Locator extends Ups
     private function formatResponse(SimpleXMLElement $response)
     {
         unset($response->Response);
+
         return $this->convertXmlObject($response);
     }
 
@@ -136,16 +137,19 @@ class Locator extends Ups
         if (null === $this->request) {
             $this->request = new Request($this->logger);
         }
+
         return $this->request;
     }
 
     /**
      * @param RequestInterface $request
+     *
      * @return $this
      */
     public function setRequest(RequestInterface $request)
     {
         $this->request = $request;
+
         return $this;
     }
 
@@ -159,11 +163,13 @@ class Locator extends Ups
 
     /**
      * @param ResponseInterface $response
+     *
      * @return $this
      */
     public function setResponse(ResponseInterface $response)
     {
         $this->response = $response;
+
         return $this;
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 class Receipt
@@ -6,7 +7,7 @@ class Receipt
     public $HTMLImage;
     public $Image;
 
-    function __construct($response = null)
+    public function __construct($response = null)
     {
         $this->Image = new Image();
 
@@ -19,4 +20,4 @@ class Receipt
             }
         }
     }
-} 
+}

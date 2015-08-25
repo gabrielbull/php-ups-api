@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 use DOMDocument;
@@ -37,6 +38,7 @@ class PackagingType implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
+     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -48,6 +50,7 @@ class PackagingType implements NodeInterface
         $node = $document->createElement('PackagingType');
         $node->appendChild($document->createElement('Code', $this->getCode()));
         $node->appendChild($document->createElement('Description', $this->getDescription()));
+
         return $node;
     }
 
@@ -61,12 +64,14 @@ class PackagingType implements NodeInterface
 
     /**
      * @param string $code
+     *
      * @return $this
      */
     public function setCode($code)
     {
         $this->Code = $code;
         $this->code = $code;
+
         return $this;
     }
 
@@ -80,12 +85,14 @@ class PackagingType implements NodeInterface
 
     /**
      * @param string $description
+     *
      * @return $this
      */
     public function setDescription($description)
     {
         $this->Description = $description;
         $this->description = $description;
+
         return $this;
     }
 }

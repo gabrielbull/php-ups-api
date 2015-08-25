@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 use DOMDocument;
@@ -6,12 +7,10 @@ use DOMElement;
 use Ups\NodeInterface;
 
 /**
- * Class Unit
- * @package Ups\Entity
+ * Class Unit.
  */
 class Unit implements NodeInterface
 {
-
     /**
      * @var string
      */
@@ -47,6 +46,7 @@ class Unit implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
+     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -59,6 +59,7 @@ class Unit implements NodeInterface
         $node->appendChild($document->createElement('Number', $this->getNumber()));
         $node->appendChild($document->createElement('Value', $this->getValue()));
         $node->appendChild($this->getUnitOfMeasurement()->toNode($document));
+
         return $node;
     }
 
@@ -72,23 +73,26 @@ class Unit implements NodeInterface
 
     /**
      * @param string $number
+     *
      * @return $this
      */
     public function setNumber($number)
     {
         $this->number = $number;
+
         return $this;
     }
 
     /**
      * @param $value
+     *
      * @return $this
      */
     public function setValue($value)
     {
         $this->value = number_format($value, 6);
 
-        if(strlen((string) $this->value) > 19) {
+        if (strlen((string) $this->value) > 19) {
             throw new \Exception('Value too long');
         }
 
@@ -105,11 +109,13 @@ class Unit implements NodeInterface
 
     /**
      * @param UnitOfMeasurement $unit
+     *
      * @return $this
      */
     public function setUnitOfMeasurement(UnitOfMeasurement $unit)
     {
         $this->unitOfMeasurement = $unit;
+
         return $this;
     }
 

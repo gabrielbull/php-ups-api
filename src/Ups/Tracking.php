@@ -1,16 +1,15 @@
 <?php
+
 namespace Ups;
 
 use DOMDocument;
+use Exception;
 use Psr\Log\LoggerInterface;
 use SimpleXMLElement;
-use Exception;
 use stdClass;
 
 /**
- * Tracking API Wrapper
- *
- * @package ups
+ * Tracking API Wrapper.
  */
 class Tracking extends Ups
 {
@@ -23,7 +22,7 @@ class Tracking extends Ups
 
     /**
      * @var ResponseInterface
-     * // todo make private
+     *                        // todo make private
      */
     public $response;
 
@@ -38,10 +37,10 @@ class Tracking extends Ups
     private $requestOption;
 
     /**
-     * @param string|null $accessKey UPS License Access Key
-     * @param string|null $userId UPS User ID
-     * @param string|null $password UPS User Password
-     * @param bool $useIntegration Determine if we should use production or CIE URLs.
+     * @param string|null      $accessKey      UPS License Access Key
+     * @param string|null      $userId         UPS User ID
+     * @param string|null      $password       UPS User Password
+     * @param bool             $useIntegration Determine if we should use production or CIE URLs.
      * @param RequestInterface $request
      * @param LoggerInterface PSR3 compatible logger (optional)
      */
@@ -54,12 +53,14 @@ class Tracking extends Ups
     }
 
     /**
-     * Get package tracking information
+     * Get package tracking information.
      *
      * @param string $trackingNumber The package's tracking number.
-     * @param string $requestOption Optional processing. For Mail Innovations the only valid options are Last Activity and All activity.
-     * @return stdClass
+     * @param string $requestOption  Optional processing. For Mail Innovations the only valid options are Last Activity and All activity.
+     *
      * @throws Exception
+     *
+     * @return stdClass
      */
     public function track($trackingNumber, $requestOption = 'activity')
     {
@@ -73,13 +74,13 @@ class Tracking extends Ups
         $response = $this->response->getResponse();
 
         if (null === $response) {
-            throw new Exception("Failure (0): Unknown error", 0);
+            throw new Exception('Failure (0): Unknown error', 0);
         }
 
         if ($response instanceof SimpleXMLElement && $response->Response->ResponseStatusCode == 0) {
             throw new Exception(
                 "Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}",
-                (int)$response->Response->Error->ErrorCode
+                (int) $response->Response->Error->ErrorCode
             );
         } else {
             return $this->formatResponse($response);
@@ -87,7 +88,7 @@ class Tracking extends Ups
     }
 
     /**
-     * Create the Tracking request
+     * Create the Tracking request.
      *
      * @return string
      */
@@ -96,31 +97,32 @@ class Tracking extends Ups
         $xml = new DOMDocument();
         $xml->formatOutput = true;
 
-        $trackRequest = $xml->appendChild($xml->createElement("TrackRequest"));
+        $trackRequest = $xml->appendChild($xml->createElement('TrackRequest'));
         $trackRequest->setAttribute('xml:lang', 'en-US');
 
-        $request = $trackRequest->appendChild($xml->createElement("Request"));
+        $request = $trackRequest->appendChild($xml->createElement('Request'));
 
         $node = $xml->importNode($this->createTransactionNode(), true);
         $request->appendChild($node);
 
-        $request->appendChild($xml->createElement("RequestAction", "Track"));
+        $request->appendChild($xml->createElement('RequestAction', 'Track'));
 
         if (null !== $this->requestOption) {
-            $request->appendChild($xml->createElement("RequestOption", $this->requestOption));
+            $request->appendChild($xml->createElement('RequestOption', $this->requestOption));
         }
 
         if (null !== $this->trackingNumber) {
-            $trackRequest->appendChild($xml->createElement("TrackingNumber", $this->trackingNumber));
+            $trackRequest->appendChild($xml->createElement('TrackingNumber', $this->trackingNumber));
         }
 
         return $xml->saveXML();
     }
 
     /**
-     * Format the response
+     * Format the response.
      *
      * @param SimpleXMLElement $response
+     *
      * @return stdClass
      */
     private function formatResponse(SimpleXMLElement $response)
@@ -136,16 +138,19 @@ class Tracking extends Ups
         if (null === $this->request) {
             $this->request = new Request($this->logger);
         }
+
         return $this->request;
     }
 
     /**
      * @param RequestInterface $request
+     *
      * @return $this
      */
     public function setRequest(RequestInterface $request)
     {
         $this->request = $request;
+
         return $this;
     }
 
@@ -159,11 +164,13 @@ class Tracking extends Ups
 
     /**
      * @param ResponseInterface $response
+     *
      * @return $this
      */
     public function setResponse(ResponseInterface $response)
     {
         $this->response = $response;
+
         return $this;
     }
 }

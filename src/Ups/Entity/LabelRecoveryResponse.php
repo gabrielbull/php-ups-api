@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 class LabelRecoveryResponse
@@ -7,7 +8,7 @@ class LabelRecoveryResponse
     public $LabelResults;
     public $TrackingCandidate;
 
-    function __construct($response = null)
+    public function __construct($response = null)
     {
         $this->LabelResults = new LabelResults();
 
@@ -21,8 +22,6 @@ class LabelRecoveryResponse
             if (isset($response->TrackingCandidate)) {
                 $this->TrackingCandidate = new TrackingCandidate($response->TrackingCandidate);
             }
-
         }
     }
-
-} 
+}

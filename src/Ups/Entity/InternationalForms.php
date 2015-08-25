@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 use DOMDocument;
@@ -7,14 +8,13 @@ use Ups\NodeInterface;
 
 class InternationalForms implements NodeInterface
 {
-
     /**
      * @var string
      */
     private $type = self::TYPE_INVOICE;
 
     /**
-     * Form Types
+     * Form Types.
      */
     const TYPE_INVOICE = '01';
     const TYPE_CO = '03';
@@ -27,7 +27,7 @@ class InternationalForms implements NodeInterface
     const TYPE_UPS_PREMIUM_CARE = '10';
     const TYPE_EEI_SHIPMENT_WITH_RETURN_SERVICE = '11';
 
-    private static $typeNames = array(
+    private static $typeNames = [
         '01' => 'Invoice',
         '03' => 'CO',
         '04' => 'NAFTA CO',
@@ -37,8 +37,8 @@ class InternationalForms implements NodeInterface
         '08' => 'Air Freight Packing List',
         '09' => 'CN22 Forms',
         '10' => 'UPS Premium Care',
-        '11' => 'EEI. For shipment with return service'
-    );
+        '11' => 'EEI. For shipment with return service',
+    ];
 
     /**
      * @var string
@@ -46,7 +46,7 @@ class InternationalForms implements NodeInterface
     private $termsOfShipment;
 
     /**
-     * Terms of Shipment
+     * Terms of Shipment.
      */
     const TOS_COST_AND_FREIGHT = 'CFR';
     const TOS_COST_INSURANCE_AND_FREIGHT = 'CIF';
@@ -62,7 +62,7 @@ class InternationalForms implements NodeInterface
     const TOS_FREE_CARRIER = 'FCA';
     const TOS_FREE_ON_BOARD = 'FOB';
 
-    private static $termsOfShipmentNames = array(
+    private static $termsOfShipmentNames = [
         'CFR' => 'Cost and Freight',
         'CIF' => 'Cost, Insurance and Freight',
         'CIP' => 'Carriage and Insurance Paid',
@@ -75,8 +75,8 @@ class InternationalForms implements NodeInterface
         'EXW' => 'Ex Works',
         'FAS' => 'Free Alongside Ship',
         'FCA' => 'Free Carrier',
-        'FOB' => 'Free On Board'
-    );
+        'FOB' => 'Free On Board',
+    ];
 
     /**
      * @var string
@@ -84,7 +84,7 @@ class InternationalForms implements NodeInterface
     private $reasonForExport;
 
     /**
-     * Reasons for export
+     * Reasons for export.
      */
     const RFE_SALE = 'SALE';
     const RFE_GIFT = 'GIFT';
@@ -121,7 +121,7 @@ class InternationalForms implements NodeInterface
     /**
      * @var array
      */
-    private $products = array();
+    private $products = [];
 
     /**
      * @var Discount
@@ -181,11 +181,13 @@ class InternationalForms implements NodeInterface
 
     /**
      * @param $type string
+     *
      * @return $this
      */
     public function setType($type)
     {
         $this->type = $type;
+
         return $this;
     }
 
@@ -199,11 +201,13 @@ class InternationalForms implements NodeInterface
 
     /**
      * @param $freightCharges FreightCharges
+     *
      * @return $this
      */
     public function setFreightCharges(FreightCharges $freightCharges)
     {
         $this->freightCharges = $freightCharges;
+
         return $this;
     }
 
@@ -217,11 +221,13 @@ class InternationalForms implements NodeInterface
 
     /**
      * @param $discount Discount
+     *
      * @return $this
      */
     public function setDiscount(Discount $discount)
     {
         $this->discount = $discount;
+
         return $this;
     }
 
@@ -235,11 +241,13 @@ class InternationalForms implements NodeInterface
 
     /**
      * @param Product $product
+     *
      * @return $this
      */
     public function addProduct(Product $product)
     {
         array_push($this->products, $product);
+
         return $this;
     }
 
@@ -253,6 +261,7 @@ class InternationalForms implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
+     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -266,34 +275,34 @@ class InternationalForms implements NodeInterface
         if ($this->getType()) {
             $node->appendChild($document->createElement('FormType', $this->getType()));
         }
-        if($this->getInvoiceNumber() !== null) {
+        if ($this->getInvoiceNumber() !== null) {
             $node->appendChild($document->createElement('InvoiceNumber', $this->getInvoiceNumber()));
         }
-        if($this->getInvoiceDate() !== null) {
+        if ($this->getInvoiceDate() !== null) {
             $node->appendChild($document->createElement('InvoiceDate', $this->getInvoiceDate()->format('Ymd')));
         }
-        if($this->getPurchaseOrderNumber() !== null) {
+        if ($this->getPurchaseOrderNumber() !== null) {
             $node->appendChild($document->createElement('PurchaseOrderNumber', $this->getPurchaseOrderNumber()));
         }
-        if($this->getTermsOfShipment() !== null) {
+        if ($this->getTermsOfShipment() !== null) {
             $node->appendChild($document->createElement('TermsOfShipment', $this->getTermsOfShipment()));
         }
-        if($this->getReasonForExport() !== null) {
+        if ($this->getReasonForExport() !== null) {
             $node->appendChild($document->createElement('ReasonForExport', $this->getReasonForExport()));
         }
-        if($this->getComments() !== null) {
+        if ($this->getComments() !== null) {
             $node->appendChild($document->createElement('Comments', $this->getComments()));
         }
-        if($this->getCurrencyCode() !== null) {
+        if ($this->getCurrencyCode() !== null) {
             $node->appendChild($document->createElement('CurrencyCode', $this->getCurrencyCode()));
         }
-        if($this->getDiscount() !== null) {
+        if ($this->getDiscount() !== null) {
             $node->appendChild($this->getDiscount()->toNode($document));
         }
-        if($this->getFreightCharges() !== null) {
+        if ($this->getFreightCharges() !== null) {
             $node->appendChild($this->getFreightCharges()->toNode($document));
         }
-        foreach($this->products as $product) {
+        foreach ($this->products as $product) {
             $node->appendChild($product->toNode($document));
         }
 
@@ -302,11 +311,13 @@ class InternationalForms implements NodeInterface
 
     /**
      * @param $number string
+     *
      * @return $this
      */
     public function setInvoiceNumber($number)
     {
         $this->invoiceNumber = $number;
+
         return $this;
     }
 
@@ -320,11 +331,13 @@ class InternationalForms implements NodeInterface
 
     /**
      * @param \DateTime $date
+     *
      * @return $this
      */
     public function setInvoiceDate(\DateTime $date)
     {
         $this->invoiceDate = $date;
+
         return $this;
     }
 
@@ -338,11 +351,13 @@ class InternationalForms implements NodeInterface
 
     /**
      * @param $number
+     *
      * @return $this
      */
     public function setPurchaseOrderNumber($number)
     {
         $this->purchaseOrderNumber = $number;
+
         return $this;
     }
 
@@ -356,11 +371,13 @@ class InternationalForms implements NodeInterface
 
     /**
      * @param $terms
+     *
      * @return $this
      */
     public function setTermsOfShipment($terms)
     {
         $this->termsOfShipment = $terms;
+
         return $this;
     }
 
@@ -374,15 +391,17 @@ class InternationalForms implements NodeInterface
 
     /**
      * @param $reason
+     *
      * @return $this
      */
     public function setReasonForExport($reason)
     {
-        if(strlen($reason) > 20) {
+        if (strlen($reason) > 20) {
             $reason = substr($reason, 0, 20);
         }
 
         $this->reasonForExport = $reason;
+
         return $this;
     }
 
@@ -396,15 +415,17 @@ class InternationalForms implements NodeInterface
 
     /**
      * @param $comments
+     *
      * @return $this
      */
     public function setComments($comments)
     {
-        if(strlen($comments) > 150) {
+        if (strlen($comments) > 150) {
             $comments = substr($comments, 0, 150);
         }
 
         $this->comments = $comments;
+
         return $this;
     }
 
@@ -418,11 +439,13 @@ class InternationalForms implements NodeInterface
 
     /**
      * @param $code
+     *
      * @return $this
      */
     public function setCurrencyCode($code)
     {
         $this->currencyCode = $code;
+
         return $this;
     }
 
@@ -433,6 +456,4 @@ class InternationalForms implements NodeInterface
     {
         return $this->currencyCode;
     }
-
-
 }

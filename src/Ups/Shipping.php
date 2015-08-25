@@ -1,18 +1,17 @@
 <?php
+
 namespace Ups;
 
 use DOMDocument;
-use SimpleXMLElement;
 use Exception;
 use InvalidArgumentException;
-use stdClass;
 use Psr\Log\LoggerInterface;
+use SimpleXMLElement;
+use stdClass;
 
 /**
  * Package Shipping API Wrapper
- * Based on UPS Developer Guide, dated: 31 Dec 2012
- *
- * @package ups
+ * Based on UPS Developer Guide, dated: 31 Dec 2012.
  */
 class Shipping extends Ups
 {
@@ -42,10 +41,10 @@ class Shipping extends Ups
     private $request;
 
     /**
-     * @param string|null $accessKey UPS License Access Key
-     * @param string|null $userId UPS User ID
-     * @param string|null $password UPS User Password
-     * @param bool $useIntegration Determine if we should use production or CIE URLs.
+     * @param string|null      $accessKey      UPS License Access Key
+     * @param string|null      $userId         UPS User ID
+     * @param string|null      $password       UPS User Password
+     * @param bool             $useIntegration Determine if we should use production or CIE URLs.
      * @param RequestInterface $request
      * @param LoggerInterface PSR3 compatible logger (optional)
      */
@@ -58,14 +57,16 @@ class Shipping extends Ups
     }
 
     /**
-     * Create a Shipment Confirm request (generate a digest)
+     * Create a Shipment Confirm request (generate a digest).
      *
-     * @param string $validation A UPS_Shipping::REQ_* constant (or null)
-     * @param stdClass $shipment Shipment data container.
-     * @param stdClass|null $labelSpecOpts LabelSpecification data. Optional
+     * @param string        $validation      A UPS_Shipping::REQ_* constant (or null)
+     * @param stdClass      $shipment        Shipment data container.
+     * @param stdClass|null $labelSpecOpts   LabelSpecification data. Optional
      * @param stdClass|null $receiptSpecOpts ReceiptSpecification data. Optional
-     * @return stdClass
+     *
      * @throws Exception
+     *
+     * @return stdClass
      */
     public function confirm($validation, $shipment, $labelSpecOpts = null, $receiptSpecOpts = null)
     {
@@ -74,13 +75,13 @@ class Shipping extends Ups
         $response = $this->response->getResponse();
 
         if (null === $response) {
-            throw new Exception("Failure (0): Unknown error", 0);
+            throw new Exception('Failure (0): Unknown error', 0);
         }
 
         if ($response instanceof SimpleXMLElement && $response->Response->ResponseStatusCode == 0) {
             throw new Exception(
                 "Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}",
-                (int)$response->Response->Error->ErrorCode
+                (int) $response->Response->Error->ErrorCode
             );
         } else {
             return $this->formatResponse($response);
@@ -88,12 +89,13 @@ class Shipping extends Ups
     }
 
     /**
-     * Creates a ShipConfirm request
+     * Creates a ShipConfirm request.
      *
-     * @param string $validation
-     * @param stdClass $shipment
+     * @param string        $validation
+     * @param stdClass      $shipment
      * @param stdClass|null $labelSpecOpts
      * @param stdClass|null $receiptSpecOpts
+     *
      * @return string
      */
     private function createConfirmRequest($validation, $shipment, $labelSpecOpts, $receiptSpecOpts)
@@ -111,7 +113,7 @@ class Shipping extends Ups
         $request->appendChild($node);
 
         $request->appendChild($xml->createElement('RequestAction', 'ShipConfirm'));
-        $request->appendChild($xml->createElement('RequestOption', $validation ? : 'nonvalidate'));
+        $request->appendChild($xml->createElement('RequestOption', $validation ?: 'nonvalidate'));
 
         // Page 47
         $shipmentNode = $container->appendChild($xml->createElement('Shipment'));
@@ -254,7 +256,7 @@ class Shipping extends Ups
 
                 if ($shipment->PaymentInformation->Prepaid->BillShipper->AccountNumber) {
                     $node->appendChild($xml->createElement('AccountNumber', $shipment->PaymentInformation->Prepaid->BillShipper->AccountNumber));
-                } else if ($shipment->PaymentInformation->Prepaid->BillShipper->CreditCard) {
+                } elseif ($shipment->PaymentInformation->Prepaid->BillShipper->CreditCard) {
                     $ccNode = $node->appendChild($xml->createElement('CreditCard'));
                     $ccNode->appendChild($xml->createElement('Type', $shipment->PaymentInformation->Prepaid->BillShipper->CreditCard->Type));
                     $ccNode->appendChild($xml->createElement('Number', $shipment->PaymentInformation->Prepaid->BillShipper->CreditCard->Number));
@@ -269,7 +271,7 @@ class Shipping extends Ups
                         $ccNode->appendChild($addressNode);
                     }
                 }
-            } else if ($shipment->PaymentInformation->BillThirdParty) {
+            } elseif ($shipment->PaymentInformation->BillThirdParty) {
                 $node = $paymentNode->appendChild($xml->createElement('BillThirdParty'));
                 $btpNode = $node->appendChild($xml->createElement('BillThirdPartyShipper'));
                 $btpNode->appendChild($xml->createElement('AccountNumber', $shipment->PaymentInformation->BillThirdParty->AccountNumber));
@@ -282,7 +284,7 @@ class Shipping extends Ups
                 }
 
                 $addressNode->appendChild($xml->createElement('CountryCode', $shipment->PaymentInformation->BillThirdParty->ThirdParty->Address->CountryCode));
-            } else if ($shipment->PaymentInformation->FreightCollect) {
+            } elseif ($shipment->PaymentInformation->FreightCollect) {
                 $node = $paymentNode->appendChild($xml->createElement('FreightCollect'));
                 $brNode = $node->appendChild($xml->createElement('BillReceiver'));
                 $brNode->appendChild($xml->createElement('AccountNumber', $shipment->PaymentInformation->FreightCollect->BillReceiver->AccountNumber));
@@ -291,10 +293,10 @@ class Shipping extends Ups
                     $addressNode = $brNode->appendChild($xml->createElement('Address'));
                     $addressNode->appendChild($xml->createElement('PostalCode', $shipment->PaymentInformation->FreightCollect->BillReceiver->Address->PostalCode));
                 }
-            } else if ($shipment->PaymentInformation->ConsigneeBilled) {
+            } elseif ($shipment->PaymentInformation->ConsigneeBilled) {
                 $paymentNode->appendChild($xml->createElement('ConsigneeBilled'));
             }
-        } else if (isset($shipment->ItemizedPaymentInformation)) {
+        } elseif (isset($shipment->ItemizedPaymentInformation)) {
             //$paymentNode = $shipmentNode->appendChild($xml->createElement('ItemizedPaymentInformation'));
         }
 
@@ -335,7 +337,7 @@ class Shipping extends Ups
         foreach ($shipment->getPackages() as &$package) {
             $node = $shipmentNode->appendChild($xml->createElement('Package'));
 
-            if(isset($package->Description)) {
+            if (isset($package->Description)) {
                 $node->appendChild($xml->createElement('Description', $package->Description));
             }
 
@@ -385,12 +387,12 @@ class Shipping extends Ups
         }
 
         $shipmentServiceOptions = $shipment->getShipmentServiceOptions();
-        if(isset($shipmentServiceOptions)) {
+        if (isset($shipmentServiceOptions)) {
             $shipmentNode->appendChild($shipmentServiceOptions->toNode($xml));
         }
 
         $referenceNumber = $shipment->getReferenceNumber();
-        if(isset($referenceNumber)) {
+        if (isset($referenceNumber)) {
             $shipmentNode->appendChild($referenceNumber->toNode($xml));
         }
 
@@ -433,7 +435,7 @@ class Shipping extends Ups
         }
 
         $shipmentIndicationType = $shipment->getShipmentIndicationType();
-        if(isset($shipmentIndicationType)) {
+        if (isset($shipmentIndicationType)) {
             $shipmentNode->appendChild($shipmentIndicationType->toNode($xml));
         }
 
@@ -446,15 +448,18 @@ class Shipping extends Ups
                 $node->appendChild($xml->createElement('Description', $receiptSpecOpts->ImageFormat->Description));
             }
         }
+
         return $xml->saveXML();
     }
 
     /**
-     * Create a Shipment Accept request (generate a shipping label)
+     * Create a Shipment Accept request (generate a shipping label).
      *
      * @param string $shipmentDigest The UPS Shipment Digest received from a ShipConfirm request.
-     * @return stdClass
+     *
      * @throws Exception
+     *
+     * @return stdClass
      */
     public function accept($shipmentDigest)
     {
@@ -463,13 +468,13 @@ class Shipping extends Ups
         $response = $this->response->getResponse();
 
         if (null === $response) {
-            throw new Exception("Failure (0): Unknown error", 0);
+            throw new Exception('Failure (0): Unknown error', 0);
         }
 
         if ($response instanceof SimpleXMLElement && $response->Response->ResponseStatusCode == 0) {
             throw new Exception(
                 "Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}",
-                (int)$response->Response->Error->ErrorCode
+                (int) $response->Response->Error->ErrorCode
             );
         } else {
             return $this->formatResponse($response->ShipmentResults);
@@ -477,9 +482,10 @@ class Shipping extends Ups
     }
 
     /**
-     * Creates a ShipAccept request
+     * Creates a ShipAccept request.
      *
      * @param string $shipmentDigest
+     *
      * @return string
      */
     private function createAcceptRequest($shipmentDigest)
@@ -500,12 +506,14 @@ class Shipping extends Ups
     }
 
     /**
-     * Void a shipping label / request
+     * Void a shipping label / request.
      *
      * @param string|array $shipmentData Either the UPS Shipment Identification Number or an array of
      *                                   expanded shipment data [shipmentId:, trackingNumbers:[...]]
-     * @return stdClass
+     *
      * @throws Exception
+     *
+     * @return stdClass
      */
     public function void($shipmentData)
     {
@@ -520,18 +528,20 @@ class Shipping extends Ups
         if ($response->Response->ResponseStatusCode == 0) {
             throw new Exception(
                 "Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}",
-                (int)$response->Response->Error->ErrorCode
+                (int) $response->Response->Error->ErrorCode
             );
         } else {
             unset($response->Response);
+
             return $this->formatResponse($response);
         }
     }
 
     /**
-     * Creates a void shipment request
+     * Creates a void shipment request.
      *
      * @param string|array $shipmentData
+     *
      * @return string
      */
     private function createVoidRequest($shipmentData)
@@ -564,16 +574,18 @@ class Shipping extends Ups
     }
 
     /**
-     * Recover a shipping label
+     * Recover a shipping label.
      *
-     * @param string|array $trackingData Either the tracking number or a map of ReferenceNumber data
-     *                                   [value:, shipperNumber:]
-     * @param array|null $labelSpecification Map of label specification data for this request. Optional.
-     *                                       [userAgent:, imageFormat: 'HTML|PDF']
-     * @param array|null $labelDelivery All elements are optional. [link:]
-     * @param array|null $translate Map of translation data. Optional. [language:, dialect:]
-     * @return stdClass
+     * @param string|array $trackingData       Either the tracking number or a map of ReferenceNumber data
+     *                                         [value:, shipperNumber:]
+     * @param array|null   $labelSpecification Map of label specification data for this request. Optional.
+     *                                         [userAgent:, imageFormat: 'HTML|PDF']
+     * @param array|null   $labelDelivery      All elements are optional. [link:]
+     * @param array|null   $translate          Map of translation data. Optional. [language:, dialect:]
+     *
      * @throws Exception|InvalidArgumentException
+     *
+     * @return stdClass
      */
     public function recoverLabel($trackingData, $labelSpecification = null, $labelDelivery = null, $translate = null)
     {
@@ -603,21 +615,23 @@ class Shipping extends Ups
         if ($response->Response->ResponseStatusCode == 0) {
             throw new Exception(
                 "Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}",
-                (int)$response->Response->Error->ErrorCode
+                (int) $response->Response->Error->ErrorCode
             );
         } else {
             unset($response->Response);
+
             return $this->formatResponse($response);
         }
     }
 
     /**
-     * Creates a label recovery request
+     * Creates a label recovery request.
      *
      * @param string|array $trackingData
-     * @param array|null $labelSpecificationOpts
-     * @param array|null $labelDeliveryOpts
-     * @param array|null $translateOpts
+     * @param array|null   $labelSpecificationOpts
+     * @param array|null   $labelDeliveryOpts
+     * @param array|null   $translateOpts
+     *
      * @return string
      */
     private function createRecoverLabelRequest($trackingData, $labelSpecificationOpts = null, $labelDeliveryOpts = null, $translateOpts = null)
@@ -662,9 +676,10 @@ class Shipping extends Ups
     }
 
     /**
-     * Format the response
+     * Format the response.
      *
      * @param SimpleXMLElement $response
+     *
      * @return stdClass
      */
     private function formatResponse(SimpleXMLElement $response)
@@ -673,14 +688,15 @@ class Shipping extends Ups
     }
 
     /**
-     * Generates a standard <Address> node for requests
+     * Generates a standard <Address> node for requests.
      *
      * @param stdClass $address Address data structure
+     *
      * @return SimpleXMLElement
      */
     private function compileAddressNode(&$address)
     {
-        $xml = new DOMDocument;
+        $xml = new DOMDocument();
         $xml->formatOutput = true;
 
         $node = $xml->appendChild($xml->createElement('Address'));
@@ -709,7 +725,7 @@ class Shipping extends Ups
             $node->appendChild($xml->createElement('CountryCode', $address->CountryCode));
         }
 
-        if(isset($address->ResidentialAddressIndicator)) {
+        if (isset($address->ResidentialAddressIndicator)) {
             $node->appendChild($xml->createElement('ResidentialAddress'));
         }
 
@@ -724,16 +740,19 @@ class Shipping extends Ups
         if (null === $this->request) {
             $this->request = new Request($this->logger);
         }
+
         return $this->request;
     }
 
     /**
      * @param RequestInterface $request
+     *
      * @return $this
      */
     public function setRequest(RequestInterface $request)
     {
         $this->request = $request;
+
         return $this;
     }
 
@@ -747,11 +766,13 @@ class Shipping extends Ups
 
     /**
      * @param ResponseInterface $response
+     *
      * @return $this
      */
     public function setResponse(ResponseInterface $response)
     {
         $this->response = $response;
+
         return $this;
     }
 }

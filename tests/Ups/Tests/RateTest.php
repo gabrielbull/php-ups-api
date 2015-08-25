@@ -1,19 +1,18 @@
 <?php
+
 namespace Ups\Tests;
 
+use PHPUnit_Framework_TestCase;
 use Ups\Entity\Package;
 use Ups\Entity\PackagingType;
 use Ups\Entity\RateRequest;
 use Ups\Entity\Service;
 use Ups\Entity\Shipment;
 use Ups\Rate;
-use PHPUnit_Framework_TestCase;
-use stdClass;
 
 /**
- * Rate Class Tests
+ * Rate Class Tests.
  *
- * @package ups
  * @group Rate
  */
 class RateTest extends PHPUnit_Framework_TestCase
@@ -132,14 +131,14 @@ class RateTest extends PHPUnit_Framework_TestCase
         $package->PackagingType->Code = '02';
         $package->PackageWeight = new \stdClass();
         $package->PackageWeight->Weight = '10';
-        $shipment->Package = array(
+        $shipment->Package = [
             $package,
-        );
+        ];
 
         $request->setShipment($shipment);
 
         // should throw exception cause invalid zip code
-        throw new \Exception; // fixme
+        throw new \Exception(); // fixme
         //$this->rate->getRate($shipment);
     }
 }

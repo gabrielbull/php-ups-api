@@ -1,19 +1,19 @@
 <?php
+
 namespace Ups;
 
 use DOMDocument;
 use DOMElement;
-use SimpleXMLElement;
 use Exception;
+use SimpleXMLElement;
 use stdClass;
 use Ups\Entity\RateRequest;
 use Ups\Entity\RateResponse;
 use Ups\Entity\Shipment;
 
 /**
- * Rate API Wrapper
+ * Rate API Wrapper.
  *
- * @package ups
  * @author Michael Williams <michael.williams@limelyte.com>
  */
 class Rate extends Ups
@@ -27,7 +27,7 @@ class Rate extends Ups
 
     /**
      * @var ResponseInterface
-     * todo: make private
+     *                        todo: make private
      */
     public $response;
 
@@ -38,27 +38,30 @@ class Rate extends Ups
 
     /**
      * @param $rateRequest
-     * @return RateRequest
+     *
      * @throws Exception
+     *
+     * @return RateRequest
      */
     public function shopRates($rateRequest)
     {
-
         if ($rateRequest instanceof Shipment) {
             $shipment = $rateRequest;
             $rateRequest = new RateRequest();
             $rateRequest->setShipment($shipment);
         }
 
-        $this->requestOption = "Shop";
+        $this->requestOption = 'Shop';
 
         return $this->sendRequest($rateRequest);
     }
 
     /**
      * @param $rateRequest
-     * @return RateRequest
+     *
      * @throws Exception
+     *
+     * @return RateRequest
      */
     public function getRate($rateRequest)
     {
@@ -68,18 +71,20 @@ class Rate extends Ups
             $rateRequest->setShipment($shipment);
         }
 
-        $this->requestOption = "Rate";
+        $this->requestOption = 'Rate';
 
         return $this->sendRequest($rateRequest);
     }
 
     /**
      * Creates and sends a request for the given shipment. This handles checking for
-     * errors in the response back from UPS
+     * errors in the response back from UPS.
      *
      * @param RateRequest $rateRequest
-     * @return RateRequest
+     *
      * @throws Exception
+     *
+     * @return RateRequest
      */
     private function sendRequest(RateRequest $rateRequest)
     {
@@ -90,13 +95,13 @@ class Rate extends Ups
         $response = $this->response->getResponse();
 
         if (null === $response) {
-            throw new Exception("Failure (0): Unknown error", 0);
+            throw new Exception('Failure (0): Unknown error', 0);
         }
 
         if ($response->Response->ResponseStatusCode == 0) {
             throw new Exception(
                 "Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}",
-                (int)$response->Response->Error->ErrorCode
+                (int) $response->Response->Error->ErrorCode
             );
         } else {
             return $this->formatResponse($response);
@@ -104,9 +109,10 @@ class Rate extends Ups
     }
 
     /**
-     * Create the Rate request
+     * Create the Rate request.
      *
      * @param RateRequest $rateRequest The request details. Refer to the UPS documentation for available structure
+     *
      * @return string
      */
     private function createRequest(RateRequest $rateRequest)
@@ -117,16 +123,16 @@ class Rate extends Ups
         $xml->formatOutput = true;
 
         /** @var DOMElement $trackRequest */
-        $trackRequest = $xml->appendChild($xml->createElement("RatingServiceSelectionRequest"));
+        $trackRequest = $xml->appendChild($xml->createElement('RatingServiceSelectionRequest'));
         $trackRequest->setAttribute('xml:lang', 'en-US');
 
-        $request = $trackRequest->appendChild($xml->createElement("Request"));
+        $request = $trackRequest->appendChild($xml->createElement('Request'));
 
         $node = $xml->importNode($this->createTransactionNode(), true);
         $request->appendChild($node);
 
-        $request->appendChild($xml->createElement("RequestAction", "Rate"));
-        $request->appendChild($xml->createElement("RequestOption", $this->requestOption));
+        $request->appendChild($xml->createElement('RequestAction', 'Rate'));
+        $request->appendChild($xml->createElement('RequestOption', $this->requestOption));
 
         $trackRequest->appendChild($rateRequest->getPickupType()->toNode($document));
 
@@ -173,7 +179,7 @@ class Rate extends Ups
         }
 
         $shipmentServiceOptions = $shipment->getShipmentServiceOptions();
-        if(isset($shipmentServiceOptions)) {
+        if (isset($shipmentServiceOptions)) {
             $shipmentNode->appendChild($shipmentServiceOptions->toNode($xml));
         }
 
@@ -181,9 +187,10 @@ class Rate extends Ups
     }
 
     /**
-     * Format the response
+     * Format the response.
      *
      * @param SimpleXMLElement $response
+     *
      * @return stdClass
      */
     private function formatResponse(SimpleXMLElement $response)
@@ -196,7 +203,6 @@ class Rate extends Ups
         return new RateResponse($result);
     }
 
-
     /**
      * @return RequestInterface
      */
@@ -205,16 +211,19 @@ class Rate extends Ups
         if (null === $this->request) {
             $this->request = new Request($this->logger);
         }
+
         return $this->request;
     }
 
     /**
      * @param RequestInterface $request
+     *
      * @return $this
      */
     public function setRequest(RequestInterface $request)
     {
         $this->request = $request;
+
         return $this;
     }
 
@@ -228,11 +237,13 @@ class Rate extends Ups
 
     /**
      * @param ResponseInterface $response
+     *
      * @return $this
      */
     public function setResponse(ResponseInterface $response)
     {
         $this->response = $response;
+
         return $this;
     }
 }

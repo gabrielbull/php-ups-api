@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 class DimensionalWeight
@@ -10,9 +11,8 @@ class DimensionalWeight
 
     public $Weight;
 
-    function __construct()
+    public function __construct()
     {
         $this->UnitOfMeasurement = new UnitOfMeasurement();
     }
-
-} 
+}

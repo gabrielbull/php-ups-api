@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 use DOMDocument;
@@ -109,6 +110,7 @@ class Shipper implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
+     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -147,12 +149,14 @@ class Shipper implements NodeInterface
 
     /**
      * @param Address $address
+     *
      * @return $this
      */
     public function setAddress(Address $address)
     {
         $this->Address = $address;
         $this->address = $address;
+
         return $this;
     }
 
@@ -166,12 +170,14 @@ class Shipper implements NodeInterface
 
     /**
      * @param string $attentionName
+     *
      * @return $this
      */
     public function setAttentionName($attentionName)
     {
         $this->AttentionName = $attentionName;
         $this->attentionName = $attentionName;
+
         return $this;
     }
 
@@ -185,12 +191,14 @@ class Shipper implements NodeInterface
 
     /**
      * @param string $emailAddress
+     *
      * @return $this
      */
     public function setEmailAddress($emailAddress)
     {
         $this->EMailAddress = $emailAddress;
         $this->emailAddress = $emailAddress;
+
         return $this;
     }
 
@@ -204,12 +212,14 @@ class Shipper implements NodeInterface
 
     /**
      * @param string $faxNumber
+     *
      * @return $this
      */
     public function setFaxNumber($faxNumber)
     {
         $this->FaxNumber = $faxNumber;
         $this->faxNumber = $faxNumber;
+
         return $this;
     }
 
@@ -223,12 +233,14 @@ class Shipper implements NodeInterface
 
     /**
      * @param string $name
+     *
      * @return $this
      */
     public function setName($name)
     {
         $this->Name = $name;
         $this->name = $name;
+
         return $this;
     }
 
@@ -242,11 +254,13 @@ class Shipper implements NodeInterface
 
     /**
      * @param string $companyName
+     *
      * @return $this
      */
     public function setCompanyName($companyName)
     {
         $this->companyName = $companyName;
+
         return $this;
     }
 
@@ -260,12 +274,14 @@ class Shipper implements NodeInterface
 
     /**
      * @param string $phoneNumber
+     *
      * @return $this
      */
     public function setPhoneNumber($phoneNumber)
     {
         $this->PhoneNumber = $phoneNumber;
         $this->phoneNumber = $phoneNumber;
+
         return $this;
     }
 
@@ -279,12 +295,14 @@ class Shipper implements NodeInterface
 
     /**
      * @param string $shipperNumber
+     *
      * @return $this
      */
     public function setShipperNumber($shipperNumber)
     {
         $this->ShipperNumber = $shipperNumber;
         $this->shipperNumber = $shipperNumber;
+
         return $this;
     }
 
@@ -298,12 +316,14 @@ class Shipper implements NodeInterface
 
     /**
      * @param string $taxIdentificationNumber
+     *
      * @return $this
      */
     public function setTaxIdentificationNumber($taxIdentificationNumber)
     {
         $this->TaxIdentificationNumber = $taxIdentificationNumber;
         $this->taxIdentificationNumber = $taxIdentificationNumber;
+
         return $this;
     }
 }

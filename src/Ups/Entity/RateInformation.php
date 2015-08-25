@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 use DOMDocument;
@@ -7,11 +8,10 @@ use Ups\NodeInterface;
 
 class RateInformation implements NodeInterface
 {
-
-    /** @var boolean */
+    /** @var bool */
     private $negotiatedRatesIndicator;
 
-    /** @var boolean */
+    /** @var bool */
     private $rateChartIndicator;
 
     /**
@@ -34,6 +34,7 @@ class RateInformation implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
+     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -56,7 +57,7 @@ class RateInformation implements NodeInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getNegotiatedRatesIndicator()
     {
@@ -65,16 +66,18 @@ class RateInformation implements NodeInterface
 
     /**
      * @param $value
+     *
      * @return $this
      */
     public function setNegotiatedRatesIndicator($value)
     {
         $this->negotiatedRatesIndicator = $value;
+
         return $this;
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getRateChartIndicator()
     {
@@ -83,12 +86,13 @@ class RateInformation implements NodeInterface
 
     /**
      * @param $value
+     *
      * @return $this
      */
     public function setRateChartIndicator($value)
     {
         $this->rateChartIndicator = $value;
+
         return $this;
     }
-
 }

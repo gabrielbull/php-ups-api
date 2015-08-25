@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 class Delivery
@@ -15,7 +16,7 @@ class Delivery
     public $COD;
     public $BillToAccount;
 
-    function __construct($response = null)
+    public function __construct($response = null)
     {
         $this->ShipmentReferenceNumber = new ShipmentReferenceNumber();
         $this->PackageReferenceNumber = new PackageReferenceNumber();
@@ -71,7 +72,5 @@ class Delivery
                 $this->BillToAccount = new BillToAccount($response->BillToAccount);
             }
         }
-
     }
-
 }

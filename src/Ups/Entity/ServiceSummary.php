@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 class ServiceSummary
@@ -9,7 +10,7 @@ class ServiceSummary
     public $SaturdayDelivery;
     public $SaturdayDeliveryDisclaimer;
 
-    function __construct($response = null)
+    public function __construct($response = null)
     {
         $this->Service = new Service();
         $this->Guaranteed = new Guaranteed();
@@ -27,5 +28,4 @@ class ServiceSummary
             }
         }
     }
-
 }

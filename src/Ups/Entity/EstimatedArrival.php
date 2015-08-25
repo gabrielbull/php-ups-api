@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 class EstimatedArrival
@@ -23,7 +24,7 @@ class EstimatedArrival
     public $CustomerCenterCutoff;
     public $RestDays;
 
-    function __construct($response = null)
+    public function __construct($response = null)
     {
         if (null != $response) {
             if (isset($response->BusinessTransitDays)) {
@@ -61,4 +62,4 @@ class EstimatedArrival
             }
         }
     }
-} 
+}

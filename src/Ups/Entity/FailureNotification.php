@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 class FailureNotification
@@ -6,7 +7,7 @@ class FailureNotification
     public $FailedEmailAddress;
     public $FailureNotificationCode;
 
-    function __construct($response = null)
+    public function __construct($response = null)
     {
         $this->FailureNotificationCode = new FailureNotificationCode();
 
@@ -19,4 +20,4 @@ class FailureNotification
             }
         }
     }
-} 
+}

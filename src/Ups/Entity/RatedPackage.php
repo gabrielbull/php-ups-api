@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 class RatedPackage
@@ -9,7 +10,7 @@ class RatedPackage
     public $ServiceOptionsCharges;
     public $TotalCharges;
 
-    function __construct($response = null)
+    public function __construct($response = null)
     {
         $this->BillingWeight = new BillingWeight();
         $this->TransportationCharges = new Charges();
@@ -33,9 +34,7 @@ class RatedPackage
             if (isset($response->TotalCharges)) {
                 $this->TotalCharges = new Charges($response->TotalCharges);
             }
-
         }
-
     }
 
     public function getServiceName()

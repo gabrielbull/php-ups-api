@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 use DOMDocument;
@@ -93,6 +94,7 @@ class UnitOfMeasurement implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
+     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -100,6 +102,7 @@ class UnitOfMeasurement implements NodeInterface
         $node = $document->createElement('UnitOfMeasurement');
         $node->appendChild($document->createElement('Code', $this->getCode()));
         $node->appendChild($document->createElement('Description', $this->getDescription()));
+
         return $node;
     }
 
@@ -113,12 +116,14 @@ class UnitOfMeasurement implements NodeInterface
 
     /**
      * @param string $code
+     *
      * @return $this
      */
     public function setCode($code)
     {
         $this->Code = $code;
         $this->code = $code;
+
         return $this;
     }
 
@@ -132,12 +137,14 @@ class UnitOfMeasurement implements NodeInterface
 
     /**
      * @param string $description
+     *
      * @return $this
      */
     public function setDescription($description)
     {
         $this->Description = $description;
         $this->description = $description;
+
         return $this;
     }
 }

@@ -32,7 +32,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Ups\\": "src/Ups"
+      "Ups\\": "src"
     }
   },
   "autoload-dev": {

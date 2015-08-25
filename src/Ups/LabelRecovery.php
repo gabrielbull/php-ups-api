@@ -1,17 +1,17 @@
 <?php
+
 namespace Ups;
 
 use DOMDocument;
-use SimpleXMLElement;
 use Exception;
+use SimpleXMLElement;
 use stdClass;
 use Ups\Entity\LabelRecoveryRequest;
 use Ups\Entity\LabelRecoveryResponse;
 
 /**
- * LabelRecovery API Wrapper
+ * LabelRecovery API Wrapper.
  *
- * @package ups
  * @author Sebastien Vergnes <sebastien@vergnes.eu>
  */
 class LabelRecovery extends Ups
@@ -20,8 +20,10 @@ class LabelRecovery extends Ups
 
     /**
      * @param $shipment
-     * @return LabelRecoveryRequest
+     *
      * @throws Exception
+     *
+     * @return LabelRecoveryRequest
      */
     public function getLabelRecovery($shipment)
     {
@@ -30,11 +32,13 @@ class LabelRecovery extends Ups
 
     /**
      * Creates and sends a request for the given shipment. This handles checking for
-     * errors in the response back from UPS
+     * errors in the response back from UPS.
      *
      * @param $labelRecoveryRequest
-     * @return LabelRecoveryRequest
+     *
      * @throws Exception
+     *
+     * @return LabelRecoveryRequest
      */
     private function sendRequest($labelRecoveryRequest)
     {
@@ -44,7 +48,7 @@ class LabelRecovery extends Ups
         if ($response->Response->ResponseStatusCode == 0) {
             throw new Exception(
                 "Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}",
-                (int)$response->Response->Error->ErrorCode
+                (int) $response->Response->Error->ErrorCode
             );
         } else {
             return $this->formatResponse($response);
@@ -52,9 +56,10 @@ class LabelRecovery extends Ups
     }
 
     /**
-     * Create the LabelRecovery request
+     * Create the LabelRecovery request.
      *
      * @param LabelRecoveryRequest $labelRecoveryRequest The request details. Refer to the UPS documentation for available structure
+     *
      * @return string
      */
     private function createRequest($labelRecoveryRequest)
@@ -62,15 +67,15 @@ class LabelRecovery extends Ups
         $xml = new DOMDocument();
         $xml->formatOutput = true;
 
-        $trackRequest = $xml->appendChild($xml->createElement("LabelRecoveryRequest"));
+        $trackRequest = $xml->appendChild($xml->createElement('LabelRecoveryRequest'));
         $trackRequest->setAttribute('xml:lang', 'en-US');
 
-        $request = $trackRequest->appendChild($xml->createElement("Request"));
+        $request = $trackRequest->appendChild($xml->createElement('Request'));
 
         $node = $xml->importNode($this->createTransactionNode(), true);
         $request->appendChild($node);
 
-        $request->appendChild($xml->createElement("RequestAction", "LabelRecovery"));
+        $request->appendChild($xml->createElement('RequestAction', 'LabelRecovery'));
 
         $labelSpecificationNode = $trackRequest->appendChild($xml->createElement('LabelSpecification'));
         if (isset($labelRecoveryRequest->LabelSpecification)) {
@@ -108,9 +113,10 @@ class LabelRecovery extends Ups
     }
 
     /**
-     * Format the response
+     * Format the response.
      *
      * @param SimpleXMLElement $response
+     *
      * @return stdClass
      */
     private function formatResponse(SimpleXMLElement $response)

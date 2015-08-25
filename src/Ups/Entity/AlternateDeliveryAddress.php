@@ -1,10 +1,11 @@
 <?php
+
 namespace Ups\Entity;
 
 use DOMDocument;
 
-class AlternateDeliveryAddress extends ShipTo {
-
+class AlternateDeliveryAddress extends ShipTo
+{
     /**
      * @var
      */
@@ -17,6 +18,7 @@ class AlternateDeliveryAddress extends ShipTo {
 
     /**
      * @param null|DOMDocument $document
+     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -27,11 +29,11 @@ class AlternateDeliveryAddress extends ShipTo {
 
         $node = $document->createElement('AlternateDeliveryAddress');
 
-        if($this->getName()) {
+        if ($this->getName()) {
             $node->appendChild($document->createElement('Name', $this->getName()));
         }
 
-        if($this->getUpsAccessPointId()) {
+        if ($this->getUpsAccessPointId()) {
             $node->appendChild($document->createElement('UPSAccessPointID', $this->getUpsAccessPointId()));
         }
 
@@ -74,5 +76,4 @@ class AlternateDeliveryAddress extends ShipTo {
     {
         $this->name = $name;
     }
-
 }

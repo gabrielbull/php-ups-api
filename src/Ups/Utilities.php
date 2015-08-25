@@ -1,69 +1,74 @@
 <?php
+
 namespace Ups;
 
-use stdClass;
 use DOMNode;
+use stdClass;
 
 class Utilities
 {
     /**
-     * Generates a standard <Address> node for requests
+     * Generates a standard <Address> node for requests.
      *
      * @param stdClass $address An address data structure
-     * @param DOMNode $element
+     * @param DOMNode  $element
+     *
      * @deprecated Use NodeInterface on entities instead
      */
-    static public function addAddressNode(&$address, DOMNode $element)
+    public static function addAddressNode(&$address, DOMNode $element)
     {
         $node = $element->appendChild($element->ownerDocument->createElement('Address'));
-        self::appendChild($address, "AddressLine1", $node);
-        self::appendChild($address, "AddressLine2", $node);
-        self::appendChild($address, "AddressLine3", $node);
-        self::appendChild($address, "City", $node);
-        self::appendChild($address, "StateProvinceCode", $node);
-        self::appendChild($address, "PostalCode", $node);
-        self::appendChild($address, "CountryCode", $node);
+        self::appendChild($address, 'AddressLine1', $node);
+        self::appendChild($address, 'AddressLine2', $node);
+        self::appendChild($address, 'AddressLine3', $node);
+        self::appendChild($address, 'City', $node);
+        self::appendChild($address, 'StateProvinceCode', $node);
+        self::appendChild($address, 'PostalCode', $node);
+        self::appendChild($address, 'CountryCode', $node);
     }
 
     /**
-     * Generates an artifact <Address> node for requests
+     * Generates an artifact <Address> node for requests.
      *
      * @param stdClass $address An address data structure
-     * @param DOMNode $element
+     * @param DOMNode  $element
+     *
      * @deprecated Use NodeInterface on entities instead
      */
-    static public function addAddressArtifactNode(&$address, DOMNode $element)
+    public static function addAddressArtifactNode(&$address, DOMNode $element)
     {
         $node = $element->appendChild($element->ownerDocument->createElement('AddressArtifactFormat'));
-        self::appendChild($address, "CountryCode", $node);
-        self::appendChild($address, "PoliticalDivision1", $node);
-        self::appendChild($address, "PoliticalDivision2", $node);
-        self::appendChild($address, "PostcodePrimaryLow", $node);
+        self::appendChild($address, 'CountryCode', $node);
+        self::appendChild($address, 'PoliticalDivision1', $node);
+        self::appendChild($address, 'PoliticalDivision2', $node);
+        self::appendChild($address, 'PostcodePrimaryLow', $node);
     }
 
     /**
-     * Adds location information including company name, attention name and address
+     * Adds location information including company name, attention name and address.
      *
      * @param $location
      * @param DOMNode $locationNode
+     *
      * @deprecated Use NodeInterface on entities instead
      */
-    static public function addLocationInformation($location, DOMNode $locationNode)
+    public static function addLocationInformation($location, DOMNode $locationNode)
     {
-        self::appendChild($location, "CompanyName", $locationNode);
-        self::appendChild($location, "AttentionName", $locationNode);
+        self::appendChild($location, 'CompanyName', $locationNode);
+        self::appendChild($location, 'AttentionName', $locationNode);
 
         if (isset($location->Address)) {
-            Utilities::addAddressNode($location->Address, $locationNode);
+            self::addAddressNode($location->Address, $locationNode);
         }
     }
 
     /**
      * @param $shipment
      * @param DOMNode $node
+     *
      * @deprecated Use NodeInterface on entities instead
      */
-    static public function addPackages($shipment, DOMNode $node)
+    public static function addPackages($shipment, DOMNode $node)
     {
         foreach ($shipment->Package as $package) {
             $packageNode = $node->appendChild($node->ownerDocument->createElement('Package'));
@@ -89,14 +94,15 @@ class Utilities
 
     /**
      * Conditionally adds a child node to $node. The value comes from the specified $object
-     * and will only be added if the $propertyName has a value
+     * and will only be added if the $propertyName has a value.
      *
-     * @param stdClass $object The object to get values from
-     * @param string $propertyName The property name to access
-     * @param DOMNode $node The node to add the child to
+     * @param stdClass $object       The object to get values from
+     * @param string   $propertyName The property name to access
+     * @param DOMNode  $node         The node to add the child to
+     *
      * @deprecated Use NodeInterface on entities instead
      */
-    static public function appendChild($object, $propertyName, DOMNode $node)
+    public static function appendChild($object, $propertyName, DOMNode $node)
     {
         if (isset($object->{$propertyName})) {
             $node->appendChild($node->ownerDocument->createElement($propertyName, $object->{$propertyName}));

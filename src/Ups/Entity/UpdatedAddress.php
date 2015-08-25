@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 class UpdatedAddress
@@ -26,12 +27,11 @@ class UpdatedAddress
     public $BuildingName;
     public $AddressExtendedInformation;
 
-    function __construct($response = null)
+    public function __construct($response = null)
     {
-        $this->AddressExtendedInformation = array();
+        $this->AddressExtendedInformation = [];
 
         if (null != $response) {
-
             if (isset($response->AddressLine1)) {
                 $this->AddressLine1 = $response->AddressLine1;
             }
@@ -100,7 +100,6 @@ class UpdatedAddress
                     $this->AddressExtendedInformation[] = new AddressExtendedInformation($AddressExtendedInformation);
                 }
             }
-
         }
     }
-} 
+}

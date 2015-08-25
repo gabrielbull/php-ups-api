@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 class RateRequest
@@ -23,8 +24,8 @@ class RateRequest
      */
     public function __construct($attributes = null)
     {
-        $this->setShipment(new Shipment);
-        $this->setPickupType(new PickupType);
+        $this->setShipment(new Shipment());
+        $this->setPickupType(new PickupType());
     }
 
     /**
@@ -37,12 +38,14 @@ class RateRequest
 
     /**
      * @param PickupType $pickupType
+     *
      * @return $this
      */
     public function setPickupType(PickupType $pickupType)
     {
         $this->PickupType = $pickupType;
         $this->pickupType = $pickupType;
+
         return $this;
     }
 
@@ -56,12 +59,14 @@ class RateRequest
 
     /**
      * @param Shipment $shipment
+     *
      * @return $this
      */
     public function setShipment(Shipment $shipment)
     {
         $this->Shipment = $shipment;
         $this->shipment = $shipment;
+
         return $this;
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 use DOMDocument;
@@ -23,9 +24,9 @@ class Dimensions implements NodeInterface
      */
     private $unitOfMeasurement;
 
-    function __construct($response = null)
+    public function __construct($response = null)
     {
-        $this->setUnitOfMeasurement(new UnitOfMeasurement);
+        $this->setUnitOfMeasurement(new UnitOfMeasurement());
 
         if (null != $response) {
             if (isset($response->Length)) {
@@ -42,6 +43,7 @@ class Dimensions implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
+     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -55,6 +57,7 @@ class Dimensions implements NodeInterface
         $node->appendChild($document->createElement('Height', $this->getHeight()));
         $node->appendChild($document->createElement('Width', $this->getWidth()));
         $node->appendChild($this->getUnitOfMeasurement()->toNode($document));
+
         return $node;
     }
 
@@ -68,38 +71,46 @@ class Dimensions implements NodeInterface
 
     /**
      * @param UnitOfMeasurement $unitOfMeasurement
+     *
      * @return $this
      */
     public function setUnitOfMeasurement(UnitOfMeasurement $unitOfMeasurement)
     {
         $this->unitOfMeasurement = $unitOfMeasurement;
+
         return $this;
     }
 
-    public function getLength() {
+    public function getLength()
+    {
         return $this->length;
     }
 
-    public function setLength($var) {
+    public function setLength($var)
+    {
         $this->length = $var;
         $this->Length = $var;
     }
 
-    public function getWidth() {
+    public function getWidth()
+    {
         return $this->width;
     }
 
-    public function setWidth($var) {
+    public function setWidth($var)
+    {
         $this->Width = $var;
         $this->width = $var;
     }
 
-    public function getHeight() {
+    public function getHeight()
+    {
         return $this->height;
     }
 
-    public function setHeight($var) {
+    public function setHeight($var)
+    {
         $this->height = $var;
         $this->Height = $var;
     }
-} 
+}

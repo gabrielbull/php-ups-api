@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 class COD
@@ -6,7 +7,7 @@ class COD
     public $CODCode;
     public $CODAmount;
 
-    function __construct($response = null)
+    public function __construct($response = null)
     {
         $this->CODAmount = new CODAmount();
 
@@ -19,4 +20,4 @@ class COD
             }
         }
     }
-} 
+}

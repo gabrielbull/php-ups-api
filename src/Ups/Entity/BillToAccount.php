@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 class BillToAccount
@@ -11,7 +12,7 @@ class BillToAccount
     public $Option;
     public $Number;
 
-    function __construct($response = null)
+    public function __construct($response = null)
     {
         if (null != $response) {
             if (isset($response->Option)) {
@@ -22,4 +23,4 @@ class BillToAccount
             }
         }
     }
-} 
+}

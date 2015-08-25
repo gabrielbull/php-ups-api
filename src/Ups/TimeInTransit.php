@@ -1,31 +1,30 @@
 <?php
+
 namespace Ups;
 
 use DOMDocument;
+use Exception;
 use Psr\Log\LoggerInterface;
 use SimpleXMLElement;
-use Exception;
 use Ups\Entity\TimeInTransitRequest;
 use Ups\Entity\TimeInTransitResponse;
 
 /**
- * TimeInTransit API Wrapper
+ * TimeInTransit API Wrapper.
  *
- * @package ups
  * @author Sebastien Vergnes <sebastien@vergnes.eu>
  */
 class TimeInTransit extends Ups
 {
-
     private $request;
 
     const ENDPOINT = '/TimeInTransit';
 
     /**
-     * @param string|null $accessKey UPS License Access Key
-     * @param string|null $userId UPS User ID
-     * @param string|null $password UPS User Password
-     * @param bool $useIntegration Determine if we should use production or CIE URLs.
+     * @param string|null      $accessKey      UPS License Access Key
+     * @param string|null      $userId         UPS User ID
+     * @param string|null      $password       UPS User Password
+     * @param bool             $useIntegration Determine if we should use production or CIE URLs.
      * @param RequestInterface $request
      * @param LoggerInterface PSR3 compatible logger (optional)
      */
@@ -39,8 +38,10 @@ class TimeInTransit extends Ups
 
     /**
      * @param TimeInTransitRequest $shipment
-     * @return TimeInTransitRequest
+     *
      * @throws Exception
+     *
+     * @return TimeInTransitRequest
      */
     public function getTimeInTransit(TimeInTransitRequest $shipment)
     {
@@ -49,11 +50,13 @@ class TimeInTransit extends Ups
 
     /**
      * Creates and sends a request for the given shipment. This handles checking for
-     * errors in the response back from UPS
+     * errors in the response back from UPS.
      *
      * @param TimeInTransitRequest $timeInTransitRequest
-     * @return TimeInTransitRequest
+     *
      * @throws Exception
+     *
+     * @return TimeInTransitRequest
      */
     private function sendRequest(TimeInTransitRequest $timeInTransitRequest)
     {
@@ -62,13 +65,13 @@ class TimeInTransit extends Ups
         $response = $this->response->getResponse();
 
         if (null === $response) {
-            throw new Exception("Failure (0): Unknown error", 0);
+            throw new Exception('Failure (0): Unknown error', 0);
         }
 
         if ($response instanceof SimpleXMLElement && $response->Response->ResponseStatusCode == 0) {
             throw new Exception(
                 "Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}",
-                (int)$response->Response->Error->ErrorCode
+                (int) $response->Response->Error->ErrorCode
             );
         } else {
             return $this->formatResponse($response);
@@ -77,7 +80,7 @@ class TimeInTransit extends Ups
         if ($response->Response->ResponseStatusCode == 0) {
             throw new Exception(
                 "Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}",
-                (int)$response->Response->Error->ErrorCode
+                (int) $response->Response->Error->ErrorCode
             );
         } else {
             return $this->formatResponse($response);
@@ -85,9 +88,10 @@ class TimeInTransit extends Ups
     }
 
     /**
-     * Create the TimeInTransit request
+     * Create the TimeInTransit request.
      *
      * @param TimeInTransitRequest $timeInTransitRequest The request details. Refer to the UPS documentation for available structure
+     *
      * @return string
      */
     private function createRequest(TimeInTransitRequest $timeInTransitRequest)
@@ -95,15 +99,15 @@ class TimeInTransit extends Ups
         $xml = new DOMDocument();
         $xml->formatOutput = true;
 
-        $trackRequest = $xml->appendChild($xml->createElement("TimeInTransitRequest"));
+        $trackRequest = $xml->appendChild($xml->createElement('TimeInTransitRequest'));
         $trackRequest->setAttribute('xml:lang', 'en-US');
 
-        $request = $trackRequest->appendChild($xml->createElement("Request"));
+        $request = $trackRequest->appendChild($xml->createElement('Request'));
 
         $node = $xml->importNode($this->createTransactionNode(), true);
         $request->appendChild($node);
 
-        $request->appendChild($xml->createElement("RequestAction", "TimeInTransit"));
+        $request->appendChild($xml->createElement('RequestAction', 'TimeInTransit'));
 
         $transitFromNode = $trackRequest->appendChild($xml->createElement('TransitFrom'));
         $address = $timeInTransitRequest->getTransitFrom();
@@ -124,7 +128,7 @@ class TimeInTransit extends Ups
 
         $packages = $timeInTransitRequest->getTotalPackagesInShipment();
         if (isset($packages)) {
-            $trackRequest->appendChild($xml->createElement("TotalPackagesInShipment", $packages));
+            $trackRequest->appendChild($xml->createElement('TotalPackagesInShipment', $packages));
         }
 
         $invoiceLineTotal = $timeInTransitRequest->getInvoiceLineTotal();
@@ -134,21 +138,22 @@ class TimeInTransit extends Ups
 
         $pickupDate = $timeInTransitRequest->getPickupDate();
         if ($pickupDate) {
-            $trackRequest->appendChild($xml->createElement("PickupDate", $pickupDate->format('Ymd')));
+            $trackRequest->appendChild($xml->createElement('PickupDate', $pickupDate->format('Ymd')));
         }
 
         $indicator = $timeInTransitRequest->getDocumentsOnlyIndicator();
-        if($indicator) {
-            $trackRequest->appendChild($xml->createElement("DocumentsOnlyIndicator"));
+        if ($indicator) {
+            $trackRequest->appendChild($xml->createElement('DocumentsOnlyIndicator'));
         }
 
         return $xml->saveXML();
     }
 
     /**
-     * Format the response
+     * Format the response.
      *
      * @param SimpleXMLElement $response
+     *
      * @return TimeInTransitRequest
      */
     private function formatResponse(SimpleXMLElement $response)
@@ -169,16 +174,19 @@ class TimeInTransit extends Ups
         if (null === $this->request) {
             $this->request = new Request($this->logger);
         }
+
         return $this->request;
     }
 
     /**
      * @param RequestInterface $request
+     *
      * @return $this
      */
     public function setRequest(RequestInterface $request)
     {
         $this->request = $request;
+
         return $this;
     }
 
@@ -192,11 +200,13 @@ class TimeInTransit extends Ups
 
     /**
      * @param ResponseInterface $response
+     *
      * @return $this
      */
     public function setResponse(ResponseInterface $response)
     {
         $this->response = $response;
+
         return $this;
     }
 }

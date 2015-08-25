@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 use DOMDocument;
@@ -6,12 +7,10 @@ use DOMElement;
 use Ups\NodeInterface;
 
 /**
- * Class Product
- * @package Ups\Entity
+ * Class Product.
  */
 class Product implements NodeInterface
 {
-
     /**
      * @var string
      */
@@ -65,6 +64,7 @@ class Product implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
+     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -74,20 +74,20 @@ class Product implements NodeInterface
         }
 
         $node = $document->createElement('Product');
-        for($i = 1; $i <= 3; $i++) {
-            $desc = $this->{'getDescription' . $i}();
-            if($desc !== null) {
+        for ($i = 1; $i <= 3; $i++) {
+            $desc = $this->{'getDescription'.$i}();
+            if ($desc !== null) {
                 $node->appendChild($document->createElement('Description', $desc));
             }
         }
         $node->appendChild($this->getUnit()->toNode($document));
-        if($this->getCommodityCode() !== null) {
+        if ($this->getCommodityCode() !== null) {
             $node->appendChild($document->createElement('CommodityCode', $this->getCommodityCode()));
         }
-        if($this->getPartNumber() !== null) {
+        if ($this->getPartNumber() !== null) {
             $node->appendChild($document->createElement('PartNumber', $this->getPartNumber()));
         }
-        if($this->getOriginCountryCode() !== null) {
+        if ($this->getOriginCountryCode() !== null) {
             $node->appendChild($document->createElement('OriginCountryCode', $this->getOriginCountryCode()));
         }
 
@@ -104,15 +104,17 @@ class Product implements NodeInterface
 
     /**
      * @param string $description
+     *
      * @return $this
      */
     public function setDescription1($description)
     {
-        if(strlen($description) > 35) {
+        if (strlen($description) > 35) {
             $description = substr($description, 0, 35);
         }
 
         $this->description1 = $description;
+
         return $this;
     }
 
@@ -126,15 +128,17 @@ class Product implements NodeInterface
 
     /**
      * @param string $description
+     *
      * @return $this
      */
     public function setDescription2($description)
     {
-        if(strlen($description) > 35) {
+        if (strlen($description) > 35) {
             $description = substr($description, 0, 35);
         }
 
         $this->description2 = $description;
+
         return $this;
     }
 
@@ -148,15 +152,17 @@ class Product implements NodeInterface
 
     /**
      * @param string $description
+     *
      * @return $this
      */
     public function setDescription3($description)
     {
-        if(strlen($description) > 35) {
+        if (strlen($description) > 35) {
             $description = substr($description, 0, 35);
         }
 
         $this->description3 = $description;
+
         return $this;
     }
 
@@ -170,21 +176,25 @@ class Product implements NodeInterface
 
     /**
      * @param string $code
+     *
      * @return $this
      */
     public function setCommodityCode($code)
     {
         $this->commodityCode = $code;
+
         return $this;
     }
 
     /**
      * @param Unit $unit
+     *
      * @return $this
      */
     public function setUnit(Unit $unit)
     {
         $this->unit = $unit;
+
         return $this;
     }
 
@@ -198,11 +208,13 @@ class Product implements NodeInterface
 
     /**
      * @param $number
+     *
      * @return $this
      */
     public function setPartNumber($number)
     {
         $this->partNumber = $number;
+
         return $this;
     }
 
@@ -216,11 +228,13 @@ class Product implements NodeInterface
 
     /**
      * @param $countryCode
+     *
      * @return $this
      */
     public function setOriginCountryCode($countryCode)
     {
         $this->originCountryCode = $countryCode;
+
         return $this;
     }
 
@@ -231,5 +245,4 @@ class Product implements NodeInterface
     {
         return $this->originCountryCode;
     }
-
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace Ups\Entity;
 
 class AutoDutyCode
@@ -13,7 +14,7 @@ class AutoDutyCode
     const ADC_LINERELEASE = '08';
     const ADC_SECTION321LOWVALUE = '09';
 
-    function __construct()
+    public function __construct()
     {
     }
-} 
+}
