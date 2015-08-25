@@ -121,7 +121,7 @@ class TimeInTransitTest extends PHPUnit_Framework_TestCase
 
         // Test response
 
-        $this->assertContains('Ë', $times->TransitTo->PoliticalDivision3);
+        $this->assertContains('Ã‹', $times->TransitTo->PoliticalDivision3);
     }
 
 }
