@@ -61,7 +61,6 @@ class RequestMock implements RequestInterface
         $request = realpath(__DIR__ . self::REQUEST_DIRECTORY . $request);
         if ($request && is_file($request)) {
             $request = file_get_contents($request);
-            $request = mb_convert_encoding($request, 'UTF-8', mb_detect_encoding($request));
             if (isset($args)) {
                 $request = call_user_func_array('sprintf', array_merge([$request], $args));
             }
@@ -100,6 +99,7 @@ class RequestMock implements RequestInterface
         if ($response && is_file($response)) {
             $response = file_get_contents($response);
             if (!empty($response)) {
+                $response = mb_convert_encoding($response, 'UTF-8', mb_detect_encoding($response));
                 $response = new SimpleXMLElement($response);
                 if (isset($response->Response) && isset($response->Response->ResponseStatusCode)) {
                     return (new ResponseMock)->setResponse($response);
