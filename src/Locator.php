@@ -7,6 +7,7 @@ use Exception;
 use Psr\Log\LoggerInterface;
 use SimpleXMLElement;
 use Ups\Entity\LocatorRequest;
+use Ups\Entity\TimeInTransitRequest;
 
 /**
  * Locator API Wrapper.
@@ -35,7 +36,7 @@ class Locator extends Ups
      * @param string|null      $password       UPS User Password
      * @param bool             $useIntegration Determine if we should use production or CIE URLs.
      * @param RequestInterface $request
-     * @param LoggerInterface PSR3 compatible logger (optional)
+     * @param LoggerInterface  $logger PSR3 compatible logger (optional)
      */
     public function __construct($accessKey = null, $userId = null, $password = null, $useIntegration = false, RequestInterface $request = null, LoggerInterface $logger = null)
     {
@@ -54,10 +55,9 @@ class Locator extends Ups
      * Creates and sends a request for the given shipment. This handles checking for
      * errors in the response back from UPS.
      *
-     * @param TimeInTransitRequest $timeInTransitRequest
-     *
+     * @param LocatorRequest $request
+     * @param $requestOption
      * @throws Exception
-     *
      * @return TimeInTransitRequest
      */
     private function sendRequest(LocatorRequest $request, $requestOption)
@@ -83,8 +83,8 @@ class Locator extends Ups
     /**
      * Create the TimeInTransit request.
      *
-     * @param TimeInTransitRequest $timeInTransitRequest The request details. Refer to the UPS documentation for available structure
-     *
+     * @param LocatorRequest $locatorRequest The request details. Refer to the UPS documentation for available structure
+     * @param $requestOption
      * @return string
      */
     private function createRequest(LocatorRequest $locatorRequest, $requestOption)

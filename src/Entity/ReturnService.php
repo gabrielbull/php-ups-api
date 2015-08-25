@@ -103,7 +103,7 @@ class ReturnService implements NodeInterface
     }
 
     /**
-     * @param string $code
+     * @param int $code
      *
      * @return $this
      */

@@ -37,9 +37,14 @@ class Product implements NodeInterface
     private $partNumber;
 
     /**
-     * @var
+     * @var string
      */
     private $originCountryCode;
+
+    /**
+     * @var Unit
+     */
+    private $unit;
 
     /**
      * @param null|object $attributes
@@ -48,7 +53,7 @@ class Product implements NodeInterface
     {
         if (null !== $attributes) {
             if (isset($attributes->Description)) {
-                $this->setDescription($attributes->Description);
+                $this->setDescription1($attributes->Description);
             }
             if (isset($attributes->CommodityCode)) {
                 $this->setCommodityCode($attributes->CommodityCode);
@@ -199,7 +204,7 @@ class Product implements NodeInterface
     }
 
     /**
-     * @return mixed
+     * @return Unit
      */
     public function getUnit()
     {
@@ -227,7 +232,7 @@ class Product implements NodeInterface
     }
 
     /**
-     * @param $countryCode
+     * @param string $countryCode
      *
      * @return $this
      */
@@ -239,7 +244,7 @@ class Product implements NodeInterface
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getOriginCountryCode()
     {

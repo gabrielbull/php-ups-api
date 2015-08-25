@@ -99,11 +99,13 @@ class UnitOfMeasurement implements NodeInterface
      */
     public function toNode(DOMDocument $document = null)
     {
-        $node = $document->createElement('UnitOfMeasurement');
-        $node->appendChild($document->createElement('Code', $this->getCode()));
-        $node->appendChild($document->createElement('Description', $this->getDescription()));
-
-        return $node;
+        if (null !== $document) {
+            $node = $document->createElement('UnitOfMeasurement');
+            $node->appendChild($document->createElement('Code', $this->getCode()));
+            $node->appendChild($document->createElement('Description', $this->getDescription()));
+            return $node;
+        }
+        return new DOMElement('UnitOfMeasurement');
     }
 
     /**

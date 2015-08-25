@@ -36,9 +36,4 @@ class RatedPackage
             }
         }
     }
-
-    public function getServiceName()
-    {
-        return $this->Service->getName();
-    }
 }

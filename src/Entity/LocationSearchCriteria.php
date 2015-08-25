@@ -2,6 +2,7 @@
 
 namespace Ups\Entity;
 
+use Exception;
 use DOMDocument;
 use DOMElement;
 use Ups\NodeInterface;
@@ -9,7 +10,7 @@ use Ups\NodeInterface;
 class LocationSearchCriteria implements NodeInterface
 {
     /**
-     * @var string
+     * @var AccessPointSearch
      */
     private $accessPointSearch;
 
@@ -19,7 +20,7 @@ class LocationSearchCriteria implements NodeInterface
     private $maximumListSize;
 
     /**
-     * @return string
+     * @return AccessPointSearch
      */
     public function getAccessPointSearch()
     {
@@ -27,7 +28,7 @@ class LocationSearchCriteria implements NodeInterface
     }
 
     /**
-     * @param string $accessPointSearch
+     * @param AccessPointSearch $accessPointSearch
      */
     public function setAccessPointSearch(AccessPointSearch $accessPointSearch)
     {
@@ -68,13 +69,14 @@ class LocationSearchCriteria implements NodeInterface
 
     /**
      * @param mixed $maximumListSize
+     * @throws Exception
      */
     public function setMaximumListSize($maximumListSize)
     {
         $maximumListSize = (int) $maximumListSize;
 
         if ($maximumListSize < 1 || $maximumListSize > 50) {
-            throw new \Exception('Maximum list size: If present, indicates the maximum number of locations the client wishes to receive in response; ranges from 1 to 50 with a default value of 10');
+            throw new Exception('Maximum list size: If present, indicates the maximum number of locations the client wishes to receive in response; ranges from 1 to 50 with a default value of 10');
         }
 
         $this->maximumListSize = $maximumListSize;

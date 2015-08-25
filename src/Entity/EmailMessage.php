@@ -105,7 +105,7 @@ class EmailMessage implements NodeInterface
     }
 
     /**
-     * @param array $emailAddress
+     * @param array $emailAddresses
      */
     public function setEmailAddresses(array $emailAddresses)
     {

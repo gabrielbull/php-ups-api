@@ -5,6 +5,7 @@ namespace Ups\Entity;
 use DOMDocument;
 use DOMElement;
 use Ups\NodeInterface;
+use DateTime;
 
 class InternationalForms implements NodeInterface
 {
@@ -109,7 +110,7 @@ class InternationalForms implements NodeInterface
     private $invoiceNumber;
 
     /**
-     * @var string
+     * @var DateTime
      */
     private $invoiceDate;
 
@@ -162,7 +163,7 @@ class InternationalForms implements NodeInterface
                 $this->setInvoiceNumber($attributes->InvoiceNumber);
             }
             if (isset($attributes->InvoiceDate)) {
-                $this->setInvoiceDate(new \DateTime($attributes->InvoiceDate));
+                $this->setInvoiceDate(new DateTime($attributes->InvoiceDate));
             }
             if (isset($attributes->PurchaseOrderNumber)) {
                 $this->setPurchaseOrderNumber($attributes->PurchaseOrderNumber);
@@ -330,11 +331,11 @@ class InternationalForms implements NodeInterface
     }
 
     /**
-     * @param \DateTime $date
+     * @param DateTime $date
      *
      * @return $this
      */
-    public function setInvoiceDate(\DateTime $date)
+    public function setInvoiceDate(DateTime $date)
     {
         $this->invoiceDate = $date;
 
@@ -342,7 +343,7 @@ class InternationalForms implements NodeInterface
     }
 
     /**
-     * @return string
+     * @return DateTime
      */
     public function getInvoiceDate()
     {

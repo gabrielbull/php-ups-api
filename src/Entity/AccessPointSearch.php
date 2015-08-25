@@ -82,7 +82,7 @@ class AccessPointSearch implements NodeInterface
     }
 
     /**
-     * @param mixed $publicAccessPointID
+     * @param mixed $publicAccessPointId
      */
     public function setPublicAccessPointId($publicAccessPointId)
     {
