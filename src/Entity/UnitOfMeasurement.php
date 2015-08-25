@@ -103,8 +103,10 @@ class UnitOfMeasurement implements NodeInterface
             $node = $document->createElement('UnitOfMeasurement');
             $node->appendChild($document->createElement('Code', $this->getCode()));
             $node->appendChild($document->createElement('Description', $this->getDescription()));
+
             return $node;
         }
+
         return new DOMElement('UnitOfMeasurement');
     }
 

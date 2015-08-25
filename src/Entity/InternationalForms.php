@@ -2,10 +2,10 @@
 
 namespace Ups\Entity;
 
+use DateTime;
 use DOMDocument;
 use DOMElement;
 use Ups\NodeInterface;
-use DateTime;
 
 class InternationalForms implements NodeInterface
 {

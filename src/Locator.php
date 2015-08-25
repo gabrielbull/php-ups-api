@@ -36,7 +36,7 @@ class Locator extends Ups
      * @param string|null      $password       UPS User Password
      * @param bool             $useIntegration Determine if we should use production or CIE URLs.
      * @param RequestInterface $request
-     * @param LoggerInterface  $logger PSR3 compatible logger (optional)
+     * @param LoggerInterface  $logger         PSR3 compatible logger (optional)
      */
     public function __construct($accessKey = null, $userId = null, $password = null, $useIntegration = false, RequestInterface $request = null, LoggerInterface $logger = null)
     {
@@ -57,7 +57,9 @@ class Locator extends Ups
      *
      * @param LocatorRequest $request
      * @param $requestOption
+     *
      * @throws Exception
+     *
      * @return TimeInTransitRequest
      */
     private function sendRequest(LocatorRequest $request, $requestOption)
@@ -85,6 +87,7 @@ class Locator extends Ups
      *
      * @param LocatorRequest $locatorRequest The request details. Refer to the UPS documentation for available structure
      * @param $requestOption
+     *
      * @return string
      */
     private function createRequest(LocatorRequest $locatorRequest, $requestOption)

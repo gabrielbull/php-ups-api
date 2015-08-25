@@ -2,9 +2,9 @@
 
 namespace Ups\Entity;
 
-use Exception;
 use DOMDocument;
 use DOMElement;
+use Exception;
 use Ups\NodeInterface;
 
 class LocationSearchCriteria implements NodeInterface
@@ -69,6 +69,7 @@ class LocationSearchCriteria implements NodeInterface
 
     /**
      * @param mixed $maximumListSize
+     *
      * @throws Exception
      */
     public function setMaximumListSize($maximumListSize)
