@@ -114,6 +114,7 @@ class Request implements RequestInterface, LoggerAwareInterface
 
             if ($response->getStatusCode() === 200) {
                 $body = $response->getBody();
+                $body = mb_convert_encoding($body, 'UTF-8', mb_detect_encoding($body));
                 $xml = new SimpleXMLElement($body);
                 if (isset($xml->Response) && isset($xml->Response->ResponseStatusCode)) {
                     $responseInstance = new Response;

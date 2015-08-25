@@ -61,6 +61,7 @@ class RequestMock implements RequestInterface
         $request = realpath(__DIR__ . self::REQUEST_DIRECTORY . $request);
         if ($request && is_file($request)) {
             $request = file_get_contents($request);
+            $request = mb_convert_encoding($request, 'UTF-8', mb_detect_encoding($request));
             if (isset($args)) {
                 $request = call_user_func_array('sprintf', array_merge([$request], $args));
             }
