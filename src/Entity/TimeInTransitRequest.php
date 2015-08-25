@@ -130,6 +130,7 @@ class TimeInTransitRequest
 
     /**
      * @param $amount
+     *
      * @throws BaseException
      */
     public function setTotalPackagesInShipment($amount)
@@ -140,7 +141,6 @@ class TimeInTransitRequest
 
         $this->totalPackagesInShipment = $amount;
     }
-
 
     /**
      * @return mixed

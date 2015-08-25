@@ -118,7 +118,7 @@ class Request implements RequestInterface, LoggerAwareInterface
             }
 
             if ($response->getStatusCode() === 200) {
-                $body = (string)$response->getBody();
+                $body = (string) $response->getBody();
 
                 if (function_exists('mb_convert_encoding')) {
                     $body = mb_convert_encoding($body, 'UTF-8', mb_detect_encoding($body));
