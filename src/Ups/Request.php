@@ -4,7 +4,9 @@ namespace Ups;
 
 use DateTime;
 use Exception;
+use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ConnectException;
+use GuzzleHttp\Exception\TransferException;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use SimpleXMLElement;
@@ -97,7 +99,8 @@ class Request implements RequestInterface, LoggerAwareInterface
                     'headers' => [
                         'Content-type' => 'application/x-www-form-urlencoded; charset=utf-8',
                         'Accept-Charset' => 'UTF-8'
-                    ]
+                    ],
+                    'http_errors' => true
                 ]
             );
 
@@ -114,15 +117,22 @@ class Request implements RequestInterface, LoggerAwareInterface
 
             if ($response->getStatusCode() === 200) {
                 $body = $response->getBody();
+                $body = mb_convert_encoding($body, 'UTF-8', mb_detect_encoding($body));
                 $xml = new SimpleXMLElement($body);
-                if (isset($xml->Response) && isset($xml->Response->ResponseStatusCode)) {
-                    $responseInstance = new Response;
-                    return $responseInstance->setText($response->getBody())->setResponse($xml);
+                if(isset($xml->Response) && isset($xml->Response->ResponseStatusCode)) {
+                    if ($xml->Response->ResponseStatusCode == 1) {
+                        $responseInstance = new Response;
+                        return $responseInstance->setText($body)->setResponse($xml);
+                    }
+                    elseif ($xml->Response->ResponseStatusCode == 0) {
+                        throw new InvalidResponseException('Failure: ' . $xml->Response->Error->ErrorDescription . ' (' . $xml->Response->Error->ErrorCode . ')');
+                    }
+                }
+                else {
+                    throw new InvalidResponseException('Failure: response is in an unexpected format.');
                 }
             }
-
-            throw new InvalidResponseException("Failure: Response is invalid.");
-        } catch (ConnectException $e) {
+        } catch (ConnectException $e) { // A GuzzleHttp\Exception\ConnectException exception is thrown in the event of a networking error.
             if ($this->logger) {
                 $this->logger->alert('Connection to endpoint failed', [
                     'id' => $id,
@@ -131,6 +141,18 @@ class Request implements RequestInterface, LoggerAwareInterface
             }
 
             throw new EndpointConnectionException("Failure: Connection to Endpoint URL failed.");
+        } catch (TransferException $e) { // GuzzleHttp\Exception\TransferException. Catching this exception will catch any exception that can be thrown while transferring requests.
+            // Includes the ConnectException, but we want separate errors
+            if ($this->logger) {
+                $this->logger->alert('Transfer from endpoint failed', [
+                    'id' => $id,
+                    'endpointurl' => $this->getEndpointUrl()
+                ]);
+            }
+
+            throw new EndpointConnectionException("Failure: Transfer from endpoint failed.");
+        } catch (ClientException $e) { // A GuzzleHttp\Exception\ClientException is thrown for 400 level errors if the http_errors request option is set to true.
+            throw $e;
         } catch (InvalidResponseException $e) {
             if ($this->logger) {
                 $this->logger->critical('UPS Response is invalid', ['id' => $id]);
