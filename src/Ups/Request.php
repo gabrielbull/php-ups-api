@@ -1,10 +1,15 @@
 <?php
+
 namespace Ups;
 
+use DateTime;
+use Exception;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use SimpleXMLElement;
-use Exception;
+use Ups\Exception\EndpointConnectionException;
+use Ups\Exception\InvalidResponseException;
+use GuzzleHttp\Client as Guzzle;
 
 class Request implements RequestInterface, LoggerAwareInterface
 {
@@ -33,7 +38,7 @@ class Request implements RequestInterface, LoggerAwareInterface
      */
     public function __construct(LoggerInterface $logger = null)
     {
-        if($logger) {
+        if ($logger) {
             $this->setLogger($logger);
         }
     }
@@ -67,54 +72,69 @@ class Request implements RequestInterface, LoggerAwareInterface
         $this->setEndpointUrl($endpointurl);
 
         // Log request
-        if($this->logger) {
-            $date = new \DateTime;
+        $id = null;
+        if ($this->logger) {
+            $date = new DateTime;
             $id = $date->format('YmdHisu');
-            $this->logger->info('Request To UPS API', array('id' => $id, 'endpointurl' => $this->getEndpointUrl()));
-            $this->logger->debug('Request: ' . $this->getRequest(), array('id' => $id, 'endpointurl' => $this->getEndpointUrl()));
+            $this->logger->info('Request To UPS API', [
+                'id' => $id,
+                'endpointurl' => $this->getEndpointUrl()
+            ]);
+            $this->logger->debug('Request: ' . $this->getRequest(), [
+                'id' => $id,
+                'endpointurl' => $this->getEndpointUrl()
+            ]);
         }
 
-        // Create POST request
-        $form = array(
-            'http' => array(
-                'method' => 'POST',
-                'header' => 'Content-type: application/x-www-form-urlencoded',
-                'content' => $this->getAccess() . $this->getRequest()
-            )
-        );
+        try {
+            $client = new Guzzle();
+            $response = $client->post(
+                $this->getEndpointUrl(),
+                [
+                    'http' => [
+                        'method' => 'POST',
+                        'header' => 'Content-type: application/x-www-form-urlencoded',
+                        'content' => $this->getAccess() . $this->getRequest()
+                    ]
+                ]
+            );
 
-        $request = stream_context_create($form);
-
-        if (!$handle = fopen($this->getEndpointUrl(), 'rb', false, $request)) {
-            if($this->logger) {
-                $this->logger->alert('Connection to UPS API failed', array('id' => $id, 'endpointurl' => $this->getEndpointUrl()));
+            if ($this->logger) {
+                $this->logger->info('Response from UPS API', [
+                    'id' => $id,
+                    'endpointurl' => $this->getEndpointUrl()
+                ]);
+                $this->logger->debug('Response: ' . $response->getBody(), [
+                    'id' => $id,
+                    'endpointurl' => $this->getEndpointUrl()
+                ]);
             }
 
-            throw new Exception("Failure: Connection to Endpoint URL failed.");
-        }
-
-        $response = stream_get_contents($handle);
-        fclose($handle);
-
-        if($this->logger) {
-            $this->logger->info('Response from UPS API', array('id' => $id, 'endpointurl' => $this->getEndpointUrl()));
-            $this->logger->debug('Response: ' . $response, array('id' => $id, 'endpointurl' => $this->getEndpointUrl()));
-        }
-
-        if ($response != false) {
-            $text = $response;
-            $response = new SimpleXMLElement(utf8_encode($response));
-            if (isset($response->Response) && isset($response->Response->ResponseStatusCode)) {
-                $responseInstance = new Response;
-                return $responseInstance->setText($text)->setResponse($response);
+            if ($response->getStatusCode() === 200) {
+                $xml = new SimpleXMLElement($response->getBody());
+                if (isset($xml->Response) && isset($xml->Response->ResponseStatusCode)) {
+                    $responseInstance = new Response;
+                    return $responseInstance->setText($response->getBody())->setResponse($xml);
+                }
             }
-        }
 
-        if($this->logger) {
-            $this->logger->critical('UPS Response is invalid', array('id' => $id));
-        }
+            throw new InvalidResponseException("Failure: Response is invalid.");
+        } catch (InvalidResponseException $e) {
+            if ($this->logger) {
+                $this->logger->critical('UPS Response is invalid', ['id' => $id]);
+            }
 
-        throw new Exception("Failure: Response is invalid.");
+            throw $e;
+        } catch (Exception $e) {
+            if ($this->logger) {
+                $this->logger->alert('Connection to UPS API failed', [
+                    'id' => $id,
+                    'endpointurl' => $this->getEndpointUrl()
+                ]);
+            }
+
+            throw new EndpointConnectionException("Failure: Connection to Endpoint URL failed.");
+        }
     }
 
     /**
