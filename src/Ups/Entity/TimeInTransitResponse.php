@@ -26,11 +26,11 @@ class TimeInTransitResponse
             if (isset($response->PickupDate)) {
                 $this->PickupDate = $response->PickupDate;
             }
-            if (isset($response->TransitFrom)) {
-                $this->TransitFrom = new AddressArtifactFormat($response->TransitFrom);
+            if (isset($response->TransitFrom->AddressArtifactFormat)) {
+                $this->TransitFrom = new AddressArtifactFormat($response->TransitFrom->AddressArtifactFormat);
             }
-            if (isset($response->TransitTo)) {
-                $this->TransitTo = new AddressArtifactFormat($response->TransitTo);
+            if (isset($response->TransitTo->AddressArtifactFormat)) {
+                $this->TransitTo = new AddressArtifactFormat($response->TransitTo->AddressArtifactFormat);
             }
             if (isset($response->DocumentsOnlyIndicator)) {
                 $this->DocumentsOnlyIndicator = $response->DocumentsOnlyIndicator;

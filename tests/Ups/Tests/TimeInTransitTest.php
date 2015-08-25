@@ -92,7 +92,7 @@ class TimeInTransitTest extends PHPUnit_Framework_TestCase
     }
 
 
-    public function testRequestOddCharacter()
+    public function testRequestOddCharacterParse()
     {
         $tit = new Ups\TimeInTransit();
         $tit->setRequest($request = new RequestMock(null, '/TimeInTransit/Response2.xml'));
@@ -110,6 +110,18 @@ class TimeInTransitTest extends PHPUnit_Framework_TestCase
         $this->assertObjectHasAttribute('MaximumListSize', $times);
         $this->assertObjectHasAttribute('ServiceSummary', $times);
         $this->assertAttributeCount(3, 'ServiceSummary', $times);
+    }
+
+    public function testRequestOddCharacterCheckContent()
+    {
+        $tit = new Ups\TimeInTransit();
+        $tit->setRequest($request = new RequestMock(null, '/TimeInTransit/Response2.xml'));
+        $times = $tit->getTimeInTransit(new Ups\Entity\TimeInTransitRequest);
+
+
+        // Test response
+
+        $this->assertContains('Ë', $times->TransitTo->PoliticalDivision3);
     }
 
 }
