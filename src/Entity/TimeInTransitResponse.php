@@ -4,17 +4,59 @@ namespace Ups\Entity;
 
 class TimeInTransitResponse
 {
+    /**
+     * @var
+     */
     public $PickupDate;
+
+    /**
+     * @var AddressArtifactFormat
+     */
     public $TransitFrom;
+
+    /**
+     * @var AddressArtifactFormat
+     */
     public $TransitTo;
+
+    /**
+     * @var
+     */
     public $DocumentsOnlyIndicator;
+
+    /**
+     * @var
+     */
     public $AutoDutyCode;
+
+    /**
+     * @var ShipmentWeight
+     */
     public $ShipmentWeight;
+
+    /**
+     * @var Charges
+     */
     public $InvoiceLineTotal;
+
+    /**
+     * @var
+     */
     public $Disclaimer;
+
+    /**
+     * @var array
+     */
     public $ServiceSummary;
+
+    /**
+     * @var
+     */
     public $MaximumListSize;
 
+    /**
+     * @param null $response
+     */
     public function __construct($response = null)
     {
         $this->TransitFrom = new Address();

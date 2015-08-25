@@ -4,29 +4,119 @@ namespace Ups\Entity;
 
 class UpdatedAddress
 {
+    /**
+     * @var
+     */
     public $AddressLine1;
+
+    /**
+     * @var
+     */
     public $AddressLine2;
+
+    /**
+     * @var
+     */
     public $AddressLine3;
+
+    /**
+     * @var
+     */
     public $City;
+
+    /**
+     * @var
+     */
     public $StateProvinceCode;
+
+    /**
+     * @var
+     */
     public $PostalCode;
+
+    /**
+     * @var
+     */
     public $CountryCode;
+
+    /**
+     * @var
+     */
     public $PoliticalDivision1;
+
+    /**
+     * @var
+     */
     public $PoliticalDivision2;
+
+    /**
+     * @var
+     */
     public $PoliticalDivision3;
+
+    /**
+     * @var
+     */
     public $PostcodePrimaryLow;
+
+    /**
+     * @var
+     */
     public $PostcodePrimaryHigh;
+
+    /**
+     * @var
+     */
     public $PostcodeExtendedLow;
+
+    /**
+     * @var
+     */
     public $ResidentialAddressIndicator;
+
+    /**
+     * @var
+     */
     public $ConsigneeName;
+
+    /**
+     * @var
+     */
     public $StreetNumberLow;
+
+    /**
+     * @var
+     */
     public $StreetPrefix;
+
+    /**
+     * @var
+     */
     public $StreetName;
+
+    /**
+     * @var
+     */
     public $StreetType;
+
+    /**
+     * @var
+     */
     public $StreetSuffix;
+
+    /**
+     * @var
+     */
     public $BuildingName;
+
+    /**
+     * @var array
+     */
     public $AddressExtendedInformation;
 
+    /**
+     * @param null $response
+     */
     public function __construct($response = null)
     {
         $this->AddressExtendedInformation = [];
@@ -69,7 +159,7 @@ class UpdatedAddress
                 $this->PostcodePrimaryHigh = $response->PostcodePrimaryHigh;
             }
             if (isset($response->PostcodeExtendedLow)) {
-                $this->PostcodeextendedLow = $response->PostcodeExtendedLow;
+                $this->PostcodeExtendedLow = $response->PostcodeExtendedLow;
             }
             if (isset($response->ResidentialAddressIndicator)) {
                 $this->ResidentialAddressIndicator = $response->ResidentialAddressIndicator;

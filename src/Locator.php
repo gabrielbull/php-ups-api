@@ -157,7 +157,7 @@ class Locator extends Ups
     }
 
     /**
-     * @return ResponseInterface
+     * @return ResponseInterface|SimpleXMLElement
      */
     public function getResponse()
     {
@@ -165,7 +165,7 @@ class Locator extends Ups
     }
 
     /**
-     * @param ResponseInterface $response
+     * @param ResponseInterface|SimpleXMLElement $response
      *
      * @return $this
      */
