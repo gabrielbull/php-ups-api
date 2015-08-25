@@ -95,6 +95,7 @@ class Request implements RequestInterface, LoggerAwareInterface
                     'body' => $this->getAccess() . $this->getRequest(),
                     'headers' => [
                         'Content-type' => 'application/x-www-form-urlencoded',
+                        'Accept-Charset' => 'UTF-8'
                     ]
                 ]
             );
