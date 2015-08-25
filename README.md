@@ -391,4 +391,4 @@ $rate = new Ups\Rate($key, $username, $password, $useIntegration, $log);
 <a name="license-section"></a>
 ## License
 
-PHP UPS Api is licensed under [The MIT License (MIT)](LICENSE).
+PHP UPS API is licensed under [The MIT License (MIT)](LICENSE).
