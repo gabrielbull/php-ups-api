@@ -1,4 +1,4 @@
-PHP UPS Api
+PHP UPS API
 ===========
 
 [![Build Status](https://api.travis-ci.org/gabrielbull/php-ups-api.svg?branch=master)](https://travis-ci.org/gabrielbull/php-ups-api)
@@ -37,6 +37,7 @@ Tracking API, Shipping API, Rating API and Time in Transit API. Feel free to con
     * [Parameters](#locator-class-parameters)
 9. [Shipping Class](#shipping-class)
 10. [Logging](#logging)
+10. [License](#license-section)
 
 <a name="requirements"></a>
 ## Requirements
@@ -386,3 +387,8 @@ $log->pushHandler(new \Monolog\Handler\StreamHandler('logs/ups.log', \Monolog\Lo
 // Create Rate object + insert logger
 $rate = new Ups\Rate($key, $username, $password, $useIntegration, $log);
 ````
+
+<a name="license-section"></a>
+## License
+
+PHP UPS Api is licensed under [The MIT License (MIT)](LICENSE).

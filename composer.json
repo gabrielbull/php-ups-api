@@ -1,19 +1,8 @@
 {
   "name": "gabrielbull/ups-api",
   "type": "library",
-  "description": "UPS API PHP Wrapper",
-  "keywords": [
-    "ups",
-    "api",
-    "wrapper",
-    "quantum view",
-    "tracking",
-    "shipping",
-    "rate",
-    "rating",
-    "time in transit"
-  ],
-  "homepage": "https://github.com/gabrielbull/php-ups-api",
+  "description": "PHP UPS API",
+  "keywords": ["ups", "api", "wrapper", "quantum view", "tracking", "shipping", "rate", "rating", "time in transit"],
   "license": "MIT",
   "authors": [
     {
@@ -34,8 +23,8 @@
     }
   ],
   "require": {
-    "php": ">=5.3",
-    "psr/log": "~1.0"
+    "php": ">=5.3.3",
+    "psr/log": "~1.0|1.0.0|~1"
   },
   "require-dev": {
     "phpunit/phpunit": "~4"
@@ -49,5 +38,12 @@
     "psr-4": {
       "Ups\\Tests\\": ["tests/Ups/Tests", "tests/Ups/Tests/_includes"]
     }
-  }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-develop": "0.4.1-dev"
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }
