@@ -10,6 +10,7 @@ use Ups\NodeInterface;
  * Class ShipmentServiceOptions
  * @package Ups\Entity
  */
+// @todo Refactor to private properties
 class ShipmentServiceOptions implements NodeInterface
 {
     /**
@@ -36,6 +37,11 @@ class ShipmentServiceOptions implements NodeInterface
      * @var
      */
     public $DirectDeliveryOnlyIndicator;
+
+    /**
+     * @var
+     */
+    public $DeliverToAddresseeOnlyIndicator;
 
     /**
      * @var
@@ -70,6 +76,9 @@ class ShipmentServiceOptions implements NodeInterface
             if (isset($response->DirectDeliveryOnlyIndicator)) {
                 $this->DirectDeliveryOnlyIndicator = $response->DirectDeliveryOnlyIndicator;
             }
+            if (isset($response->DeliverToAddresseeOnlyIndicator)) {
+                $this->DeliverToAddresseeOnlyIndicator = $response->DeliverToAddresseeOnlyIndicator;
+            }
             if (isset($response->InternationalForms)) {
                 $this->setInternationalForms($response->InternationalForms);
             }
@@ -91,6 +100,10 @@ class ShipmentServiceOptions implements NodeInterface
 
         if (isset($this->DirectDeliveryOnlyIndicator)) {
             $node->appendChild($document->createElement('DirectDeliveryOnlyIndicator'));
+        }
+
+        if (isset($this->DeliverToAddresseeOnlyIndicator)) {
+            $node->appendChild($document->createElement('DeliverToAddresseeOnlyIndicator'));
         }
 
         if (isset($this->SaturdayPickup)) {
@@ -241,4 +254,23 @@ class ShipmentServiceOptions implements NodeInterface
         $this->DirectDeliveryOnlyIndicator = $DirectDeliveryOnlyIndicator;
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getDeliverToAddresseeOnlyIndicator()
+    {
+        return $this->DeliverToAddresseeOnlyIndicator;
+    }
+
+    /**
+     * @param mixed $DeliverToAddresseeOnlyIndicator
+     * @return ShipmentServiceOptions
+     */
+    public function setDeliverToAddresseeOnlyIndicator($DeliverToAddresseeOnlyIndicator)
+    {
+        $this->DeliverToAddresseeOnlyIndicator = $DeliverToAddresseeOnlyIndicator;
+        return $this;
+    }
+
 }
