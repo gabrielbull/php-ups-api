@@ -6,17 +6,50 @@ use DOMDocument;
 use DOMElement;
 use Ups\NodeInterface;
 
+/**
+ * Class ShipmentServiceOptions
+ * @package Ups\Entity
+ */
 class ShipmentServiceOptions implements NodeInterface
 {
+    /**
+     * @var
+     */
     public $SaturdayPickup;
+
+    /**
+     * @var
+     */
     public $SaturdayDelivery;
+
+    /**
+     * @var CallTagARS
+     */
     public $CallTagARS;
+
+    /**
+     * @var
+     */
     public $NegotiatedRatesIndicator;
+
+    /**
+     * @var
+     */
     public $DirectDeliveryOnlyIndicator;
 
+    /**
+     * @var
+     */
     private $internationalForms;
+
+    /**
+     * @var array
+     */
     private $notifications = [];
 
+    /**
+     * @param null $response
+     */
     public function __construct($response = null)
     {
         $this->CallTagARS = new CallTagARS();
@@ -117,5 +150,95 @@ class ShipmentServiceOptions implements NodeInterface
     public function getNotifications()
     {
         return $this->notifications;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSaturdayPickup()
+    {
+        return $this->SaturdayPickup;
+    }
+
+    /**
+     * @param mixed $SaturdayPickup
+     * @return ShipmentServiceOptions
+     */
+    public function setSaturdayPickup($SaturdayPickup)
+    {
+        $this->SaturdayPickup = $SaturdayPickup;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSaturdayDelivery()
+    {
+        return $this->SaturdayDelivery;
+    }
+
+    /**
+     * @param mixed $SaturdayDelivery
+     * @return ShipmentServiceOptions
+     */
+    public function setSaturdayDelivery($SaturdayDelivery)
+    {
+        $this->SaturdayDelivery = $SaturdayDelivery;
+        return $this;
+    }
+
+    /**
+     * @return CallTagARS
+     */
+    public function getCallTagARS()
+    {
+        return $this->CallTagARS;
+    }
+
+    /**
+     * @param CallTagARS $CallTagARS
+     * @return ShipmentServiceOptions
+     */
+    public function setCallTagARS($CallTagARS)
+    {
+        $this->CallTagARS = $CallTagARS;
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isNegotiatedRatesIndicator()
+    {
+        return $this->NegotiatedRatesIndicator;
+    }
+
+    /**
+     * @param boolean $NegotiatedRatesIndicator
+     * @return ShipmentServiceOptions
+     */
+    public function setNegotiatedRatesIndicator($NegotiatedRatesIndicator)
+    {
+        $this->NegotiatedRatesIndicator = $NegotiatedRatesIndicator;
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isDirectDeliveryOnlyIndicator()
+    {
+        return $this->DirectDeliveryOnlyIndicator;
+    }
+
+    /**
+     * @param boolean $DirectDeliveryOnlyIndicator
+     * @return ShipmentServiceOptions
+     */
+    public function setDirectDeliveryOnlyIndicator($DirectDeliveryOnlyIndicator)
+    {
+        $this->DirectDeliveryOnlyIndicator = $DirectDeliveryOnlyIndicator;
+        return $this;
     }
 }
