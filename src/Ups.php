@@ -66,10 +66,10 @@ abstract class Ups implements LoggerAwareInterface
     /**
      * Constructor.
      *
-     * @param string|null $accessKey      UPS License Access Key
-     * @param string|null $userId         UPS User ID
-     * @param string|null $password       UPS User Password
-     * @param bool        $useIntegration Determine if we should use production or CIE URLs.
+     * @param string|null $accessKey UPS License Access Key
+     * @param string|null $userId UPS User ID
+     * @param string|null $password UPS User Password
+     * @param bool $useIntegration Determine if we should use production or CIE URLs.
      * @param LoggerInterface PSR3 compatible logger (optional)
      */
     public function __construct($accessKey = null, $userId = null, $password = null, $useIntegration = false, LoggerInterface $logger = null)
@@ -166,8 +166,8 @@ abstract class Ups implements LoggerAwareInterface
     /**
      * Send request to UPS.
      *
-     * @param string $access      The access request xml
-     * @param string $request     The request xml
+     * @param string $access The access request xml
+     * @param string $request The request xml
      * @param string $endpointurl The UPS API Endpoint URL
      *
      * @throws Exception
@@ -212,6 +212,6 @@ abstract class Ups implements LoggerAwareInterface
     {
         $base = ($this->useIntegration ? $this->integrationBaseUrl : $this->productionBaseUrl);
 
-        return $base.$segment;
+        return $base . $segment;
     }
 }

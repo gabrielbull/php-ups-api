@@ -12,8 +12,8 @@ interface RequestInterface
     public function __construct(LoggerInterface $logger = null);
 
     /**
-     * @param string $access      The access request xml
-     * @param string $request     The request xml
+     * @param string $access The access request xml
+     * @param string $request The request xml
      * @param string $endpointurl The UPS API Endpoint URL
      *
      * @return ResponseInterface

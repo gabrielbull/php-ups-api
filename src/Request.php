@@ -61,8 +61,8 @@ class Request implements RequestInterface, LoggerAwareInterface
     /**
      * Send request to UPS.
      *
-     * @param string $access      The access request xml
-     * @param string $request     The request xml
+     * @param string $access The access request xml
+     * @param string $request The request xml
      * @param string $endpointurl The UPS API Endpoint URL
      *
      * @throws Exception
@@ -80,12 +80,12 @@ class Request implements RequestInterface, LoggerAwareInterface
         $date = new DateTime();
         $id = $date->format('YmdHisu');
         $this->logger->info('Request To UPS API', [
-            'id'          => $id,
+            'id' => $id,
             'endpointurl' => $this->getEndpointUrl(),
         ]);
 
-        $this->logger->debug('Request: '.$this->getRequest(), [
-            'id'          => $id,
+        $this->logger->debug('Request: ' . $this->getRequest(), [
+            'id' => $id,
             'endpointurl' => $this->getEndpointUrl(),
         ]);
 
@@ -95,24 +95,24 @@ class Request implements RequestInterface, LoggerAwareInterface
             $response = $client->post(
                 $this->getEndpointUrl(),
                 [
-                    'body'    => $this->getAccess().$this->getRequest(),
+                    'body' => $this->getAccess() . $this->getRequest(),
                     'headers' => [
-                        'Content-type'   => 'application/x-www-form-urlencoded; charset=utf-8',
+                        'Content-type' => 'application/x-www-form-urlencoded; charset=utf-8',
                         'Accept-Charset' => 'UTF-8',
                     ],
                     'http_errors' => true,
                 ]
             );
 
-            $body = (string) $response->getBody();
+            $body = (string)$response->getBody();
 
             $this->logger->info('Response from UPS API', [
-                'id'          => $id,
+                'id' => $id,
                 'endpointurl' => $this->getEndpointUrl(),
             ]);
 
-            $this->logger->debug('Response: '.$body, [
-                'id'          => $id,
+            $this->logger->debug('Response: ' . $body, [
+                'id' => $id,
                 'endpointurl' => $this->getEndpointUrl(),
             ]);
 
@@ -128,7 +128,7 @@ class Request implements RequestInterface, LoggerAwareInterface
 
                         return $responseInstance->setText($body)->setResponse($xml);
                     } elseif ($xml->Response->ResponseStatusCode == 0) {
-                        throw new InvalidResponseException('Failure: '.$xml->Response->Error->ErrorDescription.' ('.$xml->Response->Error->ErrorCode.')');
+                        throw new InvalidResponseException('Failure: ' . $xml->Response->Error->ErrorDescription . ' (' . $xml->Response->Error->ErrorCode . ')');
                     }
                 } else {
                     throw new InvalidResponseException('Failure: response is in an unexpected format.');
@@ -136,7 +136,7 @@ class Request implements RequestInterface, LoggerAwareInterface
             }
         } catch (\GuzzleHttp\Exception\TransferException $e) { // Guzzle: All of the exceptions extend from GuzzleHttp\Exception\TransferException
             $this->logger->alert($e->getMessage(), [
-                'id'          => $id,
+                'id' => $id,
                 'endpointurl' => $this->getEndpointUrl(),
             ]);
 

@@ -55,7 +55,7 @@ class FreightCharges implements NodeInterface
             throw new \Exception('Freight charges cannot be negative');
         }
 
-        if (strlen((string) $this->monetaryValue) > 15) {
+        if (strlen((string)$this->monetaryValue) > 15) {
             throw new \Exception('Value too long');
         }
 

@@ -92,7 +92,7 @@ class Unit implements NodeInterface
     {
         $this->value = number_format($value, 6);
 
-        if (strlen((string) $this->value) > 19) {
+        if (strlen((string)$this->value) > 19) {
             throw new \Exception('Value too long');
         }
 

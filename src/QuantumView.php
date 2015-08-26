@@ -52,10 +52,10 @@ class QuantumView extends Ups
     private $bookmark;
 
     /**
-     * @param string|null      $accessKey      UPS License Access Key
-     * @param string|null      $userId         UPS User ID
-     * @param string|null      $password       UPS User Password
-     * @param bool             $useIntegration Determine if we should use production or CIE URLs.
+     * @param string|null $accessKey UPS License Access Key
+     * @param string|null $userId UPS User ID
+     * @param string|null $password UPS User Password
+     * @param bool $useIntegration Determine if we should use production or CIE URLs.
      * @param RequestInterface $request
      * @param LoggerInterface PSR3 compatible logger (optional)
      */
@@ -70,11 +70,11 @@ class QuantumView extends Ups
     /**
      * Get a QuantumView subscription.
      *
-     * @param string $name          Name of subscription requested by user.
+     * @param string $name Name of subscription requested by user.
      * @param string $beginDateTime Beginning date time for the retrieval criteria of the subscriptions. Format: Y-m-d H:i:s or Unix timestamp.
-     * @param string $endDateTime   Ending date time for the retrieval criteria of the subscriptions. Format: Y-m-d H:i:s or Unix timestamp.
-     * @param string $fileName      File name of specific subscription requested by user.
-     * @param string $bookmark      Bookmarks the file for next retrieval.
+     * @param string $endDateTime Ending date time for the retrieval criteria of the subscriptions. Format: Y-m-d H:i:s or Unix timestamp.
+     * @param string $fileName File name of specific subscription requested by user.
+     * @param string $bookmark Bookmarks the file for next retrieval.
      *
      * @throws Exception
      *
@@ -116,11 +116,11 @@ class QuantumView extends Ups
         if ($response->Response->ResponseStatusCode == 0) {
             throw new Exception(
                 "Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}",
-                (int) $response->Response->Error->ErrorCode
+                (int)$response->Response->Error->ErrorCode
             );
         } else {
             if (isset($response->Bookmark)) {
-                $this->setBookmark((string) $response->Bookmark);
+                $this->setBookmark((string)$response->Bookmark);
             } else {
                 $this->setBookmark(null);
             }
@@ -197,9 +197,9 @@ class QuantumView extends Ups
             foreach ($subcriptionFile as $eventName => $event) {
                 if (!in_array($eventName, $eventsException)) {
                     $event = $this->convertXmlObject($event);
-                    $event = (object) array_merge(
+                    $event = (object)array_merge(
                         ['Type' => $eventName],
-                        (array) $event
+                        (array)$event
                     );
                     $output->append($event);
                 }

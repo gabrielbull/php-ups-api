@@ -52,7 +52,7 @@ class OriginAddress implements NodeInterface
      */
     public function setMaximumListSize($maximumListSize)
     {
-        $maximumListSize = (int) $maximumListSize;
+        $maximumListSize = (int)$maximumListSize;
 
         if ($maximumListSize < 1 || $maximumListSize > 50) {
             throw new \Exception('Maximum list size: If present, indicates the maximum number of locations the client wishes to receive in response; ranges from 1 to 50 with a default value of 10');

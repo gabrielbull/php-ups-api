@@ -41,10 +41,10 @@ class Shipping extends Ups
     private $request;
 
     /**
-     * @param string|null      $accessKey      UPS License Access Key
-     * @param string|null      $userId         UPS User ID
-     * @param string|null      $password       UPS User Password
-     * @param bool             $useIntegration Determine if we should use production or CIE URLs.
+     * @param string|null $accessKey UPS License Access Key
+     * @param string|null $userId UPS User ID
+     * @param string|null $password UPS User Password
+     * @param bool $useIntegration Determine if we should use production or CIE URLs.
      * @param RequestInterface $request
      * @param LoggerInterface PSR3 compatible logger (optional)
      */
@@ -59,9 +59,9 @@ class Shipping extends Ups
     /**
      * Create a Shipment Confirm request (generate a digest).
      *
-     * @param string        $validation      A UPS_Shipping::REQ_* constant (or null)
-     * @param stdClass      $shipment        Shipment data container.
-     * @param stdClass|null $labelSpecOpts   LabelSpecification data. Optional
+     * @param string $validation A UPS_Shipping::REQ_* constant (or null)
+     * @param stdClass $shipment Shipment data container.
+     * @param stdClass|null $labelSpecOpts LabelSpecification data. Optional
      * @param stdClass|null $receiptSpecOpts ReceiptSpecification data. Optional
      *
      * @throws Exception
@@ -81,7 +81,7 @@ class Shipping extends Ups
         if ($response instanceof SimpleXMLElement && $response->Response->ResponseStatusCode == 0) {
             throw new Exception(
                 "Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}",
-                (int) $response->Response->Error->ErrorCode
+                (int)$response->Response->Error->ErrorCode
             );
         } else {
             return $this->formatResponse($response);
@@ -91,8 +91,8 @@ class Shipping extends Ups
     /**
      * Creates a ShipConfirm request.
      *
-     * @param string        $validation
-     * @param stdClass      $shipment
+     * @param string $validation
+     * @param stdClass $shipment
      * @param stdClass|null $labelSpecOpts
      * @param stdClass|null $receiptSpecOpts
      *
@@ -474,7 +474,7 @@ class Shipping extends Ups
         if ($response instanceof SimpleXMLElement && $response->Response->ResponseStatusCode == 0) {
             throw new Exception(
                 "Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}",
-                (int) $response->Response->Error->ErrorCode
+                (int)$response->Response->Error->ErrorCode
             );
         } else {
             return $this->formatResponse($response->ShipmentResults);
@@ -528,7 +528,7 @@ class Shipping extends Ups
         if ($response->Response->ResponseStatusCode == 0) {
             throw new Exception(
                 "Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}",
-                (int) $response->Response->Error->ErrorCode
+                (int)$response->Response->Error->ErrorCode
             );
         } else {
             unset($response->Response);
@@ -576,12 +576,12 @@ class Shipping extends Ups
     /**
      * Recover a shipping label.
      *
-     * @param string|array $trackingData       Either the tracking number or a map of ReferenceNumber data
+     * @param string|array $trackingData Either the tracking number or a map of ReferenceNumber data
      *                                         [value:, shipperNumber:]
-     * @param array|null   $labelSpecification Map of label specification data for this request. Optional.
+     * @param array|null $labelSpecification Map of label specification data for this request. Optional.
      *                                         [userAgent:, imageFormat: 'HTML|PDF']
-     * @param array|null   $labelDelivery      All elements are optional. [link:]
-     * @param array|null   $translate          Map of translation data. Optional. [language:, dialect:]
+     * @param array|null $labelDelivery All elements are optional. [link:]
+     * @param array|null $translate Map of translation data. Optional. [language:, dialect:]
      *
      * @throws Exception|InvalidArgumentException
      *
@@ -615,7 +615,7 @@ class Shipping extends Ups
         if ($response->Response->ResponseStatusCode == 0) {
             throw new Exception(
                 "Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}",
-                (int) $response->Response->Error->ErrorCode
+                (int)$response->Response->Error->ErrorCode
             );
         } else {
             unset($response->Response);
@@ -628,9 +628,9 @@ class Shipping extends Ups
      * Creates a label recovery request.
      *
      * @param string|array $trackingData
-     * @param array|null   $labelSpecificationOpts
-     * @param array|null   $labelDeliveryOpts
-     * @param array|null   $translateOpts
+     * @param array|null $labelSpecificationOpts
+     * @param array|null $labelDeliveryOpts
+     * @param array|null $translateOpts
      *
      * @return string
      */

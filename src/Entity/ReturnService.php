@@ -26,11 +26,11 @@ class ReturnService implements NodeInterface
     const PACK_AND_COLLECT_SERVICE_3_ATTEMPT_BOX_5 = 20;
 
     private static $serviceNames = [
-        2  => 'UPS Print and Mail (PNM)',
-        3  => 'UPS Return Service 1-Attempt (RS1)',
-        5  => 'UPS Return Service 3-Attempt (RS3)',
-        8  => 'UPS Electronic Return Label (ERL)',
-        9  => 'UPS Print Return Label (PRL)',
+        2 => 'UPS Print and Mail (PNM)',
+        3 => 'UPS Return Service 1-Attempt (RS1)',
+        5 => 'UPS Return Service 3-Attempt (RS3)',
+        8 => 'UPS Electronic Return Label (ERL)',
+        9 => 'UPS Print Return Label (PRL)',
         10 => 'UPS Exchange Print Return Label',
         11 => 'UPS Pack & Collect Service 1-Attempt Box 1',
         12 => 'UPS Pack & Collect Service 1-Attempt Box 2',

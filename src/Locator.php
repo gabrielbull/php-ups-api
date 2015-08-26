@@ -31,12 +31,12 @@ class Locator extends Ups
     const OPTION_UPS_ACCESS_POINT_LOCATIONS = 64;
 
     /**
-     * @param string|null      $accessKey      UPS License Access Key
-     * @param string|null      $userId         UPS User ID
-     * @param string|null      $password       UPS User Password
-     * @param bool             $useIntegration Determine if we should use production or CIE URLs.
+     * @param string|null $accessKey UPS License Access Key
+     * @param string|null $userId UPS User ID
+     * @param string|null $password UPS User Password
+     * @param bool $useIntegration Determine if we should use production or CIE URLs.
      * @param RequestInterface $request
-     * @param LoggerInterface  $logger         PSR3 compatible logger (optional)
+     * @param LoggerInterface $logger PSR3 compatible logger (optional)
      */
     public function __construct($accessKey = null, $userId = null, $password = null, $useIntegration = false, RequestInterface $request = null, LoggerInterface $logger = null)
     {
@@ -75,7 +75,7 @@ class Locator extends Ups
         if ($response instanceof SimpleXMLElement && $response->Response->ResponseStatusCode == 0) {
             throw new Exception(
                 "Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}",
-                (int) $response->Response->Error->ErrorCode
+                (int)$response->Response->Error->ErrorCode
             );
         } else {
             return $this->formatResponse($response);

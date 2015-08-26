@@ -37,10 +37,10 @@ class Tracking extends Ups
     private $requestOption;
 
     /**
-     * @param string|null      $accessKey      UPS License Access Key
-     * @param string|null      $userId         UPS User ID
-     * @param string|null      $password       UPS User Password
-     * @param bool             $useIntegration Determine if we should use production or CIE URLs.
+     * @param string|null $accessKey UPS License Access Key
+     * @param string|null $userId UPS User ID
+     * @param string|null $password UPS User Password
+     * @param bool $useIntegration Determine if we should use production or CIE URLs.
      * @param RequestInterface $request
      * @param LoggerInterface PSR3 compatible logger (optional)
      */
@@ -56,7 +56,7 @@ class Tracking extends Ups
      * Get package tracking information.
      *
      * @param string $trackingNumber The package's tracking number.
-     * @param string $requestOption  Optional processing. For Mail Innovations the only valid options are Last Activity and All activity.
+     * @param string $requestOption Optional processing. For Mail Innovations the only valid options are Last Activity and All activity.
      *
      * @throws Exception
      *
@@ -80,7 +80,7 @@ class Tracking extends Ups
         if ($response instanceof SimpleXMLElement && $response->Response->ResponseStatusCode == 0) {
             throw new Exception(
                 "Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}",
-                (int) $response->Response->Error->ErrorCode
+                (int)$response->Response->Error->ErrorCode
             );
         } else {
             return $this->formatResponse($response);

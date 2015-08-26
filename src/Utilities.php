@@ -11,7 +11,7 @@ class Utilities
      * Generates a standard <Address> node for requests.
      *
      * @param stdClass $address An address data structure
-     * @param DOMNode  $element
+     * @param DOMNode $element
      *
      * @deprecated Use NodeInterface on entities instead
      */
@@ -31,7 +31,7 @@ class Utilities
      * Generates an artifact <Address> node for requests.
      *
      * @param stdClass $address An address data structure
-     * @param DOMNode  $element
+     * @param DOMNode $element
      *
      * @deprecated Use NodeInterface on entities instead
      */
@@ -96,9 +96,9 @@ class Utilities
      * Conditionally adds a child node to $node. The value comes from the specified $object
      * and will only be added if the $propertyName has a value.
      *
-     * @param stdClass $object       The object to get values from
-     * @param string   $propertyName The property name to access
-     * @param DOMNode  $node         The node to add the child to
+     * @param stdClass $object The object to get values from
+     * @param string $propertyName The property name to access
+     * @param DOMNode $node The node to add the child to
      *
      * @deprecated Use NodeInterface on entities instead
      */
