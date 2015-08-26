@@ -1,5 +1,4 @@
-PHP UPS API
-===========
+# ![PHP UPS API](https://rawgit.com/gabrielbull/php-ups-api/develop/icon.svg "PHP UPS API")
 
 [![Build Status](https://api.travis-ci.org/gabrielbull/php-ups-api.svg?branch=master)](https://travis-ci.org/gabrielbull/php-ups-api)
 [![StyleCI](https://styleci.io/repos/7774788/shield)](https://styleci.io/repos/7774788)
