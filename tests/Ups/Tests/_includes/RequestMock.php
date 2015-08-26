@@ -104,7 +104,9 @@ class RequestMock implements RequestInterface
         if ($response && is_file($response)) {
             $response = file_get_contents($response);
             if (!empty($response)) {
-                $response = mb_convert_encoding($response, 'UTF-8', mb_detect_encoding($response));
+                if (function_exists('mb_convert_encoding')) {
+                    $response = mb_convert_encoding($response, 'UTF-8', mb_detect_encoding($response));
+                }
                 $response = new SimpleXMLElement($response);
                 if (isset($response->Response) && isset($response->Response->ResponseStatusCode)) {
                     return (new ResponseMock())->setResponse($response);
