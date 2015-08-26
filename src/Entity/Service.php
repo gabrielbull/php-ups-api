@@ -23,6 +23,7 @@ class Service implements NodeInterface
     const S_WW_EXPRESSPLUS = '54';
     const S_WW_EXPEDITED = '08';
     const S_SAVER = '65'; // Require for Rating, ignored for Shopping
+    const S_ACCESS_POINT = '70'; // Access Point Economy
 
     // Valid Poland to Poland same day values
     const S_UPSTODAY_STANDARD = '82';
