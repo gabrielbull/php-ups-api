@@ -46,6 +46,7 @@ class Service implements NodeInterface
         '54' => 'UPS Worldwide Express Plus',
         '59' => 'UPS Second Day Air AM',
         '65' => 'UPS Saver',
+        '70' => 'UPS Access Point Economy'
     ];
 
     /** @deprecated */
