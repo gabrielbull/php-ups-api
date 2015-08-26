@@ -272,5 +272,4 @@ class ShipmentServiceOptions implements NodeInterface
         $this->DeliverToAddresseeOnlyIndicator = $DeliverToAddresseeOnlyIndicator;
         return $this;
     }
-
 }

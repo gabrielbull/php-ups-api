@@ -141,7 +141,7 @@ class Request implements RequestInterface, LoggerAwareInterface
             ]);
 
             throw new RequestException('Failure: ' . $e->getMessage());
-         }
+        }
     }
 
     /**
