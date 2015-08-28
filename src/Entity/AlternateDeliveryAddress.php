@@ -74,6 +74,10 @@ class AlternateDeliveryAddress extends ShipTo
      */
     public function setName($name)
     {
+        if (strlen($name) > 35) {
+            $name = substr($name, 0, 35);
+        }
+
         $this->name = $name;
     }
 }
