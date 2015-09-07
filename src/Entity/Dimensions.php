@@ -26,7 +26,9 @@ class Dimensions implements NodeInterface
 
     public function __construct($response = null)
     {
-        $this->setUnitOfMeasurement(new UnitOfMeasurement());
+        $this->setUnitOfMeasurement(new UnitOfMeasurement(
+            isset($response->UnitOfMeasurement) ? $response->UnitOfMeasurement : null)
+        );
 
         if (null != $response) {
             if (isset($response->Length)) {
