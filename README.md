@@ -1,7 +1,5 @@
 # ![PHP UPS API](https://rawgit.com/gabrielbull/php-ups-api/develop/php-ups-api-logo.svg "PHP UPS API")
 
-[![Join the chat at https://gitter.im/gabrielbull/php-ups-api](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/gabrielbull/php-ups-api?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 [![Build Status](https://api.travis-ci.org/gabrielbull/php-ups-api.svg?branch=master)](https://travis-ci.org/gabrielbull/php-ups-api)
 [![StyleCI](https://styleci.io/repos/7774788/shield)](https://styleci.io/repos/7774788)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/gabrielbull/php-ups-api/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/gabrielbull/php-ups-api/?branch=master)
@@ -11,6 +9,8 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/gabrielbull/ups-api.svg?style=flat)](https://packagist.org/packages/gabrielbull/ups-api)
 [![License](https://img.shields.io/packagist/l/gabrielbull/ups-api.svg?style=flat)](https://packagist.org/packages/gabrielbull/ups-api)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/22e29343-ee01-4cd1-8796-c19152c3c195/mini.png)](https://insight.sensiolabs.com/projects/22e29343-ee01-4cd1-8796-c19152c3c195)
+
+[![Join the chat at https://gitter.im/gabrielbull/php-ups-api](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/gabrielbull/php-ups-api?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 This library is aimed at wrapping all the UPS API into a simple to use PHP Library. It currently covers the Quantum View®,
 Tracking API, Shipping API, Rating API and Time in Transit API. Feel free to contribute.
