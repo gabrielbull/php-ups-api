@@ -24,9 +24,14 @@ class PackageWeight implements NodeInterface
      */
     private $weight;
 
-    public function __construct()
+    public function __construct($attributes = null)
     {
-        $this->setUnitOfMeasurement(new UnitOfMeasurement());
+        $this->setUnitOfMeasurement(new UnitOfMeasurement(
+            isset($attributes->UnitOfMeasurement) ? $attributes->UnitOfMeasurement : null
+        ));
+        if (isset($attributes->Weight)) {
+            $this->setWeight($attributes->Weight);
+        }
     }
 
     /**
