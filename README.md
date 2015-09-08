@@ -1,5 +1,7 @@
 # ![PHP UPS API](https://rawgit.com/gabrielbull/php-ups-api/develop/php-ups-api-logo.svg "PHP UPS API")
 
+[![Join the chat at https://gitter.im/gabrielbull/php-ups-api](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/gabrielbull/php-ups-api?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![Build Status](https://api.travis-ci.org/gabrielbull/php-ups-api.svg?branch=master)](https://travis-ci.org/gabrielbull/php-ups-api)
 [![StyleCI](https://styleci.io/repos/7774788/shield)](https://styleci.io/repos/7774788)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/gabrielbull/php-ups-api/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/gabrielbull/php-ups-api/?branch=master)
