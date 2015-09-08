@@ -36,6 +36,16 @@ class PackagingType implements NodeInterface
      */
     private $description;
 
+    public function __construct($attributes = null)
+    {
+        if (isset($attributes->Description)) {
+            $this->setDescription($attributes->Description);
+        }
+        if (isset($attributes->Code)) {
+            $this->setCode($attributes->Code);
+        }
+    }
+
     /**
      * @param null|DOMDocument $document
      *

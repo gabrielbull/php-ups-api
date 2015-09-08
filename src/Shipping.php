@@ -410,18 +410,21 @@ class Shipping extends Ups
                 $labelSpec->appendChild($xml->createElement('HTTPUserAgent', $labelSpecOpts->HTTPUserAgent));
             }
 
-            if (isset($labelSpecOpts->LabelStockSize)) {
-                $stock = $labelSpec->appendChild($xml->createElement('LabelStockSize'));
 
-                $stock->appendChild($xml->createElement('Height', $labelSpecOpts->LabelStockSize->Height));
-                $stock->appendChild($xml->createElement('Width', $labelSpecOpts->LabelStockSize->Width));
-            }
+            //Label print method is required only for GIF label formats
+            if ($labelSpecOpts->LabelPrintMethod->Code == 'GIF') {
+                $imageFormatNode = $labelSpec->appendChild($xml->createElement('LabelImageFormat'));
+                $node->appendChild($xml->createElement('Code', $labelSpecOpts->ImageFormat->Code));
 
-            $node = $labelSpec->appendChild($xml->createElement('LabelImageFormat'));
-            $node->appendChild($xml->createElement('Code', $labelSpecOpts->ImageFormat->Code));
+                if (isset($labelSpecOpts->ImageFormat->Description)) {
+                    $imageFormatNode->appendChild($xml->createElement('Description', $labelSpecOpts->ImageFormat->Description));
+                }
+            } else {
+                //Label stock size is required only for non-GIF label formats
+                $stockSizeNode = $labelSpec->appendChild($xml->createElement('LabelStockSize'));
 
-            if (isset($labelSpecOpts->ImageFormat->Description)) {
-                $node->appendChild($xml->createElement('Description', $labelSpecOpts->ImageFormat->Description));
+                $stockSizeNode->appendChild($xml->createElement('Height', $labelSpecOpts->LabelStockSize->Height));
+                $stockSizeNode->appendChild($xml->createElement('Width', $labelSpecOpts->LabelStockSize->Width));
             }
 
             if (isset($labelSpecOpts->Instruction)) {
