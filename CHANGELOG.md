@@ -1,7 +1,10 @@
 # CHANGELOG
 
-## 0.5.1 (upcoming release)
+## 0.5.2 (upcoming)
 
+## 0.5.1 (released 08-09-2015)
+
+- Limit alternate delivery address names to 35 characters
 
 ## 0.5.0 (released 26-08-2015)
 
