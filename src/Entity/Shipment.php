@@ -4,25 +4,6 @@ namespace Ups\Entity;
 
 class Shipment
 {
-    /** @deprecated */
-    public $Description;
-    /** @deprecated */
-    public $Shipper;
-    /** @deprecated */
-    public $ShipTo;
-    /** @deprecated */
-    public $SoldTo;
-    /** @deprecated */
-    public $ShipFrom;
-    /** @deprecated */
-    public $Service;
-    /** @deprecated */
-    public $Package = [];
-    /** @deprecated */
-    public $ShipmentServiceOptions;
-    /** @deprecated */
-    public $PaymentInformation;
-
     /**
      * @var PaymentInformation
      */
@@ -98,6 +79,26 @@ class Shipment
      */
     private $shipmentServiceOptions;
 
+    /**
+     * @var bool
+     */
+    private $goodsNotInFreeCirculationIndicator;
+
+    /**
+     * @var string
+     */
+    private $movementReferenceNumber;
+
+    /**
+     * @var InvoiceLineTotal
+     */
+    private $invoiceLineTotal;
+
+    /**
+     * @var string
+     */
+    private $numOfPiecesInShipment;
+
     public function __construct()
     {
         $this->setShipper(new Shipper());
@@ -143,7 +144,7 @@ class Shipment
     /**
      * @param Package $package
      *
-     * @return $this
+     * @return Shipment
      */
     public function addPackage(Package $package)
     {
@@ -165,11 +166,10 @@ class Shipment
     /**
      * @param string $description
      *
-     * @return $this
+     * @return Shipment
      */
     public function setDescription($description)
     {
-        $this->Description = $description;
         $this->description = $description;
 
         return $this;
@@ -178,7 +178,7 @@ class Shipment
     /**
      * @param ReferenceNumber $referenceNumber
      *
-     * @return $this
+     * @return Shipment
      */
     public function setReferenceNumber(ReferenceNumber $referenceNumber)
     {
@@ -206,7 +206,7 @@ class Shipment
     /**
      * @param bool $documentsOnly
      *
-     * @return $this
+     * @return Shipment
      */
     public function setDocumentsOnly($documentsOnly)
     {
@@ -226,11 +226,10 @@ class Shipment
     /**
      * @param Package[] $packages
      *
-     * @return $this
+     * @return Shipment
      */
     public function setPackages(array $packages)
     {
-        $this->Package = $packages;
         $this->packages = $packages;
 
         return $this;
@@ -247,11 +246,10 @@ class Shipment
     /**
      * @param Service $service
      *
-     * @return $this
+     * @return Shipment
      */
     public function setService(Service $service)
     {
-        $this->Service = $service;
         $this->service = $service;
 
         return $this;
@@ -268,7 +266,7 @@ class Shipment
     /**
      * @param ReturnService $returnService
      *
-     * @return $this
+     * @return Shipment
      */
     public function setReturnService(ReturnService $returnService)
     {
@@ -288,11 +286,10 @@ class Shipment
     /**
      * @param ShipFrom $shipFrom
      *
-     * @return $this
+     * @return Shipment
      */
     public function setShipFrom(ShipFrom $shipFrom)
     {
-        $this->ShipFrom = $shipFrom;
         $this->shipFrom = $shipFrom;
 
         return $this;
@@ -309,11 +306,10 @@ class Shipment
     /**
      * @param ShipTo $shipTo
      *
-     * @return $this
+     * @return Shipment
      */
     public function setShipTo(ShipTo $shipTo)
     {
-        $this->ShipTo = $shipTo;
         $this->shipTo = $shipTo;
 
         return $this;
@@ -330,11 +326,10 @@ class Shipment
     /**
      * @param SoldTo $soldTo
      *
-     * @return $this
+     * @return Shipment
      */
     public function setSoldTo(SoldTo $soldTo)
     {
-        $this->SoldTo = $soldTo;
         $this->soldTo = $soldTo;
 
         return $this;
@@ -351,11 +346,10 @@ class Shipment
     /**
      * @param ShipmentServiceOptions $shipmentServiceOptions
      *
-     * @return $this
+     * @return Shipment
      */
     public function setShipmentServiceOptions(ShipmentServiceOptions $shipmentServiceOptions)
     {
-        $this->ShipmentServiceOptions = $shipmentServiceOptions;
         $this->shipmentServiceOptions = $shipmentServiceOptions;
 
         return $this;
@@ -372,11 +366,10 @@ class Shipment
     /**
      * @param Shipper $shipper
      *
-     * @return $this
+     * @return Shipment
      */
     public function setShipper(Shipper $shipper)
     {
-        $this->Shipper = $shipper;
         $this->shipper = $shipper;
 
         return $this;
@@ -393,11 +386,10 @@ class Shipment
     /**
      * @param PaymentInformation $paymentInformation
      *
-     * @return $this
+     * @return Shipment
      */
     public function setPaymentInformation(PaymentInformation $paymentInformation)
     {
-        $this->PaymentInformation = $paymentInformation;
         $this->paymentInformation = $paymentInformation;
 
         return $this;
@@ -423,11 +415,87 @@ class Shipment
     /**
      * @param RateInformation $rateInformation
      *
-     * @return $this
+     * @return Shipment
      */
     public function setRateInformation(RateInformation $rateInformation)
     {
         $this->rateInformation = $rateInformation;
+
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getGoodsNotInFreeCirculationIndicator()
+    {
+        return $this->goodsNotInFreeCirculationIndicator;
+    }
+
+    /**
+     * @param boolean $goodsNotInFreeCirculationIndicator
+     * @return Shipment
+     */
+    public function setGoodsNotInFreeCirculationIndicator($goodsNotInFreeCirculationIndicator)
+    {
+        $this->goodsNotInFreeCirculationIndicator = $goodsNotInFreeCirculationIndicator;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMovementReferenceNumber()
+    {
+        return $this->movementReferenceNumber;
+    }
+
+    /**
+     * @param string $movementReferenceNumber
+     * @return Shipment
+     */
+    public function setMovementReferenceNumber($movementReferenceNumber)
+    {
+        $this->movementReferenceNumber = $movementReferenceNumber;
+
+        return $this;
+    }
+
+    /**
+     * @return InvoiceLineTotal
+     */
+    public function getInvoiceLineTotal()
+    {
+        return $this->invoiceLineTotal;
+    }
+
+    /**
+     * @param InvoiceLineTotal $invoiceLineTotal
+     * @return Shipment
+     */
+    public function setInvoiceLineTotal(InvoiceLineTotal $invoiceLineTotal)
+    {
+        $this->invoiceLineTotal = $invoiceLineTotal;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNumOfPiecesInShipment()
+    {
+        return $this->numOfPiecesInShipment;
+    }
+
+    /**
+     * @param string $numOfPiecesInShipment
+     * @return Shipment
+     */
+    public function setNumOfPiecesInShipment($numOfPiecesInShipment)
+    {
+        $this->numOfPiecesInShipment = $numOfPiecesInShipment;
 
         return $this;
     }

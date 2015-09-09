@@ -9,6 +9,7 @@
 namespace Ups\Entity;
 
 /**
+ * Based on UPS Developer Guide, dated: 13 Jul 2015
  * @author Eduard Sukharev <eduard.sukharev@opensoftdev.ru>
  */
 class ShipmentRequestLabelSpecification

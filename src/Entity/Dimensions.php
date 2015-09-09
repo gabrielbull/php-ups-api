@@ -8,15 +8,19 @@ use Ups\NodeInterface;
 
 class Dimensions implements NodeInterface
 {
-    /** @deprecated */
-    public $Length;
-    /** @deprecated */
-    public $Width;
-    /** @deprecated */
-    public $Height;
-
+    /**
+     * @var integer
+     */
     private $length;
+
+    /**
+     * @var integer
+     */
     private $width;
+
+    /**
+     * @var integer
+     */
     private $height;
 
     /**
@@ -83,36 +87,60 @@ class Dimensions implements NodeInterface
         return $this;
     }
 
+    /**
+     * @return integer
+     */
     public function getLength()
     {
         return $this->length;
     }
 
+    /**
+     * @param integer $var
+     * @return Dimensions
+     */
     public function setLength($var)
     {
         $this->length = $var;
-        $this->Length = $var;
+
+        return $this;
     }
 
+    /**
+     * @return integer
+     */
     public function getWidth()
     {
         return $this->width;
     }
 
+    /**
+     * @param integer $var
+     * @return Dimensions
+     */
     public function setWidth($var)
     {
-        $this->Width = $var;
         $this->width = $var;
+
+        return $this;
     }
 
+    /**
+     * @return integer
+     */
     public function getHeight()
     {
         return $this->height;
     }
 
+    /**
+     * @param integer $var
+     * @return Dimensions
+     */
     public function setHeight($var)
     {
         $this->height = $var;
-        $this->Height = $var;
+
+        return $this;
     }
 }
