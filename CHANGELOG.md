@@ -1,6 +1,8 @@
 # CHANGELOG
 
-## 0.5.2 (upcoming)
+## 0.5.2 (released 16-09-2015)
+
+- TimeInTransit ServiceSummary results should be array of summaries, which was not the case when 1 result
 
 ## 0.5.1 (released 08-09-2015)
 
