@@ -163,6 +163,11 @@ class TimeInTransit extends Ups
 
         $result = $this->convertXmlObject($response);
 
+        // Fix for when one ServiceSummary while expecting an array in later responses - easiest place to fix here
+        if(isset($result->TransitResponse->ServiceSummary->Service)) {
+            $result->TransitResponse->ServiceSummary = array($result->TransitResponse->ServiceSummary);
+        }
+
         return new TimeInTransitResponse($result->TransitResponse);
     }
 
