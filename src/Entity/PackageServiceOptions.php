@@ -8,46 +8,48 @@ use Ups\NodeInterface;
 
 class PackageServiceOptions implements NodeInterface
 {
-    /** @deprecated */
-    public $COD;
-    /** @deprecated */
-    public $InsuredValue;
-    /** @deprecated */
-    public $EarliestDeliveryTime;
-    /** @deprecated */
-    public $HazardousMaterialsCode;
-    /** @deprecated */
-    public $HoldForPickup;
-
+    /**
+     * @var COD
+     */
     private $cod;
+
+    /**
+     * @var InsuredValue
+     */
     private $insuredValue;
+
+    /**
+     * @var string
+     */
     private $earliestDeliveryTime;
     private $hazardousMaterialsCode;
     private $holdForPickup;
 
-    public function __construct($response = null)
+    public function __construct($parameters = null)
     {
-        if (null != $response) {
-            if (isset($response->COD)) {
-                $this->setCOD(new COD($response->COD));
+        if (null != $parameters) {
+            if (isset($parameters->COD)) {
+                $this->setCOD(new COD($parameters->COD));
             }
-            if (isset($response->InsuredValue)) {
-                $this->setInsuredValue(new InsuredValue($response->InsuredValue));
+            if (isset($parameters->InsuredValue)) {
+                $this->setInsuredValue(new InsuredValue($parameters->InsuredValue));
             }
-            if (isset($response->EarliestDeliveryTime)) {
-                $this->setEarliestDeliveryTime($response->EarliestDeliveryTime);
+            if (isset($parameters->EarliestDeliveryTime)) {
+                $this->setEarliestDeliveryTime($parameters->EarliestDeliveryTime);
             }
-            if (isset($response->HazardousMaterialsCode)) {
-                $this->setHazardousMaterialsCode($response->HazardousMaterialsCode);
+            if (isset($parameters->HazardousMaterialsCode)) {
+                $this->setHazardousMaterialsCode($parameters->HazardousMaterialsCode);
             }
-            if (isset($response->HoldForPickup)) {
-                $this->setHoldForPickup($response->HoldForPickup);
+            if (isset($parameters->HoldForPickup)) {
+                $this->setHoldForPickup($parameters->HoldForPickup);
             }
         }
     }
 
     /**
      * @param null|DOMDocument $document
+     *
+     * TODO: this seem to be awfully incomplete
      *
      * @return DOMElement
      */
@@ -73,7 +75,6 @@ class PackageServiceOptions implements NodeInterface
 
     public function setInsuredValue($var)
     {
-        $this->InsuredValue = $var;
         $this->insuredValue = $var;
     }
 
@@ -84,7 +85,6 @@ class PackageServiceOptions implements NodeInterface
 
     public function setCOD($var)
     {
-        $this->COD = $var;
         $this->cod = $var;
     }
 
@@ -96,7 +96,6 @@ class PackageServiceOptions implements NodeInterface
     public function setEarliestDeliveryTime($var)
     {
         $this->earliestDeliveryTime = $var;
-        $this->EarliestDeliveryTime = $var;
     }
 
     public function getHazardousMaterialsCode()
@@ -106,7 +105,6 @@ class PackageServiceOptions implements NodeInterface
 
     public function setHazardousMaterialsCode($var)
     {
-        $this->HazardousMaterialsCode = $var;
         $this->hazardousMaterialsCode = $var;
     }
 
@@ -117,7 +115,6 @@ class PackageServiceOptions implements NodeInterface
 
     public function setHoldForPickup($var)
     {
-        $this->HoldForPickup = $var;
         $this->holdForPickup = $var;
     }
 }
