@@ -192,6 +192,11 @@ class QuantumView extends Ups
         $eventsException = ['FileName', 'StatusType'];
         $output = new ArrayObject();
 
+        // Empty response?
+        if(!isset($response->QuantumViewEvents->SubscriptionEvents->SubscriptionFile)) {
+            return $output;
+        }
+
         // Loop subscription files
         foreach ($response->QuantumViewEvents->SubscriptionEvents->SubscriptionFile as $subcriptionFile) {
             foreach ($subcriptionFile as $eventName => $event) {
