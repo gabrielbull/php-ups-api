@@ -13,7 +13,14 @@ class InsuredValue implements NodeInterface
     /** @deprecated */
     public $MonetaryValue;
 
+    /**
+     * @var string
+     */
     private $currencyCode;
+
+    /**
+     * @var float
+     */
     private $monetaryValue;
 
     public function __construct($response = null)
@@ -46,22 +53,34 @@ class InsuredValue implements NodeInterface
         return $node;
     }
 
+    /**
+     * @return string|null
+     */
     public function getCurrencyCode()
     {
         return $this->currencyCode;
     }
 
+    /**
+     * @param $var string
+     */
     public function setCurrencyCode($var)
     {
         $this->CurrencyCode = $var;
         $this->currencyCode = $var;
     }
 
+    /**
+     * @return float|null
+     */
     public function getMonetaryValue()
     {
         return $this->monetaryValue;
     }
 
+    /**
+     * @param $var float
+     */
     public function setMonetaryValue($var)
     {
         $this->MonetaryValue = $var;

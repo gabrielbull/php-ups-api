@@ -56,11 +56,11 @@ class Locator extends Ups
      * errors in the response back from UPS.
      *
      * @param LocatorRequest $request
-     * @param $requestOption
+     * @param int $requestOption
      *
      * @throws Exception
      *
-     * @return TimeInTransitRequest
+     * @return \stdClass
      */
     private function sendRequest(LocatorRequest $request, $requestOption)
     {
@@ -157,7 +157,7 @@ class Locator extends Ups
     }
 
     /**
-     * @return ResponseInterface|SimpleXMLElement
+     * @return ResponseInterface
      */
     public function getResponse()
     {
@@ -165,7 +165,7 @@ class Locator extends Ups
     }
 
     /**
-     * @param ResponseInterface|SimpleXMLElement $response
+     * @param ResponseInterface $response
      *
      * @return $this
      */

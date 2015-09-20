@@ -50,7 +50,7 @@ class ReferenceNumber implements NodeInterface
     private $barCodeIndicator;
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getCode()
     {
@@ -66,7 +66,7 @@ class ReferenceNumber implements NodeInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getValue()
     {

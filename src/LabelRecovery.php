@@ -23,7 +23,7 @@ class LabelRecovery extends Ups
      *
      * @throws Exception
      *
-     * @return LabelRecoveryRequest
+     * @return LabelRecoveryResponse
      */
     public function getLabelRecovery($shipment)
     {
@@ -38,7 +38,7 @@ class LabelRecovery extends Ups
      *
      * @throws Exception
      *
-     * @return LabelRecoveryRequest
+     * @return LabelRecoveryResponse
      */
     private function sendRequest($labelRecoveryRequest)
     {
@@ -117,7 +117,7 @@ class LabelRecovery extends Ups
      *
      * @param SimpleXMLElement $response
      *
-     * @return stdClass
+     * @return LabelRecoveryResponse
      */
     private function formatResponse(SimpleXMLElement $response)
     {

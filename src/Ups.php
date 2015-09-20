@@ -147,7 +147,7 @@ abstract class Ups implements LoggerAwareInterface
     /**
      * Creates the TransactionReference node for a request.
      *
-     * @return DomDocument
+     * @return \DomNode
      */
     protected function createTransactionNode()
     {

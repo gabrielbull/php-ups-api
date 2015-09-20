@@ -5,6 +5,10 @@ namespace Ups\Entity;
 use DOMDocument;
 use Ups\NodeInterface;
 
+/**
+ * Class Translate
+ * @package Ups\Entity
+ */
 class Translate implements NodeInterface
 {
     /**
@@ -22,11 +26,29 @@ class Translate implements NodeInterface
      */
     public $Code;
 
+    /**
+     * @var string
+     */
     private $languageCode;
+
+    /**
+     * @var string
+     */
     private $dialectCode;
+
+    /**
+     * @var string
+     */
     private $code;
+
+    /**
+     * @var string
+     */
     private $locale;
 
+    /**
+     * @param null $response
+     */
     public function __construct($response = null)
     {
         if (null != $response) {
@@ -45,6 +67,10 @@ class Translate implements NodeInterface
         }
     }
 
+    /**
+     * @param DOMDocument|null $document
+     * @return \DOMElement
+     */
     public function toNode(DOMDocument $document = null)
     {
         if (null === $document) {
@@ -71,7 +97,7 @@ class Translate implements NodeInterface
     }
 
     /**
-     * @return mixed
+     * @return string|null
      */
     public function getLanguageCode()
     {
@@ -88,7 +114,7 @@ class Translate implements NodeInterface
     }
 
     /**
-     * @return mixed
+     * @return string|null
      */
     public function getDialectCode()
     {
@@ -105,7 +131,7 @@ class Translate implements NodeInterface
     }
 
     /**
-     * @return mixed
+     * @return null|string
      */
     public function getCode()
     {
@@ -122,7 +148,7 @@ class Translate implements NodeInterface
     }
 
     /**
-     * @return mixed
+     * @return null|string
      */
     public function getLocale()
     {

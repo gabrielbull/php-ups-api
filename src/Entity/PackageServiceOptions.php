@@ -6,6 +6,10 @@ use DOMDocument;
 use DOMElement;
 use Ups\NodeInterface;
 
+/**
+ * Class PackageServiceOptions
+ * @package Ups\Entity
+ */
 class PackageServiceOptions implements NodeInterface
 {
     /**
@@ -22,9 +26,20 @@ class PackageServiceOptions implements NodeInterface
      * @var string
      */
     private $earliestDeliveryTime;
+
+    /**
+     * @var string
+     */
     private $hazardousMaterialsCode;
+
+    /**
+     * @var string
+     */
     private $holdForPickup;
 
+    /**
+     * @param null $parameters
+     */
     public function __construct($parameters = null)
     {
         if (null != $parameters) {
@@ -68,51 +83,81 @@ class PackageServiceOptions implements NodeInterface
         return $node;
     }
 
+    /**
+     * @return InsuredValue|null
+     */
     public function getInsuredValue()
     {
         return $this->insuredValue;
     }
 
+    /**
+     * @param $var
+     */
     public function setInsuredValue($var)
     {
         $this->insuredValue = $var;
     }
 
+    /**
+     * @return COD|null
+     */
     public function getCOD()
     {
         return $this->cod;
     }
 
+    /**
+     * @param $var
+     */
     public function setCOD($var)
     {
         $this->cod = $var;
     }
 
+    /**
+     * @return string|null
+     */
     public function getEarliestDeliveryTime()
     {
         return $this->earliestDeliveryTime;
     }
 
+    /**
+     * @param $var
+     */
     public function setEarliestDeliveryTime($var)
     {
         $this->earliestDeliveryTime = $var;
     }
 
+    /**
+     * @return string|null
+     */
     public function getHazardousMaterialsCode()
     {
         return $this->hazardousMaterialsCode;
     }
 
+    /**
+     * @param $var
+     */
     public function setHazardousMaterialsCode($var)
     {
         $this->hazardousMaterialsCode = $var;
     }
 
+    /**
+     * @return string|null
+     */
     public function getHoldForPickup()
     {
         return $this->holdForPickup;
     }
 
+    /**
+     * @param $var
+     */
     public function setHoldForPickup($var)
     {
         $this->holdForPickup = $var;
