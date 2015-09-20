@@ -193,7 +193,7 @@ class QuantumView extends Ups
         $output = new ArrayObject();
 
         // Empty response?
-        if(!isset($response->QuantumViewEvents->SubscriptionEvents->SubscriptionFile)) {
+        if (!isset($response->QuantumViewEvents->SubscriptionEvents->SubscriptionFile)) {
             return $output;
         }
 
