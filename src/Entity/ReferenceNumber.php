@@ -9,26 +9,6 @@ use Ups\NodeInterface;
 class ReferenceNumber implements NodeInterface
 {
     /**
-     * @deprecated
-     */
-    public $Number;
-
-    /**
-     * @deprecated
-     */
-    public $Code;
-
-    /**
-     * @deprecated
-     */
-    public $Value;
-
-    /**
-     * @deprecated
-     */
-    public $BarCodeIndicator;
-
-    /**
      * Codes.
      */
     const CODE_ACCOUNTS_RECEIVABLE_CUSTOMER_ACCOUNT = 'AJ';
@@ -70,7 +50,7 @@ class ReferenceNumber implements NodeInterface
     private $barCodeIndicator;
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getCode()
     {
@@ -78,7 +58,7 @@ class ReferenceNumber implements NodeInterface
     }
 
     /**
-     * @param mixed $code
+     * @param string $code
      */
     public function setCode($code)
     {
@@ -86,7 +66,7 @@ class ReferenceNumber implements NodeInterface
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getValue()
     {
@@ -94,7 +74,7 @@ class ReferenceNumber implements NodeInterface
     }
 
     /**
-     * @param mixed $value
+     * @param string $value
      */
     public function setValue($value)
     {
@@ -102,7 +82,7 @@ class ReferenceNumber implements NodeInterface
     }
 
     /**
-     * @return mixed
+     * @return bool
      */
     public function getBarCodeIndicator()
     {
@@ -110,7 +90,7 @@ class ReferenceNumber implements NodeInterface
     }
 
     /**
-     * @param mixed $barCodeIndicator
+     * @param bool $barCodeIndicator
      */
     public function setBarCodeIndicator($barCodeIndicator)
     {
@@ -124,16 +104,13 @@ class ReferenceNumber implements NodeInterface
     {
         if (null != $response) {
             if (isset($response->BarCodeIndicator)) {
-                $this->BarCodeIndicator = $response->BarCodeIndicator;
-            }
-            if (isset($response->Number)) {
-                $this->Number = $response->Number;
+                $this->setBarCodeIndicator($response->BarCodeIndicator);
             }
             if (isset($response->Code)) {
-                $this->Code = $response->Code;
+                $this->setCode($response->Code);
             }
             if (isset($response->Value)) {
-                $this->Value = $response->Value;
+                $this->setValue($response->Value);
             }
         }
     }

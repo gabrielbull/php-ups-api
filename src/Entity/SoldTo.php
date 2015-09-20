@@ -87,6 +87,11 @@ class SoldTo implements NodeInterface
     private $address;
 
     /**
+     * @var string
+     */
+    private $option;
+
+    /**
      * @param null|object $attributes
      */
     public function __construct($attributes = null)
@@ -127,6 +132,9 @@ class SoldTo implements NodeInterface
             if (isset($attributes->Address)) {
                 $this->setAddress(new Address($attributes->Address));
             }
+            if (isset($attributes->Option)) {
+                $this->setOption($attributes->Option);
+            }
         }
     }
 
@@ -164,7 +172,7 @@ class SoldTo implements NodeInterface
     /**
      * @param Address $address
      *
-     * @return $this
+     * @return SoldTo
      */
     public function setAddress(Address $address)
     {
@@ -185,7 +193,7 @@ class SoldTo implements NodeInterface
     /**
      * @param string $attentionName
      *
-     * @return $this
+     * @return SoldTo
      */
     public function setAttentionName($attentionName)
     {
@@ -206,7 +214,7 @@ class SoldTo implements NodeInterface
     /**
      * @param string $bookmark
      *
-     * @return $this
+     * @return SoldTo
      */
     public function setBookmark($bookmark)
     {
@@ -227,7 +235,7 @@ class SoldTo implements NodeInterface
     /**
      * @param string $companyName
      *
-     * @return $this
+     * @return SoldTo
      */
     public function setCompanyName($companyName)
     {
@@ -248,7 +256,7 @@ class SoldTo implements NodeInterface
     /**
      * @param string $emailAddress
      *
-     * @return $this
+     * @return SoldTo
      */
     public function setEmailAddress($emailAddress)
     {
@@ -269,7 +277,7 @@ class SoldTo implements NodeInterface
     /**
      * @param string $faxNumber
      *
-     * @return $this
+     * @return SoldTo
      */
     public function setFaxNumber($faxNumber)
     {
@@ -290,7 +298,7 @@ class SoldTo implements NodeInterface
     /**
      * @param string $locationId
      *
-     * @return $this
+     * @return SoldTo
      */
     public function setLocationId($locationId)
     {
@@ -311,7 +319,7 @@ class SoldTo implements NodeInterface
     /**
      * @param string $phoneNumber
      *
-     * @return $this
+     * @return SoldTo
      */
     public function setPhoneNumber($phoneNumber)
     {
@@ -332,7 +340,7 @@ class SoldTo implements NodeInterface
     /**
      * @param string $receivingAddressName
      *
-     * @return $this
+     * @return SoldTo
      */
     public function setReceivingAddressName($receivingAddressName)
     {
@@ -353,7 +361,7 @@ class SoldTo implements NodeInterface
     /**
      * @param string $shipperAssignedIdentificationNumber
      *
-     * @return $this
+     * @return SoldTo
      */
     public function setShipperAssignedIdentificationNumber($shipperAssignedIdentificationNumber)
     {
@@ -374,12 +382,32 @@ class SoldTo implements NodeInterface
     /**
      * @param string $taxIdentificationNumber
      *
-     * @return $this
+     * @return SoldTo
      */
     public function setTaxIdentificationNumber($taxIdentificationNumber)
     {
         $this->TaxIdentificationNumber = $taxIdentificationNumber;
         $this->taxIdentificationNumber = $taxIdentificationNumber;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOption()
+    {
+        return $this->option;
+    }
+
+    /**
+     * @param string $option
+     *
+     * @return SoldTo
+     */
+    public function setOption($option)
+    {
+        $this->option = $option;
 
         return $this;
     }
