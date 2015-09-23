@@ -330,13 +330,7 @@ class Shipping extends Ups
         }
 
         if ($shipment->getInvoiceLineTotal()) {
-            $node = $shipmentNode->appendChild($xml->createElement('InvoiceLineTotal'));
-
-            if ($shipment->getInvoiceLineTotal()->getCurrencyCode()) {
-                $node->appendChild($xml->createElement('CurrencyCode', $shipment->getInvoiceLineTotal()->getCurrencyCode()));
-            }
-
-            $node->appendChild($xml->createElement('MonetaryValue', $shipment->getInvoiceLineTotal()->getMonetaryValue()));
+            $shipmentNode->appendChild($shipment->getInvoiceLineTotal()->toNode($xml));
         }
 
         if ($shipment->getNumOfPiecesInShipment()) {
