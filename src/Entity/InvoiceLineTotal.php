@@ -35,7 +35,11 @@ class InvoiceLineTotal implements NodeInterface
         }
 
         $node = $document->createElement('InvoiceLineTotal');
-        $node->appendChild($document->createElement('CurrencyCode', $this->getCurrencyCode()));
+
+        if ($this->getCurrencyCode()) {
+            $node->appendChild($document->createElement('CurrencyCode', $this->getCurrencyCode()));
+        }
+
         $node->appendChild($document->createElement('MonetaryValue', $this->getMonetaryValue()));
 
         return $node;
