@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 0.6.0
+## 0.6.0 (released 25-09-2015)
 - Extra check on response in QuantumView, when no response it gave an error
 - Added ShipmentRequestLabelSpecification class for easier options setting
 - Added ShipmentRequestReceiptSpecification class for easier options setting
