@@ -1,6 +1,7 @@
 # CHANGELOG
 
-## 0.6.0 (upcoming)
+## 0.6.0
+- Extra check on response in QuantumView, when no response it gave an error
 - Added ShipmentRequestLabelSpecification class for easier options setting
 - Added ShipmentRequestReceiptSpecification class for easier options setting
 - **[!]** Shipment class dropped some public properties in favor of private properties and setter/getter methods.
