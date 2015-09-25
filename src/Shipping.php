@@ -342,7 +342,7 @@ class Shipping extends Ups
             $node->appendChild($xml->createElement('NegotiatedRatesIndicator'));
         }
 
-        foreach ($shipment->getPackages() as &$package) {
+        foreach ($shipment->getPackages() as $package) {
             $shipmentNode->appendChild($xml->importNode($package->toNode($xml), true));
         }
 
