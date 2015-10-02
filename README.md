@@ -36,9 +36,12 @@ Tracking API, Shipping API, Rating API and Time in Transit API. Feel free to con
 8. [Locator Class](#locator-class)
     * [Example](#locator-class-example)
     * [Parameters](#locator-class-parameters)
-9. [Shipping Class](#shipping-class)
-10. [Logging](#logging)
-10. [License](#license-section)
+9. [Tradeability Class](#tradeability-class)
+    * [Example](#tradeability-class-example)
+    * [Parameters](#tradeability-class-parameters)
+10. [Shipping Class](#shipping-class)
+11. [Logging](#logging)
+12. [License](#license-section)
 
 <a name="requirements"></a>
 ## Requirements
@@ -78,8 +81,8 @@ $address->setBuildingName('Test');
 $address->setAddressLine1('Address Line 1');
 $address->setAddressLine2('Address Line 2');
 $address->setAddressLine3('Address Line 3');
-$address->setStateProvinceCode('NY');       
-$address->setCity('New York');     
+$address->setStateProvinceCode('NY');
+$address->setCity('New York');
 $address->setCountryCode('US');
 $address->setPostalCode('10000');
 
@@ -103,7 +106,7 @@ Adress Validation parameters are:
 <a name="quantumview-class"></a>
 ## QuantumView Class
 
-The QuantumView Class allow you to request a Quantum View Data subscription. 
+The QuantumView Class allow you to request a Quantum View Data subscription.
 
 <a name="quantumview-class-example"></a>
 ### Example
@@ -114,12 +117,12 @@ $quantumView = new Ups\QuantumView($accessKey, $userId, $password);
 try {
 	// Get the subscription for all events for the last hour
 	$events = $quantumView->getSubscription(null, (time() - 3600));
-	
+
 	foreach($events as $event) {
 		// Your code here
 		echo $event->Type;
 	}
-	
+
 } catch (Exception $e) {
 	var_dump($e);
 }
@@ -143,7 +146,7 @@ _To use the `fileName` parameter, do not provide a `beginDateTime`._
 <a name="tracking-class"></a>
 ## Tracking Class
 
-The Tracking Class allow you to track a shipment using the UPS Tracking API. 
+The Tracking Class allow you to track a shipment using the UPS Tracking API.
 
 <a name="tracking-class-example"></a>
 ### Example
@@ -153,11 +156,11 @@ $tracking = new Ups\Tracking($accessKey, $userId, $password);
 
 try {
 	$shipment = $tracking->track('TRACKING NUMBER');
-		
+
 	foreach($shipment->Package->Activity as $activity) {
 		var_dump($activity);
 	}
-	
+
 } catch (Exception $e) {
 	var_dump($e);
 }
@@ -248,7 +251,7 @@ try {
     $request = new \Ups\Entity\TimeInTransitRequest;
 
     // Addresses
-    $from = new \Ups\Entity\AddressArtifactFormat;    
+    $from = new \Ups\Entity\AddressArtifactFormat;
     $from->setPoliticalDivision3('Amsterdam');
     $from->setPostcodePrimaryLow('1000AA');
     $from->setCountryCode('NL');
@@ -360,8 +363,92 @@ Locator class parameters are:
  * `locatorRequest` Mandatory. locatorRequest object with request details, see example
  * `requestOption` Optional. Type of locations you are searching for.
 
+<a name="tradeability-class"></a>
+## Tradeability Class
+
+The Tradeability class allows you to get data for international shipments:
+* Landed Costs (e.g. duties)
+* Denied Party Screener
+* Import Compliance
+* Export License Detection
+
+Note: only the Landed Costs API is currently implemented.
+
+WARNING: Tradeability is only available through a SOAP API. Therefore you are required to have the [SOAP extension](http://php.net/manual/en/book.soap.php) installed on your system.
+
+<a name="tradeability-class-example"></a>
+### Example
+
+```php
+// Build request
+$landedCostRequest = new \Ups\Entity\Tradeability\LandedCostRequest;
+
+// Build shipment
+$shipment = new \Ups\Entity\Tradeability\Shipment;
+$shipment->setOriginCountryCode('NL');
+$shipment->setDestinationCountryCode('US');
+$shipment->setDestinationStateProvinceCode('TX');
+$shipment->setResultCurrencyCode('EUR');
+$shipment->setTariffCodeAlert(1);
+$shipment->setTransportationMode(\Ups\Entity\Tradeability\Shipment::TRANSPORT_MODE_AIR);
+$shipment->setTransactionReferenceId('1');
+
+// Build product
+$product = new \Ups\Entity\Tradeability\Product;
+$product->setProductName('Test');
+$tariffInfo = new \Ups\Entity\Tradeability\TariffInfo;
+$tariffInfo->setTariffCode('5109.90.80.00');
+$product->setTariffInfo($tariffInfo);
+$product->setProductCountryCodeOfOrigin('BD');
+$unitPrice = new \Ups\Entity\Tradeability\UnitPrice;
+$unitPrice->setMonetaryValue(250);
+$unitPrice->setCurrencyCode('EUR');
+$product->setUnitPrice($unitPrice);
+$weight = new Ups\Entity\Tradeability\Weight;
+$weight->setValue(0.83);
+$unitOfMeasurement = new \Ups\Entity\Tradeability\UnitOfMeasurement;
+$unitOfMeasurement->setCode('kg');
+$weight->setUnitOfMeasurement($unitOfMeasurement);
+$product->setWeight($weight);
+$quantity = new \Ups\Entity\Tradeability\Quantity;
+$quantity->setValue(5);
+$unitOfMeasurement = new \Ups\Entity\Tradeability\UnitOfMeasurement;
+$unitOfMeasurement->setCode(\Ups\Entity\Tradeability\UnitOfMeasurement::PROD_PIECES);
+$quantity->setUnitOfMeasurement($unitOfMeasurement);
+$product->setQuantity($quantity);
+$product->setTariffCodeAlert(1);
+
+// Add product to shipment
+$shipment->addProduct($product);
+
+// Query request
+$queryRequest = new \Ups\Entity\Tradeability\QueryRequest;
+$queryRequest->setShipment($shipment);
+$queryRequest->setSuppressQuestionIndicator(true);
+
+// Build
+$landedCostRequest->setQueryRequest($queryRequest);
+
+try {
+    // Get the data
+    $api = new Ups\Tradeability($accessKey, $userId, $password);
+    $result = $api->getLandedCosts($landedCostRequest);
+
+    var_dump($result);
+} catch (Exception $e) {
+    var_dump($e);
+}
+```
+
+<a name="tradeability-class-parameters"></a>
+### Parameters
+
+For the Landed Cost call, parameters are:
+
+ * `landedCostRequest` Mandatory. landedCostRequest object with request details, see example.
+
 <a name="shipping-class"></a>
-## Shipping Class. 
+## Shipping Class.
 
 Documentation for this class is coming.
 
@@ -369,7 +456,7 @@ Documentation for this class is coming.
 ## Logging
 
 All constructors take a [PSR-3](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md) compatible logger.
- 
+
 Besides that, the main UPS class has a public method `setLogger` to set it after the constructor ran.
 
 Requests & responses (including XML, no access keys) are logged at DEBUG level. At INFO level only the event is reported, not the XML content. More severe problems (e.g. no connection) are logged with higher severity.
