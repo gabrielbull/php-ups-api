@@ -64,29 +64,43 @@ class Tradeability extends Ups
     public function getLandedCosts(LandedCostRequest $request)
     {
         $request = $this->createRequestLandedCost($request);
-        return $this->sendRequest($request, self::ENDPOINT_LANDEDCOST);
+        return $this->sendRequest($request, self::ENDPOINT_LANDEDCOST, 'ProcessLCRequest')->LandedCostResponse->EstimateResponse;
     }
 
     /**
-     * Creates and sends a request for the given shipment. This handles checking for
-     * errors in the response back from UPS.
+     * Creates and sends a request for the given data. Most errors are handled in SoapRequest
      *
-     * @param $requestObj
+     * @param $request
+     * @param $endpoint
+     * @param $operation
      *
      * @throws Exception
      *
      * @return TimeInTransitRequest
      */
-    private function sendRequest($request, $endpoint)
+    private function sendRequest($request, $endpoint, $operation)
     {
         $endpointurl = $this->compileEndpointUrl($endpoint);
-        $response = $this->getRequest()->request($this->createAccess(), $request, $endpointurl);
+        $this->response = $this->getRequest()->request($this->createAccess(), $request, $endpointurl, $operation);
+        $response = $this->response->getResponse();
 
         if (null === $response) {
             throw new Exception('Failure (0): Unknown error', 0);
         }
 
-        return $response;
+        return $this->formatResponse($response);
+    }
+
+    /**
+     * Format the response.
+     *
+     * @param SimpleXMLElement $response
+     *
+     * @return stdClass
+     */
+    private function formatResponse(SimpleXMLElement $response)
+    {
+        return $this->convertXmlObject($response->Body);
     }
 
     /**
