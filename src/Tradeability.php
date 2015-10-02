@@ -15,8 +15,29 @@ use Ups\Entity\Tradeability\LandedCostRequest;
  */
 class Tradeability extends Ups
 {
+
+    /**
+     * @var
+     */
     private $request;
 
+    /**
+     * @var string
+     *
+     * @deprecated
+     */
+    protected $productionBaseUrl = 'https://www.ups.com/webservices';
+
+    /**
+     * @var string
+     *
+     * @deprecated
+     */
+    protected $integrationBaseUrl = 'https://wwwcie.ups.com/webservices';
+
+    /**
+     *
+     */
     const ENDPOINT_LANDEDCOST = '/LandedCost';
 
     /**
@@ -58,33 +79,14 @@ class Tradeability extends Ups
      */
     private function sendRequest($request, $endpoint)
     {
-        // @todo adjust
-        $endpointurl = 'https://www.ups.com/webservices' . $endpoint;
-        //$this->compileEndpointUrl($endpoint)
-        $this->response = $this->getRequest()->request($this->createAccess(), $request, $endpointurl);
-        $response = $this->response->getResponse();
+        $endpointurl = $this->compileEndpointUrl($endpoint);
+        $response = $this->getRequest()->request($this->createAccess(), $request, $endpointurl);
 
         if (null === $response) {
             throw new Exception('Failure (0): Unknown error', 0);
         }
 
-        if ($response instanceof SimpleXMLElement && $response->Response->ResponseStatusCode == 0) {
-            throw new Exception(
-                "Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}",
-                (int)$response->Response->Error->ErrorCode
-            );
-        } else {
-            return $this->formatResponse($response);
-        }
-
-        if ($response->Response->ResponseStatusCode == 0) {
-            throw new Exception(
-                "Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}",
-                (int)$response->Response->Error->ErrorCode
-            );
-        } else {
-            return $this->formatResponse($response);
-        }
+        return $response;
     }
 
     /**
@@ -117,23 +119,6 @@ class Tradeability extends Ups
     }
 
     /**
-     * Format the response.
-     *
-     * @param SimpleXMLElement $response
-     *
-     * @return TimeInTransitResponse
-     */
-    private function formatResponse(SimpleXMLElement $response)
-    {
-        // We don't need to return data regarding the response to the user
-        unset($response->Response);
-
-        $result = $this->convertXmlObject($response);
-
-        return $result;
-    }
-
-    /**
      * @return RequestInterface
      */
     public function getRequest()
@@ -157,23 +142,4 @@ class Tradeability extends Ups
         return $this;
     }
 
-    /**
-     * @return ResponseInterface
-     */
-    public function getResponse()
-    {
-        return $this->response;
-    }
-
-    /**
-     * @param ResponseInterface $response
-     *
-     * @return $this
-     */
-    public function setResponse(ResponseInterface $response)
-    {
-        $this->response = $response;
-
-        return $this;
-    }
 }
