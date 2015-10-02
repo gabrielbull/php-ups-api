@@ -4,14 +4,12 @@ namespace Ups;
 
 use DateTime;
 use Exception;
-use GuzzleHttp\Client as Guzzle;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use SimpleXMLElement;
-use Ups\Exception\InvalidResponseException;
-use Ups\Exception\RequestException;
 use SoapClient;
+use Ups\Exception\InvalidResponseException;
 
 class SoapRequest implements RequestInterface, LoggerAwareInterface
 {
@@ -74,7 +72,7 @@ class SoapRequest implements RequestInterface, LoggerAwareInterface
     public function request($access, $request, $endpointurl, $operation = null)
     {
         // Check for operation
-        if(is_null($operation)) {
+        if (is_null($operation)) {
             throw new \Exception('Operation is required');
         }
 
@@ -93,12 +91,12 @@ class SoapRequest implements RequestInterface, LoggerAwareInterface
         );
 
         // Initialize soap client
-        $client = new SoapClient(__DIR__ . '/WSDL/LandedCost.wsdl' , $mode);
+        $client = new SoapClient(__DIR__ . '/WSDL/LandedCost.wsdl', $mode);
 
         // Set endpoint URL + auth & request data
         $client->__setLocation($endpointurl);
-        $auth = (array) new SimpleXMLElement($access);
-        $request = (array) new SimpleXMLElement($request);
+        $auth = (array)new SimpleXMLElement($access);
+        $request = (array)new SimpleXMLElement($request);
 
         // Build auth header
         $header = new \SoapHeader('http://www.ups.com/schema/xpci/1.0/auth', 'AccessRequest', $auth);
@@ -133,7 +131,8 @@ class SoapRequest implements RequestInterface, LoggerAwareInterface
                 'endpointurl' => $this->getEndpointUrl(),
             ]);
 
-            $xml = new SimpleXMLElement(preg_replace('/(<\/*)[^>:]+:/', '$1', $body)); // Strip off namespaces and make XML
+            $xml = new SimpleXMLElement(preg_replace('/(<\/*)[^>:]+:/', '$1',
+                $body)); // Strip off namespaces and make XML
             $responseInstance = new Response();
             return $responseInstance->setText($body)->setResponse($xml);
         } catch (\Exception $e) {
@@ -150,14 +149,14 @@ class SoapRequest implements RequestInterface, LoggerAwareInterface
                 ]);
 
                 throw new InvalidResponseException('Failure: ' . (string)$errorMsg[0] . ' (' . (string)$errorCode[0] . ')');
-            }
-            else {
+            } else {
                 $this->logger->alert($e->getMessage(), [
                     'id' => $id,
                     'endpointurl' => $this->getEndpointUrl(),
                 ]);
 
-                throw new InvalidResponseException('Cannot parse error from UPS: ' . $e->getMessage(), $e->getCode(), $e);
+                throw new InvalidResponseException('Cannot parse error from UPS: ' . $e->getMessage(), $e->getCode(),
+                    $e);
             }
         }
     }

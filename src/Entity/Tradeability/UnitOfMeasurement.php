@@ -22,8 +22,7 @@ class UnitOfMeasurement extends \Ups\Entity\UnitOfMeasurement
             $node = $document->createElement('UnitOfMeasure');
             $node->appendChild($document->createElement('UnitCode', $this->getCode()));
 
-            if($this->getDescription() !== null)
-            {
+            if ($this->getDescription() !== null) {
                 $node->appendChild($document->createElement('UnitDescription', $this->getDescription()));
             }
 

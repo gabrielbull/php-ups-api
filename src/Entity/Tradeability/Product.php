@@ -71,19 +71,20 @@ class Product implements NodeInterface
         $node->appendChild($this->getQuantity()->toNode($document));
 
         // Optional
-        if($this->getProductName() !== null) {
+        if ($this->getProductName() !== null) {
             $node->appendChild($document->createElement('ProductName', $this->getProductName()));
         }
-        if($this->getProductDescription() !== null) {
+        if ($this->getProductDescription() !== null) {
             $node->appendChild($document->createElement('ProductDescription', $this->getProductDescription()));
         }
-        if($this->getProductCountryCodeOfOrigin() !== null) {
-            $node->appendChild($document->createElement('ProductCountryCodeOfOrigin', $this->getProductCountryCodeOfOrigin()));
+        if ($this->getProductCountryCodeOfOrigin() !== null) {
+            $node->appendChild($document->createElement('ProductCountryCodeOfOrigin',
+                $this->getProductCountryCodeOfOrigin()));
         }
-        if($this->getWeight() instanceof Weight) {
+        if ($this->getWeight() instanceof Weight) {
             $node->appendChild($this->getWeight()->toNode($document));
         }
-        if($this->getTariffCodeAlert() !== null) {
+        if ($this->getTariffCodeAlert() !== null) {
             $node->appendChild($document->createElement('TariffCodeAlert', $this->getTariffCodeAlert()));
         }
 

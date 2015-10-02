@@ -3,9 +3,9 @@
 namespace Ups\Entity\Tradeability;
 
 use DomDocument;
-use Ups\NodeInterface;
-use Ups\Entity\FreightCharges;
 use DomElement;
+use Ups\Entity\FreightCharges;
+use Ups\NodeInterface;
 
 class Shipment implements NodeInterface
 {
@@ -97,27 +97,29 @@ class Shipment implements NodeInterface
         $node->appendChild($document->createElement('DestinationCountryCode', $this->getDestinationCountryCode()));
 
         // Then the optional values
-        if($this->getOriginStateProvinceCode() !== null) {
-            $node->appendChild($document->createElement('OriginStateProvinceCode', $this->getOriginStateProvinceCode()));
+        if ($this->getOriginStateProvinceCode() !== null) {
+            $node->appendChild($document->createElement('OriginStateProvinceCode',
+                $this->getOriginStateProvinceCode()));
         }
-        if($this->getDestinationStateProvinceCode() !== null) {
-            $node->appendChild($document->createElement('DestinationStateProvinceCode', $this->getDestinationStateProvinceCode()));
+        if ($this->getDestinationStateProvinceCode() !== null) {
+            $node->appendChild($document->createElement('DestinationStateProvinceCode',
+                $this->getDestinationStateProvinceCode()));
         }
-        if($this->getTransportationMode() !== null) {
+        if ($this->getTransportationMode() !== null) {
             $node->appendChild($document->createElement('TransportationMode', $this->getTransportationMode()));
         }
-        if($this->getResultCurrencyCode() !== null) {
+        if ($this->getResultCurrencyCode() !== null) {
             $node->appendChild($document->createElement('ResultCurrencyCode', $this->getResultCurrencyCode()));
         }
-        if($this->getTariffCodeAlert() !== null) {
+        if ($this->getTariffCodeAlert() !== null) {
             $node->appendChild($document->createElement('TariffCodeAlert', $this->getTariffCodeAlert()));
         }
-        if($this->getTransactionReferenceId() !== null) {
+        if ($this->getTransactionReferenceId() !== null) {
             $node->appendChild($document->createElement('TransactionReferenceID', $this->getTransactionReferenceId()));
         }
 
         // Then products array
-        foreach($this->products as $product) {
+        foreach ($this->products as $product) {
             $node->appendChild($product->toNode($document));
         }
 

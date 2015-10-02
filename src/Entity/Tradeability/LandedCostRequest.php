@@ -14,8 +14,6 @@ class LandedCostRequest
      */
     private $estimateRequest;
 
-    public function __construct() {}
-
     /**
      * @return QueryRequest
      */
