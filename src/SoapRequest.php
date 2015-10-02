@@ -117,22 +117,25 @@ class SoapRequest implements RequestInterface, LoggerAwareInterface
             'endpointurl' => $this->getEndpointUrl(),
         ]);
 
-        // Perform response
+        // Perform call and get response
         try {
             $request = json_decode(json_encode((array)$request), true);
-            $response = $client->__soapCall($operation, [$request]);
+            $client->__soapCall($operation, [$request]);
+            $body = $client->__getLastResponse();
 
             $this->logger->info('Response from UPS API', [
                 'id' => $id,
                 'endpointurl' => $this->getEndpointUrl(),
             ]);
 
-            $this->logger->debug('Response: ' . $response, [
+            $this->logger->debug('Response: ' . $body, [
                 'id' => $id,
                 'endpointurl' => $this->getEndpointUrl(),
             ]);
 
-            return $response;
+            $xml = new SimpleXMLElement(preg_replace('/(<\/*)[^>:]+:/', '$1', $body)); // Strip off namespaces and make XML
+            $responseInstance = new Response();
+            return $responseInstance->setText($body)->setResponse($xml);
         } catch (\Exception $e) {
             // Parse error response
             $xml = new SimpleXMLElement($client->__getLastResponse());
