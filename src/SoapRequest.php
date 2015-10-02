@@ -82,8 +82,7 @@ class SoapRequest implements RequestInterface, LoggerAwareInterface
         $this->setEndpointUrl($endpointurl);
 
         // Settings based on UPS PHP Example
-        $mode = array
-        (
+        $mode = array(
             'soap_version' => 'SOAP_1_1',
             'trace' => 1,
             'connection_timeout' => 2,
