@@ -21,12 +21,16 @@ class UnitOfMeasurement extends \Ups\Entity\UnitOfMeasurement
         if (null !== $document) {
             $node = $document->createElement('UnitOfMeasure');
             $node->appendChild($document->createElement('UnitCode', $this->getCode()));
-            $node->appendChild($document->createElement('UnitDescription', $this->getDescription()));
+
+            if($this->getDescription() !== null)
+            {
+                $node->appendChild($document->createElement('UnitDescription', $this->getDescription()));
+            }
 
             return $node;
         }
 
-        return new DOMElement('UnitOfMeasurement');
+        return new DOMElement('UnitOfMeasure');
     }
 
 }

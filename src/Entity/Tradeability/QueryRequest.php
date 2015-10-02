@@ -3,8 +3,8 @@
 namespace Ups\Entity\Tradeability;
 
 use DomDocument;
-use Ups\NodeInterface;
 use DomElement;
+use Ups\NodeInterface;
 
 class QueryRequest implements NodeInterface
 {
@@ -33,9 +33,8 @@ class QueryRequest implements NodeInterface
         $node = $document->createElement('QueryRequest');
 
         $node->appendChild($this->getShipment()->toNode($document));
-        if ($this->isSuppressQuestionIndicator()) {
-            $node->appendChild($document->createElement('SuppressQuestionIndicator'));
-        }
+        $node->appendChild($document->createElement('SuppressQuestionIndicator',
+            ($this->isSuppressQuestionIndicator() ? 'Y' : 'N')));
 
         return $node;
     }

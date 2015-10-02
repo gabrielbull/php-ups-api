@@ -67,63 +67,42 @@ class SoapRequest implements RequestInterface, LoggerAwareInterface
      * @param string $endpointurl The UPS API Endpoint URL
      *
      * @throws Exception
-     *                   todo: make access, request and endpointurl nullable to make the testable
+     * @todo: make access, request and endpointurl nullable to make the testable
      *
      * @return ResponseInterface
      */
-    public function request($access, $request, $endpointurl)
+    public function request($access, $request, $endpointurl, $operation = null)
     {
+        // Check for operation
+        if(is_null($operation)) {
+            throw new \Exception('Operation is required');
+        }
+
+        // Set data
         $this->setAccess($access);
         $this->setRequest($request);
         $this->setEndpointUrl($endpointurl);
 
-        // Easy test
+        // Settings based on UPS PHP Example
         $mode = array
         (
-            'soap_version' => 'SOAP_1_1',  // use soap 1.1 client
-            'trace' => 1
+            'soap_version' => 'SOAP_1_1',
+            'trace' => 1,
+            'connection_timeout' => 2,
+            'cache_wsdl' => WSDL_CACHE_BOTH,
         );
 
-        // initialize soap client
+        // Initialize soap client
         $client = new SoapClient(__DIR__ . '/WSDL/LandedCost.wsdl' , $mode);
 
-        //set endpoint url
+        // Set endpoint URL + auth & request data
         $client->__setLocation($endpointurl);
         $auth = (array) new SimpleXMLElement($access);
         $request = (array) new SimpleXMLElement($request);
 
-        $operation = "ProcessLCRequest";
-
-        $header = new \SoapHeader('http://www.ups.com/schema/xpci/1.0/auth','AccessRequest',$auth);
+        // Build auth header
+        $header = new \SoapHeader('http://www.ups.com/schema/xpci/1.0/auth', 'AccessRequest', $auth);
         $client->__setSoapHeaders($header);
-
-
-        //get response
-        try {
-            $request = json_decode(json_encode((array)$request), true);
-            $response = $client->__soapCall('ProcessLCRequest', [$request]);
-        } catch (\Exception $e) {
-            $xml = new SimpleXMLElement($client->__getLastResponse());
-            $xml->registerXPathNamespace('err', 'http://www.ups.com/schema/xpci/1.0/error');
-            $errorCode = $xml->xpath('//err:PrimaryErrorCode/err:Code');
-            $errorMsg = $xml->xpath('//err:PrimaryErrorCode/err:Description');
-
-            if (isset($errorCode[0]) && isset($errorMsg[0])) {
-                throw new InvalidResponseException('Failure: ' . (string)$errorMsg . ' (' . (string)$errorCode . ')');
-            }
-            else {
-                echo '<pre>';
-                echo htmlspecialchars($client->__getLastRequest());
-                echo '</pre>';
-                echo '<pre>';
-                echo htmlspecialchars($client->__getLastRequestHeaders());
-                echo '</pre>';
-                dd($e->getMessage());
-            }
-        }
-        dd($response);
-
-        return 1;
 
         // Log request
         $date = new DateTime();
@@ -138,58 +117,45 @@ class SoapRequest implements RequestInterface, LoggerAwareInterface
             'endpointurl' => $this->getEndpointUrl(),
         ]);
 
+        // Perform response
         try {
-            $client = new Guzzle();
-
-            $response = $client->post(
-                $this->getEndpointUrl(),
-                [
-                    'body' => $this->getAccess() . $this->getRequest(),
-                    'headers' => [
-                        'Content-type' => 'application/x-www-form-urlencoded; charset=utf-8',
-                        'Accept-Charset' => 'UTF-8',
-                    ],
-                    'http_errors' => true,
-                ]
-            );
-
-            $body = (string)$response->getBody();
+            $request = json_decode(json_encode((array)$request), true);
+            $response = $client->__soapCall($operation, [$request]);
 
             $this->logger->info('Response from UPS API', [
                 'id' => $id,
                 'endpointurl' => $this->getEndpointUrl(),
             ]);
 
-            $this->logger->debug('Response: ' . $body, [
+            $this->logger->debug('Response: ' . $response, [
                 'id' => $id,
                 'endpointurl' => $this->getEndpointUrl(),
             ]);
 
-            if ($response->getStatusCode() === 200) {
-                if (function_exists('mb_convert_encoding')) {
-                    $body = mb_convert_encoding($body, 'UTF-8', mb_detect_encoding($body));
-                }
+            return $response;
+        } catch (\Exception $e) {
+            // Parse error response
+            $xml = new SimpleXMLElement($client->__getLastResponse());
+            $xml->registerXPathNamespace('err', 'http://www.ups.com/schema/xpci/1.0/error');
+            $errorCode = $xml->xpath('//err:PrimaryErrorCode/err:Code');
+            $errorMsg = $xml->xpath('//err:PrimaryErrorCode/err:Description');
 
-                $xml = new SimpleXMLElement($body);
-                if (isset($xml->Response) && isset($xml->Response->ResponseStatusCode)) {
-                    if ($xml->Response->ResponseStatusCode == 1) {
-                        $responseInstance = new Response();
+            if (isset($errorCode[0]) && isset($errorMsg[0])) {
+                $this->logger->alert($errorMsg[0], [
+                    'id' => $id,
+                    'endpointurl' => $this->getEndpointUrl(),
+                ]);
 
-                        return $responseInstance->setText($body)->setResponse($xml);
-                    } elseif ($xml->Response->ResponseStatusCode == 0) {
-                        throw new InvalidResponseException('Failure: ' . $xml->Response->Error->ErrorDescription . ' (' . $xml->Response->Error->ErrorCode . ')');
-                    }
-                } else {
-                    throw new InvalidResponseException('Failure: response is in an unexpected format.');
-                }
+                throw new InvalidResponseException('Failure: ' . (string)$errorMsg[0] . ' (' . (string)$errorCode[0] . ')');
             }
-        } catch (\GuzzleHttp\Exception\TransferException $e) { // Guzzle: All of the exceptions extend from GuzzleHttp\Exception\TransferException
-            $this->logger->alert($e->getMessage(), [
-                'id' => $id,
-                'endpointurl' => $this->getEndpointUrl(),
-            ]);
+            else {
+                $this->logger->alert($e->getMessage(), [
+                    'id' => $id,
+                    'endpointurl' => $this->getEndpointUrl(),
+                ]);
 
-            throw new RequestException('Failure: ' . $e->getMessage());
+                throw new InvalidResponseException('Cannot parse error from UPS: ' . $e->getMessage(), $e->getCode(), $e);
+            }
         }
     }
 
