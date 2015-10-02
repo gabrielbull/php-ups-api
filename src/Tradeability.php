@@ -48,8 +48,14 @@ class Tradeability extends Ups
      * @param RequestInterface $request
      * @param LoggerInterface PSR3 compatible logger (optional)
      */
-    public function __construct($accessKey = null, $userId = null, $password = null, $useIntegration = false, RequestInterface $request = null, LoggerInterface $logger = null)
-    {
+    public function __construct(
+        $accessKey = null,
+        $userId = null,
+        $password = null,
+        $useIntegration = false,
+        RequestInterface $request = null,
+        LoggerInterface $logger = null
+    ) {
         if (null !== $request) {
             $this->setRequest($request);
         }
@@ -64,7 +70,8 @@ class Tradeability extends Ups
     public function getLandedCosts(LandedCostRequest $request)
     {
         $request = $this->createRequestLandedCost($request);
-        return $this->sendRequest($request, self::ENDPOINT_LANDEDCOST, 'ProcessLCRequest')->LandedCostResponse->EstimateResponse;
+        return $this->sendRequest($request, self::ENDPOINT_LANDEDCOST,
+            'ProcessLCRequest')->LandedCostResponse->EstimateResponse;
     }
 
     /**
@@ -125,7 +132,7 @@ class Tradeability extends Ups
 
         $request->appendChild($xml->createElement('RequestAction', 'LandedCost'));
 
-        if($landedCostRequest->getQueryRequest() !== null) {
+        if ($landedCostRequest->getQueryRequest() !== null) {
             $tradeabilityRequest->appendChild($landedCostRequest->getQueryRequest()->toNode($xml));
         }
 
