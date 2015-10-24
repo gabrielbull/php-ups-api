@@ -34,6 +34,11 @@ class Tracking extends Ups
     /**
      * @var string
      */
+    private $ReferenceNumber;
+
+    /**
+     * @var string
+     */
     private $requestOption;
 
     /**
@@ -57,16 +62,18 @@ class Tracking extends Ups
      *
      * @param string $trackingNumber The package's tracking number.
      * @param string $requestOption Optional processing. For Mail Innovations the only valid options are Last Activity and All activity.
+     * @param $referenceNumber The ability to track any UPS package or shipment by reference number gives applications added flexibility and convenience. Reference numbers can be a purchase order number, job number, etc
      *
      * @throws Exception
      *
      * @return stdClass
      */
-    public function track($trackingNumber, $requestOption = 'activity')
+    public function track($trackingNumber, $requestOption = 'activity', $referenceNumber)
     {
         $this->trackingNumber = $trackingNumber;
         $this->requestOption = $requestOption;
-
+        $this->referenceNumber = $referenceNumber;
+        
         $access = $this->createAccess();
         $request = $this->createRequest();
 
@@ -114,7 +121,10 @@ class Tracking extends Ups
         if (null !== $this->trackingNumber) {
             $trackRequest->appendChild($xml->createElement('TrackingNumber', $this->trackingNumber));
         }
-
+        
+        if (null !== $this->referenceNumber) {
+            $trackRequest->appendChild($xml->createElement('ReferenceNumber'))->appendChild($xml->createElement('Value',$this->referenceNumber));
+        }
         return $xml->saveXML();
     }
 
