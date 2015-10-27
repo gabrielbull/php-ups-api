@@ -62,16 +62,45 @@ class Tracking extends Ups
      *
      * @param string $trackingNumber The package's tracking number.
      * @param string $requestOption Optional processing. For Mail Innovations the only valid options are Last Activity and All activity.
-     * @param $referenceNumber The ability to track any UPS package or shipment by reference number gives applications added flexibility and convenience. Reference numbers can be a purchase order number, job number, etc
      *
      * @throws Exception
      *
      * @return stdClass
      */
-    public function track($trackingNumber, $requestOption = 'activity', $referenceNumber)
+    public function track($trackingNumber, $requestOption = 'activity')
     {
         $this->trackingNumber = $trackingNumber;
         $this->requestOption = $requestOption;
+                
+        $access = $this->createAccess();
+        $request = $this->createRequest();
+
+        $this->response = $this->getRequest()->request($access, $request, $this->compileEndpointUrl(self::ENDPOINT));
+        $response = $this->response->getResponse();
+
+        if (null === $response) {
+            throw new Exception('Failure (0): Unknown error', 0);
+        }
+
+        if ($response instanceof SimpleXMLElement && $response->Response->ResponseStatusCode == 0) {
+            throw new Exception(
+                "Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}",
+                (int)$response->Response->Error->ErrorCode
+            );
+        } else {
+            return $this->formatResponse($response);
+        }
+    }
+
+    /**
+     * Get package tracking information.
+     *
+     * @param $referenceNumber The ability to track any UPS package or shipment by reference number gives applications added flexibility and convenience. Reference numbers can be a purchase order number, job number, etc     *
+     * @throws Exception
+     *
+     * @return stdClass
+     */
+    public function trackByReference($referenceNumber){
         $this->referenceNumber = $referenceNumber;
         
         $access = $this->createAccess();
