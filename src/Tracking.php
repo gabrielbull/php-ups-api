@@ -34,7 +34,7 @@ class Tracking extends Ups
     /**
      * @var string
      */
-    private $ReferenceNumber;
+    private $referenceNumber;
 
     /**
      * @var string
