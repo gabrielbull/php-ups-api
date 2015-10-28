@@ -143,10 +143,10 @@ _To use the `fileName` parameter, do not provide a `beginDateTime`._
 <a name="tracking-class"></a>
 ## Tracking Class
 
-The Tracking Class allow you to track a shipment using the UPS Tracking API. 
+The Tracking Class allow you to track a shipment using the UPS Tracking API or Reference Number. 
 
 <a name="tracking-class-example"></a>
-### Example
+### Example using UPS Tracking
 
 ```php
 $tracking = new Ups\Tracking($accessKey, $userId, $password);
@@ -170,6 +170,31 @@ Tracking parameters are:
 
  * `trackingNumber` The package’s tracking number.
  * `requestOption` Optional processing. For Mail Innovations the only valid options are Last Activity and All activity.
+
+<a name="tracking-class-example"></a>
+### Example using Reference Number
+
+```php
+$tracking = new Ups\Tracking($accessKey, $userId, $password);
+
+try {
+    $shipment = $tracking->trackByReference('REFERENCE NUMBER');
+        
+    foreach($shipment->Package->Activity as $activity) {
+        var_dump($activity);
+    }
+    
+} catch (Exception $e) {
+    var_dump($e);
+}
+```
+<a name="tracking-class-parameters"></a>
+### Parameters
+
+Tracking parameters are:
+
+ * `referenceNumber` The ability to track any UPS package or shipment by reference number gives applications added flexibility and convenience. Reference numbers can be a purchase order number, job number, etc  
+ 
 
 <a name="rate-class"></a>
 ## Rate Class
