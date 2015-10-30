@@ -71,7 +71,7 @@ class Tracking extends Ups
     {
         $this->trackingNumber = $trackingNumber;
         $this->requestOption = $requestOption;
-                
+
         $access = $this->createAccess();
         $request = $this->createRequest();
 
@@ -103,7 +103,7 @@ class Tracking extends Ups
     public function trackByReference($referenceNumber)
     {
         $this->referenceNumber = $referenceNumber;
-        
+
         $access = $this->createAccess();
         $request = $this->createRequest();
 
@@ -151,10 +151,11 @@ class Tracking extends Ups
         if (null !== $this->trackingNumber) {
             $trackRequest->appendChild($xml->createElement('TrackingNumber', $this->trackingNumber));
         }
-        
+
         if (null !== $this->referenceNumber) {
             $trackRequest->appendChild($xml->createElement('ReferenceNumber'))->appendChild($xml->createElement('Value', $this->referenceNumber));
         }
+        
         return $xml->saveXML();
     }
 

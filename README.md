@@ -78,8 +78,8 @@ $address->setBuildingName('Test');
 $address->setAddressLine1('Address Line 1');
 $address->setAddressLine2('Address Line 2');
 $address->setAddressLine3('Address Line 3');
-$address->setStateProvinceCode('NY');       
-$address->setCity('New York');     
+$address->setStateProvinceCode('NY');
+$address->setCity('New York');
 $address->setCountryCode('US');
 $address->setPostalCode('10000');
 
@@ -103,7 +103,7 @@ Adress Validation parameters are:
 <a name="quantumview-class"></a>
 ## QuantumView Class
 
-The QuantumView Class allow you to request a Quantum View Data subscription. 
+The QuantumView Class allow you to request a Quantum View Data subscription.
 
 <a name="quantumview-class-example"></a>
 ### Example
@@ -114,12 +114,12 @@ $quantumView = new Ups\QuantumView($accessKey, $userId, $password);
 try {
 	// Get the subscription for all events for the last hour
 	$events = $quantumView->getSubscription(null, (time() - 3600));
-	
+
 	foreach($events as $event) {
 		// Your code here
 		echo $event->Type;
 	}
-	
+
 } catch (Exception $e) {
 	var_dump($e);
 }
@@ -143,21 +143,21 @@ _To use the `fileName` parameter, do not provide a `beginDateTime`._
 <a name="tracking-class"></a>
 ## Tracking Class
 
-The Tracking Class allow you to track a shipment using the UPS Tracking API or Reference Number. 
+The Tracking Class allow you to track a shipment using the UPS Tracking API.
 
 <a name="tracking-class-example"></a>
-### Example using UPS Tracking
+### Example using Tracking Number
 
 ```php
 $tracking = new Ups\Tracking($accessKey, $userId, $password);
 
 try {
 	$shipment = $tracking->track('TRACKING NUMBER');
-		
+
 	foreach($shipment->Package->Activity as $activity) {
 		var_dump($activity);
 	}
-	
+
 } catch (Exception $e) {
 	var_dump($e);
 }
@@ -179,11 +179,11 @@ $tracking = new Ups\Tracking($accessKey, $userId, $password);
 
 try {
     $shipment = $tracking->trackByReference('REFERENCE NUMBER');
-        
+
     foreach($shipment->Package->Activity as $activity) {
         var_dump($activity);
     }
-    
+
 } catch (Exception $e) {
     var_dump($e);
 }
@@ -193,8 +193,7 @@ try {
 
 Tracking parameters are:
 
- * `referenceNumber` The ability to track any UPS package or shipment by reference number gives applications added flexibility and convenience. Reference numbers can be a purchase order number, job number, etc  
- 
+ * `referenceNumber` The ability to track any UPS package or shipment by reference number. Reference numbers can be a purchase order number, job number, etc. Reference Number is supplied when generating a shipment.
 
 <a name="rate-class"></a>
 ## Rate Class
@@ -273,7 +272,7 @@ try {
     $request = new \Ups\Entity\TimeInTransitRequest;
 
     // Addresses
-    $from = new \Ups\Entity\AddressArtifactFormat;    
+    $from = new \Ups\Entity\AddressArtifactFormat;
     $from->setPoliticalDivision3('Amsterdam');
     $from->setPostcodePrimaryLow('1000AA');
     $from->setCountryCode('NL');
@@ -386,7 +385,7 @@ Locator class parameters are:
  * `requestOption` Optional. Type of locations you are searching for.
 
 <a name="shipping-class"></a>
-## Shipping Class. 
+## Shipping Class.
 
 Documentation for this class is coming.
 
@@ -394,7 +393,7 @@ Documentation for this class is coming.
 ## Logging
 
 All constructors take a [PSR-3](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md) compatible logger.
- 
+
 Besides that, the main UPS class has a public method `setLogger` to set it after the constructor ran.
 
 Requests & responses (including XML, no access keys) are logged at DEBUG level. At INFO level only the event is reported, not the XML content. More severe problems (e.g. no connection) are logged with higher severity.
