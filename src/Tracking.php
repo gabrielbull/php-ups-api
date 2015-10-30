@@ -95,14 +95,15 @@ class Tracking extends Ups
     /**
      * Get package tracking information.
      *
-     * @param $referenceNumber The ability to track any UPS package or shipment by reference number gives applications added flexibility and convenience. Reference numbers can be a purchase order number, job number, etc     *
+     * @param string $referenceNumber Reference numbers can be a purchase order number, job number, etc. Reference number can be added when creating a shipment.
      * @throws Exception
      *
      * @return stdClass
      */
-    public function trackByReference($referenceNumber)
+    public function trackByReference($referenceNumber, $requestOption = 'activity')
     {
         $this->referenceNumber = $referenceNumber;
+        $this->requestOption = $requestOption;
 
         $access = $this->createAccess();
         $request = $this->createRequest();
@@ -155,7 +156,7 @@ class Tracking extends Ups
         if (null !== $this->referenceNumber) {
             $trackRequest->appendChild($xml->createElement('ReferenceNumber'))->appendChild($xml->createElement('Value', $this->referenceNumber));
         }
-        
+
         return $xml->saveXML();
     }
 
