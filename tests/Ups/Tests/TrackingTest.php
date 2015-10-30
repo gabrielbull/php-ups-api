@@ -23,6 +23,21 @@ class TrackingTest extends PHPUnit_Framework_TestCase
         );
     }
 
+    public function testCreateRequestReference()
+    {
+        $tracking = new Ups\Tracking();
+        $tracking->setRequest($request = new RequestMock());
+        try {
+            $tracking->trackByReference('1Z12345E0000000000');
+        } catch (Exception $e) {
+        }
+
+        $this->assertEquals(
+            $request->getRequestXml(),
+            $request->getExpectedRequestXml('/Track/Request2.xml')
+        );
+    }
+
     public function testTrack()
     {
         $tracking = new Ups\Tracking();
@@ -45,4 +60,5 @@ class TrackingTest extends PHPUnit_Framework_TestCase
         // Test context
         $this->assertEquals('unit test', $response->Response->TransactionReference->CustomerContext);
     }
+
 }
