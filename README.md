@@ -194,6 +194,7 @@ try {
 Tracking parameters are:
 
  * `referenceNumber` The ability to track any UPS package or shipment by reference number. Reference numbers can be a purchase order number, job number, etc. Reference Number is supplied when generating a shipment.
+ * `requestOption` Optional processing. For Mail Innovations the only valid options are Last Activity and All activity.
 
 <a name="rate-class"></a>
 ## Rate Class
