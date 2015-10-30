@@ -71,7 +71,7 @@ class Tradeability extends Ups
     {
         $request = $this->createRequestLandedCost($request);
         return $this->sendRequest($request, self::ENDPOINT_LANDEDCOST,
-            'ProcessLCRequest')->LandedCostResponse->EstimateResponse;
+            'ProcessLCRequest', 'LandedCost')->LandedCostResponse->EstimateResponse;
     }
 
     /**
@@ -80,15 +80,16 @@ class Tradeability extends Ups
      * @param $request
      * @param $endpoint
      * @param $operation
+     * @param $wsdl
      *
      * @throws Exception
      *
      * @return TimeInTransitRequest
      */
-    private function sendRequest($request, $endpoint, $operation)
+    private function sendRequest($request, $endpoint, $operation, $wsdl)
     {
         $endpointurl = $this->compileEndpointUrl($endpoint);
-        $this->response = $this->getRequest()->request($this->createAccess(), $request, $endpointurl, $operation);
+        $this->response = $this->getRequest()->request($this->createAccess(), $request, $endpointurl, $operation, $wsdl);
         $response = $this->response->getResponse();
 
         if (null === $response) {

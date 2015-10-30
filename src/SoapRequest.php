@@ -63,17 +63,24 @@ class SoapRequest implements RequestInterface, LoggerAwareInterface
      * @param string $access The access request xml
      * @param string $request The request xml
      * @param string $endpointurl The UPS API Endpoint URL
+     * @param string $operation Operation to perform on SOAP endpoint
+     * @param string $wsdl Which WSDL file to use
      *
      * @throws Exception
      * @todo: make access, request and endpointurl nullable to make the testable
      *
      * @return ResponseInterface
      */
-    public function request($access, $request, $endpointurl, $operation = null)
+    public function request($access, $request, $endpointurl, $operation = null, $wsdl = null)
     {
         // Check for operation
         if (is_null($operation)) {
             throw new \Exception('Operation is required');
+        }
+
+        // Check for WSDL
+        if (is_null($wsdl)) {
+            throw new \Exception('WSDL is required');
         }
 
         // Set data
@@ -90,7 +97,7 @@ class SoapRequest implements RequestInterface, LoggerAwareInterface
         );
 
         // Initialize soap client
-        $client = new SoapClient(__DIR__ . '/WSDL/LandedCost.wsdl', $mode);
+        $client = new SoapClient(__DIR__ . '/WSDL/' . $wsdl . '.wsdl', $mode);
 
         // Set endpoint URL + auth & request data
         $client->__setLocation($endpointurl);
