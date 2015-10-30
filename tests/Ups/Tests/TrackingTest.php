@@ -60,5 +60,4 @@ class TrackingTest extends PHPUnit_Framework_TestCase
         // Test context
         $this->assertEquals('unit test', $response->Response->TransactionReference->CustomerContext);
     }
-
 }
