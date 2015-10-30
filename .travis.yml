@@ -16,7 +16,6 @@ script: phpunit
 
 matrix:
   allow_failures:
-    - php: hhvm
     - php: nightly
 
 sudo: false

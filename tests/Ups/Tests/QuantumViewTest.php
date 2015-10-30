@@ -45,7 +45,7 @@ class QuantumViewTest extends PHPUnit_Framework_TestCase
 
         // Test response
         $this->assertInstanceOf('ArrayObject', $events);
-        $this->assertObjectHasAttribute('Type', reset($events));
+        $this->assertObjectHasAttribute('Type', $events->offsetGet(0));
 
         // Test bookmarks
         $this->assertInternalType('bool', $quantumView->hasBookmark());
