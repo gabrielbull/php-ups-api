@@ -171,5 +171,4 @@ class Tradeability extends Ups
     {
         return $this->convertXmlObject($response->Body);
     }
-
 }
