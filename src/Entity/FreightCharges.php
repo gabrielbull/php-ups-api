@@ -8,7 +8,7 @@ use Ups\NodeInterface;
 
 class FreightCharges implements NodeInterface
 {
-    private $monetaryValue;
+    protected $monetaryValue;
 
     public function __construct($response = null)
     {
