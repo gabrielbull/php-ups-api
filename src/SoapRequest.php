@@ -137,8 +137,9 @@ class SoapRequest implements RequestInterface, LoggerAwareInterface
                 'endpointurl' => $this->getEndpointUrl(),
             ]);
 
-            $xml = new SimpleXMLElement(preg_replace('/(<\/*)[^>:]+:/', '$1',
-                $body)); // Strip off namespaces and make XML
+            // Strip off namespaces and make XML
+            $body = preg_replace('/(<\/*)[^>:]+:/', '$1', $body);
+            $xml = new SimpleXMLElement($body);
             $responseInstance = new Response();
             return $responseInstance->setText($body)->setResponse($xml);
         } catch (\Exception $e) {
@@ -168,43 +169,11 @@ class SoapRequest implements RequestInterface, LoggerAwareInterface
     }
 
     /**
-     * @param $access
-     *
-     * @return $this
-     */
-    public function setAccess($access)
-    {
-        $this->access = $access;
-
-        return $this;
-    }
-
-    /**
      * @return string
      */
-    public function getAccess()
+    public function getEndpointUrl()
     {
-        return $this->access;
-    }
-
-    /**
-     * @param $request
-     *
-     * @return $this
-     */
-    public function setRequest($request)
-    {
-        $this->request = $request;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getRequest()
-    {
-        return $this->request;
+        return $this->endpointUrl;
     }
 
     /**
@@ -222,8 +191,40 @@ class SoapRequest implements RequestInterface, LoggerAwareInterface
     /**
      * @return string
      */
-    public function getEndpointUrl()
+    public function getRequest()
     {
-        return $this->endpointUrl;
+        return $this->request;
+    }
+
+    /**
+     * @param $request
+     *
+     * @return $this
+     */
+    public function setRequest($request)
+    {
+        $this->request = $request;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAccess()
+    {
+        return $this->access;
+    }
+
+    /**
+     * @param $access
+     *
+     * @return $this
+     */
+    public function setAccess($access)
+    {
+        $this->access = $access;
+
+        return $this;
     }
 }
