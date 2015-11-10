@@ -1,6 +1,15 @@
 # CHANGELOG
 
+## 0.6.2 (released 10-11-2015)
+
+- Add Landed Cost request of Tradeability API (using SOAP). Tradeability consist of 4 endpoints, of which now one is implemented.
+
+## 0.6.1 (released 30-10-2015)
+
+- Add option to use the Tracking API also when supplying a ReferenceNumber
+
 ## 0.6.0 (released 25-09-2015)
+
 - Extra check on response in QuantumView, when no response it gave an error
 - Added ShipmentRequestLabelSpecification class for easier options setting
 - Added ShipmentRequestReceiptSpecification class for easier options setting
