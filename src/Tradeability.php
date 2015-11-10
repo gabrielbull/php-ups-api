@@ -64,14 +64,20 @@ class Tradeability extends Ups
 
     /**
      * @param LandedCostRequest $request
-     * @return TimeInTransitRequest
+     * @return SimpleXmlElement
      * @throws Exception
      */
     public function getLandedCosts(LandedCostRequest $request)
     {
         $request = $this->createRequestLandedCost($request);
-        return $this->sendRequest($request, self::ENDPOINT_LANDEDCOST,
-            'ProcessLCRequest', 'LandedCost')->LandedCostResponse->EstimateResponse;
+        $response = $this->sendRequest($request, self::ENDPOINT_LANDEDCOST,
+            'ProcessLCRequest', 'LandedCost');
+
+        if(isset($response->LandedCostResponse->QueryResponse)) {
+            return $response->LandedCostResponse->QueryResponse;
+        }
+
+        return $response->LandedCostResponse->EstimateResponse;
     }
 
     /**
