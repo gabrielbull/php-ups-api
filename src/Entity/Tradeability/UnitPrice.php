@@ -61,6 +61,7 @@ class UnitPrice implements NodeInterface
     public function setMonetaryValue($monetaryValue)
     {
         $this->monetaryValue = $monetaryValue;
+
         return $this;
     }
 
@@ -79,7 +80,7 @@ class UnitPrice implements NodeInterface
     public function setCurrencyCode($currencyCode)
     {
         $this->currencyCode = $currencyCode;
+
         return $this;
     }
-
 }

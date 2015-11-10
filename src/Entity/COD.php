@@ -4,6 +4,7 @@ namespace Ups\Entity;
 
 class COD
 {
+
     public $CODCode;
     public $CODAmount;
 

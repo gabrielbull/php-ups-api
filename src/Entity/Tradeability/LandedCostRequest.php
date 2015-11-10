@@ -4,6 +4,7 @@ namespace Ups\Entity\Tradeability;
 
 class LandedCostRequest
 {
+
     /**
      * @var QueryRequest
      */
@@ -29,6 +30,7 @@ class LandedCostRequest
     public function setQueryRequest($queryRequest)
     {
         $this->queryRequest = $queryRequest;
+
         return $this;
     }
 
@@ -47,7 +49,7 @@ class LandedCostRequest
     public function setEstimateRequest($estimateRequest)
     {
         $this->estimateRequest = $estimateRequest;
+
         return $this;
     }
-
 }

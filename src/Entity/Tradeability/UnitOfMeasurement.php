@@ -31,5 +31,4 @@ class UnitOfMeasurement extends \Ups\Entity\UnitOfMeasurement
 
         return new DOMElement('UnitOfMeasure');
     }
-
 }

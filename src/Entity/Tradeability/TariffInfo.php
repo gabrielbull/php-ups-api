@@ -81,6 +81,7 @@ class TariffInfo implements NodeInterface
     public function setTariffCode($tariffCode)
     {
         $this->tariffCode = $tariffCode;
+
         return $this;
     }
 
@@ -99,6 +100,7 @@ class TariffInfo implements NodeInterface
     public function setDetailId($detailId)
     {
         $this->detailId = $detailId;
+
         return $this;
     }
 
@@ -117,6 +119,7 @@ class TariffInfo implements NodeInterface
     public function setSecondaryTariffCode($secondaryTariffCode)
     {
         $this->secondaryTariffCode = $secondaryTariffCode;
+
         return $this;
     }
 
@@ -135,7 +138,7 @@ class TariffInfo implements NodeInterface
     public function setSecondaryDetailId($secondaryDetailId)
     {
         $this->secondaryDetailId = $secondaryDetailId;
+
         return $this;
     }
-
 }

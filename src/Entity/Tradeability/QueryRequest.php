@@ -33,8 +33,12 @@ class QueryRequest implements NodeInterface
         $node = $document->createElement('QueryRequest');
 
         $node->appendChild($this->getShipment()->toNode($document));
-        $node->appendChild($document->createElement('SuppressQuestionIndicator',
-            ($this->isSuppressQuestionIndicator() ? 'Y' : 'N')));
+        $node->appendChild(
+            $document->createElement(
+                'SuppressQuestionIndicator',
+                ($this->isSuppressQuestionIndicator() ? 'Y' : 'N')
+            )
+        );
 
         return $node;
     }
@@ -54,6 +58,7 @@ class QueryRequest implements NodeInterface
     public function setShipment($shipment)
     {
         $this->shipment = $shipment;
+
         return $this;
     }
 
@@ -72,6 +77,7 @@ class QueryRequest implements NodeInterface
     public function setSuppressQuestionIndicator($suppressQuestionIndicator)
     {
         $this->suppressQuestionIndicator = $suppressQuestionIndicator;
+
         return $this;
     }
 }

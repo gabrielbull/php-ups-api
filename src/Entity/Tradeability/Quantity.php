@@ -47,24 +47,6 @@ class Quantity implements NodeInterface
     }
 
     /**
-     * @return UnitOfMeasurement
-     */
-    public function getUnitOfMeasurement()
-    {
-        return $this->unitOfMeasurement;
-    }
-
-    /**
-     * @param UnitOfMeasurement $unitOfMeasurement
-     * @return Quantity
-     */
-    public function setUnitOfMeasurement(UnitOfMeasurement $unitOfMeasurement)
-    {
-        $this->unitOfMeasurement = $unitOfMeasurement;
-        return $this;
-    }
-
-    /**
      * @return int
      */
     public function getValue()
@@ -79,7 +61,26 @@ class Quantity implements NodeInterface
     public function setValue($value)
     {
         $this->value = $value;
+
         return $this;
     }
 
+    /**
+     * @return UnitOfMeasurement
+     */
+    public function getUnitOfMeasurement()
+    {
+        return $this->unitOfMeasurement;
+    }
+
+    /**
+     * @param UnitOfMeasurement $unitOfMeasurement
+     * @return Quantity
+     */
+    public function setUnitOfMeasurement(UnitOfMeasurement $unitOfMeasurement)
+    {
+        $this->unitOfMeasurement = $unitOfMeasurement;
+
+        return $this;
+    }
 }

@@ -98,12 +98,20 @@ class Shipment implements NodeInterface
 
         // Then the optional values
         if ($this->getOriginStateProvinceCode() !== null) {
-            $node->appendChild($document->createElement('OriginStateProvinceCode',
-                $this->getOriginStateProvinceCode()));
+            $node->appendChild(
+                $document->createElement(
+                    'OriginStateProvinceCode',
+                    $this->getOriginStateProvinceCode()
+                )
+            );
         }
         if ($this->getDestinationStateProvinceCode() !== null) {
-            $node->appendChild($document->createElement('DestinationStateProvinceCode',
-                $this->getDestinationStateProvinceCode()));
+            $node->appendChild(
+                $document->createElement(
+                    'DestinationStateProvinceCode',
+                    $this->getDestinationStateProvinceCode()
+                )
+            );
         }
         if ($this->getTransportationMode() !== null) {
             $node->appendChild($document->createElement('TransportationMode', $this->getTransportationMode()));
@@ -128,110 +136,21 @@ class Shipment implements NodeInterface
     }
 
     /**
-     * @return int
+     * @return AdditionalInsurance
      */
-    public function getTariffCodeAlert()
+    public function getAdditionalInsurance()
     {
-        return $this->tariffCodeAlert;
+        return $this->additionalInsurance;
     }
 
     /**
-     * @param int $tariffCodeAlert
-     * @return Shipment
-     */
-    public function setTariffCodeAlert($tariffCodeAlert)
-    {
-        $this->tariffCodeAlert = $tariffCodeAlert;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getOriginCountryCode()
-    {
-        return $this->originCountryCode;
-    }
-
-    /**
-     * @param string $originCountryCode
+     * @param AdditionalInsurance $additionalInsurance
      * @return QueryRequestShipment
      */
-    public function setOriginCountryCode($originCountryCode)
+    public function setAdditionalInsurance($additionalInsurance)
     {
-        $this->originCountryCode = $originCountryCode;
-        return $this;
-    }
+        $this->additionalInsurance = $additionalInsurance;
 
-    /**
-     * @return string
-     */
-    public function getOriginStateProvinceCode()
-    {
-        return $this->originStateProvinceCode;
-    }
-
-    /**
-     * @param string $originStateProvinceCode
-     * @return QueryRequestShipment
-     */
-    public function setOriginStateProvinceCode($originStateProvinceCode)
-    {
-        $this->originStateProvinceCode = $originStateProvinceCode;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDestinationCountryCode()
-    {
-        return $this->destinationCountryCode;
-    }
-
-    /**
-     * @param string $destinationCountryCode
-     * @return QueryRequestShipment
-     */
-    public function setDestinationCountryCode($destinationCountryCode)
-    {
-        $this->destinationCountryCode = $destinationCountryCode;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDestinationStateProvinceCode()
-    {
-        return $this->destinationStateProvinceCode;
-    }
-
-    /**
-     * @param string $destinationStateProvinceCode
-     * @return QueryRequestShipment
-     */
-    public function setDestinationStateProvinceCode($destinationStateProvinceCode)
-    {
-        $this->destinationStateProvinceCode = $destinationStateProvinceCode;
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getTransportationMode()
-    {
-        return $this->transportationMode;
-    }
-
-    /**
-     * @param int $transportationMode
-     * @return QueryRequestShipment
-     */
-    public function setTransportationMode($transportationMode)
-    {
-        $this->transportationMode = $transportationMode;
         return $this;
     }
 
@@ -250,52 +169,102 @@ class Shipment implements NodeInterface
     public function setFreightCharges($freightCharges)
     {
         $this->freightCharges = $freightCharges;
+
         return $this;
     }
 
     /**
-     * @return AdditionalInsurance
+     * @return string
      */
-    public function getAdditionalInsurance()
+    public function getOriginCountryCode()
     {
-        return $this->additionalInsurance;
+        return $this->originCountryCode;
     }
 
     /**
-     * @param AdditionalInsurance $additionalInsurance
+     * @param string $originCountryCode
      * @return QueryRequestShipment
      */
-    public function setAdditionalInsurance($additionalInsurance)
+    public function setOriginCountryCode($originCountryCode)
     {
-        $this->additionalInsurance = $additionalInsurance;
+        $this->originCountryCode = $originCountryCode;
+
         return $this;
     }
 
     /**
-     * @return array
+     * @return string
      */
-    public function getProducts()
+    public function getDestinationCountryCode()
     {
-        return $this->products;
+        return $this->destinationCountryCode;
     }
 
     /**
-     * @param Product $product
-     * @return $this
-     */
-    public function addProduct(Product $product)
-    {
-        array_push($this->products, $product);
-        return $this;
-    }
-
-    /**
-     * @param array $products
+     * @param string $destinationCountryCode
      * @return QueryRequestShipment
      */
-    public function setProducts($products)
+    public function setDestinationCountryCode($destinationCountryCode)
     {
-        $this->products = $products;
+        $this->destinationCountryCode = $destinationCountryCode;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOriginStateProvinceCode()
+    {
+        return $this->originStateProvinceCode;
+    }
+
+    /**
+     * @param string $originStateProvinceCode
+     * @return QueryRequestShipment
+     */
+    public function setOriginStateProvinceCode($originStateProvinceCode)
+    {
+        $this->originStateProvinceCode = $originStateProvinceCode;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDestinationStateProvinceCode()
+    {
+        return $this->destinationStateProvinceCode;
+    }
+
+    /**
+     * @param string $destinationStateProvinceCode
+     * @return QueryRequestShipment
+     */
+    public function setDestinationStateProvinceCode($destinationStateProvinceCode)
+    {
+        $this->destinationStateProvinceCode = $destinationStateProvinceCode;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTransportationMode()
+    {
+        return $this->transportationMode;
+    }
+
+    /**
+     * @param int $transportationMode
+     * @return QueryRequestShipment
+     */
+    public function setTransportationMode($transportationMode)
+    {
+        $this->transportationMode = $transportationMode;
+
         return $this;
     }
 
@@ -314,6 +283,26 @@ class Shipment implements NodeInterface
     public function setResultCurrencyCode($resultCurrencyCode)
     {
         $this->resultCurrencyCode = $resultCurrencyCode;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTariffCodeAlert()
+    {
+        return $this->tariffCodeAlert;
+    }
+
+    /**
+     * @param int $tariffCodeAlert
+     * @return Shipment
+     */
+    public function setTariffCodeAlert($tariffCodeAlert)
+    {
+        $this->tariffCodeAlert = $tariffCodeAlert;
+
         return $this;
     }
 
@@ -332,7 +321,37 @@ class Shipment implements NodeInterface
     public function setTransactionReferenceId($transactionReferenceId)
     {
         $this->transactionReferenceId = $transactionReferenceId;
+
         return $this;
     }
 
+    /**
+     * @return array
+     */
+    public function getProducts()
+    {
+        return $this->products;
+    }
+
+    /**
+     * @param array $products
+     * @return QueryRequestShipment
+     */
+    public function setProducts($products)
+    {
+        $this->products = $products;
+
+        return $this;
+    }
+
+    /**
+     * @param Product $product
+     * @return $this
+     */
+    public function addProduct(Product $product)
+    {
+        array_push($this->products, $product);
+
+        return $this;
+    }
 }

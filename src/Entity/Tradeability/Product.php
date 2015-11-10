@@ -78,8 +78,12 @@ class Product implements NodeInterface
             $node->appendChild($document->createElement('ProductDescription', $this->getProductDescription()));
         }
         if ($this->getProductCountryCodeOfOrigin() !== null) {
-            $node->appendChild($document->createElement('ProductCountryCodeOfOrigin',
-                $this->getProductCountryCodeOfOrigin()));
+            $node->appendChild(
+                $document->createElement(
+                    'ProductCountryCodeOfOrigin',
+                    $this->getProductCountryCodeOfOrigin()
+                )
+            );
         }
         if ($this->getWeight() instanceof Weight) {
             $node->appendChild($this->getWeight()->toNode($document));
@@ -89,60 +93,6 @@ class Product implements NodeInterface
         }
 
         return $node;
-    }
-
-    /**
-     * @return string
-     */
-    public function getProductName()
-    {
-        return $this->productName;
-    }
-
-    /**
-     * @param string $productName
-     * @return Product
-     */
-    public function setProductName($productName)
-    {
-        $this->productName = $productName;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getProductDescription()
-    {
-        return $this->productDescription;
-    }
-
-    /**
-     * @param string $productDescription
-     * @return Product
-     */
-    public function setProductDescription($productDescription)
-    {
-        $this->productDescription = $productDescription;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getProductCountryCodeOfOrigin()
-    {
-        return $this->productCountryCodeOfOrigin;
-    }
-
-    /**
-     * @param string $productCountryCodeOfOrigin
-     * @return Product
-     */
-    public function setProductCountryCodeOfOrigin($productCountryCodeOfOrigin)
-    {
-        $this->productCountryCodeOfOrigin = $productCountryCodeOfOrigin;
-        return $this;
     }
 
     /**
@@ -160,24 +110,7 @@ class Product implements NodeInterface
     public function setTariffInfo(TariffInfo $tariffInfo)
     {
         $this->tariffInfo = $tariffInfo;
-        return $this;
-    }
 
-    /**
-     * @return Quantity
-     */
-    public function getQuantity()
-    {
-        return $this->quantity;
-    }
-
-    /**
-     * @param Quantity $quantity
-     * @return Product
-     */
-    public function setQuantity($quantity)
-    {
-        $this->quantity = $quantity;
         return $this;
     }
 
@@ -196,6 +129,83 @@ class Product implements NodeInterface
     public function setUnitPrice($unitPrice)
     {
         $this->unitPrice = $unitPrice;
+
+        return $this;
+    }
+
+    /**
+     * @return Quantity
+     */
+    public function getQuantity()
+    {
+        return $this->quantity;
+    }
+
+    /**
+     * @param Quantity $quantity
+     * @return Product
+     */
+    public function setQuantity($quantity)
+    {
+        $this->quantity = $quantity;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getProductName()
+    {
+        return $this->productName;
+    }
+
+    /**
+     * @param string $productName
+     * @return Product
+     */
+    public function setProductName($productName)
+    {
+        $this->productName = $productName;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getProductDescription()
+    {
+        return $this->productDescription;
+    }
+
+    /**
+     * @param string $productDescription
+     * @return Product
+     */
+    public function setProductDescription($productDescription)
+    {
+        $this->productDescription = $productDescription;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getProductCountryCodeOfOrigin()
+    {
+        return $this->productCountryCodeOfOrigin;
+    }
+
+    /**
+     * @param string $productCountryCodeOfOrigin
+     * @return Product
+     */
+    public function setProductCountryCodeOfOrigin($productCountryCodeOfOrigin)
+    {
+        $this->productCountryCodeOfOrigin = $productCountryCodeOfOrigin;
+
         return $this;
     }
 
@@ -214,6 +224,7 @@ class Product implements NodeInterface
     public function setWeight($weight)
     {
         $this->weight = $weight;
+
         return $this;
     }
 
@@ -232,7 +243,7 @@ class Product implements NodeInterface
     public function setTariffCodeAlert($tariffCodeAlert)
     {
         $this->tariffCodeAlert = $tariffCodeAlert;
+
         return $this;
     }
-
 }

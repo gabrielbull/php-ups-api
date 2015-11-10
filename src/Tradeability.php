@@ -17,10 +17,9 @@ class Tradeability extends Ups
 {
 
     /**
-     * @var
+     *
      */
-    private $request;
-
+    const ENDPOINT_LANDEDCOST = '/LandedCost';
     /**
      * @var string
      *
@@ -34,11 +33,10 @@ class Tradeability extends Ups
      * @deprecated
      */
     protected $integrationBaseUrl = 'https://wwwcie.ups.com/webservices';
-
     /**
-     *
+     * @var
      */
-    const ENDPOINT_LANDEDCOST = '/LandedCost';
+    private $request;
 
     /**
      * @param string|null $accessKey UPS License Access Key
@@ -70,51 +68,16 @@ class Tradeability extends Ups
     public function getLandedCosts(LandedCostRequest $request)
     {
         $request = $this->createRequestLandedCost($request);
-        $response = $this->sendRequest($request, self::ENDPOINT_LANDEDCOST,
-            'ProcessLCRequest', 'LandedCost');
+        $response = $this->sendRequest(
+            $request, self::ENDPOINT_LANDEDCOST,
+            'ProcessLCRequest', 'LandedCost'
+        );
 
-        if(isset($response->LandedCostResponse->QueryResponse)) {
+        if (isset($response->LandedCostResponse->QueryResponse)) {
             return $response->LandedCostResponse->QueryResponse;
         }
 
         return $response->LandedCostResponse->EstimateResponse;
-    }
-
-    /**
-     * Creates and sends a request for the given data. Most errors are handled in SoapRequest
-     *
-     * @param $request
-     * @param $endpoint
-     * @param $operation
-     * @param $wsdl
-     *
-     * @throws Exception
-     *
-     * @return TimeInTransitRequest
-     */
-    private function sendRequest($request, $endpoint, $operation, $wsdl)
-    {
-        $endpointurl = $this->compileEndpointUrl($endpoint);
-        $this->response = $this->getRequest()->request($this->createAccess(), $request, $endpointurl, $operation, $wsdl);
-        $response = $this->response->getResponse();
-
-        if (null === $response) {
-            throw new Exception('Failure (0): Unknown error', 0);
-        }
-
-        return $this->formatResponse($response);
-    }
-
-    /**
-     * Format the response.
-     *
-     * @param SimpleXMLElement $response
-     *
-     * @return stdClass
-     */
-    private function formatResponse(SimpleXMLElement $response)
-    {
-        return $this->convertXmlObject($response->Body);
     }
 
     /**
@@ -147,6 +110,33 @@ class Tradeability extends Ups
     }
 
     /**
+     * Creates and sends a request for the given data. Most errors are handled in SoapRequest
+     *
+     * @param $request
+     * @param $endpoint
+     * @param $operation
+     * @param $wsdl
+     *
+     * @throws Exception
+     *
+     * @return TimeInTransitRequest
+     */
+    private function sendRequest($request, $endpoint, $operation, $wsdl)
+    {
+        $endpointurl = $this->compileEndpointUrl($endpoint);
+        $this->response = $this->getRequest()->request(
+            $this->createAccess(), $request, $endpointurl, $operation, $wsdl
+        );
+        $response = $this->response->getResponse();
+
+        if (null === $response) {
+            throw new Exception('Failure (0): Unknown error', 0);
+        }
+
+        return $this->formatResponse($response);
+    }
+
+    /**
      * @return RequestInterface
      */
     public function getRequest()
@@ -168,6 +158,18 @@ class Tradeability extends Ups
         $this->request = $request;
 
         return $this;
+    }
+
+    /**
+     * Format the response.
+     *
+     * @param SimpleXMLElement $response
+     *
+     * @return stdClass
+     */
+    private function formatResponse(SimpleXMLElement $response)
+    {
+        return $this->convertXmlObject($response->Body);
     }
 
 }
