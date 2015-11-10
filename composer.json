@@ -49,6 +49,9 @@
       "dev-develop": "0.5.1-dev"
     }
   },
+  "suggest": {
+    "ext-soap": "Required if you need the Tradeability API of UPS"
+  },
   "minimum-stability": "dev",
   "prefer-stable": true
 }
