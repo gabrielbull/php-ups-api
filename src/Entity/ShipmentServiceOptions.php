@@ -24,6 +24,11 @@ class ShipmentServiceOptions implements NodeInterface
     public $SaturdayDelivery;
 
     /**
+     * @var
+     */
+    public $COD;
+
+    /**
      * @var CallTagARS
      */
     public $CallTagARS;
@@ -66,6 +71,9 @@ class ShipmentServiceOptions implements NodeInterface
             }
             if (isset($response->SaturdayDelivery)) {
                 $this->SaturdayDelivery = $response->SaturdayDelivery;
+            }
+            if (isset($response->COD)) {
+                $this->COD = $response->COD;
             }
             if (isset($response->CallTagARS)) {
                 $this->CallTagARS = new CallTagARS($response->CallTagARS);
@@ -112,6 +120,10 @@ class ShipmentServiceOptions implements NodeInterface
 
         if (isset($this->SaturdayDelivery)) {
             $node->appendChild($document->createElement('SaturdayDelivery'));
+        }
+
+        if ($this->getCOD()) {
+            $node->appendChild($this->getCOD()->toNode($document));
         }
 
         if (isset($this->internationalForms)) {
@@ -200,6 +212,25 @@ class ShipmentServiceOptions implements NodeInterface
         $this->SaturdayDelivery = $SaturdayDelivery;
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getCOD()
+    {
+        return $this->COD;
+    }
+
+    /**
+     * @param mixed $COD
+     * @return ShipmentServiceOptions
+     */
+    public function setCOD($COD)
+    {
+        $this->COD = $COD;
+        return $this;
+    }
+
 
     /**
      * @return CallTagARS
