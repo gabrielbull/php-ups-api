@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## 0.7.0 (released 16-11-2015)
+
+- **[!]** Default ShipFrom on Shipment class not set anymore in constructor (ShipFrom is optional)
+- Adds support for cash on delivery for shipments
+
+Items marked with **[!]**  may incur backwards incompatibility.
+
+## 0.6.3 (released 10-11-2015)
+
+- Improvement in parsing XML
+
 ## 0.6.2 (released 10-11-2015)
 
 - Add Landed Cost request of Tradeability API (using SOAP). Tradeability consist of 4 endpoints, of which now one is implemented.
