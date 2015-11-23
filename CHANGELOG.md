@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.7.1 (released 23-11-2015)
+
+- Adds support for a second reference number
+
 ## 0.7.0 (released 16-11-2015)
 
 - **[!]** Default ShipFrom on Shipment class not set anymore in constructor (ShipFrom is optional)
