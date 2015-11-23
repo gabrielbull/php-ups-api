@@ -351,9 +351,11 @@ class Shipping extends Ups
             $shipmentNode->appendChild($shipmentServiceOptions->toNode($xml));
         }
 
-        $referenceNumber = $shipment->getReferenceNumber();
-        if (isset($referenceNumber)) {
-            $shipmentNode->appendChild($referenceNumber->toNode($xml));
+        $referenceNumbers = $shipment->getReferenceNumbers();
+        if (isset($referenceNumbers)) {
+            foreach($referenceNumbers as $referenceNumber) {
+                $shipmentNode->appendChild($referenceNumber->toNode($xml));
+            }
         }
 
         if ($labelSpec) {
