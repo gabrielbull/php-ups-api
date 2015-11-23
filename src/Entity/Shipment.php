@@ -70,9 +70,14 @@ class Shipment
     private $packages = [];
 
     /**
-     * @var ReferenceNumber[]
+     * @var ReferenceNumber
      */
-    private $referenceNumbers = [];
+    private $referenceNumber;
+    
+    /**
+     * @var ReferenceNumber
+     */
+    private $referenceNumber2;
 
     /**
      * @var ShipmentServiceOptions
@@ -175,27 +180,25 @@ class Shipment
     }
 
     /**
-     * @param Package $package
+     * @param ReferenceNumber $referenceNumber
      *
      * @return Shipment
      */
-    public function addReferenceNumber(ReferenceNumber $referenceNumber)
+    public function setReferenceNumber(ReferenceNumber $referenceNumber)
     {
-        $referenceNumbers = $this->getReferenceNumbers();
-        $referenceNumbers[] = $referenceNumber;
-        $this->setReferenceNumbers($referenceNumbers);
+        $this->referenceNumber = $referenceNumber;
 
         return $this;
     }
-
+    
     /**
-     * @param ReferenceNumber $referenceNumbers
+     * @param ReferenceNumber $referenceNumber
      *
      * @return Shipment
      */
-    public function setReferenceNumbers(array $referenceNumbers)
+    public function setReferenceNumber2(ReferenceNumber $referenceNumber)
     {
-        $this->referenceNumbers = $referenceNumbers;
+        $this->referenceNumber2 = $referenceNumber;
 
         return $this;
     }
@@ -203,9 +206,17 @@ class Shipment
     /**
      * @return ReferenceNumber
      */
-    public function getReferenceNumbers()
+    public function getReferenceNumber()
     {
-        return $this->referenceNumbers;
+        return $this->referenceNumber;
+    }
+    
+    /**
+     * @return ReferenceNumber
+     */
+    public function getReferenceNumber2()
+    {
+        return $this->referenceNumber2;
     }
 
     /**
