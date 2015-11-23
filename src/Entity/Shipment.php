@@ -73,6 +73,11 @@ class Shipment
      * @var ReferenceNumber
      */
     private $referenceNumber;
+    
+    /**
+     * @var ReferenceNumber
+     */
+    private $referenceNumber2;
 
     /**
      * @var ShipmentServiceOptions
@@ -185,6 +190,18 @@ class Shipment
 
         return $this;
     }
+    
+    /**
+     * @param ReferenceNumber $referenceNumber
+     *
+     * @return Shipment
+     */
+    public function setReferenceNumber2(ReferenceNumber $referenceNumber)
+    {
+        $this->referenceNumber2 = $referenceNumber;
+
+        return $this;
+    }
 
     /**
      * @return ReferenceNumber
@@ -192,6 +209,14 @@ class Shipment
     public function getReferenceNumber()
     {
         return $this->referenceNumber;
+    }
+    
+    /**
+     * @return ReferenceNumber
+     */
+    public function getReferenceNumber2()
+    {
+        return $this->referenceNumber2;
     }
 
     /**
