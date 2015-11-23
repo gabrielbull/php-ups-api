@@ -102,7 +102,6 @@ class Shipment
     public function __construct()
     {
         $this->setShipper(new Shipper());
-        $this->setShipFrom(new ShipFrom());
         $this->setShipTo(new ShipTo());
         $this->setShipmentServiceOptions(new ShipmentServiceOptions());
         $this->setService(new Service());
