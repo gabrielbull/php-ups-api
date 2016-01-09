@@ -142,7 +142,7 @@ class Tradeability extends Ups
     public function getRequest()
     {
         if (null === $this->request) {
-            $this->request = new Request($this->logger);
+            $this->request = new SoapRequest($this->logger);
         }
 
         return $this->request;
