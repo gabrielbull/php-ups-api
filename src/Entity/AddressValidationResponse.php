@@ -1,6 +1,5 @@
 <?php namespace Ups\Entity;
 
-
 use Ups\AddressValidation;
 use Ups\Entity\AddressValidation\AVAddress;
 use Ups\Entity\AddressValidation\AddressClassification;
@@ -15,7 +14,7 @@ class AddressValidationResponse
      * @param \SimpleXMLElement $xmlDocument
      * @param $requestAction
      */
-    public function __construct(\SimpleXMLElement $xmlDocument,$requestAction)
+    public function __construct(\SimpleXMLElement $xmlDocument, $requestAction)
     {
         $this->response = $xmlDocument;
         $this->requestAction = $requestAction;
@@ -30,8 +29,8 @@ class AddressValidationResponse
      */
     public function noCandidates()
     {
-        if(AddressValidation::REQUEST_OPTION_ADDRESS_CLASSIFICATION == $this->requestAction) {
-            throw new \BadMethodCallException(__METHOD__.' should not be called on Address Classification only requests.');
+        if (AddressValidation::REQUEST_OPTION_ADDRESS_CLASSIFICATION == $this->requestAction) {
+            throw new \BadMethodCallException(__METHOD__ . ' should not be called on Address Classification only requests.');
         }
         return isset($this->response->NoCandidatesIndicator);
     }
@@ -44,7 +43,7 @@ class AddressValidationResponse
      */
     public function isValid()
     {
-        if(AddressValidation::REQUEST_OPTION_ADDRESS_CLASSIFICATION == $this->requestAction) {
+        if (AddressValidation::REQUEST_OPTION_ADDRESS_CLASSIFICATION == $this->requestAction) {
             return $this->response->AddressClassification->Code > 0;
         }
         return isset($this->response->ValidAddressIndicator);
@@ -60,8 +59,8 @@ class AddressValidationResponse
      */
     public function isAmbiguous()
     {
-        if(AddressValidation::REQUEST_OPTION_ADDRESS_CLASSIFICATION == $this->requestAction) {
-            throw new \BadMethodCallException(__METHOD__.' should not be called on Address Classification only requests.');
+        if (AddressValidation::REQUEST_OPTION_ADDRESS_CLASSIFICATION == $this->requestAction) {
+            throw new \BadMethodCallException(__METHOD__ . ' should not be called on Address Classification only requests.');
         }
         return isset($this->response->AmbiguousAddressIndicator);
     }
@@ -72,7 +71,7 @@ class AddressValidationResponse
      */
     public function getAddressClassification()
     {
-        if($this->requestAction < AddressValidation::REQUEST_OPTION_ADDRESS_CLASSIFICATION) {
+        if ($this->requestAction < AddressValidation::REQUEST_OPTION_ADDRESS_CLASSIFICATION) {
             throw new \BadMethodCallException('Address Classification was not requested.');
         }
         return new AddressClassification($this->response->AddressClassification);
@@ -83,11 +82,11 @@ class AddressValidationResponse
      */
     public function getCandidateAddressList()
     {
-        if(!isset($this->response->AddressKeyFormat)) {
+        if (!isset($this->response->AddressKeyFormat)) {
             return [];
         }
         $candidates = [];
-        foreach($this->response->AddressKeyFormat as $address) {
+        foreach ($this->response->AddressKeyFormat as $address) {
             $candidates[] = new AVAddress($address);
         }
         return $candidates;
@@ -95,10 +94,11 @@ class AddressValidationResponse
 
     public function getValidatedAddress()
     {
-        if($this->requestAction == AddressValidation::REQUEST_OPTION_ADDRESS_CLASSIFICATION) {
+        if ($this->requestAction == AddressValidation::REQUEST_OPTION_ADDRESS_CLASSIFICATION) {
             throw new \BadMethodCallException('Only Address Classification was requested. There is no address.');
         }
 
         return new AVAddress($this->response->AddressKeyFormat);
     }
+
 }

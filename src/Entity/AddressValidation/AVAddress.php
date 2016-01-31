@@ -1,6 +1,5 @@
 <?php namespace Ups\Entity\AddressValidation;
 
-
 class AVAddress
 {
     public $addressClassification;
@@ -64,11 +63,12 @@ class AVAddress
      * @param string $extendedDivider
      * @return string
      */
-    public function getPostalCode($withExtended = false,$extendedDivider = '-')
+    public function getPostalCode($withExtended = false, $extendedDivider = '-')
     {
-        if($withExtended) {
+        if ($withExtended) {
             return $this->postcodePrimaryLow . $extendedDivider . $this->postcodeExtendedLow;
         }
         return $this->postcodePrimaryLow;
     }
+
 }

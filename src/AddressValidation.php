@@ -128,7 +128,7 @@ class AddressValidation extends Ups
         }
         if ($this->useAVResponseObject) {
             unset($response->Response);
-            $avResponse = new AddressValidationResponse($response,$requestOption);
+            $avResponse = new AddressValidationResponse($response, $requestOption);
             return $avResponse;
         }
         return $this->formatResponse($response);

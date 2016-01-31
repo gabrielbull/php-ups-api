@@ -1,6 +1,5 @@
 <?php namespace Ups\Entity\AddressValidation;
 
-
 class AddressClassification
 {
     public $code;
@@ -14,4 +13,5 @@ class AddressClassification
         $this->code = $object->Code;
         $this->description = $object->Description;
     }
+
 }
