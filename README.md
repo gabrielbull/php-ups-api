@@ -87,17 +87,40 @@ $address->setCountryCode('US');
 $address->setPostalCode('10000');
 
 $xav = new \Ups\AddressValidation($accessKey, $userId, $password);
+
+$xav->validateReturnAVObject();
 try {
     $response = $xav->validate($address, $requestOption = \Ups\AddressValidation::REQUEST_OPTION_ADDRESS_VALIDATION, $maxSuggestion = 15);
 } catch (Exception $e) {
     var_dump($e);
 }
+if($response->noCandidates()) {
+    //Do something helpful with an unknown address
+}
+if($response->isAmbiguous()) {
+    $candidateAddresses = $response->getCandidateAddressList();
+    foreach($candidateAddresses as $address) {
+        //Present user with list of candidate addresses so they can pick the correct one        
+    }
+}
+if($response->isValid()) {
+    $validAddress = $response->getValidatedAddress();
+    
+    //Show user validated address or update their address with the 'official' address
+    //Or do something else helpful...
+}
 ```
+#### AddressValidation::validateReturnAVObject()
+
+Calling AddressValidation::validateReturnAVObject() will cause the validate method to return a new AddressValidationResponse object
+instead of returning a single object with either the matched validated address or the first candidate address.
+The AddressValidationResponse object provides a number of methods to allow you to more easily query the API response to 
+determine the outcome
 
 <a name="addressvalidation-class-parameters"></a>
 ### Parameters
 
-Adress Validation parameters are:
+Address Validation parameters are:
 
  * `address` Address object as constructed in example
  * `requestOption` One of the three request options. See documentation. Default = Address Validation.
