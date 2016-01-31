@@ -100,5 +100,4 @@ class AddressValidationResponse
 
         return new AVAddress($this->response->AddressKeyFormat);
     }
-
 }

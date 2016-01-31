@@ -13,5 +13,4 @@ class AddressClassification
         $this->code = $object->Code;
         $this->description = $object->Description;
     }
-
 }

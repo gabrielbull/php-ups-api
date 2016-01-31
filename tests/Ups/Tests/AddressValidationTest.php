@@ -192,5 +192,4 @@ class AddressValidationTest extends PHPUnit_Framework_TestCase
 
         $this->address = $address;
     }
-
 }

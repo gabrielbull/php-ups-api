@@ -70,5 +70,4 @@ class AVAddress
         }
         return $this->postcodePrimaryLow;
     }
-
 }
