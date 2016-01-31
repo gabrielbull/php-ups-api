@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<AddressValidationResponse>
+    <Response>
+        <TransactionReference/>
+        <ResponseStatusCode>1</ResponseStatusCode>
+        <ResponseStatusDescription>Success</ResponseStatusDescription>
+    </Response>
+    <NoCandidatesIndicator/>
+    <AddressClassification>
+        <Code>0</Code>
+        <Description>Unknown</Description>
+    </AddressClassification>
+</AddressValidationResponse>

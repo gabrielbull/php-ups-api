@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<AddressValidationResponse>
+    <Response>
+        <TransactionReference/>
+        <ResponseStatusCode>1</ResponseStatusCode>
+        <ResponseStatusDescription>Success</ResponseStatusDescription>
+    </Response>
+    <AmbiguousAddressIndicator/>
+    <AddressClassification>
+        <Code>0</Code>
+        <Description>Unknown</Description>
+    </AddressClassification>
+    <AddressKeyFormat>
+        <AddressLine>400-498 STAMBRIDGE CT</AddressLine>
+        <Region>ALPHARETTA GA 30005-2567</Region>
+        <PoliticalDivision2>ALPHARETTA</PoliticalDivision2>
+        <PoliticalDivision1>GA</PoliticalDivision1>
+        <PostcodePrimaryLow>30005</PostcodePrimaryLow>
+        <PostcodeExtendedLow>2567</PostcodeExtendedLow>
+        <CountryCode>US</CountryCode>
+    </AddressKeyFormat>
+    <AddressKeyFormat>
+        <AddressLine>401-499 STAMBRIDGE CT</AddressLine>
+        <Region>ALPHARETTA GA 30005-2565</Region>
+        <PoliticalDivision2>ALPHARETTA</PoliticalDivision2>
+        <PoliticalDivision1>GA</PoliticalDivision1>
+        <PostcodePrimaryLow>30005</PostcodePrimaryLow>
+        <PostcodeExtendedLow>2565</PostcodeExtendedLow>
+        <CountryCode>US</CountryCode>
+    </AddressKeyFormat>
+    <AddressKeyFormat>
+        <AddressLine>500-599 STAMBRIDGE CT</AddressLine>
+        <Region>ALPHARETTA GA 30005-2568</Region>
+        <PoliticalDivision2>ALPHARETTA</PoliticalDivision2>
+        <PoliticalDivision1>GA</PoliticalDivision1>
+        <PostcodePrimaryLow>30005</PostcodePrimaryLow>
+        <PostcodeExtendedLow>2568</PostcodeExtendedLow>
+        <CountryCode>US</CountryCode>
+    </AddressKeyFormat>
+</AddressValidationResponse>

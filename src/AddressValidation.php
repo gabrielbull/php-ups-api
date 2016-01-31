@@ -8,6 +8,7 @@ use Psr\Log\LoggerInterface;
 use SimpleXMLElement;
 use stdClass;
 use Ups\Entity\Address;
+use Ups\Entity\AddressValidationResponse;
 
 /**
  * Address Validation API Wrapper.
@@ -42,6 +43,10 @@ class AddressValidation extends Ups
      * @var int
      */
     private $maxSuggestion;
+    /**
+     * @var bool
+     */
+    private $useAVResponseObject = false;
 
     /**
      * Request Options.
@@ -58,14 +63,28 @@ class AddressValidation extends Ups
      * @param RequestInterface $request
      * @param LoggerInterface PSR3 compatible logger (optional)
      */
-    public function __construct($accessKey = null, $userId = null, $password = null, $useIntegration = false, RequestInterface $request = null, LoggerInterface $logger = null)
-    {
+    public function __construct(
+        $accessKey = null,
+        $userId = null,
+        $password = null,
+        $useIntegration = false,
+        RequestInterface $request = null,
+        LoggerInterface $logger = null
+    ) {
         if (null !== $request) {
             $this->setRequest($request);
         }
         parent::__construct($accessKey, $userId, $password, $useIntegration, $logger);
     }
 
+    /**
+     * This message set the addressValidationResponseObject
+     * @param bool $value
+     */
+    public function validateReturnAVObject($value = true)
+    {
+        $this->useAVResponseObject = $value;
+    }
     /**
      * Get address suggestions from UPS.
      *
@@ -75,7 +94,7 @@ class AddressValidation extends Ups
      *
      * @throws Exception
      *
-     * @return stdClass
+     * @return stdClass|AddressValidationResponse
      */
     public function validate($address, $requestOption = self::REQUEST_OPTION_ADDRESS_VALIDATION, $maxSuggestion = 15)
     {
@@ -106,9 +125,13 @@ class AddressValidation extends Ups
                 "Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}",
                 (int)$response->Response->Error->ErrorCode
             );
-        } else {
-            return $this->formatResponse($response);
         }
+        if ($this->useAVResponseObject) {
+            unset($response->Response);
+            $avResponse = new AddressValidationResponse($response,$requestOption);
+            return $avResponse;
+        }
+        return $this->formatResponse($response);
     }
 
     /**
@@ -158,7 +181,8 @@ class AddressValidation extends Ups
                 $addressNode->appendChild($xml->createElement('AddressLine', $this->address->getAddressLine3()));
             }
             if ($this->address->getStateProvinceCode()) {
-                $addressNode->appendChild($xml->createElement('PoliticalDivision2', $this->address->getStateProvinceCode()));
+                $addressNode->appendChild($xml->createElement('PoliticalDivision2',
+                    $this->address->getStateProvinceCode()));
             }
             if ($this->address->getCity()) {
                 $addressNode->appendChild($xml->createElement('PoliticalDivision1', $this->address->getCity()));
