@@ -126,6 +126,69 @@ class Tracking extends Ups
     }
 
     /**
+     * Check if tracking number is for mail innovations.
+     *
+     * @return bool
+     */
+    private function isMailInnovations()
+    {
+        if($this->trackingNumber === '9102084383041101186729'){     // official test MI tracking number
+            return true;
+        }
+
+        $patterns = [
+
+            // UPS Mail Innovations tracking numbers
+            '/^MI\d{6}\d{1,22}$/',// MI 000000 00000000+
+
+            // USPS - Certified Mail
+            '/^94071\d{17}$/',    // 9407 1000 0000 0000 0000 00
+            '/^7\d{19}$/',        // 7000 0000 0000 0000 0000
+
+            // USPS - Collect on Delivery
+            '/^93033\d{17}$/',    // 9303 3000 0000 0000 0000 00
+            '/^M\d{9}$/',         // M000 0000 00
+
+            // USPS - Global Express Guaranteed
+            '/^82\d{10}$/',       // 82 000 000 00
+
+            // USPS - Priority Mail Express International
+            '/^EC\d{9}US$/',      // EC 000 000 000 US
+
+            // USPS - Priority Mail Express
+            '/^927\d{19}$/',      // 9270 1000 0000 0000 0000 00
+            '/^EA\d{9}US$/',      // EA 000 000 000 US
+
+            // USPS - Priority Mail International
+            '/^CP\d{9}US$/',      // CP 000 000 000 US
+
+            // USPS - Priority Mail
+            '/^92055\d{17}$/',    // 9205 5000 0000 0000 0000 00
+            '/^14\d{18}$/',       // 1400 0000 0000 0000 0000
+
+            // USPS - Registered Mail
+            '/^92088\d{17}$/',    // 9208 8000 0000 0000 0000 00
+            '/^RA\d{9}US$/',      // RA 000 000 000 US
+
+            // USPS - Signature Confirmation
+            '/^9202\d{16}US$/',   // 9202 1000 0000 0000 0000 00
+            '/^23\d{16}US$/',     // 2300 0000 0000 0000 0000
+
+            // USPS - Tracking
+            '/^94\d{20}$/',       // 9400 1000 0000 0000 0000 00
+            '/^03\d{18}$/'        // 0300 0000 0000 0000 0000
+        ];
+
+        foreach($patterns as $pattern){
+            if(preg_match($pattern, $this->trackingNumber)){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Create the Tracking request.
      *
      * @return string
@@ -153,10 +216,14 @@ class Tracking extends Ups
             $trackRequest->appendChild($xml->createElement('TrackingNumber', $this->trackingNumber));
         }
 
+        if ($this->isMailInnovations()) {
+            $trackRequest->appendChild($xml->createElement('IncludeMailInnovationIndicator'));
+        }
+
         if (null !== $this->referenceNumber) {
             $trackRequest->appendChild($xml->createElement('ReferenceNumber'))->appendChild($xml->createElement('Value', $this->referenceNumber));
         }
-
+//        var_dump($xml->saveXML());
         return $xml->saveXML();
     }
 

@@ -149,7 +149,7 @@ _To use the `fileName` parameter, do not provide a `beginDateTime`._
 The Tracking Class allow you to track a shipment using the UPS Tracking API.
 
 <a name="tracking-class-example"></a>
-### Example using Tracking Number
+### Example using Tracking Number / Mail Innovations tracking number
 
 ```php
 $tracking = new Ups\Tracking($accessKey, $userId, $password);
