@@ -132,9 +132,6 @@ class Tracking extends Ups
      */
     private function isMailInnovations()
     {
-        if($this->trackingNumber === '9102084383041101186729'){     // official test MI tracking number
-            return true;
-        }
 
         $patterns = [
 
@@ -179,8 +176,8 @@ class Tracking extends Ups
             '/^03\d{18}$/'        // 0300 0000 0000 0000 0000
         ];
 
-        foreach($patterns as $pattern){
-            if(preg_match($pattern, $this->trackingNumber)){
+        foreach ($patterns as $pattern) {
+            if (preg_match($pattern, $this->trackingNumber)) {
                 return true;
             }
         }
@@ -223,7 +220,6 @@ class Tracking extends Ups
         if (null !== $this->referenceNumber) {
             $trackRequest->appendChild($xml->createElement('ReferenceNumber'))->appendChild($xml->createElement('Value', $this->referenceNumber));
         }
-//        var_dump($xml->saveXML());
         return $xml->saveXML();
     }
 
