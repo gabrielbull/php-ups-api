@@ -14,7 +14,7 @@ class TrackingMITest extends PHPUnit_Framework_TestCase
         $tracking = new Ups\Tracking();
         $tracking->setRequest($request = new RequestMock());
         try {
-            $tracking->track('9102084383041101186729');
+            $tracking->track('9270000000000000000000');
         } catch (Exception $e) {
         }
 
