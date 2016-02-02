@@ -132,7 +132,6 @@ class Tracking extends Ups
      */
     private function isMailInnovations()
     {
-
         $patterns = [
 
             // UPS Mail Innovations tracking numbers
