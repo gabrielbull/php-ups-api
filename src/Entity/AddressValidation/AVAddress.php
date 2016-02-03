@@ -2,16 +2,49 @@
 
 class AVAddress
 {
+    /**
+     * @var null|AddressClassification
+     */
     public $addressClassification;
+    /**
+     * @var string
+     */
     public $consigneeName;
+    /**
+     * @var string
+     */
     public $buildingName;
+    /**
+     * @var string
+     */
     public $addressLine;
+    /**
+     * @var string
+     */
     public $region;
+    /**
+     * @var string
+     */
     public $politicalDivision2;
+    /**
+     * @var string
+     */
     public $politicalDivision1;
+    /**
+     * @var string
+     */
     public $postcodePrimaryLow;
+    /**
+     * @var string
+     */
     public $postcodeExtendedLow;
+    /**
+     * @var string
+     */
     public $urbanization;
+    /**
+     * @var
+     */
     public $countryCode;
 
     /**
@@ -59,15 +92,23 @@ class AVAddress
     }
 
     /**
-     * @param bool $withExtended
-     * @param string $extendedDivider
+     * Return the address postal code
+     *
      * @return string
      */
-    public function getPostalCode($withExtended = false, $extendedDivider = '-')
+    public function getPostalCode()
     {
-        if ($withExtended) {
-            return $this->postcodePrimaryLow . $extendedDivider . $this->postcodeExtendedLow;
-        }
         return $this->postcodePrimaryLow;
+    }
+
+    /**
+     * Return the address postal code with extension (i.e. the U.S. extended zip+4 postal code)
+     *
+     * @param string $divider
+     * @return string
+     */
+    public function getPostalCodeWithExtension($divider = '-')
+    {
+        return $this->postcodePrimaryLow . $divider . $this->postcodeExtendedLow;
     }
 }
