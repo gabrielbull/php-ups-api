@@ -25,6 +25,7 @@ class AddressValidationResponse
      * This indicator is returned if the address is so badly formed that UPS is
      * unable to even offer any suggested alternatives
      *
+     * @throws \BadMethodCallException
      * @return bool
      */
     public function noCandidates()
@@ -39,6 +40,7 @@ class AddressValidationResponse
      * Tells whether or not the ValidAddressIndicator is present on the XML document.
      * This indicator is present if provided address is valid and represents a
      * single, unique address in the UPS Address Validation system.
+     *
      * @return bool
      */
     public function isValid()
@@ -92,6 +94,9 @@ class AddressValidationResponse
         return $candidates;
     }
 
+    /**
+     * @return AVAddress
+     */
     public function getValidatedAddress()
     {
         if ($this->requestAction == AddressValidation::REQUEST_OPTION_ADDRESS_CLASSIFICATION) {
