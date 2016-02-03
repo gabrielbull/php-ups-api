@@ -111,5 +111,4 @@ class COD implements NodeInterface
         $this->CODAmount = $CODAmount;
         return $this;
     }
-
 }
