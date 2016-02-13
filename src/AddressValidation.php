@@ -78,12 +78,19 @@ class AddressValidation extends Ups
     }
 
     /**
-     * This message set the addressValidationResponseObject
-     * @param bool $value
+     * Turn on returning of the AddressValidationResponse object
      */
-    public function validateReturnAVObject($value = true)
+    public function activateReturnObjectOnValidate()
     {
-        $this->useAVResponseObject = $value;
+        $this->useAVResponseObject = true;
+    }
+
+    /**
+     * Turn off returning of the AddressValidationResponse object
+     */
+    public function deActivateReturnObjectOnValidate()
+    {
+        $this->useAVResponseObject = false;
     }
     /**
      * Get address suggestions from UPS.

@@ -87,7 +87,7 @@ $address->setCountryCode('US');
 $address->setPostalCode('10000');
 
 $xav = new \Ups\AddressValidation($accessKey, $userId, $password);
-$xav->validateReturnAVObject(); //This is optional
+$xav->activateReturnObjectOnValidate(); //This is optional
 try {
     $response = $xav->validate($address, $requestOption = \Ups\AddressValidation::REQUEST_OPTION_ADDRESS_VALIDATION, $maxSuggestion = 15);
 } catch (Exception $e) {
@@ -95,7 +95,7 @@ try {
 }
 ```
 #### AddressValidation::validateReturnAVObject()
-In the code above `$xav->validateReturnAVObject()` is completely optional. Calling this method will cause 
+In the code above `$xav->activateReturnObjectOnValidate()` is completely optional. Calling this method will cause 
 `AddressValidation::validate()` to return an `AddressValidationResponse` object. If you do not call this method, `validate`
 continues to function as it has previously. If you do not call this method, a single object with either the matched 
 validated address, or the first candidate address if the address is ambiguous, will be returned.
