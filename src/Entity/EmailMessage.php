@@ -106,6 +106,8 @@ class EmailMessage implements NodeInterface
 
     /**
      * @param array $emailAddresses
+     *
+     * @throws \Exception
      */
     public function setEmailAddresses(array $emailAddresses)
     {
@@ -174,6 +176,8 @@ class EmailMessage implements NodeInterface
 
     /**
      * @param mixed $memo
+     *
+     * @throws \Exception
      */
     public function setMemo($memo)
     {
@@ -194,6 +198,8 @@ class EmailMessage implements NodeInterface
 
     /**
      * @param mixed $subject
+     *
+     * @throws \Exception
      */
     public function setSubject($subject)
     {

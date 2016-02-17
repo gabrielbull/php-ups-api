@@ -46,6 +46,10 @@ class Discount implements NodeInterface
 
     /**
      * @param $var
+     *
+     * @throws \Exception
+     *
+     * @return $this
      */
     public function setMonetaryValue($var)
     {

@@ -5,7 +5,6 @@ namespace Ups;
 use DOMDocument;
 use Exception;
 use SimpleXMLElement;
-use stdClass;
 use Ups\Entity\LabelRecoveryRequest;
 use Ups\Entity\LabelRecoveryResponse;
 

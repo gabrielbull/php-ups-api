@@ -7,7 +7,6 @@ use Exception;
 use Psr\Log\LoggerInterface;
 use SimpleXMLElement;
 use Ups\Entity\LocatorRequest;
-use Ups\Entity\TimeInTransitRequest;
 
 /**
  * Locator API Wrapper.

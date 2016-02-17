@@ -43,8 +43,8 @@ class Tradeability extends Ups
      * @param string|null $userId UPS User ID
      * @param string|null $password UPS User Password
      * @param bool $useIntegration Determine if we should use production or CIE URLs.
-     * @param RequestInterface $request
-     * @param LoggerInterface PSR3 compatible logger (optional)
+     * @param RequestInterface|null $request
+     * @param LoggerInterface|null $logger PSR3 compatible logger (optional)
      */
     public function __construct(
         $accessKey = null,
@@ -83,7 +83,7 @@ class Tradeability extends Ups
     /**
      * Create the LandedCostRequest request.
      *
-     * @param LandedCostRequest $request The request details. Refer to the UPS documentation for available structure
+     * @param LandedCostRequest $landedCostRequest The request details. Refer to the UPS documentation for available structure
      *
      * @return string
      */
@@ -165,7 +165,7 @@ class Tradeability extends Ups
      *
      * @param SimpleXMLElement $response
      *
-     * @return stdClass
+     * @return \stdClass
      */
     private function formatResponse(SimpleXMLElement $response)
     {

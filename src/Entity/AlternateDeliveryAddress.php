@@ -19,7 +19,7 @@ class AlternateDeliveryAddress extends ShipTo
     /**
      * @param null|DOMDocument $document
      *
-     * @return DOMElement
+     * @return \DOMElement
      */
     public function toNode(DOMDocument $document = null)
     {

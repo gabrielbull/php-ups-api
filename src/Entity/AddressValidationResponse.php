@@ -80,7 +80,7 @@ class AddressValidationResponse
     }
 
     /**
-     * @return \Ups\Entity\AddressValidation\Address[]
+     * @return array
      */
     public function getCandidateAddressList()
     {

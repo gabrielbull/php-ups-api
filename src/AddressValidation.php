@@ -60,8 +60,8 @@ class AddressValidation extends Ups
      * @param string|null $userId UPS User ID
      * @param string|null $password UPS User Password
      * @param bool $useIntegration Determine if we should use production or CIE URLs.
-     * @param RequestInterface $request
-     * @param LoggerInterface PSR3 compatible logger (optional)
+     * @param RequestInterface|null $request
+     * @param LoggerInterface|null $logger PSR3 compatible logger (optional)
      */
     public function __construct(
         $accessKey = null,
