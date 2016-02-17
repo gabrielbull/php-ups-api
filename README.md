@@ -87,17 +87,46 @@ $address->setCountryCode('US');
 $address->setPostalCode('10000');
 
 $xav = new \Ups\AddressValidation($accessKey, $userId, $password);
+$xav->activateReturnObjectOnValidate(); //This is optional
 try {
     $response = $xav->validate($address, $requestOption = \Ups\AddressValidation::REQUEST_OPTION_ADDRESS_VALIDATION, $maxSuggestion = 15);
 } catch (Exception $e) {
     var_dump($e);
 }
 ```
+#### AddressValidation::validateReturnAVObject()
+In the code above `$xav->activateReturnObjectOnValidate()` is completely optional. Calling this method will cause 
+`AddressValidation::validate()` to return an `AddressValidationResponse` object. If you do not call this method, `validate`
+continues to function as it has previously. If you do not call this method, a single object with either the matched 
+validated address, or the first candidate address if the address is ambiguous, will be returned.
+
+The AddressValidationResponse object provides a number of methods to allow you to more easily query the API response to 
+determine the outcome. Continuing the example from above, returning an `AddressValidationResponse` object will allow
+you to be a bit more specific with how you handle the various outcomes:
+
+```PHP
+
+if ($response->noCandidates()) {
+    //Do something clever and helpful to let the use know the address is invalid
+}
+if ($response->isAmbiguous()) {
+    $candidateAddresses = $response->getCandidateAddressList();
+    foreach($candidateAddresses as $address) {
+        //Present user with list of candidate addresses so they can pick the correct one        
+    }
+}
+if ($response->isValid()) {
+    $validAddress = $response->getValidatedAddress();
+    
+    //Show user validated address or update their address with the 'official' address
+    //Or do something else helpful...
+}
+```
 
 <a name="addressvalidation-class-parameters"></a>
 ### Parameters
 
-Adress Validation parameters are:
+Address Validation parameters are:
 
  * `address` Address object as constructed in example
  * `requestOption` One of the three request options. See documentation. Default = Address Validation.
