@@ -76,15 +76,6 @@ class TimeInTransit extends Ups
         } else {
             return $this->formatResponse($response);
         }
-
-        if ($response->Response->ResponseStatusCode == 0) {
-            throw new Exception(
-                "Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}",
-                (int)$response->Response->Error->ErrorCode
-            );
-        } else {
-            return $this->formatResponse($response);
-        }
     }
 
     /**
