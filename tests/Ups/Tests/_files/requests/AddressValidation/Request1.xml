@@ -12,8 +12,8 @@
         <AddressLine>Times Square 1</AddressLine>
         <AddressLine>First Corner</AddressLine>
         <AddressLine>Second Corner</AddressLine>
-        <PoliticalDivision2>NY</PoliticalDivision2>
-        <PoliticalDivision1>New York</PoliticalDivision1>
+        <PoliticalDivision2>New York</PoliticalDivision2>
+        <PoliticalDivision1>NY</PoliticalDivision1>
         <CountryCode>US</CountryCode>
         <PostcodePrimaryLow>50000</PostcodePrimaryLow>
     </AddressKeyFormat>
