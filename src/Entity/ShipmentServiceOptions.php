@@ -157,6 +157,10 @@ class ShipmentServiceOptions implements NodeInterface
 
     /**
      * @param Notification $notification
+     *
+     * @throws \Exception
+     *
+     * @return $this
      */
     public function addNotification(Notification $notification)
     {

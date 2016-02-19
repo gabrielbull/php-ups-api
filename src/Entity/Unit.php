@@ -86,6 +86,8 @@ class Unit implements NodeInterface
     /**
      * @param $value
      *
+     * @throws \Exception
+     *
      * @return $this
      */
     public function setValue($value)

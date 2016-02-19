@@ -46,7 +46,7 @@ class Shipment implements NodeInterface
     private $freightCharges;
 
     /**
-     * @var AdditionalInsurance
+     * @var mixed
      */
     private $additionalInsurance;
 
@@ -82,11 +82,6 @@ class Shipment implements NodeInterface
         }
 
         $node = $document->createElement('Shipment');
-
-        // Objects first
-        if ($this->getAdditionalInsurance() instanceof AdditionalInsurance) {
-            $node->appendChild($this->getAdditionalInsurance()->toNode($document));
-        }
 
         if ($this->getFreightCharges() instanceof FreightCharges) {
             $node->appendChild($this->getFreightCharges()->toNode($document));
@@ -136,7 +131,7 @@ class Shipment implements NodeInterface
     }
 
     /**
-     * @return AdditionalInsurance
+     * @return mixed
      */
     public function getAdditionalInsurance()
     {
@@ -144,8 +139,9 @@ class Shipment implements NodeInterface
     }
 
     /**
-     * @param AdditionalInsurance $additionalInsurance
-     * @return QueryRequestShipment
+     * @param mixed $additionalInsurance
+     *
+     * @return $this
      */
     public function setAdditionalInsurance($additionalInsurance)
     {
@@ -164,7 +160,7 @@ class Shipment implements NodeInterface
 
     /**
      * @param FreightCharges $freightCharges
-     * @return QueryRequestShipment
+     * @return $this
      */
     public function setFreightCharges($freightCharges)
     {
@@ -183,7 +179,7 @@ class Shipment implements NodeInterface
 
     /**
      * @param string $originCountryCode
-     * @return QueryRequestShipment
+     * @return $this
      */
     public function setOriginCountryCode($originCountryCode)
     {
@@ -202,7 +198,7 @@ class Shipment implements NodeInterface
 
     /**
      * @param string $destinationCountryCode
-     * @return QueryRequestShipment
+     * @return $this
      */
     public function setDestinationCountryCode($destinationCountryCode)
     {
@@ -221,7 +217,7 @@ class Shipment implements NodeInterface
 
     /**
      * @param string $originStateProvinceCode
-     * @return QueryRequestShipment
+     * @return $this
      */
     public function setOriginStateProvinceCode($originStateProvinceCode)
     {
@@ -240,7 +236,7 @@ class Shipment implements NodeInterface
 
     /**
      * @param string $destinationStateProvinceCode
-     * @return QueryRequestShipment
+     * @return $this
      */
     public function setDestinationStateProvinceCode($destinationStateProvinceCode)
     {
@@ -259,7 +255,7 @@ class Shipment implements NodeInterface
 
     /**
      * @param int $transportationMode
-     * @return QueryRequestShipment
+     * @return $this
      */
     public function setTransportationMode($transportationMode)
     {
@@ -278,7 +274,7 @@ class Shipment implements NodeInterface
 
     /**
      * @param string $resultCurrencyCode
-     * @return QueryRequestShipment
+     * @return $this
      */
     public function setResultCurrencyCode($resultCurrencyCode)
     {
@@ -316,7 +312,7 @@ class Shipment implements NodeInterface
 
     /**
      * @param mixed $transactionReferenceId
-     * @return QueryRequestShipment
+     * @return $this
      */
     public function setTransactionReferenceId($transactionReferenceId)
     {
@@ -335,7 +331,7 @@ class Shipment implements NodeInterface
 
     /**
      * @param array $products
-     * @return QueryRequestShipment
+     * @return $this
      */
     public function setProducts($products)
     {

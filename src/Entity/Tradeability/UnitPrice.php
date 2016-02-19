@@ -18,7 +18,7 @@ class UnitPrice implements NodeInterface
     private $monetaryValue;
 
     /**
-     * @var str
+     * @var string
      */
     private $currencyCode;
 
@@ -66,7 +66,7 @@ class UnitPrice implements NodeInterface
     }
 
     /**
-     * @return str
+     * @return string
      */
     public function getCurrencyCode()
     {
@@ -74,7 +74,7 @@ class UnitPrice implements NodeInterface
     }
 
     /**
-     * @param str $currencyCode
+     * @param string $currencyCode
      * @return UnitPrice
      */
     public function setCurrencyCode($currencyCode)

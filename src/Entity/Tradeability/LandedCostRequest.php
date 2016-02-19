@@ -11,7 +11,7 @@ class LandedCostRequest
     private $queryRequest;
 
     /**
-     * @var EstimateRequest
+     * @var mixed
      */
     private $estimateRequest;
 
@@ -35,7 +35,7 @@ class LandedCostRequest
     }
 
     /**
-     * @return EstimateRequest
+     * @return mixed
      */
     public function getEstimateRequest()
     {
@@ -43,7 +43,8 @@ class LandedCostRequest
     }
 
     /**
-     * @param EstimateRequest $estimateRequest
+     * @param mixed $estimateRequest
+     *
      * @return LandedCostRequest
      */
     public function setEstimateRequest($estimateRequest)

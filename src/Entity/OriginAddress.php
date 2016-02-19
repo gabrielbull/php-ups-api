@@ -49,6 +49,8 @@ class OriginAddress implements NodeInterface
 
     /**
      * @param mixed $maximumListSize
+     *
+     * @throws \Exception
      */
     public function setMaximumListSize($maximumListSize)
     {

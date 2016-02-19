@@ -8,10 +8,6 @@ use Exception;
 use InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 use SimpleXMLElement;
-use stdClass;
-use Ups\Entity\Address;
-use Ups\Entity\LabelSpecification;
-use Ups\Entity\Package;
 use Ups\Entity\Shipment;
 use Ups\Entity\ShipmentRequestLabelSpecification;
 use Ups\Entity\ShipmentRequestReceiptSpecification;
@@ -52,8 +48,8 @@ class Shipping extends Ups
      * @param string|null $userId UPS User ID
      * @param string|null $password UPS User Password
      * @param bool $useIntegration Determine if we should use production or CIE URLs.
-     * @param RequestInterface $request
-     * @param LoggerInterface PSR3 compatible logger (optional)
+     * @param RequestInterface|null $request
+     * @param LoggerInterface|null PSR3 compatible logger (optional)
      */
     public function __construct($accessKey = null, $userId = null, $password = null, $useIntegration = false, RequestInterface $request = null, LoggerInterface $logger = null)
     {
@@ -384,7 +380,7 @@ class Shipping extends Ups
      *
      * @throws Exception
      *
-     * @return stdClass
+     * @return \stdClass
      */
     public function accept($shipmentDigest)
     {
@@ -438,7 +434,7 @@ class Shipping extends Ups
      *
      * @throws Exception
      *
-     * @return stdClass
+     * @return \stdClass
      */
     public function void($shipmentData)
     {
@@ -510,7 +506,7 @@ class Shipping extends Ups
      *
      * @throws Exception|InvalidArgumentException
      *
-     * @return stdClass
+     * @return \stdClass
      */
     public function recoverLabel($trackingData, $labelSpecification = null, $labelDelivery = null, $translate = null)
     {
@@ -605,7 +601,7 @@ class Shipping extends Ups
      *
      * @param SimpleXMLElement $response
      *
-     * @return stdClass
+     * @return \stdClass
      */
     private function formatResponse(SimpleXMLElement $response)
     {
