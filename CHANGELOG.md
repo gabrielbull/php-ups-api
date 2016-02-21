@@ -1,9 +1,17 @@
 # CHANGELOG
 
-## 0.7.2 (released 17-02-2016)
+## 0.7.4 (released 21-02-2016)
+
+- Bugfix: switched node names in XAV
+
+## 0.7.3 (released 17-02-2016)
 
 - Mail Innovation support in Tracking    
 - Option to get a result object from the Validation class with several methods to make you process the results easier. Does not introduce backwords incompatibility, as it's an optional feature.
+
+## 0.7.2 (released 09-01-2016)
+
+- Bugfix: Use SoapRequest instead of Request in Tradeability
 
 ## 0.7.1 (released 23-11-2015)
 
