@@ -205,15 +205,15 @@ class Tracking extends Ups
             $trackRequest->appendChild($xml->createElement('ReferenceNumber'))->appendChild($xml->createElement('Value', $this->referenceNumber));
         }
 
-        if(null !== $this->shipperNumber) {
+        if (null !== $this->shipperNumber) {
             $trackRequest->appendChild($xml->createElement('ShipperNumber', $this->shipperNumber));
         }
 
-        if(null !== $this->beginDate) {
+        if (null !== $this->beginDate) {
             $trackRequest->appendChild($xml->createElement('BeginDate', $this->beginDate));
         }
 
-        if(null !== $this->endDate) {
+        if (null !== $this->endDate) {
             $trackRequest->appendChild($xml->createElement('EndDate', $this->endDate));
         }
 
