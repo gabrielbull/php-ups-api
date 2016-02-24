@@ -42,6 +42,21 @@ class Tracking extends Ups
     private $requestOption;
 
     /**
+     * @var string
+     */
+    private $shipperNumber;
+
+    /**
+     * @var string
+     */
+    private $beginDate;
+
+    /**
+     * @var string
+     */
+    private $endDate;
+
+    /**
      * @param string|null $accessKey UPS License Access Key
      * @param string|null $userId UPS User ID
      * @param string|null $password UPS User Password
@@ -125,6 +140,39 @@ class Tracking extends Ups
         } else {
             return $this->formatResponse($response);
         }
+    }
+
+    /**
+     * Set shipper number
+     *
+     * @param string $shipperNumber
+     *
+     */
+    public function setShipperNumber($shipperNumber)
+    {
+        $this->shipperNumber = $shipperNumber;
+    }
+
+    /**
+     * Set begin date
+     *
+     * @param string $beginDate
+     *
+     */
+    public function setBeginDate($beginDate)
+    {
+        $this->beginDate = $beginDate;
+    }
+
+    /**
+     * Set end date
+     *
+     * @param string $endDate
+     *
+     */
+    public function setEndDate($endDate)
+    {
+        $this->endDate = $endDate;
     }
 
     /**
@@ -221,6 +269,19 @@ class Tracking extends Ups
         if (null !== $this->referenceNumber) {
             $trackRequest->appendChild($xml->createElement('ReferenceNumber'))->appendChild($xml->createElement('Value', $this->referenceNumber));
         }
+
+        if (null !== $this->shipperNumber) {
+            $trackRequest->appendChild($xml->createElement('ShipperNumber', $this->shipperNumber));
+        }
+
+        if (null !== $this->beginDate) {
+            $trackRequest->appendChild($xml->createElement('BeginDate', $this->beginDate));
+        }
+
+        if (null !== $this->endDate) {
+            $trackRequest->appendChild($xml->createElement('EndDate', $this->endDate));
+        }
+
         return $xml->saveXML();
     }
 
