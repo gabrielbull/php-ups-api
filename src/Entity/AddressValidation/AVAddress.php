@@ -21,6 +21,14 @@ class AVAddress
     /**
      * @var string
      */
+    public $addressLine2;
+    /**
+     * @var string
+     */
+    public $addressLine3;
+    /**
+     * @var string
+     */
     public $region;
     /**
      * @var string
@@ -59,14 +67,26 @@ class AVAddress
         $this->addressClassification = isset($xmlDoc->AddressClassification) ? new AddressClassification($xmlDoc->AddressClassification) : null;
         $this->consigneeName = isset($xmlDoc->ConsigneeName) ? (string)$xmlDoc->ConsigneeName : '';
         $this->buildingName = isset($xmlDoc->BuildingName) ? (string)$xmlDoc->BuildingName : '';
-        $this->addressLine = isset($xmlDoc->AddressLine) ? (string)$xmlDoc->AddressLine : '';
-        $this->region = isset($xmlDoc->Region) ? (string)$xmlDoc->Regions : '';
+        if (isset($xmlDoc->AddressLine)) {
+            for ($i = 0, $len = count($xmlDoc->AddressLine); $i < $len; $i++) {
+                if ($i === 0) {
+                    $this->addressLine = isset($xmlDoc->AddressLine[$i]) ? (string) $xmlDoc->AddressLine[$i] : '';
+                }
+                else if ($i === 1) {
+                    $this->addressLine2 = isset($xmlDoc->AddressLine[$i]) ? (string) $xmlDoc->AddressLine[$i] : '';
+                }
+                else if ($i === 2) {
+                    $this->addressLine3 = isset($xmlDoc->AddressLine[$i]) ? (string) $xmlDoc->AddressLine[$i] : '';
+                }
+            }
+        }
+        $this->region = isset($xmlDoc->Region) ? (string)$xmlDoc->Region : '';
         $this->politicalDivision2 = isset($xmlDoc->PoliticalDivision2) ? (string)$xmlDoc->PoliticalDivision2 : '';
         $this->politicalDivision1 = isset($xmlDoc->PoliticalDivision1) ? (string)$xmlDoc->PoliticalDivision1 : '';
         $this->postcodePrimaryLow = isset($xmlDoc->PostcodePrimaryLow) ? (string)$xmlDoc->PostcodePrimaryLow : '';
         $this->postcodeExtendedLow = isset($xmlDoc->PostcodeExtendedLow) ? (string)$xmlDoc->PostcodeExtendedLow : '';
         $this->urbanization = isset($xmlDoc->Urbanization) ? (string)$xmlDoc->Urbanization : '';
-        $this->consigneeName = isset($xmlDoc->CountryCode) ? (string)$xmlDoc->CountryCode : '';
+        $this->countryCode = isset($xmlDoc->CountryCode) ? (string)$xmlDoc->CountryCode : '';
     }
 
     /**
