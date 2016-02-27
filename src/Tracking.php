@@ -7,7 +7,7 @@ use Exception;
 use Psr\Log\LoggerInterface;
 use SimpleXMLElement;
 use stdClass;
-
+use DateTime;
 /**
  * Tracking API Wrapper.
  */
@@ -159,7 +159,7 @@ class Tracking extends Ups
      * @param string $beginDate
      *
      */
-    public function setBeginDate($beginDate)
+    public function setBeginDate(DateTime $beginDate)
     {
         $this->beginDate = $beginDate;
     }
@@ -170,7 +170,7 @@ class Tracking extends Ups
      * @param string $endDate
      *
      */
-    public function setEndDate($endDate)
+    public function setEndDate(DateTime $endDate)
     {
         $this->endDate = $endDate;
     }
@@ -275,11 +275,13 @@ class Tracking extends Ups
         }
 
         if (null !== $this->beginDate) {
-            $trackRequest->appendChild($xml->createElement('BeginDate', $this->beginDate));
+            $beginDate = $this->beginDate->format('Ymd');
+            $trackRequest->appendChild($xml->createElement('BeginDate', $beginDate));
         }
 
         if (null !== $this->endDate) {
-            $trackRequest->appendChild($xml->createElement('EndDate', $this->endDate));
+            $endDate = $this->endDate->format('Ymd');
+            $trackRequest->appendChild($xml->createElement('EndDate', $endDate));
         }
 
         return $xml->saveXML();
