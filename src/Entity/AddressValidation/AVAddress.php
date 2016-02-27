@@ -72,10 +72,10 @@ class AVAddress
                 if ($i === 0) {
                     $this->addressLine = isset($xmlDoc->AddressLine[$i]) ? (string) $xmlDoc->AddressLine[$i] : '';
                 }
-                else if ($i === 1) {
+                elseif ($i === 1) {
                     $this->addressLine2 = isset($xmlDoc->AddressLine[$i]) ? (string) $xmlDoc->AddressLine[$i] : '';
                 }
-                else if ($i === 2) {
+                elseif ($i === 2) {
                     $this->addressLine3 = isset($xmlDoc->AddressLine[$i]) ? (string) $xmlDoc->AddressLine[$i] : '';
                 }
             }
