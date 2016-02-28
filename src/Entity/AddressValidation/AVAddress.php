@@ -69,13 +69,8 @@ class AVAddress
         $this->buildingName = isset($xmlDoc->BuildingName) ? (string)$xmlDoc->BuildingName : '';
         if (isset($xmlDoc->AddressLine)) {
             for ($i = 0, $len = count($xmlDoc->AddressLine); $i < $len; $i++) {
-                if ($i === 0) {
-                    $this->addressLine = isset($xmlDoc->AddressLine[$i]) ? (string) $xmlDoc->AddressLine[$i] : '';
-                } elseif ($i === 1) {
-                    $this->addressLine2 = isset($xmlDoc->AddressLine[$i]) ? (string) $xmlDoc->AddressLine[$i] : '';
-                } elseif ($i === 2) {
-                    $this->addressLine3 = isset($xmlDoc->AddressLine[$i]) ? (string) $xmlDoc->AddressLine[$i] : '';
-                }
+                $var = 'addressLine' . ($i > 0 ? $i + 1 : '');
+                $this->{$var} = isset($xmlDoc->AddressLine[$i]) ? (string) $xmlDoc->AddressLine[$i] : '';
             }
         }
         $this->region = isset($xmlDoc->Region) ? (string)$xmlDoc->Region : '';
@@ -99,6 +94,38 @@ class AVAddress
     public function getCity()
     {
         return $this->politicalDivision2;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRegion()
+    {
+        return $this->region;
+    }
+
+    /**
+     * @return string
+     */
+    public function getConsigneeName()
+    {
+        return $this->consigneeName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrbanization()
+    {
+        return $this->urbanization;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBuildingName()
+    {
+        return $this->buildingName;
     }
 
     /**
@@ -128,5 +155,17 @@ class AVAddress
     public function getPostalCodeWithExtension($divider = '-')
     {
         return $this->postcodePrimaryLow . $divider . $this->postcodeExtendedLow;
+    }
+
+    /**
+     * @return string
+     *
+     * @param int $lineNumber
+     * @return string
+     */
+    public function getAddressLine($lineNumber = 1)
+    {
+        $var = 'addressLine' . ($lineNumber > 1 ? $lineNumber : '');
+        return $this->{$var};
     }
 }
