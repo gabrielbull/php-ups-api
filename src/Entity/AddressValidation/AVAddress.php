@@ -21,6 +21,14 @@ class AVAddress
     /**
      * @var string
      */
+    public $addressLine2;
+    /**
+     * @var string
+     */
+    public $addressLine3;
+    /**
+     * @var string
+     */
     public $region;
     /**
      * @var string
@@ -59,14 +67,19 @@ class AVAddress
         $this->addressClassification = isset($xmlDoc->AddressClassification) ? new AddressClassification($xmlDoc->AddressClassification) : null;
         $this->consigneeName = isset($xmlDoc->ConsigneeName) ? (string)$xmlDoc->ConsigneeName : '';
         $this->buildingName = isset($xmlDoc->BuildingName) ? (string)$xmlDoc->BuildingName : '';
-        $this->addressLine = isset($xmlDoc->AddressLine) ? (string)$xmlDoc->AddressLine : '';
-        $this->region = isset($xmlDoc->Region) ? (string)$xmlDoc->Regions : '';
+        if (isset($xmlDoc->AddressLine)) {
+            for ($i = 0, $len = count($xmlDoc->AddressLine); $i < $len; $i++) {
+                $var = 'addressLine' . ($i > 0 ? $i + 1 : '');
+                $this->{$var} = isset($xmlDoc->AddressLine[$i]) ? (string) $xmlDoc->AddressLine[$i] : '';
+            }
+        }
+        $this->region = isset($xmlDoc->Region) ? (string)$xmlDoc->Region : '';
         $this->politicalDivision2 = isset($xmlDoc->PoliticalDivision2) ? (string)$xmlDoc->PoliticalDivision2 : '';
         $this->politicalDivision1 = isset($xmlDoc->PoliticalDivision1) ? (string)$xmlDoc->PoliticalDivision1 : '';
         $this->postcodePrimaryLow = isset($xmlDoc->PostcodePrimaryLow) ? (string)$xmlDoc->PostcodePrimaryLow : '';
         $this->postcodeExtendedLow = isset($xmlDoc->PostcodeExtendedLow) ? (string)$xmlDoc->PostcodeExtendedLow : '';
         $this->urbanization = isset($xmlDoc->Urbanization) ? (string)$xmlDoc->Urbanization : '';
-        $this->consigneeName = isset($xmlDoc->CountryCode) ? (string)$xmlDoc->CountryCode : '';
+        $this->countryCode = isset($xmlDoc->CountryCode) ? (string)$xmlDoc->CountryCode : '';
     }
 
     /**
@@ -81,6 +94,38 @@ class AVAddress
     public function getCity()
     {
         return $this->politicalDivision2;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRegion()
+    {
+        return $this->region;
+    }
+
+    /**
+     * @return string
+     */
+    public function getConsigneeName()
+    {
+        return $this->consigneeName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrbanization()
+    {
+        return $this->urbanization;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBuildingName()
+    {
+        return $this->buildingName;
     }
 
     /**
@@ -110,5 +155,17 @@ class AVAddress
     public function getPostalCodeWithExtension($divider = '-')
     {
         return $this->postcodePrimaryLow . $divider . $this->postcodeExtendedLow;
+    }
+
+    /**
+     * @return string
+     *
+     * @param int $lineNumber
+     * @return string
+     */
+    public function getAddressLine($lineNumber = 1)
+    {
+        $var = 'addressLine' . ($lineNumber > 1 ? $lineNumber : '');
+        return $this->{$var};
     }
 }
