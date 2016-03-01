@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.7.5 (released 01-03-2016)
+
+- Improved Address Validation returned object
+
 ## 0.7.4 (released 21-02-2016)
 
 - Bugfix: switched node names in XAV
