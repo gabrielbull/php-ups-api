@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.7.6 (released 04-03-2016)
+
+- Add extra parameters for filtering on Tracking API
+
 ## 0.7.5 (released 01-03-2016)
 
 - Improved Address Validation returned object
