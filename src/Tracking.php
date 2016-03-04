@@ -7,6 +7,7 @@ use Exception;
 use Psr\Log\LoggerInterface;
 use SimpleXMLElement;
 use stdClass;
+use DateTime;
 
 /**
  * Tracking API Wrapper.
@@ -40,6 +41,21 @@ class Tracking extends Ups
      * @var string
      */
     private $requestOption;
+
+    /**
+     * @var string
+     */
+    private $shipperNumber;
+
+    /**
+     * @var \DateTime
+     */
+    private $beginDate;
+
+    /**
+     * @var \DateTime
+     */
+    private $endDate;
 
     /**
      * @param string|null $accessKey UPS License Access Key
@@ -125,6 +141,39 @@ class Tracking extends Ups
         } else {
             return $this->formatResponse($response);
         }
+    }
+
+    /**
+     * Set shipper number
+     *
+     * @param string $shipperNumber
+     *
+     */
+    public function setShipperNumber($shipperNumber)
+    {
+        $this->shipperNumber = $shipperNumber;
+    }
+
+    /**
+     * Set begin date
+     *
+     * @param string $beginDate
+     *
+     */
+    public function setBeginDate(DateTime $beginDate)
+    {
+        $this->beginDate = $beginDate;
+    }
+
+    /**
+     * Set end date
+     *
+     * @param string $endDate
+     *
+     */
+    public function setEndDate(DateTime $endDate)
+    {
+        $this->endDate = $endDate;
     }
 
     /**
@@ -221,6 +270,21 @@ class Tracking extends Ups
         if (null !== $this->referenceNumber) {
             $trackRequest->appendChild($xml->createElement('ReferenceNumber'))->appendChild($xml->createElement('Value', $this->referenceNumber));
         }
+
+        if (null !== $this->shipperNumber) {
+            $trackRequest->appendChild($xml->createElement('ShipperNumber', $this->shipperNumber));
+        }
+
+        if (null !== $this->beginDate) {
+            $beginDate = $this->beginDate->format('Ymd');
+            $trackRequest->appendChild($xml->createElement('BeginDate', $beginDate));
+        }
+
+        if (null !== $this->endDate) {
+            $endDate = $this->endDate->format('Ymd');
+            $trackRequest->appendChild($xml->createElement('EndDate', $endDate));
+        }
+
         return $xml->saveXML();
     }
 
