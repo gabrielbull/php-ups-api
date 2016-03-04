@@ -48,12 +48,12 @@ class Tracking extends Ups
     private $shipperNumber;
 
     /**
-     * @var string
+     * @var \DateTime
      */
     private $beginDate;
 
     /**
-     * @var string
+     * @var \DateTime
      */
     private $endDate;
 
