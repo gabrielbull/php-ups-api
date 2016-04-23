@@ -135,6 +135,11 @@ class InternationalForms implements NodeInterface
     private $freightCharges;
 
     /**
+     * @var string $declarationStatement
+     */
+    private $declarationStatement;
+
+    /**
      * @return array
      */
     public static function getTypes()
@@ -176,6 +181,9 @@ class InternationalForms implements NodeInterface
             }
             if (isset($attributes->CurrencyCode)) {
                 $this->setCurrencyCode($attributes->CurrencyCode);
+            }
+            if (isset($attributes->DeclarationStatement)) {
+                $this->setDeclarationStatement($attributes->DeclarationStatement);
             }
         }
     }
@@ -296,6 +304,9 @@ class InternationalForms implements NodeInterface
         }
         if ($this->getCurrencyCode() !== null) {
             $node->appendChild($document->createElement('CurrencyCode', $this->getCurrencyCode()));
+        }
+        if ($this->getDeclarationStatement() !== null) {
+            $node->appendChild($document->createElement('DeclarationStatement', $this->getDeclarationStatement()));
         }
         if ($this->getDiscount() !== null) {
             $node->appendChild($this->getDiscount()->toNode($document));
@@ -456,5 +467,20 @@ class InternationalForms implements NodeInterface
     public function getCurrencyCode()
     {
         return $this->currencyCode;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDeclarationStatement()
+    {
+        return $this->declarationStatement;
+    }
+
+    public function setDeclarationStatement($statement)
+    {
+        $this->declarationStatement = $statement;
+
+        return $this;
     }
 }
