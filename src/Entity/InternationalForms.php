@@ -135,6 +135,11 @@ class InternationalForms implements NodeInterface
     private $freightCharges;
 
     /**
+     * @var OtherCharges
+     */
+    private $otherCharges;
+
+    /**
      * @var string $declarationStatement
      */
     private $declarationStatement;
@@ -249,6 +254,26 @@ class InternationalForms implements NodeInterface
     }
 
     /**
+     * @param \Ups\Entity\OtherCharges $otherCharges
+     *
+     * @return $this
+     */
+    public function setOtherCharges(OtherCharges $otherCharges)
+    {
+        $this->otherCharges = $otherCharges;
+
+        return $this;
+    }
+
+    /**
+     * @return OtherCharges
+     */
+    public function getOtherCharges()
+    {
+        return $this->otherCharges;
+    }
+
+    /**
      * @param Product $product
      *
      * @return $this
@@ -313,6 +338,9 @@ class InternationalForms implements NodeInterface
         }
         if ($this->getFreightCharges() !== null) {
             $node->appendChild($this->getFreightCharges()->toNode($document));
+        }
+        if ($this->getOtherCharges() !== null) {
+            $node->appendChild($this->getOtherCharges()->toNode($document));
         }
         foreach ($this->products as $product) {
             $node->appendChild($product->toNode($document));
