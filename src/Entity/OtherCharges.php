@@ -97,5 +97,4 @@ class OtherCharges implements NodeInterface
 
         return $this;
     }
-
 }
