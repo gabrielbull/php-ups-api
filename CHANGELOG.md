@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 0.7.7 (released 31-05-2016)
+
+- Added AccessPointCOD under ShipmentServiceOptions
+- RatedShipment extended with extra fields
+- Password field (under Access tag) support entities now
+
 ## 0.7.6 (released 04-03-2016)
 
 - Add extra parameters for filtering on Tracking API
