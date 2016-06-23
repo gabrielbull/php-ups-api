@@ -35,6 +35,11 @@ class Request implements RequestInterface, LoggerAwareInterface
     protected $logger;
 
     /**
+     * @var Guzzle
+     */
+    protected $client;
+
+    /**
      * @param LoggerInterface $logger
      */
     public function __construct(LoggerInterface $logger = null)
@@ -44,6 +49,8 @@ class Request implements RequestInterface, LoggerAwareInterface
         } else {
             $this->setLogger(new NullLogger);
         }
+
+        $this->setClient();
     }
 
     /**
@@ -56,6 +63,16 @@ class Request implements RequestInterface, LoggerAwareInterface
     public function setLogger(LoggerInterface $logger)
     {
         $this->logger = $logger;
+    }
+
+    /**
+     * Creates a single instance of the Guzzle client
+     *
+     * @return null
+     */
+    public function setClient()
+    {
+        $this->client = new Guzzle();
     }
 
     /**
@@ -90,9 +107,7 @@ class Request implements RequestInterface, LoggerAwareInterface
         ]);
 
         try {
-            $client = new Guzzle();
-
-            $response = $client->post(
+            $response = $this->client->post(
                 $this->getEndpointUrl(),
                 [
                     'body' => $this->getAccess() . $this->getRequest(),
