@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.7.8 (released 23-06-2016)
+
+- Do not create new Guzzle object instance on each Request, but re-use it. 
+
 ## 0.7.7 (released 31-05-2016)
 
 - Added AccessPointCOD under ShipmentServiceOptions
