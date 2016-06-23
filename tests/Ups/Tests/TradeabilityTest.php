@@ -8,7 +8,6 @@ use Ups;
 
 class TradeabilityTest extends PHPUnit_Framework_TestCase
 {
-
     public function testCreateRequest()
     {
         $api = new Ups\Tradeability();
