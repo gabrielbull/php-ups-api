@@ -73,5 +73,4 @@ class AccessPointCOD implements NodeInterface
     {
         $this->monetaryValue = $monetaryValue;
     }
-
 }
