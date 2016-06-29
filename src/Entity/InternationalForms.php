@@ -135,6 +135,11 @@ class InternationalForms implements NodeInterface
     private $freightCharges;
 
     /**
+     * @var bool
+     */
+    private $additionalDocumentIndicator;
+
+    /**
      * @return array
      */
     public static function getTypes()
@@ -303,6 +308,9 @@ class InternationalForms implements NodeInterface
         if ($this->getFreightCharges() !== null) {
             $node->appendChild($this->getFreightCharges()->toNode($document));
         }
+        if ($this->getAdditionalDocumentIndicator() !== null) {
+            $node->appendChild($document->createElement('AdditionalDocumentIndicator'));
+        }
         foreach ($this->products as $product) {
             $node->appendChild($product->toNode($document));
         }
@@ -456,5 +464,23 @@ class InternationalForms implements NodeInterface
     public function getCurrencyCode()
     {
         return $this->currencyCode;
+    }
+
+    /**
+     * @param $additionalDocumentIndicator
+     *
+     * @return $this
+     */
+    public function setAdditionalDocumentIndicator($additionalDocumentIndicator)
+    {
+        $this->additionalDocumentIndicator = $additionalDocumentIndicator;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getAdditionalDocumentIndicator()
+    {
+        return $this->additionalDocumentIndicator;
     }
 }
