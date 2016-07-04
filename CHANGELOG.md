@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 0.7.9 (released 01-07-2016)
+
+- Add Shipping API Support for AdditionalDocumentIndicator in the InternationalForms node
+- Add Shipping API Support for EEIFilingOption in the InternationalForms node
+- Add TimeInTransit API Response Service Code Constants for US/EU Shipments to Entity/Service.php
+- Add Tracking API Response StatusType Constants
+
 ## 0.7.8 (released 23-06-2016)
 
 - Do not create new Guzzle object instance on each Request, but re-use it. 
