@@ -186,9 +186,9 @@ class EntityTest extends PHPUnit_Framework_TestCase
         $this->assertNotInstanceOf('Ups\NodeInterface', $obj);
     }
 
-
-    public function getListOfNodesWithoutNodeInterface() {
-        return array_map(function($item) {
+    public function getListOfNodesWithoutNodeInterface()
+    {
+        return array_map(function ($item) {
             return [$item];
         }, $this->nodeListNoNodeInterface);
     }
