@@ -4,7 +4,6 @@ namespace Ups\Entity\Tradeability;
 
 use DomDocument;
 use DomElement;
-use Ups\Entity\FreightCharges;
 use Ups\NodeInterface;
 
 class Shipment implements NodeInterface
