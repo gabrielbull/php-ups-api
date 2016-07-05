@@ -577,7 +577,7 @@ In the example $return is used to show how a return could be handled.
     $shipTo->setAddress($address);
     $shipTo->setCompanyName('XX');
     $shipTo->setAttentionName('XX');
-    $shipTo->setEmailAddress('XX''); 
+    $shipTo->setEmailAddress('XX'); 
     $shipTo->setPhoneNumber('XX');
     $shipment->setShipTo($shipTo);
 
