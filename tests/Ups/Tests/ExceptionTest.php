@@ -24,5 +24,4 @@ class ExceptionTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('Test Message', $exception->getMessage());
         $this->assertEquals(1, $exception->getCode());
     }
-
 }

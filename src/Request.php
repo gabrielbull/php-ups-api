@@ -234,5 +234,4 @@ class Request implements RequestInterface, LoggerAwareInterface
 
         return utf8_encode($body);
     }
-
 }
