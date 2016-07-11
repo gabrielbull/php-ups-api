@@ -132,9 +132,7 @@ class Request implements RequestInterface, LoggerAwareInterface
             ]);
 
             if ($response->getStatusCode() === 200) {
-                if (function_exists('mb_convert_encoding')) {
-                    $body = mb_convert_encoding($body, 'UTF-8', mb_detect_encoding($body));
-                }
+                $body = $this->convertEncoding($body);
 
                 $xml = new SimpleXMLElement($body);
                 if (isset($xml->Response) && isset($xml->Response->ResponseStatusCode)) {
@@ -218,4 +216,23 @@ class Request implements RequestInterface, LoggerAwareInterface
     {
         return $this->endpointUrl;
     }
+
+    /**
+     * @param $body
+     * @return string
+     */
+    protected function convertEncoding($body)
+    {
+        if (!function_exists('mb_convert_encoding')) {
+            return $body;
+        }
+
+        $encoding = mb_detect_encoding($body);
+        if ($encoding) {
+            return mb_convert_encoding($body, 'UTF-8', $encoding);
+        }
+
+        return utf8_encode($body);
+    }
+
 }
