@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.7.10 (released 12-07-2016) 
+
+- Solve an issue when mb_detect_encoding couldn't detect it, use a fallback to use utf8_encode. Else response parsing breaks.
+
 ## 0.7.9 (released 01-07-2016)
 
 - Add Shipping API Support for AdditionalDocumentIndicator in the InternationalForms node
