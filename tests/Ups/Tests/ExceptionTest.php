@@ -6,7 +6,6 @@ use Ups\Exception\RequestException;
 
 class ExceptionTest extends PHPUnit_Framework_TestCase
 {
-
     public function testInvalidResponseException()
     {
         $exception = new InvalidResponseException('Test Message', 1);
@@ -24,5 +23,4 @@ class ExceptionTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('Test Message', $exception->getMessage());
         $this->assertEquals(1, $exception->getCode());
     }
-
 }
