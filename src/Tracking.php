@@ -202,6 +202,9 @@ class Tracking extends Ups
             // USPS - Priority Mail Express International
             '/^EC\d{9}US$/',      // EC 000 000 000 US
 
+            // USPS Innovations Expedited
+            '/^927\d{23}$/',      // 9270 8900 8900 8900 8900 8900 00
+            
             // USPS - Priority Mail Express
             '/^927\d{19}$/',      // 9270 1000 0000 0000 0000 00
             '/^EA\d{9}US$/',      // EA 000 000 000 US
