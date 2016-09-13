@@ -311,8 +311,14 @@ class Tracking extends Ups
      */
     private function formatResponse(SimpleXMLElement $response)
     {
-        if($this->allowMultipleShipments)
-            return $this->convertXmlObject($response);
+        if($this->allowMultipleShipments) {
+            $response = $this->convertXmlObject($response);
+            if(!is_array($response->Shipment))
+            {
+                $response->Shipment = [$response->Shipment];
+            }
+            return $response;
+        }
 
         return $this->convertXmlObject($response->Shipment);
     }
