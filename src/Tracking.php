@@ -360,4 +360,15 @@ class Tracking extends Ups
 
         return $this;
     }
+
+    /**
+     * @param bool $value
+     * @return $this
+     */
+    public function allowMultipleShipments($value = true)
+    {
+        $this->allowMultipleShipments = $value ? true : false;
+
+        return $this;
+    }
 }
