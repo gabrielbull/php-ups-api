@@ -22,6 +22,17 @@ class Tracking extends Ups
     private $request;
 
     /**
+     *
+     * Workaround flag to handle Multiple shipment nodes in tracking response
+     * See GitHub Issue #117
+     *
+     * fixme in next major release
+     *
+     * @var boolean
+     */
+    protected $allowMultipleShipments = false;
+
+    /**
      * @var ResponseInterface
      *                        // todo make private
      */
@@ -300,6 +311,9 @@ class Tracking extends Ups
      */
     private function formatResponse(SimpleXMLElement $response)
     {
+        if($this->allowMultipleShipments)
+            return $this->convertXmlObject($response);
+
         return $this->convertXmlObject($response->Shipment);
     }
 
