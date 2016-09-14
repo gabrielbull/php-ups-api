@@ -92,10 +92,29 @@ class AddressValidation extends Ups
     {
         $this->useAVResponseObject = false;
     }
+
     /**
-     * Get address suggestions from UPS.
+     * Get address suggestions from UPS using the 'Street Level' Address Validation API (/XAV)
      *
-     * @param $address
+     * @param Address $address
+     * @param int $requestOption
+     * @param int $maxSuggestion
+     *
+     * @deprecated Make use of the 'extended' or 'simple' method calls
+     *
+     * @throws Exception
+     *
+     * @return stdClass|AddressValidationResponse
+     */
+    public function validate(Address $address, $requestOption = self::REQUEST_OPTION_ADDRESS_VALIDATION, $maxSuggestion = 15)
+    {
+        return $this->validateExtended($address, $requestOption, $maxSuggestion);
+    }
+
+    /**
+     * Get address suggestions from UPS using the 'Street Level' Address Validation API (/XAV)
+     *
+     * @param Address $address
      * @param int $requestOption
      * @param int $maxSuggestion
      *
@@ -103,7 +122,7 @@ class AddressValidation extends Ups
      *
      * @return stdClass|AddressValidationResponse
      */
-    public function validate($address, $requestOption = self::REQUEST_OPTION_ADDRESS_VALIDATION, $maxSuggestion = 15)
+    public function validateExtended(Address $address, $requestOption = self::REQUEST_OPTION_ADDRESS_VALIDATION, $maxSuggestion = 15)
     {
         if ($maxSuggestion > 50) {
             throw new \Exception('Maximum of 50 suggestions allowed');
