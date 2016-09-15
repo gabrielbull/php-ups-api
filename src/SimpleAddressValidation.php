@@ -65,7 +65,7 @@ class SimpleAddressValidation extends Ups
      *
      * @throws Exception
      *
-     * @return stdClass
+     * @return array
      */
     public function validate(Address $address)
     {
@@ -136,11 +136,15 @@ class SimpleAddressValidation extends Ups
      *
      * @param SimpleXMLElement $response
      *
-     * @return stdClass
+     * @return array
      */
     private function formatResponse(SimpleXMLElement $response)
     {
-        return $this->convertXmlObject($response->AddressValidationResult);
+        $result = $this->convertXmlObject($response->AddressValidationResult);
+        if (!is_array($result)) {
+            $result = [$result];
+        }
+        return $result;
     }
 
     /**
