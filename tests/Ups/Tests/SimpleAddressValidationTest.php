@@ -8,7 +8,6 @@ use Ups;
 
 class SimpleAddressValidationTest extends PHPUnit_Framework_TestCase
 {
-
     public function testCreateRequest()
     {
         $validator = new Ups\SimpleAddressValidation();
@@ -70,5 +69,4 @@ class SimpleAddressValidationTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('10118', $last->PostalCodeLowEnd);
         $this->assertEquals('10118', $last->PostalCodeHighEnd);
     }
-
 }
