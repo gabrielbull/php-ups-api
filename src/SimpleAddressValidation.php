@@ -140,11 +140,13 @@ class SimpleAddressValidation extends Ups
      */
     private function formatResponse(SimpleXMLElement $response)
     {
-        $result = $this->convertXmlObject($response->AddressValidationResult);
-        if (!is_array($result)) {
-            $result = [$result];
+        $result = $this->convertXmlObject($response);
+
+        if (!is_array($result->AddressValidationResult)) {
+            return [$result->AddressValidationResult];
         }
-        return $result;
+
+        return $result->AddressValidationResult;
     }
 
     /**
@@ -153,7 +155,7 @@ class SimpleAddressValidation extends Ups
     public function getRequest()
     {
         if (null === $this->request) {
-            $this->request = new Request();
+            $this->request = new Request($this->logger);
         }
 
         return $this->request;

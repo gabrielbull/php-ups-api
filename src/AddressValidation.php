@@ -227,7 +227,7 @@ class AddressValidation extends Ups
     public function getRequest()
     {
         if (null === $this->request) {
-            $this->request = new Request();
+            $this->request = new Request($this->logger);
         }
 
         return $this->request;
