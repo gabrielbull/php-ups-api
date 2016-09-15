@@ -21,29 +21,32 @@ Tracking API, Shipping API, Rating API and Time in Transit API. Feel free to con
 3. [Address Validation Class](#addressvalidation-class)
     * [Example](#addressvalidation-class-example)
     * [Parameters](#addressvalidation-class-parameters)
-4. [QuantumView Class](#quantumview-class)
+4. [Simple Address Validation Class](#simple-addressvalidation-class)
+    * [Example](#simple-addressvalidation-class-example)
+    * [Parameters](#simple-addressvalidation-class-parameters)    
+5. [QuantumView Class](#quantumview-class)
     * [Example](#quantumview-class-example)
     * [Parameters](#quantumview-class-parameters)
-5. [Tracking Class](#tracking-class)
+6. [Tracking Class](#tracking-class)
     * [Example](#tracking-class-example)
     * [Parameters](#tracking-class-parameters)
-6. [Rate Class](#rate-class)
+7. [Rate Class](#rate-class)
     * [Example](#rate-class-example)
     * [Parameters](#rate-class-parameters)
-7. [TimeInTransit Class](#timeintransit-class)
+8. [TimeInTransit Class](#timeintransit-class)
     * [Example](#timeintransit-class-example)
     * [Parameters](#timeintransit-class-parameters)
-8. [Locator Class](#locator-class)
+9. [Locator Class](#locator-class)
     * [Example](#locator-class-example)
     * [Parameters](#locator-class-parameters)
-9. [Tradeability Class](#tradeability-class)
+10. [Tradeability Class](#tradeability-class)
     * [Example](#tradeability-class-example)
     * [Parameters](#tradeability-class-parameters)
-10. [Shipping Class](#shipping-class)
+11. [Shipping Class](#shipping-class)
     * [Example](#shipping-class-example)
     * [Parameters](#shipping-class-parameters)
-11. [Logging](#logging)
-12. [License](#license-section)
+12. [Logging](#logging)
+13. [License](#license-section)
 
 <a name="requirements"></a>
 ## Requirements
@@ -133,6 +136,41 @@ Address Validation parameters are:
  * `address` Address object as constructed in example
  * `requestOption` One of the three request options. See documentation. Default = Address Validation.
  * `maxSuggestion` Maximum number of suggestions to be returned. Max = 50
+ 
+<a name="simple-addressvalidation-class"></a>
+## Simple Address Validation Class 
+
+The Address Validation Class allow you to validate less extensive as the previous class, but it's supported in more countries. It returns a quality score of the supplied address and provides alternatives.
+
+Note: UPS has two Address Validations. This is supported in more countries, but offers less functionality.
+
+Not all countries are supported, see UPS documentation.
+
+<a name="simple-addressvalidation-class-example"></a>
+### Example
+
+```php
+$address = new \Ups\Entity\Address();
+$address->setStateProvinceCode('NY');
+$address->setCity('New York');
+$address->setCountryCode('US');
+$address->setPostalCode('10000');
+
+$av = new \Ups\SimpleAddressValidation($accessKey, $userId, $password);
+try {
+ $response = $av->validate($address);
+ var_dump($response);
+} catch (Exception $e) {
+ var_dump($e);
+}
+```
+
+<a name="simpleaddressvalidation-class-parameters"></a>
+### Parameters
+
+Simple Address Validation parameters are:
+
+* `address` Address object as constructed in example
 
 <a name="quantumview-class"></a>
 ## QuantumView Class
