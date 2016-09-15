@@ -35,7 +35,7 @@ class AddressValidationTest extends PHPUnit_Framework_TestCase
 
     public function testAddressValidationResponseReturned()
     {
-        $this->xavRequest->setRequest(new RequestMock(null, '/AddressValidation/response1.xml'));
+        $this->xavRequest->setRequest(new RequestMock(null, '/AddressValidation/Response1.xml'));
         $this->xavRequest->activateReturnObjectOnValidate();
 
         $response = $this->xavRequest->validate($this->address);
@@ -45,7 +45,7 @@ class AddressValidationTest extends PHPUnit_Framework_TestCase
 
     public function testIsValidWhenKnownAddressValidated()
     {
-        $this->xavRequest->setRequest(new RequestMock(null, '/AddressValidation/response3.xml'));
+        $this->xavRequest->setRequest(new RequestMock(null, '/AddressValidation/Response3.xml'));
         $this->xavRequest->activateReturnObjectOnValidate();
 
         $response = $this->xavRequest->validate($this->address);
@@ -54,7 +54,7 @@ class AddressValidationTest extends PHPUnit_Framework_TestCase
 
     public function testIsValidWhenUnKnownAddressValidated()
     {
-        $this->xavRequest->setRequest(new RequestMock(null, '/AddressValidation/response1.xml'));
+        $this->xavRequest->setRequest(new RequestMock(null, '/AddressValidation/Response1.xml'));
         $this->xavRequest->activateReturnObjectOnValidate();
 
         $response = $this->xavRequest->validate($this->address);
@@ -63,7 +63,7 @@ class AddressValidationTest extends PHPUnit_Framework_TestCase
 
     public function testNoCandidatesWhenUnknownAddressValidated()
     {
-        $this->xavRequest->setRequest(new RequestMock(null, '/AddressValidation/response2.xml'));
+        $this->xavRequest->setRequest(new RequestMock(null, '/AddressValidation/Response2.xml'));
         $this->xavRequest->activateReturnObjectOnValidate();
 
         $response = $this->xavRequest->validate($this->address);
@@ -72,7 +72,7 @@ class AddressValidationTest extends PHPUnit_Framework_TestCase
 
     public function testNoCandidatesWhenKnownAddressValidated()
     {
-        $this->xavRequest->setRequest(new RequestMock(null, '/AddressValidation/response1.xml'));
+        $this->xavRequest->setRequest(new RequestMock(null, '/AddressValidation/Response1.xml'));
         $this->xavRequest->activateReturnObjectOnValidate();
 
         $response = $this->xavRequest->validate($this->address);
@@ -81,7 +81,7 @@ class AddressValidationTest extends PHPUnit_Framework_TestCase
 
     public function testIsAmbiguousWhenAmbiguousAddressValidated()
     {
-        $this->xavRequest->setRequest(new RequestMock(null, '/AddressValidation/response1.xml'));
+        $this->xavRequest->setRequest(new RequestMock(null, '/AddressValidation/Response1.xml'));
         $this->xavRequest->activateReturnObjectOnValidate();
 
         $response = $this->xavRequest->validate($this->address);
@@ -90,7 +90,7 @@ class AddressValidationTest extends PHPUnit_Framework_TestCase
 
     public function testIsAmbiguousWhenKnownAddressValidated()
     {
-        $this->xavRequest->setRequest(new RequestMock(null, '/AddressValidation/response3.xml'));
+        $this->xavRequest->setRequest(new RequestMock(null, '/AddressValidation/Response3.xml'));
         $this->xavRequest->activateReturnObjectOnValidate();
 
         $response = $this->xavRequest->validate($this->address);
@@ -100,7 +100,7 @@ class AddressValidationTest extends PHPUnit_Framework_TestCase
     public function testNoCandidatesThrowsBadMethodExceptionOnClassificationOnlyRequests()
     {
         $this->setExpectedException('BadMethodCallException');
-        $this->xavRequest->setRequest(new RequestMock(null, '/AddressValidation/response4.xml'));
+        $this->xavRequest->setRequest(new RequestMock(null, '/AddressValidation/Response4.xml'));
         $this->xavRequest->activateReturnObjectOnValidate();
 
         $response = $this->xavRequest->validate($this->address,
@@ -111,7 +111,7 @@ class AddressValidationTest extends PHPUnit_Framework_TestCase
     public function testIsAmbiguousThrowsBadMethodExceptionOnClassificationOnlyRequests()
     {
         $this->setExpectedException('BadMethodCallException');
-        $this->xavRequest->setRequest(new RequestMock(null, '/AddressValidation/response4.xml'));
+        $this->xavRequest->setRequest(new RequestMock(null, '/AddressValidation/Response4.xml'));
         $this->xavRequest->activateReturnObjectOnValidate();
 
         $response = $this->xavRequest->validate($this->address,
@@ -121,7 +121,7 @@ class AddressValidationTest extends PHPUnit_Framework_TestCase
 
     public function testIsValidWhenClassificationOnlyRequestsReturnsValidClassification()
     {
-        $this->xavRequest->setRequest(new RequestMock(null, '/AddressValidation/response4.xml'));
+        $this->xavRequest->setRequest(new RequestMock(null, '/AddressValidation/Response4.xml'));
         $this->xavRequest->activateReturnObjectOnValidate();
         $response = $this->xavRequest->validate($this->address,
             AddressValidation::REQUEST_OPTION_ADDRESS_CLASSIFICATION);
@@ -131,7 +131,7 @@ class AddressValidationTest extends PHPUnit_Framework_TestCase
     public function testGetAddressClassificationThrowsExceptionOnAddressOnlyRequest()
     {
         $this->setExpectedException('BadMethodCallException');
-        $this->xavRequest->setRequest(new RequestMock(null, '/AddressValidation/response4.xml'));
+        $this->xavRequest->setRequest(new RequestMock(null, '/AddressValidation/Response4.xml'));
         $this->xavRequest->activateReturnObjectOnValidate();
         $response = $this->xavRequest->validate($this->address, AddressValidation::REQUEST_OPTION_ADDRESS_VALIDATION);
         $response->getAddressClassification();
@@ -139,7 +139,7 @@ class AddressValidationTest extends PHPUnit_Framework_TestCase
 
     public function testGetAddressClassificationReturnsObject()
     {
-        $this->xavRequest->setRequest(new RequestMock(null, '/AddressValidation/response1.xml'));
+        $this->xavRequest->setRequest(new RequestMock(null, '/AddressValidation/Response1.xml'));
         $this->xavRequest->activateReturnObjectOnValidate();
         $response = $this->xavRequest->validate($this->address,
             AddressValidation::REQUEST_OPTION_ADDRESS_VALIDATION_AND_CLASSIFICATION);
@@ -149,7 +149,7 @@ class AddressValidationTest extends PHPUnit_Framework_TestCase
 
     public function testGetCandidateAddressList()
     {
-        $this->xavRequest->setRequest(new RequestMock(null, '/AddressValidation/response1.xml'));
+        $this->xavRequest->setRequest(new RequestMock(null, '/AddressValidation/Response1.xml'));
         $this->xavRequest->activateReturnObjectOnValidate();
         $response = $this->xavRequest->validate($this->address,
             AddressValidation::REQUEST_OPTION_ADDRESS_VALIDATION_AND_CLASSIFICATION);
@@ -159,7 +159,7 @@ class AddressValidationTest extends PHPUnit_Framework_TestCase
 
     public function testGetValidatedAddressReturnsValidAddressObject()
     {
-        $this->xavRequest->setRequest(new RequestMock(null, '/AddressValidation/response3.xml'));
+        $this->xavRequest->setRequest(new RequestMock(null, '/AddressValidation/Response3.xml'));
         $this->xavRequest->activateReturnObjectOnValidate();
         $response = $this->xavRequest->validate($this->address,
             AddressValidation::REQUEST_OPTION_ADDRESS_VALIDATION_AND_CLASSIFICATION);

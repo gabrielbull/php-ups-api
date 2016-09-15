@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AddressValidationResponse>
+    <Response>
+        <TransactionReference />
+        <ResponseStatusCode>1</ResponseStatusCode>
+        <ResponseStatusDescription>Success</ResponseStatusDescription>
+    </Response>
+    <AddressValidationResult>
+        <Rank>1</Rank>
+        <Quality>0.9875</Quality>
+        <Address>
+            <City>NEW YORK</City>
+            <StateProvinceCode>NY</StateProvinceCode>
+        </Address>
+        <PostalCodeLowEnd>10118</PostalCodeLowEnd>
+        <PostalCodeHighEnd>10118</PostalCodeHighEnd>
+    </AddressValidationResult>
+    <AddressValidationResult>
+        <Rank>2</Rank>
+        <Quality>0.9875</Quality>
+        <Address>
+            <City>MANHATTAN</City>
+            <StateProvinceCode>NY</StateProvinceCode>
+        </Address>
+        <PostalCodeLowEnd>10118</PostalCodeLowEnd>
+        <PostalCodeHighEnd>10118</PostalCodeHighEnd>
+    </AddressValidationResult>
+    <AddressValidationResult>
+        <Rank>3</Rank>
+        <Quality>0.9875</Quality>
+        <Address>
+            <City>NEW YORK CITY</City>
+            <StateProvinceCode>NY</StateProvinceCode>
+        </Address>
+        <PostalCodeLowEnd>10118</PostalCodeLowEnd>
+        <PostalCodeHighEnd>10118</PostalCodeHighEnd>
+    </AddressValidationResult>
+    <AddressValidationResult>
+        <Rank>4</Rank>
+        <Quality>0.9875</Quality>
+        <Address>
+            <City>NY</City>
+            <StateProvinceCode>NY</StateProvinceCode>
+        </Address>
+        <PostalCodeLowEnd>10118</PostalCodeLowEnd>
+        <PostalCodeHighEnd>10118</PostalCodeHighEnd>
+    </AddressValidationResult>
+    <AddressValidationResult>
+        <Rank>5</Rank>
+        <Quality>0.9875</Quality>
+        <Address>
+            <City>NY CITY</City>
+            <StateProvinceCode>NY</StateProvinceCode>
+        </Address>
+        <PostalCodeLowEnd>10118</PostalCodeLowEnd>
+        <PostalCodeHighEnd>10118</PostalCodeHighEnd>
+    </AddressValidationResult>
+    <AddressValidationResult>
+        <Rank>6</Rank>
+        <Quality>0.9875</Quality>
+        <Address>
+            <City>NYC</City>
+            <StateProvinceCode>NY</StateProvinceCode>
+        </Address>
+        <PostalCodeLowEnd>10118</PostalCodeLowEnd>
+        <PostalCodeHighEnd>10118</PostalCodeHighEnd>
+    </AddressValidationResult>
+</AddressValidationResponse>
