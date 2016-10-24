@@ -87,13 +87,13 @@ class ShipTo implements NodeInterface
     private $address;
 
     /**
-     * @param null|object $attributes
+     * @param \stdClass|object $attributes
      */
-    public function __construct($attributes = null)
+    public function __construct(\stdClass $attributes = null)
     {
         $this->address = new Address();
 
-        if (null != $attributes) {
+        if (null !== $attributes) {
             if (isset($attributes->LocationID)) {
                 $this->setLocationId($attributes->LocationID);
             }
