@@ -22,7 +22,7 @@ class RateInformation implements NodeInterface
         $this->setNegotiatedRatesIndicator(false);
         $this->setRateChartIndicator(false);
 
-        if (null != $attributes) {
+        if (null !== $attributes) {
             if (isset($attributes->NegotiatedRatesIndicator)) {
                 $this->setNegotiatedRatesIndicator(true);
             }

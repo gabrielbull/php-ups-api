@@ -11,11 +11,14 @@ class LabelImage
     public $InternationalSignatureGraphicImage;
     public $URL;
 
-    public function __construct($response = null)
+    /**
+     * @param \stdClass|null $response
+     */
+    public function __construct(\stdClass $response = null)
     {
         $this->LabelImageFormat = new LabelImageFormat();
 
-        if (null != $response) {
+        if (null !== $response) {
             if (isset($response->LabelImageFormat)) {
                 $this->LabelImageFormat = new LabelImageFormat($response->LabelImageFormat);
             }

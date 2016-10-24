@@ -6,9 +6,7 @@ use DOMDocument;
 use Exception;
 use Psr\Log\LoggerInterface;
 use SimpleXMLElement;
-use stdClass;
 use Ups\Entity\Address;
-use Ups\Entity\AddressValidationResponse;
 
 /**
  * Address Validation API Wrapper to use the basic Address Validation endpoints.

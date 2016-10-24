@@ -48,7 +48,7 @@ class Manifest
         $this->BillToAccount = new BillToAccount();
         $this->UAPAddress = new Address();
 
-        if (null != $response) {
+        if (null !== $response) {
             if (isset($response->Shipper)) {
                 $this->Shipper = new Shipper($response->Shipper);
             }

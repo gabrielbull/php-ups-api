@@ -12,9 +12,12 @@ class BillToAccount
     public $Option;
     public $Number;
 
-    public function __construct($response = null)
+    /**
+     * @param \stdClass|null $response
+     */
+    public function __construct(\stdClass $response = null)
     {
-        if (null != $response) {
+        if (null !== $response) {
             if (isset($response->Option)) {
                 $this->Option = $response->Option;
             }

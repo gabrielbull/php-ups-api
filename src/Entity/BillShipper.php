@@ -1,9 +1,4 @@
 <?php
-/*
- * Copyright © Eduard Sukharev
- *
- * For a full license, see the LICENSE file.
- */
 
 namespace Ups\Entity;
 
@@ -22,7 +17,10 @@ class BillShipper
      */
     private $creditCard;
 
-    public function __construct($attributes = null)
+    /**
+     * @param \stdClass|null $attributes
+     */
+    public function __construct(\stdClass $attributes = null)
     {
         if (isset($attributes->AccountNumber)) {
             $this->setAccountNumber($attributes->AccountNumber);

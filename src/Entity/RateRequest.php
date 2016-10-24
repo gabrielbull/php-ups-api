@@ -24,10 +24,7 @@ class RateRequest
      */
     private $shipment;
 
-    /**
-     * @param null|object $attributes
-     */
-    public function __construct($attributes = null)
+    public function __construct()
     {
         $this->setShipment(new Shipment());
         $this->setPickupType(new PickupType());

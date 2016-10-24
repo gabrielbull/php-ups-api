@@ -9,7 +9,10 @@ class TrackingCandidate
     public $DestinationCountryCode;
     public $PickupDateRange;
 
-    public function __construct($response = null)
+    /**
+     * @param \stdClass|null $response
+     */
+    public function __construct(\stdClass $response = null)
     {
         if (isset($response->TrackingNumber)) {
             $this->TrackingNumber = $response->TrackingNumber;

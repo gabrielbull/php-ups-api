@@ -16,7 +16,7 @@ class COD implements NodeInterface
     {
         $this->CODAmount = new CODAmount();
 
-        if (null != $response) {
+        if (null !== $response) {
             if (isset($response->CODCode)) {
                 $this->CODCode = $response->CODCode;
             }

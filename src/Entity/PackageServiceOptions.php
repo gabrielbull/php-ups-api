@@ -42,7 +42,7 @@ class PackageServiceOptions implements NodeInterface
      */
     public function __construct($parameters = null)
     {
-        if (null != $parameters) {
+        if (null !== $parameters) {
             if (isset($parameters->COD)) {
                 $this->setCOD(new COD($parameters->COD));
             }

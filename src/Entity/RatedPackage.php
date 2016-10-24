@@ -10,7 +10,10 @@ class RatedPackage
     public $ServiceOptionsCharges;
     public $TotalCharges;
 
-    public function __construct($response = null)
+    /**
+     * @param \stdClass|null $response
+     */
+    public function __construct(\stdClass $response = null)
     {
         $this->BillingWeight = new BillingWeight();
         $this->TransportationCharges = new Charges();
@@ -18,7 +21,7 @@ class RatedPackage
         $this->TotalCharges = new Charges();
         $this->Weight = '0.0';
 
-        if (null != $response) {
+        if (null !== $response) {
             if (isset($response->Weight)) {
                 $this->Weight = $response->Weight;
             }

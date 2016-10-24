@@ -51,7 +51,7 @@ class Translate implements NodeInterface
      */
     public function __construct($response = null)
     {
-        if (null != $response) {
+        if (null !== $response) {
             if (isset($response->LanguageCode)) {
                 $this->setLanguageCode($response->LanguageCode);
             }

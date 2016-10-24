@@ -15,7 +15,7 @@ class ShipmentWeight implements NodeInterface
     {
         $this->setUnitOfMeasurement(new UnitOfMeasurement());
 
-        if (null != $response) {
+        if (null !== $response) {
             if (isset($response->UnitOfMeasurement)) {
                 $this->setUnitOfMeasurement(new UnitOfMeasurement($response->UnitOfMeasurement));
             }

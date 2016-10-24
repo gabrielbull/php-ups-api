@@ -10,13 +10,16 @@ class ServiceSummary
     public $SaturdayDelivery;
     public $SaturdayDeliveryDisclaimer;
 
-    public function __construct($response = null)
+    /**
+     * @param \stdClass|null $response
+     */
+    public function __construct(\stdClass $response = null)
     {
         $this->Service = new Service();
         $this->Guaranteed = new Guaranteed();
         $this->EstimatedArrival = new EstimatedArrival();
 
-        if (null != $response) {
+        if (null !== $response) {
             if (isset($response->Service)) {
                 $this->Service = new Service($response->Service);
             }

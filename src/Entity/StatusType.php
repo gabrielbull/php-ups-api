@@ -21,9 +21,12 @@ class StatusType
         self::ST_MANIFEST_PICKUP => "Manifest Pickup"
     );
 
-    public function __construct($response = null)
+    /**
+     * @param \stdClass|null $response
+     */
+    public function __construct(\stdClass $response = null)
     {
-        if (null != $response) {
+        if (null !== $response) {
             if (isset($response->Code)) {
                 $this->Code = $response->Code;
             }

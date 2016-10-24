@@ -11,7 +11,7 @@ class LabelRecoveryRequest
     public $ReferenceNumber;
     public $ShipperNumber;
 
-    public function __construct($request = null)
+    public function __construct()
     {
         $this->LabelSpecification = new LabelSpecification();
         $this->Translate = new Translate();

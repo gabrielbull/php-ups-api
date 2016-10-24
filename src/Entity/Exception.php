@@ -20,7 +20,10 @@ class Exception
     public $ActivityLocation;
     public $BillToAccount;
 
-    public function __construct($response = null)
+    /**
+     * @param \stdClass|null $response
+     */
+    public function __construct(\stdClass $response = null)
     {
         $this->PackageReferenceNumber = [];
         $this->ShipmentReferenceNumber = [];
@@ -28,7 +31,7 @@ class Exception
         $this->ActivityLocation = new ActivityLocation();
         $this->BillToAccount = new BillToAccount();
 
-        if (null != $response) {
+        if (null !== $response) {
             if (isset($response->PackageReferenceNumber)) {
                 foreach ($response->PackageReferenceNumber as $PackageReferenceNumber) {
                     $this->PackageReferenceNumber[] = new PackageReferenceNumber($PackageReferenceNumber);
