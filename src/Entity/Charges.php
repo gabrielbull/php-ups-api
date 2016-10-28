@@ -10,9 +10,12 @@ class Charges
     public $Description;
     public $SubType;
 
-    public function __construct($response = null)
+    /**
+     * @param \stdClass|null $response
+     */
+    public function __construct(\stdClass $response = null)
     {
-        if (null != $response) {
+        if (null !== $response) {
             if (isset($response->CurrencyCode)) {
                 $this->CurrencyCode = $response->CurrencyCode;
             }

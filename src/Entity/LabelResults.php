@@ -8,11 +8,14 @@ class LabelResults
     public $LabelImage;
     public $Receipt;
 
-    public function __construct($response = null)
+    /**
+     * @param \stdClass|null $response
+     */
+    public function __construct(\stdClass $response = null)
     {
         $this->LabelImage = new LabelImage();
 
-        if (null != $response) {
+        if (null !== $response) {
             if (isset($response->TrackingNumber)) {
                 $this->TrackingNumber = $response->TrackingNumber;
             }

@@ -70,7 +70,7 @@ class ShipmentServiceOptions implements NodeInterface
     {
         $this->CallTagARS = new CallTagARS();
 
-        if (null != $response) {
+        if (null !== $response) {
             if (isset($response->SaturdayPickup)) {
                 $this->SaturdayPickup = $response->SaturdayPickup;
             }

@@ -25,7 +25,7 @@ class InsuredValue implements NodeInterface
 
     public function __construct($response = null)
     {
-        if (null != $response) {
+        if (null !== $response) {
             if (isset($response->CurrencyCode)) {
                 $this->setCurrencyCode($response->CurrencyCode);
             }

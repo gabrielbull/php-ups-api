@@ -7,11 +7,14 @@ class FailureNotification
     public $FailedEmailAddress;
     public $FailureNotificationCode;
 
-    public function __construct($response = null)
+    /**
+     * @param \stdClass|null $response
+     */
+    public function __construct(\stdClass $response = null)
     {
         $this->FailureNotificationCode = new FailureNotificationCode();
 
-        if (null != $response) {
+        if (null !== $response) {
             if (isset($response->FailedEmailAddress)) {
                 $this->FailedEmailAddress = $response->FailedEmailAddress;
             }

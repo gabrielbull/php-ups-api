@@ -9,9 +9,12 @@ class ShipmentReferenceNumber
     public $Code;
     public $Value;
 
-    public function __construct($response = null)
+    /**
+     * @param \stdClass|null $response
+     */
+    public function __construct(\stdClass $response = null)
     {
-        if (null != $response) {
+        if (null !== $response) {
             if (isset($response->Number)) {
                 $this->Number = $response->Number;
             }

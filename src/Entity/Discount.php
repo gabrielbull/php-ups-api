@@ -12,7 +12,7 @@ class Discount implements NodeInterface
 
     public function __construct($response = null)
     {
-        if (null != $response) {
+        if (null !== $response) {
             if (isset($response->MonetaryValue)) {
                 $this->setMonetaryValue($response->MonetaryValue);
             }

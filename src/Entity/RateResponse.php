@@ -10,7 +10,7 @@ class RateResponse
     {
         $this->RatedShipment = [];
 
-        if (null != $response) {
+        if (null !== $response) {
             if (isset($response->RatedShipment)) {
                 if (is_array($response->RatedShipment)) {
                     foreach ($response->RatedShipment as $ratedShipment) {

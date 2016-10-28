@@ -25,7 +25,7 @@ class Delivery
         $this->COD = new COD();
         $this->BillToAccount = new BillToAccount();
 
-        if (null != $response) {
+        if (null !== $response) {
             if (isset($response->PackageReferenceNumber)) {
                 if (is_array($response->PackageReferenceNumber)) {
                     foreach ($response->PackageReferenceNumber as $PackageReferenceNumber) {

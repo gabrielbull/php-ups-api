@@ -9,7 +9,10 @@ class NegotiatedRates
      */
     public $NetSummaryCharges;
 
-    public function __construct($response = null)
+    /**
+     * @param \stdClass|null $response
+     */
+    public function __construct(\stdClass $response = null)
     {
         $this->NetSummaryCharges = new NetSummaryCharges();
 

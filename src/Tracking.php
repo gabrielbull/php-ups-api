@@ -26,15 +26,16 @@ class Tracking extends Ups
      * Workaround flag to handle Multiple shipment nodes in tracking response
      * See GitHub Issue #117
      *
-     * fixme in next major release
+     * @todo: fix in next major release
      *
      * @var boolean
      */
     protected $allowMultipleShipments = false;
 
     /**
+     * @todo: make private
+     *
      * @var ResponseInterface
-     *                        // todo make private
      */
     public $response;
 
@@ -99,24 +100,7 @@ class Tracking extends Ups
         $this->trackingNumber = $trackingNumber;
         $this->requestOption = $requestOption;
 
-        $access = $this->createAccess();
-        $request = $this->createRequest();
-
-        $this->response = $this->getRequest()->request($access, $request, $this->compileEndpointUrl(self::ENDPOINT));
-        $response = $this->response->getResponse();
-
-        if (null === $response) {
-            throw new Exception('Failure (0): Unknown error', 0);
-        }
-
-        if ($response instanceof SimpleXMLElement && $response->Response->ResponseStatusCode == 0) {
-            throw new Exception(
-                "Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}",
-                (int)$response->Response->Error->ErrorCode
-            );
-        } else {
-            return $this->formatResponse($response);
-        }
+        return $this->getFormattedResponse();
     }
 
     /**
@@ -134,24 +118,7 @@ class Tracking extends Ups
         $this->referenceNumber = $referenceNumber;
         $this->requestOption = $requestOption;
 
-        $access = $this->createAccess();
-        $request = $this->createRequest();
-
-        $this->response = $this->getRequest()->request($access, $request, $this->compileEndpointUrl(self::ENDPOINT));
-        $response = $this->response->getResponse();
-
-        if (null === $response) {
-            throw new Exception('Failure (0): Unknown error', 0);
-        }
-
-        if ($response instanceof SimpleXMLElement && $response->Response->ResponseStatusCode == 0) {
-            throw new Exception(
-                "Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}",
-                (int)$response->Response->Error->ErrorCode
-            );
-        } else {
-            return $this->formatResponse($response);
-        }
+        return $this->getFormattedResponse();
     }
 
     /**
@@ -168,7 +135,7 @@ class Tracking extends Ups
     /**
      * Set begin date
      *
-     * @param string $beginDate
+     * @param DateTime $beginDate
      *
      */
     public function setBeginDate(DateTime $beginDate)
@@ -179,12 +146,39 @@ class Tracking extends Ups
     /**
      * Set end date
      *
-     * @param string $endDate
+     * @param DateTime $endDate
      *
      */
     public function setEndDate(DateTime $endDate)
     {
         $this->endDate = $endDate;
+    }
+
+    /**
+     * @return stdClass
+     * @throws Exception
+     */
+    private function getFormattedResponse()
+    {
+        $this->response = $this->getRequest()->request(
+            $this->createAccess(),
+            $this->createRequest(),
+            $this->compileEndpointUrl(self::ENDPOINT)
+        );
+        $response = $this->response->getResponse();
+
+        if (null === $response) {
+            throw new Exception('Failure (0): Unknown error', 0);
+        }
+
+        if ($response instanceof SimpleXMLElement && $response->Response->ResponseStatusCode == 0) {
+            throw new Exception(
+                "Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}",
+                (int)$response->Response->Error->ErrorCode
+            );
+        }
+
+        return $this->formatResponse($response);
     }
 
     /**
@@ -215,7 +209,7 @@ class Tracking extends Ups
 
             // USPS Innovations Expedited
             '/^927\d{23}$/',      // 9270 8900 8900 8900 8900 8900 00
-            
+
             // USPS - Priority Mail Express
             '/^927\d{19}$/',      // 9270 1000 0000 0000 0000 00
             '/^EA\d{9}US$/',      // EA 000 000 000 US

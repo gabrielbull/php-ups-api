@@ -29,7 +29,7 @@ class RatedShipment
         $this->RatedPackage = [];
         $this->SurCharges = [];
 
-        if (null != $response) {
+        if (null !== $response) {
             if (isset($response->Service)) {
                 $this->Service->setCode($response->Service->Code);
             }

@@ -9,12 +9,15 @@ class SubscriptionEvents
     public $SubscriptionStatus;
     public $DateRange;
 
-    public function __construct($response = null)
+    /**
+     * @param \stdClass|null $response
+     */
+    public function __construct(\stdClass $response = null)
     {
         $this->SubscriptionStatus = new SubscriptionStatus();
         $this->DateRange = new DateRange();
 
-        if (null != $response) {
+        if (null !== $response) {
             if (isset($response->Name)) {
                 $this->Name = new $response->Name();
             }

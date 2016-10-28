@@ -6,9 +6,12 @@ class CustomsValue
 {
     public $MonetaryValue;
 
-    public function __construct($response = null)
+    /**
+     * @param \stdClass|null $response
+     */
+    public function __construct(\stdClass $response = null)
     {
-        if (null != $response) {
+        if (null !== $response) {
             if (isset($response->MonetaryValue)) {
                 $this->MonetaryValue = $response->MonetaryValue;
             }
