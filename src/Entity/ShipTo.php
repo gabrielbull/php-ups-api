@@ -87,7 +87,7 @@ class ShipTo implements NodeInterface
     private $address;
 
     /**
-     * @param \stdClass|object $attributes
+     * @param \stdClass|null $attributes
      */
     public function __construct(\stdClass $attributes = null)
     {
