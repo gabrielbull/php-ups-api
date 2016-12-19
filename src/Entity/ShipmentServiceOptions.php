@@ -62,6 +62,11 @@ class ShipmentServiceOptions implements NodeInterface
      * @var AccessPointCOD
      */
     private $accessPointCOD;
+    
+    /**
+     * @var EmailMessage
+     */
+    private $EmailMessage;
 
     /**
      * @param null $response
@@ -146,6 +151,10 @@ class ShipmentServiceOptions implements NodeInterface
             foreach ($this->notifications as $notification) {
                 $node->appendChild($notification->toNode($document));
             }
+        }
+        
+        if ($this->getEmailMessage()) {
+            $node->appendChild($this->getEmailMessage()->toNode($document));
         }
 
         return $node;
@@ -267,7 +276,6 @@ class ShipmentServiceOptions implements NodeInterface
         return $this;
     }
 
-
     /**
      * @return CallTagARS
      */
@@ -338,5 +346,23 @@ class ShipmentServiceOptions implements NodeInterface
     {
         $this->DeliverToAddresseeOnlyIndicator = $DeliverToAddresseeOnlyIndicator;
         return $this;
+    }
+    
+    /**
+     * @return EmailMessage
+     */
+    public function getEmailMessage()
+    {
+        return $this->EmailMessage;
+    }
+    
+    /**
+     * @param EmailMessage $EmailMessage
+     * @return ShipmentServiceOptions
+     */
+    public function setEmaiLmessage(EmailMessage $EmailMessage)
+    {
+        $this->EmailMessage = $EmailMessage;
+        return $this;        
     }
 }
