@@ -1,5 +1,5 @@
 {
-  "name": "compadvance/ups-api",
+  "name": "compadvance/php-ups-api",
   "type": "library",
   "description": "PHP UPS API",
   "keywords": ["ups", "api", "wrapper", "quantum view", "tracking", "shipping", "rate", "rating", "time in transit", "tradeability"],
