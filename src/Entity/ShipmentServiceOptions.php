@@ -360,7 +360,7 @@ class ShipmentServiceOptions implements NodeInterface
      * @param EmailMessage $EmailMessage
      * @return ShipmentServiceOptions
      */
-    public function setEmaiLmessage(EmailMessage $EmailMessage)
+    public function setEmailMessage(EmailMessage $EmailMessage)
     {
         $this->EmailMessage = $EmailMessage;
         return $this;        
