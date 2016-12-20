@@ -52,7 +52,7 @@ class Shipping extends Ups
      * @param LoggerInterface|null PSR3 compatible logger (optional)
      */
     public function __construct($accessKey = null, $userId = null, $password = null, $useIntegration = false, RequestInterface $request = null, LoggerInterface $logger = null)
-    {
+    {        
         if (null !== $request) {
             $this->setRequest($request);
         }
