@@ -13,6 +13,11 @@ use Ups\NodeInterface;
 // @todo Refactor to private properties
 class ShipmentServiceOptions implements NodeInterface
 {
+    const DCIS_SIGNATURE = '1';
+    
+    const DCIS_SIGNATURE_ADULT = '2';
+    
+    
     /**
      * @var boolean
      */
@@ -64,14 +69,14 @@ class ShipmentServiceOptions implements NodeInterface
     private $accessPointCOD;
     
     /**
-     * @var EmailMessage
-     */
-    private $EmailMessage;
-    
-    /**
-     * @var boolean
+     * @var int
      */
     private $DeliveryConfirmation;
+    
+    /**
+     * @var bool
+     */
+    private $CarbonNeutral;
 
     /**
      * @param null $response
@@ -121,7 +126,7 @@ class ShipmentServiceOptions implements NodeInterface
         if (null === $document) {
             $document = new DOMDocument();
         }
-
+        
         $node = $document->createElement('ShipmentServiceOptions');
 
         if ($this->DirectDeliveryOnlyIndicator) {
@@ -141,7 +146,11 @@ class ShipmentServiceOptions implements NodeInterface
         }
         
         if ($this->DeliveryConfirmation) {
-            $node->appendChild($document->createElement('DeliveryConfirmation'));
+            $deliveryConfirmation = $document->createElement('DeliveryConfirmation');
+            $deliveryConfirmation->appendChild(
+                $document->createElement('DCISType', $this->DeliveryConfirmation)
+            );      
+            $node->appendChild($deliveryConfirmation);            
         }
 
         if ($this->getCOD()) {
@@ -162,10 +171,6 @@ class ShipmentServiceOptions implements NodeInterface
             }
         }
         
-        if ($this->getEmailMessage()) {
-            $node->appendChild($this->getEmailMessage()->toNode($document));
-        }
-
         return $node;
     }
 
@@ -356,27 +361,9 @@ class ShipmentServiceOptions implements NodeInterface
         $this->DeliverToAddresseeOnlyIndicator = $DeliverToAddresseeOnlyIndicator;
         return $this;
     }
-    
+        
     /**
-     * @return EmailMessage
-     */
-    public function getEmailMessage()
-    {
-        return $this->EmailMessage;
-    }
-    
-    /**
-     * @param EmailMessage $EmailMessage
-     * @return ShipmentServiceOptions
-     */
-    public function setEmailMessage(EmailMessage $EmailMessage)
-    {
-        $this->EmailMessage = $EmailMessage;
-        return $this;        
-    }
-    
-    /**
-     * @return bool
+     * @return int
      */
     public function getDeliveryConfirmation()
     {
@@ -384,14 +371,42 @@ class ShipmentServiceOptions implements NodeInterface
     }
 
     /**
-     * @param bool $DeliveryConfirmation
+     * @param int $DeliveryConfirmation
      * @return ShipmentServiceOptions
      */
     public function setDeliveryConfirmation($DeliveryConfirmation)
     {
+        switch ($DeliveryConfirmation) {            
+            case self::DCIS_SIGNATURE:
+            case self::DCIS_SIGNATURE_ADULT:
+                break;
+            default:
+                throw new \Exception("Incorrect DeliveryConfirmation type");
+                break;
+        }
         $this->DeliveryConfirmation = $DeliveryConfirmation;
         return $this;
     }
+
+    /**
+     * @return bool
+     */    
+    public function getCarbonNeutral()
+    {
+        return $this->CarbonNeutral;
+    }
+
+    /**
+     * @param bool $CarbonNeutral
+     * @return ShipmentServiceOptions
+     */
+    public function setCarbonNeutral($CarbonNeutral)
+    {
+        $this->CarbonNeutral = $CarbonNeutral;
+        return $this;
+    }
+
+
 
 
     
