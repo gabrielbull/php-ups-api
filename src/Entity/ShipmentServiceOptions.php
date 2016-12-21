@@ -362,9 +362,5 @@ class ShipmentServiceOptions implements NodeInterface
         $this->CarbonNeutral = $CarbonNeutral;
         return $this;
     }
-
-
-
-
     
 }
