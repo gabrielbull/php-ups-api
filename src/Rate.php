@@ -70,7 +70,7 @@ class Rate extends Ups
             $rateRequest->setShipment($shipment);
         }
 
-        $this->requestOption = 'Shop';
+        $this->requestOption = 'Rate';
 
         return $this->sendRequest($rateRequest);
     }
@@ -129,7 +129,7 @@ class Rate extends Ups
         $node = $xml->importNode($this->createTransactionNode(), true);
         $request->appendChild($node);
 
-        $request->appendChild($xml->createElement('RequestAction', 'Shop'));
+        $request->appendChild($xml->createElement('RequestAction', 'Rate'));
         $request->appendChild($xml->createElement('RequestOption', $this->requestOption));
 
         $trackRequest->appendChild($rateRequest->getPickupType()->toNode($document));

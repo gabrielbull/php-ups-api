@@ -213,7 +213,7 @@ abstract class Ups implements LoggerAwareInterface
     protected function compileEndpointUrl($segment)
     {
         $base = ($this->useIntegration ? $this->integrationBaseUrl : $this->productionBaseUrl);
-        
+
         return $base . $segment;
     }
 }
