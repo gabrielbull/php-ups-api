@@ -85,12 +85,9 @@ class Shipping extends Ups
             throw new Exception('Failure (0): Unknown error', 0);
         }
 
-        // FIXME TODO nasty exception handling
-
         if ($response instanceof SimpleXMLElement && $response->Response->ResponseStatusCode == 0) {
             throw new Exception(
-                "Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}
-                <br/>Full error : <pre>" . print_r($response->Response->Error, true) . "</pre>",                
+                "Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}",
                 (int)$response->Response->Error->ErrorCode
             );
         } else {

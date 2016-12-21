@@ -134,8 +134,6 @@ class Request implements RequestInterface, LoggerAwareInterface
             if ($response->getStatusCode() === 200) {
                 $body = $this->convertEncoding($body);
 
-                // FIXME TODO nasty exception handling
-                
                 $xml = new SimpleXMLElement($body);
                 if (isset($xml->Response) && isset($xml->Response->ResponseStatusCode)) {
                     if ($xml->Response->ResponseStatusCode == 1) {
@@ -143,9 +141,7 @@ class Request implements RequestInterface, LoggerAwareInterface
 
                         return $responseInstance->setText($body)->setResponse($xml);
                     } elseif ($xml->Response->ResponseStatusCode == 0) {
-                        throw new InvalidResponseException('Failure: ' . $xml->Response->Error->ErrorDescription . ' (' . $xml->Response->Error->ErrorCode . ')' .
-                        "<br/>Full error : <pre>" . print_r($xml->Response->Error, true) . "</pre>"                
-                        );
+                        throw new InvalidResponseException('Failure: ' . $xml->Response->Error->ErrorDescription . ' (' . $xml->Response->Error->ErrorCode . ')');
                     }
                 } else {
                     throw new InvalidResponseException('Failure: response is in an unexpected format.');
