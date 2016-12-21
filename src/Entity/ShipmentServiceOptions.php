@@ -14,12 +14,12 @@ use Ups\NodeInterface;
 class ShipmentServiceOptions implements NodeInterface
 {
     /**
-     * @var
+     * @var boolean
      */
     public $SaturdayPickup;
 
     /**
-     * @var
+     * @var boolean
      */
     public $SaturdayDelivery;
 
@@ -34,12 +34,12 @@ class ShipmentServiceOptions implements NodeInterface
     public $CallTagARS;
 
     /**
-     * @var
+     * @var boolean
      */
     public $NegotiatedRatesIndicator;
 
     /**
-     * @var
+     * @var boolean
      */
     public $DirectDeliveryOnlyIndicator;
 
@@ -67,6 +67,11 @@ class ShipmentServiceOptions implements NodeInterface
      * @var EmailMessage
      */
     private $EmailMessage;
+    
+    /**
+     * @var boolean
+     */
+    private $DeliveryConfirmation;
 
     /**
      * @param null $response
@@ -119,20 +124,24 @@ class ShipmentServiceOptions implements NodeInterface
 
         $node = $document->createElement('ShipmentServiceOptions');
 
-        if (isset($this->DirectDeliveryOnlyIndicator)) {
+        if ($this->DirectDeliveryOnlyIndicator) {
             $node->appendChild($document->createElement('DirectDeliveryOnlyIndicator'));
         }
 
-        if (isset($this->DeliverToAddresseeOnlyIndicator)) {
+        if ($this->DeliverToAddresseeOnlyIndicator) {
             $node->appendChild($document->createElement('DeliverToAddresseeOnlyIndicator'));
         }
 
-        if (isset($this->SaturdayPickup)) {
+        if ($this->SaturdayPickup) {
             $node->appendChild($document->createElement('SaturdayPickup'));
         }
 
-        if (isset($this->SaturdayDelivery)) {
+        if ($this->SaturdayDelivery) {
             $node->appendChild($document->createElement('SaturdayDelivery'));
+        }
+        
+        if ($this->DeliveryConfirmation) {
+            $node->appendChild($document->createElement('DeliveryConfirmation'));
         }
 
         if ($this->getCOD()) {
@@ -143,7 +152,7 @@ class ShipmentServiceOptions implements NodeInterface
             $node->appendChild($this->getAccessPointCOD()->toNode($document));
         }
 
-        if (isset($this->internationalForms)) {
+        if ($this->internationalForms) {
             $node->appendChild($this->internationalForms->toNode($document));
         }
 
@@ -365,4 +374,25 @@ class ShipmentServiceOptions implements NodeInterface
         $this->EmailMessage = $EmailMessage;
         return $this;        
     }
+    
+    /**
+     * @return bool
+     */
+    public function getDeliveryConfirmation()
+    {
+        return $this->DeliveryConfirmation;
+    }
+
+    /**
+     * @param bool $DeliveryConfirmation
+     * @return ShipmentServiceOptions
+     */
+    public function setDeliveryConfirmation($DeliveryConfirmation)
+    {
+        $this->DeliveryConfirmation = $DeliveryConfirmation;
+        return $this;
+    }
+
+
+    
 }
