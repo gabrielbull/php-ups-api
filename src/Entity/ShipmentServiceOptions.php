@@ -15,12 +15,12 @@ class ShipmentServiceOptions implements NodeInterface
 {
 
     /**
-     * @var boolean
+     * @var bool
      */
     public $SaturdayPickup;
 
     /**
-     * @var boolean
+     * @var bool
      */
     public $SaturdayDelivery;
 
@@ -35,12 +35,12 @@ class ShipmentServiceOptions implements NodeInterface
     public $CallTagARS;
 
     /**
-     * @var boolean
+     * @var bool
      */
     public $NegotiatedRatesIndicator;
 
     /**
-     * @var boolean
+     * @var bool
      */
     public $DirectDeliveryOnlyIndicator;
 
@@ -292,7 +292,7 @@ class ShipmentServiceOptions implements NodeInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isNegotiatedRatesIndicator()
     {
@@ -300,7 +300,7 @@ class ShipmentServiceOptions implements NodeInterface
     }
 
     /**
-     * @param boolean $NegotiatedRatesIndicator
+     * @param bool $NegotiatedRatesIndicator
      * @return ShipmentServiceOptions
      */
     public function setNegotiatedRatesIndicator($NegotiatedRatesIndicator)
@@ -310,7 +310,7 @@ class ShipmentServiceOptions implements NodeInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isDirectDeliveryOnlyIndicator()
     {
@@ -318,7 +318,7 @@ class ShipmentServiceOptions implements NodeInterface
     }
 
     /**
-     * @param boolean $DirectDeliveryOnlyIndicator
+     * @param bool $DirectDeliveryOnlyIndicator
      * @return ShipmentServiceOptions
      */
     public function setDirectDeliveryOnlyIndicator($DirectDeliveryOnlyIndicator)
