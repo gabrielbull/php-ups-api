@@ -13,11 +13,7 @@ use Ups\NodeInterface;
 // @todo Refactor to private properties
 class ShipmentServiceOptions implements NodeInterface
 {
-    const DCIS_SIGNATURE = '1';
-    
-    const DCIS_SIGNATURE_ADULT = '2';
-    
-    
+
     /**
      * @var boolean
      */
@@ -67,12 +63,7 @@ class ShipmentServiceOptions implements NodeInterface
      * @var AccessPointCOD
      */
     private $accessPointCOD;
-    
-    /**
-     * @var int
-     */
-    private $DeliveryConfirmation;
-    
+        
     /**
      * @var bool
      */
@@ -106,9 +97,9 @@ class ShipmentServiceOptions implements NodeInterface
             }
             if (isset($response->DirectDeliveryOnlyIndicator)) {
                 $this->DirectDeliveryOnlyIndicator = $response->DirectDeliveryOnlyIndicator;
-            }
-            if (isset($response->DeliverToAddresseeOnlyIndicator)) {
-                $this->DeliverToAddresseeOnlyIndicator = $response->DeliverToAddresseeOnlyIndicator;
+            }            
+            if (isset($response->CarbonNeutral)) {
+                $this->CarbonNeutral = $response->CarbonNeutral;
             }
             if (isset($response->InternationalForms)) {
                 $this->setInternationalForms($response->InternationalForms);
@@ -145,14 +136,6 @@ class ShipmentServiceOptions implements NodeInterface
             $node->appendChild($document->createElement('SaturdayDelivery'));
         }
         
-        if ($this->DeliveryConfirmation) {
-            $deliveryConfirmation = $document->createElement('DeliveryConfirmation');
-            $deliveryConfirmation->appendChild(
-                $document->createElement('DCISType', $this->DeliveryConfirmation)
-            );      
-            $node->appendChild($deliveryConfirmation);            
-        }
-
         if ($this->getCOD()) {
             $node->appendChild($this->getCOD()->toNode($document));
         }
@@ -361,33 +344,7 @@ class ShipmentServiceOptions implements NodeInterface
         $this->DeliverToAddresseeOnlyIndicator = $DeliverToAddresseeOnlyIndicator;
         return $this;
     }
-        
-    /**
-     * @return int
-     */
-    public function getDeliveryConfirmation()
-    {
-        return $this->DeliveryConfirmation;
-    }
-
-    /**
-     * @param int $DeliveryConfirmation
-     * @return ShipmentServiceOptions
-     */
-    public function setDeliveryConfirmation($DeliveryConfirmation)
-    {
-        switch ($DeliveryConfirmation) {            
-            case self::DCIS_SIGNATURE:
-            case self::DCIS_SIGNATURE_ADULT:
-                break;
-            default:
-                throw new \Exception("Incorrect DeliveryConfirmation type");
-                break;
-        }
-        $this->DeliveryConfirmation = $DeliveryConfirmation;
-        return $this;
-    }
-
+    
     /**
      * @return bool
      */    
