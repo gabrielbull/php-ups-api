@@ -332,6 +332,11 @@ try {
     $package = new \Ups\Entity\Package();
     $package->getPackagingType()->setCode(\Ups\Entity\PackagingType::PT_PACKAGE);
     $package->getPackageWeight()->setWeight(10);
+    
+    // if you need this (depends of the shipper country)
+    $weightUnit = new \Ups\Entity\UnitOfMeasurement;
+    $weightUnit->setCode(\Ups\Entity\UnitOfMeasurement::UOM_KGS);
+    $package->getPackageWeight()->setUnitOfMeasurement($weightUnit);
 
     $dimensions = new \Ups\Entity\Dimensions();
     $dimensions->setHeight(10);
