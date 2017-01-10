@@ -56,7 +56,4 @@ class LabelMethodTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($node->getElementsByTagName('Code')->length, 1);
         $this->assertEquals($node->getElementsByTagName('Description')->length, 1);
     }
-
-
 }
-

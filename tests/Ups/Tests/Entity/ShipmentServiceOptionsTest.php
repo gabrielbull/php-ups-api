@@ -60,6 +60,4 @@ class ShipmentServiceOptionsTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($node->getElementsByTagName('LabelMethod')->length, 1);
         $this->assertEquals($node->getElementsByTagName('ImportControlIndicator')->length, 1);
     }
-
-
 }
