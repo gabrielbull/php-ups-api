@@ -275,7 +275,7 @@ class ShipmentServiceOptions implements NodeInterface
     }
 
     /**
-     * @return null|LabelMethod
+     * @return mixed
      */
     public function getSaturdayDelivery()
     {
