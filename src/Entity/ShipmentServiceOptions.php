@@ -222,7 +222,8 @@ class ShipmentServiceOptions implements NodeInterface
     }
 
     /**
-     * @return mixed
+     * @return null|LabelMethod
+     *
      */
     public function getLabelMethod()
     {
