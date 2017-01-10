@@ -54,7 +54,7 @@ class ShipmentServiceOptions implements NodeInterface
     private $internationalForms;
 
     /**
-     * @var
+     * @var null|LabelMethod
      */
     private $labelMethod;
 
