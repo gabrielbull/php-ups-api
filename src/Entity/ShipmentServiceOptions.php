@@ -54,6 +54,11 @@ class ShipmentServiceOptions implements NodeInterface
     private $internationalForms;
 
     /**
+     * @var
+     */
+    private $labelMethod;
+
+    /**
      * @var array
      */
     private $notifications = [];
@@ -62,6 +67,11 @@ class ShipmentServiceOptions implements NodeInterface
      * @var AccessPointCOD
      */
     private $accessPointCOD;
+
+    /**
+     * @var ImportControlIndicator
+     */
+    private $importControlIndicator;
 
     /**
      * @param null $response
@@ -97,6 +107,13 @@ class ShipmentServiceOptions implements NodeInterface
             }
             if (isset($response->InternationalForms)) {
                 $this->setInternationalForms($response->InternationalForms);
+            }
+            if (isset($response->ImportControlIndicator)) {
+                $this->setImportControlIndicator($response->ImportControlIndicator);
+            }
+            if (isset($response->LabelMethod)) {
+                var_dump("HERE");
+                $this->setLabelMethod(new LabelMethod($response->LabelMethod));
             }
         }
     }
@@ -142,6 +159,14 @@ class ShipmentServiceOptions implements NodeInterface
             $node->appendChild($this->internationalForms->toNode($document));
         }
 
+        if (isset($this->importControlIndicator)) {
+            $node->appendChild($document->createElement('ImportControlIndicator'));
+        }
+
+        if (isset($this->labelMethod)) {
+            $node->appendChild($this->labelMethod->toNode($document));
+        }
+
         if (!empty($this->notifications)) {
             foreach ($this->notifications as $notification) {
                 $node->appendChild($notification->toNode($document));
@@ -185,6 +210,24 @@ class ShipmentServiceOptions implements NodeInterface
     public function getInternationalForms()
     {
         return $this->internationalForms;
+    }
+
+    /**
+     * @param LabelMethod $data
+     * @return $this
+     */
+    public function setLabelMethod(LabelMethod $data)
+    {
+        $this->labelMethod = $data;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLabelMethod()
+    {
+        return $this->labelMethod;
     }
 
     /**
@@ -301,6 +344,33 @@ class ShipmentServiceOptions implements NodeInterface
     public function setNegotiatedRatesIndicator($NegotiatedRatesIndicator)
     {
         $this->NegotiatedRatesIndicator = $NegotiatedRatesIndicator;
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isImportControlIndicator()
+    {
+        return isset($this->importControlIndicator);
+    }
+
+    /**
+     * @param boolean $importControlIndicator
+     * @return ShipmentServiceOptions
+     */
+    public function setImportControlIndicator($importControlIndicator)
+    {
+        $this->importControlIndicator = $importControlIndicator;
+        return $this;
+    }
+
+    /**
+     * @return ShipmentServiceOptions
+     */
+    public function unsImportControlIndicator()
+    {
+        unset($this->importControlIndicator);
         return $this;
     }
 
