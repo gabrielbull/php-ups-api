@@ -69,7 +69,7 @@ class ShipmentServiceOptions implements NodeInterface
     private $accessPointCOD;
 
     /**
-     * @var ImportControlIndicator
+     * @bool ImportControlIndicator
      */
     private $importControlIndicator;
 
@@ -112,7 +112,6 @@ class ShipmentServiceOptions implements NodeInterface
                 $this->setImportControlIndicator($response->ImportControlIndicator);
             }
             if (isset($response->LabelMethod)) {
-                var_dump("HERE");
                 $this->setLabelMethod(new LabelMethod($response->LabelMethod));
             }
         }
@@ -275,7 +274,7 @@ class ShipmentServiceOptions implements NodeInterface
     }
 
     /**
-     * @return mixed
+     * @return null|LabelMethod
      */
     public function getSaturdayDelivery()
     {
@@ -352,7 +351,7 @@ class ShipmentServiceOptions implements NodeInterface
      */
     public function isImportControlIndicator()
     {
-        return isset($this->importControlIndicator);
+        return $this->importControlIndicator;
     }
 
     /**
@@ -362,15 +361,6 @@ class ShipmentServiceOptions implements NodeInterface
     public function setImportControlIndicator($importControlIndicator)
     {
         $this->importControlIndicator = $importControlIndicator;
-        return $this;
-    }
-
-    /**
-     * @return ShipmentServiceOptions
-     */
-    public function unsImportControlIndicator()
-    {
-        unset($this->importControlIndicator);
         return $this;
     }
 

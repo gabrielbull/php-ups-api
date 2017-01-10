@@ -38,14 +38,6 @@ class ShipmentServiceOptionsTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($opts->isImportControlIndicator());
     }
 
-    public function testUnsImportControlIndicatorUnset()
-    {
-        $opts = new ShipmentServiceOptions();
-
-        $opts->unsImportControlIndicator();
-        $this->assertEmpty($opts->isImportControlIndicator());
-    }
-
     public function testValidXML()
     {
         $doc = new DOMDocument();
