@@ -69,7 +69,7 @@ class ShipmentServiceOptions implements NodeInterface
     private $accessPointCOD;
 
     /**
-     * @bool ImportControlIndicator
+     * @var boolean
      */
     private $importControlIndicator;
 
