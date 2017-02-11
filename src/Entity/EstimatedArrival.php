@@ -14,6 +14,7 @@ class EstimatedArrival
 
     public $BusinessTransitDays;
     public $Time;
+    public $Arrival;
     public $PickupDate;
     public $PickupTime;
     public $HolidayCount;
@@ -62,6 +63,12 @@ class EstimatedArrival
             }
             if (isset($response->RestDays)) {
                 $this->RestDays = $response->RestDays;
+            }
+            if (isset($response->Arrival)) {
+                $this->Arrival = new Arrival($response->Arrival);
+            }
+            if (isset($response->Pickup)) {
+                $this->Pickup = new Pickup($response->Pickup);
             }
         }
     }

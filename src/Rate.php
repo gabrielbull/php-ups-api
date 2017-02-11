@@ -62,6 +62,26 @@ class Rate extends Ups
      *
      * @return RateResponse
      */
+    public function shopRatesTimeInTransit($rateRequest)
+    {
+        if ($rateRequest instanceof Shipment) {
+            $shipment = $rateRequest;
+            $rateRequest = new RateRequest();
+            $rateRequest->setShipment($shipment);
+        }
+
+        $this->requestOption = 'Shoptimeintransit';
+
+        return $this->sendRequest($rateRequest);
+    }
+
+    /**
+     * @param $rateRequest
+     *
+     * @throws Exception
+     *
+     * @return RateResponse
+     */
     public function getRate($rateRequest)
     {
         if ($rateRequest instanceof Shipment) {
@@ -71,6 +91,26 @@ class Rate extends Ups
         }
 
         $this->requestOption = 'Rate';
+
+        return $this->sendRequest($rateRequest);
+    }
+
+    /**
+     * @param $rateRequest
+     *
+     * @throws Exception
+     *
+     * @return RateResponse
+     */
+    public function getRateTimeInTransit($rateRequest)
+    {
+        if ($rateRequest instanceof Shipment) {
+            $shipment = $rateRequest;
+            $rateRequest = new RateRequest();
+            $rateRequest->setShipment($shipment);
+        }
+
+        $this->requestOption = 'Ratetimeintransit';
 
         return $this->sendRequest($rateRequest);
     }
@@ -184,6 +224,11 @@ class Rate extends Ups
         $shipmentServiceOptions = $shipment->getShipmentServiceOptions();
         if (isset($shipmentServiceOptions)) {
             $shipmentNode->appendChild($shipmentServiceOptions->toNode($xml));
+        }
+
+        $deliveryTimeInformation = $shipment->getDeliveryTimeInformation();
+        if (isset($deliveryTimeInformation)) {
+            $shipmentNode->appendChild($deliveryTimeInformation->toNode($xml));
         }
 
         return $xml->saveXML();
