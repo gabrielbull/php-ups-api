@@ -7,15 +7,15 @@ use Ups\Entity\Pickup;
 
 class EstimatedArrival
 {
-    public $BusinessTransitDays;
-    public $Arrival;
-    public $Pickup;
-    public $DayOfWeek;
-    public $CustomerCenterCutoff;
-    public $DelayCount;
-    public $HolidayCount;
-    public $RestDays;
-    public $TotalTransitDays;
+    private $BusinessTransitDays;
+    private $Arrival;
+    private $Pickup;
+    private $DayOfWeek;
+    private $CustomerCenterCutoff;
+    private $DelayCount;
+    private $HolidayCount;
+    private $RestDays;
+    private $TotalTransitDays;
 
     /**
      * @param \stdClass|null $response
@@ -52,4 +52,149 @@ class EstimatedArrival
             }
         }
     }
+
+    /**
+     * @return mixed
+     */
+    public function getBusinessTransitDays()
+    {
+        return $this->BusinessTransitDays;
+    }
+
+    /**
+     * @param mixed $BusinessTransitDays
+     */
+    public function setBusinessTransitDays($BusinessTransitDays)
+    {
+        $this->BusinessTransitDays = $BusinessTransitDays;
+    }
+
+    /**
+     * @return Arrival
+     */
+    public function getArrival()
+    {
+        return $this->Arrival;
+    }
+
+    /**
+     * @param Arrival $Arrival
+     */
+    public function setArrival($Arrival)
+    {
+        $this->Arrival = $Arrival;
+    }
+
+    /**
+     * @return Pickup
+     */
+    public function getPickup()
+    {
+        return $this->Pickup;
+    }
+
+    /**
+     * @param Pickup $Pickup
+     */
+    public function setPickup($Pickup)
+    {
+        $this->Pickup = $Pickup;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDayOfWeek()
+    {
+        return $this->DayOfWeek;
+    }
+
+    /**
+     * @param mixed $DayOfWeek
+     */
+    public function setDayOfWeek($DayOfWeek)
+    {
+        $this->DayOfWeek = $DayOfWeek;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCustomerCenterCutoff()
+    {
+        return $this->CustomerCenterCutoff;
+    }
+
+    /**
+     * @param mixed $CustomerCenterCutoff
+     */
+    public function setCustomerCenterCutoff($CustomerCenterCutoff)
+    {
+        $this->CustomerCenterCutoff = $CustomerCenterCutoff;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDelayCount()
+    {
+        return $this->DelayCount;
+    }
+
+    /**
+     * @param mixed $DelayCount
+     */
+    public function setDelayCount($DelayCount)
+    {
+        $this->DelayCount = $DelayCount;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getHolidayCount()
+    {
+        return $this->HolidayCount;
+    }
+
+    /**
+     * @param mixed $HolidayCount
+     */
+    public function setHolidayCount($HolidayCount)
+    {
+        $this->HolidayCount = $HolidayCount;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRestDays()
+    {
+        return $this->RestDays;
+    }
+
+    /**
+     * @param mixed $RestDays
+     */
+    public function setRestDays($RestDays)
+    {
+        $this->RestDays = $RestDays;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTotalTransitDays()
+    {
+        return $this->TotalTransitDays;
+    }
+
+    /**
+     * @param mixed $TotalTransitDays
+     */
+    public function setTotalTransitDays($TotalTransitDays)
+    {
+        $this->TotalTransitDays = $TotalTransitDays;
+    }
+
 }
