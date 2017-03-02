@@ -18,6 +18,11 @@ class BillShipper
     private $creditCard;
 
     /**
+     * TODO: AlternatePaymentMethod?
+     */
+    // private $alternatePaymentMethod;
+
+    /**
      * @param \stdClass|null $attributes
      */
     public function __construct(\stdClass $attributes = null)

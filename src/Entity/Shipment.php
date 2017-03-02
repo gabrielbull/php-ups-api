@@ -10,6 +10,11 @@ class Shipment
     private $paymentInformation;
 
     /**
+     * @var ItemizedPaymentInformation
+     */
+    private $itemizedPaymentInformation;
+
+    /**
      * @var RateInformation
      */
     private $rateInformation;
@@ -415,6 +420,28 @@ class Shipment
     public function setPaymentInformation(PaymentInformation $paymentInformation)
     {
         $this->paymentInformation = $paymentInformation;
+        $this->itemizedPaymentInformation = null;
+
+        return $this;
+    }
+
+    /**
+     * @return ItemizedPaymentInformation
+     */
+    public function getItemizedPaymentInformation()
+    {
+        return $this->itemizedPaymentInformation;
+    }
+
+    /**
+     * @param ItemizedPaymentInformation $itemizedPaymentInformation
+     *
+     * @return Shipment
+     */
+    public function setItemizedPaymentInformation(ItemizedPaymentInformation $itemizedPaymentInformation)
+    {
+        $this->itemizedPaymentInformation = $itemizedPaymentInformation;
+        $this->paymentInformation = null;
 
         return $this;
     }

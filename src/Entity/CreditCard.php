@@ -1,11 +1,14 @@
 <?php
 
 namespace Ups\Entity;
+use DOMDocument;
+use DOMElement;
+use Ups\NodeInterface;
 
 /**
  * @author Eduard Sukharev <eduard.sukharev@opensoftdev.ru>
  */
-class CreditCard
+class CreditCard implements NodeInterface
 {
     /**
      * @var string
@@ -51,6 +54,34 @@ class CreditCard
         if (isset($attributes->SecurityCode)) {
             $this->setSecurityCode($attributes->SecurityCode);
         }
+    }
+
+    /**
+     * @param DOMDocument|null $document
+     *
+     * @return DOMElement
+     */
+    public function toNode(DOMDocument $document = null)
+    {
+        if (null === $document) {
+            $document = new DOMDocument();
+        }
+
+        $node = $document->createElement('CreditCard');
+
+        $node->appendChild($document->createElement('Type', $this->getType()));
+        $node->appendChild($document->createElement('Number', $this->getNumber()));
+        $node->appendChild($document->createElement('ExpirationDate', $this->getExpirationDate()));
+
+        if ($this->getSecurityCode()) {
+           $node->appendChild($document->createElement('SecurityCode', $this->getSecurityCode()));
+        }
+
+        if ($this->getAddress()) {
+            $node->appendChild($this->getAddress()->toNode($document));
+        }
+
+        return $node;
     }
 
     /**
