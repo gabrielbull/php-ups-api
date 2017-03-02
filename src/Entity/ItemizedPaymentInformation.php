@@ -41,5 +41,4 @@ class ItemizedPaymentInformation
 
         return $this;
     }
-
 }
