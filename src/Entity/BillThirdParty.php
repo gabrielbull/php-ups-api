@@ -1,6 +1,7 @@
 <?php
 
 namespace Ups\Entity;
+
 use DOMDocument;
 use DOMElement;
 use Ups\NodeInterface;

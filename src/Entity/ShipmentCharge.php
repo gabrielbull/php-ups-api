@@ -7,7 +7,6 @@ namespace Ups\Entity;
  */
 class ShipmentCharge
 {
-
     const TYPE_TRANSPORTATION = '01';
     const TYPE_DUTIES_AND_TAXES = '02';
 
@@ -51,7 +50,8 @@ class ShipmentCharge
      *
      * @return $this
      */
-    public function setType($type) {
+    public function setType($type)
+    {
         $this->type = $type;
 
         return $this;
@@ -60,7 +60,8 @@ class ShipmentCharge
     /**
      * @return string
      */
-    public function getType() {
+    public function getType()
+    {
         return $this->type;
     }
 
@@ -68,7 +69,8 @@ class ShipmentCharge
      * @param BillShipper $shipper
      * @return $this
      */
-    public function setBillShipper(BillShipper $shipper) {
+    public function setBillShipper(BillShipper $shipper)
+    {
         $this->billShipper = $shipper;
 
         return $this;
@@ -77,7 +79,8 @@ class ShipmentCharge
     /**
      * @return BillShipper
      */
-    public function getBillShipper() {
+    public function getBillShipper()
+    {
         return $this->billShipper;
     }
 
@@ -85,7 +88,8 @@ class ShipmentCharge
      * @param BillReceiver $receiver
      * @return $this
      */
-    public function setBillReceiver(BillReceiver $receiver) {
+    public function setBillReceiver(BillReceiver $receiver)
+    {
         $this->billReceiver = $receiver;
 
         return $this;
@@ -94,7 +98,8 @@ class ShipmentCharge
     /**
      * @return BillReceiver
      */
-    public function getBillReceiver() {
+    public function getBillReceiver()
+    {
         return $this->billReceiver;
     }
 
@@ -102,7 +107,8 @@ class ShipmentCharge
      * @param BillThirdParty $thirdParty
      * @return $this
      */
-    public function setThirdPartyBilled(BillThirdParty $thirdParty) {
+    public function setThirdPartyBilled(BillThirdParty $thirdParty)
+    {
         $this->billThirdParty = $thirdParty;
 
         return $this;
@@ -111,7 +117,8 @@ class ShipmentCharge
     /**
      * @return BillThirdParty
      */
-    public function getThirdPartyBilled() {
+    public function getThirdPartyBilled()
+    {
         return $this->billThirdParty;
     }
 
@@ -119,7 +126,8 @@ class ShipmentCharge
      * @param boolean $bool
      * @return $this
      */
-    public function setConsigneeBilled($bool = true) {
+    public function setConsigneeBilled($bool = true)
+    {
         $this->billConsigneeBilled = $bool;
 
         return $this;
@@ -128,7 +136,8 @@ class ShipmentCharge
     /**
      * @return bool
      */
-    public function getConsigneeBilled() {
+    public function getConsigneeBilled()
+    {
         return $this->billConsigneeBilled;
     }
 
@@ -136,7 +145,8 @@ class ShipmentCharge
      * @param bool $indicator
      * @return $this
      */
-    public function setSplitDutyVATIndicator($indicator = true) {
+    public function setSplitDutyVATIndicator($indicator = true)
+    {
         $this->splitDutyVATIndicator = $indicator;
 
         return $this;
@@ -145,8 +155,8 @@ class ShipmentCharge
     /**
      * @return boolean
      */
-    public function getSplitDutyVATIndicator() {
+    public function getSplitDutyVATIndicator()
+    {
         return $this->splitDutyVATIndicator;
     }
-
 }

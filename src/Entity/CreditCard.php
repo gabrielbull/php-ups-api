@@ -1,6 +1,7 @@
 <?php
 
 namespace Ups\Entity;
+
 use DOMDocument;
 use DOMElement;
 use Ups\NodeInterface;
@@ -74,7 +75,7 @@ class CreditCard implements NodeInterface
         $node->appendChild($document->createElement('ExpirationDate', $this->getExpirationDate()));
 
         if ($this->getSecurityCode()) {
-           $node->appendChild($document->createElement('SecurityCode', $this->getSecurityCode()));
+            $node->appendChild($document->createElement('SecurityCode', $this->getSecurityCode()));
         }
 
         if ($this->getAddress()) {

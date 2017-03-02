@@ -16,7 +16,8 @@ class ItemizedPaymentInformation
      * @param ShipmentCharge $charge
      * @return $this
      */
-    public function addShipmentCharge(ShipmentCharge $charge) {
+    public function addShipmentCharge(ShipmentCharge $charge)
+    {
         $this->charges[] = $charge;
 
         return $this;
@@ -25,7 +26,8 @@ class ItemizedPaymentInformation
     /**
      * @return ShipmentCharge[]
      */
-    public function getShipmentCharges() {
+    public function getShipmentCharges()
+    {
         return $this->charges;
     }
 
@@ -33,7 +35,8 @@ class ItemizedPaymentInformation
      * @param ShipmentCharge[] $charges
      * @return $this
      */
-    public function setShipmentCharges(array $charges) {
+    public function setShipmentCharges(array $charges)
+    {
         $this->charges = $charges;
 
         return $this;
