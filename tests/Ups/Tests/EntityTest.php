@@ -48,7 +48,6 @@ class EntityTest extends PHPUnit_Framework_TestCase
         'BillShipper',
         'Image',
         'PickupDateRange',
-        'BillThirdParty',
         'ImageFormat',
         'StatusType',
         'BillToAccount',
@@ -66,7 +65,6 @@ class EntityTest extends PHPUnit_Framework_TestCase
         'LabelImageFormat',
         'RateRequest',
         'TrackingCandidate',
-        'CreditCard',
         'LabelRecoveryRequest',
         'RateResponse',
         'LabelRecoveryResponse',
@@ -95,6 +93,7 @@ class EntityTest extends PHPUnit_Framework_TestCase
      */
     protected $nodeListNoConstructAndNodeInterface = [
         'AccessPointCOD',
+        'CreditCard',
         'Discount',
         'AccessPointSearch',
         'EEIFilingOption',
@@ -124,6 +123,7 @@ class EntityTest extends PHPUnit_Framework_TestCase
         'InsuredValue',
         'InternationalForms',
         'Product',
+        'BillThirdParty',
         'COD',
         'InvoiceLineTotal',
         'CODAmount',
