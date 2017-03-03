@@ -7,6 +7,8 @@ namespace Ups\Entity;
  */
 class BillShipper
 {
+    const TYPE_ALTERNATE_PAYMENT_METHOD_PAYPAL = '01';
+
     /**
      * @var string
      */
@@ -18,9 +20,9 @@ class BillShipper
     private $creditCard;
 
     /**
-     * TODO: AlternatePaymentMethod?
+     * @var string
      */
-    // private $alternatePaymentMethod;
+    private $alternatePaymentMethod;
 
     /**
      * @param \stdClass|null $attributes
@@ -31,7 +33,10 @@ class BillShipper
             $this->setAccountNumber($attributes->AccountNumber);
         }
         if (isset($attributes->CreditCard)) {
-            $this->setAccountNumber(new CreditCard($attributes->CreditCard));
+            $this->setCreditCard(new CreditCard($attributes->CreditCard));
+        }
+        if (isset($attributes->alternatePaymentMethod)) {
+            $this->setAlternatePaymentMethod($attributes->alternatePaymentMethod);
         }
     }
 
@@ -72,5 +77,24 @@ class BillShipper
         $this->creditCard = $creditCard;
 
         return $this;
+    }
+
+    /**
+     * @param string $type
+     * @return BillShipper
+     */
+    public function setAlternatePaymentMethod($type)
+    {
+        $this->alternatePaymentMethod = $type;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getAlternatePaymentMethod()
+    {
+        return $this->alternatePaymentMethod;
     }
 }

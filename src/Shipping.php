@@ -267,6 +267,8 @@ class Shipping extends Ups
                     $node->appendChild($xml->createElement('AccountNumber', $shipment->getPaymentInformation()->getPrepaid()->getBillShipper()->getAccountNumber()));
                 } elseif (isset($billShipper) && $creditCard = $shipment->getPaymentInformation()->getPrepaid()->getBillShipper()->getCreditCard()) {
                     $node->appendChild($creditCard->toNode($xml));
+                } elseif (isset($billShipper) && $type = $shipment->getPaymentInformation()->getPrepaid()->getBillShipper()->getAlternatePaymentMethod()) {
+                    $node->appendChild($xml->createElement('AlternatePaymentMethod', $type));
                 }
             } elseif ($shipment->getPaymentInformation()->getBillThirdParty()) {
                 $paymentNode->appendChild($shipment->getPaymentInformation()->getBillThirdParty()->toNode($xml));
@@ -296,8 +298,8 @@ class Shipping extends Ups
                         $shipperNode->appendChild($xml->createElement('AccountNumber', $shipmentCharge->getBillShipper()->getAccountNumber()));
                     } elseif ($creditCard = $shipmentCharge->getBillShipper()->getCreditCard()) {
                         $shipperNode->appendChild($creditCard->toNode($xml));
-                    } elseif (false) {
-                        // Alternate payment?
+                    } elseif ($type = $shipmentCharge->getBillShipper()->getAlternatePaymentMethod()) {
+                        $shipperNode->appendChild($xml->createElement('AlternatePaymentMethod', $type));
                     }
 
                     $chNode->appendChild($shipperNode);
