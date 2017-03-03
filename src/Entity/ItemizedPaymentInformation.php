@@ -2,7 +2,10 @@
 
 namespace Ups\Entity;
 
-class ItemizedPaymentInformation
+use DOMDocument;
+use Ups\NodeInterface;
+
+class ItemizedPaymentInformation implements NodeInterface
 {
 
     /**
@@ -11,6 +14,54 @@ class ItemizedPaymentInformation
      * @var array
      */
     private $charges = array();
+
+    /**
+     * @param null|DOMDocument $document
+     *
+     * @return DOMElement
+     */
+    public function toNode(DOMDocument $document = null)
+    {
+        if (null === $document) {
+            $document = new DOMDocument();
+        }
+
+        $node = $document->createElement('ItemizedPaymentInformation');
+
+        foreach ($this->getShipmentCharges() as $shipmentCharge) {
+            $chNode = $document->createElement('ShipmentCharge');
+            $chNode->appendChild($document->createElement('Type', $shipmentCharge->getType()));
+
+            if ($shipmentCharge->getBillShipper()) {
+                $chNode->appendChild($shipmentCharge->getBillShipper()->toNode($document));
+            } elseif ($shipmentCharge->getBillReceiver()) {
+                $receiverNode = $document->createElement('BillReceiver');
+
+                if ($shipmentCharge->getBillReceiver()->getAccountNumber()) {
+                    $receiverNode->appendChild($document->createElement('AccountNumber', $shipmentCharge->getBillReceiver()->getAccountNumber()));
+                }
+                if ($shipmentCharge->getBillReceiver()->getPostalCode()) {
+                    $address = $document->createElement('Address');
+                    $address->appendChild($document->createElement('PostalCode', $shipmentCharge->getBillReceiver()->getPostalCode()));
+                    $receiverNode->appendChild($address);
+                }
+
+                $chNode->appendChild($receiverNode);
+            } elseif ($shipmentCharge->getThirdPartyBilled()) {
+                $chNode->appendChild($shipmentCharge->getThirdPartyBilled()->toNode($document));
+            } elseif ($shipmentCharge->getConsigneeBilled()) {
+                $chNode->appendChild($document->createElement('ConsigneeBilled'));
+            }
+
+            $node->appendChild($chNode);
+
+            if ($shipmentCharge->getSplitDutyVATIndicator()) {
+                $node->appendChild($document->createElement('SplitDutyVATIndicator'));
+            }
+        }
+        
+        return $node;
+    }
 
     /**
      * @param ShipmentCharge $charge

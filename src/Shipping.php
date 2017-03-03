@@ -279,40 +279,7 @@ class Shipping extends Ups
                 $paymentNode->appendChild($xml->createElement('ConsigneeBilled'));
             }
         } elseif ($shipment->getItemizedPaymentInformation()) {
-            $paymentNode = $shipmentNode->appendChild($xml->createElement('ItemizedPaymentInformation'));
-
-            foreach ($shipment->getItemizedPaymentInformation()->getShipmentCharges() as $shipmentCharge) {
-                $chNode = $xml->createElement('ShipmentCharge');
-                $chNode->appendChild($xml->createElement('Type', $shipmentCharge->getType()));
-
-                if ($shipmentCharge->getBillShipper()) {
-                    $chNode->appendChild($shipmentCharge->getBillShipper()->toNode($xml));
-                } elseif ($shipmentCharge->getBillReceiver()) {
-                    $receiverNode = $xml->createElement('BillReceiver');
-
-                    if ($shipmentCharge->getBillReceiver()->getAccountNumber()) {
-                        $receiverNode->appendChild($xml->createElement('AccountNumber', $shipmentCharge->getBillReceiver()->getAccountNumber()));
-                    }
-                    if ($shipmentCharge->getBillReceiver()->getPostalCode()) {
-                        $address = $xml->createElement('Address');
-                        $address->appendChild($xml->createElement('PostalCode', $shipmentCharge->getBillReceiver()->getPostalCode()));
-
-                        $receiverNode->appendChild($address);
-                    }
-
-                    $chNode->appendChild($receiverNode);
-                } elseif ($shipmentCharge->getThirdPartyBilled()) {
-                    $chNode->appendChild($shipmentCharge->getThirdPartyBilled()->toNode($xml));
-                } elseif ($shipmentCharge->getConsigneeBilled()) {
-                    $chNode->appendChild($xml->createElement('ConsigneeBilled'));
-                }
-
-                $paymentNode->appendChild($chNode);
-
-                if ($shipmentCharge->getSplitDutyVATIndicator()) {
-                    $paymentNode->appendChild($xml->createElement('SplitDutyVATIndicator'));
-                }
-            }
+            $shipmentNode->appendChild($shipment->getItemizedPaymentInformation()->toNode());
         }
 
         if ($shipment->getGoodsNotInFreeCirculationIndicator()) {
