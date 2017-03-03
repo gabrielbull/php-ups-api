@@ -2,10 +2,13 @@
 
 namespace Ups\Entity;
 
+use DOMDocument;
+use Ups\NodeInterface;
+
 /**
  * @author Eduard Sukharev <eduard.sukharev@opensoftdev.ru>
  */
-class BillShipper
+class BillShipper implements NodeInterface
 {
     const TYPE_ALTERNATE_PAYMENT_METHOD_PAYPAL = '01';
 
@@ -38,6 +41,30 @@ class BillShipper
         if (isset($attributes->alternatePaymentMethod)) {
             $this->setAlternatePaymentMethod($attributes->alternatePaymentMethod);
         }
+    }
+
+    /**
+     * @param null|DOMDocument $document
+     *
+     * @return DOMElement
+     */
+    public function toNode(DOMDocument $document = null)
+    {
+        if (null === $document) {
+            $document = new DOMDocument();
+        }
+
+        $node = $document->createElement('BillShipper');
+
+        if ($this->getAccountNumber()) {
+            $node->appendChild($document->createElement('AccountNumber', $this->getAccountNumber()));
+        } elseif ($creditCard = $this->getCreditCard()) {
+            $node->appendChild($creditCard->toNode($document));
+        } elseif ($type = $this->getAlternatePaymentMethod()) {
+            $node->appendChild($document->createElement('AlternatePaymentMethod', $type));
+        }
+
+        return $node;
     }
 
     /**

@@ -260,15 +260,9 @@ class Shipping extends Ups
 
             if ($shipment->getPaymentInformation()->getPrepaid()) {
                 $node = $paymentNode->appendChild($xml->createElement('Prepaid'));
-                $node = $node->appendChild($xml->createElement('BillShipper'));
-
                 $billShipper = $shipment->getPaymentInformation()->getPrepaid()->getBillShipper();
-                if (isset($billShipper) && $shipment->getPaymentInformation()->getPrepaid()->getBillShipper()->getAccountNumber()) {
-                    $node->appendChild($xml->createElement('AccountNumber', $shipment->getPaymentInformation()->getPrepaid()->getBillShipper()->getAccountNumber()));
-                } elseif (isset($billShipper) && $creditCard = $shipment->getPaymentInformation()->getPrepaid()->getBillShipper()->getCreditCard()) {
-                    $node->appendChild($creditCard->toNode($xml));
-                } elseif (isset($billShipper) && $type = $shipment->getPaymentInformation()->getPrepaid()->getBillShipper()->getAlternatePaymentMethod()) {
-                    $node->appendChild($xml->createElement('AlternatePaymentMethod', $type));
+                if ($billShipper) {
+                    $node->appendChild($billShipper->toNode($xml));
                 }
             } elseif ($shipment->getPaymentInformation()->getBillThirdParty()) {
                 $paymentNode->appendChild($shipment->getPaymentInformation()->getBillThirdParty()->toNode($xml));
@@ -292,17 +286,7 @@ class Shipping extends Ups
                 $chNode->appendChild($xml->createElement('Type', $shipmentCharge->getType()));
 
                 if ($shipmentCharge->getBillShipper()) {
-                    $shipperNode = $xml->createElement('BillShipper');
-
-                    if ($shipmentCharge->getBillShipper()->getAccountNumber()) {
-                        $shipperNode->appendChild($xml->createElement('AccountNumber', $shipmentCharge->getBillShipper()->getAccountNumber()));
-                    } elseif ($creditCard = $shipmentCharge->getBillShipper()->getCreditCard()) {
-                        $shipperNode->appendChild($creditCard->toNode($xml));
-                    } elseif ($type = $shipmentCharge->getBillShipper()->getAlternatePaymentMethod()) {
-                        $shipperNode->appendChild($xml->createElement('AlternatePaymentMethod', $type));
-                    }
-
-                    $chNode->appendChild($shipperNode);
+                    $chNode->appendChild($shipmentCharge->getBillShipper()->toNode($xml));
                 } elseif ($shipmentCharge->getBillReceiver()) {
                     $receiverNode = $xml->createElement('BillReceiver');
 
