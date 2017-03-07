@@ -38,7 +38,7 @@ class ItemizedPaymentInformation
             }
         }
 
-        if(isset($attributes->SplitDutyVATIndicator)) {
+        if (isset($attributes->SplitDutyVATIndicator)) {
             $this->setSplitDutyVATIndicator($attributes->SplitDutyVATIndicator);
         }
     }
