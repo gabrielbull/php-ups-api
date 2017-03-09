@@ -33,7 +33,7 @@ class Rate extends Ups
     /**
      * @var string
      */
-    private $requestOption;
+    protected $requestOption;
 
     /**
      * @param $rateRequest
@@ -62,26 +62,6 @@ class Rate extends Ups
      *
      * @return RateResponse
      */
-    public function shopRatesTimeInTransit($rateRequest)
-    {
-        if ($rateRequest instanceof Shipment) {
-            $shipment = $rateRequest;
-            $rateRequest = new RateRequest();
-            $rateRequest->setShipment($shipment);
-        }
-
-        $this->requestOption = 'Shoptimeintransit';
-
-        return $this->sendRequest($rateRequest);
-    }
-
-    /**
-     * @param $rateRequest
-     *
-     * @throws Exception
-     *
-     * @return RateResponse
-     */
     public function getRate($rateRequest)
     {
         if ($rateRequest instanceof Shipment) {
@@ -96,26 +76,6 @@ class Rate extends Ups
     }
 
     /**
-     * @param $rateRequest
-     *
-     * @throws Exception
-     *
-     * @return RateResponse
-     */
-    public function getRateTimeInTransit($rateRequest)
-    {
-        if ($rateRequest instanceof Shipment) {
-            $shipment = $rateRequest;
-            $rateRequest = new RateRequest();
-            $rateRequest->setShipment($shipment);
-        }
-
-        $this->requestOption = 'Ratetimeintransit';
-
-        return $this->sendRequest($rateRequest);
-    }
-
-    /**
      * Creates and sends a request for the given shipment. This handles checking for
      * errors in the response back from UPS.
      *
@@ -125,7 +85,7 @@ class Rate extends Ups
      *
      * @return RateResponse
      */
-    private function sendRequest(RateRequest $rateRequest)
+    protected function sendRequest(RateRequest $rateRequest)
     {
         $request = $this->createRequest($rateRequest);
 
