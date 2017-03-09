@@ -212,7 +212,8 @@ class InternationalForms implements NodeInterface
      *
      * @return $this
      */
-    public function setTypes(array $types) {
+    public function setTypes(array $types)
+    {
         $this->types = $types;
 
         return $this;
