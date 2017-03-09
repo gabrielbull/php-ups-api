@@ -47,6 +47,11 @@ class Product implements NodeInterface
     private $unit;
 
     /**
+     * @var PackingListInfo
+     */
+    private $packingListInfo;
+
+    /**
      * @param null|object $attributes
      */
     public function __construct($attributes = null)
@@ -96,6 +101,9 @@ class Product implements NodeInterface
         }
         if ($this->getOriginCountryCode() !== null) {
             $node->appendChild($document->createElement('OriginCountryCode', $this->getOriginCountryCode()));
+        }
+        if ($this->getPackingListInfo()) {
+            $node->appendChild($this->getPackingListInfo()->toNode($document));
         }
 
         return $node;
@@ -251,5 +259,25 @@ class Product implements NodeInterface
     public function getOriginCountryCode()
     {
         return $this->originCountryCode;
+    }
+
+    /**
+     * @param PackingListInfo $info
+     *
+     * @return $this
+     */
+    public function setPackingListInfo(PackingListInfo $info)
+    {
+        $this->packingListInfo = $info;
+
+        return $this;
+    }
+
+    /**
+     * @return PackingListInfo
+     */
+    public function getPackingListInfo()
+    {
+        return $this->packingListInfo;
     }
 }

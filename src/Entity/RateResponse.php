@@ -4,6 +4,9 @@ namespace Ups\Entity;
 
 class RateResponse
 {
+    /**
+     * @var RatedShipment[]
+     */
     public $RatedShipment;
 
     public function __construct($response = null)
