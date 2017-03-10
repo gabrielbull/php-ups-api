@@ -58,7 +58,6 @@ class SearchFilter implements NodeInterface
 
         if ($this->getClickAndCollectSortWithDistance()) {
             $node->appendChild($document->createElement('ClickAndCollectSortWithDistance', strval($this->getClickAndCollectSortWithDistance())));
-
         }
 
         return $node;
@@ -127,5 +126,4 @@ class SearchFilter implements NodeInterface
     {
         $this->clickAndCollectSortWithDistance = $clickAndCollectSortWithDistance;
     }
-
 }

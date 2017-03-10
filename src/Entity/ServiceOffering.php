@@ -8,7 +8,6 @@ use Ups\NodeInterface;
 
 class ServiceOffering implements NodeInterface
 {
-
     const SO_DIRECT_TO_RETAIL = '001';
     const SO_NOT_IN_ONE_ADL = '002';
     const SO_CLICK_AND_COLLECT = '003';

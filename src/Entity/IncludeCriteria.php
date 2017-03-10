@@ -126,6 +126,4 @@ class IncludeCriteria implements NodeInterface
     {
         $this->searchFilter = $searchFilter;
     }
-
-
 }

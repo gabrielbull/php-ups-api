@@ -56,5 +56,4 @@ class MerchantAccountNumber implements NodeInterface
     {
         $this->merchantAccountNumber = $merchantAccountNumber;
     }
-
 }
