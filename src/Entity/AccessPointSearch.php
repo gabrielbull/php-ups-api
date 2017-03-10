@@ -30,6 +30,11 @@ class AccessPointSearch implements NodeInterface
     private $accountNumber;
 
     /**
+     * @var IncludeCriteria
+     */
+    private $includeCriteria;
+
+    /**
      * @param null|DOMDocument $document
      *
      * @return DOMElement
@@ -52,6 +57,10 @@ class AccessPointSearch implements NodeInterface
 
         if ($this->getAccountNumber()) {
             $node->appendChild($document->createElement('AccountNumber', $this->getAccountNumber()));
+        }
+
+        if ($this->getIncludeCriteria()) {
+            $node->appendChild($this->getIncludeCriteria()->toNode($document));
         }
 
         return $node;
@@ -103,5 +112,21 @@ class AccessPointSearch implements NodeInterface
     public function setAccessPointStatus($accessPointStatus)
     {
         $this->accessPointStatus = $accessPointStatus;
+    }
+
+    /**
+     * @return IncludeCriteria|null
+     */
+    public function getIncludeCriteria()
+    {
+        return $this->includeCriteria;
+    }
+
+    /**
+     * @param IncludeCriteria $includeCriteria
+     */
+    public function setIncludeCriteria($includeCriteria = null)
+    {
+        $this->includeCriteria = $includeCriteria;
     }
 }
