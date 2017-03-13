@@ -30,7 +30,12 @@ class PackageServiceOptions implements NodeInterface
     /**
      * @var HazMat[]
      */
-    private $hazmat = [];
+    private $hazMat = [];
+
+    /**
+     * @var HazMatPackageInformation
+     */
+    private $hazMatPackageInformation;
 
     /**
      * @var string
@@ -78,6 +83,9 @@ class PackageServiceOptions implements NodeInterface
         }
         foreach($this->getHazMat() as $hazmat) {
             $node->appendChild($hazmat->toNode($document));
+        }
+        if ($this->getHazMatPackageInformation() !== null) {
+            $node->appendChild($this->getHazMatPackageInformation()->toNode($document));
         }
 
         return $node;
@@ -136,15 +144,15 @@ class PackageServiceOptions implements NodeInterface
      */
     public function getHazMat()
     {
-        return $this->hazmat;
+        return $this->hazMat;
     }
 
     /**
-     * @param HazMat[] $hazmat
+     * @param HazMat[] $hazMat
      */
-    public function setHazMat(array $hazmat)
+    public function setHazMat(array $hazMat)
     {
-        $this->hazmat = $hazmat;
+        $this->hazMat = $hazMat;
     }
 
     /**
@@ -152,7 +160,7 @@ class PackageServiceOptions implements NodeInterface
      */
     public function addHazMat(HazMat $hazmat)
     {
-        $this->hazmat[] = $hazmat;
+        $this->hazMat[] = $hazmat;
     }
 
     /**
@@ -169,5 +177,21 @@ class PackageServiceOptions implements NodeInterface
     public function setHoldForPickup($var)
     {
         $this->holdForPickup = $var;
+    }
+
+    /**
+     * @return HazMatPackageInformation
+     */
+    public function getHazMatPackageInformation()
+    {
+        return $this->hazMatPackageInformation;
+    }
+
+    /**
+     * @param HazMatPackageInformation $hazMatPackageInformation
+     */
+    public function setHazMatPackageInformation($hazMatPackageInformation)
+    {
+        $this->hazMatPackageInformation = $hazMatPackageInformation;
     }
 }
