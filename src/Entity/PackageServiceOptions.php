@@ -28,9 +28,9 @@ class PackageServiceOptions implements NodeInterface
     private $earliestDeliveryTime;
 
     /**
-     * @var string
+     * @var HazMat[]
      */
-    private $hazardousMaterialsCode;
+    private $hazmat = [];
 
     /**
      * @var string
@@ -52,9 +52,6 @@ class PackageServiceOptions implements NodeInterface
             if (isset($parameters->EarliestDeliveryTime)) {
                 $this->setEarliestDeliveryTime($parameters->EarliestDeliveryTime);
             }
-            if (isset($parameters->HazardousMaterialsCode)) {
-                $this->setHazardousMaterialsCode($parameters->HazardousMaterialsCode);
-            }
             if (isset($parameters->HoldForPickup)) {
                 $this->setHoldForPickup($parameters->HoldForPickup);
             }
@@ -64,7 +61,7 @@ class PackageServiceOptions implements NodeInterface
     /**
      * @param null|DOMDocument $document
      *
-     * TODO: this seem to be awfully incomplete
+     * @TODO: this seem to be awfully incomplete
      *
      * @return DOMElement
      */
@@ -78,6 +75,9 @@ class PackageServiceOptions implements NodeInterface
 
         if ($this->getInsuredValue()) {
             $node->appendChild($this->getInsuredValue()->toNode($document));
+        }
+        foreach($this->getHazMat() as $hazmat) {
+            $node->appendChild($hazmat->toNode($document));
         }
 
         return $node;
@@ -132,19 +132,27 @@ class PackageServiceOptions implements NodeInterface
     }
 
     /**
-     * @return string|null
+     * @return HazMat[]
      */
-    public function getHazardousMaterialsCode()
+    public function getHazMat()
     {
-        return $this->hazardousMaterialsCode;
+        return $this->hazmat;
     }
 
     /**
-     * @param $var
+     * @param HazMat[] $hazmat
      */
-    public function setHazardousMaterialsCode($var)
+    public function setHazMat(array $hazmat)
     {
-        $this->hazardousMaterialsCode = $var;
+        $this->hazmat = $hazmat;
+    }
+
+    /**
+     * @param HazMat $hazmat
+     */
+    public function addHazMat(HazMat $hazmat)
+    {
+        $this->hazmat[] = $hazmat;
     }
 
     /**
