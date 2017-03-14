@@ -283,14 +283,20 @@ class Tracking extends Ups
             $trackRequest->appendChild($xml->createElement('ShipperNumber', $this->shipperNumber));
         }
 
-        if (null !== $this->beginDate) {
-            $beginDate = $this->beginDate->format('Ymd');
-            $trackRequest->appendChild($xml->createElement('BeginDate', $beginDate));
-        }
+        if (null !== $this->beginDate || null !== $this->endDate) {
+            $DateRange = $xml->createElement('PickupDateRange');
 
-        if (null !== $this->endDate) {
-            $endDate = $this->endDate->format('Ymd');
-            $trackRequest->appendChild($xml->createElement('EndDate', $endDate));
+            if (null !== $this->beginDate) {
+                $beginDate = $this->beginDate->format('Ymd');
+                $DateRange->appendChild($xml->createElement('BeginDate', $beginDate));
+            }
+
+            if (null !== $this->endDate) {
+                $endDate = $this->endDate->format('Ymd');
+                $DateRange->appendChild($xml->createElement('EndDate', $endDate));
+            }
+
+            $trackRequest->appendChild($DateRange);
         }
 
         return $xml->saveXML();
