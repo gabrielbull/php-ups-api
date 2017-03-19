@@ -10,9 +10,11 @@ use Ups\NodeInterface;
 class InternationalForms implements NodeInterface
 {
     /**
-     * @var string
+     * @var array
      */
-    private $type = self::TYPE_INVOICE;
+    private $types = [
+        self::TYPE_INVOICE
+    ];
 
     /**
      * Form Types.
@@ -152,17 +154,19 @@ class InternationalForms implements NodeInterface
     /**
      * @return array
      */
-    public static function getTypes()
+    public static function getFormTypes()
     {
         return self::$typeNames;
     }
 
     /**
+     * @param string $type
+     *
      * @return string
      */
-    public function getTypeName()
+    public function getFormTypeName($type)
     {
-        return self::$typeNames[$this->getType()];
+        return self::$typeNames[$type];
     }
 
     /**
@@ -208,7 +212,17 @@ class InternationalForms implements NodeInterface
      */
     public function setType($type)
     {
-        $this->type = $type;
+        return $this->setTypes([$type]);
+    }
+
+    /**
+     * @param array $types
+     *
+     * @return $this
+     */
+    public function setTypes(array $types)
+    {
+        $this->types = $types;
 
         return $this;
     }
@@ -216,9 +230,9 @@ class InternationalForms implements NodeInterface
     /**
      * @return string
      */
-    public function getType()
+    public function getTypes()
     {
-        return $this->type;
+        return $this->types;
     }
 
     /**
@@ -294,8 +308,8 @@ class InternationalForms implements NodeInterface
 
         $node = $document->createElement('InternationalForms');
 
-        if ($this->getType()) {
-            $node->appendChild($document->createElement('FormType', $this->getType()));
+        foreach ($this->getTypes() as $type) {
+            $node->appendChild($document->createElement('FormType', $type));
         }
         if ($this->getInvoiceNumber() !== null) {
             $node->appendChild($document->createElement('InvoiceNumber', $this->getInvoiceNumber()));
