@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 0.7.12 (released 19-03-2016)
+
+- Extend ShipmentServiceOptions in Shipping API
+- Fix for Begin and End date in Tracking API
+- Support for HazMat containers in Shipping API 
+
+## 0.7.11 (released 15-09-2016)
+
+- Multiple results in Tracking + add Simple Address Validation class
+
 ## 0.7.10 (released 12-07-2016) 
 
 - Solve an issue when mb_detect_encoding couldn't detect it, use a fallback to use utf8_encode. Else response parsing breaks.
