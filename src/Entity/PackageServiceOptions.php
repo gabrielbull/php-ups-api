@@ -81,7 +81,7 @@ class PackageServiceOptions implements NodeInterface
         if ($this->getInsuredValue()) {
             $node->appendChild($this->getInsuredValue()->toNode($document));
         }
-        foreach($this->getHazMat() as $hazmat) {
+        foreach ($this->getHazMat() as $hazmat) {
             $node->appendChild($hazmat->toNode($document));
         }
         if ($this->getHazMatPackageInformation() !== null) {
