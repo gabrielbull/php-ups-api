@@ -3,3 +3,5 @@ phpunit.xml
 vendor
 php-ups-api.iml
 .idea
+/nbproject/private/
+nbproject/

@@ -13,13 +13,14 @@ use Ups\NodeInterface;
 // @todo Refactor to private properties
 class ShipmentServiceOptions implements NodeInterface
 {
+
     /**
-     * @var
+     * @var bool
      */
     public $SaturdayPickup;
 
     /**
-     * @var
+     * @var bool
      */
     public $SaturdayDelivery;
 
@@ -34,12 +35,12 @@ class ShipmentServiceOptions implements NodeInterface
     public $CallTagARS;
 
     /**
-     * @var
+     * @var bool
      */
     public $NegotiatedRatesIndicator;
 
     /**
-     * @var
+     * @var bool
      */
     public $DirectDeliveryOnlyIndicator;
 
@@ -67,6 +68,11 @@ class ShipmentServiceOptions implements NodeInterface
      * @var AccessPointCOD
      */
     private $accessPointCOD;
+        
+    /**
+     * @var bool
+     */
+    private $CarbonNeutral;
 
     /**
      * @var boolean
@@ -101,9 +107,9 @@ class ShipmentServiceOptions implements NodeInterface
             }
             if (isset($response->DirectDeliveryOnlyIndicator)) {
                 $this->DirectDeliveryOnlyIndicator = $response->DirectDeliveryOnlyIndicator;
-            }
-            if (isset($response->DeliverToAddresseeOnlyIndicator)) {
-                $this->DeliverToAddresseeOnlyIndicator = $response->DeliverToAddresseeOnlyIndicator;
+            }            
+            if (isset($response->CarbonNeutral)) {
+                $this->CarbonNeutral = $response->CarbonNeutral;
             }
             if (isset($response->InternationalForms)) {
                 $this->setInternationalForms($response->InternationalForms);
@@ -127,25 +133,25 @@ class ShipmentServiceOptions implements NodeInterface
         if (null === $document) {
             $document = new DOMDocument();
         }
-
+        
         $node = $document->createElement('ShipmentServiceOptions');
 
-        if (isset($this->DirectDeliveryOnlyIndicator)) {
+        if ($this->DirectDeliveryOnlyIndicator) {
             $node->appendChild($document->createElement('DirectDeliveryOnlyIndicator'));
         }
 
-        if (isset($this->DeliverToAddresseeOnlyIndicator)) {
+        if ($this->DeliverToAddresseeOnlyIndicator) {
             $node->appendChild($document->createElement('DeliverToAddresseeOnlyIndicator'));
         }
 
-        if (isset($this->SaturdayPickup)) {
+        if ($this->SaturdayPickup) {
             $node->appendChild($document->createElement('SaturdayPickup'));
         }
 
-        if (isset($this->SaturdayDelivery)) {
+        if ($this->SaturdayDelivery) {
             $node->appendChild($document->createElement('SaturdayDelivery'));
         }
-
+        
         if ($this->getCOD()) {
             $node->appendChild($this->getCOD()->toNode($document));
         }
@@ -154,7 +160,7 @@ class ShipmentServiceOptions implements NodeInterface
             $node->appendChild($this->getAccessPointCOD()->toNode($document));
         }
 
-        if (isset($this->internationalForms)) {
+        if ($this->internationalForms) {
             $node->appendChild($this->internationalForms->toNode($document));
         }
 
@@ -171,7 +177,7 @@ class ShipmentServiceOptions implements NodeInterface
                 $node->appendChild($notification->toNode($document));
             }
         }
-
+        
         return $node;
     }
 
@@ -310,7 +316,6 @@ class ShipmentServiceOptions implements NodeInterface
         return $this;
     }
 
-
     /**
      * @return CallTagARS
      */
@@ -330,7 +335,7 @@ class ShipmentServiceOptions implements NodeInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isNegotiatedRatesIndicator()
     {
@@ -338,7 +343,7 @@ class ShipmentServiceOptions implements NodeInterface
     }
 
     /**
-     * @param boolean $NegotiatedRatesIndicator
+     * @param bool $NegotiatedRatesIndicator
      * @return ShipmentServiceOptions
      */
     public function setNegotiatedRatesIndicator($NegotiatedRatesIndicator)
@@ -348,7 +353,7 @@ class ShipmentServiceOptions implements NodeInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isImportControlIndicator()
     {
@@ -374,7 +379,7 @@ class ShipmentServiceOptions implements NodeInterface
     }
 
     /**
-     * @param boolean $DirectDeliveryOnlyIndicator
+     * @param bool $DirectDeliveryOnlyIndicator
      * @return ShipmentServiceOptions
      */
     public function setDirectDeliveryOnlyIndicator($DirectDeliveryOnlyIndicator)
@@ -400,4 +405,23 @@ class ShipmentServiceOptions implements NodeInterface
         $this->DeliverToAddresseeOnlyIndicator = $DeliverToAddresseeOnlyIndicator;
         return $this;
     }
+    
+    /**
+     * @return bool
+     */    
+    public function getCarbonNeutral()
+    {
+        return $this->CarbonNeutral;
+    }
+
+    /**
+     * @param bool $CarbonNeutral
+     * @return ShipmentServiceOptions
+     */
+    public function setCarbonNeutral($CarbonNeutral)
+    {
+        $this->CarbonNeutral = $CarbonNeutral;
+        return $this;
+    }
+    
 }
