@@ -568,6 +568,14 @@ class Shipping extends Ups
 
         $request->appendChild($xml->createElement('RequestAction', 'LabelRecovery'));
 
+        if (is_string($trackingData)) {
+            $container->appendChild($xml->createElement('TrackingNumber', $trackingData));
+        } elseif (is_array($trackingData)) {
+            $referenceNumber = $container->appendChild($xml->createElement('ReferenceNumber'));
+            $referenceNumber->appendChild($xml->createElement('Value', $trackingData['value']));
+            $container->appendChild($xml->createElement('ShipperNumber', $trackingData['shipperNumber']));
+        }
+
         if (!empty($labelSpecificationOpts)) {
             $labelSpec = $request->appendChild($xml->createElement('LabelSpecification'));
 
