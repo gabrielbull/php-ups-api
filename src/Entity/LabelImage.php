@@ -22,6 +22,21 @@ class LabelImage
             if (isset($response->LabelImageFormat)) {
                 $this->LabelImageFormat = new LabelImageFormat($response->LabelImageFormat);
             }
+            if (isset($response->GraphicImage)) {
+                $this->GraphicImage = $response->GraphicImage;
+            }
+            if (isset($response->HTMLImage)) {
+                $this->HTMLImage = $response->HTMLImage;
+            }
+            if (isset($response->PDF417)) {
+                $this->PDF417 = $response->PDF417;
+            }
+            if (isset($response->InternationalSignatureGraphicImage)) {
+                $this->InternationalSignatureGraphicImage = $response->InternationalSignatureGraphicImage;
+            }
+            if (isset($response->URL)) {
+                $this->URL = $response->URL;
+            }
         }
     }
 }
