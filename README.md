@@ -269,6 +269,32 @@ Tracking parameters are:
 
  * `referenceNumber` The ability to track any UPS package or shipment by reference number. Reference numbers can be a purchase order number, job number, etc. Reference Number is supplied when generating a shipment.
  * `requestOption` Optional processing. For Mail Innovations the only valid options are Last Activity and All activity.
+  
+<a name="tracking-class-example"></a>
+### Example using Reference Number with additional parameters
+
+```php
+$tracking = new Ups\Tracking($accessKey, $userId, $password);
+
+$tracking->setShipperNumber('SHIPPER NUMBER');
+
+$dateBegin = new \DateTime('2016-01-01');
+$dateEnd = new \DateTime('2016-01-31');
+
+$tracking->setBeginDate($dateBegin);
+$tracking->setEndDate($dateEnd);
+
+try {
+    $shipment = $tracking->trackByReference('REFERENCE NUMBER');
+
+    foreach($shipment->Package->Activity as $activity) {
+        var_dump($activity);
+    }
+
+} catch (Exception $e) {
+    var_dump($e);
+}
+```
 
 <a name="tracking-class-example"></a>
 ### Example using Reference Number with additional parameters
