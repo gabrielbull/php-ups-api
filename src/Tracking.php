@@ -165,11 +165,12 @@ class Tracking extends Ups
             $this->createRequest(),
             $this->compileEndpointUrl(self::ENDPOINT)
         );
-        $response = $this->response->getResponse();
 
-        if (null === $response) {
-            throw new Exception('Failure (0): Unknown error', 0);
+        $response = '';
+        if($this->response) {
+          $response = $this->response->getResponse();
         }
+
 
         if ($response instanceof SimpleXMLElement && $response->Response->ResponseStatusCode == 0) {
             throw new Exception(
@@ -177,8 +178,11 @@ class Tracking extends Ups
                 (int)$response->Response->Error->ErrorCode
             );
         }
+        if($response)
+          return $this->formatResponse($response);
+        else
+          return $response;
 
-        return $this->formatResponse($response);
     }
 
     /**
