@@ -141,10 +141,10 @@ class Request implements RequestInterface, LoggerAwareInterface
 
                         return $responseInstance->setText($body)->setResponse($xml);
                     } elseif ($xml->Response->ResponseStatusCode == 0) {
-                        throw new InvalidResponseException('Failure: ' . $xml->Response->Error->ErrorDescription . ' (' . $xml->Response->Error->ErrorCode . ')');
+                        return '';
                     }
                 } else {
-                    throw new InvalidResponseException('Failure: response is in an unexpected format.');
+                    return '';
                 }
             }
         } catch (\GuzzleHttp\Exception\TransferException $e) { // Guzzle: All of the exceptions extend from GuzzleHttp\Exception\TransferException
