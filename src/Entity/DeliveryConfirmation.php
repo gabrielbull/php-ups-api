@@ -13,12 +13,15 @@ use Ups\NodeInterface;
 class DeliveryConfirmation implements NodeInterface
 {
     /**
-     * @var
-     *
-     * 1 => 'Delivery Confirmation Signature Required'
-     * 2 => 'Delivery Confirmation Adult Signature Required.'
+     * @var int
      */
-    private $dcisType = 1;
+    private $dcisType;
+
+    /**
+     * DCIS type codes
+     */
+    const DELIVERY_CONFIRMATION_SIGNATURE_REQUIRED = 1;
+    const DELIVERY_CONFIRMATION_ADULT_SIGNATURE_REQUIRED = 2;
 
     /**
      * @param null|DOMDocument $document
@@ -39,8 +42,7 @@ class DeliveryConfirmation implements NodeInterface
     }
 
     /**
-     * @param mixed $SaturdayPickup
-     * @return $this
+     * @return int
      */
     public function getDcisType()
     {
@@ -48,7 +50,7 @@ class DeliveryConfirmation implements NodeInterface
     }
 
     /**
-     * @param mixed $dcisTypeId
+     * @param int $dcisTypeId
      * @return $this
      */
     public function setDcisType($dcisTypeId)
@@ -57,5 +59,4 @@ class DeliveryConfirmation implements NodeInterface
 
         return $this;
     }
-
 }

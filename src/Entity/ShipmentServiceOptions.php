@@ -388,6 +388,14 @@ class ShipmentServiceOptions implements NodeInterface
     }
 
     /**
+     * @return DeliveryConfirmation
+     */
+    public function getDeliveryConfirmation()
+    {
+        return $this->deliveryConfirmation;
+    }
+
+    /**
      * @return boolean
      */
     public function isDirectDeliveryOnlyIndicator()
