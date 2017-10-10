@@ -69,7 +69,7 @@ class Shipping extends Ups
      *
      * @throws Exception
      *
-     * @return stdClass
+     * @return \stdClass
      */
     public function confirm(
         $validation,
