@@ -8,10 +8,25 @@ use Ups\NodeInterface;
 
 class COD implements NodeInterface
 {
+    /**
+     * @var string
+     */
     public $CODCode;
+
+    /**
+     * @var string
+     */
     public $CODFundsCode;
+
+    /**
+     * @var CODAmount
+     */
     public $CODAmount;
 
+    /**
+     * COD constructor.
+     * @param null|\stdClass $response
+     */
     public function __construct($response = null)
     {
         $this->CODAmount = new CODAmount();
@@ -29,9 +44,8 @@ class COD implements NodeInterface
         }
     }
 
-     /**
-     * @param null|DOMDocument $document
-     *
+    /**
+     * @param DOMDocument|null $document
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -58,7 +72,7 @@ class COD implements NodeInterface
     }
 
     /**
-     * @return mixed
+     * @return string|null
      */
     public function getCODCode()
     {
@@ -66,7 +80,7 @@ class COD implements NodeInterface
     }
 
     /**
-     * @param mixed $CODCode
+     * @param string $CODCode
      * @return COD
      */
     public function setCODCode($CODCode)
@@ -76,7 +90,7 @@ class COD implements NodeInterface
     }
 
     /**
-     * @return mixed
+     * @return string|null
      */
     public function getCODFundsCode()
     {
@@ -84,7 +98,7 @@ class COD implements NodeInterface
     }
 
     /**
-     * @param mixed $CODFundsCode
+     * @param string $CODFundsCode
      * @return COD
      */
     public function setCODFundsCode($CODFundsCode)
@@ -94,7 +108,7 @@ class COD implements NodeInterface
     }
 
     /**
-     * @return mixed
+     * @return CODAmount|null
      */
     public function getCODAmount()
     {
@@ -102,10 +116,10 @@ class COD implements NodeInterface
     }
 
     /**
-     * @param mixed $CODAmount
+     * @param CODAmount $CODAmount
      * @return COD
      */
-    public function setCODAmount($CODAmount)
+    public function setCODAmount(CODAmount $CODAmount)
     {
         $this->CODAmount = $CODAmount;
         return $this;
