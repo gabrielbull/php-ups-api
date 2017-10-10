@@ -74,7 +74,7 @@ class ShipmentServiceOptions implements NodeInterface
     private $importControlIndicator;
 
     /**
-     * @var null|DeliveryConfirmation
+     * @var DeliveryConfirmation
      */
     private $deliveryConfirmation;
 
@@ -381,14 +381,14 @@ class ShipmentServiceOptions implements NodeInterface
      * @param DeliveryConfirmation $deliveryConfirmation
      * @return ShipmentServiceOptions
      */
-    public function setDeliveryConfirmation($deliveryConfirmation)
+    public function setDeliveryConfirmation(DeliveryConfirmation $deliveryConfirmation)
     {
         $this->deliveryConfirmation = $deliveryConfirmation;
         return $this;
     }
 
     /**
-     * @return DeliveryConfirmation
+     * @return DeliveryConfirmation|null
      */
     public function getDeliveryConfirmation()
     {
