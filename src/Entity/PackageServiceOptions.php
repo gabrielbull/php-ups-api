@@ -43,6 +43,11 @@ class PackageServiceOptions implements NodeInterface
     private $holdForPickup;
 
     /**
+     * @var DeliveryConfirmation
+     */
+    private $deliveryConfirmation;
+
+    /**
      * @param null $parameters
      */
     public function __construct($parameters = null)
@@ -59,6 +64,9 @@ class PackageServiceOptions implements NodeInterface
             }
             if (isset($parameters->HoldForPickup)) {
                 $this->setHoldForPickup($parameters->HoldForPickup);
+            }
+            if (isset($parameters->DeliveryConfirmation)) {
+                $this->setDeliveryConfirmation($parameters->DeliveryConfirmation);
             }
         }
     }
@@ -86,6 +94,9 @@ class PackageServiceOptions implements NodeInterface
         }
         if ($this->getHazMatPackageInformation() !== null) {
             $node->appendChild($this->getHazMatPackageInformation()->toNode($document));
+        }
+        if (isset($this->deliveryConfirmation)) {
+            $node->appendChild($this->deliveryConfirmation->toNode($document));
         }
 
         return $node;
@@ -193,5 +204,23 @@ class PackageServiceOptions implements NodeInterface
     public function setHazMatPackageInformation($hazMatPackageInformation)
     {
         $this->hazMatPackageInformation = $hazMatPackageInformation;
+    }
+
+    /**
+     * @param DeliveryConfirmation $deliveryConfirmation
+     * @return ShipmentServiceOptions
+     */
+    public function setDeliveryConfirmation(DeliveryConfirmation $deliveryConfirmation)
+    {
+        $this->deliveryConfirmation = $deliveryConfirmation;
+        return $this;
+    }
+
+    /**
+     * @return DeliveryConfirmation|null
+     */
+    public function getDeliveryConfirmation()
+    {
+        return $this->deliveryConfirmation;
     }
 }
