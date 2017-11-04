@@ -85,7 +85,7 @@ class Locator extends Ups
      * Create the TimeInTransit request.
      *
      * @param LocatorRequest $locatorRequest The request details. Refer to the UPS documentation for available structure
-     * @param $requestOption
+     * @param integer $requestOption
      *
      * @return string
      */
