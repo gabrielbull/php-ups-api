@@ -33,20 +33,23 @@ Tracking API, Shipping API, Rating API and Time in Transit API. Feel free to con
 7. [Rate Class](#rate-class)
     * [Example](#rate-class-example)
     * [Parameters](#rate-class-parameters)
-8. [TimeInTransit Class](#timeintransit-class)
+8. [RateTimeInTransit Class](#ratetimeintransit-class)
+    * [Example](#ratetimeintransit-class-example)
+    * [Parameters](#ratetimeintransit-class-parameters)
+9. [TimeInTransit Class](#timeintransit-class)
     * [Example](#timeintransit-class-example)
     * [Parameters](#timeintransit-class-parameters)
-9. [Locator Class](#locator-class)
+10. [Locator Class](#locator-class)
     * [Example](#locator-class-example)
     * [Parameters](#locator-class-parameters)
-10. [Tradeability Class](#tradeability-class)
+11. [Tradeability Class](#tradeability-class)
     * [Example](#tradeability-class-example)
     * [Parameters](#tradeability-class-parameters)
-11. [Shipping Class](#shipping-class)
+12. [Shipping Class](#shipping-class)
     * [Example](#shipping-class-example)
     * [Parameters](#shipping-class-parameters)
-12. [Logging](#logging)
-13. [License](#license-section)
+13. [Logging](#logging)
+14. [License](#license-section)
 
 <a name="requirements"></a>
 ## Requirements
@@ -362,6 +365,82 @@ try {
  * `rateRequest` Mandatory. rateRequest Object with shipment details
 
 This Rate class is not finished yet! Parameter should be added when it will be finished.
+
+<a name="ratetimeinstransit-class"></a>
+## RateTimeInTransit Class
+
+The RateTimeInTransit Class allow you to get shipment rates like the Rate Class, but the response will also include 
+TimeInTransit data.
+
+<a name="ratetimeintransit-class-example"></a>
+### Example
+
+```php
+$rate = new Ups\RateTimeInTransit(
+	$accessKey,
+	$userId,
+	$password
+);
+
+try {
+    $shipment = new \Ups\Entity\Shipment();
+
+    $shipperAddress = $shipment->getShipper()->getAddress();
+    $shipperAddress->setPostalCode('99205');
+
+    $address = new \Ups\Entity\Address();
+    $address->setPostalCode('99205');
+    $shipFrom = new \Ups\Entity\ShipFrom();
+    $shipFrom->setAddress($address);
+
+    $shipment->setShipFrom($shipFrom);
+
+    $shipTo = $shipment->getShipTo();
+    $shipTo->setCompanyName('Test Ship To');
+    $shipToAddress = $shipTo->getAddress();
+    $shipToAddress->setPostalCode('99205');
+
+    $package = new \Ups\Entity\Package();
+    $package->getPackagingType()->setCode(\Ups\Entity\PackagingType::PT_PACKAGE);
+    $package->getPackageWeight()->setWeight(10);
+    
+    // if you need this (depends of the shipper country)
+    $weightUnit = new \Ups\Entity\UnitOfMeasurement;
+    $weightUnit->setCode(\Ups\Entity\UnitOfMeasurement::UOM_KGS);
+    $package->getPackageWeight()->setUnitOfMeasurement($weightUnit);
+
+    $dimensions = new \Ups\Entity\Dimensions();
+    $dimensions->setHeight(10);
+    $dimensions->setWidth(10);
+    $dimensions->setLength(10);
+
+    $unit = new \Ups\Entity\UnitOfMeasurement;
+    $unit->setCode(\Ups\Entity\UnitOfMeasurement::UOM_IN);
+
+    $dimensions->setUnitOfMeasurement($unit);
+    $package->setDimensions($dimensions);
+
+    $shipment->addPackage($package);
+
+    $deliveryTimeInformation = new \Ups\Entity\DeliveryTimeInformation();
+    $deliveryTimeInformation->setPackageBillType(\Ups\Entity\DeliveryTimeInformation::PBT_NON_DOCUMENT);
+    
+    $pickup = new \Ups\Entity\Pickup();
+    $pickup->setDate("20170520");
+    $pickup->setTime("160000");
+    $shipment->setDeliveryTimeInformation($deliveryTimeInformation);
+
+    var_dump($rate->shopRatesTimeInTransit($shipment));
+} catch (Exception $e) {
+    var_dump($e);
+}
+```
+<a name="ratetimeintransit-class-parameters"></a>
+### Parameters
+
+ * `rateRequest` Mandatory. rateRequest Object with shipment details
+
+This RateTimeInTransit extends the Rate class which is not finished yet! Parameter should be added when it will be finished.
 
 <a name="timeintransit-class"></a>
 ## TimeInTransit Class

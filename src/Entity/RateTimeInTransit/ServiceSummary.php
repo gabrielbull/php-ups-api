@@ -1,15 +1,14 @@
 <?php
 
-namespace Ups\Entity;
+namespace Ups\Entity\RateTimeInTransit;
+
+use Ups\Entity\ServiceSummaryTrait;
 
 class ServiceSummary
 {
     use ServiceSummaryTrait;
 
-    /** @deprecated */
-    public $EstimatedArrival;
-
-    /** @var  \Ups\Entity\EstimatedArrival */
+    /** @var  \Ups\Entity\TimeInTransit\EstimatedArrival */
     protected $estimatedArrival;
 
     /**
@@ -18,6 +17,7 @@ class ServiceSummary
     public function __construct(\stdClass $response = null)
     {
         self::build($response);
+
         $this->setEstimatedArrival(new EstimatedArrival());
 
         if (null !== $response) {
@@ -28,7 +28,7 @@ class ServiceSummary
     }
 
     /**
-     * @return \Ups\Entity\EstimatedArrival
+     * @return \Ups\Entity\RateTimeInTransit\EstimatedArrival
      */
     public function getEstimatedArrival()
     {
@@ -36,11 +36,10 @@ class ServiceSummary
     }
 
     /**
-     * @param \Ups\Entity\EstimatedArrival
+     * @param \Ups\Entity\RateTimeInTransit\EstimatedArrival
      */
     public function setEstimatedArrival(EstimatedArrival $estimatedArrival)
     {
-        $this->EstimatedArrival = $estimatedArrival;
         $this->estimatedArrival = $estimatedArrival;
     }
 }

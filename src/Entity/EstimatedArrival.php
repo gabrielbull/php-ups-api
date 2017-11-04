@@ -2,8 +2,10 @@
 
 namespace Ups\Entity;
 
-class EstimatedArrival extends Rate\EstimatedArrival
+class EstimatedArrival
 {
+    use EstimatedArrivalTrait;
+
     const EA_MONDAY = 'MON';
     const EA_TUESDAY = 'TUE';
     const EA_WEDNESDAY = 'WEB';
@@ -12,6 +14,7 @@ class EstimatedArrival extends Rate\EstimatedArrival
     const EA_SATURDAY = 'SAT';
     // Sunday is an invalid day :-)
 
+    private $BusinessTransitDays;
     private $Time;
     private $PickupDate;
     private $PickupTime;
@@ -23,9 +26,11 @@ class EstimatedArrival extends Rate\EstimatedArrival
      */
     public function __construct(\stdClass $response = null)
     {
-        parent::__construct($response);
-
         if (null !== $response) {
+            self::build($response);
+            if (isset($response->BusinessTransitDays)) {
+              $this->BusinessTransitDays = $response->BusinessTransitDays;
+            }
             if (isset($response->Time)) {
                 $this->Time = $response->Time;
             }
@@ -42,6 +47,22 @@ class EstimatedArrival extends Rate\EstimatedArrival
                 $this->Date = $response->Date;
             }
         }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBusinessTransitDays()
+    {
+      return $this->BusinessTransitDays;
+    }
+
+    /**
+     * @param mixed $BusinessTransitDays
+     */
+    public function setBusinessTransitDays($BusinessTransitDays)
+    {
+      $this->BusinessTransitDays = $BusinessTransitDays;
     }
 
     /**
