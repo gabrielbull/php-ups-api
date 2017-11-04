@@ -60,21 +60,23 @@ trait ServiceSummaryTrait
      */
     public function setService(Service $service)
     {
-      $this->Service = $service;
-      $this->service = $service;
+        $this->Service = $service;
+        $this->service = $service;
     }
 
     /**
      * @return \Ups\Entity\Guaranteed
      */
-    public function getGuaranteed() {
+    public function getGuaranteed()
+    {
         return $this->guaranteed;
     }
 
     /**
      * @param \Ups\Entity\Guaranteed $guaranteed
      */
-    public function setGuaranteed(Guaranteed $guaranteed) {
+    public function setGuaranteed(Guaranteed $guaranteed)
+    {
         $this->Guaranteed = $guaranteed;
         $this->guaranteed = $guaranteed;
     }
@@ -82,14 +84,16 @@ trait ServiceSummaryTrait
     /**
      * @return mixed
      */
-    public function getSaturdayDelivery() {
+    public function getSaturdayDelivery()
+    {
         return $this->saturdayDelivery;
     }
 
     /**
      * @param mixed $saturdayDelivery
      */
-    public function setSaturdayDelivery($saturdayDelivery) {
+    public function setSaturdayDelivery($saturdayDelivery)
+    {
         $this->SaturdayDelivery = $saturdayDelivery;
         $this->saturdayDelivery = $saturdayDelivery;
     }
@@ -97,16 +101,17 @@ trait ServiceSummaryTrait
     /**
      * @return mixed
      */
-    public function getSaturdayDeliveryDisclaimer() {
+    public function getSaturdayDeliveryDisclaimer()
+    {
         return $this->saturdayDeliveryDisclaimer;
     }
 
     /**
      * @param mixed $saturdayDeliveryDisclaimer
      */
-    public function setSaturdayDeliveryDisclaimer($saturdayDeliveryDisclaimer) {
+    public function setSaturdayDeliveryDisclaimer($saturdayDeliveryDisclaimer)
+    {
         $this->SaturdayDeliveryDisclaimer = $saturdayDeliveryDisclaimer;
         $this->saturdayDeliveryDisclaimer = $saturdayDeliveryDisclaimer;
     }
-
 }

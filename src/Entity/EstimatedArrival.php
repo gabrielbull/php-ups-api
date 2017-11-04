@@ -29,7 +29,7 @@ class EstimatedArrival
         if (null !== $response) {
             self::build($response);
             if (isset($response->BusinessTransitDays)) {
-              $this->BusinessTransitDays = $response->BusinessTransitDays;
+                $this->BusinessTransitDays = $response->BusinessTransitDays;
             }
             if (isset($response->Time)) {
                 $this->Time = $response->Time;
@@ -54,7 +54,7 @@ class EstimatedArrival
      */
     public function getBusinessTransitDays()
     {
-      return $this->BusinessTransitDays;
+        return $this->BusinessTransitDays;
     }
 
     /**
@@ -62,7 +62,7 @@ class EstimatedArrival
      */
     public function setBusinessTransitDays($BusinessTransitDays)
     {
-      $this->BusinessTransitDays = $BusinessTransitDays;
+        $this->BusinessTransitDays = $BusinessTransitDays;
     }
 
     /**

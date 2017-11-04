@@ -85,5 +85,4 @@ class Pickup implements NodeInterface
     {
         $this->time = $time;
     }
-
 }

@@ -67,5 +67,4 @@ class Arrival
     {
         $this->time = $time;
     }
-
 }
