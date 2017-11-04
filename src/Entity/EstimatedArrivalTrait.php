@@ -79,7 +79,7 @@ trait EstimatedArrivalTrait
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getDayOfWeek()
     {
@@ -87,7 +87,7 @@ trait EstimatedArrivalTrait
     }
 
     /**
-     * @param mixed $DayOfWeek
+     * @param string $DayOfWeek
      */
     public function setDayOfWeek($DayOfWeek)
     {
@@ -95,7 +95,7 @@ trait EstimatedArrivalTrait
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getCustomerCenterCutoff()
     {
@@ -103,7 +103,7 @@ trait EstimatedArrivalTrait
     }
 
     /**
-     * @param mixed $CustomerCenterCutoff
+     * @param string $CustomerCenterCutoff
      */
     public function setCustomerCenterCutoff($CustomerCenterCutoff)
     {
@@ -111,7 +111,7 @@ trait EstimatedArrivalTrait
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getDelayCount()
     {
@@ -119,7 +119,7 @@ trait EstimatedArrivalTrait
     }
 
     /**
-     * @param mixed $DelayCount
+     * @param string $DelayCount
      */
     public function setDelayCount($DelayCount)
     {
@@ -127,7 +127,7 @@ trait EstimatedArrivalTrait
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getHolidayCount()
     {
@@ -135,7 +135,7 @@ trait EstimatedArrivalTrait
     }
 
     /**
-     * @param mixed $HolidayCount
+     * @param string $HolidayCount
      */
     public function setHolidayCount($HolidayCount)
     {
@@ -143,7 +143,7 @@ trait EstimatedArrivalTrait
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getRestDays()
     {
@@ -151,7 +151,7 @@ trait EstimatedArrivalTrait
     }
 
     /**
-     * @param mixed $RestDays
+     * @param string $RestDays
      */
     public function setRestDays($RestDays)
     {
@@ -159,7 +159,7 @@ trait EstimatedArrivalTrait
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getTotalTransitDays()
     {
@@ -167,7 +167,7 @@ trait EstimatedArrivalTrait
     }
 
     /**
-     * @param mixed $TotalTransitDays
+     * @param string $TotalTransitDays
      */
     public function setTotalTransitDays($TotalTransitDays)
     {

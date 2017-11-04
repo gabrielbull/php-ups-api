@@ -8,7 +8,7 @@ class ServiceSummary
 {
     use ServiceSummaryTrait;
 
-    /** @var  \Ups\Entity\TimeInTransit\EstimatedArrival */
+    /** @var  \Ups\Entity\RateTimeInTransit\EstimatedArrival */
     protected $estimatedArrival;
 
     /**

@@ -26,7 +26,7 @@ class EstimatedArrival
     public function __construct(\stdClass $response = null)
     {
         if (null !== $response) {
-            self::build($response);
+            $this->build($response);
             if (isset($response->BusinessTransitDays)) {
                 $this->BusinessTransitDays = $response->BusinessTransitDays;
             }
@@ -46,7 +46,7 @@ class EstimatedArrival
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getBusinessTransitDays()
     {
@@ -54,7 +54,7 @@ class EstimatedArrival
     }
 
     /**
-     * @param mixed $BusinessTransitDays
+     * @param string $BusinessTransitDays
      */
     public function setBusinessTransitDays($BusinessTransitDays)
     {
@@ -62,7 +62,7 @@ class EstimatedArrival
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getTime()
     {
@@ -70,7 +70,7 @@ class EstimatedArrival
     }
 
     /**
-     * @param mixed $Time
+     * @param string $Time
      */
     public function setTime($Time)
     {
@@ -78,7 +78,7 @@ class EstimatedArrival
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getPickupDate()
     {
@@ -86,7 +86,7 @@ class EstimatedArrival
     }
 
     /**
-     * @param mixed $PickupDate
+     * @param string $PickupDate
      */
     public function setPickupDate($PickupDate)
     {
@@ -94,7 +94,7 @@ class EstimatedArrival
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getPickupTime()
     {
@@ -102,7 +102,7 @@ class EstimatedArrival
     }
 
     /**
-     * @param mixed $PickupTime
+     * @param string $PickupTime
      */
     public function setPickupTime($PickupTime)
     {
@@ -110,7 +110,7 @@ class EstimatedArrival
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getDate()
     {
@@ -118,7 +118,7 @@ class EstimatedArrival
     }
 
     /**
-     * @param mixed $Date
+     * @param string $Date
      */
     public function setDate($Date)
     {

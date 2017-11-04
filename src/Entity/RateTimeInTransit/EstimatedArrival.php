@@ -16,7 +16,7 @@ class EstimatedArrival
     public function __construct(\stdClass $response = null)
     {
         if (null !== $response) {
-            self::build($response);
+            $this->build($response);
 
             if (isset($response->BusinessDaysInTransit)) {
                 $this->businessDaysInTransit = $response->BusinessDaysInTransit;
@@ -25,7 +25,7 @@ class EstimatedArrival
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getBusinessDaysInTransit()
     {
@@ -33,7 +33,7 @@ class EstimatedArrival
     }
 
     /**
-     * @param mixed $BusinessDaysInTransit
+     * @param string $BusinessDaysInTransit
      */
     public function setBusinessDaysInTransit($BusinessDaysInTransit)
     {
