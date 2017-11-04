@@ -18,7 +18,6 @@ class EstimatedArrival
     private $Time;
     private $PickupDate;
     private $PickupTime;
-    private $DelayCount;
     private $Date;
 
     /**
@@ -39,9 +38,6 @@ class EstimatedArrival
             }
             if (isset($response->PickupTime)) {
                 $this->PickupTime = $response->PickupTime;
-            }
-            if (isset($response->DelayCount)) {
-                $this->DelayCount = $response->DelayCount;
             }
             if (isset($response->Date)) {
                 $this->Date = $response->Date;
@@ -111,22 +107,6 @@ class EstimatedArrival
     public function setPickupTime($PickupTime)
     {
         $this->PickupTime = $PickupTime;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDelayCount()
-    {
-        return $this->DelayCount;
-    }
-
-    /**
-     * @param mixed $DelayCount
-     */
-    public function setDelayCount($DelayCount)
-    {
-        $this->DelayCount = $DelayCount;
     }
 
     /**
