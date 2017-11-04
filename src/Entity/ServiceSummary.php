@@ -17,7 +17,8 @@ class ServiceSummary
      */
     public function __construct(\stdClass $response = null)
     {
-        self::build($response);
+        $this->build($response);
+        
         $this->setEstimatedArrival(new EstimatedArrival());
 
         if (null !== $response) {
