@@ -144,5 +144,4 @@ class EstimatedArrival
     {
         $this->Date = $Date;
     }
-
 }
