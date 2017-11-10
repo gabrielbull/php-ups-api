@@ -74,6 +74,11 @@ class ShipmentServiceOptions implements NodeInterface
     private $importControlIndicator;
 
     /**
+     * @var DeliveryConfirmation
+     */
+    private $deliveryConfirmation;
+
+    /**
      * @param null $response
      */
     public function __construct($response = null)
@@ -110,6 +115,9 @@ class ShipmentServiceOptions implements NodeInterface
             }
             if (isset($response->ImportControlIndicator)) {
                 $this->setImportControlIndicator($response->ImportControlIndicator);
+            }
+            if (isset($response->DeliveryConfirmation)) {
+                $this->setDeliveryConfirmation($response->DeliveryConfirmation);
             }
             if (isset($response->LabelMethod)) {
                 $this->setLabelMethod(new LabelMethod($response->LabelMethod));
@@ -156,6 +164,10 @@ class ShipmentServiceOptions implements NodeInterface
 
         if (isset($this->internationalForms)) {
             $node->appendChild($this->internationalForms->toNode($document));
+        }
+
+        if (isset($this->deliveryConfirmation)) {
+            $node->appendChild($this->deliveryConfirmation->toNode($document));
         }
 
         if (isset($this->importControlIndicator)) {
@@ -363,6 +375,24 @@ class ShipmentServiceOptions implements NodeInterface
     {
         $this->importControlIndicator = $importControlIndicator;
         return $this;
+    }
+
+    /**
+     * @param DeliveryConfirmation $deliveryConfirmation
+     * @return ShipmentServiceOptions
+     */
+    public function setDeliveryConfirmation(DeliveryConfirmation $deliveryConfirmation)
+    {
+        $this->deliveryConfirmation = $deliveryConfirmation;
+        return $this;
+    }
+
+    /**
+     * @return DeliveryConfirmation|null
+     */
+    public function getDeliveryConfirmation()
+    {
+        return $this->deliveryConfirmation;
     }
 
     /**

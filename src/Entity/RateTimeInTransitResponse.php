@@ -2,6 +2,8 @@
 
 namespace Ups\Entity;
 
+use Ups\Entity\RateTimeInTransit\ServiceSummary as RateTimeInTransitServiceSummary;
+
 class RateTimeInTransitResponse
 {
     /**
@@ -55,7 +57,7 @@ class RateTimeInTransitResponse
                 $this->Disclaimer = $response->Disclaimer;
             }
             if (isset($response->ServiceSummary)) {
-                $this->ServiceSummary = new ServiceSummary($response->ServiceSummary);
+                $this->ServiceSummary = new RateTimeInTransitServiceSummary($response->ServiceSummary);
             }
         }
     }

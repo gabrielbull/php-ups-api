@@ -1,13 +1,9 @@
 <?php
 
-namespace Ups\Entity\Rate;
+namespace Ups\Entity;
 
-use Ups\Entity\Arrival;
-use Ups\Entity\Pickup;
-
-class EstimatedArrival
+trait EstimatedArrivalTrait
 {
-    private $BusinessTransitDays;
     private $Arrival;
     private $Pickup;
     private $DayOfWeek;
@@ -20,12 +16,9 @@ class EstimatedArrival
     /**
      * @param \stdClass|null $response
      */
-    public function __construct(\stdClass $response = null)
+    public function build(\stdClass $response = null)
     {
         if (null !== $response) {
-            if (isset($response->BusinessTransitDays)) {
-                $this->BusinessTransitDays = $response->BusinessTransitDays;
-            }
             if (isset($response->Arrival)) {
                 $this->Arrival = new Arrival($response->Arrival);
             }
@@ -51,22 +44,6 @@ class EstimatedArrival
                 $this->RestDays = $response->RestDays;
             }
         }
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getBusinessTransitDays()
-    {
-        return $this->BusinessTransitDays;
-    }
-
-    /**
-     * @param mixed $BusinessTransitDays
-     */
-    public function setBusinessTransitDays($BusinessTransitDays)
-    {
-        $this->BusinessTransitDays = $BusinessTransitDays;
     }
 
     /**
@@ -102,7 +79,7 @@ class EstimatedArrival
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getDayOfWeek()
     {
@@ -110,7 +87,7 @@ class EstimatedArrival
     }
 
     /**
-     * @param mixed $DayOfWeek
+     * @param string $DayOfWeek
      */
     public function setDayOfWeek($DayOfWeek)
     {
@@ -118,7 +95,7 @@ class EstimatedArrival
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getCustomerCenterCutoff()
     {
@@ -126,7 +103,7 @@ class EstimatedArrival
     }
 
     /**
-     * @param mixed $CustomerCenterCutoff
+     * @param string $CustomerCenterCutoff
      */
     public function setCustomerCenterCutoff($CustomerCenterCutoff)
     {
@@ -134,7 +111,7 @@ class EstimatedArrival
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getDelayCount()
     {
@@ -142,7 +119,7 @@ class EstimatedArrival
     }
 
     /**
-     * @param mixed $DelayCount
+     * @param string $DelayCount
      */
     public function setDelayCount($DelayCount)
     {
@@ -150,7 +127,7 @@ class EstimatedArrival
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getHolidayCount()
     {
@@ -158,7 +135,7 @@ class EstimatedArrival
     }
 
     /**
-     * @param mixed $HolidayCount
+     * @param string $HolidayCount
      */
     public function setHolidayCount($HolidayCount)
     {
@@ -166,7 +143,7 @@ class EstimatedArrival
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getRestDays()
     {
@@ -174,7 +151,7 @@ class EstimatedArrival
     }
 
     /**
-     * @param mixed $RestDays
+     * @param string $RestDays
      */
     public function setRestDays($RestDays)
     {
@@ -182,7 +159,7 @@ class EstimatedArrival
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getTotalTransitDays()
     {
@@ -190,11 +167,10 @@ class EstimatedArrival
     }
 
     /**
-     * @param mixed $TotalTransitDays
+     * @param string $TotalTransitDays
      */
     public function setTotalTransitDays($TotalTransitDays)
     {
         $this->TotalTransitDays = $TotalTransitDays;
     }
-
 }

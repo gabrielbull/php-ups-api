@@ -2,8 +2,10 @@
 
 namespace Ups\Entity;
 
-class EstimatedArrival extends Rate\EstimatedArrival
+class EstimatedArrival
 {
+    use EstimatedArrivalTrait;
+
     const EA_MONDAY = 'MON';
     const EA_TUESDAY = 'TUE';
     const EA_WEDNESDAY = 'WEB';
@@ -12,10 +14,10 @@ class EstimatedArrival extends Rate\EstimatedArrival
     const EA_SATURDAY = 'SAT';
     // Sunday is an invalid day :-)
 
+    private $BusinessTransitDays;
     private $Time;
     private $PickupDate;
     private $PickupTime;
-    private $DelayCount;
     private $Date;
 
     /**
@@ -23,9 +25,11 @@ class EstimatedArrival extends Rate\EstimatedArrival
      */
     public function __construct(\stdClass $response = null)
     {
-        parent::__construct($response);
-
         if (null !== $response) {
+            $this->build($response);
+            if (isset($response->BusinessTransitDays)) {
+                $this->BusinessTransitDays = $response->BusinessTransitDays;
+            }
             if (isset($response->Time)) {
                 $this->Time = $response->Time;
             }
@@ -35,9 +39,6 @@ class EstimatedArrival extends Rate\EstimatedArrival
             if (isset($response->PickupTime)) {
                 $this->PickupTime = $response->PickupTime;
             }
-            if (isset($response->DelayCount)) {
-                $this->DelayCount = $response->DelayCount;
-            }
             if (isset($response->Date)) {
                 $this->Date = $response->Date;
             }
@@ -45,7 +46,23 @@ class EstimatedArrival extends Rate\EstimatedArrival
     }
 
     /**
-     * @return mixed
+     * @return string
+     */
+    public function getBusinessTransitDays()
+    {
+        return $this->BusinessTransitDays;
+    }
+
+    /**
+     * @param string $BusinessTransitDays
+     */
+    public function setBusinessTransitDays($BusinessTransitDays)
+    {
+        $this->BusinessTransitDays = $BusinessTransitDays;
+    }
+
+    /**
+     * @return string
      */
     public function getTime()
     {
@@ -53,7 +70,7 @@ class EstimatedArrival extends Rate\EstimatedArrival
     }
 
     /**
-     * @param mixed $Time
+     * @param string $Time
      */
     public function setTime($Time)
     {
@@ -61,7 +78,7 @@ class EstimatedArrival extends Rate\EstimatedArrival
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getPickupDate()
     {
@@ -69,7 +86,7 @@ class EstimatedArrival extends Rate\EstimatedArrival
     }
 
     /**
-     * @param mixed $PickupDate
+     * @param string $PickupDate
      */
     public function setPickupDate($PickupDate)
     {
@@ -77,7 +94,7 @@ class EstimatedArrival extends Rate\EstimatedArrival
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getPickupTime()
     {
@@ -85,7 +102,7 @@ class EstimatedArrival extends Rate\EstimatedArrival
     }
 
     /**
-     * @param mixed $PickupTime
+     * @param string $PickupTime
      */
     public function setPickupTime($PickupTime)
     {
@@ -93,23 +110,7 @@ class EstimatedArrival extends Rate\EstimatedArrival
     }
 
     /**
-     * @return mixed
-     */
-    public function getDelayCount()
-    {
-        return $this->DelayCount;
-    }
-
-    /**
-     * @param mixed $DelayCount
-     */
-    public function setDelayCount($DelayCount)
-    {
-        $this->DelayCount = $DelayCount;
-    }
-
-    /**
-     * @return mixed
+     * @return string
      */
     public function getDate()
     {
@@ -117,11 +118,10 @@ class EstimatedArrival extends Rate\EstimatedArrival
     }
 
     /**
-     * @param mixed $Date
+     * @param string $Date
      */
     public function setDate($Date)
     {
         $this->Date = $Date;
     }
-
 }

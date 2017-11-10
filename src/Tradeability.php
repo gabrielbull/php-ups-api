@@ -112,14 +112,14 @@ class Tradeability extends Ups
     /**
      * Creates and sends a request for the given data. Most errors are handled in SoapRequest
      *
-     * @param $request
-     * @param $endpoint
-     * @param $operation
-     * @param $wsdl
+     * @param string $request
+     * @param string $endpoint
+     * @param string $operation
+     * @param string $wsdl
      *
      * @throws Exception
      *
-     * @return TimeInTransitRequest
+     * @return \stdClass
      */
     private function sendRequest($request, $endpoint, $operation, $wsdl)
     {
