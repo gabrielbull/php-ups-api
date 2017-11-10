@@ -104,6 +104,11 @@ class Shipment
      */
     private $numOfPiecesInShipment;
 
+    /**
+     * @var DeliveryTimeInformation
+     */
+    private $deliveryTimeInformation;
+
     public function __construct()
     {
         $this->setShipper(new Shipper());
@@ -522,5 +527,21 @@ class Shipment
         $this->numOfPiecesInShipment = $numOfPiecesInShipment;
 
         return $this;
+    }
+
+    /**
+     * @return DeliveryTimeInformation
+     */
+    public function getDeliveryTimeInformation()
+    {
+        return $this->deliveryTimeInformation;
+    }
+
+    /**
+     * @param DeliveryTimeInformation $deliveryTimeInformation
+     */
+    public function setDeliveryTimeInformation(DeliveryTimeInformation $deliveryTimeInformation)
+    {
+        $this->deliveryTimeInformation = $deliveryTimeInformation;
     }
 }

@@ -33,7 +33,7 @@ class Rate extends Ups
     /**
      * @var string
      */
-    private $requestOption;
+    protected $requestOption;
 
     /**
      * @param $rateRequest
@@ -85,7 +85,7 @@ class Rate extends Ups
      *
      * @return RateResponse
      */
-    private function sendRequest(RateRequest $rateRequest)
+    protected function sendRequest(RateRequest $rateRequest)
     {
         $request = $this->createRequest($rateRequest);
 
@@ -184,6 +184,11 @@ class Rate extends Ups
         $shipmentServiceOptions = $shipment->getShipmentServiceOptions();
         if (isset($shipmentServiceOptions)) {
             $shipmentNode->appendChild($shipmentServiceOptions->toNode($xml));
+        }
+
+        $deliveryTimeInformation = $shipment->getDeliveryTimeInformation();
+        if (isset($deliveryTimeInformation)) {
+            $shipmentNode->appendChild($deliveryTimeInformation->toNode($xml));
         }
 
         return $xml->saveXML();
