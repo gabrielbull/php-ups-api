@@ -656,7 +656,7 @@ For the Landed Cost call, parameters are:
  * `landedCostRequest` Mandatory. landedCostRequest object with request details, see example.
 
 <a name="shipping-class"></a>
-## Shipping Class.
+## Shipping Class
 
 The Shipping class allows you to register shipments. This also includes return shipments.
 
@@ -685,6 +685,7 @@ In the example $return is used to show how a return could be handled.
     $shipperAddress->setAddressLine1('XX');
     $shipperAddress->setPostalCode('XX');
     $shipperAddress->setCity('XX');
+    $shipperAddress->setStateProvinceCode('XX');
     $shipperAddress->setCountryCode('XX');
     $shipper->setAddress($shipperAddress);
     $shipper->setEmailAddress('XX'); 
@@ -696,6 +697,7 @@ In the example $return is used to show how a return could be handled.
     $address->setAddressLine1('XX');
     $address->setPostalCode('XX');
     $address->setCity('XX');
+    $address->setStateProvinceCode('XX');
     $address->setCountryCode('XX');
     $shipTo = new \Ups\Entity\ShipTo();
     $shipTo->setAddress($address);
@@ -710,8 +712,8 @@ In the example $return is used to show how a return could be handled.
     $address->setAddressLine1('XX');
     $address->setPostalCode('XX');
     $address->setCity('XX');
-    $address->setCountryCode('XX');
     $address->setStateProvinceCode('XX');
+    $address->setCountryCode('XX');
     $shipFrom = new \Ups\Entity\ShipFrom();
     $shipFrom->setAddress($address);
     $shipFrom->setName('XX');
