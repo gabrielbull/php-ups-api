@@ -685,7 +685,7 @@ In the example $return is used to show how a return could be handled.
     $shipperAddress->setAddressLine1('XX');
     $shipperAddress->setPostalCode('XX');
     $shipperAddress->setCity('XX');
-    $shipperAddress->setStateProvinceCode('XX');
+    $shipperAddress->setStateProvinceCode('XX'); // required in US
     $shipperAddress->setCountryCode('XX');
     $shipper->setAddress($shipperAddress);
     $shipper->setEmailAddress('XX'); 
@@ -697,7 +697,7 @@ In the example $return is used to show how a return could be handled.
     $address->setAddressLine1('XX');
     $address->setPostalCode('XX');
     $address->setCity('XX');
-    $address->setStateProvinceCode('XX');
+    $address->setStateProvinceCode('XX');  // Required in US
     $address->setCountryCode('XX');
     $shipTo = new \Ups\Entity\ShipTo();
     $shipTo->setAddress($address);
@@ -712,7 +712,7 @@ In the example $return is used to show how a return could be handled.
     $address->setAddressLine1('XX');
     $address->setPostalCode('XX');
     $address->setCity('XX');
-    $address->setStateProvinceCode('XX');
+    $address->setStateProvinceCode('XX');  
     $address->setCountryCode('XX');
     $shipFrom = new \Ups\Entity\ShipFrom();
     $shipFrom->setAddress($address);
