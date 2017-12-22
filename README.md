@@ -813,6 +813,16 @@ In the example $return is used to show how a return could be handled.
     }
 ```
 
+If you wanted to create a printable file from the UPS Shipping label image data that came back with $accept, you would use something like the following: 
+
+```
+    $label_file = $order_id . ".gif"; 
+    $base64_string = $accept->PackageResults->LabelImage->GraphicImage;
+    $ifp = fopen($label_file, 'wb');
+    fwrite($ifp, base64_decode($base64_string));
+    fclose($ifp);
+```
+
 <a name="shipping-class-parameters"></a>
 ### Parameters
 
