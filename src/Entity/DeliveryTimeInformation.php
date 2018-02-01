@@ -38,7 +38,6 @@ class DeliveryTimeInformation implements NodeInterface
 
         $node = $document->createElement('DeliveryTimeInformation');
         $node->appendChild($document->createElement('PackageBillType', $this->getPackageBillType()));
-
         if ($this->getPickup() !== null) {
             $node->appendChild($this->getPickup()->toNode($document));
         }

@@ -328,6 +328,10 @@ class Shipping extends Ups
         if ($shipment->getInvoiceLineTotal()) {
             $shipmentNode->appendChild($shipment->getInvoiceLineTotal()->toNode($xml));
         }
+        
+        if ($shipment->getShipmentTotalWeight()) {
+            $shipmentNode->appendChild($shipment->getShipmentTotalWeight()->toNode($xml));
+        }
 
         if ($shipment->getNumOfPiecesInShipment()) {
             $shipmentNode->appendChild($xml->createElement('NumOfPiecesInShipment', $shipment->getNumOfPiecesInShipment()));

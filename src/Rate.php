@@ -190,6 +190,16 @@ class Rate extends Ups
         if (isset($deliveryTimeInformation)) {
             $shipmentNode->appendChild($deliveryTimeInformation->toNode($xml));
         }
+          
+        $ShipmentTotalWeight = $shipment->getShipmentTotalWeight();
+        if (isset($ShipmentTotalWeight)) {
+            $shipmentNode->appendChild($ShipmentTotalWeight->toNode($xml));
+        }
+        
+        $InvoiceLineTotal = $shipment->getInvoiceLineTotal();
+        if (isset($InvoiceLineTotal)) {
+            $shipmentNode->appendChild($InvoiceLineTotal->toNode($xml));
+        }
 
         return $xml->saveXML();
     }

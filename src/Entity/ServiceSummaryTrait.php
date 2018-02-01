@@ -16,14 +16,11 @@ trait ServiceSummaryTrait
     /** @deprecated */
     public $SaturdayDeliveryDisclaimer;
 
-    /**
-     * @var Service
-     */
+
+    /** @var  \Ups\Entity\Service */
     protected $service;
 
-    /**
-     * @var Guaranteed
-     */
+    /** @var  \Ups\Entity\Guaranteed */
     protected $guaranteed;
 
     /** @var mixed  */
@@ -51,7 +48,7 @@ trait ServiceSummaryTrait
     }
 
     /**
-     * @return Service|null
+     * @return \Ups\Entity\Service
      */
     public function getService()
     {
@@ -59,7 +56,7 @@ trait ServiceSummaryTrait
     }
 
     /**
-     * @param Service $service
+     * @param \Ups\Entity\Service $service
      */
     public function setService(Service $service)
     {
@@ -68,7 +65,7 @@ trait ServiceSummaryTrait
     }
 
     /**
-     * @return Guaranteed|null
+     * @return \Ups\Entity\Guaranteed
      */
     public function getGuaranteed()
     {
@@ -76,7 +73,7 @@ trait ServiceSummaryTrait
     }
 
     /**
-     * @param $guaranteed
+     * @param \Ups\Entity\Guaranteed $guaranteed
      */
     public function setGuaranteed(Guaranteed $guaranteed)
     {
