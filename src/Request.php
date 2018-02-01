@@ -125,6 +125,7 @@ class Request implements RequestInterface, LoggerAwareInterface
                 'id' => $id,
                 'endpointurl' => $this->getEndpointUrl(),
             ]);
+            
             $this->logger->debug('Response: ' . $body, [
                 'id' => $id,
                 'endpointurl' => $this->getEndpointUrl(),
