@@ -559,7 +559,7 @@ class Shipment
     }
 
     /**
-     * @param Array $ShipmentTotalWeight
+     * @param ShipmentTotalWeight $ShipmentTotalWeight
      */
     public function setShipmentTotalWeight($ShipmentTotalWeight)
     {
