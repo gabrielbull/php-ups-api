@@ -9,9 +9,7 @@ class ServiceSummary
     /** @deprecated */
     public $EstimatedArrival;
 
-    /**
-     * @var EstimatedArrival
-     */
+    /** @var  \Ups\Entity\EstimatedArrival */
     protected $estimatedArrival;
 
     /**
@@ -31,7 +29,7 @@ class ServiceSummary
     }
 
     /**
-     * @return EstimatedArrival|null
+     * @return \Ups\Entity\EstimatedArrival
      */
     public function getEstimatedArrival()
     {
@@ -39,7 +37,7 @@ class ServiceSummary
     }
 
     /**
-     * @param EstimatedArrival
+     * @param \Ups\Entity\EstimatedArrival
      */
     public function setEstimatedArrival(EstimatedArrival $estimatedArrival)
     {

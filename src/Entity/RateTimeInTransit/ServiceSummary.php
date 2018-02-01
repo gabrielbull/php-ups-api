@@ -8,9 +8,7 @@ class ServiceSummary
 {
     use ServiceSummaryTrait;
 
-    /**
-     * @var
-     */
+    /** @var  \Ups\Entity\RateTimeInTransit\EstimatedArrival */
     protected $estimatedArrival;
 
     /**
@@ -30,7 +28,7 @@ class ServiceSummary
     }
 
     /**
-     * @return EstimatedArrival|null
+     * @return \Ups\Entity\RateTimeInTransit\EstimatedArrival
      */
     public function getEstimatedArrival()
     {
@@ -38,7 +36,7 @@ class ServiceSummary
     }
 
     /**
-     * @param EstimatedArrival $estimatedArrival
+     * @param \Ups\Entity\RateTimeInTransit\EstimatedArrival
      */
     public function setEstimatedArrival(EstimatedArrival $estimatedArrival)
     {

@@ -17,7 +17,7 @@ class UnitOfMeasurement implements NodeInterface
     const UOM_CM = 'CM'; // Centimeters
 
     // Dimensions for Locator
-    const UOM_MI = 'MI'; // Miles
+    const UOM_MI = 'MI'; // Miles 
     const UOM_KM = 'KM'; // Kilometers
 
     // Products

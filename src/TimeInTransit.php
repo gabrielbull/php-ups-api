@@ -126,7 +126,12 @@ class TimeInTransit extends Ups
         if (isset($invoiceLineTotal)) {
             $trackRequest->appendChild($invoiceLineTotal->toNode($xml));
         }
-
+        
+        $shipmentTotalWeight = $timeInTransitRequest->getShipmentTotalWeight();
+        if (isset($shipmentTotalWeight)) {
+            $trackRequest->appendChild($shipmentTotalWeight->toNode($xml));
+        }
+        
         $pickupDate = $timeInTransitRequest->getPickupDate();
         if ($pickupDate) {
             $trackRequest->appendChild($xml->createElement('PickupDate', $pickupDate->format('Ymd')));
