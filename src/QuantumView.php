@@ -158,7 +158,7 @@ class QuantumView extends Ups
                 $dateTimeRange->appendChild($xml->createElement('BeginDateTime', $this->beginDateTime));
                 $dateTimeRange->appendChild($xml->createElement('EndDateTime', $this->endDateTime));
 
-                // File name
+            // File name
             } elseif (null !== $this->fileName) {
                 $subscriptionRequest->appendChild($xml->createElement('FileName', $this->fileName));
             }
