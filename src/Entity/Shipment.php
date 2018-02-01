@@ -550,7 +550,7 @@ class Shipment
         $this->deliveryTimeInformation = $deliveryTimeInformation;
     }
     
-     /**
+    /**
      * @return ShipmentTotalWeight
      */
     public function getShipmentTotalWeight()
