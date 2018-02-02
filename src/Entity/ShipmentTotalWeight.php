@@ -5,17 +5,18 @@ namespace Ups\Entity;
 use DOMDocument;
 use DOMElement;
 use Ups\NodeInterface;
+Use Ups\Entity\UnitOfMeasurement;
 
 class ShipmentTotalWeight implements NodeInterface
 {
-    private $UnitOfMeasurement;
+    private $unitOfMeasurement;
     private $Weight;
 
     public function __construct($response = null)
     {
         if (null !== $response) {
-            if (isset($response->UnitOfMeasurement)) {
-                $this->setUnitOfMeasurement($response->UnitOfMeasurement);
+            if (isset($response->unitOfMeasurement)) {
+                $this->setUnitOfMeasurement($response->unitOfMeasurement);
             }
             if (isset($response->Weight)) {
                 $this->setWeight($response->Weight);
@@ -44,27 +45,40 @@ class ShipmentTotalWeight implements NodeInterface
         return $node;
     }
 
+    /**
+     * @return UnitOfMeasurement unitOfMeasurement
+     */
     public function getUnitOfMeasurement()
     {
-        return $this->UnitOfMeasurement;
+        return $this->unitOfMeasurement;
     }
 
-    public function setUnitOfMeasurement($var)
+
+    /**
+     * @param UnitOfMeasurement $unitOfMeasurement
+     */
+    public function setUnitOfMeasurement( UnitOfMeasurement $unitOfMeasurement)
     {
-        $this->UnitOfMeasurement = $var;
+        $this->unitOfMeasurement = $unitOfMeasurement;
     }
 
+    /**
+     * @return weight
+     */
     public function getWeight()
     {
         return $this->Weight;
     }
-
-    public function setWeight($var)
+    
+    /**
+     * @param number $weight
+     */
+    public function setWeight($weight)
     {
-        if (!is_numeric($var)) {
+        if (!is_numeric($weight)) {
             throw new \Exception('Weight value should be a numeric value');
         }
 
-        $this->Weight = $var;
+        $this->Weight = $weight;
     }
 }

@@ -95,14 +95,14 @@ class Shipment
     private $movementReferenceNumber;
 
     /**
-     * @var InvoiceLineTotal
+     * @var invoiceLineTotal
      */
     private $invoiceLineTotal;
     
     /**
-     * @var ShipmentTotalWeight
+     * @var shipmentTotalWeight
      */
-    private $ShipmentTotalWeight;
+    private $shipmentTotalWeight;
 
     /**
      * @var string
@@ -551,18 +551,18 @@ class Shipment
     }
     
     /**
-     * @return ShipmentTotalWeight
+     * @return shipmentTotalWeight
      */
     public function getShipmentTotalWeight()
     {
-        return $this->ShipmentTotalWeight;
+        return $this->shipmentTotalWeight;
     }
 
     /**
-     * @param ShipmentTotalWeight $ShipmentTotalWeight
+     * @param shipmentTotalWeight $shipmentTotalWeight
      */
-    public function setShipmentTotalWeight($ShipmentTotalWeight)
+    public function setShipmentTotalWeight($shipmentTotalWeight)
     {
-        $this->ShipmentTotalWeight = $ShipmentTotalWeight;
+        $this->shipmentTotalWeight = $shipmentTotalWeight;
     }
 }
