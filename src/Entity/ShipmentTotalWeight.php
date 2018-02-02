@@ -5,7 +5,7 @@ namespace Ups\Entity;
 use DOMDocument;
 use DOMElement;
 use Ups\NodeInterface;
-Use Ups\Entity\UnitOfMeasurement;
+use Ups\Entity\UnitOfMeasurement;
 
 class ShipmentTotalWeight implements NodeInterface
 {
@@ -57,7 +57,7 @@ class ShipmentTotalWeight implements NodeInterface
     /**
      * @param UnitOfMeasurement $unitOfMeasurement
      */
-    public function setUnitOfMeasurement( UnitOfMeasurement $unitOfMeasurement)
+    public function setUnitOfMeasurement(UnitOfMeasurement $unitOfMeasurement)
     {
         $this->unitOfMeasurement = $unitOfMeasurement;
     }
