@@ -310,16 +310,16 @@ class Shipping extends Ups
 
             for ($shipmentChargeRec = 1; $shipmentChargeRec <= 2; $shipmentChargeRec++) {
                 if ($shipmentChargeRec == 1) {
-                    $rec = $shipment->getItemizedPaymentInformation()->getTransportationShipmentCharge(); 
+                    $rec = $shipment->getItemizedPaymentInformation()->getTransportationShipmentCharge();
                     if ($rec == null) {
-                        continue; 
+                        continue;
                     }
                     $node = $paymentNode->appendChild($xml->createElement('ShipmentCharge'));
                     $node->appendChild($xml->createElement('Type', \Ups\Entity\ShipmentCharge::SHIPMENT_CHARGE_TYPE_TRANSPORTATION));
                 } else {
-                    $rec = $shipment->getItemizedPaymentInformation()->getDutiesAndTaxesShipmentCharge(); 
+                    $rec = $shipment->getItemizedPaymentInformation()->getDutiesAndTaxesShipmentCharge();
                     if ($rec == null) {
-                        continue; 
+                        continue;
                     }
                     $node = $paymentNode->appendChild($xml->createElement('ShipmentCharge'));
                     $node->appendChild($xml->createElement('Type', \Ups\Entity\ShipmentCharge::SHIPMENT_CHARGE_TYPE_DUTIES));
@@ -365,8 +365,8 @@ class Shipping extends Ups
                     $node->appendChild($xml->createElement('ConsigneeBilled'));
                 }
             }  
-            if ($shipment->getItemizedPaymentInformation()->getSplitDutyVATIndicator()) { 
-               $paymentNode->appendChild($xml->createElement('SplitDutyVATIndicator'));
+            if ($shipment->getItemizedPaymentInformation()->getSplitDutyVATIndicator()) {
+                $paymentNode->appendChild($xml->createElement('SplitDutyVATIndicator'));
             }
         }
 
