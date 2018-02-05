@@ -74,7 +74,7 @@ class ShipmentCharge
     }
 
     /**
-     * @return BillShipper 
+     * @return BillShipper
      */
     public function getBillShipper()
     {
@@ -93,7 +93,7 @@ class ShipmentCharge
     }
 
     /**
-     * @return BillReceiver 
+     * @return BillReceiver
      */
     public function getBillReceiver()
     {

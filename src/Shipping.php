@@ -309,16 +309,20 @@ class Shipping extends Ups
             $paymentNode = $shipmentNode->appendChild($xml->createElement('ItemizedPaymentInformation'));
 
             for ($shipmentChargeRec = 1; $shipmentChargeRec <= 2; $shipmentChargeRec++) {
-                if ($shipmentChargeRec == 1) { 
-                   $rec = $shipment->getItemizedPaymentInformation()->getTransportationShipmentCharge(); 
-                   if ($rec == null) continue; 
-                   $node = $paymentNode->appendChild($xml->createElement('ShipmentCharge'));
-                   $node->appendChild($xml->createElement('Type', \Ups\Entity\ShipmentCharge::SHIPMENT_CHARGE_TYPE_TRANSPORTATION));
+                if ($shipmentChargeRec == 1) {
+                    $rec = $shipment->getItemizedPaymentInformation()->getTransportationShipmentCharge(); 
+                    if ($rec == null) {
+                        continue; 
+                    }
+                    $node = $paymentNode->appendChild($xml->createElement('ShipmentCharge'));
+                    $node->appendChild($xml->createElement('Type', \Ups\Entity\ShipmentCharge::SHIPMENT_CHARGE_TYPE_TRANSPORTATION));
                 } else {
-                   $rec = $shipment->getItemizedPaymentInformation()->getDutiesAndTaxesShipmentCharge(); 
-                   if ($rec == null) continue; 
-                   $node = $paymentNode->appendChild($xml->createElement('ShipmentCharge'));
-                   $node->appendChild($xml->createElement('Type', \Ups\Entity\ShipmentCharge::SHIPMENT_CHARGE_TYPE_DUTIES));
+                    $rec = $shipment->getItemizedPaymentInformation()->getDutiesAndTaxesShipmentCharge(); 
+                    if ($rec == null) {
+                        continue; 
+                    }
+                    $node = $paymentNode->appendChild($xml->createElement('ShipmentCharge'));
+                    $node->appendChild($xml->createElement('Type', \Ups\Entity\ShipmentCharge::SHIPMENT_CHARGE_TYPE_DUTIES));
                 }
                 
                 if ($rec->getBillShipper()) {
@@ -341,8 +345,8 @@ class Shipping extends Ups
                             $ccNode->appendChild($rec->getBillShipper()->getCreditCard()->getAddress()->toNode($xml));
                         }
                     }
-                } else if ($rec->getBillReceiver()) {
-                    // TODO not done yet 
+                } elseif ($rec->getBillReceiver()) {
+                    // TODO not done yet
                 } elseif ($rec->getBillThirdParty()) {
                     $node = $node->appendChild($xml->createElement('BillThirdParty'));
                     $btpNode = $node->appendChild($xml->createElement('BillThirdPartyShipper'));

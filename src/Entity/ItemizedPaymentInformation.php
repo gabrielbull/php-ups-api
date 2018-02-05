@@ -33,8 +33,8 @@ class ItemizedPaymentInformation
     public function setShipmentCharge(ShipmentCharge $shipmentCharge)
     {
         if ($shipmentCharge->getType() == ShipmentCharge::SHIPMENT_CHARGE_TYPE_TRANSPORTATION) {
-           $this->transportationShipmentCharge = $shipmentCharge;
-        } else if ($shipmentCharge->getType() == ShipmentCharge::SHIPMENT_CHARGE_TYPE_DUTIES) {
+            $this->transportationShipmentCharge = $shipmentCharge;
+        } elseif ($shipmentCharge->getType() == ShipmentCharge::SHIPMENT_CHARGE_TYPE_DUTIES) {
             $this->dutiesAndTaxesShipmentCharge = $shipmentCharge;
         } else {
             throw new LogicException(sprintf('Unknown ShipmentCharge charge type requested: "%s"', $type));
