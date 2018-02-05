@@ -364,7 +364,7 @@ class Shipping extends Ups
                 } elseif ($rec->getConsigneeBilled()) {
                     $node->appendChild($xml->createElement('ConsigneeBilled'));
                 }
-            }  
+            }
             if ($shipment->getItemizedPaymentInformation()->getSplitDutyVATIndicator()) {
                 $paymentNode->appendChild($xml->createElement('SplitDutyVATIndicator'));
             }
