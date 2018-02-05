@@ -7,8 +7,8 @@ use LogicException;
 class ShipmentCharge
 {
 
-    const SHIPMENT_CHARGE_TYPE_TRANSPORTATION = '01'; 
-    const SHIPMENT_CHARGE_TYPE_DUTIES = '02'; 
+    const SHIPMENT_CHARGE_TYPE_TRANSPORTATION = '01';
+    const SHIPMENT_CHARGE_TYPE_DUTIES = '02';
 
     const TYPE_BILL_SHIPPER = 'billShipper';
     const TYPE_BILL_RECEIVER = 'billReceiver';
@@ -18,7 +18,7 @@ class ShipmentCharge
     /**
      * @var type
      */
-    private $type; 
+    private $type;
 
     /**
      * @var billShipper
@@ -43,11 +43,11 @@ class ShipmentCharge
     public function __construct($type = self::SHIPMENT_CHARGE_TYPE_TRANSPORTATION, $bill_type = self::TYPE_BILL_SHIPPER, $attributes = null)
     {
         switch ($type) {
-            case self::SHIPMENT_CHARGE_TYPE_TRANSPORTATION: 
-                $this->type = self::SHIPMENT_CHARGE_TYPE_TRANSPORTATION; 
+            case self::SHIPMENT_CHARGE_TYPE_TRANSPORTATION:
+                $this->type = self::SHIPMENT_CHARGE_TYPE_TRANSPORTATION;
                 break;
-            case self::SHIPMENT_CHARGE_TYPE_DUTIES: 
-                $this->type = self::SHIPMENT_CHARGE_TYPE_DUTIES; 
+            case self::SHIPMENT_CHARGE_TYPE_DUTIES:
+                $this->type = self::SHIPMENT_CHARGE_TYPE_DUTIES;
                 break;
             default:
                 throw new LogicException(sprintf('Unknown ShipmentCharge charge type requested: "%s"', $type));
@@ -57,8 +57,8 @@ class ShipmentCharge
             case self::TYPE_BILL_SHIPPER:
                 $this->billShipper = new BillShipper($attributes);
                 break;
-/* TODO 
-            case self::TYPE_BILL_RECEIVER: 
+/* TODO
+            case self::TYPE_BILL_RECEIVER:
                 $this->billReceiver = new BillReceiver($attributes);
                 break;
 */
