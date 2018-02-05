@@ -15,17 +15,18 @@ class ShipmentCharge
     const TYPE_CONSIGNEE_BILLED = 'consigneeBilled';
 
     /**
-     * @var type
+     * @var string
      */
     private $type;
 
     /**
-     * @var billShipper
+     * @var BillShipper
      */
     private $billShipper;
 
     /**
-     * @var billReceiver
+     * @var BillReceiver
+     * TODO not implemented yet
      */
     private $billReceiver;
 
@@ -149,7 +150,7 @@ class ShipmentCharge
     }
 
     /**
-     * @return String
+     * @return string
      */
     public function getType()
     {

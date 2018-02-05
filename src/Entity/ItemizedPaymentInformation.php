@@ -11,11 +11,28 @@ class ItemizedPaymentInformation
      * @var splitDutyVATIndicator
      */
     private $splitDutyVATIndicator;
-    private $transportationShipmentCharge = null;
-    private $dutiesAndTaxesShipmentCharge = null;
 
-    public function __construct($attributes = null)
+    /**
+     * @var transportationShipmentCharge
+     */
+    private $transportationShipmentCharge;
+
+    /**
+     * @var dutiesAndTaxesShipmentCharge
+     */
+    private $dutiesAndTaxesShipmentCharge;
+
+    public function __construct($transportationShipmentCharge = null, $dutiesAndTaxesShipmentCharge = null, $splitDutyVATIndicator = null)
     {
+        if ($transportationShipmentCharge) {
+            $this->setShipmentCharge($transportationShipmentCharge);
+        }
+        if ($dutiesAndTaxesShipmentCharge) {
+            $this->setShipmentCharge($dutiesAndTaxesShipmentCharge);
+        }
+        if ($splitDutyVATIndicator) {
+            $this->setSplitDutyVATIndicator($splitDutyVATIndicator);
+        }
     }
 
     /**
@@ -32,9 +49,9 @@ class ItemizedPaymentInformation
      */
     public function setShipmentCharge(ShipmentCharge $shipmentCharge)
     {
-        if ($shipmentCharge->getType() == ShipmentCharge::SHIPMENT_CHARGE_TYPE_TRANSPORTATION) {
+        if ($shipmentCharge->getType() === ShipmentCharge::SHIPMENT_CHARGE_TYPE_TRANSPORTATION) {
             $this->transportationShipmentCharge = $shipmentCharge;
-        } elseif ($shipmentCharge->getType() == ShipmentCharge::SHIPMENT_CHARGE_TYPE_DUTIES) {
+        } elseif ($shipmentCharge->getType() === ShipmentCharge::SHIPMENT_CHARGE_TYPE_DUTIES) {
             $this->dutiesAndTaxesShipmentCharge = $shipmentCharge;
         } else {
             throw new LogicException(sprintf('Unknown ShipmentCharge charge type requested: "%s"', $type));
@@ -43,7 +60,7 @@ class ItemizedPaymentInformation
     }
 
     /**
-     * @return dutiesAndTaxesShipmentCharge
+     * @return DutiesAndTaxesShipmentCharge
      */
     public function getDutiesAndTaxesShipmentCharge()
     {
@@ -51,7 +68,7 @@ class ItemizedPaymentInformation
     }
 
     /**
-     * @return splitDutyVATIndicator
+     * @return bool
      */
     public function getSplitDutyVATIndicator()
     {
@@ -59,7 +76,7 @@ class ItemizedPaymentInformation
     }
 
     /**
-     * @param splitDutyVATIndicator $splitDutyVATIndicator
+     * @param bool $splitDutyVATIndicator
      * @return ItemizedPaymentInformation
      */
     public function setSplitDutyVATIndicator($splitDutyVATIndicator)

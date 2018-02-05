@@ -309,7 +309,7 @@ class Shipping extends Ups
             $paymentNode = $shipmentNode->appendChild($xml->createElement('ItemizedPaymentInformation'));
 
             for ($shipmentChargeRec = 1; $shipmentChargeRec <= 2; $shipmentChargeRec++) {
-                if ($shipmentChargeRec == 1) {
+                if ($shipmentChargeRec === 1) {
                     $rec = $shipment->getItemizedPaymentInformation()->getTransportationShipmentCharge();
                     if ($rec == null) {
                         continue;
