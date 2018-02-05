@@ -6,7 +6,6 @@ use LogicException;
 
 class ShipmentCharge
 {
-
     const SHIPMENT_CHARGE_TYPE_TRANSPORTATION = '01';
     const SHIPMENT_CHARGE_TYPE_DUTIES = '02';
 
