@@ -85,7 +85,7 @@ class ShipmentCharge
      * @param BillShipper $billShipper
      * @return ShipmentCharge
      */
-    public function setBillShipper(BillShipper $billShipper= null)
+    public function setBillShipper(BillShipper $billShipper)
     {
         $this->billShipper = $billShipper;
 

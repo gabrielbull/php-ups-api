@@ -8,7 +8,7 @@ class ItemizedPaymentInformation
 {
 
     /**
-     * @var splitDutyVATIndicator
+     * @var bool
      */
     private $splitDutyVATIndicator;
 
