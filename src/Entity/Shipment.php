@@ -95,12 +95,12 @@ class Shipment
     private $movementReferenceNumber;
 
     /**
-     * @var invoiceLineTotal
+     * @var InvoiceLineTotal
      */
     private $invoiceLineTotal;
     
     /**
-     * @var shipmentTotalWeight
+     * @var ShipmentTotalWeight
      */
     private $shipmentTotalWeight;
 
@@ -551,7 +551,7 @@ class Shipment
     }
     
     /**
-     * @return shipmentTotalWeight
+     * @return ShipmentTotalWeight
      */
     public function getShipmentTotalWeight()
     {
@@ -559,7 +559,7 @@ class Shipment
     }
 
     /**
-     * @param shipmentTotalWeight $shipmentTotalWeight
+     * @param ShipmentTotalWeight $shipmentTotalWeight
      */
     public function setShipmentTotalWeight($shipmentTotalWeight)
     {

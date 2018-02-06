@@ -10,13 +10,14 @@ use Ups\Entity\UnitOfMeasurement;
 class ShipmentTotalWeight implements NodeInterface
 {
     private $unitOfMeasurement;
+
     private $Weight;
 
     public function __construct($response = null)
     {
         if (null !== $response) {
             if (isset($response->unitOfMeasurement)) {
-                $this->setUnitOfMeasurement($response->unitOfMeasurement);
+                $this->setUnitOfMeasurement(new UnitOfMeasurement($response->unitOfMeasurement));
             }
             if (isset($response->Weight)) {
                 $this->setWeight($response->Weight);
@@ -46,7 +47,7 @@ class ShipmentTotalWeight implements NodeInterface
     }
 
     /**
-     * @return UnitOfMeasurement unitOfMeasurement
+     * @return UnitOfMeasurement
      */
     public function getUnitOfMeasurement()
     {
@@ -63,7 +64,7 @@ class ShipmentTotalWeight implements NodeInterface
     }
 
     /**
-     * @return weight
+     * @return string weight
      */
     public function getWeight()
     {
