@@ -56,7 +56,7 @@ class TimeInTransit extends Ups
      *
      * @throws Exception
      *
-     * @return TimeInTransitRequest
+     * @return TimeInTransitResponse
      */
     private function sendRequest(TimeInTransitRequest $timeInTransitRequest)
     {
@@ -145,7 +145,7 @@ class TimeInTransit extends Ups
      *
      * @param SimpleXMLElement $response
      *
-     * @return TimeInTransitRequest
+     * @return TimeInTransitResponse
      */
     private function formatResponse(SimpleXMLElement $response)
     {

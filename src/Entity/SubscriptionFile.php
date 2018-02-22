@@ -12,7 +12,10 @@ class SubscriptionFile
     public $Delivery;
     public $Generic;
 
-    public function __construct($response = null)
+    /**
+     * @param \stdClass|null $response
+     */
+    public function __construct(\stdClass $response = null)
     {
         $this->StatusType = new StatusType();
         $this->Manifest = new Manifest();
@@ -21,7 +24,7 @@ class SubscriptionFile
         $this->Delivery = new Delivery();
         $this->Generic = new Generic();
 
-        if (null != $response) {
+        if (null !== $response) {
             if (isset($response->FileName)) {
                 $this->FileName = $response->FileName;
             }

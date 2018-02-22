@@ -22,7 +22,7 @@ class Origin
         $this->ActivityLocation = new ActivityLocation();
         $this->BillToAccount = new BillToAccount();
 
-        if (null != $response) {
+        if (null !== $response) {
             if (isset($response->PackageReferenceNumber)) {
                 if (is_array($response->PackageReferenceNumber)) {
                     foreach ($response->PackageReferenceNumber as $PackageReferenceNumber) {

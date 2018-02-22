@@ -55,9 +55,9 @@ class TimeInTransitResponse
     public $MaximumListSize;
 
     /**
-     * @param null $response
+     * @param \stdClass|null $response
      */
-    public function __construct($response = null)
+    public function __construct(\stdClass $response = null)
     {
         $this->TransitFrom = new Address();
         $this->TransitTo = new Address();
@@ -65,7 +65,7 @@ class TimeInTransitResponse
         $this->InvoiceLineTotal = new Charges();
         $this->ServiceSummary = [];
 
-        if (null != $response) {
+        if (null !== $response) {
             if (isset($response->PickupDate)) {
                 $this->PickupDate = $response->PickupDate;
             }

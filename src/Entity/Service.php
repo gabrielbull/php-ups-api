@@ -16,6 +16,7 @@ class Service implements NodeInterface
     const S_AIR_2DAY = '02';
     const S_3DAYSELECT = '12';
     const S_GROUND = '03';
+    const S_SURE_POST = '93';
 
     // Valid international values
     const S_STANDARD = '11';
@@ -96,6 +97,10 @@ class Service implements NodeInterface
         '85' => 'UPS Today Express',
         '86' => 'UPS Today Express Saver',
         '96' => 'UPS Worldwide Express Freight',
+        '59' => 'UPS Second Day Air AM',
+        '65' => 'UPS Saver',
+        '70' => 'UPS Access Point Economy',
+        '93' => 'UPS Sure Post',
     ];
 
     /** @deprecated */

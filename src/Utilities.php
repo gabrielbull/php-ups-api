@@ -47,12 +47,12 @@ class Utilities
     /**
      * Adds location information including company name, attention name and address.
      *
-     * @param $location
+     * @param stdClass $location
      * @param DOMNode $locationNode
      *
      * @deprecated Use NodeInterface on entities instead
      */
-    public static function addLocationInformation($location, DOMNode $locationNode)
+    public static function addLocationInformation(stdClass $location, DOMNode $locationNode)
     {
         self::appendChild($location, 'CompanyName', $locationNode);
         self::appendChild($location, 'AttentionName', $locationNode);
@@ -63,12 +63,12 @@ class Utilities
     }
 
     /**
-     * @param $shipment
+     * @param stdClass $shipment
      * @param DOMNode $node
      *
      * @deprecated Use NodeInterface on entities instead
      */
-    public static function addPackages($shipment, DOMNode $node)
+    public static function addPackages(stdClass $shipment, DOMNode $node)
     {
         foreach ($shipment->Package as $package) {
             $packageNode = $node->appendChild($node->ownerDocument->createElement('Package'));
@@ -102,7 +102,7 @@ class Utilities
      *
      * @deprecated Use NodeInterface on entities instead
      */
-    public static function appendChild($object, $propertyName, DOMNode $node)
+    public static function appendChild(stdClass $object, $propertyName, DOMNode $node)
     {
         if (isset($object->{$propertyName})) {
             $node->appendChild($node->ownerDocument->createElement($propertyName, $object->{$propertyName}));

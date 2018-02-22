@@ -7,9 +7,12 @@ class Image
     public $ImageFormat;
     public $GraphicImage;
 
-    public function __construct($response = null)
+    /**
+     * @param \stdClass|null $response
+     */
+    public function __construct(\stdClass $response = null)
     {
-        if (null != $response) {
+        if (null !== $response) {
             if (isset($response->ImageFormat)) {
                 $this->ImageFormat = new ImageFormat($response->ImageFormat);
             }

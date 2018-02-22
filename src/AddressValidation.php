@@ -12,6 +12,8 @@ use Ups\Entity\AddressValidationResponse;
 
 /**
  * Address Validation API Wrapper.
+ *
+ * This functionality is only available in USA, Puerto Rico & Canada.
  */
 class AddressValidation extends Ups
 {
@@ -43,6 +45,7 @@ class AddressValidation extends Ups
      * @var int
      */
     private $maxSuggestion;
+
     /**
      * @var bool
      */
@@ -92,10 +95,11 @@ class AddressValidation extends Ups
     {
         $this->useAVResponseObject = false;
     }
+
     /**
-     * Get address suggestions from UPS.
+     * Get address suggestions from UPS using the 'Street Level' Address Validation API (/XAV)
      *
-     * @param $address
+     * @param Address $address
      * @param int $requestOption
      * @param int $maxSuggestion
      *
@@ -103,7 +107,7 @@ class AddressValidation extends Ups
      *
      * @return stdClass|AddressValidationResponse
      */
-    public function validate($address, $requestOption = self::REQUEST_OPTION_ADDRESS_VALIDATION, $maxSuggestion = 15)
+    public function validate(Address $address, $requestOption = self::REQUEST_OPTION_ADDRESS_VALIDATION, $maxSuggestion = 15)
     {
         if ($maxSuggestion > 50) {
             throw new \Exception('Maximum of 50 suggestions allowed');
@@ -223,7 +227,7 @@ class AddressValidation extends Ups
     public function getRequest()
     {
         if (null === $this->request) {
-            $this->request = new Request();
+            $this->request = new Request($this->logger);
         }
 
         return $this->request;

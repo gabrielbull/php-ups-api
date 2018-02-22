@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AddressValidationRequest xml:lang="en-US">
+    <Request>
+        <TransactionReference />
+        <RequestAction>AV</RequestAction>
+    </Request>
+    <Address>
+        <StateProvinceCode>NY</StateProvinceCode>
+        <City>NYork</City>
+        <CountryCode>US</CountryCode>
+        <PostalCode>10118</PostalCode>
+    </Address>
+</AddressValidationRequest>

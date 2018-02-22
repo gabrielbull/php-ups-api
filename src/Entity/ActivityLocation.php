@@ -6,11 +6,14 @@ class ActivityLocation
 {
     public $AddressArtifactFormat;
 
-    public function __construct($response = null)
+    /**
+     * @param \stdClass|null $response
+     */
+    public function __construct(\stdClass $response = null)
     {
         $this->AddressArtifactFormat = new AddressArtifactFormat();
 
-        if (null != $response) {
+        if (null !== $response) {
             if (isset($response->AddressArtifactFormat)) {
                 $this->AddressArtifactFormat = new AddressArtifactFormat($response->AddressArtifactFormat);
             }

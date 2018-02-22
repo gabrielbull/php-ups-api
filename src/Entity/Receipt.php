@@ -7,11 +7,14 @@ class Receipt
     public $HTMLImage;
     public $Image;
 
-    public function __construct($response = null)
+    /**
+     * @param \stdClass|null $response
+     */
+    public function __construct(\stdClass $response = null)
     {
         $this->Image = new Image();
 
-        if (null != $response) {
+        if (null !== $response) {
             if (isset($response->HTMLImage)) {
                 $this->HTMLImage = $response->HTMLImage;
             }

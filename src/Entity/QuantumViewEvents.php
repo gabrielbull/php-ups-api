@@ -11,7 +11,7 @@ class QuantumViewEvents
     {
         $this->SubscriptionEvents = [];
 
-        if (null != $response) {
+        if (null !== $response) {
             if (isset($response->SubscriberID)) {
                 $this->SubscriberID = new $response->SubscriberID();
             }

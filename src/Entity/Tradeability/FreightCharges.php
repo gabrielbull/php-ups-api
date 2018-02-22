@@ -11,7 +11,7 @@ class FreightCharges extends \Ups\Entity\FreightCharges
 
     public function __construct($response = null)
     {
-        if (null != $response) {
+        if (null !== $response) {
             if (isset($response->CurrencyCode)) {
                 $this->setCurrencyCode($response->CurrencyCode);
             }

@@ -6,11 +6,14 @@ class LabelDelivery
 {
     public $LabelLinkIndicator;
 
-    public function __construct($response = null)
+    /**
+     * @param \stdClass|null $response
+     */
+    public function __construct(\stdClass $response = null)
     {
         $this->LabelLinkIndicator = null;
 
-        if (null != $response) {
+        if (null !== $response) {
             if (isset($response->LabelLinkIndicator)) {
                 $this->LabelLinkIndicator = true;
             }

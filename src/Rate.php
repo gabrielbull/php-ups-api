@@ -6,7 +6,6 @@ use DOMDocument;
 use DOMElement;
 use Exception;
 use SimpleXMLElement;
-use stdClass;
 use Ups\Entity\RateRequest;
 use Ups\Entity\RateResponse;
 use Ups\Entity\Shipment;
@@ -34,14 +33,14 @@ class Rate extends Ups
     /**
      * @var string
      */
-    private $requestOption;
+    protected $requestOption;
 
     /**
      * @param $rateRequest
      *
      * @throws Exception
      *
-     * @return RateRequest
+     * @return RateResponse
      */
     public function shopRates($rateRequest)
     {
@@ -61,7 +60,7 @@ class Rate extends Ups
      *
      * @throws Exception
      *
-     * @return RateRequest
+     * @return RateResponse
      */
     public function getRate($rateRequest)
     {
@@ -84,12 +83,11 @@ class Rate extends Ups
      *
      * @throws Exception
      *
-     * @return RateRequest
+     * @return RateResponse
      */
-    private function sendRequest(RateRequest $rateRequest)
+    protected function sendRequest(RateRequest $rateRequest)
     {
         $request = $this->createRequest($rateRequest);
-        //$response = $this->request($this->createAccess(), $request, $this->compileEndpointUrl(self::ENDPOINT));
 
         $this->response = $this->getRequest()->request($this->createAccess(), $request, $this->compileEndpointUrl(self::ENDPOINT));
         $response = $this->response->getResponse();
@@ -188,6 +186,11 @@ class Rate extends Ups
             $shipmentNode->appendChild($shipmentServiceOptions->toNode($xml));
         }
 
+        $deliveryTimeInformation = $shipment->getDeliveryTimeInformation();
+        if (isset($deliveryTimeInformation)) {
+            $shipmentNode->appendChild($deliveryTimeInformation->toNode($xml));
+        }
+
         return $xml->saveXML();
     }
 
@@ -196,7 +199,7 @@ class Rate extends Ups
      *
      * @param SimpleXMLElement $response
      *
-     * @return stdClass
+     * @return RateResponse
      */
     private function formatResponse(SimpleXMLElement $response)
     {

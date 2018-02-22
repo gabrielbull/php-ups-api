@@ -115,13 +115,13 @@ class UpdatedAddress
     public $AddressExtendedInformation;
 
     /**
-     * @param null $response
+     * @param \stdClass|null $response
      */
-    public function __construct($response = null)
+    public function __construct(\stdClass $response = null)
     {
         $this->AddressExtendedInformation = [];
 
-        if (null != $response) {
+        if (null !== $response) {
             if (isset($response->AddressLine1)) {
                 $this->AddressLine1 = $response->AddressLine1;
             }

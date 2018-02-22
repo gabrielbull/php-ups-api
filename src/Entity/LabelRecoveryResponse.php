@@ -8,11 +8,14 @@ class LabelRecoveryResponse
     public $LabelResults;
     public $TrackingCandidate;
 
-    public function __construct($response = null)
+    /**
+     * @param \stdClass|null $response
+     */
+    public function __construct(\stdClass $response = null)
     {
         $this->LabelResults = new LabelResults();
 
-        if (null != $response) {
+        if (null !== $response) {
             if (isset($response->ShipmentIdentificationNumber)) {
                 $this->ShipmentIdentificationNumber = $response->ShipmentIdentificationNumber;
             }
