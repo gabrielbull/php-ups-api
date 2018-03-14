@@ -34,6 +34,9 @@ class Service implements NodeInterface
     const S_UPSTODAY_EXPRESSSAVER = '86';
     const S_UPSWW_EXPRESSFREIGHT = '96';
 
+    // Valid Germany to Germany values
+    const S_UPSEXPRESS_1200 = '74';
+
     // Time in Transit Response Service Codes: United States Domestic Shipments
     const TT_S_US_AIR_1DAYAM    = '1DM';  // UPS Next Day Air Early
     const TT_S_US_AIR_1DAY      = '1DA';  // UPS Next Day Air
@@ -90,6 +93,7 @@ class Service implements NodeInterface
         '59' => 'UPS Second Day Air AM',
         '65' => 'UPS Saver',
         '70' => 'UPS Access Point Economy',
+        '74' => 'UPS Express 12:00',
         '93' => 'UPS Sure Post',
     ];
 
