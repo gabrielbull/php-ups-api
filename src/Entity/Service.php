@@ -84,7 +84,7 @@ class Service implements NodeInterface
         '08' => 'UPS Worldwide Expedited',
         '11' => 'UPS Standard',
         '12' => 'UPS Three-Day Select',
-        '13' => 'Next Day Air Saver',
+        '13' => 'UPS Next Day Air Saver',
         '14' => 'UPS Next Day Air Early AM',
         '54' => 'UPS Worldwide Express Plus',
         '59' => 'UPS Second Day Air AM',
