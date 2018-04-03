@@ -8,9 +8,9 @@ use Ups\NodeInterface;
 
 class ShipperFiled implements NodeInterface
 {
-    const SF_ITN                   = 'A';  // Requires the ITN
-    const SF_EXEMPTION_LEGEND      = 'B';  // Requires the Exemption Legend
-    const SF_POST_DEPARTURE_FILING = 'C';  // Requires Post Departure Filing Citation
+    const SF_ITN                   = 'A'; // Requires the ITN
+    const SF_EXEMPTION_LEGEND      = 'B'; // Requires the Exemption Legend
+    const SF_POST_DEPARTURE_FILING = 'C'; // Requires Post Departure Filing Citation
 
     /**
      * @var string

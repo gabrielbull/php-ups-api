@@ -101,7 +101,7 @@ class Request implements RequestInterface, LoggerAwareInterface
             'endpointurl' => $this->getEndpointUrl(),
         ]);
 
-        $this->logger->debug('Request: ' . $this->getRequest(), [
+        $this->logger->debug('Request: '.$this->getRequest(), [
             'id' => $id,
             'endpointurl' => $this->getEndpointUrl(),
         ]);
@@ -110,7 +110,7 @@ class Request implements RequestInterface, LoggerAwareInterface
             $response = $this->client->post(
                 $this->getEndpointUrl(),
                 [
-                    'body' => $this->getAccess() . $this->getRequest(),
+                    'body' => $this->getAccess().$this->getRequest(),
                     'headers' => [
                         'Content-type' => 'application/x-www-form-urlencoded; charset=utf-8',
                         'Accept-Charset' => 'UTF-8',
@@ -126,7 +126,7 @@ class Request implements RequestInterface, LoggerAwareInterface
                 'endpointurl' => $this->getEndpointUrl(),
             ]);
 
-            $this->logger->debug('Response: ' . $body, [
+            $this->logger->debug('Response: '.$body, [
                 'id' => $id,
                 'endpointurl' => $this->getEndpointUrl(),
             ]);
@@ -141,7 +141,7 @@ class Request implements RequestInterface, LoggerAwareInterface
 
                         return $responseInstance->setText($body)->setResponse($xml);
                     } elseif ($xml->Response->ResponseStatusCode == 0) {
-                        throw new InvalidResponseException('Failure: ' . $xml->Response->Error->ErrorDescription . ' (' . $xml->Response->Error->ErrorCode . ')');
+                        throw new InvalidResponseException('Failure: '.$xml->Response->Error->ErrorDescription.' ('.$xml->Response->Error->ErrorCode.')');
                     }
                 } else {
                     throw new InvalidResponseException('Failure: response is in an unexpected format.');
@@ -153,7 +153,7 @@ class Request implements RequestInterface, LoggerAwareInterface
                 'endpointurl' => $this->getEndpointUrl(),
             ]);
 
-            throw new RequestException('Failure: ' . $e->getMessage());
+            throw new RequestException('Failure: '.$e->getMessage());
         }
     }
 

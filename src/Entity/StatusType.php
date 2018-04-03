@@ -4,11 +4,11 @@ namespace Ups\Entity;
 
 class StatusType
 {
-    const ST_IN_TRANSIT       = 'I';  // In Transit
-    const ST_DELIVERED        = 'D';  // Delivered
-    const ST_EXCEPTION        = 'X';  // Exception
-    const ST_PICKUP           = 'P';  // Pickup
-    const ST_MANIFEST_PICKUP  = 'M';  // Manifest Pickup
+    const ST_IN_TRANSIT       = 'I'; // In Transit
+    const ST_DELIVERED        = 'D'; // Delivered
+    const ST_EXCEPTION        = 'X'; // Exception
+    const ST_PICKUP           = 'P'; // Pickup
+    const ST_MANIFEST_PICKUP  = 'M'; // Manifest Pickup
 
     public $Code;
     public $Description;
