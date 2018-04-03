@@ -214,6 +214,6 @@ abstract class Ups implements LoggerAwareInterface
     {
         $base = ($this->useIntegration ? $this->integrationBaseUrl : $this->productionBaseUrl);
 
-        return $base . $segment;
+        return $base.$segment;
     }
 }

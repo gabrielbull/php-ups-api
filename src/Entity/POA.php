@@ -8,8 +8,8 @@ use Ups\NodeInterface;
 
 class POA implements NodeInterface
 {
-    const POA_ONE_TIME = '1';  // One Time POA
-    const POA_BLANKET  = '2';  // Blanket POA
+    const POA_ONE_TIME = '1'; // One Time POA
+    const POA_BLANKET  = '2'; // Blanket POA
 
     /**
      * @var string

@@ -97,7 +97,7 @@ class SoapRequest implements RequestInterface, LoggerAwareInterface
         );
 
         // Initialize soap client
-        $client = new SoapClient(__DIR__ . '/WSDL/' . $wsdl . '.wsdl', $mode);
+        $client = new SoapClient(__DIR__.'/WSDL/'.$wsdl.'.wsdl', $mode);
 
         // Set endpoint URL + auth & request data
         $client->__setLocation($endpointurl);
@@ -116,7 +116,7 @@ class SoapRequest implements RequestInterface, LoggerAwareInterface
             'endpointurl' => $this->getEndpointUrl(),
         ]);
 
-        $this->logger->debug('Request: ' . $this->getRequest(), [
+        $this->logger->debug('Request: '.$this->getRequest(), [
             'id' => $id,
             'endpointurl' => $this->getEndpointUrl(),
         ]);
@@ -132,7 +132,7 @@ class SoapRequest implements RequestInterface, LoggerAwareInterface
                 'endpointurl' => $this->getEndpointUrl(),
             ]);
 
-            $this->logger->debug('Response: ' . $body, [
+            $this->logger->debug('Response: '.$body, [
                 'id' => $id,
                 'endpointurl' => $this->getEndpointUrl(),
             ]);
@@ -155,14 +155,14 @@ class SoapRequest implements RequestInterface, LoggerAwareInterface
                     'endpointurl' => $this->getEndpointUrl(),
                 ]);
 
-                throw new InvalidResponseException('Failure: ' . (string)$errorMsg[0] . ' (' . (string)$errorCode[0] . ')');
+                throw new InvalidResponseException('Failure: '.(string)$errorMsg[0].' ('.(string)$errorCode[0].')');
             } else {
                 $this->logger->alert($e->getMessage(), [
                     'id' => $id,
                     'endpointurl' => $this->getEndpointUrl(),
                 ]);
 
-                throw new InvalidResponseException('Cannot parse error from UPS: ' . $e->getMessage(), $e->getCode(),
+                throw new InvalidResponseException('Cannot parse error from UPS: '.$e->getMessage(), $e->getCode(),
                     $e);
             }
         }

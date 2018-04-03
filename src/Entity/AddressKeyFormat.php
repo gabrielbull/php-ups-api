@@ -60,16 +60,16 @@ class AddressKeyFormat extends Address
         }
 
         for ($i = 1; $i <= 3; $i++) {
-            $line = $this->{'getAddressLine' . $i}();
+            $line = $this->{'getAddressLine'.$i}();
             if ($line) {
-                $node->appendChild($document->createElement('AddressLine' . ($i == 1 ? '' : $i), $line));
+                $node->appendChild($document->createElement('AddressLine'.($i == 1 ? '' : $i), $line));
             }
         }
 
         for ($i = 1; $i <= 3; $i++) {
-            $line = $this->{'getPoliticalDivision' . $i}();
+            $line = $this->{'getPoliticalDivision'.$i}();
             if ($line) {
-                $node->appendChild($document->createElement('PoliticalDivision' . $i, $line));
+                $node->appendChild($document->createElement('PoliticalDivision'.$i, $line));
             }
         }
 
