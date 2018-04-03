@@ -41,7 +41,7 @@ class TimeInTransit extends Ups
      *
      * @throws Exception
      *
-     * @return TimeInTransitRequest
+     * @return TimeInTransitResponse
      */
     public function getTimeInTransit(TimeInTransitRequest $shipment)
     {

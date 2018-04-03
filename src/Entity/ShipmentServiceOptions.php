@@ -196,7 +196,7 @@ class ShipmentServiceOptions implements NodeInterface
     }
 
     /**
-     * @param $accessPointCOD
+     * @param AccessPointCOD $accessPointCOD
      * @return $this
      */
     public function setAccessPointCOD($accessPointCOD)
@@ -216,7 +216,7 @@ class ShipmentServiceOptions implements NodeInterface
     }
 
     /**
-     * @return mixed
+     * @return InternationalForms
      */
     public function getInternationalForms()
     {
