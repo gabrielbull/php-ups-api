@@ -2,6 +2,8 @@
 
 namespace Ups\Entity;
 
+use DOMDocument;
+
 /**
  * @author Eduard Sukharev <eduard.sukharev@opensoftdev.ru>
  */
@@ -28,6 +30,25 @@ class BillShipper
         if (isset($attributes->CreditCard)) {
             $this->setAccountNumber(new CreditCard($attributes->CreditCard));
         }
+    }
+
+    /**
+     * @param null|DOMDocument $document
+     *
+     * @return DOMElement
+     */
+    public function toNode(DOMDocument $document = null)
+    {
+        if (is_null($document)) {
+            $document = new DOMDocument();
+        }
+
+        $node = $document->createElement('BillShipper');
+        if ($this->getAccountNumber()) {
+            $node->appendChild($document->createElement('AccountNumber', $this->getAccountNumber()));
+        }
+
+        return $node;
     }
 
     /**

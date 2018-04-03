@@ -305,9 +305,10 @@ class Shipping extends Ups
             } elseif ($shipment->getPaymentInformation()->getConsigneeBilled()) {
                 $paymentNode->appendChild($xml->createElement('ConsigneeBilled'));
             }
-//         TODO: create ItemizedPaymentInformation class and required subclasses for node processing
-//        } elseif ($shipment->getItemizedPaymentInformation()) {
-//            $paymentNode = $shipmentNode->appendChild($xml->createElement('ItemizedPaymentInformation'));
+        }
+
+        if (!$shipment->getPaymentInformation() && $shipment->getItemizedPaymentInformation()) {
+            $shipmentNode->appendChild($shipment->getItemizedPaymentInformation()->toNode($xml));
         }
 
         if ($shipment->getGoodsNotInFreeCirculationIndicator()) {
