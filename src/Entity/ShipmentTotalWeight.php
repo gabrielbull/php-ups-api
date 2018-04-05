@@ -9,9 +9,16 @@ use Ups\Entity\UnitOfMeasurement;
 
 class ShipmentTotalWeight implements NodeInterface
 {
+
+    /**
+    * @var UnitOfMeasurement
+    **/
     private $unitOfMeasurement;
 
-    private $Weight;
+    /**
+    * @var weight
+    **/
+    private $weight;
 
     public function __construct($response = null)
     {
@@ -54,7 +61,6 @@ class ShipmentTotalWeight implements NodeInterface
         return $this->unitOfMeasurement;
     }
 
-
     /**
      * @param UnitOfMeasurement $unitOfMeasurement
      */
@@ -64,11 +70,11 @@ class ShipmentTotalWeight implements NodeInterface
     }
 
     /**
-     * @return string weight
+     * @return int
      */
     public function getWeight()
     {
-        return $this->Weight;
+        return $this->weight;
     }
     
     /**
@@ -80,6 +86,6 @@ class ShipmentTotalWeight implements NodeInterface
             throw new \Exception('Weight value should be a numeric value');
         }
 
-        $this->Weight = $weight;
+        $this->weight = $weight;
     }
 }

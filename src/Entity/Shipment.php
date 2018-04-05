@@ -561,7 +561,7 @@ class Shipment
     /**
      * @param ShipmentTotalWeight $shipmentTotalWeight
      */
-    public function setShipmentTotalWeight($shipmentTotalWeight)
+    public function setShipmentTotalWeight(ShipmentTotalWeight  $shipmentTotalWeight)
     {
         $this->shipmentTotalWeight = $shipmentTotalWeight;
     }
