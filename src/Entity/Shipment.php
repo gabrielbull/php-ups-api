@@ -98,6 +98,11 @@ class Shipment
      * @var InvoiceLineTotal
      */
     private $invoiceLineTotal;
+    
+    /**
+     * @var ShipmentTotalWeight
+     */
+    private $shipmentTotalWeight;
 
     /**
      * @var string
@@ -543,5 +548,21 @@ class Shipment
     public function setDeliveryTimeInformation(DeliveryTimeInformation $deliveryTimeInformation)
     {
         $this->deliveryTimeInformation = $deliveryTimeInformation;
+    }
+    
+    /**
+     * @return ShipmentTotalWeight
+     */
+    public function getShipmentTotalWeight()
+    {
+        return $this->shipmentTotalWeight;
+    }
+
+    /**
+     * @param ShipmentTotalWeight $shipmentTotalWeight
+     */
+    public function setShipmentTotalWeight(ShipmentTotalWeight $shipmentTotalWeight)
+    {
+        $this->shipmentTotalWeight = $shipmentTotalWeight;
     }
 }
