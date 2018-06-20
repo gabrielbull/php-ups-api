@@ -2,8 +2,6 @@
 
 namespace Ups\Entity;
 
-use LogicException;
-
 class ShipmentCharge
 {
     const SHIPMENT_CHARGE_TYPE_TRANSPORTATION = '01';
@@ -40,36 +38,13 @@ class ShipmentCharge
      */
     private $consigneeBilled;
 
-    public function __construct($type = self::SHIPMENT_CHARGE_TYPE_TRANSPORTATION, $bill_type = self::TYPE_BILL_SHIPPER, $attributes = null)
+    public function __construct($attributes = null)
     {
-        switch ($type) {
-            case self::SHIPMENT_CHARGE_TYPE_TRANSPORTATION:
-                $this->type = self::SHIPMENT_CHARGE_TYPE_TRANSPORTATION;
-                break;
-            case self::SHIPMENT_CHARGE_TYPE_DUTIES:
-                $this->type = self::SHIPMENT_CHARGE_TYPE_DUTIES;
-                break;
-            default:
-                throw new LogicException(sprintf('Unknown ShipmentCharge charge type requested: "%s"', $type));
+        if (isset($attributes->Type)) {
+            $this->setType($attributes->Type);
         }
-
-        switch ($bill_type) {
-            case self::TYPE_BILL_SHIPPER:
-                $this->billShipper = new BillShipper($attributes);
-                break;
-/* TODO
-            case self::TYPE_BILL_RECEIVER:
-                $this->billReceiver = new BillReceiver($attributes);
-                break;
-*/
-            case self::TYPE_BILL_THIRD_PARTY:
-                $this->billThirdParty = new BillThirdParty($attributes);
-                break;
-            case self::TYPE_CONSIGNEE_BILLED:
-                $this->consigneeBilled = true;
-                break;
-            default:
-                throw new LogicException(sprintf('Unknown ShipmentCharge type requested: "%s"', $type));
+        if (isset($attributes->billShipper)) {
+            $this->setBillShipper($attributes->billShipper);
         }
     }
 
@@ -156,4 +131,16 @@ class ShipmentCharge
     {
         return $this->type;
     }
+
+    /**
+     * @param string $type
+     * @return ShipmentCharge
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
 }
