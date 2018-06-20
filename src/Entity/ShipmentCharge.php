@@ -142,5 +142,4 @@ class ShipmentCharge
 
         return $this;
     }
-
 }
