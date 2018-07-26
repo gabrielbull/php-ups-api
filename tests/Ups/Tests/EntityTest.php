@@ -21,6 +21,7 @@ class EntityTest extends PHPUnit_Framework_TestCase
         'AddressValidationResponse',
         'AddressValidation\AVAddress',
         'AddressValidation\AddressClassification',
+        'LabelDelivery'
     ];
 
     /**
@@ -56,7 +57,6 @@ class EntityTest extends PHPUnit_Framework_TestCase
         'SubscriptionEvents',
         'QuantumViewEvents',
         'SubscriptionStatus',
-        'LabelDelivery',
         'QuantumViewResponse',
         'TimeInTransitRequest',
         'CallTagARS',
