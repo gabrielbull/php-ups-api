@@ -141,7 +141,7 @@ class Request implements RequestInterface, LoggerAwareInterface
 
                         return $responseInstance->setText($body)->setResponse($xml);
                     } elseif ($xml->Response->ResponseStatusCode == 0) {
-                        $code = $xml->Response->Error->ErrorCode + 0;
+                        $code = (int)$xml->Response->Error->ErrorCode; 
                         throw new InvalidResponseException('Failure: '.$xml->Response->Error->ErrorDescription.' ('.$xml->Response->Error->ErrorCode.')', $code);
                     }
                 } else {
