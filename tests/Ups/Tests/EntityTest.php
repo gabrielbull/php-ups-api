@@ -141,11 +141,11 @@ class EntityTest extends PHPUnit_Framework_TestCase
         'Service',
         'Tradeability\FreightCharges',
         'Tradeability\Product',
-        'Tradeability\QueryRequest',
+        // 'Tradeability\QueryRequest',
         'Tradeability\TariffInfo',
         'Tradeability\UnitPrice',
         'Tradeability\Quantity',
-        'Tradeability\Shipment',
+        // 'Tradeability\Shipment',
         'Tradeability\UnitOfMeasurement',
         'Tradeability\Weight',
     ];
