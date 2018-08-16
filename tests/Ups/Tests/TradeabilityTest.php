@@ -6,7 +6,7 @@ use Exception;
 use PHPUnit_Framework_TestCase;
 use Ups;
 
-class TradeabilityTest extends PHPUnit_Framework_TestCase
+class TradeabilityTest 
 {
     public function testCreateRequest()
     {
