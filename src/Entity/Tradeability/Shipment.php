@@ -71,7 +71,7 @@ class Shipment implements NodeInterface
     /**
      * @param null|DOMDocument $document
      *
-     * @return DOMElement
+     * @return DOMNode
      */
     public function toNode(DOMDocument $document = null)
     {
