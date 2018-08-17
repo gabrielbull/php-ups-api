@@ -79,7 +79,7 @@ The Address Validation Class allow you to validate an address at street level. S
 Note: UPS has two Address Validations. This is Street Level option, which includes all option
 of the normal Address Validation class and adds street level validation.
 
-Not all countries are supported, see UPS documentation. Currently US & Puerto Rico are supported.
+Currently only US & Puerto Rico are supported.
 
 <a name="addressvalidation-class-example"></a>
 ### Example
@@ -145,11 +145,11 @@ Address Validation parameters are:
 <a name="simple-addressvalidation-class"></a>
 ## Simple Address Validation Class 
 
-The Address Validation Class allow you to validate less extensive as the previous class, but it's supported in more countries. It returns a quality score of the supplied address and provides alternatives.
+The Simple Address Validation Class allow you to validate less extensive as the previous class. It returns a quality score of the supplied address and provides alternatives.
 
-Note: UPS has two Address Validations. This is supported in more countries, but offers less functionality.
+Note: UPS has two Address Validations. This is the Simple option. 
 
-Not all countries are supported, see UPS documentation.
+Currently only US & Puerto Rico are supported.
 
 <a name="simple-addressvalidation-class-example"></a>
 ### Example
