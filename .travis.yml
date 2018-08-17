@@ -19,5 +19,6 @@ script: vendor/bin/phpunit
 matrix:
   allow_failures:
     - php: nightly
+    - php: hhvm
 
 sudo: false
