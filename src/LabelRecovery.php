@@ -125,6 +125,6 @@ class LabelRecovery extends Ups
 
         $result = $this->convertXmlObject($response);
 
-        return new LabelRecoveryResponse($result->LabelRecoveryResponse);
+        return new LabelRecoveryResponse($result);
     }
 }
