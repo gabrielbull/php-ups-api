@@ -7,6 +7,9 @@ class LabelSpecification
     public $HTTPUserAgent;
     public $LabelImageFormat;
 
+    /** @var LabelStockSize|null */
+    public $LabelStockSize;
+
     /**
      * @param \stdClass|null $response
      */

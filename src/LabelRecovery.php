@@ -81,6 +81,12 @@ class LabelRecovery extends Ups
             $labelSpecificationNode->appendChild($xml->createElement('HTTPUserAgent', $labelRecoveryRequest->LabelSpecification->HTTPUserAgent));
             $labelImageFormatNode = $labelSpecificationNode->appendChild($xml->createElement('LabelImageFormat'));
             $labelImageFormatNode->appendChild($xml->createElement('Code', $labelRecoveryRequest->LabelSpecification->LabelImageFormat->Code));
+
+            if (isset($labelRecoveryRequest->LabelSpecification->LabelStockSize)) {
+                $labelStockSizeNode = $labelSpecificationNode->appendChild($xml->createElement('LabelStockSize'));
+                $labelStockSizeNode->appendChild($xml->createElement('Height', $labelRecoveryRequest->LabelSpecification->LabelStockSize->Height));
+                $labelStockSizeNode->appendChild($xml->createElement('Width', $labelRecoveryRequest->LabelSpecification->LabelStockSize->Width));
+            }
         }
 
         if (isset($labelRecoveryRequest->Translate)) {
@@ -107,7 +113,6 @@ class LabelRecovery extends Ups
         if (isset($labelRecoveryRequest->ShipperNumber)) {
             $trackRequest->appendChild($xml->createElement('ShipperNumber', $labelRecoveryRequest->ShipperNumber));
         }
-
         return $xml->saveXML();
     }
 
