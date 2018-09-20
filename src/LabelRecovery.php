@@ -101,7 +101,7 @@ class LabelRecovery extends Ups
 
         if (isset($labelRecoveryRequest->ReferenceNumber)) {
             $referenceNumberNode = $trackRequest->appendChild($xml->createElement('ReferenceNumber'));
-            $referenceNumberNode->appendChild($xml->createElement('Value', $labelRecoveryRequest->ReferenceNumber->Value));
+            $referenceNumberNode->appendChild($xml->createElement('Value', $labelRecoveryRequest->ReferenceNumber->getValue()));
         }
 
         if (isset($labelRecoveryRequest->ShipperNumber)) {
@@ -125,6 +125,6 @@ class LabelRecovery extends Ups
 
         $result = $this->convertXmlObject($response);
 
-        return new LabelRecoveryResponse($result->LabelRecoveryResponse);
+        return new LabelRecoveryResponse($result);
     }
 }
