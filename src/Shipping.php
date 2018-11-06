@@ -180,6 +180,10 @@ class Shipping extends Ups
 
         $shipToNode->appendChild($xml->createElement('CompanyName', $shipment->getShipTo()->getCompanyName()));
 
+        if ($shipment->getShipTo()->getName()) {
+            $shipToNode->appendChild($xml->createElement('Name', $shipment->getShipTo()->getName()));
+        }
+
         if ($shipment->getShipTo()->getAttentionName()) {
             $shipToNode->appendChild($xml->createElement('AttentionName', $shipment->getShipTo()->getAttentionName()));
         }

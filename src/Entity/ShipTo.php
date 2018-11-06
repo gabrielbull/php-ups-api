@@ -51,6 +51,9 @@ class ShipTo implements NodeInterface
      */
     private $shipperAssignedIdentificationNumber;
 
+    /** @var string */
+    private $name;
+
     /**
      * @var string
      */
@@ -142,6 +145,7 @@ class ShipTo implements NodeInterface
         }
 
         $node = $document->createElement('ShipTo');
+        $node->appendChild($document->createElement('Name', $this->getName()));
         $node->appendChild($document->createElement('CompanyName', $this->getCompanyName()));
         $node->appendChild($document->createElement('AttentionName', $this->getAttentionName()));
 
@@ -151,6 +155,22 @@ class ShipTo implements NodeInterface
         }
 
         return $node;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
     }
 
     /**
