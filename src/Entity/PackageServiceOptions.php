@@ -252,5 +252,4 @@ class PackageServiceOptions implements NodeInterface
         $this->ShipperReleaseIndicator = $ShipperReleaseIndicator;
         return $this;
     }
-    
 }
