@@ -119,6 +119,11 @@ class Shipment
      */
     private $deliveryTimeInformation;
 
+    /**
+     * @var bool
+     */
+    private $taxInformationIndicator;
+
     public function __construct()
     {
         $this->setShipper(new Shipper());
@@ -589,5 +594,24 @@ class Shipment
     public function setShipmentTotalWeight(ShipmentTotalWeight $shipmentTotalWeight)
     {
         $this->shipmentTotalWeight = $shipmentTotalWeight;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getTaxInformationIndicator()
+    {
+        return $this->taxInformationIndicator;
+    }
+
+    /**
+     * @param bool $taxInformationIndicator
+     * @return $this
+     */
+    public function setTaxInformationIndicator($taxInformationIndicator)
+    {
+        $this->taxInformationIndicator = $taxInformationIndicator;
+
+        return $this;
     }
 }
