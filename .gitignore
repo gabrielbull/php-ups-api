@@ -3,3 +3,4 @@ phpunit.xml
 vendor
 php-ups-api.iml
 .idea
+.DS_Store
