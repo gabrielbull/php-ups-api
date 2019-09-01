@@ -289,7 +289,7 @@ class Address implements NodeInterface
             $node->appendChild($document->createElement('CountryCode', $this->getCountryCode()));
         }
         if ($this->getResidentialAddressIndicator()) {
-            $node->appendChild($document->createElement('ResidentialAddressIndicator'));
+            $node->appendChild($document->createElement('ResidentialAddress'));
         }
 
         return $node;
