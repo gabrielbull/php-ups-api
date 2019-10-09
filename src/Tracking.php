@@ -234,7 +234,7 @@ class Tracking extends Ups
             '/^03\d{18}$/',        // 0300 0000 0000 0000 0000
 
             // USPS - Parcel Select
-            '/^9261\d{22}$/',       // 9400 1000 0000 0000 0000 00
+            '/^9261\d{22}$/',       // 9261 0000 0000 0000 0000 0000 00
         ];
 
         foreach ($patterns as $pattern) {
