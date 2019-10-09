@@ -149,7 +149,7 @@ class Request implements RequestInterface, LoggerAwareInterface
                             $code
                         );
 
-                        if( isset($xml->Response->Error->ErrorLocation, $xml->Response->Error->ErrorLocation->ErrorLocationElementName) ) {
+                        if(isset($xml->Response->Error->ErrorLocation, $xml->Response->Error->ErrorLocation->ErrorLocationElementName)) {
                             $message .= sprintf(
                                 ' (Error location: %s)',
                                 $xml->Response->Error->ErrorLocation->ErrorLocationElementName
