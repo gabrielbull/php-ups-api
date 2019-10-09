@@ -142,7 +142,21 @@ class Request implements RequestInterface, LoggerAwareInterface
                         return $responseInstance->setText($body)->setResponse($xml);
                     } elseif ($xml->Response->ResponseStatusCode == 0) {
                         $code = (int)$xml->Response->Error->ErrorCode;
-                        throw new InvalidResponseException('Failure: '.$xml->Response->Error->ErrorDescription.' ('.$xml->Response->Error->ErrorCode.')', $code);
+                        
+                        $message = sprintf(
+                            'Failure: %s (%d)',
+                            $xml->Response->Error->ErrorDescription,
+                            $code
+                        );
+
+                        if( isset($xml->Response->Error->ErrorLocation, $xml->Response->Error->ErrorLocation->ErrorLocationElementName) ) {
+                            $message .= sprintf(
+                                ' (Error location: %s)',
+                                $xml->Response->Error->ErrorLocation->ErrorLocationElementName
+                            );
+                        }
+
+                        throw new InvalidResponseException($message, $code);
                     }
                 } else {
                     throw new InvalidResponseException('Failure: response is in an unexpected format.');
