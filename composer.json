@@ -1,29 +1,13 @@
 {
-  "name": "gabrielbull/ups-api",
+  "name": "gregpunla/ups-api",
   "type": "library",
   "description": "PHP UPS API",
   "keywords": ["ups", "api", "wrapper", "quantum view", "tracking", "shipping", "rate", "rating", "time in transit", "tradeability"],
   "license": "MIT",
   "authors": [
     {
-      "name": "Gabriel Bull",
-      "email": "me@gabrielbull.com"
-    },
-    {
-      "name": "Sebastien Vergnes",
-      "email": "sebastien@vergnes.eu"
-    },
-    {
-      "name": "Michael Williams",
-      "email": "michael.williams@limelyte.com"
-    },
-    {
-      "name": "Stefan Doorn",
-      "email": "stefan@efectos.nl"
-    },
-    {
-      "name": "Eduard Sukharev",
-      "email": "sukharev.eh@gmail.com"
+      "name": "Greg Punla",
+      "email": "gregpunla@gmail.com"
     }
   ],
   "require": {

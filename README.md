@@ -66,7 +66,7 @@ It is recommended that you install the PHP UPS API library [through composer](ht
 run the Composer command to install the latest stable version of PHP UPS API:
 
 ```shell
-composer require gabrielbull/ups-api
+composer require gregpunla/ups-api
 ```
 
 If not using composer, you must also include these libraries: [Guzzle](https://github.com/guzzle/guzzle), [Guzzle Promises](https://github.com/guzzle/promises), [Guzzle PSR7] (https://github.com/guzzle/psr7), [PHP-Fig PSR Log](https://github.com/php-fig/log), and [PHP-Fig HTTP Message](https://github.com/php-fig/http-message).
