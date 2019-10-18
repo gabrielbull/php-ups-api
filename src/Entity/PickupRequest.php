@@ -118,6 +118,16 @@ class PickupRequest
     private $specialInstruction;
 
     /**
+     * @var
+     */
+    private $cancelType;
+
+    /**
+     * @var
+     */
+    private $prnNumber;
+
+    /**
      * Getter for ReferenceNumber
      *
      * @return [type]
@@ -598,6 +608,51 @@ class PickupRequest
     public function setSpecialInstruction($specialInstruction)
     {
         $this->specialInstruction = $specialInstruction;
+        return $this;
+    }
+
+    /**
+     * Getter for PrnNumber
+     *
+     * @return [type]
+     */
+    public function getPrnNumber()
+    {
+        return $this->prnNumber;
+    }
+
+    /**
+     * Setter for PrnNumber
+     * @var [type] prnNumber
+     *
+     * @return self
+     */
+    public function setPrnNumber($prnNumber)
+    {
+        $this->prnNumber = $prnNumber;
+        return $this;
+    }
+
+    /**
+     * Getter for cancelType
+     *
+     * @return [type]
+     */
+    public function getcancelType()
+    {
+        return $this->cancelType;
+    }
+
+    /**
+     * Setter for cancelType
+     * @var [type] cancelType
+     *
+     * @return self
+     */
+
+    public function setcancelType($cancelType)
+    {
+        $this->cancelType = $cancelType;
         return $this;
     }
 
