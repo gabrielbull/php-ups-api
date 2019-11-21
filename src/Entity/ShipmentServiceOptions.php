@@ -59,11 +59,6 @@ class ShipmentServiceOptions implements NodeInterface
     private $labelMethod;
 
     /**
-     * @var null|LabelDelivery
-     */
-    private $labelDelivery;
-
-    /**
      * @var array
      */
     private $notifications = [];
@@ -77,6 +72,11 @@ class ShipmentServiceOptions implements NodeInterface
      * @var boolean
      */
     private $importControlIndicator;
+
+    /**
+     * @var boolean
+     */
+    private $UPScarbonneutralIndicator;
 
     /**
      * @var DeliveryConfirmation
@@ -121,14 +121,14 @@ class ShipmentServiceOptions implements NodeInterface
             if (isset($response->ImportControlIndicator)) {
                 $this->setImportControlIndicator($response->ImportControlIndicator);
             }
+            if (isset($response->UPScarbonneutralIndicator)) {
+                $this->setUPScarbonneutralIndicator($response->UPScarbonneutralIndicator);
+            }
             if (isset($response->DeliveryConfirmation)) {
                 $this->setDeliveryConfirmation($response->DeliveryConfirmation);
             }
             if (isset($response->LabelMethod)) {
                 $this->setLabelMethod(new LabelMethod($response->LabelMethod));
-            }
-            if (isset($response->EMailMessage)) {
-                $this->setEMailMessage(new EMailMessage($response->EMailMessage));
             }
         }
     }
@@ -170,6 +170,10 @@ class ShipmentServiceOptions implements NodeInterface
             $node->appendChild($this->getAccessPointCOD()->toNode($document));
         }
 
+        if ($this->UPScarbonneutralIndicator) {
+            $node->appendChild($document->createElement('UPScarbonneutralIndicator'));
+        }
+
         if (isset($this->internationalForms)) {
             $node->appendChild($this->internationalForms->toNode($document));
         }
@@ -184,22 +188,6 @@ class ShipmentServiceOptions implements NodeInterface
 
         if (isset($this->labelMethod)) {
             $node->appendChild($this->labelMethod->toNode($document));
-        }
-
-        if (isset($this->labelDelivery)) {
-            $labelDeliveryNode = $node->appendChild($document->createElement('LabelDelivery'));
-            $emailMessageNode = $labelDeliveryNode->appendChild($document->createElement('EMailMessage'));
-            $labelDelivery = $this->getLabelDelivery();
-            foreach ($labelDelivery as $key => $value) {
-                if ($key == 'LabelLinkIndicator') {
-                    $labelDeliveryNode->appendChild($document->createElement($key, $value));
-                } elseif ($key == 'SubjectCode') {
-                    $SubjectNode = $emailMessageNode->appendChild($document->createElement('Subject'));
-                    $SubjectNode->appendChild($document->createElement($key, $value));
-                } else {
-                    $emailMessageNode->appendChild($document->createElement($key, $value));
-                }
-            }
         }
 
         if (!empty($this->notifications)) {
@@ -220,7 +208,7 @@ class ShipmentServiceOptions implements NodeInterface
     }
 
     /**
-     * @param AccessPointCOD $accessPointCOD
+     * @param $accessPointCOD
      * @return $this
      */
     public function setAccessPointCOD($accessPointCOD)
@@ -240,7 +228,7 @@ class ShipmentServiceOptions implements NodeInterface
     }
 
     /**
-     * @return InternationalForms
+     * @return mixed
      */
     public function getInternationalForms()
     {
@@ -259,28 +247,11 @@ class ShipmentServiceOptions implements NodeInterface
 
     /**
      * @return null|LabelMethod
+     *
      */
     public function getLabelMethod()
     {
         return $this->labelMethod;
-    }
-
-    /**
-     * @param LabelDelivery $data
-     * @return $this
-     */
-    public function setLabelDelivery(LabelDelivery $data)
-    {
-        $this->labelDelivery = $data;
-        return $this;
-    }
-
-    /**
-     * @return null|LabelDelivery
-     */
-    public function getLabelDelivery()
-    {
-        return $this->labelDelivery;
     }
 
     /**
@@ -415,6 +386,24 @@ class ShipmentServiceOptions implements NodeInterface
     public function setImportControlIndicator($importControlIndicator)
     {
         $this->importControlIndicator = $importControlIndicator;
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isUPScarbonneutralIndicator()
+    {
+        return $this->UPScarbonneutralIndicator;
+    }
+
+    /**
+     * @param boolean $UPScarbonneutralIndicator
+     * @return ShipmentServiceOptions
+     */
+    public function setUPScarbonneutralIndicator($UPScarbonneutralIndicator)
+    {
+        $this->UPScarbonneutralIndicator = $UPScarbonneutralIndicator;
         return $this;
     }
 
