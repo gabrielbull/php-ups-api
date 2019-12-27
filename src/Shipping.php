@@ -790,6 +790,10 @@ class Shipping extends Ups
                 $instructionNode->appendChild($xml->createElement('Description', $labelSpec->getInstructionDescription()));
             }
         }
+        
+        if ($labelSpec->getCharacterSet()) {
+            $labelSpecNode->appendChild($xml->createElement('CharacterSet', $labelSpec->getCharacterSet()));
+        }
 
         return $labelSpecNode->cloneNode(true);
     }

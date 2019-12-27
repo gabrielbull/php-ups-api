@@ -762,6 +762,11 @@ In the example $return is used to show how a return could be handled.
     $unit->setCode(\Ups\Entity\UnitOfMeasurement::UOM_KGS);
     $package->getPackageWeight()->setUnitOfMeasurement($unit);
 
+    // Set Package Service Options
+    $packageServiceOptions = new \Ups\Entity\PackageServiceOptions();
+    $packageServiceOptions->setShipperReleaseIndicator(true);
+    $package->setPackageServiceOptions($packageServiceOptions);
+
     // Set dimensions
     $dimensions = new \Ups\Entity\Dimensions();
     $dimensions->setHeight(50);
