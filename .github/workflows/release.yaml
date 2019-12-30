@@ -9,23 +9,26 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-      with:
-        ref: ${{ github.ref }}
-
+        
+    - name: Get branch
+      id: branch
+      run: echo "::set-output name=name::$(sed "s/refs\/heads\///g" <<< ${REF})"
+      env:
+        REF: ${{ github.ref }}
+  
     - name: Checkout
       run: |
         git remote rm origin
         git remote add origin "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY.git"
         git fetch --all
         git checkout ${BRANCH}
-        git pull origin ${BRANCH} --ff-only
         git config --local user.email "${GITHUB_EMAIL}"
         git config --local user.name "${GITHUB_ACTOR}"
       env:
         GITHUB_ACTOR: ${{ secrets.USER_GITHUB_ACTOR }}
         GITHUB_EMAIL: ${{ secrets.USER_GITHUB_EMAIL }}
         GITHUB_TOKEN: ${{ secrets.USER_GITHUB_TOKEN }}
-        BRANCH: ${{ github.ref }}
+        BRANCH: ${{ steps.branch.outputs.name }}
     
     - name: Get version
       run: | 
