@@ -1,6 +1,9 @@
 name: release
 
-on: push
+on:
+  push:
+    branches:
+    - master
 
 jobs:
   release:
@@ -39,7 +42,9 @@ jobs:
     
     - name: Create tag
       if: steps.version.outputs.version != ''
-      run: echo ${VERSION}
+      run: |
+        git tag -a "${VERSION}" -m ""
+        git push origin HEAD
       env:
         GITHUB_ACTOR: ${{ secrets.USER_GITHUB_ACTOR }}
         GITHUB_EMAIL: ${{ secrets.USER_GITHUB_EMAIL }}
