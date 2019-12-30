@@ -35,7 +35,7 @@ jobs:
         version=$(jq -r '.version' composer.json)
         tag=$((git show-ref --tags | grep "refs/tags/${version}$") || true)
         [[ "$tag" != "" ]] && version=""
-        echo "::set-output name=dir::${version}"
+        echo "::set-output name=version::${version}"
     
     - name: Create tag
       run: echo ${VERSION}
@@ -43,5 +43,5 @@ jobs:
         GITHUB_ACTOR: ${{ secrets.USER_GITHUB_ACTOR }}
         GITHUB_EMAIL: ${{ secrets.USER_GITHUB_EMAIL }}
         GITHUB_TOKEN: ${{ secrets.USER_GITHUB_TOKEN }}
-        VERSION: ${{ steps.version.outputs.name }}
+        VERSION: ${{ steps.version.outputs.version }}
 #      if: steps.version.outputs.name != ''
