@@ -34,8 +34,10 @@ jobs:
       run: |
         version=$(jq -r '.version' composer.json)
         tag=$((git show-ref --tags | grep "refs/tags/${version}$") || true)
-        if [ "$tag" != "" ]; then; version=""; fi;
-        echo "::set-output name=dir::${version}"
+        echo $version
+        echo $tag
+      #  if [ "$tag" != "" ]; then; version=""; fi;
+      #  echo "::set-output name=dir::${version}"
     
     - name: Create tag
       if: steps.version.outputs.name != ''
