@@ -1,15 +1,14 @@
-name: Release
+name: release
 
 on: push
 
 jobs:
-  create-tag:
-    name: Create tag
+  release:
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v1
-        
+
     - name: Get branch
       id: branch
       run: echo "::set-output name=name::$(sed "s/refs\/heads\///g" <<< ${REF})"
@@ -31,6 +30,18 @@ jobs:
         BRANCH: ${{ steps.branch.outputs.name }}
     
     - name: Get version
-      run: | 
-        jq -r '.version' composer.json
-        echo "::set-output name=dir::$(jq -r '.version' composer.json)"
+      id: version
+      run: |
+        version=$(jq -r '.version' composer.json)
+        tag=$((git show-ref --tags | grep "refs/tags/${version}$") || true)
+        if [ "$tag" != "" ]; then; version=""; fi;
+        echo "::set-output name=dir::${version}"
+    
+    - name: Create tag
+      if: steps.version.outputs.name != ''
+      run: echo ${VERSION}
+      env:
+        GITHUB_ACTOR: ${{ secrets.USER_GITHUB_ACTOR }}
+        GITHUB_EMAIL: ${{ secrets.USER_GITHUB_EMAIL }}
+        GITHUB_TOKEN: ${{ secrets.USER_GITHUB_TOKEN }}
+        VERSION: ${{ steps.version.outputs.name }}
