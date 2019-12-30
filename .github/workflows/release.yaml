@@ -36,8 +36,7 @@ jobs:
         version="0.8.0"
         tag=$((git show-ref --tags | grep "refs/tags/${version}$") || true)
         [[ "$tag" != "" ]] && version=""
-        echo $version
-      #  echo "::set-output name=dir::${version}"
+        echo "::set-output name=dir::${version}"
     
     - name: Create tag
       if: steps.version.outputs.name != ''
