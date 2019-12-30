@@ -1,0 +1,33 @@
+name: Release
+
+on:
+  push:
+    branches:
+    - master
+
+jobs:
+  create-tag:
+    name: Create tag
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        ref: ${{ github.ref }}
+
+    - name: Checkout
+      run: |
+        git checkout ${BRANCH}
+        git remote rm origin
+        git remote add origin "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY.git"
+        git pull origin ${BRANCH} --ff-only
+        git config --local user.email "me@gabrielbull.com"
+        git config --local user.name "Gabriel Bull"
+      env:
+        GITHUB_TOKEN: ${{ secrets.USER_GITHUB_TOKEN }}
+        BRANCH: ${{ github.ref }}
+    
+    - name: Get version
+      run: | 
+        jq -r '.version' composer.json
+        echo "::set-output name=dir::$(jq -r '.version' composer.json)"

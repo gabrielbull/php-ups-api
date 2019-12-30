@@ -1,5 +1,6 @@
 {
   "name": "gabrielbull/ups-api",
+  "version": "1.0.0",
   "type": "library",
   "description": "PHP UPS API",
   "keywords": ["ups", "api", "wrapper", "quantum view", "tracking", "shipping", "rate", "rating", "time in transit", "tradeability"],
