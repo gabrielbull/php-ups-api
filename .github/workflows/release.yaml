@@ -38,10 +38,10 @@ jobs:
         echo "::set-output name=dir::${version}"
     
     - name: Create tag
-      if: steps.version.outputs.name != ''
       run: echo ${VERSION}
       env:
         GITHUB_ACTOR: ${{ secrets.USER_GITHUB_ACTOR }}
         GITHUB_EMAIL: ${{ secrets.USER_GITHUB_EMAIL }}
         GITHUB_TOKEN: ${{ secrets.USER_GITHUB_TOKEN }}
         VERSION: ${{ steps.version.outputs.name }}
+#      if: steps.version.outputs.name != ''
