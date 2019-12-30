@@ -34,7 +34,7 @@ jobs:
       run: |
         version=$(jq -r '.version' composer.json)
         tag=$((git show-ref --tags | grep "refs/tags/${version}$") || true)
-        [[ "$tag" != "" ]] && version="$version" || version=""
+        [[ "$tag" != "" ]] && version=""
         echo $version
       #  echo "::set-output name=dir::${version}"
     
