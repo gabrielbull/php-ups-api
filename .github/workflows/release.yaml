@@ -33,6 +33,7 @@ jobs:
       id: version
       run: |
         version=$(jq -r '.version' composer.json)
+        version="0.8.0"
         tag=$((git show-ref --tags | grep "refs/tags/${version}$") || true)
         [[ "$tag" != "" ]] && version=""
         echo $version
