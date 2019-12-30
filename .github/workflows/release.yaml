@@ -14,13 +14,14 @@ jobs:
 
     - name: Checkout
       run: |
-        git checkout ${BRANCH}
         git remote rm origin
         git remote add origin "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY.git"
+        git checkout ${BRANCH}
         git pull origin ${BRANCH} --ff-only
         git config --local user.email "me@gabrielbull.com"
         git config --local user.name "Gabriel Bull"
       env:
+        GITHUB_ACTOR: ${{ secrets.USER_GITHUB_ACTOR }}
         GITHUB_TOKEN: ${{ secrets.USER_GITHUB_TOKEN }}
         BRANCH: ${{ github.ref }}
     
