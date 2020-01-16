@@ -123,12 +123,7 @@ class Request implements RequestInterface, LoggerAwareInterface
 	        if ($response->getStatusCode() === 200) {
 		        $content = $this->convertEncoding( $content );
 
-		        $xmlDocument = new DOMDocument('1.0');
-		        $xmlDocument->preserveWhiteSpace = false;
-		        $xmlDocument->formatOutput = true;
-		        $xmlDocument->loadXML($content);
-
-		        $content = $xmlDocument->saveXML();
+		        $content = $this->formatXml();
 	        }
             $this->logger->debug('Response from UPS API', [
 	            'content' => $content,
@@ -161,6 +156,22 @@ class Request implements RequestInterface, LoggerAwareInterface
 
             throw new RequestException('Failure: '.$e->getMessage());
         }
+    }
+
+	/**
+	 * Formats XML.
+	 *
+	 * @param string $xml .
+	 *
+	 * @return string
+	 */
+    private function formatXml( $xml ) {
+	    $xmlDocument = new DOMDocument('1.0');
+	    $xmlDocument->preserveWhiteSpace = false;
+	    $xmlDocument->formatOutput = true;
+	    $xmlDocument->loadXML($xml);
+
+	    return $xmlDocument->saveXML();
     }
 
     /**
