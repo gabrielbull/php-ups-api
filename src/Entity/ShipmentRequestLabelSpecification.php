@@ -93,6 +93,35 @@ class ShipmentRequestLabelSpecification
      * @var string
      */
     private $instructionDescription;
+    
+    /**
+     * Optional.
+     * Language character set expected on label. Valid values are:
+     * dan = Danish (Latin-1)
+     * nld = Dutch (Latin-1)
+     * fin = Finnish (Latin-1)
+     * fra = French (Latin-1)
+     * deu = German (Latin-1)
+     * itl = Italian (Latin-1)
+     * nor = Norwegian (Latin-1)
+     * pol = Polish (Latin-2)
+     * por = Poruguese (Latin-1)
+     * spa = Spanish (Latin-1)
+     * swe = Swedish (Latin-1)
+     * ces = Czech (Latin-2)
+     * hun = Hungarian (Latin-2)
+     * slk = Slovak (Latin-2)
+     * rus = Russian (Cyrillic)
+     * tur = Turkish (Latin-5)
+     * ron = Romanian (Latin-2)
+     * bul = Bulgarian (Latin-2)
+     * est = Estonian (Latin-2)
+     * ell = Greek (Latin-2)
+     * lav = Latvian (Latin-2)
+     *
+     * @var string
+     */
+    private $characterSet;
 
     const PRINT_METHOD_CODE_EPL = 'EPL';
     const PRINT_METHOD_CODE_SPL = 'SPL';
@@ -105,6 +134,28 @@ class ShipmentRequestLabelSpecification
 
     const INSTRUCTION_CODE_EXCHANGE_LIKE_ITEM_ONLY = '01';
     const INSTRUCTION_CODE_EXCHANGE_DRIVER_INSTRUCTIONS_INSIDE = '02';
+    
+    const CHARACTER_SET_DANISH = 'dan';
+    const CHARACTER_SET_DUTCH = 'nld';
+    const CHARACTER_SET_FINNISH = 'fin';
+    const CHARACTER_SET_FRENCH = 'fra';
+    const CHARACTER_SET_GERMAN = 'deu';
+    const CHARACTER_SET_ITALIAN = 'itl';
+    const CHARACTER_SET_NORWEGIAN = 'nor';
+    const CHARACTER_SET_POLISH = 'pol';
+    const CHARACTER_SET_PORUGUESE = 'por';
+    const CHARACTER_SET_SPANISH = 'spa';
+    const CHARACTER_SET_SWEDISH = 'swe';
+    const CHARACTER_SET_CZECH = 'ces';
+    const CHARACTER_SET_HUNGARIAN = 'hun';
+    const CHARACTER_SET_SLOVAK = 'slk';
+    const CHARACTER_SET_RUSSIAN = 'rus';
+    const CHARACTER_SET_TURKISH = 'tur';
+    const CHARACTER_SET_ROMANIAN = 'ron';
+    const CHARACTER_SET_BULGARIAN = 'bul';
+    const CHARACTER_SET_ESTONIAN = 'est';
+    const CHARACTER_SET_GREEK = 'ell';
+    const RACTER_SET_LATVIAN = 'lav';
 
     /**
      * @param string $printMethodCode
@@ -271,6 +322,24 @@ class ShipmentRequestLabelSpecification
     {
         $this->instructionDescription = $instructionDescription;
 
+        return $this;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getCharacterSet()
+    {
+        return $this->characterSet;
+    }
+
+    /**
+     * @param string $characterSet
+     * @return ShipmentRequestLabelSpecification
+     */
+    public function setCharacterSet($characterSet)
+    {
+        $this->characterSet = $characterSet;
         return $this;
     }
 }
