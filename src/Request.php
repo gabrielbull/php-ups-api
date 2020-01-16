@@ -3,6 +3,7 @@
 namespace Ups;
 
 use DateTime;
+use DOMDocument;
 use Exception;
 use GuzzleHttp\Client as Guzzle;
 use Psr\Log\LoggerAwareInterface;
@@ -96,12 +97,9 @@ class Request implements RequestInterface, LoggerAwareInterface
         // Log request
         $date = new DateTime();
         $id = $date->format('YmdHisu');
-        $this->logger->info('Request To UPS API', [
-            'id' => $id,
-            'endpointurl' => $this->getEndpointUrl(),
-        ]);
 
-        $this->logger->debug('Request: '.$this->getRequest(), [
+        $this->logger->debug('Request to UPS API', [
+	        'content' => $this->getRequest(),
             'id' => $id,
             'endpointurl' => $this->getEndpointUrl(),
         ]);
@@ -121,12 +119,12 @@ class Request implements RequestInterface, LoggerAwareInterface
 
             $body = (string)$response->getBody();
 
-            $this->logger->info('Response from UPS API', [
-                'id' => $id,
-                'endpointurl' => $this->getEndpointUrl(),
-            ]);
-
-            $this->logger->debug('Response: '.$body, [
+	        $content = $body;
+	        if ($response->getStatusCode() === 200) {
+		        $content = $this->formatXml( $this->convertEncoding( $content ) );
+	        }
+            $this->logger->debug('Response from UPS API', [
+	            'content' => $content,
                 'id' => $id,
                 'endpointurl' => $this->getEndpointUrl(),
             ]);
@@ -156,6 +154,22 @@ class Request implements RequestInterface, LoggerAwareInterface
 
             throw new RequestException('Failure: '.$e->getMessage());
         }
+    }
+
+	/**
+	 * Formats XML.
+	 *
+	 * @param string $xml .
+	 *
+	 * @return string
+	 */
+    private function formatXml( $xml ) {
+	    $xmlDocument = new DOMDocument('1.0');
+	    $xmlDocument->preserveWhiteSpace = false;
+	    $xmlDocument->formatOutput = true;
+	    $xmlDocument->loadXML($xml);
+
+	    return $xmlDocument->saveXML();
     }
 
     /**

@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.9.1 (released 16-01-2020)
+
+- changed log messages 
+
 ## 0.7.12 (released 19-03-2016)
 
 - Extend ShipmentServiceOptions in Shipping API
