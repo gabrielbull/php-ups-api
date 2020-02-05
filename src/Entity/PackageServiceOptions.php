@@ -28,9 +28,14 @@ class PackageServiceOptions implements NodeInterface
     private $earliestDeliveryTime;
 
     /**
-     * @var string
+     * @var HazMat[]
      */
-    private $hazardousMaterialsCode;
+    private $hazMat = [];
+
+    /**
+     * @var HazMatPackageInformation
+     */
+    private $hazMatPackageInformation;
 
     /**
      * @var string
@@ -38,11 +43,21 @@ class PackageServiceOptions implements NodeInterface
     private $holdForPickup;
 
     /**
+     * @var DeliveryConfirmation
+     */
+    private $deliveryConfirmation;
+
+    /**
+     * @var ShipperReleaseIndicator
+     */
+    private $ShipperReleaseIndicator;
+
+    /**
      * @param null $parameters
      */
     public function __construct($parameters = null)
     {
-        if (null != $parameters) {
+        if (null !== $parameters) {
             if (isset($parameters->COD)) {
                 $this->setCOD(new COD($parameters->COD));
             }
@@ -52,11 +67,14 @@ class PackageServiceOptions implements NodeInterface
             if (isset($parameters->EarliestDeliveryTime)) {
                 $this->setEarliestDeliveryTime($parameters->EarliestDeliveryTime);
             }
-            if (isset($parameters->HazardousMaterialsCode)) {
-                $this->setHazardousMaterialsCode($parameters->HazardousMaterialsCode);
-            }
             if (isset($parameters->HoldForPickup)) {
                 $this->setHoldForPickup($parameters->HoldForPickup);
+            }
+            if (isset($parameters->DeliveryConfirmation)) {
+                $this->setDeliveryConfirmation($parameters->DeliveryConfirmation);
+            }
+            if (isset($parameters->ShipperReleaseIndicator)) {
+                $this->ShipperReleaseIndicator = $parameters->ShipperReleaseIndicator;
             }
         }
     }
@@ -64,7 +82,7 @@ class PackageServiceOptions implements NodeInterface
     /**
      * @param null|DOMDocument $document
      *
-     * TODO: this seem to be awfully incomplete
+     * @TODO: this seem to be awfully incomplete
      *
      * @return DOMElement
      */
@@ -78,6 +96,18 @@ class PackageServiceOptions implements NodeInterface
 
         if ($this->getInsuredValue()) {
             $node->appendChild($this->getInsuredValue()->toNode($document));
+        }
+        foreach ($this->getHazMat() as $hazmat) {
+            $node->appendChild($hazmat->toNode($document));
+        }
+        if ($this->getHazMatPackageInformation() !== null) {
+            $node->appendChild($this->getHazMatPackageInformation()->toNode($document));
+        }
+        if (isset($this->deliveryConfirmation)) {
+            $node->appendChild($this->deliveryConfirmation->toNode($document));
+        }
+        if (isset($this->ShipperReleaseIndicator)) {
+            $node->appendChild($document->createElement('ShipperReleaseIndicator'));
         }
 
         return $node;
@@ -132,19 +162,27 @@ class PackageServiceOptions implements NodeInterface
     }
 
     /**
-     * @return string|null
+     * @return HazMat[]
      */
-    public function getHazardousMaterialsCode()
+    public function getHazMat()
     {
-        return $this->hazardousMaterialsCode;
+        return $this->hazMat;
     }
 
     /**
-     * @param $var
+     * @param HazMat[] $hazMat
      */
-    public function setHazardousMaterialsCode($var)
+    public function setHazMat(array $hazMat)
     {
-        $this->hazardousMaterialsCode = $var;
+        $this->hazMat = $hazMat;
+    }
+
+    /**
+     * @param HazMat $hazmat
+     */
+    public function addHazMat(HazMat $hazmat)
+    {
+        $this->hazMat[] = $hazmat;
     }
 
     /**
@@ -161,5 +199,57 @@ class PackageServiceOptions implements NodeInterface
     public function setHoldForPickup($var)
     {
         $this->holdForPickup = $var;
+    }
+
+    /**
+     * @return HazMatPackageInformation
+     */
+    public function getHazMatPackageInformation()
+    {
+        return $this->hazMatPackageInformation;
+    }
+
+    /**
+     * @param HazMatPackageInformation $hazMatPackageInformation
+     */
+    public function setHazMatPackageInformation($hazMatPackageInformation)
+    {
+        $this->hazMatPackageInformation = $hazMatPackageInformation;
+    }
+
+    /**
+     * @param DeliveryConfirmation $deliveryConfirmation
+     * @return ShipmentServiceOptions
+     */
+    public function setDeliveryConfirmation(DeliveryConfirmation $deliveryConfirmation)
+    {
+        $this->deliveryConfirmation = $deliveryConfirmation;
+        return $this;
+    }
+
+    /**
+     * @return DeliveryConfirmation|null
+     */
+    public function getDeliveryConfirmation()
+    {
+        return $this->deliveryConfirmation;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getShipperReleaseIndicator()
+    {
+        return $this->ShipperReleaseIndicator;
+    }
+
+    /**
+     * @param mixed $ShipperReleaseIndicator
+     * @return ShipmentServiceOptions
+     */
+    public function setShipperReleaseIndicator($ShipperReleaseIndicator)
+    {
+        $this->ShipperReleaseIndicator = $ShipperReleaseIndicator;
+        return $this;
     }
 }

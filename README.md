@@ -21,27 +21,35 @@ Tracking API, Shipping API, Rating API and Time in Transit API. Feel free to con
 3. [Address Validation Class](#addressvalidation-class)
     * [Example](#addressvalidation-class-example)
     * [Parameters](#addressvalidation-class-parameters)
-4. [QuantumView Class](#quantumview-class)
+4. [Simple Address Validation Class](#simple-addressvalidation-class)
+    * [Example](#simple-addressvalidation-class-example)
+    * [Parameters](#simple-addressvalidation-class-parameters)    
+5. [QuantumView Class](#quantumview-class)
     * [Example](#quantumview-class-example)
     * [Parameters](#quantumview-class-parameters)
-5. [Tracking Class](#tracking-class)
+6. [Tracking Class](#tracking-class)
     * [Example](#tracking-class-example)
     * [Parameters](#tracking-class-parameters)
-6. [Rate Class](#rate-class)
+7. [Rate Class](#rate-class)
     * [Example](#rate-class-example)
     * [Parameters](#rate-class-parameters)
-7. [TimeInTransit Class](#timeintransit-class)
+8. [RateTimeInTransit Class](#ratetimeintransit-class)
+    * [Example](#ratetimeintransit-class-example)
+    * [Parameters](#ratetimeintransit-class-parameters)
+9. [TimeInTransit Class](#timeintransit-class)
     * [Example](#timeintransit-class-example)
     * [Parameters](#timeintransit-class-parameters)
-8. [Locator Class](#locator-class)
+10. [Locator Class](#locator-class)
     * [Example](#locator-class-example)
     * [Parameters](#locator-class-parameters)
-9. [Tradeability Class](#tradeability-class)
+11. [Tradeability Class](#tradeability-class)
     * [Example](#tradeability-class-example)
     * [Parameters](#tradeability-class-parameters)
-10. [Shipping Class](#shipping-class)
-11. [Logging](#logging)
-12. [License](#license-section)
+12. [Shipping Class](#shipping-class)
+    * [Example](#shipping-class-example)
+    * [Parameters](#shipping-class-parameters)
+13. [Logging](#logging)
+14. [License](#license-section)
 
 <a name="requirements"></a>
 ## Requirements
@@ -61,6 +69,8 @@ run the Composer command to install the latest stable version of PHP UPS API:
 composer require gabrielbull/ups-api
 ```
 
+If not using composer, you must also include these libraries: [Guzzle](https://github.com/guzzle/guzzle), [Guzzle Promises](https://github.com/guzzle/promises), [Guzzle PSR7] (https://github.com/guzzle/psr7), [PHP-Fig PSR Log](https://github.com/php-fig/log), and [PHP-Fig HTTP Message](https://github.com/php-fig/http-message).
+
 <a name="addressvalidation-class"></a>
 ## Address Validation Class (Street Level)
 
@@ -69,7 +79,7 @@ The Address Validation Class allow you to validate an address at street level. S
 Note: UPS has two Address Validations. This is Street Level option, which includes all option
 of the normal Address Validation class and adds street level validation.
 
-Not all countries are supported, see UPS documentation. Currently US & Puerto Rico are supported.
+Currently only US & Puerto Rico are supported.
 
 <a name="addressvalidation-class-example"></a>
 ### Example
@@ -131,6 +141,41 @@ Address Validation parameters are:
  * `address` Address object as constructed in example
  * `requestOption` One of the three request options. See documentation. Default = Address Validation.
  * `maxSuggestion` Maximum number of suggestions to be returned. Max = 50
+ 
+<a name="simple-addressvalidation-class"></a>
+## Simple Address Validation Class 
+
+The Simple Address Validation Class allow you to validate less extensive as the previous class. It returns a quality score of the supplied address and provides alternatives.
+
+Note: UPS has two Address Validations. This is the Simple option. 
+
+Currently only US & Puerto Rico are supported.
+
+<a name="simple-addressvalidation-class-example"></a>
+### Example
+
+```php
+$address = new \Ups\Entity\Address();
+$address->setStateProvinceCode('NY');
+$address->setCity('New York');
+$address->setCountryCode('US');
+$address->setPostalCode('10000');
+
+$av = new \Ups\SimpleAddressValidation($accessKey, $userId, $password);
+try {
+ $response = $av->validate($address);
+ var_dump($response);
+} catch (Exception $e) {
+ var_dump($e);
+}
+```
+
+<a name="simpleaddressvalidation-class-parameters"></a>
+### Parameters
+
+Simple Address Validation parameters are:
+
+* `address` Address object as constructed in example
 
 <a name="quantumview-class"></a>
 ## QuantumView Class
@@ -292,6 +337,11 @@ try {
     $package = new \Ups\Entity\Package();
     $package->getPackagingType()->setCode(\Ups\Entity\PackagingType::PT_PACKAGE);
     $package->getPackageWeight()->setWeight(10);
+    
+    // if you need this (depends of the shipper country)
+    $weightUnit = new \Ups\Entity\UnitOfMeasurement;
+    $weightUnit->setCode(\Ups\Entity\UnitOfMeasurement::UOM_KGS);
+    $package->getPackageWeight()->setUnitOfMeasurement($weightUnit);
 
     $dimensions = new \Ups\Entity\Dimensions();
     $dimensions->setHeight(10);
@@ -317,6 +367,82 @@ try {
  * `rateRequest` Mandatory. rateRequest Object with shipment details
 
 This Rate class is not finished yet! Parameter should be added when it will be finished.
+
+<a name="ratetimeinstransit-class"></a>
+## RateTimeInTransit Class
+
+The RateTimeInTransit Class allow you to get shipment rates like the Rate Class, but the response will also include 
+TimeInTransit data.
+
+<a name="ratetimeintransit-class-example"></a>
+### Example
+
+```php
+$rate = new Ups\RateTimeInTransit(
+	$accessKey,
+	$userId,
+	$password
+);
+
+try {
+    $shipment = new \Ups\Entity\Shipment();
+
+    $shipperAddress = $shipment->getShipper()->getAddress();
+    $shipperAddress->setPostalCode('99205');
+
+    $address = new \Ups\Entity\Address();
+    $address->setPostalCode('99205');
+    $shipFrom = new \Ups\Entity\ShipFrom();
+    $shipFrom->setAddress($address);
+
+    $shipment->setShipFrom($shipFrom);
+
+    $shipTo = $shipment->getShipTo();
+    $shipTo->setCompanyName('Test Ship To');
+    $shipToAddress = $shipTo->getAddress();
+    $shipToAddress->setPostalCode('99205');
+
+    $package = new \Ups\Entity\Package();
+    $package->getPackagingType()->setCode(\Ups\Entity\PackagingType::PT_PACKAGE);
+    $package->getPackageWeight()->setWeight(10);
+    
+    // if you need this (depends of the shipper country)
+    $weightUnit = new \Ups\Entity\UnitOfMeasurement;
+    $weightUnit->setCode(\Ups\Entity\UnitOfMeasurement::UOM_KGS);
+    $package->getPackageWeight()->setUnitOfMeasurement($weightUnit);
+
+    $dimensions = new \Ups\Entity\Dimensions();
+    $dimensions->setHeight(10);
+    $dimensions->setWidth(10);
+    $dimensions->setLength(10);
+
+    $unit = new \Ups\Entity\UnitOfMeasurement;
+    $unit->setCode(\Ups\Entity\UnitOfMeasurement::UOM_IN);
+
+    $dimensions->setUnitOfMeasurement($unit);
+    $package->setDimensions($dimensions);
+
+    $shipment->addPackage($package);
+
+    $deliveryTimeInformation = new \Ups\Entity\DeliveryTimeInformation();
+    $deliveryTimeInformation->setPackageBillType(\Ups\Entity\DeliveryTimeInformation::PBT_NON_DOCUMENT);
+    
+    $pickup = new \Ups\Entity\Pickup();
+    $pickup->setDate("20170520");
+    $pickup->setTime("160000");
+    $shipment->setDeliveryTimeInformation($deliveryTimeInformation);
+
+    var_dump($rate->shopRatesTimeInTransit($shipment));
+} catch (Exception $e) {
+    var_dump($e);
+}
+```
+<a name="ratetimeintransit-class-parameters"></a>
+### Parameters
+
+ * `rateRequest` Mandatory. rateRequest Object with shipment details
+
+This RateTimeInTransit extends the Rate class which is not finished yet! Parameter should be added when it will be finished.
 
 <a name="timeintransit-class"></a>
 ## TimeInTransit Class
@@ -530,9 +656,191 @@ For the Landed Cost call, parameters are:
  * `landedCostRequest` Mandatory. landedCostRequest object with request details, see example.
 
 <a name="shipping-class"></a>
-## Shipping Class.
+## Shipping Class
 
-Documentation for this class is coming.
+The Shipping class allows you to register shipments. This also includes return shipments.
+
+The shipping flow consists of 2 steps:
+
+* Confirm: Send information to UPS to get it validated and get a digest you can use to accept the shipment.
+* Accept: Finalise the shipment, mark it as it will be shipped. Get label and additional information.
+
+Please note this is just an example. Your use case might demand more or less information to be sent to UPS.
+
+In the example $return is used to show how a return could be handled. 
+
+<a name="shipping-class-example"></a>
+### Example
+
+```php
+    // Start shipment
+    $shipment = new Ups\Entity\Shipment;
+
+    // Set shipper
+    $shipper = $shipment->getShipper();
+    $shipper->setShipperNumber('XX');
+    $shipper->setName('XX');
+    $shipper->setAttentionName('XX');
+    $shipperAddress = $shipper->getAddress();
+    $shipperAddress->setAddressLine1('XX');
+    $shipperAddress->setPostalCode('XX');
+    $shipperAddress->setCity('XX');
+    $shipperAddress->setStateProvinceCode('XX'); // required in US
+    $shipperAddress->setCountryCode('XX');
+    $shipper->setAddress($shipperAddress);
+    $shipper->setEmailAddress('XX'); 
+    $shipper->setPhoneNumber('XX');
+    $shipment->setShipper($shipper);
+
+    // To address
+    $address = new \Ups\Entity\Address();
+    $address->setAddressLine1('XX');
+    $address->setPostalCode('XX');
+    $address->setCity('XX');
+    $address->setStateProvinceCode('XX');  // Required in US
+    $address->setCountryCode('XX');
+    $shipTo = new \Ups\Entity\ShipTo();
+    $shipTo->setAddress($address);
+    $shipTo->setCompanyName('XX');
+    $shipTo->setAttentionName('XX');
+    $shipTo->setEmailAddress('XX'); 
+    $shipTo->setPhoneNumber('XX');
+    $shipment->setShipTo($shipTo);
+
+    // From address
+    $address = new \Ups\Entity\Address();
+    $address->setAddressLine1('XX');
+    $address->setPostalCode('XX');
+    $address->setCity('XX');
+    $address->setStateProvinceCode('XX');  
+    $address->setCountryCode('XX');
+    $shipFrom = new \Ups\Entity\ShipFrom();
+    $shipFrom->setAddress($address);
+    $shipFrom->setName('XX');
+    $shipFrom->setAttentionName($shipFrom->getName());
+    $shipFrom->setCompanyName($shipFrom->getName());
+    $shipFrom->setEmailAddress('XX');
+    $shipFrom->setPhoneNumber('XX');
+    $shipment->setShipFrom($shipFrom);
+
+    // Sold to
+    $address = new \Ups\Entity\Address();
+    $address->setAddressLine1('XX');
+    $address->setPostalCode('XX');
+    $address->setCity('XX');
+    $address->setCountryCode('XX');
+    $address->setStateProvinceCode('XX');
+    $soldTo = new \Ups\Entity\SoldTo;
+    $soldTo->setAddress($address);
+    $soldTo->setAttentionName('XX');
+    $soldTo->setCompanyName($soldTo->getAttentionName());
+    $soldTo->setEmailAddress('XX');
+    $soldTo->setPhoneNumber('XX');
+    $shipment->setSoldTo($soldTo);
+
+    // Set service
+    $service = new \Ups\Entity\Service;
+    $service->setCode(\Ups\Entity\Service::S_STANDARD);
+    $service->setDescription($service->getName());
+    $shipment->setService($service);
+
+    // Mark as a return (if return)
+    if ($return) {
+        $returnService = new \Ups\Entity\ReturnService;
+        $returnService->setCode(\Ups\Entity\ReturnService::PRINT_RETURN_LABEL_PRL);
+        $shipment->setReturnService($returnService);
+    }
+
+    // Set description
+    $shipment->setDescription('XX');
+
+    // Add Package
+    $package = new \Ups\Entity\Package();
+    $package->getPackagingType()->setCode(\Ups\Entity\PackagingType::PT_PACKAGE);
+    $package->getPackageWeight()->setWeight(10);
+    $unit = new \Ups\Entity\UnitOfMeasurement;
+    $unit->setCode(\Ups\Entity\UnitOfMeasurement::UOM_KGS);
+    $package->getPackageWeight()->setUnitOfMeasurement($unit);
+
+    // Set Package Service Options
+    $packageServiceOptions = new \Ups\Entity\PackageServiceOptions();
+    $packageServiceOptions->setShipperReleaseIndicator(true);
+    $package->setPackageServiceOptions($packageServiceOptions);
+
+    // Set dimensions
+    $dimensions = new \Ups\Entity\Dimensions();
+    $dimensions->setHeight(50);
+    $dimensions->setWidth(50);
+    $dimensions->setLength(50);
+    $unit = new \Ups\Entity\UnitOfMeasurement;
+    $unit->setCode(\Ups\Entity\UnitOfMeasurement::UOM_CM);
+    $dimensions->setUnitOfMeasurement($unit);
+    $package->setDimensions($dimensions);
+
+    // Add descriptions because it is a package
+    $package->setDescription('XX');
+
+    // Add this package
+    $shipment->addPackage($package);
+
+    // Set Reference Number
+    $referenceNumber = new \Ups\Entity\ReferenceNumber;
+    if ($return) {
+        $referenceNumber->setCode(\Ups\Entity\ReferenceNumber::CODE_RETURN_AUTHORIZATION_NUMBER);
+        $referenceNumber->setValue($return_id);
+    } else {
+        $referenceNumber->setCode(\Ups\Entity\ReferenceNumber::CODE_INVOICE_NUMBER);
+        $referenceNumber->setValue($order_id);
+    }
+    $shipment->setReferenceNumber($referenceNumber);
+
+    // Set payment information
+    $shipment->setPaymentInformation(new \Ups\Entity\PaymentInformation('prepaid', (object)array('AccountNumber' => 'XX')));
+
+    // Ask for negotiated rates (optional)
+    $rateInformation = new \Ups\Entity\RateInformation;
+    $rateInformation->setNegotiatedRatesIndicator(1);
+    $shipment->setRateInformation($rateInformation);
+
+    // Get shipment info
+    try {
+        $api = new Ups\Shipping($accessKey, $userId, $password); 
+    
+        $confirm = $api->confirm(\Ups\Shipping::REQ_VALIDATE, $shipment);
+        var_dump($confirm); // Confirm holds the digest you need to accept the result
+        
+        if ($confirm) {
+            $accept = $api->accept($confirm->ShipmentDigest);
+            var_dump($accept); // Accept holds the label and additional information
+        }
+    } catch (\Exception $e) {
+        var_dump($e);
+    }
+```
+
+If you wanted to create a printable file from the UPS Shipping label image data that came back with $accept, you would use something like the following: 
+
+```
+    $label_file = $order_id . ".gif"; 
+    $base64_string = $accept->PackageResults->LabelImage->GraphicImage;
+    $ifp = fopen($label_file, 'wb');
+    fwrite($ifp, base64_decode($base64_string));
+    fclose($ifp);
+```
+
+<a name="shipping-class-parameters"></a>
+### Parameters
+
+For the Shipping `confirm` call, the parameters are: 
+
+ * $validation A UPS_Shipping::REQ_* constant (or null). Required
+ * $shipment Shipment data container. Required
+ * $labelSpec LabelSpecification data. Optional
+ * $receiptSpec ShipmentRequestReceiptSpecification data. Optional
+
+For the Shipping `accept` call, the parameters are: 
+
+ * $shipmentDigest The UPS Shipment Digest received from a ShipConfirm request. Required
 
 <a name="logging"></a>
 ## Logging

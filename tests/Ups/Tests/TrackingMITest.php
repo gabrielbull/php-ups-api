@@ -8,7 +8,6 @@ use Ups;
 
 class TrackingMITest extends PHPUnit_Framework_TestCase
 {
-
     public function testCreateRequest()
     {
         $tracking = new Ups\Tracking();

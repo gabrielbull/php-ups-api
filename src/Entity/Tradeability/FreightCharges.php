@@ -7,12 +7,11 @@ use DOMElement;
 
 class FreightCharges extends \Ups\Entity\FreightCharges
 {
-
     private $currencyCode;
 
     public function __construct($response = null)
     {
-        if (null != $response) {
+        if (null !== $response) {
             if (isset($response->CurrencyCode)) {
                 $this->setCurrencyCode($response->CurrencyCode);
             }

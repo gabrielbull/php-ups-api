@@ -102,7 +102,7 @@ class ReferenceNumber implements NodeInterface
      */
     public function __construct($response = null)
     {
-        if (null != $response) {
+        if (null !== $response) {
             if (isset($response->BarCodeIndicator)) {
                 $this->setBarCodeIndicator($response->BarCodeIndicator);
             }

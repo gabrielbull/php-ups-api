@@ -11,11 +11,14 @@ class BillingWeight
 
     public $Weight;
 
-    public function __construct($response = null)
+    /**
+     * @param \stdClass|null $response
+     */
+    public function __construct(\stdClass $response = null)
     {
         $this->UnitOfMeasurement = new UnitOfMeasurement();
 
-        if (null != $response) {
+        if (null !== $response) {
             if (isset($response->UnitOfMeasurement)) {
                 $this->UnitOfMeasurement = new UnitOfMeasurement($response->UnitOfMeasurement);
             }

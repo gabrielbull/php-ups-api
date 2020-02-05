@@ -31,7 +31,7 @@ class AddressValidationResponse
     public function noCandidates()
     {
         if (AddressValidation::REQUEST_OPTION_ADDRESS_CLASSIFICATION == $this->requestAction) {
-            throw new \BadMethodCallException(__METHOD__ . ' should not be called on Address Classification only requests.');
+            throw new \BadMethodCallException(__METHOD__.' should not be called on Address Classification only requests.');
         }
         return isset($this->response->NoCandidatesIndicator);
     }
@@ -62,7 +62,7 @@ class AddressValidationResponse
     public function isAmbiguous()
     {
         if (AddressValidation::REQUEST_OPTION_ADDRESS_CLASSIFICATION == $this->requestAction) {
-            throw new \BadMethodCallException(__METHOD__ . ' should not be called on Address Classification only requests.');
+            throw new \BadMethodCallException(__METHOD__.' should not be called on Address Classification only requests.');
         }
         return isset($this->response->AmbiguousAddressIndicator);
     }

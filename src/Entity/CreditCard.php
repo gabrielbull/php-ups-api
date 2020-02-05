@@ -1,9 +1,4 @@
 <?php
-/*
- * Copyright © Eduard Sukharev
- *
- * For a full license, see the LICENSE file.
- */
 
 namespace Ups\Entity;
 
@@ -37,7 +32,10 @@ class CreditCard
      */
     private $address;
 
-    public function __construct($attributes = null)
+    /**
+     * @param \stdClass|null $attributes
+     */
+    public function __construct(\stdClass $attributes = null)
     {
         $this->setAddress(new Address(isset($attributes->Address) ? $attributes->Address : null));
 

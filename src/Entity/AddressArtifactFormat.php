@@ -40,9 +40,9 @@ class AddressArtifactFormat extends Address
         $node = $document->createElement('AddressArtifactFormat');
 
         for ($i = 1; $i <= 3; $i++) {
-            $line = $this->{'getPoliticalDivision' . $i}();
+            $line = $this->{'getPoliticalDivision'.$i}();
             if ($line) {
-                $node->appendChild($document->createElement('PoliticalDivision' . $i, $line));
+                $node->appendChild($document->createElement('PoliticalDivision'.$i, $line));
             }
         }
 

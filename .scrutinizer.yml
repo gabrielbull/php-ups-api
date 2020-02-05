@@ -2,3 +2,24 @@ tools:
     php_code_sniffer:
         config:
             standard: "PSR2"
+filter:
+    excluded_paths:
+        - 'tests/*'
+checks:
+    php: true
+coding_style:
+    php:
+        spaces:
+            other:
+                after_type_cast: false
+build:
+    tests:
+        override:
+            -
+                command: 'phpunit --coverage-clover=phpunit-coverage.xml'
+                coverage:
+                    file: 'phpunit-coverage.xml'
+                    format: 'php-clover'
+    environment:
+        php:
+            version: 5.5

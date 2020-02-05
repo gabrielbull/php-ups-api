@@ -7,9 +7,12 @@ class Activity
     public $Date;
     public $Time;
 
-    public function __construct($response = null)
+    /**
+     * @param \stdClass|null $response
+     */
+    public function __construct(\stdClass $response = null)
     {
-        if (null != $response) {
+        if (null !== $response) {
             if (isset($response->Date)) {
                 $this->Date = $response->Date;
             }

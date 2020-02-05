@@ -7,9 +7,12 @@ class QuantumViewResponse
     public $QuantumViewEvents;
     public $Bookmark;
 
-    public function __construct($response = null)
+    /**
+     * @param \stdClass|null $response
+     */
+    public function __construct(\stdClass $response = null)
     {
-        if (null != $response) {
+        if (null !== $response) {
             if (isset($response->QuantumViewEvents)) {
                 $this->QuantumViewEvents = $response->QuantumViewEvents;
             }

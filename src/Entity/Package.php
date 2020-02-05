@@ -41,6 +41,11 @@ class Package implements NodeInterface
      * @var ReferenceNumber
      */
     private $referenceNumber;
+    
+    /**
+     * @var ReferenceNumber
+     */
+    private $referenceNumber2;
 
     /**
      * @var string
@@ -76,6 +81,7 @@ class Package implements NodeInterface
             isset($attributes->PackagingType) ? $attributes->PackagingType : null)
         );
         $this->setReferenceNumber(new ReferenceNumber());
+        $this->setReferenceNumber2(new ReferenceNumber());
         $this->setPackageWeight(new PackageWeight());
         $this->setPackageServiceOptions(new PackageServiceOptions());
 
@@ -94,6 +100,9 @@ class Package implements NodeInterface
             }
             if (isset($attributes->ReferenceNumber)) {
                 $this->setReferenceNumber(new ReferenceNumber($attributes->ReferenceNumber));
+            }
+            if (isset($attributes->ReferenceNumber2)) {
+                $this->setReferenceNumber2(new ReferenceNumber($attributes->ReferenceNumber2));
             }
             if (isset($attributes->TrackingNumber)) {
                 $this->setTrackingNumber($attributes->TrackingNumber);
@@ -159,6 +168,13 @@ class Package implements NodeInterface
             && !is_null($this->getReferenceNumber()->getValue())
         ) {
             $packageNode->appendChild($this->getReferenceNumber()->toNode($document));
+        }
+        
+        if ($this->getReferenceNumber2()
+            && !is_null($this->getReferenceNumber2()->getCode())
+            && !is_null($this->getReferenceNumber2()->getValue())
+        ) {
+            $packageNode->appendChild($this->getReferenceNumber2()->toNode($document));
         }
 
         return $packageNode;
@@ -327,6 +343,31 @@ class Package implements NodeInterface
     public function removeReferenceNumber()
     {
         $this->referenceNumber = null;
+    }
+    
+    /**
+     * @return ReferenceNumber
+     */
+    public function getReferenceNumber2()
+    {
+        return $this->referenceNumber2;
+    }
+
+    /**
+     * @param ReferenceNumber $referenceNumber
+     *
+     * @return Package
+     */
+    public function setReferenceNumber2(ReferenceNumber $referenceNumber)
+    {
+        $this->referenceNumber2 = $referenceNumber;
+
+        return $this;
+    }
+
+    public function removeReferenceNumber2()
+    {
+        $this->referenceNumber2 = null;
     }
 
     /**

@@ -35,7 +35,7 @@ class Generic
         $this->ShipTo = new ShipTo();
         $this->FailureNotification = new FailureNotification();
 
-        if (null != $response) {
+        if (null !== $response) {
             if (isset($response->ActivityType)) {
                 $this->ActivityType = $response->ActivityType;
             }

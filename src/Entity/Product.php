@@ -80,12 +80,14 @@ class Product implements NodeInterface
 
         $node = $document->createElement('Product');
         for ($i = 1; $i <= 3; $i++) {
-            $desc = $this->{'getDescription' . $i}();
+            $desc = $this->{'getDescription'.$i}();
             if ($desc !== null) {
                 $node->appendChild($document->createElement('Description', $desc));
             }
         }
-        $node->appendChild($this->getUnit()->toNode($document));
+        if ($this->getUnit() !== null) {
+            $node->appendChild($this->getUnit()->toNode($document));
+        }
         if ($this->getCommodityCode() !== null) {
             $node->appendChild($document->createElement('CommodityCode', $this->getCommodityCode()));
         }

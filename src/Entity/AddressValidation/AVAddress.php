@@ -62,15 +62,15 @@ class AVAddress
     public function __construct(\SimpleXMLElement $xmlDoc)
     {
         if ($xmlDoc->count() == 0) {
-            throw new \InvalidArgumentException(__METHOD__ . ': The passed object does not have any child nodes.');
+            throw new \InvalidArgumentException(__METHOD__.': The passed object does not have any child nodes.');
         }
         $this->addressClassification = isset($xmlDoc->AddressClassification) ? new AddressClassification($xmlDoc->AddressClassification) : null;
         $this->consigneeName = isset($xmlDoc->ConsigneeName) ? (string)$xmlDoc->ConsigneeName : '';
         $this->buildingName = isset($xmlDoc->BuildingName) ? (string)$xmlDoc->BuildingName : '';
         if (isset($xmlDoc->AddressLine)) {
             for ($i = 0, $len = count($xmlDoc->AddressLine); $i < $len; $i++) {
-                $var = 'addressLine' . ($i > 0 ? $i + 1 : '');
-                $this->{$var} = isset($xmlDoc->AddressLine[$i]) ? (string) $xmlDoc->AddressLine[$i] : '';
+                $var = 'addressLine'.($i > 0 ? $i + 1 : '');
+                $this->{$var} = isset($xmlDoc->AddressLine[$i]) ? (string)$xmlDoc->AddressLine[$i] : '';
             }
         }
         $this->region = isset($xmlDoc->Region) ? (string)$xmlDoc->Region : '';
@@ -154,7 +154,7 @@ class AVAddress
      */
     public function getPostalCodeWithExtension($divider = '-')
     {
-        return $this->postcodePrimaryLow . $divider . $this->postcodeExtendedLow;
+        return $this->postcodePrimaryLow.$divider.$this->postcodeExtendedLow;
     }
 
     /**
@@ -165,7 +165,7 @@ class AVAddress
      */
     public function getAddressLine($lineNumber = 1)
     {
-        $var = 'addressLine' . ($lineNumber > 1 ? $lineNumber : '');
+        $var = 'addressLine'.($lineNumber > 1 ? $lineNumber : '');
         return $this->{$var};
     }
 }

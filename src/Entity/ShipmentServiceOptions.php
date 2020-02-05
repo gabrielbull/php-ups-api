@@ -54,9 +54,34 @@ class ShipmentServiceOptions implements NodeInterface
     private $internationalForms;
 
     /**
+     * @var null|LabelMethod
+     */
+    private $labelMethod;
+
+    /**
+     * @var null|LabelDelivery
+     */
+    private $labelDelivery;
+
+    /**
      * @var array
      */
     private $notifications = [];
+
+    /**
+     * @var AccessPointCOD
+     */
+    private $accessPointCOD;
+
+    /**
+     * @var boolean
+     */
+    private $importControlIndicator;
+
+    /**
+     * @var DeliveryConfirmation
+     */
+    private $deliveryConfirmation;
 
     /**
      * @param null $response
@@ -65,7 +90,7 @@ class ShipmentServiceOptions implements NodeInterface
     {
         $this->CallTagARS = new CallTagARS();
 
-        if (null != $response) {
+        if (null !== $response) {
             if (isset($response->SaturdayPickup)) {
                 $this->SaturdayPickup = $response->SaturdayPickup;
             }
@@ -74,6 +99,9 @@ class ShipmentServiceOptions implements NodeInterface
             }
             if (isset($response->COD)) {
                 $this->COD = $response->COD;
+            }
+            if (isset($response->AccessPointCOD)) {
+                $this->setAccessPointCOD(new AccessPointCOD($response->AccessPointCOD));
             }
             if (isset($response->CallTagARS)) {
                 $this->CallTagARS = new CallTagARS($response->CallTagARS);
@@ -89,6 +117,18 @@ class ShipmentServiceOptions implements NodeInterface
             }
             if (isset($response->InternationalForms)) {
                 $this->setInternationalForms($response->InternationalForms);
+            }
+            if (isset($response->ImportControlIndicator)) {
+                $this->setImportControlIndicator($response->ImportControlIndicator);
+            }
+            if (isset($response->DeliveryConfirmation)) {
+                $this->setDeliveryConfirmation($response->DeliveryConfirmation);
+            }
+            if (isset($response->LabelMethod)) {
+                $this->setLabelMethod(new LabelMethod($response->LabelMethod));
+            }
+            if (isset($response->EMailMessage)) {
+                $this->setEMailMessage(new EMailMessage($response->EMailMessage));
             }
         }
     }
@@ -126,8 +166,40 @@ class ShipmentServiceOptions implements NodeInterface
             $node->appendChild($this->getCOD()->toNode($document));
         }
 
+        if ($this->getAccessPointCOD()) {
+            $node->appendChild($this->getAccessPointCOD()->toNode($document));
+        }
+
         if (isset($this->internationalForms)) {
             $node->appendChild($this->internationalForms->toNode($document));
+        }
+
+        if (isset($this->deliveryConfirmation)) {
+            $node->appendChild($this->deliveryConfirmation->toNode($document));
+        }
+
+        if (isset($this->importControlIndicator)) {
+            $node->appendChild($document->createElement('ImportControlIndicator'));
+        }
+
+        if (isset($this->labelMethod)) {
+            $node->appendChild($this->labelMethod->toNode($document));
+        }
+
+        if (isset($this->labelDelivery)) {
+            $labelDeliveryNode = $node->appendChild($document->createElement('LabelDelivery'));
+            $emailMessageNode = $labelDeliveryNode->appendChild($document->createElement('EMailMessage'));
+            $labelDelivery = $this->getLabelDelivery();
+            foreach ($labelDelivery as $key => $value) {
+                if ($key == 'LabelLinkIndicator') {
+                    $labelDeliveryNode->appendChild($document->createElement($key, $value));
+                } elseif ($key == 'SubjectCode') {
+                    $SubjectNode = $emailMessageNode->appendChild($document->createElement('Subject'));
+                    $SubjectNode->appendChild($document->createElement($key, $value));
+                } else {
+                    $emailMessageNode->appendChild($document->createElement($key, $value));
+                }
+            }
         }
 
         if (!empty($this->notifications)) {
@@ -140,19 +212,75 @@ class ShipmentServiceOptions implements NodeInterface
     }
 
     /**
+     * @return AccessPointCOD
+     */
+    public function getAccessPointCOD()
+    {
+        return $this->accessPointCOD;
+    }
+
+    /**
+     * @param AccessPointCOD $accessPointCOD
+     * @return $this
+     */
+    public function setAccessPointCOD($accessPointCOD)
+    {
+        $this->accessPointCOD = $accessPointCOD;
+        return $this;
+    }
+
+    /**
      * @param InternationalForms $data
+     * @return $this
      */
     public function setInternationalForms(InternationalForms $data)
     {
         $this->internationalForms = $data;
+        return $this;
     }
 
     /**
-     * @return mixed
+     * @return InternationalForms
      */
     public function getInternationalForms()
     {
         return $this->internationalForms;
+    }
+
+    /**
+     * @param LabelMethod $data
+     * @return $this
+     */
+    public function setLabelMethod(LabelMethod $data)
+    {
+        $this->labelMethod = $data;
+        return $this;
+    }
+
+    /**
+     * @return null|LabelMethod
+     */
+    public function getLabelMethod()
+    {
+        return $this->labelMethod;
+    }
+
+    /**
+     * @param LabelDelivery $data
+     * @return $this
+     */
+    public function setLabelDelivery(LabelDelivery $data)
+    {
+        $this->labelDelivery = $data;
+        return $this;
+    }
+
+    /**
+     * @return null|LabelDelivery
+     */
+    public function getLabelDelivery()
+    {
+        return $this->labelDelivery;
     }
 
     /**
@@ -270,6 +398,42 @@ class ShipmentServiceOptions implements NodeInterface
     {
         $this->NegotiatedRatesIndicator = $NegotiatedRatesIndicator;
         return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isImportControlIndicator()
+    {
+        return $this->importControlIndicator;
+    }
+
+    /**
+     * @param boolean $importControlIndicator
+     * @return ShipmentServiceOptions
+     */
+    public function setImportControlIndicator($importControlIndicator)
+    {
+        $this->importControlIndicator = $importControlIndicator;
+        return $this;
+    }
+
+    /**
+     * @param DeliveryConfirmation $deliveryConfirmation
+     * @return ShipmentServiceOptions
+     */
+    public function setDeliveryConfirmation(DeliveryConfirmation $deliveryConfirmation)
+    {
+        $this->deliveryConfirmation = $deliveryConfirmation;
+        return $this;
+    }
+
+    /**
+     * @return DeliveryConfirmation|null
+     */
+    public function getDeliveryConfirmation()
+    {
+        return $this->deliveryConfirmation;
     }
 
     /**

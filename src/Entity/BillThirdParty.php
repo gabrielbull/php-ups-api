@@ -1,9 +1,4 @@
 <?php
-/*
- * Copyright © Eduard Sukharev
- *
- * For a full license, see the LICENSE file.
- */
 
 namespace Ups\Entity;
 
@@ -22,7 +17,10 @@ class BillThirdParty
      */
     private $accountNumber;
 
-    public function __construct($attributes = null)
+    /**
+     * @param \stdClass|null $attributes
+     */
+    public function __construct(\stdClass $attributes = null)
     {
         $this->thirdPartyAddress = new Address(isset($attributes->Address) ? $attributes->Address : null);
         $this->accountNumber = isset($attributes->AccountNumber) ? $attributes->AccountNumber : null;

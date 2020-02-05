@@ -1,5 +1,36 @@
 # CHANGELOG
 
+## 0.7.12 (released 19-03-2016)
+
+- Extend ShipmentServiceOptions in Shipping API
+- Fix for Begin and End date in Tracking API
+- Support for HazMat containers in Shipping API 
+
+## 0.7.11 (released 15-09-2016)
+
+- Multiple results in Tracking + add Simple Address Validation class
+
+## 0.7.10 (released 12-07-2016) 
+
+- Solve an issue when mb_detect_encoding couldn't detect it, use a fallback to use utf8_encode. Else response parsing breaks.
+
+## 0.7.9 (released 01-07-2016)
+
+- Add Shipping API Support for AdditionalDocumentIndicator in the InternationalForms node
+- Add Shipping API Support for EEIFilingOption in the InternationalForms node
+- Add TimeInTransit API Response Service Code Constants for US/EU Shipments to Entity/Service.php
+- Add Tracking API Response StatusType Constants
+
+## 0.7.8 (released 23-06-2016)
+
+- Do not create new Guzzle object instance on each Request, but re-use it. 
+
+## 0.7.7 (released 31-05-2016)
+
+- Added AccessPointCOD under ShipmentServiceOptions
+- RatedShipment extended with extra fields
+- Password field (under Access tag) support entities now
+
 ## 0.7.6 (released 04-03-2016)
 
 - Add extra parameters for filtering on Tracking API

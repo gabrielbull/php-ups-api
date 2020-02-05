@@ -139,7 +139,9 @@ abstract class Ups implements LoggerAwareInterface
 
         $accessRequest->appendChild($xml->createElement('AccessLicenseNumber', $this->accessKey));
         $accessRequest->appendChild($xml->createElement('UserId', $this->userId));
-        $accessRequest->appendChild($xml->createElement('Password', $this->password));
+        
+        $p = $accessRequest->appendChild($xml->createElement('Password'));
+        $p->appendChild($xml->createTextNode($this->password));
 
         return $xml->saveXML();
     }
@@ -212,6 +214,6 @@ abstract class Ups implements LoggerAwareInterface
     {
         $base = ($this->useIntegration ? $this->integrationBaseUrl : $this->productionBaseUrl);
 
-        return $base . $segment;
+        return $base.$segment;
     }
 }
