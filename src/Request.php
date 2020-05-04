@@ -120,8 +120,8 @@ class Request implements RequestInterface, LoggerAwareInterface
             $body = (string)$response->getBody();
 
 	        $content = $body;
-	        if ($response->getStatusCode() === 200) {
-		        $content = $this->formatXml( $this->convertEncoding( $content ) );
+	        if ($response->getStatusCode() === 200 && !empty($content)) {
+		        $content = $this->formatXml($this->convertEncoding($content));
 	        }
             $this->logger->debug('Response from UPS API', [
 	            'content' => $content,

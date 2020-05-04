@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.9.2 (released 04-05-2020)
+- fixed warning on empty api response 
+
+
 ## 0.9.1 (released 16-01-2020)
 
 - changed log messages 
