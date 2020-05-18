@@ -132,18 +132,23 @@ class Request implements RequestInterface, LoggerAwareInterface
             if ($response->getStatusCode() === 200) {
                 $body = $this->convertEncoding($body);
 
-                $xml = new SimpleXMLElement($body);
-                if (isset($xml->Response) && isset($xml->Response->ResponseStatusCode)) {
-                    if ($xml->Response->ResponseStatusCode == 1) {
-                        $responseInstance = new Response();
-
-                        return $responseInstance->setText($body)->setResponse($xml);
-                    } elseif ($xml->Response->ResponseStatusCode == 0) {
-                        $code = (int)$xml->Response->Error->ErrorCode;
-                        throw new InvalidResponseException('Failure: '.$xml->Response->Error->ErrorDescription.' ('.$xml->Response->Error->ErrorCode.')', $code);
-                    }
+                if ( '' === trim( $body ) ) {
+	                throw new InvalidResponseException( 'Failure: response is an empty string.' );
                 } else {
-                    throw new InvalidResponseException('Failure: response is in an unexpected format.');
+	                $xml = new SimpleXMLElement( $body );
+	                if ( isset( $xml->Response ) && isset( $xml->Response->ResponseStatusCode ) ) {
+		                if ( $xml->Response->ResponseStatusCode == 1 ) {
+			                $responseInstance = new Response();
+
+			                return $responseInstance->setText( $body )->setResponse( $xml );
+		                } elseif ( $xml->Response->ResponseStatusCode == 0 ) {
+			                $code = (int) $xml->Response->Error->ErrorCode;
+			                throw new InvalidResponseException( 'Failure: ' . $xml->Response->Error->ErrorDescription . ' (' . $xml->Response->Error->ErrorCode . ')',
+				                $code );
+		                }
+	                } else {
+		                throw new InvalidResponseException( 'Failure: response is in an unexpected format.' );
+	                }
                 }
             }
         } catch (\GuzzleHttp\Exception\TransferException $e) { // Guzzle: All of the exceptions extend from GuzzleHttp\Exception\TransferException
