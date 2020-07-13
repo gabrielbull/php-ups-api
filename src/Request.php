@@ -5,6 +5,7 @@ namespace Ups;
 use DateTime;
 use Exception;
 use GuzzleHttp\Client as Guzzle;
+use GuzzleHttp\Exception\GuzzleException;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
@@ -148,7 +149,7 @@ class Request implements RequestInterface, LoggerAwareInterface
                     throw new InvalidResponseException('Failure: response is in an unexpected format.');
                 }
             }
-        } catch (\GuzzleHttp\Exception\TransferException $e) { // Guzzle: All of the exceptions extend from GuzzleHttp\Exception\TransferException
+        } catch (GuzzleException $e) { // Guzzle: All of the exceptions implement GuzzleHttp\Exception\GuzzleException
             $this->logger->alert($e->getMessage(), [
                 'id' => $id,
                 'endpointurl' => $this->getEndpointUrl(),
