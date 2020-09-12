@@ -1,17 +1,18 @@
-<?php namespace Ups\Tests\Entity;
+<?php
 
-use Exception;
+namespace Ups\Tests\Entity;
+
 use DOMDocument;
 use DOMElement;
-use PHPUnit_Framework_TestCase;
-use Ups\Entity\ShipmentServiceOptions;
+use PHPUnit\Framework\TestCase;
 use Ups\Entity\LabelMethod;
+use Ups\Entity\ShipmentServiceOptions;
 
-class ShipmentServiceOptionsTest extends PHPUnit_Framework_TestCase
+class ShipmentServiceOptionsTest extends TestCase
 {
     private $data;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->data = (object) (array(
                     'ImportControlIndicator' => true,

@@ -3,10 +3,10 @@
 namespace Ups\Tests;
 
 use Exception;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Ups;
 
-class TrackingMITest extends PHPUnit_Framework_TestCase
+class TrackingMITest extends TestCase
 {
     public function testCreateRequest()
     {

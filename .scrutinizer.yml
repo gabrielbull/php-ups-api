@@ -22,4 +22,4 @@ build:
                     format: 'php-clover'
     environment:
         php:
-            version: 5.5
+            version: 7.1

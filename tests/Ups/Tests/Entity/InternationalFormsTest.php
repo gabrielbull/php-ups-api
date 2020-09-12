@@ -1,23 +1,23 @@
 <?php namespace Ups\Tests\Entity;
 
-use Exception;
 use DOMDocument;
 use DOMElement;
-use PHPUnit_Framework_TestCase;
-use Ups\Entity\InternationalForms;
+use PHPUnit\Framework\TestCase;
 use Ups\Entity\EEIFilingOption;
+use Ups\Entity\InternationalForms;
 use Ups\Entity\POA;
 use Ups\Entity\ShipperFiled;
 use Ups\Entity\UPSFiled;
 
-class InternationalFormsTest extends PHPUnit_Framework_TestCase
+class InternationalFormsTest extends TestCase
 {
     private $data;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->data = (object) (array(
-            'EEIFilingOption' => (object) (array(
+            'EEIFilingOption' => (object) (
+                array(
                 'Code' => EEIFilingOption::FO_UPS,
                 'EmailAddress' => 'test@test.com',
                 'Description' => 'Hello World',
@@ -34,7 +34,7 @@ class InternationalFormsTest extends PHPUnit_Framework_TestCase
                     'ExemptionLegend' => '67890'
                 ))
             )
-        )));
+            )));
     }
 
     public function testConstruct()
