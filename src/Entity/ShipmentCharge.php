@@ -4,13 +4,13 @@ namespace Ups\Entity;
 
 class ShipmentCharge
 {
-    const SHIPMENT_CHARGE_TYPE_TRANSPORTATION = '01';
-    const SHIPMENT_CHARGE_TYPE_DUTIES = '02';
+    public const SHIPMENT_CHARGE_TYPE_TRANSPORTATION = '01';
+    public const SHIPMENT_CHARGE_TYPE_DUTIES = '02';
 
-    const TYPE_BILL_SHIPPER = 'billShipper';
-    const TYPE_BILL_RECEIVER = 'billReceiver';
-    const TYPE_BILL_THIRD_PARTY = 'billThirdParty';
-    const TYPE_CONSIGNEE_BILLED = 'consigneeBilled';
+    public const TYPE_BILL_SHIPPER = 'billShipper';
+    public const TYPE_BILL_RECEIVER = 'billReceiver';
+    public const TYPE_BILL_THIRD_PARTY = 'billThirdParty';
+    public const TYPE_CONSIGNEE_BILLED = 'consigneeBilled';
 
     /**
      * @var string
@@ -48,19 +48,12 @@ class ShipmentCharge
         }
     }
 
-    /**
-     * @return BillShipper
-     */
-    public function getBillShipper()
+    public function getBillShipper(): BillShipper
     {
         return $this->billShipper;
     }
 
-    /**
-     * @param BillShipper $billShipper
-     * @return ShipmentCharge
-     */
-    public function setBillShipper(BillShipper $billShipper)
+    public function setBillShipper(BillShipper $billShipper): self
     {
         $this->billShipper = $billShipper;
 
@@ -77,66 +70,44 @@ class ShipmentCharge
 
     /**
      * @param BillReceiver $billReceiver
-     * @return ShipmentCharge
      */
-    public function setBillReceiver(BillReceiver $billReceiver= null)
+    public function setBillReceiver($billReceiver = null): self
     {
         $this->billReceiver = $billReceiver;
 
         return $this;
     }
 
-    /**
-     * @return BillThirdParty
-     */
-    public function getBillThirdParty()
+    public function getBillThirdParty(): ?BillThirdParty
     {
         return $this->billThirdParty;
     }
 
-    /**
-     * @param BillThirdParty $billThirdParty
-     * @return ShipmentCharge
-     */
-    public function setBillThirdParty(BillThirdParty $billThirdParty = null)
+    public function setBillThirdParty(?BillThirdParty $billThirdParty = null): self
     {
         $this->billThirdParty = $billThirdParty;
 
         return $this;
     }
 
-    /**
-     * @return bool
-     */
-    public function getConsigneeBilled()
+    public function getConsigneeBilled(): bool
     {
         return $this->consigneeBilled;
     }
 
-    /**
-     * @param bool $consigneeBilled
-     * @return ShipmentCharge
-     */
-    public function setConsigneeBilled($consigneeBilled)
+    public function setConsigneeBilled(bool $consigneeBilled): self
     {
         $this->consigneeBilled = $consigneeBilled;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
 
-    /**
-     * @param string $type
-     * @return ShipmentCharge
-     */
-    public function setType($type)
+    public function setType(string $type): self
     {
         $this->type = $type;
 

@@ -12,14 +12,8 @@ class ItemizedPaymentInformation
      */
     private $splitDutyVATIndicator;
 
-    /**
-     * @var transportationShipmentCharge
-     */
     private $transportationShipmentCharge;
 
-    /**
-     * @var dutiesAndTaxesShipmentCharge
-     */
     private $dutiesAndTaxesShipmentCharge;
 
     public function __construct($transportationShipmentCharge = null, $dutiesAndTaxesShipmentCharge = null, $splitDutyVATIndicator = null)
@@ -36,50 +30,40 @@ class ItemizedPaymentInformation
     }
 
     /**
-     * @return transportationShipmentCharge
+     * @return mixed
      */
     public function getTransportationShipmentCharge()
     {
         return $this->transportationShipmentCharge;
     }
 
-    /**
-     * @param ShipmentCharge $shipmentCharge
-     * @return ItemizedPaymentInformation
-     */
-    public function setShipmentCharge(ShipmentCharge $shipmentCharge)
+    public function setShipmentCharge(ShipmentCharge $shipmentCharge): self
     {
         if ($shipmentCharge->getType() === ShipmentCharge::SHIPMENT_CHARGE_TYPE_TRANSPORTATION) {
             $this->transportationShipmentCharge = $shipmentCharge;
         } elseif ($shipmentCharge->getType() === ShipmentCharge::SHIPMENT_CHARGE_TYPE_DUTIES) {
             $this->dutiesAndTaxesShipmentCharge = $shipmentCharge;
         } else {
-            throw new LogicException(sprintf('Unknown ShipmentCharge charge type requested: "%s"', $type));
+            throw new LogicException(sprintf('Unknown ShipmentCharge charge type requested: "%s"', $shipmentCharge->getType()));
         }
+
         return $this;
     }
 
     /**
-     * @return DutiesAndTaxesShipmentCharge
+     * @return mixed
      */
     public function getDutiesAndTaxesShipmentCharge()
     {
         return $this->dutiesAndTaxesShipmentCharge;
     }
 
-    /**
-     * @return bool
-     */
-    public function getSplitDutyVATIndicator()
+    public function getSplitDutyVATIndicator(): bool
     {
         return $this->splitDutyVATIndicator;
     }
 
-    /**
-     * @param bool $splitDutyVATIndicator
-     * @return ItemizedPaymentInformation
-     */
-    public function setSplitDutyVATIndicator($splitDutyVATIndicator)
+    public function setSplitDutyVATIndicator(bool $splitDutyVATIndicator): self
     {
         $this->splitDutyVATIndicator = $splitDutyVATIndicator;
 

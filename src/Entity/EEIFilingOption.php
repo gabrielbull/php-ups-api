@@ -60,12 +60,7 @@ class EEIFilingOption implements NodeInterface
         }
     }
 
-    /**
-     * @param null|DOMDocument $document
-     *
-     * @return DOMElement
-     */
-    public function toNode(DOMDocument $document = null)
+    public function toNode(?DOMDocument $document = null): DOMElement
     {
         if (null === $document) {
             $document = new DOMDocument();
@@ -80,7 +75,7 @@ class EEIFilingOption implements NodeInterface
 
         $emailAddress = $this->getEmailAddress();
         if (isset($emailAddress)) {
-            $node->appendChild($document->createElement('EMailAdress', $emailAddress));
+            $node->appendChild($document->createElement('EMailAddress', $emailAddress));
         }
 
         $description = $this->getDescription();
@@ -101,10 +96,7 @@ class EEIFilingOption implements NodeInterface
         return $node;
     }
 
-    /**
-     * @return string
-     */
-    public function getCode()
+    public function getCode(): ?string
     {
         return $this->code;
     }
@@ -121,20 +113,12 @@ class EEIFilingOption implements NodeInterface
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getEmailAddress()
+    public function getEmailAddress(): ?string
     {
         return $this->emailAddress;
     }
 
-    /**
-     * @param string $emailAddress
-     *
-     * @return $this
-     */
-    public function setEmailAddress($emailAddress)
+    public function setEmailAddress(string $emailAddress): self
     {
         $this->emailAddress = $emailAddress;
 

@@ -6,29 +6,20 @@ use DOMDocument;
 use DOMElement;
 use Ups\NodeInterface;
 
-/**
- * Class AccessPointCOD
- * @package Ups\Entity
- */
 class AccessPointCOD implements NodeInterface
 {
 
     /**
-     * @var string
+     * @var ?string
      */
     private $currencyCode;
 
     /**
-     * @var float
+     * @var ?float
      */
     private $monetaryValue;
 
-    /**
-     * @param null|DOMDocument $document
-     *
-     * @return DOMElement
-     */
-    public function toNode(DOMDocument $document = null)
+    public function toNode(?DOMDocument $document = null): DOMElement
     {
         if (null === $document) {
             $document = new DOMDocument();
@@ -42,34 +33,22 @@ class AccessPointCOD implements NodeInterface
         return $node;
     }
 
-    /**
-     * @return string
-     */
-    public function getCurrencyCode()
+    public function getCurrencyCode(): ?string
     {
         return $this->currencyCode;
     }
 
-    /**
-     * @param string $currencyCode
-     */
-    public function setCurrencyCode($currencyCode)
+    public function setCurrencyCode(string $currencyCode): void
     {
         $this->currencyCode = $currencyCode;
     }
 
-    /**
-     * @return float
-     */
-    public function getMonetaryValue()
+    public function getMonetaryValue(): ?float
     {
         return $this->monetaryValue;
     }
 
-    /**
-     * @param float $monetaryValue
-     */
-    public function setMonetaryValue($monetaryValue)
+    public function setMonetaryValue(float $monetaryValue): void
     {
         $this->monetaryValue = $monetaryValue;
     }

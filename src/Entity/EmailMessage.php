@@ -14,32 +14,32 @@ class EmailMessage implements NodeInterface
     private $emailAddresses = [];
 
     /**
-     * @var string
+     * @var null|string
      */
     private $undeliverableEmailAddress;
 
     /**
-     * @var string
+     * @var null|string
      */
     private $fromEmailAddress;
 
     /**
-     * @var string
+     * @var null|string
      */
     private $fromName;
 
     /**
-     * @var string
+     * @var null|string
      */
     private $memo;
 
     /**
-     * @var string
+     * @var null|string
      */
     private $subject;
 
     /**
-     * @var string
+     * @var null|string
      */
     private $subjectCode;
 
@@ -52,12 +52,7 @@ class EmailMessage implements NodeInterface
     const SUBJECT_CODE_SHIPMENT_PACKAGE_NR2 = '04';
     const SUBJECT_CODE_SUBJECT_TEXT = '08'; // Return only
 
-    /**
-     * @param null|DOMDocument $document
-     *
-     * @return DOMElement
-     */
-    public function toNode(DOMDocument $document = null)
+    public function toNode(?DOMDocument $document = null): DOMElement
     {
         if (null === $document) {
             $document = new DOMDocument();

@@ -10,6 +10,7 @@ class CODAmount implements NodeInterface
 {
     public $CurrencyCode;
     public $MonetaryValue;
+    public $CODCode;
 
     public function __construct($response = null)
     {
@@ -23,12 +24,7 @@ class CODAmount implements NodeInterface
         }
     }
 
-    /**
-     * @param null|DOMDocument $document
-     *
-     * @return DOMElement
-     */
-    public function toNode(DOMDocument $document = null)
+    public function toNode(?DOMDocument $document = null): DOMElement
     {
         if (null === $document) {
             $document = new DOMDocument();
@@ -40,6 +36,7 @@ class CODAmount implements NodeInterface
         if ($this->MonetaryValue) {
             $node->appendChild($document->createElement('MonetaryValue', $this->MonetaryValue));
         }
+
         return $node;
     }
 
@@ -53,11 +50,11 @@ class CODAmount implements NodeInterface
 
     /**
      * @param mixed $CurrencyCode
-     * @return CODAmount
      */
-    public function setCurrencyCode($CurrencyCode)
+    public function setCurrencyCode($CurrencyCode): self
     {
         $this->CurrencyCode = $CurrencyCode;
+
         return $this;
     }
 
@@ -71,11 +68,11 @@ class CODAmount implements NodeInterface
 
     /**
      * @param mixed $MonetaryValue
-     * @return CODAmount
      */
-    public function setMonetaryValue($MonetaryValue)
+    public function setMonetaryValue($MonetaryValue): self
     {
         $this->MonetaryValue = $MonetaryValue;
+
         return $this;
     }
 }

@@ -6,10 +6,6 @@ use DOMDocument;
 use DOMElement;
 use Ups\NodeInterface;
 
-/**
- * Class ShipmentServiceOptions
- * @package Ups\Entity
- */
 // @todo Refactor to private properties
 class ShipmentServiceOptions implements NodeInterface
 {
@@ -101,7 +97,10 @@ class ShipmentServiceOptions implements NodeInterface
                 $this->COD = $response->COD;
             }
             if (isset($response->AccessPointCOD)) {
-                $this->setAccessPointCOD(new AccessPointCOD($response->AccessPointCOD));
+                $accessCode = new AccessPointCOD();
+                $accessCode->setCurrencyCode($response->AccessPointCOD->currencyCode);
+                $accessCode->setMonetaryValue($response->AccessPointCOD->monetaryValue);
+                $this->setAccessPointCOD($accessCode);
             }
             if (isset($response->CallTagARS)) {
                 $this->CallTagARS = new CallTagARS($response->CallTagARS);
@@ -127,18 +126,14 @@ class ShipmentServiceOptions implements NodeInterface
             if (isset($response->LabelMethod)) {
                 $this->setLabelMethod(new LabelMethod($response->LabelMethod));
             }
-            if (isset($response->EMailMessage)) {
+            // TODO: check if email message is still in XML.
+            /* if (isset($response->EMailMessage)) {
                 $this->setEMailMessage(new EMailMessage($response->EMailMessage));
-            }
+            } */
         }
     }
 
-    /**
-     * @param null|DOMDocument $document
-     *
-     * @return DOMElement
-     */
-    public function toNode(DOMDocument $document = null)
+    public function toNode(?DOMDocument $document = null): DOMElement
     {
         if (null === $document) {
             $document = new DOMDocument();
@@ -191,9 +186,9 @@ class ShipmentServiceOptions implements NodeInterface
             $emailMessageNode = $labelDeliveryNode->appendChild($document->createElement('EMailMessage'));
             $labelDelivery = $this->getLabelDelivery();
             foreach ($labelDelivery as $key => $value) {
-                if ($key == 'LabelLinkIndicator') {
+                if ($key === 'LabelLinkIndicator') {
                     $labelDeliveryNode->appendChild($document->createElement($key, $value));
-                } elseif ($key == 'SubjectCode') {
+                } elseif ($key === 'SubjectCode') {
                     $SubjectNode = $emailMessageNode->appendChild($document->createElement('Subject'));
                     $SubjectNode->appendChild($document->createElement($key, $value));
                 } else {
@@ -211,86 +206,55 @@ class ShipmentServiceOptions implements NodeInterface
         return $node;
     }
 
-    /**
-     * @return AccessPointCOD
-     */
-    public function getAccessPointCOD()
+    public function getAccessPointCOD(): ?AccessPointCOD
     {
         return $this->accessPointCOD;
     }
 
-    /**
-     * @param AccessPointCOD $accessPointCOD
-     * @return $this
-     */
-    public function setAccessPointCOD($accessPointCOD)
+    public function setAccessPointCOD(AccessPointCOD $accessPointCOD): self
     {
         $this->accessPointCOD = $accessPointCOD;
+
         return $this;
     }
 
-    /**
-     * @param InternationalForms $data
-     * @return $this
-     */
-    public function setInternationalForms(InternationalForms $data)
+    public function setInternationalForms(InternationalForms $data): self
     {
         $this->internationalForms = $data;
+
         return $this;
     }
 
-    /**
-     * @return InternationalForms
-     */
-    public function getInternationalForms()
+    public function getInternationalForms(): InternationalForms
     {
         return $this->internationalForms;
     }
 
-    /**
-     * @param LabelMethod $data
-     * @return $this
-     */
-    public function setLabelMethod(LabelMethod $data)
+    public function setLabelMethod(LabelMethod $data): self
     {
         $this->labelMethod = $data;
+
         return $this;
     }
 
-    /**
-     * @return null|LabelMethod
-     */
-    public function getLabelMethod()
+    public function getLabelMethod(): ?LabelMethod
     {
         return $this->labelMethod;
     }
 
-    /**
-     * @param LabelDelivery $data
-     * @return $this
-     */
-    public function setLabelDelivery(LabelDelivery $data)
+    public function setLabelDelivery(LabelDelivery $data): self
     {
         $this->labelDelivery = $data;
+
         return $this;
     }
 
-    /**
-     * @return null|LabelDelivery
-     */
-    public function getLabelDelivery()
+    public function getLabelDelivery(): ?LabelDelivery
     {
         return $this->labelDelivery;
     }
 
-    /**
-     * @param Notification $notification
-     *
-     * @throws \Exception
-     *
-     * @return $this
-     */
-    public function addNotification(Notification $notification)
+    public function addNotification(Notification $notification): self
     {
         $this->notifications[] = $notification;
 
@@ -301,10 +265,7 @@ class ShipmentServiceOptions implements NodeInterface
         return $this;
     }
 
-    /**
-     * @return array
-     */
-    public function getNotifications()
+    public function getNotifications(): array
     {
         return $this->notifications;
     }
@@ -319,11 +280,11 @@ class ShipmentServiceOptions implements NodeInterface
 
     /**
      * @param mixed $SaturdayPickup
-     * @return ShipmentServiceOptions
      */
-    public function setSaturdayPickup($SaturdayPickup)
+    public function setSaturdayPickup($SaturdayPickup): self
     {
         $this->SaturdayPickup = $SaturdayPickup;
+
         return $this;
     }
 
@@ -337,11 +298,11 @@ class ShipmentServiceOptions implements NodeInterface
 
     /**
      * @param mixed $SaturdayDelivery
-     * @return ShipmentServiceOptions
      */
-    public function setSaturdayDelivery($SaturdayDelivery)
+    public function setSaturdayDelivery($SaturdayDelivery): self
     {
         $this->SaturdayDelivery = $SaturdayDelivery;
+
         return $this;
     }
 
@@ -355,102 +316,71 @@ class ShipmentServiceOptions implements NodeInterface
 
     /**
      * @param mixed $COD
-     * @return ShipmentServiceOptions
      */
-    public function setCOD($COD)
+    public function setCOD($COD): self
     {
         $this->COD = $COD;
+
         return $this;
     }
 
-
-    /**
-     * @return CallTagARS
-     */
-    public function getCallTagARS()
+    public function getCallTagARS(): CallTagARS
     {
         return $this->CallTagARS;
     }
 
-    /**
-     * @param CallTagARS $CallTagARS
-     * @return ShipmentServiceOptions
-     */
-    public function setCallTagARS($CallTagARS)
+    public function setCallTagARS(CallTagARS $CallTagARS): self
     {
         $this->CallTagARS = $CallTagARS;
+
         return $this;
     }
 
-    /**
-     * @return boolean
-     */
-    public function isNegotiatedRatesIndicator()
+    public function isNegotiatedRatesIndicator(): bool
     {
         return $this->NegotiatedRatesIndicator;
     }
 
-    /**
-     * @param boolean $NegotiatedRatesIndicator
-     * @return ShipmentServiceOptions
-     */
-    public function setNegotiatedRatesIndicator($NegotiatedRatesIndicator)
+    public function setNegotiatedRatesIndicator(bool $NegotiatedRatesIndicator): self
     {
         $this->NegotiatedRatesIndicator = $NegotiatedRatesIndicator;
+
         return $this;
     }
 
-    /**
-     * @return boolean
-     */
-    public function isImportControlIndicator()
+    public function isImportControlIndicator(): bool
     {
         return $this->importControlIndicator;
     }
 
-    /**
-     * @param boolean $importControlIndicator
-     * @return ShipmentServiceOptions
-     */
-    public function setImportControlIndicator($importControlIndicator)
+    public function setImportControlIndicator(bool $importControlIndicator): self
     {
         $this->importControlIndicator = $importControlIndicator;
+
         return $this;
     }
 
-    /**
-     * @param DeliveryConfirmation $deliveryConfirmation
-     * @return ShipmentServiceOptions
-     */
-    public function setDeliveryConfirmation(DeliveryConfirmation $deliveryConfirmation)
+    public function setDeliveryConfirmation(DeliveryConfirmation $deliveryConfirmation): self
     {
         $this->deliveryConfirmation = $deliveryConfirmation;
+
         return $this;
     }
 
-    /**
-     * @return DeliveryConfirmation|null
-     */
-    public function getDeliveryConfirmation()
+    public function getDeliveryConfirmation(): ?DeliveryConfirmation
     {
         return $this->deliveryConfirmation;
     }
 
-    /**
-     * @return boolean
-     */
-    public function isDirectDeliveryOnlyIndicator()
+    public function isDirectDeliveryOnlyIndicator(): bool
     {
         return $this->DirectDeliveryOnlyIndicator;
     }
 
-    /**
-     * @param boolean $DirectDeliveryOnlyIndicator
-     * @return ShipmentServiceOptions
-     */
-    public function setDirectDeliveryOnlyIndicator($DirectDeliveryOnlyIndicator)
+    public function setDirectDeliveryOnlyIndicator(bool $DirectDeliveryOnlyIndicator): self
     {
         $this->DirectDeliveryOnlyIndicator = $DirectDeliveryOnlyIndicator;
+
         return $this;
     }
 
@@ -466,9 +396,10 @@ class ShipmentServiceOptions implements NodeInterface
      * @param mixed $DeliverToAddresseeOnlyIndicator
      * @return ShipmentServiceOptions
      */
-    public function setDeliverToAddresseeOnlyIndicator($DeliverToAddresseeOnlyIndicator)
+    public function setDeliverToAddresseeOnlyIndicator($DeliverToAddresseeOnlyIndicator): self
     {
         $this->DeliverToAddresseeOnlyIndicator = $DeliverToAddresseeOnlyIndicator;
+
         return $this;
     }
 }

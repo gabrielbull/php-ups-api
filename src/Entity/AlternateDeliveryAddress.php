@@ -38,9 +38,7 @@ class AlternateDeliveryAddress extends ShipTo
         }
 
         $address = $this->getAddress();
-        if (isset($address)) {
-            $node->appendChild($address->toNode($document));
-        }
+        $node->appendChild($address->toNode($document));
 
         return $node;
     }

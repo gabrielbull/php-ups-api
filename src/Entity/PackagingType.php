@@ -8,30 +8,30 @@ use Ups\NodeInterface;
 
 class PackagingType implements NodeInterface
 {
-    const PT_UNKNOWN = '00';
-    const PT_UPSLETTER = '01';
-    const PT_PACKAGE = '02';
-    const PT_TUBE = '03';
-    const PT_PAK = '04';
-    const PT_UPS_EXPRESSBOX = '21';
-    const PT_UPS_25KGBOX = '24';
-    const PT_UPS_10KGBOX = '25';
-    const PT_PALLET = '30';
-    const PT_EXPRESSBOX_S = '2a';
-    const PT_EXPRESSBOX_M = '2b';
-    const PT_EXPRESSBOX_L = '2c';
-    const PT_FLATS = '56';
-    const PT_PARCELS = '57';
-    const PT_BPM = '58';
-    const PT_FIRST_CLASS = '59';
-    const PT_PRIORITY = '60';
-    const PT_MACHINABLES = '61';
-    const PT_IRREGULARS = '62';
-    const PT_PARCEL_POST = '63';
-    const PT_BPM_PARCEL = '64';
-    const PT_MEDIA_MAIL = '65';
-    const PT_BPM_FLAT = '66';
-    const PT_STANDARD_FLAT = '67';
+    public const PT_UNKNOWN = '00';
+    public const PT_UPSLETTER = '01';
+    public const PT_PACKAGE = '02';
+    public const PT_TUBE = '03';
+    public const PT_PAK = '04';
+    public const PT_UPS_EXPRESSBOX = '21';
+    public const PT_UPS_25KGBOX = '24';
+    public const PT_UPS_10KGBOX = '25';
+    public const PT_PALLET = '30';
+    public const PT_EXPRESSBOX_S = '2a';
+    public const PT_EXPRESSBOX_M = '2b';
+    public const PT_EXPRESSBOX_L = '2c';
+    public const PT_FLATS = '56';
+    public const PT_PARCELS = '57';
+    public const PT_BPM = '58';
+    public const PT_FIRST_CLASS = '59';
+    public const PT_PRIORITY = '60';
+    public const PT_MACHINABLES = '61';
+    public const PT_IRREGULARS = '62';
+    public const PT_PARCEL_POST = '63';
+    public const PT_BPM_PARCEL = '64';
+    public const PT_MEDIA_MAIL = '65';
+    public const PT_BPM_FLAT = '66';
+    public const PT_STANDARD_FLAT = '67';
 
     /**
      * Required.
@@ -66,7 +66,7 @@ class PackagingType implements NodeInterface
     private $code = self::PT_UNKNOWN;
 
     /**
-     * @var string
+     * @var null|string
      */
     private $description;
 
@@ -80,12 +80,7 @@ class PackagingType implements NodeInterface
         }
     }
 
-    /**
-     * @param null|DOMDocument $document
-     *
-     * @return DOMElement
-     */
-    public function toNode(DOMDocument $document = null)
+    public function toNode(?DOMDocument $document = null): DOMElement
     {
         if (null === $document) {
             $document = new DOMDocument();
@@ -98,43 +93,25 @@ class PackagingType implements NodeInterface
         return $node;
     }
 
-    /**
-     * @return string
-     */
-    public function getCode()
+    public function getCode(): string
     {
         return $this->code;
     }
 
-    /**
-     * @param string $code
-     *
-     * @return $this
-     */
-    public function setCode($code)
+    public function setCode(string $code): self
     {
-        $this->Code = $code;
         $this->code = $code;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    /**
-     * @param string $description
-     *
-     * @return $this
-     */
-    public function setDescription($description)
+    public function setDescription(string $description): self
     {
-        $this->Description = $description;
         $this->description = $description;
 
         return $this;
