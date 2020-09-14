@@ -162,8 +162,11 @@ class SoapRequest implements RequestInterface, LoggerAwareInterface
                     'endpointurl' => $this->getEndpointUrl(),
                 ]);
 
-                throw new InvalidResponseException('Cannot parse error from UPS: '.$e->getMessage(), $e->getCode(),
-                    $e);
+                throw new InvalidResponseException(
+                    'Cannot parse error from UPS: '.$e->getMessage(),
+                    $e->getCode(),
+                    $e
+                );
             }
         }
     }

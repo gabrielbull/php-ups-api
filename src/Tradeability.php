@@ -69,8 +69,10 @@ class Tradeability extends Ups
     {
         $request = $this->createRequestLandedCost($request);
         $response = $this->sendRequest(
-            $request, self::ENDPOINT_LANDEDCOST,
-            'ProcessLCRequest', 'LandedCost'
+            $request,
+            self::ENDPOINT_LANDEDCOST,
+            'ProcessLCRequest',
+            'LandedCost'
         );
 
         if (isset($response->LandedCostResponse->QueryResponse)) {
@@ -125,7 +127,11 @@ class Tradeability extends Ups
     {
         $endpointurl = $this->compileEndpointUrl($endpoint);
         $this->response = $this->getRequest()->request(
-            $this->createAccess(), $request, $endpointurl, $operation, $wsdl
+            $this->createAccess(),
+            $request,
+            $endpointurl,
+            $operation,
+            $wsdl
         );
         $response = $this->response->getResponse();
 
