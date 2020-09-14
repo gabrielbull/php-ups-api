@@ -3,7 +3,7 @@
 namespace Ups\Entity\Tradeability;
 
 use DomDocument;
-use DomElement;
+use DOMElement;
 use Ups\NodeInterface;
 
 class Shipment implements NodeInterface
@@ -68,12 +68,7 @@ class Shipment implements NodeInterface
      */
     private $tariffCodeAlert;
 
-    /**
-     * @param null|DOMDocument $document
-     *
-     * @return DOMElement
-     */
-    public function toNode(DOMDocument $document = null)
+    public function toNode(?DOMDocument $document = null): DOMElement
     {
         if (null === $document) {
             $document = new DOMDocument();
