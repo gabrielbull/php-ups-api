@@ -33,5 +33,6 @@ jobs:
           max_attempts: 5
           command: composer update --no-interaction --prefer-dist --no-progress
         if: "matrix.php < 8"
+      - run: vendor/bin/phpstan analyse -c phpstan.neon
       - run: vendor/bin/phpunit --coverage-text
 
