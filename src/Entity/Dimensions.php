@@ -32,8 +32,8 @@ class Dimensions implements NodeInterface
     {
         $this->setUnitOfMeasurement(
             new UnitOfMeasurement(
-            isset($response->UnitOfMeasurement) ? $response->UnitOfMeasurement : null
-        )
+                isset($response->UnitOfMeasurement) ? $response->UnitOfMeasurement : null
+            )
         );
 
         if (null !== $response) {

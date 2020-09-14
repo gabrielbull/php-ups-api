@@ -79,8 +79,8 @@ class Package implements NodeInterface
     {
         $this->setPackagingType(
             new PackagingType(
-            isset($attributes->PackagingType) ? $attributes->PackagingType : null
-        )
+                isset($attributes->PackagingType) ? $attributes->PackagingType : null
+            )
         );
         $this->setReferenceNumber(new ReferenceNumber());
         $this->setReferenceNumber2(new ReferenceNumber());
