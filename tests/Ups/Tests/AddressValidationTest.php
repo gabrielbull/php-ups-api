@@ -1,12 +1,12 @@
 <?php namespace Ups\Tests;
 
 use Exception;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Ups\AddressValidation;
 use Ups\Entity\Address;
 
 // @todo Include also request test
-class AddressValidationTest extends PHPUnit_Framework_TestCase
+class AddressValidationTest extends TestCase
 {
     /**
      * @var Address
@@ -99,23 +99,27 @@ class AddressValidationTest extends PHPUnit_Framework_TestCase
 
     public function testNoCandidatesThrowsBadMethodExceptionOnClassificationOnlyRequests()
     {
-        $this->setExpectedException('BadMethodCallException');
+        $this->expectException('BadMethodCallException');
         $this->xavRequest->setRequest(new RequestMock(null, '/AddressValidation/Response4.xml'));
         $this->xavRequest->activateReturnObjectOnValidate();
 
-        $response = $this->xavRequest->validate($this->address,
-            AddressValidation::REQUEST_OPTION_ADDRESS_CLASSIFICATION);
+        $response = $this->xavRequest->validate(
+            $this->address,
+            AddressValidation::REQUEST_OPTION_ADDRESS_CLASSIFICATION
+        );
         $response->noCandidates();
     }
 
     public function testIsAmbiguousThrowsBadMethodExceptionOnClassificationOnlyRequests()
     {
-        $this->setExpectedException('BadMethodCallException');
+        $this->expectException('BadMethodCallException');
         $this->xavRequest->setRequest(new RequestMock(null, '/AddressValidation/Response4.xml'));
         $this->xavRequest->activateReturnObjectOnValidate();
 
-        $response = $this->xavRequest->validate($this->address,
-            AddressValidation::REQUEST_OPTION_ADDRESS_CLASSIFICATION);
+        $response = $this->xavRequest->validate(
+            $this->address,
+            AddressValidation::REQUEST_OPTION_ADDRESS_CLASSIFICATION
+        );
         $response->isAmbiguous();
     }
 
@@ -123,14 +127,16 @@ class AddressValidationTest extends PHPUnit_Framework_TestCase
     {
         $this->xavRequest->setRequest(new RequestMock(null, '/AddressValidation/Response4.xml'));
         $this->xavRequest->activateReturnObjectOnValidate();
-        $response = $this->xavRequest->validate($this->address,
-            AddressValidation::REQUEST_OPTION_ADDRESS_CLASSIFICATION);
+        $response = $this->xavRequest->validate(
+            $this->address,
+            AddressValidation::REQUEST_OPTION_ADDRESS_CLASSIFICATION
+        );
         $this->assertTrue($response->isValid());
     }
 
     public function testGetAddressClassificationThrowsExceptionOnAddressOnlyRequest()
     {
-        $this->setExpectedException('BadMethodCallException');
+        $this->expectException('BadMethodCallException');
         $this->xavRequest->setRequest(new RequestMock(null, '/AddressValidation/Response4.xml'));
         $this->xavRequest->activateReturnObjectOnValidate();
         $response = $this->xavRequest->validate($this->address, AddressValidation::REQUEST_OPTION_ADDRESS_VALIDATION);
@@ -141,18 +147,24 @@ class AddressValidationTest extends PHPUnit_Framework_TestCase
     {
         $this->xavRequest->setRequest(new RequestMock(null, '/AddressValidation/Response1.xml'));
         $this->xavRequest->activateReturnObjectOnValidate();
-        $response = $this->xavRequest->validate($this->address,
-            AddressValidation::REQUEST_OPTION_ADDRESS_VALIDATION_AND_CLASSIFICATION);
-        $this->assertInstanceOf('Ups\Entity\AddressValidation\AddressClassification',
-            $response->getAddressClassification());
+        $response = $this->xavRequest->validate(
+            $this->address,
+            AddressValidation::REQUEST_OPTION_ADDRESS_VALIDATION_AND_CLASSIFICATION
+        );
+        $this->assertInstanceOf(
+            'Ups\Entity\AddressValidation\AddressClassification',
+            $response->getAddressClassification()
+        );
     }
 
     public function testGetCandidateAddressList()
     {
         $this->xavRequest->setRequest(new RequestMock(null, '/AddressValidation/Response1.xml'));
         $this->xavRequest->activateReturnObjectOnValidate();
-        $response = $this->xavRequest->validate($this->address,
-            AddressValidation::REQUEST_OPTION_ADDRESS_VALIDATION_AND_CLASSIFICATION);
+        $response = $this->xavRequest->validate(
+            $this->address,
+            AddressValidation::REQUEST_OPTION_ADDRESS_VALIDATION_AND_CLASSIFICATION
+        );
 
         $this->assertEquals(3, count($response->getCandidateAddressList()));
     }
@@ -161,13 +173,17 @@ class AddressValidationTest extends PHPUnit_Framework_TestCase
     {
         $this->xavRequest->setRequest(new RequestMock(null, '/AddressValidation/Response3.xml'));
         $this->xavRequest->activateReturnObjectOnValidate();
-        $response = $this->xavRequest->validate($this->address,
-            AddressValidation::REQUEST_OPTION_ADDRESS_VALIDATION_AND_CLASSIFICATION);
+        $response = $this->xavRequest->validate(
+            $this->address,
+            AddressValidation::REQUEST_OPTION_ADDRESS_VALIDATION_AND_CLASSIFICATION
+        );
 
         $validAddress = $response->getValidatedAddress();
         $this->assertInstanceOf('Ups\Entity\AddressValidation\AVAddress', $validAddress);
-        $this->assertInstanceOf('Ups\Entity\AddressValidation\AddressClassification',
-            $validAddress->addressClassification);
+        $this->assertInstanceOf(
+            'Ups\Entity\AddressValidation\AddressClassification',
+            $validAddress->addressClassification
+        );
         $this->assertEquals('2', $validAddress->addressClassification->code);
         $this->assertEquals('FLORENCE', $validAddress->getCity());
         $this->assertEquals('MS', $validAddress->getStateProvince());
@@ -175,11 +191,11 @@ class AddressValidationTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('39073-9240', $validAddress->getPostalCodeWithExtension());
     }
 
-    public function setup()
+    public function setup(): void
     {
-        $this->xavRequest = new \Ups\AddressValidation();
+        $this->xavRequest = new AddressValidation();
 
-        $address = new \Ups\Entity\Address();
+        $address = new Address();
         $address->setAttentionName('Test Test');
         $address->setBuildingName('Building 1');
         $address->setAddressLine1('Times Square 1');

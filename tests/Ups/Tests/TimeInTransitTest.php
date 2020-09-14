@@ -2,37 +2,43 @@
 
 namespace Ups\Tests;
 
+use DateTime;
 use Exception;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Ups;
+use Ups\Entity\AddressArtifactFormat;
+use Ups\Entity\InvoiceLineTotal;
+use Ups\Entity\ShipmentWeight;
+use Ups\Entity\TimeInTransitRequest;
+use Ups\Entity\UnitOfMeasurement;
 
-class TimeInTransitTest extends PHPUnit_Framework_TestCase
+class TimeInTransitTest extends TestCase
 {
     public function testCreateRequest()
     {
         $tit = new Ups\TimeInTransit();
         $tit->setRequest($request = new RequestMock());
 
-        $data = new \Ups\Entity\TimeInTransitRequest();
+        $data = new TimeInTransitRequest();
 
         // Addresses
-        $from = new \Ups\Entity\AddressArtifactFormat();
+        $from = new AddressArtifactFormat();
         $from->setPoliticalDivision3('Amsterdam');
         $from->setPostcodePrimaryLow('1000AA');
         $from->setCountryCode('NL');
         $data->setTransitFrom($from);
 
-        $to = new \Ups\Entity\AddressArtifactFormat();
+        $to = new AddressArtifactFormat();
         $to->setPoliticalDivision3('Amsterdam');
         $to->setPostcodePrimaryLow('1000AA');
         $to->setCountryCode('NL');
         $data->setTransitTo($to);
 
         // Weight
-        $shipmentWeight = new \Ups\Entity\ShipmentWeight();
+        $shipmentWeight = new ShipmentWeight();
         $shipmentWeight->setWeight(5.00);
-        $unit = new \Ups\Entity\UnitOfMeasurement();
-        $unit->setCode(\Ups\Entity\UnitOfMeasurement::UOM_KGS);
+        $unit = new UnitOfMeasurement();
+        $unit->setCode(UnitOfMeasurement::UOM_KGS);
         $shipmentWeight->setUnitOfMeasurement($unit);
         $data->setShipmentWeight($shipmentWeight);
 
@@ -40,13 +46,13 @@ class TimeInTransitTest extends PHPUnit_Framework_TestCase
         $data->setTotalPackagesInShipment(2);
 
         // InvoiceLines
-        $invoiceLineTotal = new \Ups\Entity\InvoiceLineTotal();
+        $invoiceLineTotal = new InvoiceLineTotal();
         $invoiceLineTotal->setMonetaryValue(100.00);
         $invoiceLineTotal->setCurrencyCode('EUR');
         $data->setInvoiceLineTotal($invoiceLineTotal);
 
         // Pickup date
-        $data->setPickupDate(new \DateTime('2015-05-23'));
+        $data->setPickupDate(new DateTime('2015-05-23'));
 
         try {
             // Get data
@@ -78,7 +84,7 @@ class TimeInTransitTest extends PHPUnit_Framework_TestCase
     {
         $tit = new Ups\TimeInTransit();
         $tit->setRequest($request = new RequestMock(null, '/TimeInTransit/Response1.xml'));
-        $times = $tit->getTimeInTransit(new Ups\Entity\TimeInTransitRequest());
+        $times = $tit->getTimeInTransit(new TimeInTransitRequest());
 
         // Test response
         $this->assertInstanceOf('\Ups\Entity\TimeInTransitResponse', $times);
@@ -87,18 +93,18 @@ class TimeInTransitTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\Ups\Entity\ShipmentWeight', $times->ShipmentWeight);
         $this->assertInstanceOf('\Ups\Entity\Charges', $times->InvoiceLineTotal);
         $this->assertInstanceOf('\Ups\Entity\ServiceSummary', $times->ServiceSummary[0]);
-        $this->assertInternalType('string', $times->Disclaimer);
+        $this->assertIsString($times->Disclaimer);
         $this->assertObjectHasAttribute('PickupDate', $times);
         $this->assertObjectHasAttribute('MaximumListSize', $times);
         $this->assertObjectHasAttribute('ServiceSummary', $times);
-        $this->assertAttributeCount(3, 'ServiceSummary', $times);
+        $this->assertCount(3, $times->ServiceSummary);
     }
 
     public function testRequestOddCharacterParse()
     {
         $tit = new Ups\TimeInTransit();
         $tit->setRequest($request = new RequestMock(null, '/TimeInTransit/Response2.xml'));
-        $times = $tit->getTimeInTransit(new Ups\Entity\TimeInTransitRequest());
+        $times = $tit->getTimeInTransit(new TimeInTransitRequest());
 
         // Test response
         $this->assertInstanceOf('\Ups\Entity\TimeInTransitResponse', $times);
@@ -107,21 +113,21 @@ class TimeInTransitTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\Ups\Entity\ShipmentWeight', $times->ShipmentWeight);
         $this->assertInstanceOf('\Ups\Entity\Charges', $times->InvoiceLineTotal);
         $this->assertInstanceOf('\Ups\Entity\ServiceSummary', $times->ServiceSummary[0]);
-        $this->assertInternalType('string', $times->Disclaimer);
+        $this->assertIsString($times->Disclaimer);
         $this->assertObjectHasAttribute('PickupDate', $times);
         $this->assertObjectHasAttribute('MaximumListSize', $times);
         $this->assertObjectHasAttribute('ServiceSummary', $times);
-        $this->assertAttributeCount(3, 'ServiceSummary', $times);
+        $this->assertCount(3, $times->ServiceSummary);
     }
 
     public function testRequestOddCharacterCheckContent()
     {
         $tit = new Ups\TimeInTransit();
         $tit->setRequest($request = new RequestMock(null, '/TimeInTransit/Response2.xml'));
-        $times = $tit->getTimeInTransit(new Ups\Entity\TimeInTransitRequest());
+        $times = $tit->getTimeInTransit(new TimeInTransitRequest());
 
         // Test response
 
-        $this->assertContains('Ë', $times->TransitTo->PoliticalDivision3);
+        $this->assertStringContainsString('Ë', $times->TransitTo->PoliticalDivision3);
     }
 }

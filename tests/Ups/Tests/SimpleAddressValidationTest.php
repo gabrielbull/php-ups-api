@@ -3,10 +3,10 @@
 namespace Ups\Tests;
 
 use Exception;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Ups;
 
-class SimpleAddressValidationTest extends PHPUnit_Framework_TestCase
+class SimpleAddressValidationTest extends TestCase
 {
     public function testCreateRequest()
     {
@@ -44,13 +44,13 @@ class SimpleAddressValidationTest extends PHPUnit_Framework_TestCase
         $result = $validator->validate($address);
 
         // Test response
-        $this->assertInternalType('array', $result);
+        $this->assertIsArray($result);
         $this->assertCount(6, $result);
 
         $first = $result[0];
         $this->assertInstanceOf('stdClass', $first);
         $this->assertEquals(1, $first->Rank);
-        $this->assertInternalType('string', $first->Quality);
+        $this->assertIsString($first->Quality);
         $this->assertEquals('0.9875', $first->Quality);
         $this->assertInstanceOf('stdClass', $first->Address);
         $this->assertEquals('NEW YORK', $first->Address->City);
@@ -61,7 +61,7 @@ class SimpleAddressValidationTest extends PHPUnit_Framework_TestCase
         $last = $result[5];
         $this->assertInstanceOf('stdClass', $last);
         $this->assertEquals(6, $last->Rank);
-        $this->assertInternalType('string', $last->Quality);
+        $this->assertIsString($last->Quality);
         $this->assertEquals('0.9875', $last->Quality);
         $this->assertInstanceOf('stdClass', $last->Address);
         $this->assertEquals('NYC', $last->Address->City);
