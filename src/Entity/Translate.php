@@ -71,7 +71,7 @@ class Translate implements NodeInterface
      * @param DOMDocument|null $document
      * @return \DOMElement
      */
-    public function toNode(DOMDocument $document = null)
+    public function toNode(?DOMDocument $document = null): \DOMNode
     {
         if (null === $document) {
             $document = new DOMDocument();

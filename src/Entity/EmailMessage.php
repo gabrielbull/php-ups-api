@@ -52,7 +52,7 @@ class EmailMessage implements NodeInterface
     const SUBJECT_CODE_SHIPMENT_PACKAGE_NR2 = '04';
     const SUBJECT_CODE_SUBJECT_TEXT = '08'; // Return only
 
-    public function toNode(?DOMDocument $document = null): DOMElement
+    public function toNode(?DOMDocument $document = null): \DOMNode
     {
         if (null === $document) {
             $document = new DOMDocument();

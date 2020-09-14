@@ -3,7 +3,6 @@
 namespace Ups\Entity\Tradeability;
 
 use DomDocument;
-use DOMElement;
 use Ups\NodeInterface;
 
 class QueryRequest implements NodeInterface
@@ -19,7 +18,7 @@ class QueryRequest implements NodeInterface
      */
     private $suppressQuestionIndicator = false;
 
-    public function toNode(?DOMDocument $document = null): DOMElement
+    public function toNode(?DOMDocument $document = null): \DOMNode
     {
         if (null === $document) {
             $document = new DOMDocument();

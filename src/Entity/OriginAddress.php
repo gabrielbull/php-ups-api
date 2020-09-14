@@ -13,7 +13,7 @@ class OriginAddress implements NodeInterface
     private $addressKeyFormat;
     private $maximumListSize;
 
-    public function toNode(DOMDocument $document = null)
+    public function toNode(?DOMDocument $document = null): \DOMNode
     {
         if (null === $document) {
             $document = new DOMDocument();

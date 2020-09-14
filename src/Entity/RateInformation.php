@@ -37,7 +37,7 @@ class RateInformation implements NodeInterface
      *
      * @return DOMElement
      */
-    public function toNode(DOMDocument $document = null)
+    public function toNode(?DOMDocument $document = null): \DOMNode
     {
         if (null === $document) {
             $document = new DOMDocument();

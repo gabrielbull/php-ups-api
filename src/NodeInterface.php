@@ -3,9 +3,9 @@
 namespace Ups;
 
 use DOMDocument;
-use DOMElement;
+use DOMNode;
 
 interface NodeInterface
 {
-    public function toNode(?DOMDocument $document = null): DOMElement;
+    public function toNode(?DOMDocument $document = null): DOMNode;
 }

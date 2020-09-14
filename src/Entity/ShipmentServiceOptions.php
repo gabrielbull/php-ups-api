@@ -133,7 +133,7 @@ class ShipmentServiceOptions implements NodeInterface
         }
     }
 
-    public function toNode(?DOMDocument $document = null): DOMElement
+    public function toNode(?DOMDocument $document = null): \DOMNode
     {
         if (null === $document) {
             $document = new DOMDocument();

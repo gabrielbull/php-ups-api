@@ -16,7 +16,7 @@ class UnitOfMeasurement extends \Ups\Entity\UnitOfMeasurement
      *
      * @return DOMElement
      */
-    public function toNode(DOMDocument $document = null)
+    public function toNode(?DOMDocument $document = null): \DOMNode
     {
         if (null !== $document) {
             $node = $document->createElement('UnitOfMeasure');
