@@ -1,9 +1,20 @@
 {
   "name": "gabrielbull/ups-api",
-  "version": "1.0.0",
   "type": "library",
   "description": "PHP UPS API",
-  "keywords": ["ups", "api", "wrapper", "quantum view", "tracking", "shipping", "rate", "rating", "time in transit", "tradeability"],
+  "keywords": [
+    "ups",
+    "api",
+    "wrapper",
+    "quantum view",
+    "tracking",
+    "shipping",
+    "rate",
+    "rating",
+    "time in transit",
+    "tradeability"
+  ],
+  "version": "1.0.0",
   "license": "MIT",
   "authors": [
     {
@@ -29,13 +40,21 @@
   ],
   "require": {
     "php": "^7.1 || ^8.0",
+    "ext-dom": "*",
+    "ext-simplexml": "*",
     "guzzlehttp/guzzle": "^6.0",
     "psr/log": "^1.0"
   },
   "require-dev": {
-    "phpunit/phpunit": "^7.0 || ^9.3",
-    "ext-simplexml": "*",
-    "ext-dom": "*"
+    "phpunit/phpunit": "^7.0 || ^9.3"
+  },
+  "suggest": {
+    "ext-soap": "Required if you need the Tradeability API of UPS"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-develop": "0.5.1-dev"
+    }
   },
   "autoload": {
     "psr-4": {
@@ -44,16 +63,11 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Ups\\Tests\\": ["tests/Ups/Tests", "tests/Ups/Tests/_includes"]
+      "Ups\\Tests\\": [
+        "tests/Ups/Tests",
+        "tests/Ups/Tests/_includes"
+      ]
     }
-  },
-  "extra": {
-    "branch-alias": {
-      "dev-develop": "0.5.1-dev"
-    }
-  },
-  "suggest": {
-    "ext-soap": "Required if you need the Tradeability API of UPS"
   },
   "minimum-stability": "dev",
   "prefer-stable": true
