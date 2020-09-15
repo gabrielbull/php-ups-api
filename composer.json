@@ -42,7 +42,7 @@
     "php": "^7.1 || ^8.0",
     "ext-dom": "*",
     "ext-simplexml": "*",
-    "guzzlehttp/guzzle": "^6.0",
+    "guzzlehttp/guzzle": "^6.0 || ^7.0",
     "psr/log": "^1.0"
   },
   "require-dev": {
