@@ -1,4 +1,4 @@
-name: CI
+name: Tests
 
 on: [push, pull_request]
 
@@ -19,6 +19,20 @@ jobs:
           php-version: ${{ matrix.php }}
           coverage: xdebug
           tools: composer:v2
+      - name: Install PHP 7 Dependencies
+        uses: nick-invision/retry@v1
+        with:
+          timeout_minutes: 5
+          max_attempts: 5
+          command: composer update --no-interaction --prefer-dist --no-progress
+        if: "matrix.php < 8 && matrix.php > 7.1"
+      - name: Install PHP 7 Dependencies lowest
+        uses: nick-invision/retry@v1
+        with:
+          timeout_minutes: 5
+          max_attempts: 5
+          command: composer update --no-interaction --prefer-lowest --no-progress
+        if: "matrix.php == 7.1"
       - name: Install PHP 8 Dependencies
         uses: nick-invision/retry@v1
         with:
@@ -26,12 +40,4 @@ jobs:
           max_attempts: 5
           command: composer update --no-interaction --no-progress --ignore-platform-req=php
         if: "matrix.php >= 8"
-      - name: Install PHP 7 Dependencies
-        uses: nick-invision/retry@v1
-        with:
-          timeout_minutes: 5
-          max_attempts: 5
-          command: composer update --no-interaction --prefer-dist --no-progress
-        if: "matrix.php < 8"
       - run: vendor/bin/phpunit --coverage-text
-
