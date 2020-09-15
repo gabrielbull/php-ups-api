@@ -11,12 +11,13 @@ use Ups\Entity\InvoiceLineTotal;
 use Ups\Entity\ShipmentWeight;
 use Ups\Entity\TimeInTransitRequest;
 use Ups\Entity\UnitOfMeasurement;
+use Ups\TimeInTransit;
 
 class TimeInTransitTest extends TestCase
 {
     public function testCreateRequest()
     {
-        $tit = new Ups\TimeInTransit();
+        $tit = new TimeInTransit();
         $tit->setRequest($request = new RequestMock());
 
         $data = new TimeInTransitRequest();
@@ -82,7 +83,7 @@ class TimeInTransitTest extends TestCase
 
     public function testRequest()
     {
-        $tit = new Ups\TimeInTransit();
+        $tit = new TimeInTransit();
         $tit->setRequest($request = new RequestMock(null, '/TimeInTransit/Response1.xml'));
         $times = $tit->getTimeInTransit(new TimeInTransitRequest());
 
@@ -93,7 +94,7 @@ class TimeInTransitTest extends TestCase
         $this->assertInstanceOf('\Ups\Entity\ShipmentWeight', $times->ShipmentWeight);
         $this->assertInstanceOf('\Ups\Entity\Charges', $times->InvoiceLineTotal);
         $this->assertInstanceOf('\Ups\Entity\ServiceSummary', $times->ServiceSummary[0]);
-        $this->assertIsString($times->Disclaimer);
+        $this->assertTrue(is_string($times->Disclaimer));
         $this->assertObjectHasAttribute('PickupDate', $times);
         $this->assertObjectHasAttribute('MaximumListSize', $times);
         $this->assertObjectHasAttribute('ServiceSummary', $times);
@@ -102,7 +103,7 @@ class TimeInTransitTest extends TestCase
 
     public function testRequestOddCharacterParse()
     {
-        $tit = new Ups\TimeInTransit();
+        $tit = new TimeInTransit();
         $tit->setRequest($request = new RequestMock(null, '/TimeInTransit/Response2.xml'));
         $times = $tit->getTimeInTransit(new TimeInTransitRequest());
 
@@ -113,7 +114,7 @@ class TimeInTransitTest extends TestCase
         $this->assertInstanceOf('\Ups\Entity\ShipmentWeight', $times->ShipmentWeight);
         $this->assertInstanceOf('\Ups\Entity\Charges', $times->InvoiceLineTotal);
         $this->assertInstanceOf('\Ups\Entity\ServiceSummary', $times->ServiceSummary[0]);
-        $this->assertIsString($times->Disclaimer);
+        $this->assertTrue(is_string($times->Disclaimer));
         $this->assertObjectHasAttribute('PickupDate', $times);
         $this->assertObjectHasAttribute('MaximumListSize', $times);
         $this->assertObjectHasAttribute('ServiceSummary', $times);
@@ -122,12 +123,11 @@ class TimeInTransitTest extends TestCase
 
     public function testRequestOddCharacterCheckContent()
     {
-        $tit = new Ups\TimeInTransit();
+        $tit = new TimeInTransit();
         $tit->setRequest($request = new RequestMock(null, '/TimeInTransit/Response2.xml'));
         $times = $tit->getTimeInTransit(new TimeInTransitRequest());
 
         // Test response
-
-        $this->assertStringContainsString('Ë', $times->TransitTo->PoliticalDivision3);
+        $this->assertContains('Ë', $times->TransitTo->PoliticalDivision3);
     }
 }
