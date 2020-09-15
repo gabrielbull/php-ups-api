@@ -3,10 +3,10 @@
 namespace Ups\Tests;
 
 use Exception;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Ups;
 
-class TradeabilityTest extends PHPUnit_Framework_TestCase
+class TradeabilityTest extends TestCase
 {
     public function testCreateRequest()
     {

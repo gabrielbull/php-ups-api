@@ -1,10 +1,10 @@
 <?php namespace Ups\Tests;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Ups\Exception\InvalidResponseException;
 use Ups\Exception\RequestException;
 
-class ExceptionTest extends PHPUnit_Framework_TestCase
+class ExceptionTest extends TestCase
 {
     public function testInvalidResponseException()
     {

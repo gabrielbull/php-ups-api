@@ -1,16 +1,15 @@
 <?php namespace Ups\Tests\Entity;
 
-use Exception;
 use DOMDocument;
 use DOMElement;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Ups\Entity\LabelMethod;
 
-class LabelMethodTest extends PHPUnit_Framework_TestCase
+class LabelMethodTest extends TestCase
 {
     private $data;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->data = (object) (array(
                     'Code' => LabelMethod::C_PRINT,

@@ -2,11 +2,8 @@
 
 namespace Ups\Tests;
 
-use PHPUnit_Framework_TestCase;
-use Ups\Entity\Package;
-use Ups\Entity\PackagingType;
+use PHPUnit\Framework\TestCase;
 use Ups\Entity\RateRequest;
-use Ups\Entity\Service;
 use Ups\Entity\Shipment;
 use Ups\Rate;
 
@@ -15,14 +12,14 @@ use Ups\Rate;
  *
  * @group Rate
  */
-class RateTest extends PHPUnit_Framework_TestCase
+class RateTest extends TestCase
 {
     /**
      * @var Rate
      */
     private $rate;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->rate = new Rate(null, null, null, true);
     }
@@ -30,6 +27,7 @@ class RateTest extends PHPUnit_Framework_TestCase
     // fixme
     public function testShopRates()
     {
+        $this->markTestSkipped();
         /*$shipment = new \stdClass();
         $shipment->Shipper = new \stdClass();
         $shipment->Shipper->Name = 'Test Shipper';
@@ -99,11 +97,9 @@ class RateTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(1, sizeof($rate->RatedShipment->RatedPackage), 'Assert we have only one package in returned quote');*/
     }
 
-    /**
-     * @expectedException \Exception
-     */
     public function testGetRateInvalidShipment()
     {
+        $this->expectException(\Exception::class);
         $request = new RateRequest();
 
         $shipment = new Shipment();

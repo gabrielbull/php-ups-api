@@ -1,6 +1,6 @@
 <?php namespace Ups\Tests;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Ups\NodeInterface;
 
 /**
@@ -9,7 +9,7 @@ use Ups\NodeInterface;
  * Class EntityTest
  * @package Ups\Tests
  */
-class EntityTest extends PHPUnit_Framework_TestCase
+class EntityTest extends TestCase
 {
 
     /**
