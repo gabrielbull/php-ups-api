@@ -128,6 +128,6 @@ class TimeInTransitTest extends TestCase
         $times = $tit->getTimeInTransit(new TimeInTransitRequest());
 
         // Test response
-        $this->assertContains('Ë', $times->TransitTo->PoliticalDivision3);
+        $this->assertNotFalse(strpos($times->TransitTo->PoliticalDivision3, 'Ë'));
     }
 }
