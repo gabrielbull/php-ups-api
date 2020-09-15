@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 1.2.0 (released 15-09-2020)
+
+- Removed PHP 5.5, 5.6 and 7.0 support
+- Add Guzzle 7 support (thanks @neoteknic #289)
+- Add support of PHP 8.0
+- Update PHPUnit to version 7 or 9.3
+
 ## 0.7.12 (released 19-03-2016)
 
 - Extend ShipmentServiceOptions in Shipping API
