@@ -48,7 +48,7 @@ class QuantumViewTest extends TestCase
         $this->assertObjectHasAttribute('Type', $events->offsetGet(0));
 
         // Test bookmarks
-        $this->assertIsBool($quantumView->hasBookmark());
+        $this->assertTrue(\is_bool($quantumView->hasBookmark()));
     }
 
     public function testSubscriptionContext()

@@ -5,6 +5,7 @@ namespace Ups\Tests;
 use Exception;
 use PHPUnit\Framework\TestCase;
 use Ups;
+use Ups\Entity\Address;
 
 class SimpleAddressValidationTest extends TestCase
 {
@@ -12,7 +13,7 @@ class SimpleAddressValidationTest extends TestCase
     {
         $validator = new Ups\SimpleAddressValidation();
 
-        $address = new \Ups\Entity\Address();
+        $address = new Address();
         $address->setStateProvinceCode('NY');
         $address->setCity('NYork');
         $address->setCountryCode('US');
@@ -36,7 +37,7 @@ class SimpleAddressValidationTest extends TestCase
         $validator = new Ups\SimpleAddressValidation();
         $validator->setRequest($request = new RequestMock(null, '/SimpleAddressValidation/Response1.xml'));
 
-        $address = new \Ups\Entity\Address();
+        $address = new Address();
         $address->setStateProvinceCode('NY');
         $address->setCity('NYork');
         $address->setCountryCode('US');
@@ -44,13 +45,13 @@ class SimpleAddressValidationTest extends TestCase
         $result = $validator->validate($address);
 
         // Test response
-        $this->assertIsArray($result);
+        $this->assertTrue(is_array($result));
         $this->assertCount(6, $result);
 
         $first = $result[0];
         $this->assertInstanceOf('stdClass', $first);
         $this->assertEquals(1, $first->Rank);
-        $this->assertIsString($first->Quality);
+        $this->assertTrue(is_string($first->Quality));
         $this->assertEquals('0.9875', $first->Quality);
         $this->assertInstanceOf('stdClass', $first->Address);
         $this->assertEquals('NEW YORK', $first->Address->City);
@@ -61,7 +62,7 @@ class SimpleAddressValidationTest extends TestCase
         $last = $result[5];
         $this->assertInstanceOf('stdClass', $last);
         $this->assertEquals(6, $last->Rank);
-        $this->assertIsString($last->Quality);
+        $this->assertTrue(is_string($first->Quality));
         $this->assertEquals('0.9875', $last->Quality);
         $this->assertInstanceOf('stdClass', $last->Address);
         $this->assertEquals('NYC', $last->Address->City);
