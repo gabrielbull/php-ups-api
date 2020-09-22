@@ -31,5 +31,4 @@ class Package
      * )
      */
     private $activity;
-
 }

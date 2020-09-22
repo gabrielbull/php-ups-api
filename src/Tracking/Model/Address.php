@@ -56,5 +56,4 @@ class Address
      * )
      */
     private $countryCode;
-
 }

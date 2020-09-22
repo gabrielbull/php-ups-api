@@ -21,5 +21,4 @@ class TrackingResponse
      * )
      */
     private $shipment;
-
 }
