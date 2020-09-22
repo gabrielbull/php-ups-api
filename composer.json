@@ -40,13 +40,27 @@
   ],
   "require": {
     "php": "^7.1 || ^8.0",
-    "ext-dom": "*",
-    "ext-simplexml": "*",
-    "guzzlehttp/guzzle": "^6.0 || ^7.0",
-    "psr/log": "^1.0"
+    "jane-php/open-api-runtime": "~6.1.0",
+    "psr/http-client-implementation": "*",
+    "php-http/client-common": "^1.9 || ^2.0",
+    "php-http/discovery": "^1.7",
+    "psr/log": "^1.0",
+    "zircote/swagger-php": "^3.1"
   },
   "require-dev": {
-    "phpunit/phpunit": "^7.0 || ^9.3"
+    "jane-php/open-api-3": "~6.1.0",
+    "symfony/http-client": "^5.1",
+    "nyholm/psr7": "^1.2",
+    "friendsofphp/php-cs-fixer": "^2.16",
+    "symfony/phpunit-bridge": "^4.3",
+    "opis/json-schema": "^1.0",
+    "symfony/console": "^5.1",
+    "symfony/contracts": "^2.1",
+    "symfony/process": "^5.1",
+    "symfony/string": "^5.1"
+  },
+  "conflict": {
+    "php-http/httplug": "< 2.0"
   },
   "suggest": {
     "ext-soap": "Required if you need the Tradeability API of UPS"

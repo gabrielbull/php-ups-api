@@ -2,3 +2,4 @@ preset: psr12
 finder:
   exclude:
     - "tests"
+    - "config"

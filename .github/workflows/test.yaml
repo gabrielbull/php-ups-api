@@ -46,4 +46,4 @@ jobs:
           max_attempts: 5
           command: composer update --no-interaction --no-progress --ignore-platform-req=php
         if: "matrix.php >= 8"
-      - run: vendor/bin/phpunit --coverage-text
+      # - run: vendor/bin/phpunit --coverage-text

@@ -1,0 +1,173 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Tracking API",
+        "contact": {
+            "email": "pierre.tondereau@protonmail.com"
+        },
+        "license": {
+            "name": "MIT"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "https://onlinetools.ups.com/track/v1",
+            "description": "Production URL"
+        },
+        {
+            "url": "https://wwwcie.ups.com/track/v1",
+            "description": "Sandbox URL"
+        }
+    ],
+    "paths": {
+        "/details": {
+            "get": {
+                "summary": "Get track activities with an inquiry number",
+                "parameters": [
+                    {
+                        "name": "inquiryNumber",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success: Everything is working",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/trackingResponse"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "activity": {
+                "title": "List of activity",
+                "properties": {
+                    "location": {
+                        "$ref": "#/components/schemas/location"
+                    }
+                },
+                "type": "object"
+            },
+            "address": {
+                "title": "Address",
+                "properties": {
+                    "postalCode": {
+                        "description": "Postal code of state or province (if applicable)",
+                        "type": "string",
+                        "example": "55555"
+                    },
+                    "stateProvince": {
+                        "description": "State or Province name",
+                        "type": "string"
+                    },
+                    "city": {
+                        "description": "City name",
+                        "type": "string",
+                        "maxLength": 50
+                    },
+                    "countryCode": {
+                        "description": "Two digit country code.",
+                        "type": "string",
+                        "maxLength": 2,
+                        "example": "US"
+                    }
+                },
+                "type": "object"
+            },
+            "errors": {
+                "title": "List of errors tracking response",
+                "properties": {
+                    "code": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "response": {
+                "title": "Error tracking response",
+                "description": "Error tracking response",
+                "properties": {
+                    "errors": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/errors"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "location": {
+                "title": "Location",
+                "properties": {
+                    "address": {
+                        "$ref": "#/components/schemas/address"
+                    }
+                },
+                "type": "object"
+            },
+            "package": {
+                "title": "List of package",
+                "properties": {
+                    "trackingNumber": {
+                        "type": "string",
+                        "maxLength": 34
+                    },
+                    "activity": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/activity"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "shipment": {
+                "title": "List of shipment",
+                "properties": {
+                    "package": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/package"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "trackingResponse": {
+                "title": "Tracking response",
+                "description": "Tracking response",
+                "properties": {
+                    "shipment": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/shipment"
+                        }
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "externalDocs": {
+        "description": "Find out more about Tracking API",
+        "url": "https://www.ups.com/upsdeveloperkit"
+    }
+}
