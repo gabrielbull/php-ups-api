@@ -21,7 +21,7 @@
         }
     ],
     "paths": {
-        "/details": {
+        "/details/{inquiryNumber}": {
             "get": {
                 "summary": "Get track activities with an inquiry number",
                 "parameters": [

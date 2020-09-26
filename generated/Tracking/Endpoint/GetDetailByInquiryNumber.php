@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Ups\Api\Tracking\Endpoint;
 
-class GetDetail extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Endpoint
+class GetDetailByInquiryNumber extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Endpoint
 {
     use \Jane\OpenApiRuntime\Client\EndpointTrait;
     protected $inquiryNumber;
@@ -21,7 +21,7 @@ class GetDetail extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jan
 
     public function getUri(): string
     {
-        return str_replace(['{inquiryNumber}'], [$this->inquiryNumber], '/details');
+        return str_replace(['{inquiryNumber}'], [$this->inquiryNumber], '/details/{inquiryNumber}');
     }
 
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array

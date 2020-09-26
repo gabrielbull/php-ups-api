@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Ups\Tracking;
 
 use OpenApi\Annotations as OA;
 
 /**
  * @OA\Get(
- *     path="/details",
+ *     path="/details/{inquiryNumber}",
  *     summary="Get track activities with an inquiry number",
  *     @OA\Parameter(
  *       name="inquiryNumber",

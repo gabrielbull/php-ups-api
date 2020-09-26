@@ -72,15 +72,13 @@
   },
   "autoload": {
     "psr-4": {
-      "Ups\\": "src"
+      "Ups\\": "src/",
+      "Ups\\Api\\": "generated/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Ups\\Tests\\": [
-        "tests/Ups/Tests",
-        "tests/Ups/Tests/_includes"
-      ]
+      "Ups\\Tests\\": "tests"
     }
   },
   "minimum-stability": "dev",

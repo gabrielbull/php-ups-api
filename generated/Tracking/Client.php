@@ -11,9 +11,9 @@ class Client extends \Jane\OpenApiRuntime\Client\Client
      *
      * @return \Ups\Api\Tracking\Model\TrackingResponse|\Psr\Http\Message\ResponseInterface|null
      */
-    public function getDetail(string $inquiryNumber, string $fetch = self::FETCH_OBJECT)
+    public function getDetailByInquiryNumber(string $inquiryNumber, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \Ups\Api\Tracking\Endpoint\GetDetail($inquiryNumber), $fetch);
+        return $this->executeEndpoint(new \Ups\Api\Tracking\Endpoint\GetDetailByInquiryNumber($inquiryNumber), $fetch);
     }
 
     public static function create($httpClient = null, array $additionalPlugins = [])

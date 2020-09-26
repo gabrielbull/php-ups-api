@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Ups\Tracking\Model;
 
 use OpenApi\Annotations as OA;
