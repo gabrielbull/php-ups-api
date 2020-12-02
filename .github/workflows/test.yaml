@@ -14,7 +14,11 @@ jobs:
 
     strategy:
       matrix:
-        php: [7.1, 7.2, 7.3, 7.4, 8.0]
+        php: [7.1, 7.2, 7.3, 7.4]
+        include:
+          - php-versions: "8.0"
+            dependencies: "highest"
+            composer-options: "--ignore-platform-req=php"
 
     name: PHP ${{ matrix.php }}
 
@@ -25,25 +29,8 @@ jobs:
           php-version: ${{ matrix.php }}
           coverage: xdebug
           tools: composer:v2
-      - name: Install PHP 7 Dependencies
-        uses: nick-invision/retry@v1
+      - name: Install dependencies
+        uses: "ramsey/composer-install@v1"
         with:
-          timeout_minutes: 5
-          max_attempts: 5
-          command: composer update --no-interaction --prefer-dist --no-progress
-        if: "matrix.php < 8 && matrix.php > 7.1"
-      - name: Install PHP 7 Dependencies lowest
-        uses: nick-invision/retry@v1
-        with:
-          timeout_minutes: 5
-          max_attempts: 5
-          command: composer update --no-interaction --prefer-lowest --no-progress
-        if: "matrix.php == 7.1"
-      - name: Install PHP 8 Dependencies
-        uses: nick-invision/retry@v1
-        with:
-          timeout_minutes: 5
-          max_attempts: 5
-          command: composer update --no-interaction --no-progress --ignore-platform-req=php
-        if: "matrix.php >= 8"
+          composer-options: "${{ matrix.composer-options }}"
       - run: vendor/bin/phpunit --coverage-text
