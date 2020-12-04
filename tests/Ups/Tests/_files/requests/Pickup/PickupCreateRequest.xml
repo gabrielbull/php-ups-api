@@ -1,0 +1,54 @@
+<PickupCreationRequest xml:lang="en-US">
+    <Request>
+        <TransactionReference/>
+    </Request>
+    <RatePickupIndicator>Y</RatePickupIndicator>
+    <TaxInformationIndicator>Y</TaxInformationIndicator>
+    <Shipper>
+        <ChargeCard>
+            <CardHolderName>Test user</CardHolderName>
+            <CardType>06</CardType>
+            <CardNumber>4023602222222125</CardNumber>
+            <ExpirationDate>201808</ExpirationDate>
+            <SecurityCode>737</SecurityCode>
+            <CardAddress>
+                <AddressLine>2311 York Rd</AddressLine>
+                <City>Rome</City>
+                <PostalCode>21093</PostalCode>
+                <CountryCode>IT</CountryCode>
+            </CardAddress>
+        </ChargeCard>
+    </Shipper>
+    <PickupDateInfo>
+        <CloseTime>1400</CloseTime>
+        <ReadyTime>0500</ReadyTime>
+        <PickupDate>20160405</PickupDate>
+    </PickupDateInfo>
+    <PickupAddress>
+        <CompanyName>X company</CompanyName>
+        <ContactName>Y Manager</ContactName>
+        <AddressLine>35 Thompson Drive</AddressLine>
+        <City>Timonium</City>
+        <StateProvince>MD</StateProvince>
+        <PostalCode>21093</PostalCode>
+        <CountryCode>US</CountryCode>
+        <ResidentialIndicator>Y</ResidentialIndicator>
+        <Phone>
+            <Number>6785851399</Number>
+            <Extension>911</Extension>
+        </Phone>
+    </PickupAddress>
+    <AlternateAddressIndicator>Y</AlternateAddressIndicator>
+    <PickupPiece>
+        <ServiceCode>001</ServiceCode>
+        <Quantity>1</Quantity>
+        <DestinationCountryCode>US</DestinationCountryCode>
+        <ContainerCode>01</ContainerCode>
+    </PickupPiece>
+    <TotalWeight>
+        <Weight>5.5</Weight>
+        <UnitOfMeasurement>LBS</UnitOfMeasurement>
+    </TotalWeight>
+    <OverweightIndicator>N</OverweightIndicator>
+    <PaymentMethod>03</PaymentMethod>
+</PickupCreationRequest>

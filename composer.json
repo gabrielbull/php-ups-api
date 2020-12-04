@@ -41,6 +41,7 @@
   "require": {
     "php": "^7.1 || ^8.0",
     "ext-dom": "*",
+    "ext-json": "*",
     "ext-simplexml": "*",
     "guzzlehttp/guzzle": "^6.0 || ^7.0",
     "psr/log": "^1.0"

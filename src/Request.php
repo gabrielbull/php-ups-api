@@ -5,6 +5,7 @@ namespace Ups;
 use DateTime;
 use Exception;
 use GuzzleHttp\Client as Guzzle;
+use GuzzleHttp\Exception\TransferException;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
@@ -135,12 +136,14 @@ class Request implements RequestInterface, LoggerAwareInterface
                 $body = $this->convertEncoding($body);
 
                 $xml = new SimpleXMLElement($body);
-                if (isset($xml->Response) && isset($xml->Response->ResponseStatusCode)) {
+                if (isset($xml->Response, $xml->Response->ResponseStatusCode)) {
                     if ($xml->Response->ResponseStatusCode == 1) {
                         $responseInstance = new Response();
 
                         return $responseInstance->setText($body)->setResponse($xml);
-                    } elseif ($xml->Response->ResponseStatusCode == 0) {
+                    }
+
+                    if ($xml->Response->ResponseStatusCode == 0) {
                         $code = (int)$xml->Response->Error->ErrorCode;
                         throw new InvalidResponseException('Failure: '.$xml->Response->Error->ErrorDescription.' ('.$xml->Response->Error->ErrorCode.')', $code);
                     }
@@ -148,7 +151,7 @@ class Request implements RequestInterface, LoggerAwareInterface
                     throw new InvalidResponseException('Failure: response is in an unexpected format.');
                 }
             }
-        } catch (\GuzzleHttp\Exception\TransferException $e) { // Guzzle: All of the exceptions extend from GuzzleHttp\Exception\TransferException
+        } catch (TransferException $e) { // Guzzle: All of the exceptions extend from GuzzleHttp\Exception\TransferException
             $this->logger->alert($e->getMessage(), [
                 'id' => $id,
                 'endpointurl' => $this->getEndpointUrl(),
