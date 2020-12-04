@@ -47,8 +47,10 @@ Tracking API, Shipping API, Rating API and Time in Transit API. Feel free to con
 12. [Shipping Class](#shipping-class)
     * [Example](#shipping-class-example)
     * [Parameters](#shipping-class-parameters)
-13. [Logging](#logging)
-14. [License](#license-section)
+13. [Pickup Class](#pickup-class)
+    * [Example](#pickup-class-example)  
+14. [Logging](#logging)
+15. [License](#license-section)
 
 <a name="requirements"></a>
 ## Requirements
@@ -839,6 +841,90 @@ For the Shipping `confirm` call, the parameters are:
 For the Shipping `accept` call, the parameters are: 
 
  * $shipmentDigest The UPS Shipment Digest received from a ShipConfirm request. Required
+
+<a name="pickup-class"></a>
+## Pickup Class
+
+Introducing new Pickup class which allow you to manage pickup actions with UPS.
+
+<a name="pickup-class-example"></a>
+### Example
+```php
+$pickup = new \Ups\Pickup($accessKey, $userId, $password);
+
+$pickupInfo = new \Ups\Entity\Pickup\PickupDateInfo('1400', '0500', '20160405');
+$pickupAddress = new \Ups\Entity\Pickup\PickupAddress(
+    'X company',
+    'Y Manager',
+    '35 Thompson Drive',
+    null,
+    null,
+    'Timonium',
+    'MD',
+    null,
+    'US',
+    '21093',
+    true,
+    null,
+    new Phone('6785851399', '911')
+);
+
+$pickupPieces = [
+  new \Ups\Entity\Pickup\PickupPiece(
+      '001',
+      Quantity::fromString('1'),
+      'US',
+      ContainerCode::package()
+  ),
+];
+
+$totalWeight = new \Ups\Entity\Pickup\TotalWeight(
+    '5.5',
+    \Ups\ValueObject\UnitOfMeasurement::pounds()
+);
+
+$shipper = new \Ups\Entity\Pickup\Shipper(
+    null,
+    new \Ups\Entity\Pickup\ChargeCard(
+        'Test user',
+        \Ups\ValueObject\CardType::visa(),
+        '4023602222222125',
+        '201808',
+        '737',
+        new \Ups\Entity\Pickup\CardAddress(
+            '2311 York Rd',
+            'Rome',
+            null,
+            '21093',
+            'IT'
+        )
+    )
+);
+
+$data = new \Ups\Entity\Pickup\PickupCreationRequest(
+    'Y',
+    $pickupInfo,
+    $pickupAddress,
+    true,
+    $pickupPieces,
+    $totalWeight,
+    false,
+    null,
+    null,
+    \Ups\ValueObject\PaymentMethod::payByChargeCard(),
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    $shipper,
+    true
+);
+
+// Send a create request
+$pickup->create($data);
+```
 
 <a name="logging"></a>
 ## Logging
