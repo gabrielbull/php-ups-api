@@ -78,7 +78,7 @@ class Shipment
      * @var ReferenceNumber
      */
     private $referenceNumber;
-    
+
     /**
      * @var ReferenceNumber
      */
@@ -103,7 +103,7 @@ class Shipment
      * @var InvoiceLineTotal
      */
     private $invoiceLineTotal;
-    
+
     /**
      * @var ShipmentTotalWeight
      */
@@ -118,6 +118,10 @@ class Shipment
      * @var DeliveryTimeInformation
      */
     private $deliveryTimeInformation;
+    /**
+     * @var bool
+     */
+    private $taxInformationIndicator;
 
     public function __construct()
     {
@@ -126,6 +130,7 @@ class Shipment
         $this->setShipmentServiceOptions(new ShipmentServiceOptions());
         $this->setService(new Service());
         $this->rateInformation = null;
+        $this->taxInformationIndicator = false;
     }
 
     /**
@@ -205,7 +210,7 @@ class Shipment
 
         return $this;
     }
-    
+
     /**
      * @param ReferenceNumber $referenceNumber
      *
@@ -225,7 +230,7 @@ class Shipment
     {
         return $this->referenceNumber;
     }
-    
+
     /**
      * @return ReferenceNumber
      */
@@ -574,7 +579,7 @@ class Shipment
     {
         $this->deliveryTimeInformation = $deliveryTimeInformation;
     }
-    
+
     /**
      * @return ShipmentTotalWeight
      */
@@ -589,5 +594,18 @@ class Shipment
     public function setShipmentTotalWeight(ShipmentTotalWeight $shipmentTotalWeight)
     {
         $this->shipmentTotalWeight = $shipmentTotalWeight;
+    }
+
+    public function getTaxInformationIndicator()
+    {
+        return $this->taxInformationIndicator;
+    }
+
+    /**
+     * If called, returned prices will include Tax Information
+     */
+    public function useTaxInformationIndicator()
+    {
+        $this->taxInformationIndicator = true;
     }
 }
