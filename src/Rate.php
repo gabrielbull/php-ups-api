@@ -201,7 +201,7 @@ class Rate extends Ups
             $shipmentNode->appendChild($InvoiceLineTotal->toNode($xml));
         }
 
-        if($shipment->getTaxInformationIndicator()) {
+        if ($shipment->getTaxInformationIndicator()) {
             $shipmentNode->appendChild($xml->createElement('TaxInformationIndicator'));
         }
 
