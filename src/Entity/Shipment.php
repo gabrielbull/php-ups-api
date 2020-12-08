@@ -596,7 +596,7 @@ class Shipment
         $this->shipmentTotalWeight = $shipmentTotalWeight;
     }
 
-    public function getTaxInformationIndicator()
+    public function getTaxInformationIndicator(): bool
     {
         return $this->taxInformationIndicator;
     }
@@ -604,8 +604,10 @@ class Shipment
     /**
      * If called, returned prices will include Tax Information
      */
-    public function useTaxInformationIndicator()
+    public function setTaxInformationIndicator(bool $taxInformationIndicator): self
     {
-        $this->taxInformationIndicator = true;
+        $this->taxInformationIndicator = $taxInformationIndicator;
+        
+        return $this;
     }
 }
