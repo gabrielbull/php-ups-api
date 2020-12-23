@@ -105,6 +105,7 @@ class Service implements NodeInterface
         '70' => 'UPS Access Point Economy',
         '74' => 'UPS Express 12:00',
         '93' => 'UPS Sure Post',
+        '96' => 'UPS Worldwide Express Freight',
     ];
 
     /** @deprecated */
