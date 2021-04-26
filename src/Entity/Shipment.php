@@ -4,6 +4,12 @@ namespace Ups\Entity;
 
 class Shipment
 {
+    
+    const USPS_ENDORSEMENT_RETURN_SERVICE = 1;
+    const USPS_ENDORSEMENT_FORWARDING_SERVICE = 2;
+    const USPS_ENDORSEMENT_ADDRESS_SERVICE = 3;
+    const USPS_ENDORSEMENT_CHANGE_SERVICE = 4;
+    const USPS_ENDORSEMENT_NO_SERVICE = 5;
     /**
      * @var PaymentInformation
      */
@@ -122,6 +128,20 @@ class Shipment
      * @var bool
      */
     private $taxInformationIndicator;
+    
+    /**
+     * Required for Mail Innovations.
+     *
+     * @var integer 
+     */
+    private $uspsEndorsement;
+
+    /**
+     * Required for Mail Innovations.
+     *
+     * @var string 
+     */
+    private $packageId;
 
     public function __construct()
     {
@@ -607,6 +627,46 @@ class Shipment
     public function setTaxInformationIndicator(bool $taxInformationIndicator): self
     {
         $this->taxInformationIndicator = $taxInformationIndicator;
+        
+        return $this;
+    }
+    
+    /**
+     * @return int $uspsEndorsement
+     */
+    public function getUSPSEndorsement()
+    {
+        return $this->uspsEndorsement;
+    }
+
+    /**
+     * @param integer $uspsEndorsement
+     *
+     * @return Shipment
+     */
+    public function setUSPSEndorsement($uspsEndorsement)
+    {
+        $this->uspsEndorsement = $uspsEndorsement;
+
+        return $this;
+    }
+
+    /**
+     * @return int $packageId
+     */
+    public function getPackageId()
+    {
+        return $this->packageId;
+    }
+
+    /**
+     * @param integer $packageId
+     *
+     * @return Shipment
+     */
+    public function setPackageId($packageId)
+    {
+        $this->packageId = $packageId;
         
         return $this;
     }

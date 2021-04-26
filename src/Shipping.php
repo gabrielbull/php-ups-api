@@ -132,6 +132,14 @@ class Shipping extends Ups
         if ($shipment->getDescription()) {
             $shipmentNode->appendChild($xml->createElement('Description', $shipment->getDescription()));
         }
+        
+        if ($shipment->getUspsEndorsement()) {
+            $shipmentNode->appendChild($xml->createElement('USPSEndorsement', $shipment->getUSPSEndorsement()));
+        }
+
+        if ($shipment->getPackageId()) {
+            $shipmentNode->appendChild($xml->createElement('PackageID', $shipment->getPackageId()));
+        }
 
         $returnService = $shipment->getReturnService();
         if (isset($returnService)) {
