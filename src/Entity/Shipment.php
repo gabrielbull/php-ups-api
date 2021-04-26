@@ -4,7 +4,6 @@ namespace Ups\Entity;
 
 class Shipment
 {
-    
     const USPS_ENDORSEMENT_RETURN_SERVICE = 1;
     const USPS_ENDORSEMENT_FORWARDING_SERVICE = 2;
     const USPS_ENDORSEMENT_ADDRESS_SERVICE = 3;
@@ -131,14 +130,12 @@ class Shipment
     
     /**
      * Required for Mail Innovations.
-     *
      * @var integer 
      */
     private $uspsEndorsement;
 
     /**
      * Required for Mail Innovations.
-     *
      * @var string 
      */
     private $packageId;
