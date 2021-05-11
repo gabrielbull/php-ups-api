@@ -636,7 +636,7 @@ class Shipping extends Ups
         }
 
         if (!empty($labelSpecificationOpts)) {
-            $labelSpec = $request->appendChild($xml->createElement('LabelSpecification'));
+            $labelSpec = $container->appendChild($xml->createElement('LabelSpecification'));
 
             if (isset($labelSpecificationOpts['userAgent'])) {
                 $labelSpec->appendChild($xml->createElement('HTTPUserAgent', $labelSpecificationOpts['userAgent']));
@@ -649,12 +649,12 @@ class Shipping extends Ups
         }
 
         if (!empty($labelDeliveryOpts)) {
-            $labelDelivery = $request->appendChild($xml->createElement('LabelDelivery'));
+            $labelDelivery = $container->appendChild($xml->createElement('LabelDelivery'));
             $labelDelivery->appendChild($xml->createElement('LabelLinkIndicator', $labelDeliveryOpts['link']));
         }
 
         if (!empty($translateOpts)) {
-            $translate = $request->appendChild($xml->createElement('Translate'));
+            $translate = $container->appendChild($xml->createElement('Translate'));
             $translate->appendChild($xml->createElement('LanguageCode', $translateOpts['language']));
             $translate->appendChild($xml->createElement('DialectCode', $translateOpts['dialect']));
             $translate->appendChild($xml->createElement('Code', '01'));
