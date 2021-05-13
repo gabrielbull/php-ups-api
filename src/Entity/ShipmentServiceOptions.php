@@ -185,6 +185,10 @@ class ShipmentServiceOptions implements NodeInterface
         if (isset($this->labelMethod)) {
             $node->appendChild($this->labelMethod->toNode($document));
         }
+        
+        if (isset($this->UPScarbonneutralIndicator)) {
+            $node->appendChild($document->createElement('UPScarbonneutralIndicator'));
+        }
 
         if (isset($this->labelDelivery)) {
             $labelDeliveryNode = $node->appendChild($document->createElement('LabelDelivery'));
