@@ -104,7 +104,7 @@ class AccessPointSearch implements NodeInterface
 
     /**
      * @param mixed $accessPointStatus
-     * @return $this;
+     * @return AccessPointSearch
      */
     public function setAccessPointStatus($accessPointStatus)
     {
