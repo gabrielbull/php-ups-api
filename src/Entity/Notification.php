@@ -37,7 +37,6 @@ class Notification implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
-     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -69,7 +68,6 @@ class Notification implements NodeInterface
 
     /**
      * @param mixed $locale
-     *
      * @return Notification
      */
     public function setLocale($locale)
@@ -89,10 +87,13 @@ class Notification implements NodeInterface
 
     /**
      * @param mixed $notificationCode
+     * @return Notification
      */
     public function setNotificationCode($notificationCode)
     {
         $this->notificationCode = $notificationCode;
+
+        return $this;
     }
 
     /**
@@ -105,9 +106,12 @@ class Notification implements NodeInterface
 
     /**
      * @param mixed $emailMessage
+     * @return Notification
      */
     public function setEmailMessage($emailMessage)
     {
         $this->emailMessage = $emailMessage;
+
+        return $this;
     }
 }

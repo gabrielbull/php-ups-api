@@ -57,7 +57,6 @@ class ShipperFiled implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
-     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -101,8 +100,7 @@ class ShipperFiled implements NodeInterface
 
     /**
      * @param string $code
-     *
-     * @return $this
+     * @return ShipperFiled
      */
     public function setCode($code)
     {
@@ -120,7 +118,8 @@ class ShipperFiled implements NodeInterface
     }
 
     /**
-     * @return string $description
+     * @param string $description
+     * @return ShipperFiled
      */
     public function setDescription($description)
     {
@@ -139,8 +138,7 @@ class ShipperFiled implements NodeInterface
 
     /**
      * @param string $preDepartureITNNumber
-     *
-     * @return $this
+     * @return ShipperFiled
      */
     public function setPreDepartureITNNumber($preDepartureITNNumber)
     {
@@ -158,7 +156,8 @@ class ShipperFiled implements NodeInterface
     }
 
     /**
-     * @return string $exemptionLegend
+     * @param string $exemptionLegend
+     * @return ShipperFiled
      */
     public function setExemptionLegend($exemptionLegend)
     {

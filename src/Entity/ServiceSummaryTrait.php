@@ -34,6 +34,7 @@ trait ServiceSummaryTrait
 
     /**
      * @param \stdClass|null $response
+     * @return static
      */
     public function build(\stdClass $response = null)
     {
@@ -48,6 +49,8 @@ trait ServiceSummaryTrait
                 $this->setGuaranteed(new Guaranteed($response->Guaranteed));
             }
         }
+
+        return $this;
     }
 
     /**
@@ -60,11 +63,14 @@ trait ServiceSummaryTrait
 
     /**
      * @param Service $service
+     * @return static
      */
     public function setService(Service $service)
     {
         $this->Service = $service;
         $this->service = $service;
+
+        return $this;
     }
 
     /**
@@ -77,11 +83,14 @@ trait ServiceSummaryTrait
 
     /**
      * @param $guaranteed
+     * @return static
      */
     public function setGuaranteed(Guaranteed $guaranteed)
     {
         $this->Guaranteed = $guaranteed;
         $this->guaranteed = $guaranteed;
+
+        return $this;
     }
 
     /**
@@ -94,11 +103,14 @@ trait ServiceSummaryTrait
 
     /**
      * @param mixed $saturdayDelivery
+     * @return static
      */
     public function setSaturdayDelivery($saturdayDelivery)
     {
         $this->SaturdayDelivery = $saturdayDelivery;
         $this->saturdayDelivery = $saturdayDelivery;
+
+        return $this;
     }
 
     /**
@@ -111,10 +123,13 @@ trait ServiceSummaryTrait
 
     /**
      * @param mixed $saturdayDeliveryDisclaimer
+     * @return static
      */
     public function setSaturdayDeliveryDisclaimer($saturdayDeliveryDisclaimer)
     {
         $this->SaturdayDeliveryDisclaimer = $saturdayDeliveryDisclaimer;
         $this->saturdayDeliveryDisclaimer = $saturdayDeliveryDisclaimer;
+
+        return $this;
     }
 }

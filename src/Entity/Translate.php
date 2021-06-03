@@ -106,11 +106,14 @@ class Translate implements NodeInterface
 
     /**
      * @param mixed $languageCode
+     * @return Translate
      */
     public function setLanguageCode($languageCode)
     {
         $this->LanguageCode = $languageCode;
         $this->languageCode = $languageCode;
+
+        return $this;
     }
 
     /**
@@ -123,11 +126,14 @@ class Translate implements NodeInterface
 
     /**
      * @param mixed $dialectCode
+     * @return Translate
      */
     public function setDialectCode($dialectCode)
     {
         $this->DialectCode = $dialectCode;
         $this->dialectCode = $dialectCode;
+
+        return $this;
     }
 
     /**
@@ -140,11 +146,14 @@ class Translate implements NodeInterface
 
     /**
      * @param mixed $code
+     * @return Translate
      */
     public function setCode($code)
     {
         $this->Code = $code;
         $this->code = $code;
+
+        return $this;
     }
 
     /**
@@ -157,9 +166,12 @@ class Translate implements NodeInterface
 
     /**
      * @param mixed $locale
+     * @return Translate
      */
     public function setLocale($locale)
     {
         $this->locale = $locale;
+
+        return $this;
     }
 }

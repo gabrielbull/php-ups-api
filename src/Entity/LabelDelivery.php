@@ -138,7 +138,7 @@ class LabelDelivery implements NodeInterface
     }
 
     /**
-     * @return string
+     * @return boolean
      */
     public function getLabelLinkIndicator()
     {
@@ -146,7 +146,8 @@ class LabelDelivery implements NodeInterface
     }
 
     /**
-     * @return $this
+     * @param $labelLinkIndicator
+     * @return LabelDelivery
      */
     public function setLabelLinkIndicator($labelLinkIndicator)
     {
@@ -164,7 +165,8 @@ class LabelDelivery implements NodeInterface
     }
 
     /**
-     * @return $this
+     * @param $eMailAddress
+     * @return LabelDelivery
      */
     public function setEMailAddress($eMailAddress)
     {
@@ -182,7 +184,8 @@ class LabelDelivery implements NodeInterface
     }
 
     /**
-     * @return $this
+     * @param $undeliverableEMailAddress
+     * @return LabelDelivery
      */
     public function setUndeliverableEMailAddress($undeliverableEMailAddress)
     {
@@ -200,7 +203,8 @@ class LabelDelivery implements NodeInterface
     }
 
     /**
-     * @return $this
+     * @param $fromEMailAddress
+     * @return LabelDelivery
      */
     public function setFromEMailAddress($fromEMailAddress)
     {
@@ -218,7 +222,8 @@ class LabelDelivery implements NodeInterface
     }
 
     /**
-     * @return $this
+     * @param $fromName
+     * @return LabelDelivery
      */
     public function setFromName($fromName)
     {
@@ -236,7 +241,8 @@ class LabelDelivery implements NodeInterface
     }
 
     /**
-     * @return $this
+     * @param $subject
+     * @return LabelDelivery
      */
     public function setSubject($subject)
     {
@@ -254,7 +260,8 @@ class LabelDelivery implements NodeInterface
     }
 
     /**
-     * @return $this
+     * @param $memo
+     * @return LabelDelivery
      */
     public function setMemo($memo)
     {
@@ -272,7 +279,8 @@ class LabelDelivery implements NodeInterface
     }
 
     /**
-     * @return $this
+     * @param $subjectCode
+     * @return LabelDelivery
      */
     public function setSubjectCode($subjectCode)
     {

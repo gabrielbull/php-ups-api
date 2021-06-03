@@ -94,7 +94,6 @@ class UnitOfMeasurement implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
-     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -120,8 +119,7 @@ class UnitOfMeasurement implements NodeInterface
 
     /**
      * @param string $code
-     *
-     * @return $this
+     * @return static
      */
     public function setCode($code)
     {
@@ -141,8 +139,7 @@ class UnitOfMeasurement implements NodeInterface
 
     /**
      * @param string $description
-     *
-     * @return $this
+     * @return static
      */
     public function setDescription($description)
     {

@@ -34,9 +34,12 @@ class EstimatedArrival
 
     /**
      * @param string $BusinessDaysInTransit
+     * @return EstimatedArrival
      */
     public function setBusinessDaysInTransit($BusinessDaysInTransit)
     {
         $this->businessDaysInTransit = $BusinessDaysInTransit;
+
+        return $this;
     }
 }

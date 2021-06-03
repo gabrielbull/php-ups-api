@@ -143,10 +143,13 @@ class Shipment
 
     /**
      * @param ShipmentIndicationType $shipmentIndicationType
+     * @return Shipment
      */
     public function setShipmentIndicationType(ShipmentIndicationType $shipmentIndicationType)
     {
         $this->shipmentIndicationType = $shipmentIndicationType;
+
+        return $this;
     }
 
     /**
@@ -159,15 +162,17 @@ class Shipment
 
     /**
      * @param AlternateDeliveryAddress $alternateDeliveryAddress
+     * @return Shipment
      */
     public function setAlternateDeliveryAddress(AlternateDeliveryAddress $alternateDeliveryAddress)
     {
         $this->alternateDeliveryAddress = $alternateDeliveryAddress;
+
+        return $this;
     }
 
     /**
      * @param Package $package
-     *
      * @return Shipment
      */
     public function addPackage(Package $package)
@@ -189,7 +194,6 @@ class Shipment
 
     /**
      * @param string $description
-     *
      * @return Shipment
      */
     public function setDescription($description)
@@ -201,7 +205,6 @@ class Shipment
 
     /**
      * @param ReferenceNumber $referenceNumber
-     *
      * @return Shipment
      */
     public function setReferenceNumber(ReferenceNumber $referenceNumber)
@@ -213,7 +216,6 @@ class Shipment
 
     /**
      * @param ReferenceNumber $referenceNumber
-     *
      * @return Shipment
      */
     public function setReferenceNumber2(ReferenceNumber $referenceNumber)
@@ -249,7 +251,6 @@ class Shipment
 
     /**
      * @param bool $documentsOnly
-     *
      * @return Shipment
      */
     public function setDocumentsOnly($documentsOnly)
@@ -269,7 +270,6 @@ class Shipment
 
     /**
      * @param Package[] $packages
-     *
      * @return Shipment
      */
     public function setPackages(array $packages)
@@ -289,7 +289,6 @@ class Shipment
 
     /**
      * @param Service $service
-     *
      * @return Shipment
      */
     public function setService(Service $service)
@@ -309,7 +308,6 @@ class Shipment
 
     /**
      * @param ReturnService $returnService
-     *
      * @return Shipment
      */
     public function setReturnService(ReturnService $returnService)
@@ -329,7 +327,6 @@ class Shipment
 
     /**
      * @param ShipFrom $shipFrom
-     *
      * @return Shipment
      */
     public function setShipFrom(ShipFrom $shipFrom)
@@ -349,7 +346,6 @@ class Shipment
 
     /**
      * @param ShipTo $shipTo
-     *
      * @return Shipment
      */
     public function setShipTo(ShipTo $shipTo)
@@ -369,7 +365,6 @@ class Shipment
 
     /**
      * @param SoldTo $soldTo
-     *
      * @return Shipment
      */
     public function setSoldTo(SoldTo $soldTo)
@@ -389,7 +384,6 @@ class Shipment
 
     /**
      * @param ShipmentServiceOptions $shipmentServiceOptions
-     *
      * @return Shipment
      */
     public function setShipmentServiceOptions(ShipmentServiceOptions $shipmentServiceOptions)
@@ -409,7 +403,6 @@ class Shipment
 
     /**
      * @param Shipper $shipper
-     *
      * @return Shipment
      */
     public function setShipper(Shipper $shipper)
@@ -429,7 +422,6 @@ class Shipment
 
     /**
      * @param PaymentInformation $paymentInformation
-     *
      * @return Shipment
      */
     public function setPaymentInformation(PaymentInformation $paymentInformation)
@@ -449,7 +441,6 @@ class Shipment
 
     /**
      * @param ItemizedPaymentInformation $itemizedPaymentInformation
-     *
      * @return Shipment
      */
     public function setItemizedPaymentInformation(ItemizedPaymentInformation $itemizedPaymentInformation)
@@ -461,11 +452,16 @@ class Shipment
 
     /**
      * If called, returned prices will include negotiated rates (discounts will be applied).
+     *
+     * @return Shipment
      */
     public function showNegotiatedRates()
     {
-        $this->rateInformation = new RateInformation();
-        $this->rateInformation->setNegotiatedRatesIndicator(true);
+        $this->rateInformation =
+            (new RateInformation())
+                ->setNegotiatedRatesIndicator(true);
+
+        return $this;
     }
 
     /**
@@ -478,7 +474,6 @@ class Shipment
 
     /**
      * @param RateInformation $rateInformation
-     *
      * @return Shipment
      */
     public function setRateInformation(RateInformation $rateInformation)
@@ -574,10 +569,13 @@ class Shipment
 
     /**
      * @param DeliveryTimeInformation $deliveryTimeInformation
+     * @return Shipment
      */
     public function setDeliveryTimeInformation(DeliveryTimeInformation $deliveryTimeInformation)
     {
         $this->deliveryTimeInformation = $deliveryTimeInformation;
+
+        return $this;
     }
 
     /**
@@ -590,10 +588,13 @@ class Shipment
 
     /**
      * @param ShipmentTotalWeight $shipmentTotalWeight
+     * @return Shipment
      */
     public function setShipmentTotalWeight(ShipmentTotalWeight $shipmentTotalWeight)
     {
         $this->shipmentTotalWeight = $shipmentTotalWeight;
+
+        return $this;
     }
 
     public function getTaxInformationIndicator(): bool
@@ -603,6 +604,8 @@ class Shipment
 
     /**
      * If called, returned prices will include Tax Information
+     *
+     * @return Shipment
      */
     public function setTaxInformationIndicator(bool $taxInformationIndicator): self
     {

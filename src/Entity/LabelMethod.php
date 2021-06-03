@@ -41,7 +41,6 @@ class LabelMethod implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
-     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -75,8 +74,7 @@ class LabelMethod implements NodeInterface
 
     /**
      * @param string $code
-     *
-     * @return $this
+     * @return LabelMethod
      */
     public function setCode($code)
     {
@@ -95,8 +93,7 @@ class LabelMethod implements NodeInterface
 
     /**
      * @param string $description
-     *
-     * @return $this
+     * @return LabelMethod
      */
     public function setDescription($description)
     {

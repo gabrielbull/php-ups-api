@@ -132,7 +132,6 @@ class ShipTo implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
-     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -163,8 +162,7 @@ class ShipTo implements NodeInterface
 
     /**
      * @param Address $address
-     *
-     * @return $this
+     * @return static
      */
     public function setAddress(Address $address)
     {
@@ -184,8 +182,7 @@ class ShipTo implements NodeInterface
 
     /**
      * @param string $attentionName
-     *
-     * @return $this
+     * @return static
      */
     public function setAttentionName($attentionName)
     {
@@ -205,8 +202,7 @@ class ShipTo implements NodeInterface
 
     /**
      * @param string $bookmark
-     *
-     * @return $this
+     * @return static
      */
     public function setBookmark($bookmark)
     {
@@ -226,8 +222,7 @@ class ShipTo implements NodeInterface
 
     /**
      * @param string $companyName
-     *
-     * @return $this
+     * @return static
      */
     public function setCompanyName($companyName)
     {
@@ -247,8 +242,7 @@ class ShipTo implements NodeInterface
 
     /**
      * @param string $emailAddress
-     *
-     * @return $this
+     * @return static
      */
     public function setEmailAddress($emailAddress)
     {
@@ -268,8 +262,7 @@ class ShipTo implements NodeInterface
 
     /**
      * @param string $faxNumber
-     *
-     * @return $this
+     * @return static
      */
     public function setFaxNumber($faxNumber)
     {
@@ -289,8 +282,7 @@ class ShipTo implements NodeInterface
 
     /**
      * @param string $locationId
-     *
-     * @return $this
+     * @return static
      */
     public function setLocationId($locationId)
     {
@@ -310,8 +302,7 @@ class ShipTo implements NodeInterface
 
     /**
      * @param string $phoneNumber
-     *
-     * @return $this
+     * @return static
      */
     public function setPhoneNumber($phoneNumber)
     {
@@ -331,8 +322,7 @@ class ShipTo implements NodeInterface
 
     /**
      * @param string $receivingAddressName
-     *
-     * @return $this
+     * @return static
      */
     public function setReceivingAddressName($receivingAddressName)
     {
@@ -352,8 +342,7 @@ class ShipTo implements NodeInterface
 
     /**
      * @param string $shipperAssignedIdentificationNumber
-     *
-     * @return $this
+     * @return static
      */
     public function setShipperAssignedIdentificationNumber($shipperAssignedIdentificationNumber)
     {
@@ -373,8 +362,7 @@ class ShipTo implements NodeInterface
 
     /**
      * @param string $taxIdentificationNumber
-     *
-     * @return $this
+     * @return static
      */
     public function setTaxIdentificationNumber($taxIdentificationNumber)
     {

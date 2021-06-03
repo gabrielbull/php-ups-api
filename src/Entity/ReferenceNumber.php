@@ -59,10 +59,13 @@ class ReferenceNumber implements NodeInterface
 
     /**
      * @param string $code
+     * @return ReferenceNumber
      */
     public function setCode($code)
     {
         $this->code = $code;
+
+        return $this;
     }
 
     /**
@@ -75,10 +78,13 @@ class ReferenceNumber implements NodeInterface
 
     /**
      * @param string $value
+     * @return ReferenceNumber
      */
     public function setValue($value)
     {
         $this->value = $value;
+
+        return $this;
     }
 
     /**
@@ -91,10 +97,13 @@ class ReferenceNumber implements NodeInterface
 
     /**
      * @param bool $barCodeIndicator
+     * @return ReferenceNumber
      */
     public function setBarCodeIndicator($barCodeIndicator)
     {
         $this->barCodeIndicator = $barCodeIndicator;
+
+        return $this;
     }
 
     /**
@@ -117,7 +126,6 @@ class ReferenceNumber implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
-     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)

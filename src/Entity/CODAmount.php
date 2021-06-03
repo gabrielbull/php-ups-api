@@ -25,7 +25,6 @@ class CODAmount implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
-     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -48,7 +47,7 @@ class CODAmount implements NodeInterface
      */
     public function getCurrencyCode()
     {
-        return $this->CODCode;
+        return $this->CurrencyCode;
     }
 
     /**
@@ -58,6 +57,7 @@ class CODAmount implements NodeInterface
     public function setCurrencyCode($CurrencyCode)
     {
         $this->CurrencyCode = $CurrencyCode;
+
         return $this;
     }
 
@@ -76,6 +76,7 @@ class CODAmount implements NodeInterface
     public function setMonetaryValue($MonetaryValue)
     {
         $this->MonetaryValue = $MonetaryValue;
+
         return $this;
     }
 }

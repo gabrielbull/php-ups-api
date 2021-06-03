@@ -5,22 +5,22 @@ namespace Ups\Entity;
 class LocatorRequest
 {
     /**
-     * @var
+     * @var OriginAddress
      */
     private $originAddress;
 
     /**
-     * @var
+     * @var Translate
      */
     private $translate;
 
     /**
-     * @var LocationSearchCriteria
+     * @var LocationSearchCriteria|null
      */
     private $locationSearchCriteria;
 
     /**
-     * @var
+     * @var UnitOfMeasurement|null
      */
     private $unitOfMeasurement;
 
@@ -31,7 +31,7 @@ class LocatorRequest
     }
 
     /**
-     * @return LocationSearchCriteria
+     * @return LocationSearchCriteria|null
      */
     public function getLocationSearchCriteria()
     {
@@ -40,14 +40,17 @@ class LocatorRequest
 
     /**
      * @param LocationSearchCriteria $locationSearchCriteria
+     * @return LocatorRequest
      */
-    public function setLocationSearchCriteria($locationSearchCriteria)
+    public function setLocationSearchCriteria(LocationSearchCriteria $locationSearchCriteria)
     {
         $this->locationSearchCriteria = $locationSearchCriteria;
+
+        return $this;
     }
 
     /**
-     * @return mixed
+     * @return OriginAddress
      */
     public function getOriginAddress()
     {
@@ -55,15 +58,18 @@ class LocatorRequest
     }
 
     /**
-     * @param mixed $originAddress
+     * @param OriginAddress $originAddress
+     * @return LocatorRequest
      */
     public function setOriginAddress(OriginAddress $originAddress)
     {
         $this->originAddress = $originAddress;
+
+        return $this;
     }
 
     /**
-     * @return mixed
+     * @return Translate
      */
     public function getTranslate()
     {
@@ -71,15 +77,18 @@ class LocatorRequest
     }
 
     /**
-     * @param mixed $translate
+     * @param Translate $translate
+     * @return LocatorRequest
      */
     public function setTranslate(Translate $translate)
     {
         $this->translate = $translate;
+
+        return $this;
     }
 
     /**
-     * @return mixed
+     * @return UnitOfMeasurement|null
      */
     public function getUnitOfMeasurement()
     {
@@ -87,10 +96,13 @@ class LocatorRequest
     }
 
     /**
-     * @param mixed $unitOfMeasurement
+     * @param UnitOfMeasurement $unitOfMeasurement
+     * @return LocatorRequest
      */
     public function setUnitOfMeasurement(UnitOfMeasurement $unitOfMeasurement)
     {
         $this->unitOfMeasurement = $unitOfMeasurement;
+
+        return $this;
     }
 }

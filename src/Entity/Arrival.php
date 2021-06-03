@@ -46,10 +46,13 @@ class Arrival
 
     /**
      * @param string $date
+     * @return Arrival
      */
     public function setDate($date)
     {
         $this->date = $date;
+
+        return $this;
     }
 
     /**
@@ -62,9 +65,12 @@ class Arrival
 
     /**
      * @param string $time
+     * @return Arrival
      */
     public function setTime($time)
     {
         $this->time = $time;
+
+        return $this;
     }
 }

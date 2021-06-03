@@ -38,7 +38,6 @@ class Pickup implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
-     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -64,10 +63,13 @@ class Pickup implements NodeInterface
 
     /**
      * @param string $date
+     * @return Pickup
      */
     public function setDate($date)
     {
         $this->date = $date;
+
+        return $this;
     }
 
     /**
@@ -80,9 +82,12 @@ class Pickup implements NodeInterface
 
     /**
      * @param string $time
+     * @return Pickup
      */
     public function setTime($time)
     {
         $this->time = $time;
+
+        return $this;
     }
 }

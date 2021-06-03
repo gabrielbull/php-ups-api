@@ -70,7 +70,6 @@ class Shipment implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
-     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -138,8 +137,7 @@ class Shipment implements NodeInterface
 
     /**
      * @param mixed $additionalInsurance
-     *
-     * @return $this
+     * @return Shipment
      */
     public function setAdditionalInsurance($additionalInsurance)
     {
@@ -158,7 +156,7 @@ class Shipment implements NodeInterface
 
     /**
      * @param FreightCharges $freightCharges
-     * @return $this
+     * @return Shipment
      */
     public function setFreightCharges($freightCharges)
     {
@@ -177,7 +175,7 @@ class Shipment implements NodeInterface
 
     /**
      * @param string $originCountryCode
-     * @return $this
+     * @return Shipment
      */
     public function setOriginCountryCode($originCountryCode)
     {
@@ -196,7 +194,7 @@ class Shipment implements NodeInterface
 
     /**
      * @param string $destinationCountryCode
-     * @return $this
+     * @return Shipment
      */
     public function setDestinationCountryCode($destinationCountryCode)
     {
@@ -215,7 +213,7 @@ class Shipment implements NodeInterface
 
     /**
      * @param string $originStateProvinceCode
-     * @return $this
+     * @return Shipment
      */
     public function setOriginStateProvinceCode($originStateProvinceCode)
     {
@@ -234,7 +232,7 @@ class Shipment implements NodeInterface
 
     /**
      * @param string $destinationStateProvinceCode
-     * @return $this
+     * @return Shipment
      */
     public function setDestinationStateProvinceCode($destinationStateProvinceCode)
     {
@@ -253,7 +251,7 @@ class Shipment implements NodeInterface
 
     /**
      * @param int $transportationMode
-     * @return $this
+     * @return Shipment
      */
     public function setTransportationMode($transportationMode)
     {
@@ -272,7 +270,7 @@ class Shipment implements NodeInterface
 
     /**
      * @param string $resultCurrencyCode
-     * @return $this
+     * @return Shipment
      */
     public function setResultCurrencyCode($resultCurrencyCode)
     {
@@ -310,7 +308,7 @@ class Shipment implements NodeInterface
 
     /**
      * @param mixed $transactionReferenceId
-     * @return $this
+     * @return Shipment
      */
     public function setTransactionReferenceId($transactionReferenceId)
     {
@@ -329,7 +327,7 @@ class Shipment implements NodeInterface
 
     /**
      * @param array $products
-     * @return $this
+     * @return Shipment
      */
     public function setProducts($products)
     {
@@ -340,7 +338,7 @@ class Shipment implements NodeInterface
 
     /**
      * @param Product $product
-     * @return $this
+     * @return Shipment
      */
     public function addProduct(Product $product)
     {

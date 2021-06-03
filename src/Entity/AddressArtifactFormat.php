@@ -28,7 +28,6 @@ class AddressArtifactFormat extends Address
 
     /**
      * @param null|DOMDocument $document
-     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -72,8 +71,7 @@ class AddressArtifactFormat extends Address
 
     /**
      * @param string $country
-     *
-     * @return $this
+     * @return AddressArtifactFormat
      */
     public function setCountry($country)
     {

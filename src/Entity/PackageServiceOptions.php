@@ -48,7 +48,7 @@ class PackageServiceOptions implements NodeInterface
     private $deliveryConfirmation;
 
     /**
-     * @var ShipperReleaseIndicator
+     * @var mixed
      */
     private $ShipperReleaseIndicator;
 
@@ -80,10 +80,9 @@ class PackageServiceOptions implements NodeInterface
     }
 
     /**
-     * @param null|DOMDocument $document
-     *
      * @TODO: this seem to be awfully incomplete
      *
+     * @param null|DOMDocument $document
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -123,10 +122,13 @@ class PackageServiceOptions implements NodeInterface
 
     /**
      * @param $var
+     * @return PackageServiceOptions
      */
     public function setInsuredValue($var)
     {
         $this->insuredValue = $var;
+
+        return $this;
     }
 
     /**
@@ -139,10 +141,13 @@ class PackageServiceOptions implements NodeInterface
 
     /**
      * @param $var
+     * @return PackageServiceOptions
      */
     public function setCOD($var)
     {
         $this->cod = $var;
+
+        return $this;
     }
 
     /**
@@ -155,10 +160,13 @@ class PackageServiceOptions implements NodeInterface
 
     /**
      * @param $var
+     * @return PackageServiceOptions
      */
     public function setEarliestDeliveryTime($var)
     {
         $this->earliestDeliveryTime = $var;
+
+        return $this;
     }
 
     /**
@@ -171,18 +179,24 @@ class PackageServiceOptions implements NodeInterface
 
     /**
      * @param HazMat[] $hazMat
+     * @return PackageServiceOptions
      */
     public function setHazMat(array $hazMat)
     {
         $this->hazMat = $hazMat;
+
+        return $this;
     }
 
     /**
      * @param HazMat $hazmat
+     * @return PackageServiceOptions
      */
     public function addHazMat(HazMat $hazmat)
     {
         $this->hazMat[] = $hazmat;
+
+        return $this;
     }
 
     /**
@@ -195,10 +209,13 @@ class PackageServiceOptions implements NodeInterface
 
     /**
      * @param $var
+     * @return PackageServiceOptions
      */
     public function setHoldForPickup($var)
     {
         $this->holdForPickup = $var;
+
+        return $this;
     }
 
     /**
@@ -211,19 +228,23 @@ class PackageServiceOptions implements NodeInterface
 
     /**
      * @param HazMatPackageInformation $hazMatPackageInformation
+     * @return PackageServiceOptions
      */
     public function setHazMatPackageInformation($hazMatPackageInformation)
     {
         $this->hazMatPackageInformation = $hazMatPackageInformation;
+
+        return $this;
     }
 
     /**
      * @param DeliveryConfirmation $deliveryConfirmation
-     * @return ShipmentServiceOptions
+     * @return PackageServiceOptions
      */
     public function setDeliveryConfirmation(DeliveryConfirmation $deliveryConfirmation)
     {
         $this->deliveryConfirmation = $deliveryConfirmation;
+
         return $this;
     }
 
@@ -245,11 +266,12 @@ class PackageServiceOptions implements NodeInterface
 
     /**
      * @param mixed $ShipperReleaseIndicator
-     * @return ShipmentServiceOptions
+     * @return PackageServiceOptions
      */
     public function setShipperReleaseIndicator($ShipperReleaseIndicator)
     {
         $this->ShipperReleaseIndicator = $ShipperReleaseIndicator;
+
         return $this;
     }
 }

@@ -18,7 +18,6 @@ class AlternateDeliveryAddress extends ShipTo
 
     /**
      * @param null|DOMDocument $document
-     *
      * @return \DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -55,10 +54,13 @@ class AlternateDeliveryAddress extends ShipTo
 
     /**
      * @param mixed $upsAccessPointId
+     * @return static
      */
     public function setUpsAccessPointId($upsAccessPointId)
     {
         $this->upsAccessPointId = $upsAccessPointId;
+
+        return $this;
     }
 
     /**
@@ -71,6 +73,7 @@ class AlternateDeliveryAddress extends ShipTo
 
     /**
      * @param mixed $name
+     * @return static
      */
     public function setName($name)
     {
@@ -79,5 +82,7 @@ class AlternateDeliveryAddress extends ShipTo
         }
 
         $this->name = $name;
+
+        return $this;
     }
 }

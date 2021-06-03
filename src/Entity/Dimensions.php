@@ -51,7 +51,6 @@ class Dimensions implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
-     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -79,8 +78,7 @@ class Dimensions implements NodeInterface
 
     /**
      * @param UnitOfMeasurement $unitOfMeasurement
-     *
-     * @return $this
+     * @return Dimensions
      */
     public function setUnitOfMeasurement(UnitOfMeasurement $unitOfMeasurement)
     {

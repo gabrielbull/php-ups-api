@@ -21,7 +21,6 @@ class FreightCharges implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
-     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -46,22 +45,22 @@ class FreightCharges implements NodeInterface
 
     /**
      * @param $var
-     *
+     * @param int $mode
+     * @return FreightCharges
      * @throws \Exception
-     *
-     * @return $this
      */
-    public function setMonetaryValue($var)
+    public function setMonetaryValue($var, $mode = PHP_ROUND_HALF_UP)
     {
-        $this->monetaryValue = round($var, 2); // Max 2 decimals places
-
-        if ($this->monetaryValue < 0) {
-            throw new \Exception('Freight charges cannot be negative');
+        if ($var < 0) {
+            throw new \Exception('Discount cannot be negative');
         }
 
-        if (strlen((string)$this->monetaryValue) > 15) {
+        $var = round($var, 2, $mode); // Max 2 decimals places
+        if (strlen((string)$var) > 15) {
             throw new \Exception('Value too long');
         }
+
+        $this->monetaryValue = $var;
 
         return $this;
     }

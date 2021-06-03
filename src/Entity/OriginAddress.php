@@ -13,6 +13,10 @@ class OriginAddress implements NodeInterface
     private $addressKeyFormat;
     private $maximumListSize;
 
+    /**
+     * @param null|DOMDocument $document
+     * @return \DOMElement
+     */
     public function toNode(DOMDocument $document = null)
     {
         if (null === $document) {
@@ -48,8 +52,8 @@ class OriginAddress implements NodeInterface
     }
 
     /**
-     * @param mixed $maximumListSize
-     *
+     * @param $maximumListSize
+     * @return OriginAddress
      * @throws \Exception
      */
     public function setMaximumListSize($maximumListSize)
@@ -61,6 +65,8 @@ class OriginAddress implements NodeInterface
         }
 
         $this->maximumListSize = $maximumListSize;
+
+        return $this;
     }
 
     /**
@@ -72,11 +78,14 @@ class OriginAddress implements NodeInterface
     }
 
     /**
-     * @param mixed $geoCode
+     * @param GeoCode $geoCode
+     * @return OriginAddress
      */
     public function setGeoCode(GeoCode $geoCode)
     {
         $this->geoCode = $geoCode;
+
+        return $this;
     }
 
     /**
@@ -89,10 +98,13 @@ class OriginAddress implements NodeInterface
 
     /**
      * @param mixed $addressKeyFormat
+     * @return OriginAddress
      */
     public function setAddressKeyFormat($addressKeyFormat)
     {
         $this->addressKeyFormat = $addressKeyFormat;
+
+        return $this;
     }
 
     /**
@@ -105,10 +117,13 @@ class OriginAddress implements NodeInterface
 
     /**
      * @param mixed $landmarkCode
+     * @return OriginAddress
      */
     public function setLandmarkCode($landmarkCode)
     {
         $this->landmarkCode = $landmarkCode;
+
+        return $this;
     }
 
     /**
@@ -121,9 +136,12 @@ class OriginAddress implements NodeInterface
 
     /**
      * @param mixed $phoneNumber
+     * @return OriginAddress
      */
     public function setPhoneNumber($phoneNumber)
     {
         $this->phoneNumber = $phoneNumber;
+
+        return $this;
     }
 }

@@ -40,7 +40,6 @@ class BillShipper
 
     /**
      * @param string $accountNumber
-     *
      * @return BillShipper
      */
     public function setAccountNumber($accountNumber)

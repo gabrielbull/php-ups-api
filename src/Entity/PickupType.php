@@ -32,7 +32,6 @@ class PickupType implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
-     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -58,8 +57,7 @@ class PickupType implements NodeInterface
 
     /**
      * @param string $code
-     *
-     * @return $this
+     * @return PickupType
      */
     public function setCode($code)
     {
@@ -78,8 +76,7 @@ class PickupType implements NodeInterface
 
     /**
      * @param string $description
-     *
-     * @return $this
+     * @return PickupType
      */
     public function setDescription($description)
     {

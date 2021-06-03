@@ -13,7 +13,6 @@ class UnitOfMeasurement extends \Ups\Entity\UnitOfMeasurement
 
     /**
      * @param null|DOMDocument $document
-     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)

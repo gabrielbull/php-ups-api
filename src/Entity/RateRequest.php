@@ -40,8 +40,7 @@ class RateRequest
 
     /**
      * @param PickupType $pickupType
-     *
-     * @return $this
+     * @return RateRequest
      */
     public function setPickupType(PickupType $pickupType)
     {
@@ -61,8 +60,7 @@ class RateRequest
 
     /**
      * @param CustomerClassification $customerClassification
-     *
-     * @return $this
+     * @return RateRequest
      */
     public function setCustomerClassification(CustomerClassification $customerClassification)
     {
@@ -81,8 +79,7 @@ class RateRequest
 
     /**
      * @param Shipment $shipment
-     *
-     * @return $this
+     * @return RateRequest
      */
     public function setShipment(Shipment $shipment)
     {

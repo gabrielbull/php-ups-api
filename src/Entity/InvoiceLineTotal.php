@@ -25,7 +25,6 @@ class InvoiceLineTotal implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
-     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -45,21 +44,38 @@ class InvoiceLineTotal implements NodeInterface
         return $node;
     }
 
+    /**
+     * @return mixed
+     */
     public function getCurrencyCode()
     {
         return $this->currencyCode;
     }
 
+    /**
+     * @param $var
+     * @return InvoiceLineTotal
+     */
     public function setCurrencyCode($var)
     {
         $this->currencyCode = $var;
+
+        return $this;
     }
 
+    /**
+     * @return mixed
+     */
     public function getMonetaryValue()
     {
         return $this->monetaryValue;
     }
 
+    /**
+     * @param $var
+     * @return InvoiceLineTotal
+     * @throws \Exception
+     */
     public function setMonetaryValue($var)
     {
         if (!is_numeric($var)) {
@@ -67,5 +83,7 @@ class InvoiceLineTotal implements NodeInterface
         }
 
         $this->monetaryValue = $var;
+
+        return $this;
     }
 }

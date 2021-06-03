@@ -95,7 +95,7 @@ class ShipmentCharge
     }
 
     /**
-     * @param BillThirdParty $billThirdParty
+     * @param BillThirdParty|null $billThirdParty
      * @return ShipmentCharge
      */
     public function setBillThirdParty(BillThirdParty $billThirdParty = null)

@@ -34,7 +34,6 @@ class RateInformation implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
-     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -66,8 +65,7 @@ class RateInformation implements NodeInterface
 
     /**
      * @param $value
-     *
-     * @return $this
+     * @return RateInformation
      */
     public function setNegotiatedRatesIndicator($value)
     {
@@ -86,8 +84,7 @@ class RateInformation implements NodeInterface
 
     /**
      * @param $value
-     *
-     * @return $this
+     * @return RateInformation
      */
     public function setRateChartIndicator($value)
     {

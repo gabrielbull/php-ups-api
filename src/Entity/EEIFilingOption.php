@@ -27,12 +27,12 @@ class EEIFilingOption implements NodeInterface
     private $description;
 
     /**
-     * @var UPSFiled
+     * @var UPSFiled|null
      */
     private $upsFiled;
 
     /**
-     * @var ShipperFiled
+     * @var ShipperFiled|null
      */
     private $shipperFiled;
 
@@ -62,7 +62,6 @@ class EEIFilingOption implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
-     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -111,8 +110,7 @@ class EEIFilingOption implements NodeInterface
 
     /**
      * @param string $code
-     *
-     * @return $this
+     * @return EEIFilingOption
      */
     public function setCode($code)
     {
@@ -131,8 +129,7 @@ class EEIFilingOption implements NodeInterface
 
     /**
      * @param string $emailAddress
-     *
-     * @return $this
+     * @return EEIFilingOption
      */
     public function setEmailAddress($emailAddress)
     {
@@ -151,8 +148,7 @@ class EEIFilingOption implements NodeInterface
 
     /**
      * @param string $description
-     *
-     * @return $this
+     * @return EEIFilingOption
      */
     public function setDescription($description)
     {
@@ -162,7 +158,7 @@ class EEIFilingOption implements NodeInterface
     }
 
     /**
-     * @return UPSFiled
+     * @return UPSFiled|null
      */
     public function getUPSFiled()
     {
@@ -171,8 +167,7 @@ class EEIFilingOption implements NodeInterface
 
     /**
      * @param UPSFiled $upsFiled
-     *
-     * @return $this
+     * @return EEIFilingOption
      */
     public function setUPSFiled(UPSFiled $upsFiled)
     {
@@ -182,7 +177,7 @@ class EEIFilingOption implements NodeInterface
     }
 
     /**
-     * @return ShipperFiled
+     * @return ShipperFiled|null
      */
     public function getShipperFiled()
     {
@@ -191,8 +186,7 @@ class EEIFilingOption implements NodeInterface
 
     /**
      * @param ShipperFiled $shipperFiled
-     *
-     * @return $this
+     * @return EEIFilingOption
      */
     public function setShipperFiled(ShipperFiled $shipperFiled)
     {

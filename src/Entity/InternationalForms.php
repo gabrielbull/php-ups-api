@@ -161,7 +161,6 @@ class InternationalForms implements NodeInterface
 
     /**
      * @param string $type
-     *
      * @return string
      */
     public function getFormTypeName($type)
@@ -207,8 +206,7 @@ class InternationalForms implements NodeInterface
 
     /**
      * @param $type string
-     *
-     * @return $this
+     * @return InternationalForms
      */
     public function setType($type)
     {
@@ -217,8 +215,7 @@ class InternationalForms implements NodeInterface
 
     /**
      * @param array $types
-     *
-     * @return $this
+     * @return InternationalForms
      */
     public function setTypes(array $types)
     {
@@ -228,7 +225,7 @@ class InternationalForms implements NodeInterface
     }
 
     /**
-     * @return string
+     * @return array
      */
     public function getTypes()
     {
@@ -237,8 +234,7 @@ class InternationalForms implements NodeInterface
 
     /**
      * @param $freightCharges FreightCharges
-     *
-     * @return $this
+     * @return InternationalForms
      */
     public function setFreightCharges(FreightCharges $freightCharges)
     {
@@ -257,8 +253,7 @@ class InternationalForms implements NodeInterface
 
     /**
      * @param $discount Discount
-     *
-     * @return $this
+     * @return InternationalForms
      */
     public function setDiscount(Discount $discount)
     {
@@ -277,8 +272,7 @@ class InternationalForms implements NodeInterface
 
     /**
      * @param Product $product
-     *
-     * @return $this
+     * @return InternationalForms
      */
     public function addProduct(Product $product)
     {
@@ -297,7 +291,6 @@ class InternationalForms implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
-     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -356,8 +349,7 @@ class InternationalForms implements NodeInterface
 
     /**
      * @param $number string
-     *
-     * @return $this
+     * @return InternationalForms
      */
     public function setInvoiceNumber($number)
     {
@@ -376,8 +368,7 @@ class InternationalForms implements NodeInterface
 
     /**
      * @param DateTime $date
-     *
-     * @return $this
+     * @return InternationalForms
      */
     public function setInvoiceDate(DateTime $date)
     {
@@ -396,8 +387,7 @@ class InternationalForms implements NodeInterface
 
     /**
      * @param $number
-     *
-     * @return $this
+     * @return InternationalForms
      */
     public function setPurchaseOrderNumber($number)
     {
@@ -416,8 +406,7 @@ class InternationalForms implements NodeInterface
 
     /**
      * @param $terms
-     *
-     * @return $this
+     * @return InternationalForms
      */
     public function setTermsOfShipment($terms)
     {
@@ -436,8 +425,7 @@ class InternationalForms implements NodeInterface
 
     /**
      * @param $reason
-     *
-     * @return $this
+     * @return InternationalForms
      */
     public function setReasonForExport($reason)
     {
@@ -460,8 +448,7 @@ class InternationalForms implements NodeInterface
 
     /**
      * @param $comments
-     *
-     * @return $this
+     * @return InternationalForms
      */
     public function setComments($comments)
     {
@@ -484,8 +471,7 @@ class InternationalForms implements NodeInterface
 
     /**
      * @param string $statement
-     *
-     * @return $this
+     * @return InternationalForms
      */
     public function setDeclarationStatement($statement)
     {
@@ -504,8 +490,7 @@ class InternationalForms implements NodeInterface
 
     /**
      * @param $code
-     *
-     * @return $this
+     * @return InternationalForms
      */
     public function setCurrencyCode($code)
     {
@@ -524,12 +509,13 @@ class InternationalForms implements NodeInterface
 
     /**
      * @param $additionalDocumentIndicator
-     *
-     * @return $this
+     * @return InternationalForms
      */
     public function setAdditionalDocumentIndicator($additionalDocumentIndicator)
     {
         $this->additionalDocumentIndicator = $additionalDocumentIndicator;
+
+        return $this;
     }
 
     /**
@@ -542,8 +528,7 @@ class InternationalForms implements NodeInterface
 
     /**
      * @param EEIFilingOption $eeiFilingOption
-     *
-     * @return $this
+     * @return InternationalForms
      */
     public function setEEIFilingOption(EEIFilingOption $eeiFilingOption)
     {

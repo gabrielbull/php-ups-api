@@ -36,7 +36,6 @@ class PackageWeight implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
-     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -62,8 +61,7 @@ class PackageWeight implements NodeInterface
 
     /**
      * @param UnitOfMeasurement $unitOfMeasurement
-     *
-     * @return $this
+     * @return PackageWeight
      */
     public function setUnitOfMeasurement(UnitOfMeasurement $unitOfMeasurement)
     {
@@ -83,8 +81,7 @@ class PackageWeight implements NodeInterface
 
     /**
      * @param string $weight
-     *
-     * @return $this
+     * @return PackageWeight
      */
     public function setWeight($weight)
     {

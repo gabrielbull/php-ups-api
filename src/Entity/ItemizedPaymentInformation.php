@@ -13,12 +13,12 @@ class ItemizedPaymentInformation
     private $splitDutyVATIndicator;
 
     /**
-     * @var transportationShipmentCharge
+     * @var ShipmentCharge|null
      */
     private $transportationShipmentCharge;
 
     /**
-     * @var dutiesAndTaxesShipmentCharge
+     * @var ShipmentCharge|null
      */
     private $dutiesAndTaxesShipmentCharge;
 
@@ -36,7 +36,7 @@ class ItemizedPaymentInformation
     }
 
     /**
-     * @return transportationShipmentCharge
+     * @return ShipmentCharge|null
      */
     public function getTransportationShipmentCharge()
     {
@@ -54,13 +54,14 @@ class ItemizedPaymentInformation
         } elseif ($shipmentCharge->getType() === ShipmentCharge::SHIPMENT_CHARGE_TYPE_DUTIES) {
             $this->dutiesAndTaxesShipmentCharge = $shipmentCharge;
         } else {
-            throw new LogicException(sprintf('Unknown ShipmentCharge charge type requested: "%s"', $type));
+            throw new LogicException(sprintf('Unknown ShipmentCharge charge type requested: "%s"', $shipmentCharge->getType()));
         }
+
         return $this;
     }
 
     /**
-     * @return DutiesAndTaxesShipmentCharge
+     * @return ShipmentCharge|null
      */
     public function getDutiesAndTaxesShipmentCharge()
     {

@@ -24,7 +24,6 @@ class Weight implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
-     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -56,7 +55,7 @@ class Weight implements NodeInterface
 
     /**
      * @param int $value
-     * @return Quantity
+     * @return Weight
      */
     public function setValue($value)
     {
@@ -75,7 +74,7 @@ class Weight implements NodeInterface
 
     /**
      * @param UnitOfMeasurement $unitOfMeasurement
-     * @return Quantity
+     * @return Weight
      */
     public function setUnitOfMeasurement(UnitOfMeasurement $unitOfMeasurement)
     {

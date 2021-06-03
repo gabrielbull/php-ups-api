@@ -82,7 +82,6 @@ class PackagingType implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
-     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -108,8 +107,7 @@ class PackagingType implements NodeInterface
 
     /**
      * @param string $code
-     *
-     * @return $this
+     * @return PackagingType
      */
     public function setCode($code)
     {
@@ -129,8 +127,7 @@ class PackagingType implements NodeInterface
 
     /**
      * @param string $description
-     *
-     * @return $this
+     * @return PackagingType
      */
     public function setDescription($description)
     {

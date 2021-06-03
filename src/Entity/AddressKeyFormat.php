@@ -36,15 +36,17 @@ class AddressKeyFormat extends Address
 
     /**
      * @param string $singleLineAddress
+     * @return AddressKeyFormat
      */
     public function setSingleLineAddress($singleLineAddress)
     {
         $this->singleLineAddress = $singleLineAddress;
+
+        return $this;
     }
 
     /**
      * @param null|DOMDocument $document
-     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)

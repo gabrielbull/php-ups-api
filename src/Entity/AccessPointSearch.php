@@ -31,7 +31,6 @@ class AccessPointSearch implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
-     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -67,10 +66,13 @@ class AccessPointSearch implements NodeInterface
 
     /**
      * @param mixed $accountNumber
+     * @return AccessPointSearch
      */
     public function setAccountNumber($accountNumber)
     {
         $this->accountNumber = $accountNumber;
+
+        return $this;
     }
 
     /**
@@ -83,10 +85,13 @@ class AccessPointSearch implements NodeInterface
 
     /**
      * @param mixed $publicAccessPointId
+     * @return AccessPointSearch
      */
     public function setPublicAccessPointId($publicAccessPointId)
     {
         $this->publicAccessPointId = $publicAccessPointId;
+
+        return $this;
     }
 
     /**
@@ -99,9 +104,12 @@ class AccessPointSearch implements NodeInterface
 
     /**
      * @param mixed $accessPointStatus
+     * @return $this;
      */
     public function setAccessPointStatus($accessPointStatus)
     {
         $this->accessPointStatus = $accessPointStatus;
+
+        return $this;
     }
 }

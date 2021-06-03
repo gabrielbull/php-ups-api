@@ -93,7 +93,6 @@ class Shipper implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
-     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -132,7 +131,6 @@ class Shipper implements NodeInterface
 
     /**
      * @param Address $address
-     *
      * @return Shipper
      */
     public function setAddress(Address $address)
@@ -152,7 +150,6 @@ class Shipper implements NodeInterface
 
     /**
      * @param string $attentionName
-     *
      * @return Shipper
      */
     public function setAttentionName($attentionName)
@@ -172,7 +169,6 @@ class Shipper implements NodeInterface
 
     /**
      * @param string $emailAddress
-     *
      * @return Shipper
      */
     public function setEmailAddress($emailAddress)
@@ -192,7 +188,6 @@ class Shipper implements NodeInterface
 
     /**
      * @param string $faxNumber
-     *
      * @return Shipper
      */
     public function setFaxNumber($faxNumber)
@@ -212,7 +207,6 @@ class Shipper implements NodeInterface
 
     /**
      * @param string $name
-     *
      * @return Shipper
      */
     public function setName($name)
@@ -232,7 +226,6 @@ class Shipper implements NodeInterface
 
     /**
      * @param string $phoneNumber
-     *
      * @return Shipper
      */
     public function setPhoneNumber($phoneNumber)
@@ -252,7 +245,6 @@ class Shipper implements NodeInterface
 
     /**
      * @param string $shipperNumber
-     *
      * @return Shipper
      */
     public function setShipperNumber($shipperNumber)
@@ -272,7 +264,6 @@ class Shipper implements NodeInterface
 
     /**
      * @param string $taxIdentificationNumber
-     *
      * @return Shipper
      */
     public function setTaxIdentificationNumber($taxIdentificationNumber)

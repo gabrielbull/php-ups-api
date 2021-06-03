@@ -32,9 +32,12 @@ class Prepaid
 
     /**
      * @param BillShipper $billShipper
+     * @return Prepaid
      */
     public function setBillShipper($billShipper)
     {
         $this->billShipper = $billShipper;
+
+        return $this;
     }
 }

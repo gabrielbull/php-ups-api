@@ -3,7 +3,6 @@
 namespace Ups\Entity;
 
 use DateTime;
-use Exception as BaseException;
 
 class TimeInTransitRequest
 {
@@ -51,9 +50,14 @@ class TimeInTransitRequest
         $this->setPickupDate(new DateTime());
     }
 
+    /**
+     * @return TimeInTransitRequest
+     */
     public function setDocumentsOnlyIndicator()
     {
         $this->documentsOnlyIndicator = true;
+
+        return $this;
     }
 
     /**
@@ -66,10 +70,13 @@ class TimeInTransitRequest
 
     /**
      * @param DateTime $date
+     * @return TimeInTransitRequest
      */
     public function setPickupDate(DateTime $date)
     {
         $this->pickupDate = $date;
+
+        return $this;
     }
 
     /**
@@ -82,10 +89,13 @@ class TimeInTransitRequest
 
     /**
      * @param AddressArtifactFormat $address
+     * @return TimeInTransitRequest
      */
     public function setTransitFrom(AddressArtifactFormat $address)
     {
         $this->transitFrom = $address;
+
+        return $this;
     }
 
     /**
@@ -98,10 +108,13 @@ class TimeInTransitRequest
 
     /**
      * @param AddressArtifactFormat $address
+     * @return TimeInTransitRequest
      */
     public function setTransitTo(AddressArtifactFormat $address)
     {
         $this->transitTo = $address;
+
+        return $this;
     }
 
     /**
@@ -114,10 +127,13 @@ class TimeInTransitRequest
 
     /**
      * @param ShipmentWeight $shipmentWeight
+     * @return TimeInTransitRequest
      */
     public function setShipmentWeight(ShipmentWeight $shipmentWeight)
     {
         $this->shipmentWeight = $shipmentWeight;
+
+        return $this;
     }
 
     /**
@@ -130,16 +146,18 @@ class TimeInTransitRequest
 
     /**
      * @param $amount
-     *
-     * @throws BaseException
+     * @return TimeInTransitRequest
+     * @throws \Exception
      */
     public function setTotalPackagesInShipment($amount)
     {
         if (!is_int($amount) || $amount < 0) {
-            throw new BaseException('Amount of packages should be integer and above 0');
+            throw new \Exception('Amount of packages should be integer and above 0');
         }
 
         $this->totalPackagesInShipment = $amount;
+
+        return $this;
     }
 
     /**
@@ -152,10 +170,13 @@ class TimeInTransitRequest
 
     /**
      * @param InvoiceLineTotal $invoiceLineTotal
+     * @return TimeInTransitRequest
      */
     public function setInvoiceLineTotal(InvoiceLineTotal $invoiceLineTotal)
     {
         $this->invoiceLineTotal = $invoiceLineTotal;
+
+        return $this;
     }
 
     /**

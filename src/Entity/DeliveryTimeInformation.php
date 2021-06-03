@@ -27,7 +27,6 @@ class DeliveryTimeInformation implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
-     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -56,10 +55,13 @@ class DeliveryTimeInformation implements NodeInterface
 
     /**
      * @param string $packageBillType
+     * @return DeliveryTimeInformation
      */
     public function setPackageBillType($packageBillType)
     {
         $this->packageBillType = $packageBillType;
+
+        return $this;
     }
 
     /**
@@ -72,9 +74,12 @@ class DeliveryTimeInformation implements NodeInterface
 
     /**
      * @param Pickup $pickup
+     * @return DeliveryTimeInformation
      */
     public function setPickup($pickup)
     {
         $this->pickup = $pickup;
+
+        return $this;
     }
 }

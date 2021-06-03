@@ -131,7 +131,6 @@ class Package implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
-     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -192,7 +191,6 @@ class Package implements NodeInterface
 
     /**
      * @param Activity[] $activities
-     *
      * @return Package
      */
     public function setActivities(array $activities)
@@ -212,7 +210,6 @@ class Package implements NodeInterface
 
     /**
      * @param string $description
-     *
      * @return Package
      */
     public function setDescription($description)
@@ -232,7 +229,6 @@ class Package implements NodeInterface
 
     /**
      * @param Dimensions $dimensions
-     *
      * @return Package
      */
     public function setDimensions(Dimensions $dimensions)
@@ -252,7 +248,6 @@ class Package implements NodeInterface
 
     /**
      * @param bool $largePackage
-     *
      * @return Package
      */
     public function setLargePackage($largePackage)
@@ -272,7 +267,6 @@ class Package implements NodeInterface
 
     /**
      * @param PackageServiceOptions $packageServiceOptions
-     *
      * @return Package
      */
     public function setPackageServiceOptions(PackageServiceOptions $packageServiceOptions)
@@ -292,7 +286,6 @@ class Package implements NodeInterface
 
     /**
      * @param PackageWeight $packageWeight
-     *
      * @return Package
      */
     public function setPackageWeight(PackageWeight $packageWeight)
@@ -312,7 +305,6 @@ class Package implements NodeInterface
 
     /**
      * @param PackagingType $packagingType
-     *
      * @return Package
      */
     public function setPackagingType(PackagingType $packagingType)
@@ -332,7 +324,6 @@ class Package implements NodeInterface
 
     /**
      * @param ReferenceNumber $referenceNumber
-     *
      * @return Package
      */
     public function setReferenceNumber(ReferenceNumber $referenceNumber)
@@ -342,9 +333,14 @@ class Package implements NodeInterface
         return $this;
     }
 
+    /**
+     * @return Package
+     */
     public function removeReferenceNumber()
     {
         $this->referenceNumber = null;
+
+        return $this;
     }
     
     /**
@@ -357,7 +353,6 @@ class Package implements NodeInterface
 
     /**
      * @param ReferenceNumber $referenceNumber
-     *
      * @return Package
      */
     public function setReferenceNumber2(ReferenceNumber $referenceNumber)
@@ -367,9 +362,14 @@ class Package implements NodeInterface
         return $this;
     }
 
+    /**
+     * @return Package
+     */
     public function removeReferenceNumber2()
     {
         $this->referenceNumber2 = null;
+
+        return $this;
     }
 
     /**
@@ -382,7 +382,6 @@ class Package implements NodeInterface
 
     /**
      * @param string $trackingNumber
-     *
      * @return Package
      */
     public function setTrackingNumber($trackingNumber)
@@ -402,7 +401,6 @@ class Package implements NodeInterface
 
     /**
      * @param string $upsPremiumCareIndicator
-     *
      * @return Package
      */
     public function setUpsPremiumCareIndicator($upsPremiumCareIndicator)
@@ -422,9 +420,12 @@ class Package implements NodeInterface
 
     /**
      * @param boolean $additionalHandling
+     * @return Package
      */
     public function setAdditionalHandling($additionalHandling)
     {
         $this->additionalHandling = $additionalHandling;
+
+        return $this;
     }
 }

@@ -38,7 +38,6 @@ class POA implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
-     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -72,8 +71,7 @@ class POA implements NodeInterface
 
     /**
      * @param string $code
-     *
-     * @return $this
+     * @return POA
      */
     public function setCode($code)
     {
@@ -92,8 +90,7 @@ class POA implements NodeInterface
 
     /**
      * @param string $description
-     *
-     * @return $this
+     * @return POA
      */
     public function setDescription($description)
     {

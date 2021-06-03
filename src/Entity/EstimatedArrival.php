@@ -55,10 +55,13 @@ class EstimatedArrival
 
     /**
      * @param string $BusinessTransitDays
+     * @return EstimatedArrival
      */
     public function setBusinessTransitDays($BusinessTransitDays)
     {
         $this->BusinessTransitDays = $BusinessTransitDays;
+
+        return $this;
     }
 
     /**
@@ -71,10 +74,13 @@ class EstimatedArrival
 
     /**
      * @param string $Time
+     * @return EstimatedArrival
      */
     public function setTime($Time)
     {
         $this->Time = $Time;
+
+        return $this;
     }
 
     /**
@@ -87,10 +93,13 @@ class EstimatedArrival
 
     /**
      * @param string $PickupDate
+     * @return EstimatedArrival
      */
     public function setPickupDate($PickupDate)
     {
         $this->PickupDate = $PickupDate;
+
+        return $this;
     }
 
     /**
@@ -103,10 +112,13 @@ class EstimatedArrival
 
     /**
      * @param string $PickupTime
+     * @return EstimatedArrival
      */
     public function setPickupTime($PickupTime)
     {
         $this->PickupTime = $PickupTime;
+
+        return $this;
     }
 
     /**
@@ -119,9 +131,12 @@ class EstimatedArrival
 
     /**
      * @param string $Date
+     * @return EstimatedArrival
      */
     public function setDate($Date)
     {
         $this->Date = $Date;
+
+        return $this;
     }
 }

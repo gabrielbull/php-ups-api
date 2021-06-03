@@ -33,8 +33,7 @@ class SoldTo extends ShipTo
 
     /**
      * @param string $option
-     *
-     * @return $this
+     * @return static
      */
     public function setOption($option)
     {

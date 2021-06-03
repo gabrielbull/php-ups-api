@@ -46,7 +46,6 @@ class Unit implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
-     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -75,8 +74,7 @@ class Unit implements NodeInterface
 
     /**
      * @param string $number
-     *
-     * @return $this
+     * @return Unit
      */
     public function setNumber($number)
     {
@@ -87,18 +85,18 @@ class Unit implements NodeInterface
 
     /**
      * @param $value
-     *
+     * @return Unit
      * @throws \Exception
-     *
-     * @return $this
      */
     public function setValue($value)
     {
-        $this->value = number_format($value, 6, '.', '');
+        $value = number_format($value, 6, '.', '');
 
-        if (strlen((string)$this->value) > 19) {
+        if (strlen($this->value) > 19) {
             throw new \Exception('Value too long');
         }
+
+        $this->value = $value;
 
         return $this;
     }
@@ -113,8 +111,7 @@ class Unit implements NodeInterface
 
     /**
      * @param UnitOfMeasurement $unit
-     *
-     * @return $this
+     * @return Unit
      */
     public function setUnitOfMeasurement(UnitOfMeasurement $unit)
     {

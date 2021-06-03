@@ -30,7 +30,6 @@ class HazMatPackageInformation implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
-     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -64,10 +63,13 @@ class HazMatPackageInformation implements NodeInterface
 
     /**
      * @param bool $allPackedInOneIndicator
+     * @return HazMatPackageInformation
      */
     public function setAllPackedInOneIndicator($allPackedInOneIndicator)
     {
         $this->allPackedInOneIndicator = $allPackedInOneIndicator;
+
+        return $this;
     }
 
     /**
@@ -80,10 +82,13 @@ class HazMatPackageInformation implements NodeInterface
 
     /**
      * @param bool $overPackedIndicator
+     * @return HazMatPackageInformation
      */
     public function setOverPackedIndicator($overPackedIndicator)
     {
         $this->overPackedIndicator = $overPackedIndicator;
+
+        return $this;
     }
 
     /**
@@ -96,9 +101,12 @@ class HazMatPackageInformation implements NodeInterface
 
     /**
      * @param string $qValue
+     * @return HazMatPackageInformation
      */
     public function setQValue($qValue)
     {
         $this->qValue = $qValue;
+
+        return $this;
     }
 }

@@ -55,7 +55,8 @@ class UPSFiled implements NodeInterface
     }
 
     /**
-     * @return string
+     * @param POA $poa
+     * @return UPSFiled
      */
     public function setPOA(POA $poa)
     {

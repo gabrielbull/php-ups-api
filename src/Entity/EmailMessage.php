@@ -54,7 +54,6 @@ class EmailMessage implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
-     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -106,7 +105,7 @@ class EmailMessage implements NodeInterface
 
     /**
      * @param array $emailAddresses
-     *
+     * @return EmailMessage
      * @throws \Exception
      */
     public function setEmailAddresses(array $emailAddresses)
@@ -116,6 +115,8 @@ class EmailMessage implements NodeInterface
         }
 
         $this->emailAddresses = $emailAddresses;
+
+        return $this;
     }
 
     /**
@@ -128,10 +129,13 @@ class EmailMessage implements NodeInterface
 
     /**
      * @param mixed $undeliverableEmailAddress
+     * @return EmailMessage
      */
     public function setUndeliverableEmailAddress($undeliverableEmailAddress)
     {
         $this->undeliverableEmailAddress = $undeliverableEmailAddress;
+
+        return $this;
     }
 
     /**
@@ -144,10 +148,13 @@ class EmailMessage implements NodeInterface
 
     /**
      * @param mixed $fromEmailAddress
+     * @return EmailMessage
      */
     public function setFromEmailAddress($fromEmailAddress)
     {
         $this->fromEmailAddress = $fromEmailAddress;
+
+        return $this;
     }
 
     /**
@@ -160,10 +167,13 @@ class EmailMessage implements NodeInterface
 
     /**
      * @param mixed $fromName
+     * @return EmailMessage
      */
     public function setFromName($fromName)
     {
         $this->fromName = $fromName;
+
+        return $this;
     }
 
     /**
@@ -175,8 +185,8 @@ class EmailMessage implements NodeInterface
     }
 
     /**
-     * @param mixed $memo
-     *
+     * @param $memo
+     * @return EmailMessage
      * @throws \Exception
      */
     public function setMemo($memo)
@@ -186,6 +196,8 @@ class EmailMessage implements NodeInterface
         }
 
         $this->memo = $memo;
+
+        return $this;
     }
 
     /**
@@ -197,8 +209,8 @@ class EmailMessage implements NodeInterface
     }
 
     /**
-     * @param mixed $subject
-     *
+     * @param $subject
+     * @return EmailMessage
      * @throws \Exception
      */
     public function setSubject($subject)
@@ -208,6 +220,8 @@ class EmailMessage implements NodeInterface
         }
 
         $this->subject = $subject;
+
+        return $this;
     }
 
     /**
@@ -220,9 +234,12 @@ class EmailMessage implements NodeInterface
 
     /**
      * @param mixed $subjectCode
+     * @return EmailMessage
      */
     public function setSubjectCode($subjectCode)
     {
         $this->subjectCode = $subjectCode;
+
+        return $this;
     }
 }

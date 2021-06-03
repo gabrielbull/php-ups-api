@@ -37,7 +37,6 @@ class InsuredValue implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
-     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -63,11 +62,14 @@ class InsuredValue implements NodeInterface
 
     /**
      * @param $var string
+     * @return InsuredValue
      */
     public function setCurrencyCode($var)
     {
         $this->CurrencyCode = $var;
         $this->currencyCode = $var;
+
+        return $this;
     }
 
     /**
@@ -80,10 +82,13 @@ class InsuredValue implements NodeInterface
 
     /**
      * @param $var float
+     * @return InsuredValue
      */
     public function setMonetaryValue($var)
     {
         $this->MonetaryValue = $var;
         $this->monetaryValue = $var;
+
+        return $this;
     }
 }

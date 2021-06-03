@@ -33,7 +33,6 @@ class ShipmentTotalWeight implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
-     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -62,10 +61,13 @@ class ShipmentTotalWeight implements NodeInterface
 
     /**
      * @param UnitOfMeasurement $unitOfMeasurement
+     * @return ShipmentTotalWeight
      */
     public function setUnitOfMeasurement(UnitOfMeasurement $unitOfMeasurement)
     {
         $this->unitOfMeasurement = $unitOfMeasurement;
+
+        return $this;
     }
 
     /**
@@ -75,9 +77,11 @@ class ShipmentTotalWeight implements NodeInterface
     {
         return $this->weight;
     }
-    
+
     /**
-     * @param string $weight
+     * @param $weight
+     * @return ShipmentTotalWeight
+     * @throws \Exception
      */
     public function setWeight($weight)
     {
@@ -86,5 +90,7 @@ class ShipmentTotalWeight implements NodeInterface
         }
 
         $this->weight = $weight;
+
+        return $this;
     }
 }

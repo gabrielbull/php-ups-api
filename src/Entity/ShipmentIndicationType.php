@@ -26,7 +26,6 @@ class ShipmentIndicationType implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
-     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -56,10 +55,13 @@ class ShipmentIndicationType implements NodeInterface
 
     /**
      * @param mixed $code
+     * @return ShipmentIndicationType
      */
     public function setCode($code)
     {
         $this->code = $code;
+
+        return $this;
     }
 
     /**
@@ -72,9 +74,12 @@ class ShipmentIndicationType implements NodeInterface
 
     /**
      * @param mixed $description
+     * @return ShipmentIndicationType
      */
     public function setDescription($description)
     {
         $this->description = $description;
+
+        return $this;
     }
 }

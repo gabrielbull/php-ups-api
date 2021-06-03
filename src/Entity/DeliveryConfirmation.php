@@ -25,7 +25,6 @@ class DeliveryConfirmation implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
-     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -51,7 +50,7 @@ class DeliveryConfirmation implements NodeInterface
 
     /**
      * @param int $dcisTypeId
-     * @return $this
+     * @return DeliveryConfirmation
      */
     public function setDcisType($dcisTypeId)
     {

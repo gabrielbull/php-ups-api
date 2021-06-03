@@ -22,7 +22,6 @@ class CustomerClassification implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
-     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -47,8 +46,7 @@ class CustomerClassification implements NodeInterface
 
     /**
      * @param string $code
-     *
-     * @return $this
+     * @return CustomerClassification
      */
     public function setCode($code)
     {

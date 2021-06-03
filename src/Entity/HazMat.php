@@ -239,10 +239,13 @@ class HazMat implements NodeInterface
 
     /**
      * @param string $packagingTypeQuantity
+     * @return HazMat
      */
     public function setPackagingTypeQuantity($packagingTypeQuantity)
     {
         $this->packagingTypeQuantity = $packagingTypeQuantity;
+
+        return $this;
     }
 
     /**
@@ -255,10 +258,13 @@ class HazMat implements NodeInterface
 
     /**
      * @param string $subRiskClass
+     * @return HazMat
      */
     public function setSubRiskClass($subRiskClass)
     {
         $this->subRiskClass = $subRiskClass;
+
+        return $this;
     }
 
     /**
@@ -271,10 +277,13 @@ class HazMat implements NodeInterface
 
     /**
      * @param string $adrItemNumber
+     * @return HazMat
      */
     public function setAdrItemNumber($adrItemNumber)
     {
         $this->adrItemNumber = $adrItemNumber;
+
+        return $this;
     }
 
     /**
@@ -287,10 +296,13 @@ class HazMat implements NodeInterface
 
     /**
      * @param string $adrPackingGroupLetter
+     * @return HazMat
      */
     public function setAdrPackingGroupLetter($adrPackingGroupLetter)
     {
         $this->adrPackingGroupLetter = $adrPackingGroupLetter;
+
+        return $this;
     }
 
     /**
@@ -303,10 +315,13 @@ class HazMat implements NodeInterface
 
     /**
      * @param string $technicalName
+     * @return HazMat
      */
     public function setTechnicalName($technicalName)
     {
         $this->technicalName = $technicalName;
+
+        return $this;
     }
 
     /**
@@ -319,10 +334,13 @@ class HazMat implements NodeInterface
 
     /**
      * @param string $hazardLabelRequired
+     * @return HazMat
      */
     public function setHazardLabelRequired($hazardLabelRequired)
     {
         $this->hazardLabelRequired = $hazardLabelRequired;
+
+        return $this;
     }
 
     /**
@@ -335,10 +353,13 @@ class HazMat implements NodeInterface
 
     /**
      * @param string $classDivisionNumber
+     * @return HazMat
      */
     public function setClassDivisionNumber($classDivisionNumber)
     {
         $this->classDivisionNumber = $classDivisionNumber;
+
+        return $this;
     }
 
     /**
@@ -351,10 +372,13 @@ class HazMat implements NodeInterface
 
     /**
      * @param string $referenceNumber
+     * @return HazMat
      */
     public function setReferenceNumber($referenceNumber)
     {
         $this->referenceNumber = $referenceNumber;
+
+        return $this;
     }
 
     /**
@@ -367,10 +391,13 @@ class HazMat implements NodeInterface
 
     /**
      * @param string $quantity
+     * @return HazMat
      */
     public function setQuantity($quantity)
     {
         $this->quantity = $quantity;
+
+        return $this;
     }
 
     /**
@@ -383,10 +410,13 @@ class HazMat implements NodeInterface
 
     /**
      * @param string $uom
+     * @return HazMat
      */
     public function setUom($uom)
     {
         $this->uom = $uom;
+
+        return $this;
     }
 
     /**
@@ -399,10 +429,13 @@ class HazMat implements NodeInterface
 
     /**
      * @param string $packagingType
+     * @return HazMat
      */
     public function setPackagingType($packagingType)
     {
         $this->packagingType = $packagingType;
+
+        return $this;
     }
 
     /**
@@ -415,10 +448,13 @@ class HazMat implements NodeInterface
 
     /**
      * @param string $idNumber
+     * @return HazMat
      */
     public function setIdNumber($idNumber)
     {
         $this->idNumber = $idNumber;
+
+        return $this;
     }
 
     /**
@@ -431,10 +467,13 @@ class HazMat implements NodeInterface
 
     /**
      * @param string $properShippingName
+     * @return HazMat
      */
     public function setProperShippingName($properShippingName)
     {
         $this->properShippingName = $properShippingName;
+
+        return $this;
     }
 
     /**
@@ -447,10 +486,13 @@ class HazMat implements NodeInterface
 
     /**
      * @param string $additionalDescription
+     * @return HazMat
      */
     public function setAdditionalDescription($additionalDescription)
     {
         $this->additionalDescription = $additionalDescription;
+
+        return $this;
     }
 
     /**
@@ -463,10 +505,13 @@ class HazMat implements NodeInterface
 
     /**
      * @param string $packagingGroupType
+     * @return HazMat
      */
     public function setPackagingGroupType($packagingGroupType)
     {
         $this->packagingGroupType = $packagingGroupType;
+
+        return $this;
     }
 
     /**
@@ -479,10 +524,13 @@ class HazMat implements NodeInterface
 
     /**
      * @param string $packagingInstructionCode
+     * @return HazMat
      */
     public function setPackagingInstructionCode($packagingInstructionCode)
     {
         $this->packagingInstructionCode = $packagingInstructionCode;
+
+        return $this;
     }
 
     /**
@@ -495,10 +543,13 @@ class HazMat implements NodeInterface
 
     /**
      * @param string $emergencyPhone
+     * @return HazMat
      */
     public function setEmergencyPhone($emergencyPhone)
     {
         $this->emergencyPhone = $emergencyPhone;
+
+        return $this;
     }
 
     /**
@@ -511,10 +562,13 @@ class HazMat implements NodeInterface
 
     /**
      * @param string $emergencyContact
+     * @return HazMat
      */
     public function setEmergencyContact($emergencyContact)
     {
         $this->emergencyContact = $emergencyContact;
+
+        return $this;
     }
 
     /**
@@ -527,10 +581,13 @@ class HazMat implements NodeInterface
 
     /**
      * @param string $reportableQuantity
+     * @return HazMat
      */
     public function setReportableQuantity($reportableQuantity)
     {
         $this->reportableQuantity = $reportableQuantity;
+
+        return $this;
     }
 
     /**
@@ -543,10 +600,13 @@ class HazMat implements NodeInterface
 
     /**
      * @param string $regulationSet
+     * @return HazMat
      */
     public function setRegulationSet($regulationSet)
     {
         $this->regulationSet = $regulationSet;
+
+        return $this;
     }
 
     /**
@@ -559,10 +619,13 @@ class HazMat implements NodeInterface
 
     /**
      * @param string $transportationMode
+     * @return HazMat
      */
     public function setTransportationMode($transportationMode)
     {
         $this->transportationMode = $transportationMode;
+
+        return $this;
     }
 
     /**
@@ -575,10 +638,13 @@ class HazMat implements NodeInterface
 
     /**
      * @param string $commodityRegulatedLevelCode
+     * @return HazMat
      */
     public function setCommodityRegulatedLevelCode($commodityRegulatedLevelCode)
     {
         $this->commodityRegulatedLevelCode = $commodityRegulatedLevelCode;
+
+        return $this;
     }
 
     /**
@@ -591,10 +657,13 @@ class HazMat implements NodeInterface
 
     /**
      * @param string $transportCategory
+     * @return HazMat
      */
     public function setTransportCategory($transportCategory)
     {
         $this->transportCategory = $transportCategory;
+
+        return $this;
     }
 
     /**
@@ -607,10 +676,13 @@ class HazMat implements NodeInterface
 
     /**
      * @param string $tunnelRestrictionCode
+     * @return HazMat
      */
     public function setTunnelRestrictionCode($tunnelRestrictionCode)
     {
         $this->tunnelRestrictionCode = $tunnelRestrictionCode;
+
+        return $this;
     }
 
     /**
@@ -623,9 +695,12 @@ class HazMat implements NodeInterface
 
     /**
      * @param string $chemicalRecordIdentifier
+     * @return HazMat
      */
     public function setChemicalRecordIdentifier($chemicalRecordIdentifier)
     {
         $this->chemicalRecordIdentifier = $chemicalRecordIdentifier;
+
+        return $this;
     }
 }

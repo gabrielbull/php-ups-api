@@ -40,10 +40,13 @@ class ServiceSummary
 
     /**
      * @param EstimatedArrival
+     * @return ServiceSummary
      */
     public function setEstimatedArrival(EstimatedArrival $estimatedArrival)
     {
         $this->EstimatedArrival = $estimatedArrival;
         $this->estimatedArrival = $estimatedArrival;
+
+        return $this;
     }
 }

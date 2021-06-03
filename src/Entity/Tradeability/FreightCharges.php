@@ -48,9 +48,12 @@ class FreightCharges extends \Ups\Entity\FreightCharges
 
     /**
      * @param mixed $currencyCode
+     * @return FreightCharges
      */
     public function setCurrencyCode($currencyCode)
     {
         $this->currencyCode = $currencyCode;
+
+        return $this;
     }
 }

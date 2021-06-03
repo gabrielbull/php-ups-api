@@ -340,6 +340,7 @@ class ShipmentRequestLabelSpecification
     public function setCharacterSet($characterSet)
     {
         $this->characterSet = $characterSet;
+
         return $this;
     }
 }

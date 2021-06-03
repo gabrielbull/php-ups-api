@@ -256,7 +256,6 @@ class Address implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
-     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -305,8 +304,7 @@ class Address implements NodeInterface
 
     /**
      * @param array $addressExtendedInformation
-     *
-     * @return $this
+     * @return Address
      */
     public function setAddressExtendedInformation($addressExtendedInformation)
     {
@@ -326,8 +324,7 @@ class Address implements NodeInterface
 
     /**
      * @param string $addressLine1
-     *
-     * @return $this
+     * @return Address
      */
     public function setAddressLine1($addressLine1)
     {
@@ -347,8 +344,7 @@ class Address implements NodeInterface
 
     /**
      * @param string $addressLine2
-     *
-     * @return $this
+     * @return Address
      */
     public function setAddressLine2($addressLine2)
     {
@@ -368,8 +364,7 @@ class Address implements NodeInterface
 
     /**
      * @param string $addressLine3
-     *
-     * @return $this
+     * @return Address
      */
     public function setAddressLine3($addressLine3)
     {
@@ -389,8 +384,7 @@ class Address implements NodeInterface
 
     /**
      * @param string $attentionName
-     *
-     * @return $this
+     * @return Address
      */
     public function setAttentionName($attentionName)
     {
@@ -410,8 +404,7 @@ class Address implements NodeInterface
 
     /**
      * @param string $buildingName
-     *
-     * @return $this
+     * @return Address
      */
     public function setBuildingName($buildingName)
     {
@@ -431,8 +424,7 @@ class Address implements NodeInterface
 
     /**
      * @param string $city
-     *
-     * @return $this
+     * @return Address
      */
     public function setCity($city)
     {
@@ -452,8 +444,7 @@ class Address implements NodeInterface
 
     /**
      * @param string $consigneeName
-     *
-     * @return $this
+     * @return Address
      */
     public function setConsigneeName($consigneeName)
     {
@@ -473,8 +464,7 @@ class Address implements NodeInterface
 
     /**
      * @param string $countryCode
-     *
-     * @return $this
+     * @return Address
      */
     public function setCountryCode($countryCode)
     {
@@ -494,8 +484,7 @@ class Address implements NodeInterface
 
     /**
      * @param string $politicalDivision1
-     *
-     * @return $this
+     * @return Address
      */
     public function setPoliticalDivision1($politicalDivision1)
     {
@@ -515,8 +504,7 @@ class Address implements NodeInterface
 
     /**
      * @param string $politicalDivision2
-     *
-     * @return $this
+     * @return Address
      */
     public function setPoliticalDivision2($politicalDivision2)
     {
@@ -536,8 +524,7 @@ class Address implements NodeInterface
 
     /**
      * @param string $politicalDivision3
-     *
-     * @return $this
+     * @return Address
      */
     public function setPoliticalDivision3($politicalDivision3)
     {
@@ -557,8 +544,7 @@ class Address implements NodeInterface
 
     /**
      * @param string $postalCode
-     *
-     * @return $this
+     * @return Address
      */
     public function setPostalCode($postalCode)
     {
@@ -578,8 +564,7 @@ class Address implements NodeInterface
 
     /**
      * @param string $postcodeExtendedLow
-     *
-     * @return $this
+     * @return Address
      */
     public function setPostcodeExtendedLow($postcodeExtendedLow)
     {
@@ -599,8 +584,7 @@ class Address implements NodeInterface
 
     /**
      * @param string $postcodePrimaryHigh
-     *
-     * @return $this
+     * @return Address
      */
     public function setPostcodePrimaryHigh($postcodePrimaryHigh)
     {
@@ -620,8 +604,7 @@ class Address implements NodeInterface
 
     /**
      * @param string $postcodePrimaryLow
-     *
-     * @return $this
+     * @return Address
      */
     public function setPostcodePrimaryLow($postcodePrimaryLow)
     {
@@ -641,8 +624,7 @@ class Address implements NodeInterface
 
     /**
      * @param string $residentialAddressIndicator
-     *
-     * @return $this
+     * @return Address
      */
     public function setResidentialAddressIndicator($residentialAddressIndicator)
     {
@@ -662,8 +644,7 @@ class Address implements NodeInterface
 
     /**
      * @param string $stateProvinceCode
-     *
-     * @return $this
+     * @return Address
      */
     public function setStateProvinceCode($stateProvinceCode)
     {
@@ -683,8 +664,7 @@ class Address implements NodeInterface
 
     /**
      * @param string $streetName
-     *
-     * @return $this
+     * @return Address
      */
     public function setStreetName($streetName)
     {
@@ -704,8 +684,7 @@ class Address implements NodeInterface
 
     /**
      * @param string $streetNumberLow
-     *
-     * @return $this
+     * @return Address
      */
     public function setStreetNumberLow($streetNumberLow)
     {
@@ -725,8 +704,7 @@ class Address implements NodeInterface
 
     /**
      * @param string $streetPrefix
-     *
-     * @return $this
+     * @return Address
      */
     public function setStreetPrefix($streetPrefix)
     {
@@ -746,8 +724,7 @@ class Address implements NodeInterface
 
     /**
      * @param string $streetSuffix
-     *
-     * @return $this
+     * @return Address
      */
     public function setStreetSuffix($streetSuffix)
     {
@@ -767,8 +744,7 @@ class Address implements NodeInterface
 
     /**
      * @param string $streetType
-     *
-     * @return $this
+     * @return Address
      */
     public function setStreetType($streetType)
     {

@@ -69,7 +69,6 @@ class Product implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
-     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -111,8 +110,7 @@ class Product implements NodeInterface
 
     /**
      * @param string $description
-     *
-     * @return $this
+     * @return Product
      */
     public function setDescription1($description)
     {
@@ -135,8 +133,7 @@ class Product implements NodeInterface
 
     /**
      * @param string $description
-     *
-     * @return $this
+     * @return Product
      */
     public function setDescription2($description)
     {
@@ -159,8 +156,7 @@ class Product implements NodeInterface
 
     /**
      * @param string $description
-     *
-     * @return $this
+     * @return Product
      */
     public function setDescription3($description)
     {
@@ -183,8 +179,7 @@ class Product implements NodeInterface
 
     /**
      * @param string $code
-     *
-     * @return $this
+     * @return Product
      */
     public function setCommodityCode($code)
     {
@@ -195,8 +190,7 @@ class Product implements NodeInterface
 
     /**
      * @param Unit $unit
-     *
-     * @return $this
+     * @return Product
      */
     public function setUnit(Unit $unit)
     {
@@ -215,8 +209,7 @@ class Product implements NodeInterface
 
     /**
      * @param $number
-     *
-     * @return $this
+     * @return Product
      */
     public function setPartNumber($number)
     {
@@ -235,8 +228,7 @@ class Product implements NodeInterface
 
     /**
      * @param string $countryCode
-     *
-     * @return $this
+     * @return Product
      */
     public function setOriginCountryCode($countryCode)
     {

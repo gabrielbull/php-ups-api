@@ -10,6 +10,10 @@ class GeoCode implements NodeInterface
     private $latitude;
     private $longitude;
 
+    /**
+     * @param null|DOMDocument $document
+     * @return \DOMElement
+     */
     public function toNode(DOMDocument $document = null)
     {
         if (null === $document) {
@@ -34,10 +38,13 @@ class GeoCode implements NodeInterface
 
     /**
      * @param mixed $latitude
+     * @return GeoCode
      */
     public function setLatitude($latitude)
     {
         $this->latitude = $latitude;
+
+        return $this;
     }
 
     /**
@@ -50,9 +57,12 @@ class GeoCode implements NodeInterface
 
     /**
      * @param mixed $longitude
+     * @return GeoCode
      */
     public function setLongitude($longitude)
     {
         $this->longitude = $longitude;
+
+        return $this;
     }
 }

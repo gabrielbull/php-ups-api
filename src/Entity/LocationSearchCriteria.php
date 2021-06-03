@@ -4,7 +4,6 @@ namespace Ups\Entity;
 
 use DOMDocument;
 use DOMElement;
-use Exception as BaseException;
 use Ups\NodeInterface;
 
 class LocationSearchCriteria implements NodeInterface
@@ -29,15 +28,17 @@ class LocationSearchCriteria implements NodeInterface
 
     /**
      * @param AccessPointSearch $accessPointSearch
+     * @return LocationSearchCriteria
      */
     public function setAccessPointSearch(AccessPointSearch $accessPointSearch)
     {
         $this->accessPointSearch = $accessPointSearch;
+
+        return $this;
     }
 
     /**
      * @param null|DOMDocument $document
-     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -68,18 +69,20 @@ class LocationSearchCriteria implements NodeInterface
     }
 
     /**
-     * @param mixed $maximumListSize
-     *
-     * @throws BaseException
+     * @param $maximumListSize
+     * @return LocationSearchCriteria
+     * @throws \Exception
      */
     public function setMaximumListSize($maximumListSize)
     {
         $maximumListSize = (int)$maximumListSize;
 
         if ($maximumListSize < 1 || $maximumListSize > 50) {
-            throw new BaseException('Maximum list size: If present, indicates the maximum number of locations the client wishes to receive in response; ranges from 1 to 50 with a default value of 10');
+            throw new \Exception('Maximum list size: If present, indicates the maximum number of locations the client wishes to receive in response; ranges from 1 to 50 with a default value of 10');
         }
 
         $this->maximumListSize = $maximumListSize;
+
+        return $this;
     }
 }

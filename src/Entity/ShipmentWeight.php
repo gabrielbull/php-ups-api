@@ -27,7 +27,6 @@ class ShipmentWeight implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
-     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -43,21 +42,39 @@ class ShipmentWeight implements NodeInterface
         return $node;
     }
 
+    /**
+     * @param $weight
+     * @return ShipmentWeight
+     */
     public function setWeight($weight)
     {
         $this->weight = $weight;
+
+        return $this;
     }
 
+    /**
+     * @return mixed
+     */
     public function getWeight()
     {
         return $this->weight;
     }
 
+    /**
+     * @param UnitOfMeasurement $unitOfMeasurement
+     * @return ShipmentWeight
+     */
     public function setUnitOfMeasurement(UnitOfMeasurement $unitOfMeasurement)
     {
         $this->unitOfMeasurement = $unitOfMeasurement;
+
+        return $this;
     }
 
+    /**
+     * @return mixed
+     */
     public function getUnitOfMeasurement()
     {
         return $this->unitOfMeasurement;

@@ -146,7 +146,6 @@ class Service implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
-     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -180,8 +179,7 @@ class Service implements NodeInterface
 
     /**
      * @param string $code
-     *
-     * @return $this
+     * @return Service
      */
     public function setCode($code)
     {
@@ -200,8 +198,7 @@ class Service implements NodeInterface
 
     /**
      * @param string $description
-     *
-     * @return $this
+     * @return Service
      */
     public function setDescription($description)
     {

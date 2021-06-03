@@ -10,7 +10,6 @@ class ShipFrom extends Shipper implements NodeInterface
 {
     /**
      * @param null|DOMDocument $document
-     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)

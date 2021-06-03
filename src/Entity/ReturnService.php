@@ -71,7 +71,6 @@ class ReturnService implements NodeInterface
 
     /**
      * @param null|DOMDocument $document
-     *
      * @return DOMElement
      */
     public function toNode(DOMDocument $document = null)
@@ -104,8 +103,7 @@ class ReturnService implements NodeInterface
 
     /**
      * @param int $code
-     *
-     * @return $this
+     * @return ReturnService
      */
     public function setCode($code)
     {

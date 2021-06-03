@@ -86,6 +86,7 @@ class COD implements NodeInterface
     public function setCODCode($CODCode)
     {
         $this->CODCode = $CODCode;
+
         return $this;
     }
 
@@ -104,6 +105,7 @@ class COD implements NodeInterface
     public function setCODFundsCode($CODFundsCode)
     {
         $this->CODFundsCode = $CODFundsCode;
+
         return $this;
     }
 
@@ -122,6 +124,7 @@ class COD implements NodeInterface
     public function setCODAmount(CODAmount $CODAmount)
     {
         $this->CODAmount = $CODAmount;
+
         return $this;
     }
 }

@@ -56,10 +56,13 @@ trait EstimatedArrivalTrait
 
     /**
      * @param Arrival $Arrival
+     * @return static
      */
     public function setArrival($Arrival)
     {
         $this->Arrival = $Arrival;
+
+        return $this;
     }
 
     /**
@@ -72,10 +75,13 @@ trait EstimatedArrivalTrait
 
     /**
      * @param Pickup $Pickup
+     * @return static
      */
     public function setPickup($Pickup)
     {
         $this->Pickup = $Pickup;
+
+        return $this;
     }
 
     /**
@@ -88,10 +94,13 @@ trait EstimatedArrivalTrait
 
     /**
      * @param string $DayOfWeek
+     * @return static
      */
     public function setDayOfWeek($DayOfWeek)
     {
         $this->DayOfWeek = $DayOfWeek;
+
+        return $this;
     }
 
     /**
@@ -104,10 +113,13 @@ trait EstimatedArrivalTrait
 
     /**
      * @param string $CustomerCenterCutoff
+     * @return static
      */
     public function setCustomerCenterCutoff($CustomerCenterCutoff)
     {
         $this->CustomerCenterCutoff = $CustomerCenterCutoff;
+
+        return $this;
     }
 
     /**
@@ -120,10 +132,13 @@ trait EstimatedArrivalTrait
 
     /**
      * @param string $DelayCount
+     * @return static
      */
     public function setDelayCount($DelayCount)
     {
         $this->DelayCount = $DelayCount;
+
+        return $this;
     }
 
     /**
@@ -136,10 +151,13 @@ trait EstimatedArrivalTrait
 
     /**
      * @param string $HolidayCount
+     * @return static
      */
     public function setHolidayCount($HolidayCount)
     {
         $this->HolidayCount = $HolidayCount;
+
+        return $this;
     }
 
     /**
@@ -152,10 +170,13 @@ trait EstimatedArrivalTrait
 
     /**
      * @param string $RestDays
+     * @return static
      */
     public function setRestDays($RestDays)
     {
         $this->RestDays = $RestDays;
+
+        return $this;
     }
 
     /**
@@ -168,9 +189,12 @@ trait EstimatedArrivalTrait
 
     /**
      * @param string $TotalTransitDays
+     * @return static
      */
     public function setTotalTransitDays($TotalTransitDays)
     {
         $this->TotalTransitDays = $TotalTransitDays;
+
+        return $this;
     }
 }
