@@ -127,9 +127,6 @@ class ShipmentServiceOptions implements NodeInterface
             if (isset($response->LabelMethod)) {
                 $this->setLabelMethod(new LabelMethod($response->LabelMethod));
             }
-            if (isset($response->EMailMessage)) {
-                $this->setEMailMessage(new EMailMessage($response->EMailMessage));
-            }
         }
     }
 

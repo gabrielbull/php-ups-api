@@ -54,7 +54,7 @@ class ItemizedPaymentInformation
         } elseif ($shipmentCharge->getType() === ShipmentCharge::SHIPMENT_CHARGE_TYPE_DUTIES) {
             $this->dutiesAndTaxesShipmentCharge = $shipmentCharge;
         } else {
-            throw new LogicException(sprintf('Unknown ShipmentCharge charge type requested: "%s"', $type));
+            throw new LogicException(sprintf('Unknown ShipmentCharge charge type requested: "%s"', $shipmentCharge->getType()));
         }
         return $this;
     }
