@@ -17,6 +17,7 @@ class Service implements NodeInterface
     const S_3DAYSELECT = '12';
     const S_GROUND = '03';
     const S_SURE_POST = '93';
+    const S_MAIL_INNOVATIONS = 'M4';
 
     // Valid international values
     const S_STANDARD = '11';
@@ -106,6 +107,7 @@ class Service implements NodeInterface
         '74' => 'UPS Express 12:00',
         '93' => 'UPS Sure Post',
         '96' => 'UPS Worldwide Express Freight',
+        'M4' => 'UPS Mail Innovations',
     ];
 
     /** @deprecated */
