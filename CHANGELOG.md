@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 0.9.4 (released 15-07-2020)
+- pickup type is optional
+
 ## 0.9.3 (released 18-05-2020)
 - fixed warning on an empty api response 
 
