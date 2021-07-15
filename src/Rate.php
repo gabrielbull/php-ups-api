@@ -6,6 +6,7 @@ use DOMDocument;
 use DOMElement;
 use Exception;
 use SimpleXMLElement;
+use Ups\Entity\PickupType;
 use Ups\Entity\RateRequest;
 use Ups\Entity\RateResponse;
 use Ups\Entity\Shipment;
@@ -132,7 +133,10 @@ class Rate extends Ups
         $request->appendChild($xml->createElement('RequestAction', 'Rate'));
         $request->appendChild($xml->createElement('RequestOption', $this->requestOption));
 
-        $trackRequest->appendChild($rateRequest->getPickupType()->toNode($document));
+        $pickupType = $rateRequest->getPickupType();
+        if ( $pickupType instanceof PickupType ) {
+	        $trackRequest->appendChild( $pickupType->toNode( $document ) );
+        }
 
         $customerClassification = $rateRequest->getCustomerClassification();
         if (isset($customerClassification)) {

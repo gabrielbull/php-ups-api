@@ -10,7 +10,7 @@ class RateRequest
     public $Shipment;
 
     /**
-     * @var PickupType
+     * @var PickupType|null
      */
     private $pickupType;
 
@@ -31,7 +31,7 @@ class RateRequest
     }
 
     /**
-     * @return PickupType
+     * @return PickupType|null
      */
     public function getPickupType()
     {
@@ -39,11 +39,11 @@ class RateRequest
     }
 
     /**
-     * @param PickupType $pickupType
+     * @param PickupType|null $pickupType
      *
      * @return $this
      */
-    public function setPickupType(PickupType $pickupType)
+    public function setPickupType($pickupType)
     {
         $this->PickupType = $pickupType;
         $this->pickupType = $pickupType;
