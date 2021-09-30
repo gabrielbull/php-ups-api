@@ -123,6 +123,11 @@ class Shipment
      */
     private $taxInformationIndicator;
 
+    /**
+     * @var string
+     */
+    private $locale;
+
     public function __construct()
     {
         $this->setShipper(new Shipper());
@@ -608,6 +613,26 @@ class Shipment
     {
         $this->taxInformationIndicator = $taxInformationIndicator;
         
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLocale()
+    {
+        return $this->locale;
+    }
+
+    /**
+     * @param string $locale
+     *
+     * @return Shipment
+     */
+    public function setLocale($locale)
+    {
+        $this->locale = $locale;
+
         return $this;
     }
 }
