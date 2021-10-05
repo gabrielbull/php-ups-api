@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 0.9.5 (released 05-10-2021)
+- fixed LabelSpecification
+
 ## 0.9.4 (released 15-07-2020)
 - pickup type is optional
 

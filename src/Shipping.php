@@ -640,7 +640,7 @@ class Shipping extends Ups
         }
 
         if (!empty($labelSpecificationOpts)) {
-            $labelSpec = $request->appendChild($xml->createElement('LabelSpecification'));
+            $labelSpec = $container->appendChild($xml->createElement('LabelSpecification'));
 
             if (isset($labelSpecificationOpts['userAgent'])) {
                 $labelSpec->appendChild($xml->createElement('HTTPUserAgent', $labelSpecificationOpts['userAgent']));
