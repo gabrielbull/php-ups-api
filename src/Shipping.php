@@ -429,6 +429,10 @@ class Shipping extends Ups
         if ($receiptSpec) {
             $container->appendChild($xml->importNode($this->compileReceiptSpecificationNode($receiptSpec), true));
         }
+
+        if ($shipment->getLocale()) {
+            $shipmentNode->appendChild($xml->createElement('Locale', $shipment->getLocale()));
+        }
         return $xml->saveXML();
     }
 
