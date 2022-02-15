@@ -51,6 +51,11 @@ class ShipmentServiceOptions implements NodeInterface
     /**
      * @var
      */
+    public $UPScarbonneutralIndicator;
+
+    /**
+     * @var
+     */
     private $internationalForms;
 
     /**
@@ -467,5 +472,21 @@ class ShipmentServiceOptions implements NodeInterface
     {
         $this->DeliverToAddresseeOnlyIndicator = $DeliverToAddresseeOnlyIndicator;
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUPScarbonneutralIndicator()
+    {
+        return $this->UPScarbonneutralIndicator;
+    }
+
+    /**
+     * @param mixed $UPScarbonneutralIndicator
+     */
+    public function setUPScarbonneutralIndicator(): void
+    {
+        $this->UPScarbonneutralIndicator = true;
     }
 }
