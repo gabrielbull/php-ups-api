@@ -210,6 +210,10 @@ class ShipmentServiceOptions implements NodeInterface
             }
         }
 
+        if (isset($this->UPScarbonneutralIndicator)) {
+            $node->appendChild($document->createElement('UPScarbonneutralIndicator'));
+        }
+
         return $node;
     }
 
