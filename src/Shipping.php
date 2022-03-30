@@ -221,6 +221,10 @@ class Shipping extends Ups
                 $shipFromNode->appendChild($xml->createElement('FaxNumber', $shipment->getShipFrom()->getFaxNumber()));
             }
 
+            if (!empty($shipment->getShipFrom()->getVendorInfo())) {
+                $shipFromNode->appendChild($shipment->getShipFrom()->getVendorInfo()->toNode($xml));
+            }
+
             $shipFromNode->appendChild($shipment->getShipFrom()->getAddress()->toNode($xml));
         }
 

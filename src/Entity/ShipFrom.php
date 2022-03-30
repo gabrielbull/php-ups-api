@@ -34,6 +34,11 @@ class ShipFrom extends Shipper implements NodeInterface
             $node->appendChild($address->toNode($document));
         }
 
+        $vendorInfo = $this->getVendorInfo();
+        if (isset($vendorInfo)) {
+            $node->appendChild($vendorInfo->toNode($document));
+        }
+
         return $node;
     }
 }

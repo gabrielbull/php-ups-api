@@ -54,6 +54,11 @@ class Shipper implements NodeInterface
     protected $address;
 
     /**
+     * @var VendorInfo
+     */
+    protected $vendorInfo;
+
+    /**
      * @param null|object $attributes
      */
     public function __construct($attributes = null)
@@ -87,6 +92,9 @@ class Shipper implements NodeInterface
             }
             if (isset($attributes->Address)) {
                 $this->setAddress(new Address($attributes->Address));
+            }
+            if (isset($attributes->VendorInfo)) {
+                $this->setVendorInfo(new VendorInfo($attributes->VendorInfo));
             }
         }
     }
@@ -138,6 +146,26 @@ class Shipper implements NodeInterface
     public function setAddress(Address $address)
     {
         $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * @return VendorInfo
+     */
+    public function getVendorInfo()
+    {
+        return $this->vendorInfo;
+    }
+
+    /**
+     * @param VendorInfo $vendorInfo
+     *
+     * @return Shipper
+     */
+    public function setVendorInfo(VendorInfo $vendorInfo)
+    {
+        $this->vendorInfo = $vendorInfo;
 
         return $this;
     }
