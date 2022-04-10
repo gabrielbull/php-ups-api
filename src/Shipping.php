@@ -771,7 +771,7 @@ class Shipping extends Ups
         }
 
         //Label print method is required only for GIF label formats
-        if ($labelSpec->getPrintMethodCode() == ShipmentRequestLabelSpecification::IMG_FORMAT_CODE_GIF) {
+        if ($labelSpec->getPrintMethodCode() == ShipmentRequestLabelSpecification::PRINT_METHOD_CODE_GIF) {
             $imageFormatNode = $labelSpecNode->appendChild($xml->createElement('LabelImageFormat'));
             $imageFormatNode->appendChild($xml->createElement('Code', $labelSpec->getImageFormatCode()));
 
