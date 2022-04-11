@@ -34,6 +34,11 @@ class ShipmentCharge
     private $billThirdParty;
 
     /**
+    * @var BillThirdParty
+    */
+   private $billThirdPartyConsignee;
+
+    /**
      * @var bool
      */
     private $consigneeBilled;
@@ -101,6 +106,25 @@ class ShipmentCharge
     public function setBillThirdParty(BillThirdParty $billThirdParty = null)
     {
         $this->billThirdParty = $billThirdParty;
+
+        return $this;
+    }
+
+	/**
+     * @return BillThirdParty
+     */
+    public function getBillThirdPartyConsignee()
+    {
+        return $this->billThirdPartyConsignee;
+    }
+
+    /**
+     * @param BillThirdParty $billThirdPartyConsignee
+     * @return ShipmentCharge
+     */
+    public function setBillThirdPartyConsignee(BillThirdParty $billThirdPartyConsignee = null)
+    {
+        $this->billThirdPartyConsignee = $billThirdPartyConsignee;
 
         return $this;
     }

@@ -22,6 +22,11 @@ class PaymentInformation
     private $billThirdParty;
 
     /**
+     * @var BillThirdParty
+     */
+    private $billThirdPartyConsignee;
+
+    /**
      * @var FreightCollect
      */
     private $freightCollect;
@@ -85,6 +90,25 @@ class PaymentInformation
     public function setBillThirdParty(BillThirdParty $billThirdParty = null)
     {
         $this->billThirdParty = $billThirdParty;
+
+        return $this;
+    }
+
+    /**
+     * @return BillThirdParty
+     */
+    public function getBillThirdPartyConsignee()
+    {
+        return $this->billThirdPartyConsignee;
+    }
+
+    /**
+     * @param BillThirdParty $billThirdPartyConsignee
+     * @return PaymentInformation
+     */
+    public function setBillThirdPartyConsignee(BillThirdParty $billThirdPartyConsignee = null)
+    {
+        $this->billThirdPartyConsignee = $billThirdPartyConsignee;
 
         return $this;
     }
