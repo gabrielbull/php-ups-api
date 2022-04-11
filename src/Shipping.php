@@ -355,16 +355,30 @@ class Shipping extends Ups
                     $node = $node->appendChild($xml->createElement('BillThirdParty'));
                     $btpNode = $node->appendChild($xml->createElement('BillThirdPartyShipper'));
                     $btpNode->appendChild($xml->createElement('AccountNumber', $rec->getBillThirdParty()->getAccountNumber()));
-    
+
                     $tpNode = $btpNode->appendChild($xml->createElement('ThirdParty'));
                     $addressNode = $tpNode->appendChild($xml->createElement('Address'));
-    
+
                     $thirdPartAddress = $rec->getBillThirdParty()->getThirdPartyAddress();
                     if (isset($thirdPartAddress) && $rec->getBillThirdParty()->getThirdPartyAddress()->getPostalCode()) {
                         $addressNode->appendChild($xml->createElement('PostalCode', $rec->getBillThirdParty()->getThirdPartyAddress()->getPostalCode()));
                     }
-    
+
                     $addressNode->appendChild($xml->createElement('CountryCode', $rec->getBillThirdParty()->getThirdPartyAddress()->getCountryCode()));
+                } elseif ($rec->getBillThirdPartyConsignee()) {
+                    $node = $node->appendChild($xml->createElement('BillThirdParty'));
+                    $btpNode = $node->appendChild($xml->createElement('BillThirdPartyConsignee'));
+                    $btpNode->appendChild($xml->createElement('AccountNumber', $rec->getBillThirdPartyConsignee()->getAccountNumber()));
+
+                    $tpNode = $btpNode->appendChild($xml->createElement('ThirdParty'));
+                    $addressNode = $tpNode->appendChild($xml->createElement('Address'));
+
+                    $thirdPartAddress = $rec->getBillThirdPartyConsignee()->getThirdPartyAddress();
+                    if (isset($thirdPartAddress) && $rec->getBillThirdPartyConsignee()->getThirdPartyAddress()->getPostalCode()) {
+                        $addressNode->appendChild($xml->createElement('PostalCode', $rec->getBillThirdPartyConsignee()->getThirdPartyAddress()->getPostalCode()));
+                    }
+
+                    $addressNode->appendChild($xml->createElement('CountryCode', $rec->getBillThirdPartyConsignee()->getThirdPartyAddress()->getCountryCode()));
                 } elseif ($rec->getConsigneeBilled()) {
                     $node->appendChild($xml->createElement('ConsigneeBilled'));
                 }
