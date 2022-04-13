@@ -36,7 +36,7 @@ class ShipmentCharge
     /**
     * @var BillThirdParty
     */
-   private $billThirdPartyConsignee;
+    private $billThirdPartyConsignee;
 
     /**
      * @var bool
@@ -110,7 +110,7 @@ class ShipmentCharge
         return $this;
     }
 
-	/**
+    /**
      * @return BillThirdParty
      */
     public function getBillThirdPartyConsignee()
