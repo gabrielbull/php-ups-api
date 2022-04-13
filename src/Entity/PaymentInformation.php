@@ -95,25 +95,6 @@ class PaymentInformation
     }
 
     /**
-     * @return BillThirdParty
-     */
-    public function getBillThirdPartyConsignee()
-    {
-        return $this->billThirdPartyConsignee;
-    }
-
-    /**
-     * @param BillThirdParty $billThirdPartyConsignee
-     * @return PaymentInformation
-     */
-    public function setBillThirdPartyConsignee(BillThirdParty $billThirdPartyConsignee = null)
-    {
-        $this->billThirdPartyConsignee = $billThirdPartyConsignee;
-
-        return $this;
-    }
-
-    /**
      * @return FreightCollect
      */
     public function getFreightCollect()
