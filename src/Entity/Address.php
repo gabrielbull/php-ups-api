@@ -331,6 +331,10 @@ class Address implements NodeInterface
      */
     public function setAddressLine1($addressLine1)
     {
+        if (strlen($addressLine1) > 35) {
+            $addressLine1 = substr($addressLine1, 0, 35);
+        }
+
         $this->AddressLine1 = $addressLine1;
         $this->addressLine1 = $addressLine1;
 
@@ -352,6 +356,10 @@ class Address implements NodeInterface
      */
     public function setAddressLine2($addressLine2)
     {
+        if (strlen($addressLine2) > 35) {
+            $addressLine2 = substr($addressLine2, 0, 35);
+        }
+
         $this->AddressLine2 = $addressLine2;
         $this->addressLine2 = $addressLine2;
 
@@ -373,6 +381,10 @@ class Address implements NodeInterface
      */
     public function setAddressLine3($addressLine3)
     {
+        if (strlen($addressLine3) > 35) {
+            $addressLine3 = substr($addressLine3, 0, 35);
+        }
+
         $this->AddressLine3 = $addressLine3;
         $this->addressLine3 = $addressLine3;
 
