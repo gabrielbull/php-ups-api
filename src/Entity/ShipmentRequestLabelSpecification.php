@@ -225,6 +225,9 @@ class ShipmentRequestLabelSpecification
      */
     public function setStockSizeHeight($stockSizeHeight)
     {
+        if (!is_int($stockSizeHeight) || $stockSizeHeight != 4))
+            throw new \Exception('Label:StockSizeHeight only valid value is 4');
+
         $this->stockSizeHeight = $stockSizeHeight;
 
         return $this;
@@ -244,6 +247,9 @@ class ShipmentRequestLabelSpecification
      */
     public function setStockSizeWidth($stockSizeWidth)
     {
+        if (!is_int($stockSizeWidth) || !in_array($stockSizeWidth, [6,8]))
+            throw new \Exception('Label:StockSizeWidth only valid values are 6 or 8');
+        
         $this->stockSizeWidth = $stockSizeWidth;
 
         return $this;
