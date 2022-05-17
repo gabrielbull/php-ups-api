@@ -72,8 +72,13 @@ abstract class Ups implements LoggerAwareInterface
      * @param bool $useIntegration Determine if we should use production or CIE URLs.
      * @param LoggerInterface|null $logger PSR3 compatible logger (optional)
      */
-    public function __construct($accessKey = null, $userId = null, $password = null, $useIntegration = false, LoggerInterface $logger = null)
-    {
+    public function __construct(
+        ?string $accessKey = null,
+        ?string $userId = null,
+        ?string $password = null,
+        bool $useIntegration = false,
+        LoggerInterface $logger = null
+    ) {
         $this->accessKey = $accessKey;
         $this->userId = $userId;
         $this->password = $password;
@@ -86,7 +91,7 @@ abstract class Ups implements LoggerAwareInterface
      *
      * @param string $context The transaction "guidlikesubstance" value
      */
-    public function setContext($context)
+    public function setContext(string $context): void
     {
         $this->context = $context;
     }
@@ -94,7 +99,7 @@ abstract class Ups implements LoggerAwareInterface
     /**
      * @param LoggerInterface $logger
      */
-    public function setLogger(LoggerInterface $logger)
+    public function setLogger(LoggerInterface $logger): void
     {
         $this->logger = $logger;
     }
@@ -114,7 +119,7 @@ abstract class Ups implements LoggerAwareInterface
      *
      * @return string
      */
-    public function formatDateTime($timestamp)
+    public function formatDateTime($timestamp): string
     {
         if (!is_numeric($timestamp)) {
             $timestamp = strtotime($timestamp);
@@ -128,7 +133,7 @@ abstract class Ups implements LoggerAwareInterface
      *
      * @return string
      */
-    protected function createAccess()
+    protected function createAccess(): string
     {
         $xml = new DOMDocument();
         $xml->formatOutput = true;
@@ -151,7 +156,7 @@ abstract class Ups implements LoggerAwareInterface
      *
      * @return \DomNode
      */
-    protected function createTransactionNode()
+    protected function createTransactionNode(): \DomNode
     {
         $xml = new DOMDocument();
         $xml->formatOutput = true;
@@ -210,7 +215,7 @@ abstract class Ups implements LoggerAwareInterface
      *
      * @return string
      */
-    protected function compileEndpointUrl($segment)
+    protected function compileEndpointUrl(string $segment): string
     {
         $base = ($this->useIntegration ? $this->integrationBaseUrl : $this->productionBaseUrl);
 

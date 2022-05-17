@@ -4,144 +4,99 @@ namespace Ups\Entity;
 
 class Shipment
 {
-    /**
-     * @var PaymentInformation
-     */
-    private $paymentInformation;
+    private ?PaymentInformation $paymentInformation = null;
 
-    /**
-     * @var ItemizedPaymentInformation
-     */
-    private $itemizedPaymentInformation;
+    private ?ItemizedPaymentInformation $itemizedPaymentInformation = null;
 
-    /**
-     * @var RateInformation
-     */
-    private $rateInformation;
+    private ?RateInformation $rateInformation;
 
-    /**
-     * @var string
-     */
-    private $description;
+    private string $description;
 
-    /**
-     * @var Shipper
-     */
-    private $shipper;
+    private ?Shipper $shipper = null;
 
-    /**
-     * @var ShipTo;
-     */
-    private $shipTo;
+    private ?ShipTo $shipTo = null;
 
-    /**
-     * @var SoldTo
-     */
-    private $soldTo;
+    private ?SoldTo $soldTo = null;
 
-    /**
-     * @var ShipFrom
-     */
-    private $shipFrom;
+    private ?ShipFrom $shipFrom = null;
 
-    /**
-     * @var AlternateDeliveryAddress
-     */
-    private $alternateDeliveryAddress;
+    private ?AlternateDeliveryAddress $alternateDeliveryAddress = null;
 
-    /**
-     * @var ShipmentIndicationType
-     */
-    private $shipmentIndicationType;
+    private ?ShipmentIndicationType $shipmentIndicationType = null;
 
-    /**
-     * @var Service
-     */
-    private $service;
+    private ?Service $service = null;
 
-    /**
-     * @var ReturnService
-     */
-    private $returnService;
+    private ?ReturnService $returnService = null;
 
-    /**
-     * @var bool
-     */
-    private $documentsOnly;
+    private bool $documentsOnly;
 
     /**
      * @var Package[]
      */
-    private $packages = [];
+    private array $packages = [];
 
-    /**
-     * @var ReferenceNumber
-     */
-    private $referenceNumber;
+    private ?ReferenceNumber $referenceNumber = null;
 
-    /**
-     * @var ReferenceNumber
-     */
-    private $referenceNumber2;
+    private ?ReferenceNumber $referenceNumber2 = null;
 
-    /**
-     * @var ShipmentServiceOptions
-     */
-    private $shipmentServiceOptions;
+    private ?ShipmentServiceOptions $shipmentServiceOptions = null;
 
-    /**
-     * @var bool
-     */
-    private $goodsNotInFreeCirculationIndicator;
+    private bool $goodsNotInFreeCirculationIndicator;
 
-    /**
-     * @var string
-     */
-    private $movementReferenceNumber;
+    private string $movementReferenceNumber;
 
-    /**
-     * @var InvoiceLineTotal
-     */
-    private $invoiceLineTotal;
+    private ?InvoiceLineTotal $invoiceLineTotal = null;
 
-    /**
-     * @var ShipmentTotalWeight
-     */
-    private $shipmentTotalWeight;
+    private ?ShipmentTotalWeight $shipmentTotalWeight = null;
 
-    /**
-     * @var string
-     */
-    private $numOfPiecesInShipment;
+    private string $numOfPiecesInShipment;
 
-    /**
-     * @var DeliveryTimeInformation
-     */
-    private $deliveryTimeInformation;
-    /**
-     * @var bool
-     */
-    private $taxInformationIndicator;
+    private ?DeliveryTimeInformation $deliveryTimeInformation = null;
 
-    /**
-     * @var string
-     */
-    private $locale;
+    private bool $taxInformationIndicator;
 
-    public function __construct()
-    {
+    private string $locale;
+
+    public function __construct(
+        bool $serviceInitialized = true,
+        bool $shipmentServiceOptionsInitialized = true,
+        bool $taxInformationIndicator = true,
+        bool $deliveryTimeInformation = true,
+        bool $shipmentTotalWeight = true,
+        bool $rateInformation = false
+    ) {
         $this->setShipper(new Shipper());
         $this->setShipTo(new ShipTo());
-        $this->setShipmentServiceOptions(new ShipmentServiceOptions());
-        $this->setService(new Service());
+
+        if ($serviceInitialized) {
+            $this->setService(new Service());
+        }
+
+        if ($shipmentServiceOptionsInitialized) {
+            $this->setShipmentServiceOptions(new ShipmentServiceOptions());
+        }
+        if ($rateInformation) {
+            $this->showNegotiatedRates();
+        }
+
         $this->rateInformation = null;
-        $this->taxInformationIndicator = false;
+
+        if ($taxInformationIndicator) {
+            $this->setTaxInformationIndicator(true);
+        }
+
+        if ($deliveryTimeInformation) {
+            $this->setDeliveryTimeInformation(new DeliveryTimeInformation());
+        }
+        if ($shipmentTotalWeight) {
+            $this->setShipmentTotalWeight(new ShipmentTotalWeight());
+        }
     }
 
     /**
      * @return ShipmentIndicationType
      */
-    public function getShipmentIndicationType()
+    public function getShipmentIndicationType(): ?ShipmentIndicationType
     {
         return $this->shipmentIndicationType;
     }
@@ -149,7 +104,7 @@ class Shipment
     /**
      * @param ShipmentIndicationType $shipmentIndicationType
      */
-    public function setShipmentIndicationType(ShipmentIndicationType $shipmentIndicationType)
+    public function setShipmentIndicationType(ShipmentIndicationType $shipmentIndicationType): void
     {
         $this->shipmentIndicationType = $shipmentIndicationType;
     }
@@ -157,15 +112,13 @@ class Shipment
     /**
      * @return AlternateDeliveryAddress
      */
-    public function getAlternateDeliveryAddress()
+    public function getAlternateDeliveryAddress(): ?AlternateDeliveryAddress
     {
         return $this->alternateDeliveryAddress;
     }
 
-    /**
-     * @param AlternateDeliveryAddress $alternateDeliveryAddress
-     */
-    public function setAlternateDeliveryAddress(AlternateDeliveryAddress $alternateDeliveryAddress)
+
+    public function setAlternateDeliveryAddress(AlternateDeliveryAddress $alternateDeliveryAddress): void
     {
         $this->alternateDeliveryAddress = $alternateDeliveryAddress;
     }
@@ -173,21 +126,16 @@ class Shipment
     /**
      * @param Package $package
      *
-     * @return Shipment
+     * @return void
      */
-    public function addPackage(Package $package)
+    public function addPackage(Package $package): void
     {
         $packages = $this->getPackages();
         $packages[] = $package;
         $this->setPackages($packages);
-
-        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -195,43 +143,35 @@ class Shipment
     /**
      * @param string $description
      *
-     * @return Shipment
+     * @return void
      */
-    public function setDescription($description)
+    public function setDescription(string $description): void
     {
         $this->description = $description;
-
-        return $this;
     }
 
     /**
      * @param ReferenceNumber $referenceNumber
      *
-     * @return Shipment
+     * @return void
      */
-    public function setReferenceNumber(ReferenceNumber $referenceNumber)
+    public function setReferenceNumber(ReferenceNumber $referenceNumber): void
     {
         $this->referenceNumber = $referenceNumber;
-
-        return $this;
     }
 
     /**
      * @param ReferenceNumber $referenceNumber
-     *
-     * @return Shipment
      */
-    public function setReferenceNumber2(ReferenceNumber $referenceNumber)
+    public function setReferenceNumber2(ReferenceNumber $referenceNumber): void
     {
         $this->referenceNumber2 = $referenceNumber;
-
-        return $this;
     }
 
     /**
      * @return ReferenceNumber
      */
-    public function getReferenceNumber()
+    public function getReferenceNumber(): ?ReferenceNumber
     {
         return $this->referenceNumber;
     }
@@ -239,7 +179,7 @@ class Shipment
     /**
      * @return ReferenceNumber
      */
-    public function getReferenceNumber2()
+    public function getReferenceNumber2(): ?ReferenceNumber
     {
         return $this->referenceNumber2;
     }
@@ -247,7 +187,7 @@ class Shipment
     /**
      * @return bool
      */
-    public function getDocumentsOnly()
+    public function getDocumentsOnly(): bool
     {
         return $this->documentsOnly;
     }
@@ -255,19 +195,17 @@ class Shipment
     /**
      * @param bool $documentsOnly
      *
-     * @return Shipment
+     * @return void
      */
-    public function setDocumentsOnly($documentsOnly)
+    public function setDocumentsOnly(bool $documentsOnly): void
     {
         $this->documentsOnly = $documentsOnly;
-
-        return $this;
     }
 
     /**
      * @return Package[]
      */
-    public function getPackages()
+    public function getPackages(): array
     {
         return $this->packages;
     }
@@ -275,19 +213,14 @@ class Shipment
     /**
      * @param Package[] $packages
      *
-     * @return Shipment
+     * @return void
      */
-    public function setPackages(array $packages)
+    public function setPackages(array $packages): void
     {
         $this->packages = $packages;
-
-        return $this;
     }
 
-    /**
-     * @return Service
-     */
-    public function getService()
+    public function getService(): ?Service
     {
         return $this->service;
     }
@@ -295,19 +228,17 @@ class Shipment
     /**
      * @param Service $service
      *
-     * @return Shipment
+     * @return void
      */
-    public function setService(Service $service)
+    public function setService(Service $service): void
     {
         $this->service = $service;
-
-        return $this;
     }
 
     /**
      * @return ReturnService
      */
-    public function getReturnService()
+    public function getReturnService(): ?ReturnService
     {
         return $this->returnService;
     }
@@ -315,19 +246,17 @@ class Shipment
     /**
      * @param ReturnService $returnService
      *
-     * @return Shipment
+     * @return void
      */
-    public function setReturnService(ReturnService $returnService)
+    public function setReturnService(ReturnService $returnService): void
     {
         $this->returnService = $returnService;
-
-        return $this;
     }
 
     /**
      * @return ShipFrom
      */
-    public function getShipFrom()
+    public function getShipFrom(): ?ShipFrom
     {
         return $this->shipFrom;
     }
@@ -335,19 +264,17 @@ class Shipment
     /**
      * @param ShipFrom $shipFrom
      *
-     * @return Shipment
+     * @return void
      */
-    public function setShipFrom(ShipFrom $shipFrom)
+    public function setShipFrom(ShipFrom $shipFrom): void
     {
         $this->shipFrom = $shipFrom;
-
-        return $this;
     }
 
     /**
      * @return ShipTo
      */
-    public function getShipTo()
+    public function getShipTo(): ?ShipTo
     {
         return $this->shipTo;
     }
@@ -355,19 +282,17 @@ class Shipment
     /**
      * @param ShipTo $shipTo
      *
-     * @return Shipment
+     * @return void
      */
-    public function setShipTo(ShipTo $shipTo)
+    public function setShipTo(ShipTo $shipTo): void
     {
         $this->shipTo = $shipTo;
-
-        return $this;
     }
 
     /**
      * @return SoldTo
      */
-    public function getSoldTo()
+    public function getSoldTo(): ?SoldTo
     {
         return $this->soldTo;
     }
@@ -375,39 +300,30 @@ class Shipment
     /**
      * @param SoldTo $soldTo
      *
-     * @return Shipment
+     * @return void
      */
-    public function setSoldTo(SoldTo $soldTo)
+    public function setSoldTo(SoldTo $soldTo): void
     {
         $this->soldTo = $soldTo;
-
-        return $this;
     }
 
     /**
      * @return ShipmentServiceOptions
      */
-    public function getShipmentServiceOptions()
+    public function getShipmentServiceOptions(): ?ShipmentServiceOptions
     {
         return $this->shipmentServiceOptions;
     }
 
-    /**
-     * @param ShipmentServiceOptions $shipmentServiceOptions
-     *
-     * @return Shipment
-     */
-    public function setShipmentServiceOptions(ShipmentServiceOptions $shipmentServiceOptions)
+    public function setShipmentServiceOptions(ShipmentServiceOptions $shipmentServiceOptions): void
     {
         $this->shipmentServiceOptions = $shipmentServiceOptions;
-
-        return $this;
     }
 
     /**
      * @return Shipper
      */
-    public function getShipper()
+    public function getShipper(): ?Shipper
     {
         return $this->shipper;
     }
@@ -415,19 +331,17 @@ class Shipment
     /**
      * @param Shipper $shipper
      *
-     * @return Shipment
+     * @return void
      */
-    public function setShipper(Shipper $shipper)
+    public function setShipper(Shipper $shipper): void
     {
         $this->shipper = $shipper;
-
-        return $this;
     }
 
     /**
      * @return PaymentInformation
      */
-    public function getPaymentInformation()
+    public function getPaymentInformation(): ?PaymentInformation
     {
         return $this->paymentInformation;
     }
@@ -435,19 +349,17 @@ class Shipment
     /**
      * @param PaymentInformation $paymentInformation
      *
-     * @return Shipment
+     * @return void
      */
-    public function setPaymentInformation(PaymentInformation $paymentInformation)
+    public function setPaymentInformation(PaymentInformation $paymentInformation): void
     {
         $this->paymentInformation = $paymentInformation;
-
-        return $this;
     }
 
     /**
      * @return ItemizedPaymentInformation
      */
-    public function getItemizedPaymentInformation()
+    public function getItemizedPaymentInformation(): ?ItemizedPaymentInformation
     {
         return $this->itemizedPaymentInformation;
     }
@@ -455,22 +367,20 @@ class Shipment
     /**
      * @param ItemizedPaymentInformation $itemizedPaymentInformation
      *
-     * @return Shipment
+     * @return void
      */
-    public function setItemizedPaymentInformation(ItemizedPaymentInformation $itemizedPaymentInformation)
+    public function setItemizedPaymentInformation(ItemizedPaymentInformation $itemizedPaymentInformation): void
     {
         $this->itemizedPaymentInformation = $itemizedPaymentInformation;
-
-        return $this;
     }
 
     /**
      * If called, returned prices will include negotiated rates (discounts will be applied).
      */
-    public function showNegotiatedRates()
+    public function showNegotiatedRates(): void
     {
         $this->rateInformation = new RateInformation();
-        $this->rateInformation->setNegotiatedRatesIndicator(true);
+        $this->rateInformation->setNegotiatedRatesIndicator('true');
     }
 
     /**
@@ -484,57 +394,51 @@ class Shipment
     /**
      * @param RateInformation $rateInformation
      *
-     * @return Shipment
+     * @return void
      */
-    public function setRateInformation(RateInformation $rateInformation)
+    public function setRateInformation(RateInformation $rateInformation): void
     {
         $this->rateInformation = $rateInformation;
-
-        return $this;
     }
 
     /**
      * @return boolean
      */
-    public function getGoodsNotInFreeCirculationIndicator()
+    public function getGoodsNotInFreeCirculationIndicator(): bool
     {
         return $this->goodsNotInFreeCirculationIndicator;
     }
 
     /**
      * @param boolean $goodsNotInFreeCirculationIndicator
-     * @return Shipment
+     * @return void
      */
-    public function setGoodsNotInFreeCirculationIndicator($goodsNotInFreeCirculationIndicator)
+    public function setGoodsNotInFreeCirculationIndicator(bool $goodsNotInFreeCirculationIndicator): void
     {
         $this->goodsNotInFreeCirculationIndicator = $goodsNotInFreeCirculationIndicator;
-
-        return $this;
     }
 
     /**
      * @return string
      */
-    public function getMovementReferenceNumber()
+    public function getMovementReferenceNumber(): string
     {
         return $this->movementReferenceNumber;
     }
 
     /**
      * @param string $movementReferenceNumber
-     * @return Shipment
+     * @return void
      */
-    public function setMovementReferenceNumber($movementReferenceNumber)
+    public function setMovementReferenceNumber(string $movementReferenceNumber): void
     {
         $this->movementReferenceNumber = $movementReferenceNumber;
-
-        return $this;
     }
 
     /**
      * @return InvoiceLineTotal
      */
-    public function getInvoiceLineTotal()
+    public function getInvoiceLineTotal(): ?InvoiceLineTotal
     {
         return $this->invoiceLineTotal;
     }
@@ -560,35 +464,27 @@ class Shipment
 
     /**
      * @param string $numOfPiecesInShipment
-     * @return Shipment
+     * @return void
      */
-    public function setNumOfPiecesInShipment($numOfPiecesInShipment)
+    public function setNumOfPiecesInShipment(string $numOfPiecesInShipment): void
     {
         $this->numOfPiecesInShipment = $numOfPiecesInShipment;
-
-        return $this;
     }
 
     /**
      * @return DeliveryTimeInformation
      */
-    public function getDeliveryTimeInformation()
+    public function getDeliveryTimeInformation(): ?DeliveryTimeInformation
     {
         return $this->deliveryTimeInformation;
     }
 
-    /**
-     * @param DeliveryTimeInformation $deliveryTimeInformation
-     */
-    public function setDeliveryTimeInformation(DeliveryTimeInformation $deliveryTimeInformation)
+    public function setDeliveryTimeInformation(DeliveryTimeInformation $deliveryTimeInformation): void
     {
         $this->deliveryTimeInformation = $deliveryTimeInformation;
     }
 
-    /**
-     * @return ShipmentTotalWeight
-     */
-    public function getShipmentTotalWeight()
+    public function getShipmentTotalWeight(): ?ShipmentTotalWeight
     {
         return $this->shipmentTotalWeight;
     }
@@ -596,7 +492,7 @@ class Shipment
     /**
      * @param ShipmentTotalWeight $shipmentTotalWeight
      */
-    public function setShipmentTotalWeight(ShipmentTotalWeight $shipmentTotalWeight)
+    public function setShipmentTotalWeight(ShipmentTotalWeight $shipmentTotalWeight): void
     {
         $this->shipmentTotalWeight = $shipmentTotalWeight;
     }
@@ -609,17 +505,15 @@ class Shipment
     /**
      * If called, returned prices will include Tax Information
      */
-    public function setTaxInformationIndicator(bool $taxInformationIndicator): self
+    public function setTaxInformationIndicator(bool $taxInformationIndicator): void
     {
         $this->taxInformationIndicator = $taxInformationIndicator;
-        
-        return $this;
     }
 
     /**
      * @return string
      */
-    public function getLocale()
+    public function getLocale(): string
     {
         return $this->locale;
     }
@@ -627,12 +521,10 @@ class Shipment
     /**
      * @param string $locale
      *
-     * @return Shipment
+     * @return void
      */
-    public function setLocale($locale)
+    public function setLocale(string $locale): void
     {
         $this->locale = $locale;
-
-        return $this;
     }
 }

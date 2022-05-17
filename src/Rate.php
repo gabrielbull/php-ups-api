@@ -38,11 +38,10 @@ class Rate extends Ups
     /**
      * @param $rateRequest
      *
-     * @throws Exception
-     *
      * @return RateResponse
+     * @throws Exception
      */
-    public function shopRates($rateRequest)
+    public function shopRates($rateRequest, string $requestOption = 'Rate'): RateResponse
     {
         if ($rateRequest instanceof Shipment) {
             $shipment = $rateRequest;
@@ -50,19 +49,36 @@ class Rate extends Ups
             $rateRequest->setShipment($shipment);
         }
 
-        $this->requestOption = 'Shop';
+        $this->setRequestOption($requestOption);
 
         return $this->sendRequest($rateRequest);
     }
 
     /**
+     * Rate is the only valid request option for UPS Ground Freight Pricing requests. But it all depends on the purpose of use.
+     *
+     * @param string $requestOption The request option: Rate, Shop, or Ratetimeintransit
+     * Rate =           The server rates (The default Request option is Rate if a Request Option is not provided).
+     * Shop =           The server validates the shipment, and returns rates for all UPS products from the ShipFrom to the ShipTo addresses.
+     * Ratetimeintransit = The server rates with transit time information
+     * Shoptimeintransit = The server validates the shipment, and returns rates and transit times for all UPS products from the ShipFrom to the ShipTo addresses.
+     *
+     * @return void
+     */
+    public function setRequestOption(string $requestOption): void
+    {
+        $this->requestOption = $requestOption;
+    }
+
+
+    /**
      * @param $rateRequest
      *
+     * @return RateResponse
      * @throws Exception
      *
-     * @return RateResponse
      */
-    public function getRate($rateRequest)
+    public function getRate($rateRequest, string $requestOption = 'Rate'): RateResponse
     {
         if ($rateRequest instanceof Shipment) {
             $shipment = $rateRequest;
@@ -70,10 +86,11 @@ class Rate extends Ups
             $rateRequest->setShipment($shipment);
         }
 
-        $this->requestOption = 'Rate';
+        $this->setRequestOption($requestOption);
 
         return $this->sendRequest($rateRequest);
     }
+
 
     /**
      * Creates and sends a request for the given shipment. This handles checking for
@@ -81,11 +98,11 @@ class Rate extends Ups
      *
      * @param RateRequest $rateRequest
      *
+     * @return RateResponse
      * @throws Exception
      *
-     * @return RateResponse
      */
-    protected function sendRequest(RateRequest $rateRequest)
+    protected function sendRequest(RateRequest $rateRequest): RateResponse
     {
         $request = $this->createRequest($rateRequest);
 
@@ -99,7 +116,7 @@ class Rate extends Ups
         if ($response->Response->ResponseStatusCode == 0) {
             throw new Exception(
                 "Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}",
-                (int)$response->Response->Error->ErrorCode
+                (int) $response->Response->Error->ErrorCode
             );
         } else {
             return $this->formatResponse($response);
@@ -112,8 +129,9 @@ class Rate extends Ups
      * @param RateRequest $rateRequest The request details. Refer to the UPS documentation for available structure
      *
      * @return string
+     * @throws \DOMException
      */
-    private function createRequest(RateRequest $rateRequest)
+    private function createRequest(RateRequest $rateRequest): string
     {
         $shipment = $rateRequest->getShipment();
 
