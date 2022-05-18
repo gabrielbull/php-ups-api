@@ -58,10 +58,7 @@ abstract class Ups implements LoggerAwareInterface
      */
     public $response;
 
-    /**
-     * @var LoggerInterface
-     */
-    protected $logger;
+    protected ?LoggerInterface $logger;
 
     /**
      * Constructor.
@@ -96,18 +93,12 @@ abstract class Ups implements LoggerAwareInterface
         $this->context = $context;
     }
 
-    /**
-     * @param LoggerInterface $logger
-     */
     public function setLogger(LoggerInterface $logger): void
     {
         $this->logger = $logger;
     }
 
-    /**
-     * @return LoggerInterface
-     */
-    public function getLogger()
+    public function getLogger(): ?LoggerInterface
     {
         return $this->logger;
     }
