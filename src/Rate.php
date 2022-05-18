@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Ups;
 
@@ -8,6 +8,7 @@ use Exception;
 use SimpleXMLElement;
 use Ups\Entity\RateRequest;
 use Ups\Entity\RateResponse;
+use Ups\Entity\RatingServiceSelectionRequest\Request as RequestOption;
 use Ups\Entity\Shipment;
 
 /**
@@ -30,18 +31,12 @@ class Rate extends Ups
      */
     public $response;
 
-    /**
-     * @var string
-     */
-    protected $requestOption;
+    protected string $requestOption;
 
     /**
-     * @param $rateRequest
-     *
-     * @return RateResponse
      * @throws Exception
      */
-    public function shopRates($rateRequest, string $requestOption = 'Rate'): RateResponse
+    public function shopRates($rateRequest, string $requestOption = RequestOption::REQUEST_OPTION_RATE): RateResponse
     {
         if ($rateRequest instanceof Shipment) {
             $shipment = $rateRequest;
@@ -72,13 +67,9 @@ class Rate extends Ups
 
 
     /**
-     * @param $rateRequest
-     *
-     * @return RateResponse
      * @throws Exception
-     *
      */
-    public function getRate($rateRequest, string $requestOption = 'Rate'): RateResponse
+    public function getRate($rateRequest, string $requestOption = RequestOption::REQUEST_OPTION_RATE): RateResponse
     {
         if ($rateRequest instanceof Shipment) {
             $shipment = $rateRequest;
@@ -110,11 +101,11 @@ class Rate extends Ups
         $response = $this->response->getResponse();
 
         if (null === $response) {
-            throw new Exception('Failure (0): Unknown error', 0);
+            throw new \RuntimeException('Failure (0): Unknown error', 0);
         }
 
         if ($response->Response->ResponseStatusCode == 0) {
-            throw new Exception(
+            throw new \RuntimeException(
                 "Failure ({$response->Response->Error->ErrorSeverity}): {$response->Response->Error->ErrorDescription}",
                 (int) $response->Response->Error->ErrorCode
             );
