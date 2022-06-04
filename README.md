@@ -795,7 +795,7 @@ if ($return) {
 $shipment->setReferenceNumber($referenceNumber);
 
 // Set payment information
-$shipment->setPaymentInformation(new \Ups\Entity\PaymentInformation('prepaid', (object)array('AccountNumber' => 'XX')));
+$shipment->setPaymentInformation(new \Ups\Entity\PaymentInformation('prepaid', (object) ['AccountNumber' => $shipper->getShipperNumber()]));
 
 // Ask for negotiated rates (optional)
 $rateInformation = new \Ups\Entity\RateInformation;
