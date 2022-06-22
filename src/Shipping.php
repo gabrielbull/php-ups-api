@@ -104,6 +104,7 @@ class Shipping extends Ups
      * @param ShipmentRequestReceiptSpecification|null $receiptSpec
      *
      * @return string
+     * @throws \DOMException
      */
     private function createConfirmRequest(
         $validation,
@@ -730,6 +731,7 @@ class Shipping extends Ups
     /**
      * @param ShipmentRequestReceiptSpecification $receiptSpec
      * @return DOMNode
+     * @throws \DOMException
      */
     private function compileReceiptSpecificationNode(ShipmentRequestReceiptSpecification $receiptSpec)
     {
@@ -751,6 +753,7 @@ class Shipping extends Ups
     /**
      * @param ShipmentRequestLabelSpecification $labelSpec
      * @return DOMNode
+     * @throws \DOMException
      */
     private function compileLabelSpecificationNode(ShipmentRequestLabelSpecification $labelSpec)
     {

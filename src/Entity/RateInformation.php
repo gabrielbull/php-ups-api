@@ -8,11 +8,9 @@ use Ups\NodeInterface;
 
 class RateInformation implements NodeInterface
 {
-    /** @var bool */
-    private $negotiatedRatesIndicator;
+    private string $negotiatedRatesIndicator;
 
-    /** @var bool */
-    private $rateChartIndicator;
+    private string $rateChartIndicator;
 
     /**
      * @param null|object $attributes
@@ -36,8 +34,9 @@ class RateInformation implements NodeInterface
      * @param null|DOMDocument $document
      *
      * @return DOMElement
+     * @throws \DOMException
      */
-    public function toNode(DOMDocument $document = null)
+    public function toNode(DOMDocument $document = null): DOMElement
     {
         if (null === $document) {
             $document = new DOMDocument();
@@ -46,53 +45,49 @@ class RateInformation implements NodeInterface
         $node = $document->createElement('RateInformation');
 
         if ($this->getNegotiatedRatesIndicator()) {
-            $node->appendChild($document->createElement('NegotiatedRatesIndicator'));
+            $node->appendChild($document->createElement('NegotiatedRatesIndicator', $this->getNegotiatedRatesIndicator()));
         }
 
         if ($this->getRateChartIndicator()) {
-            $node->appendChild($document->createElement('RateChartIndicator'));
+            $node->appendChild($document->createElement('RateChartIndicator', $this->getRateChartIndicator()));
         }
 
         return $node;
     }
 
     /**
-     * @return bool
+     * @return string
      */
-    public function getNegotiatedRatesIndicator()
+    public function getNegotiatedRatesIndicator(): string
     {
         return $this->negotiatedRatesIndicator;
     }
 
     /**
-     * @param $value
+     * @param string $value
      *
-     * @return $this
+     * @return void
      */
-    public function setNegotiatedRatesIndicator($value)
+    public function setNegotiatedRatesIndicator(string $value): void
     {
         $this->negotiatedRatesIndicator = $value;
-
-        return $this;
     }
 
     /**
-     * @return bool
+     * @return string
      */
-    public function getRateChartIndicator()
+    public function getRateChartIndicator(): string
     {
         return $this->rateChartIndicator;
     }
 
     /**
-     * @param $value
+     * @param string $value
      *
-     * @return $this
+     * @return void
      */
-    public function setRateChartIndicator($value)
+    public function setRateChartIndicator(string $value): void
     {
         $this->rateChartIndicator = $value;
-
-        return $this;
     }
 }
