@@ -770,8 +770,8 @@ class Shipping extends Ups
             $labelSpecNode->appendChild($xml->createElement('HTTPUserAgent', $labelSpec->getHttpUserAgent()));
         }
 
-        //Label print method is required only for GIF label formats
-        if ($labelSpec->getPrintMethodCode() == ShipmentRequestLabelSpecification::IMG_FORMAT_CODE_GIF) {
+        //Label print method is required only for GIF|PNG label formats
+        if (!empty($labelSpec->getImageFormatCode())) {
             $imageFormatNode = $labelSpecNode->appendChild($xml->createElement('LabelImageFormat'));
             $imageFormatNode->appendChild($xml->createElement('Code', $labelSpec->getImageFormatCode()));
 
@@ -779,7 +779,7 @@ class Shipping extends Ups
                 $imageFormatNode->appendChild($xml->createElement('Description', $labelSpec->getImageFormatDescription()));
             }
         } else {
-            //Label stock size is required only for non-GIF label formats
+            //Label stock size is required only for non-IMAGE label formats
             $stockSizeNode = $labelSpecNode->appendChild($xml->createElement('LabelStockSize'));
 
             $stockSizeNode->appendChild($xml->createElement('Height', $labelSpec->getStockSizeHeight()));

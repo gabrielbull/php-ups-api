@@ -59,9 +59,9 @@ class ShipmentRequestLabelSpecification
     private $stockSizeWidth;
 
     /**
-     * Required if $printMethodCode = GIF.
+     * Required if $printMethodCode = GIF|PNG.
      * Code type that the label image is to be generated in.
-     * Valid values are GIF or PNG. Only GIF is supported on the remote server.
+     * Valid values are GIF or PNG.
      *
      * @var string
      */
@@ -127,10 +127,9 @@ class ShipmentRequestLabelSpecification
     const PRINT_METHOD_CODE_SPL = 'SPL';
     const PRINT_METHOD_CODE_ZPL = 'ZPL';
     const PRINT_METHOD_CODE_STARPL = 'STARPL';
-    const PRINT_METHOD_CODE_GIF = 'GIF';
 
-    const IMG_FORMAT_CODE_GIF = 'GIF';
-    const IMG_FORMAT_CODE_PNG = 'PNG';
+    const PRINT_METHOD_CODE_GIF = 'GIF';
+    const PRINT_METHOD_CODE_PNG = 'PNG';
 
     const INSTRUCTION_CODE_EXCHANGE_LIKE_ITEM_ONLY = '01';
     const INSTRUCTION_CODE_EXCHANGE_DRIVER_INSTRUCTIONS_INSIDE = '02';
@@ -163,6 +162,10 @@ class ShipmentRequestLabelSpecification
     public function __construct($printMethodCode)
     {
         $this->printMethodCode = $printMethodCode;
+
+        if (in_array($printMethodCode, [ShipmentRequestLabelSpecification::PRINT_METHOD_CODE_GIF, ShipmentRequestLabelSpecification::PRINT_METHOD_CODE_PNG])) {
+            $this->imageFormatCode = $printMethodCode;
+        }
     }
 
     /**
@@ -255,17 +258,6 @@ class ShipmentRequestLabelSpecification
     public function getImageFormatCode()
     {
         return $this->imageFormatCode;
-    }
-
-    /**
-     * @param string $imageFormatCode
-     * @return ShipmentRequestLabelSpecification
-     */
-    public function setImageFormatCode($imageFormatCode)
-    {
-        $this->imageFormatCode = $imageFormatCode;
-
-        return $this;
     }
 
     /**
