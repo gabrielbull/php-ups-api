@@ -22,6 +22,11 @@ class PaymentInformation
     private $billThirdParty;
 
     /**
+     * @var BillThirdParty
+     */
+    private $billThirdPartyConsignee;
+
+    /**
      * @var FreightCollect
      */
     private $freightCollect;
