@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Ups;
 
@@ -329,10 +329,10 @@ class Shipping extends Ups
                     $node = $paymentNode->appendChild($xml->createElement('ShipmentCharge'));
                     $node->appendChild($xml->createElement('Type', \Ups\Entity\ShipmentCharge::SHIPMENT_CHARGE_TYPE_DUTIES));
                 }
-                
+
                 if ($rec->getBillShipper()) {
                     $node = $node->appendChild($xml->createElement('BillShipper'));
-    
+
                     $billShipper = $rec->getBillShipper();
                     if (isset($billShipper) && $rec->getBillShipper()->getAccountNumber()) {
                         $node->appendChild($xml->createElement('AccountNumber', $rec->getBillShipper()->getAccountNumber()));
@@ -341,11 +341,11 @@ class Shipping extends Ups
                         $ccNode->appendChild($xml->createElement('Type', $rec->getBillShipper()->getCreditCard()->getType()));
                         $ccNode->appendChild($xml->createElement('Number', $rec->getBillShipper()->getCreditCard()->getNumber()));
                         $ccNode->appendChild($xml->createElement('ExpirationDate', $rec->getBillShipper()->getCreditCard()->getExpirationDate()));
-    
+
                         if ($rec->getBillShipper()->getCreditCard()->getSecurityCode()) {
                             $ccNode->appendChild($xml->createElement('SecurityCode', $rec->getBillShipper()->getCreditCard()->getSecurityCode()));
                         }
-    
+
                         if ($rec->getBillShipper()->getCreditCard()->getAddress()) {
                             $ccNode->appendChild($rec->getBillShipper()->getCreditCard()->getAddress()->toNode($xml));
                         }
@@ -356,15 +356,15 @@ class Shipping extends Ups
                     $node = $node->appendChild($xml->createElement('BillThirdParty'));
                     $btpNode = $node->appendChild($xml->createElement('BillThirdPartyShipper'));
                     $btpNode->appendChild($xml->createElement('AccountNumber', $rec->getBillThirdParty()->getAccountNumber()));
-    
+
                     $tpNode = $btpNode->appendChild($xml->createElement('ThirdParty'));
                     $addressNode = $tpNode->appendChild($xml->createElement('Address'));
-    
+
                     $thirdPartAddress = $rec->getBillThirdParty()->getThirdPartyAddress();
                     if (isset($thirdPartAddress) && $rec->getBillThirdParty()->getThirdPartyAddress()->getPostalCode()) {
                         $addressNode->appendChild($xml->createElement('PostalCode', $rec->getBillThirdParty()->getThirdPartyAddress()->getPostalCode()));
                     }
-    
+
                     $addressNode->appendChild($xml->createElement('CountryCode', $rec->getBillThirdParty()->getThirdPartyAddress()->getCountryCode()));
                 } elseif ($rec->getConsigneeBilled()) {
                     $node->appendChild($xml->createElement('ConsigneeBilled'));
@@ -416,7 +416,7 @@ class Shipping extends Ups
         if (isset($referenceNumber)) {
             $shipmentNode->appendChild($referenceNumber->toNode($xml));
         }
-        
+
         $referenceNumber2 = $shipment->getReferenceNumber2();
         if (isset($referenceNumber2)) {
             $shipmentNode->appendChild($referenceNumber2->toNode($xml));
@@ -797,7 +797,7 @@ class Shipping extends Ups
                 $instructionNode->appendChild($xml->createElement('Description', $labelSpec->getInstructionDescription()));
             }
         }
-        
+
         if ($labelSpec->getCharacterSet()) {
             $labelSpecNode->appendChild($xml->createElement('CharacterSet', $labelSpec->getCharacterSet()));
         }

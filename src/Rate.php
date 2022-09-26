@@ -20,34 +20,16 @@ class Rate extends Ups
 {
     const ENDPOINT = '/Rate';
 
-    /**
-     * @var RequestInterface
-     */
-    private $request;
+    private ?RequestInterface $client = null;
 
     /**
      * @var ResponseInterface
      *                        todo: make private
      */
     public $response;
+    public ?RequestOption $request = null;
 
     protected string $requestOption;
-
-    /**
-     * @throws Exception
-     */
-    public function shopRates($rateRequest, string $requestOption = RequestOption::REQUEST_OPTION_RATE): RateResponse
-    {
-        if ($rateRequest instanceof Shipment) {
-            $shipment = $rateRequest;
-            $rateRequest = new RateRequest();
-            $rateRequest->setShipment($shipment);
-        }
-
-        $this->setRequestOption($requestOption);
-
-        return $this->sendRequest($rateRequest);
-    }
 
     /**
      * Rate is the only valid request option for UPS Ground Freight Pricing requests. But it all depends on the purpose of use.
@@ -69,7 +51,7 @@ class Rate extends Ups
     /**
      * @throws Exception
      */
-    public function getRate($rateRequest, string $requestOption = RequestOption::REQUEST_OPTION_RATE): RateResponse
+    public function getRate($rateRequest): RateResponse
     {
         if ($rateRequest instanceof Shipment) {
             $shipment = $rateRequest;
@@ -77,7 +59,6 @@ class Rate extends Ups
             $rateRequest->setShipment($shipment);
         }
 
-        $this->setRequestOption($requestOption);
 
         return $this->sendRequest($rateRequest);
     }
@@ -97,7 +78,7 @@ class Rate extends Ups
     {
         $request = $this->createRequest($rateRequest);
 
-        $this->response = $this->getRequest()->request($this->createAccess(), $request, $this->compileEndpointUrl(self::ENDPOINT));
+        $this->response = $this->getClient()->request($this->createAccess(), $request, $this->compileEndpointUrl(self::ENDPOINT));
         $response = $this->response->getResponse();
 
         if (null === $response) {
@@ -133,15 +114,8 @@ class Rate extends Ups
         $trackRequest = $xml->appendChild($xml->createElement('RatingServiceSelectionRequest'));
         $trackRequest->setAttribute('xml:lang', 'en-US');
 
-        $request = $trackRequest->appendChild($xml->createElement('Request'));
-
-        $node = $xml->importNode($this->createTransactionNode(), true);
-        $request->appendChild($node);
-
-        $request->appendChild($xml->createElement('RequestAction', 'Rate'));
-        $request->appendChild($xml->createElement('RequestOption', $this->requestOption));
-
         $trackRequest->appendChild($rateRequest->getPickupType()->toNode($document));
+        $trackRequest->appendChild($rateRequest->getRequest()->toNode($document));
 
         $customerClassification = $rateRequest->getCustomerClassification();
         if (isset($customerClassification)) {
@@ -234,28 +208,18 @@ class Rate extends Ups
         return new RateResponse($result);
     }
 
-    /**
-     * @return RequestInterface
-     */
-    public function getRequest()
+    public function getClient(): RequestInterface
     {
-        if (null === $this->request) {
-            $this->request = new Request($this->logger);
+        if (null === $this->client) {
+            $this->client = new Request($this->logger);
         }
 
-        return $this->request;
+        return $this->client;
     }
 
-    /**
-     * @param RequestInterface $request
-     *
-     * @return $this
-     */
-    public function setRequest(RequestInterface $request)
+    public function setClient(RequestInterface $client): void
     {
-        $this->request = $request;
-
-        return $this;
+        $this->client = $client;
     }
 
     /**
@@ -266,15 +230,8 @@ class Rate extends Ups
         return $this->response;
     }
 
-    /**
-     * @param ResponseInterface $response
-     *
-     * @return $this
-     */
-    public function setResponse(ResponseInterface $response)
+    public function setResponse(ResponseInterface $response): void
     {
         $this->response = $response;
-
-        return $this;
     }
 }

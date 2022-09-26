@@ -1,94 +1,60 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Ups\Entity;
 
+use Ups\Entity\RatingServiceSelectionRequest\Request;
+
 class RateRequest
 {
-    /** @deprecated */
-    public $PickupType;
-    /** @deprecated */
-    public $Shipment;
-
-    /**
-     * @var PickupType
-     */
-    private $pickupType;
-
-    /**
-     * @var CustomerClassification
-     */
-    private $customerClassification;
-
-    /**
-     * @var Shipment
-     */
-    private $shipment;
+    private PickupType $pickupType;
+    private ?CustomerClassification $customerClassification = null;
+    private Shipment $shipment;
+    private Request $request;
 
     public function __construct()
     {
+        $this->setRequest(new Request());
         $this->setShipment(new Shipment());
         $this->setPickupType(new PickupType());
     }
 
-    /**
-     * @return PickupType
-     */
-    public function getPickupType()
+    public function getPickupType(): PickupType
     {
         return $this->pickupType;
     }
 
-    /**
-     * @param PickupType $pickupType
-     *
-     * @return $this
-     */
-    public function setPickupType(PickupType $pickupType)
+    public function setPickupType(PickupType $pickupType): void
     {
-        $this->PickupType = $pickupType;
         $this->pickupType = $pickupType;
-
-        return $this;
     }
 
-    /**
-     * @return CustomerClassification
-     */
-    public function getCustomerClassification()
+    public function getCustomerClassification(): ?CustomerClassification
     {
         return $this->customerClassification;
     }
 
-    /**
-     * @param CustomerClassification $customerClassification
-     *
-     * @return $this
-     */
-    public function setCustomerClassification(CustomerClassification $customerClassification)
+    public function setCustomerClassification(CustomerClassification $customerClassification): void
     {
         $this->customerClassification = $customerClassification;
-
-        return $this;
     }
 
-    /**
-     * @return Shipment
-     */
-    public function getShipment()
+    public function getShipment(): Shipment
     {
         return $this->shipment;
     }
 
-    /**
-     * @param Shipment $shipment
-     *
-     * @return $this
-     */
-    public function setShipment(Shipment $shipment)
+    public function setShipment(Shipment $shipment): void
     {
-        $this->Shipment = $shipment;
         $this->shipment = $shipment;
+    }
 
-        return $this;
+    public function getRequest(): Request
+    {
+        return $this->request;
+    }
+
+    public function setRequest(Request $request): void
+    {
+        $this->request = $request;
     }
 }

@@ -2,6 +2,8 @@
 
 namespace Ups\Entity;
 
+use Ups\Entity\RatingServiceSelectionRequest\Shipment\RateInformation;
+
 class Shipment
 {
     private ?PaymentInformation $paymentInformation = null;
@@ -93,9 +95,6 @@ class Shipment
         }
     }
 
-    /**
-     * @return ShipmentIndicationType
-     */
     public function getShipmentIndicationType(): ?ShipmentIndicationType
     {
         return $this->shipmentIndicationType;
