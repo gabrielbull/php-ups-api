@@ -14,6 +14,11 @@ class LabelDelivery implements NodeInterface
     public $LabelLinkIndicator;
 
     /**
+     * @var boolean
+     */
+    public $LabelLinksIndicator;
+
+    /**
      * @var string
      */
     public $EMailAddress;
@@ -55,9 +60,15 @@ class LabelDelivery implements NodeInterface
     {
         $this->LabelLinkIndicator = null;
 
+        $this->LabelLinksIndicator = null;
+
         if (null !== $response) {
             if (isset($response->LabelLinkIndicator)) {
                 $this->LabelLinkIndicator = true;
+            }
+
+            if (isset($response->LabelLinksIndicator)) {
+                $this->LabelLinksIndicator = true;
             }
 
             if (isset($response->EMailAddress)) {
@@ -106,6 +117,10 @@ class LabelDelivery implements NodeInterface
             $node->appendChild($document->createElement('LabelLinkIndicator', $this->LabelLinkIndicator));
         }
 
+        if (isset($this->LabelLinksIndicator)) {
+            $node->appendChild($document->createElement('LabelLinksIndicator', $this->LabelLinksIndicator));
+        }
+
         if (isset($this->EMailAddress)) {
             $node->appendChild($document->createElement('EMailAddress', $this->EMailAddress));
         }
@@ -151,6 +166,24 @@ class LabelDelivery implements NodeInterface
     public function setLabelLinkIndicator($labelLinkIndicator)
     {
         $this->LabelLinkIndicator = $labelLinkIndicator;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLabelLinksIndicator()
+    {
+        return $this->LabelLinksIndicator;
+    }
+
+    /**
+     * @return $this
+     */
+    public function setLabelLinksIndicator($labelLinksIndicator)
+    {
+        $this->LabelLinksIndicator = $labelLinksIndicator;
 
         return $this;
     }
