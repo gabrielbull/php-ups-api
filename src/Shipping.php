@@ -184,6 +184,10 @@ class Shipping extends Ups
             $shipToNode->appendChild($xml->createElement('AttentionName', $shipment->getShipTo()->getAttentionName()));
         }
 
+        if ($shipment->getShipTo()->getTaxIdentificationNumber()) {
+            $shipToNode->appendChild($xml->createElement('TaxIdentificationNumber', $shipment->getShipTo()->getTaxIdentificationNumber()));
+        }
+
         if ($shipment->getShipTo()->getPhoneNumber()) {
             $shipToNode->appendChild($xml->createElement('PhoneNumber', $shipment->getShipTo()->getPhoneNumber()));
         }
@@ -239,6 +243,10 @@ class Shipping extends Ups
 
             if ($shipment->getSoldTo()->getAttentionName()) {
                 $soldToNode->appendChild($xml->createElement('AttentionName', $shipment->getSoldTo()->getAttentionName()));
+            }
+
+            if ($shipment->getSoldTo()->getTaxIdentificationNumber()) {
+                $soldToNode->appendChild($xml->createElement('TaxIdentificationNumber', $shipment->getSoldTo()->getTaxIdentificationNumber()));
             }
 
             if ($shipment->getSoldTo()->getPhoneNumber()) {
