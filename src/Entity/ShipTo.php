@@ -189,6 +189,10 @@ class ShipTo implements NodeInterface
      */
     public function setAttentionName($attentionName)
     {
+        if (strlen($attentionName) > 35) {
+            $attentionName = substr($attentionName, 0, 35);
+        }
+
         $this->AttentionName = $attentionName;
         $this->attentionName = $attentionName;
 
@@ -231,6 +235,10 @@ class ShipTo implements NodeInterface
      */
     public function setCompanyName($companyName)
     {
+        if (strlen($companyName) > 35) {
+            $companyName = substr($companyName, 0, 35);
+        }
+
         $this->CompanyName = $companyName;
         $this->companyName = $companyName;
 
