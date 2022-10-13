@@ -152,6 +152,11 @@ class InternationalForms implements NodeInterface
     private $eeiFilingOption;
 
     /**
+     * @var UserCreatedForm
+     */
+    private $userCreatedForm;
+
+    /**
      * @return array
      */
     public static function getFormTypes()
@@ -296,6 +301,26 @@ class InternationalForms implements NodeInterface
     }
 
     /**
+     * @param $userCreatedForm UserCreatedForm
+     *
+     * @return $this
+     */
+    public function setUserCreatedForm(UserCreatedForm $userCreatedForm)
+    {
+        $this->userCreatedForm = $userCreatedForm;
+
+        return $this;
+    }
+
+    /**
+     * @return UserCreatedForm
+     */
+    public function getUserCreatedForm()
+    {
+        return $this->userCreatedForm;
+    }
+
+    /**
      * @param null|DOMDocument $document
      *
      * @return DOMElement
@@ -347,6 +372,10 @@ class InternationalForms implements NodeInterface
         if ($this->getEEIFilingOption() !== null) {
             $node->appendChild($this->getEEIFilingOption()->toNode($document));
         }
+        if ($this->getUserCreatedForm() !== null) {
+            $node->appendChild($this->getUserCreatedForm()->toNode($document));
+        }
+
         foreach ($this->products as $product) {
             $node->appendChild($product->toNode($document));
         }
