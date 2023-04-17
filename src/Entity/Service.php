@@ -157,7 +157,7 @@ class Service implements NodeInterface
 
         $node = $document->createElement('Service');
         $node->appendChild($document->createElement('Code', $this->getCode()));
-        $node->appendChild($document->createElement('Description', $this->getDescription()));
+        $node->appendChild($document->createElement('Description', $this->getDescription() ?? ''));
 
         return $node;
     }

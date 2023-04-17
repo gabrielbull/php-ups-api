@@ -65,10 +65,16 @@ class PackagingType implements NodeInterface
      */
     private $code = self::PT_UNKNOWN;
 
+	/** @deprecated */
+    private $Code = self::PT_UNKNOWN;
+
     /**
      * @var string
      */
     private $description;
+
+	/** @deprecated */
+	private $Description;
 
     public function __construct($attributes = null)
     {
@@ -93,7 +99,7 @@ class PackagingType implements NodeInterface
 
         $node = $document->createElement('PackagingType');
         $node->appendChild($document->createElement('Code', $this->getCode()));
-        $node->appendChild($document->createElement('Description', $this->getDescription()));
+        $node->appendChild($document->createElement('Description', $this->getDescription() ?? ''));
 
         return $node;
     }
