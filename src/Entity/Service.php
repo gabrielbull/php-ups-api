@@ -17,6 +17,9 @@ class Service implements NodeInterface
     const S_3DAYSELECT = '12';
     const S_GROUND = '03';
     const S_SURE_POST = '93';
+    const S_PRIORITY_MAIL_INNOVATIONS = 'M5';
+    const S_ECONOMY_MAIL_INNOVATIONS = 'M6';
+    const S_MAIL_INNOVATIONS_RETURNS = 'M7';
 
     // Valid international values
     const S_STANDARD = '11';
@@ -105,7 +108,9 @@ class Service implements NodeInterface
         '70' => 'UPS Access Point Economy',
         '74' => 'UPS Express 12:00',
         '93' => 'UPS Sure Post',
-        '96' => 'UPS Worldwide Express Freight',
+        'M5' => 'UPS Priority Mail Innovations',
+        'M6' => 'UPS Economy Mail Innovations',
+        'M7' => 'UPS MaiI Innovations (MI) Returns',
     ];
 
     /** @deprecated */
