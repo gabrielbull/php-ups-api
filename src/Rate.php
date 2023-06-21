@@ -167,6 +167,10 @@ class Rate extends Ups
             $shipmentNode->appendChild($alternateDeliveryAddress->toNode($document));
         }
 
+        if ($shipment->getNumOfPiecesInShipment()) {
+            $shipmentNode->appendChild($xml->createElement('NumOfPieces', $shipment->getNumOfPiecesInShipment()));
+        }
+
         $rateInformation = $shipment->getRateInformation();
         if ($rateInformation !== null) {
             $shipmentNode->appendChild($rateInformation->toNode($document));
