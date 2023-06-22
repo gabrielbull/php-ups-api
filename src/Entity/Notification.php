@@ -48,7 +48,7 @@ class Notification implements NodeInterface
 
         $node = $document->createElement('Notification');
 
-        $node->appendChild($document->createElement('NotificationCode', $this->getNotificationCode()));
+        $node->appendChild($document->createElement('NotificationCode', ($this->getNotificationCode()) !== null ? htmlspecialchars($this->getNotificationCode()) : null));
         if ($this->getEmailMessage() !== null) {
             $node->appendChild($this->emailMessage->toNode($document));
         }

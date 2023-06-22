@@ -47,7 +47,7 @@ class ShipmentTotalWeight implements NodeInterface
             $node->appendChild($this->getUnitOfMeasurement()->toNode($document));
         }
 
-        $node->appendChild($document->createElement('Weight', $this->getWeight()));
+        $node->appendChild($document->createElement('Weight', ($this->getWeight()) !== null ? htmlspecialchars($this->getWeight()) : null));
         
         return $node;
     }

@@ -113,16 +113,16 @@ class SimpleAddressValidation extends Ups
             $addressNode = $avRequest->appendChild($xml->createElement('Address'));
 
             if ($this->address->getStateProvinceCode()) {
-                $addressNode->appendChild($xml->createElement('StateProvinceCode', $this->address->getStateProvinceCode()));
+                $addressNode->appendChild($xml->createElement('StateProvinceCode', ($this->address->getStateProvinceCode()) !== null ? htmlspecialchars($this->address->getStateProvinceCode()) : null));
             }
             if ($this->address->getCity()) {
-                $addressNode->appendChild($xml->createElement('City', $this->address->getCity()));
+                $addressNode->appendChild($xml->createElement('City', ($this->address->getCity()) !== null ? htmlspecialchars($this->address->getCity()) : null));
             }
             if ($this->address->getCountryCode()) {
-                $addressNode->appendChild($xml->createElement('CountryCode', $this->address->getCountryCode()));
+                $addressNode->appendChild($xml->createElement('CountryCode', ($this->address->getCountryCode()) !== null ? htmlspecialchars($this->address->getCountryCode()) : null));
             }
             if ($this->address->getPostalCode()) {
-                $addressNode->appendChild($xml->createElement('PostalCode', $this->address->getPostalCode()));
+                $addressNode->appendChild($xml->createElement('PostalCode', ($this->address->getPostalCode()) !== null ? htmlspecialchars($this->address->getPostalCode()) : null));
             }
         }
 

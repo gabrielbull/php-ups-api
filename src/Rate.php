@@ -130,7 +130,7 @@ class Rate extends Ups
         $request->appendChild($node);
 
         $request->appendChild($xml->createElement('RequestAction', 'Rate'));
-        $request->appendChild($xml->createElement('RequestOption', $this->requestOption));
+        $request->appendChild($xml->createElement('RequestOption', ($this->requestOption) !== null ? htmlspecialchars($this->requestOption) : null));
 
         $trackRequest->appendChild($rateRequest->getPickupType()->toNode($document));
 

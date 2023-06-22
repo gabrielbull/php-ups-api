@@ -137,8 +137,8 @@ abstract class Ups implements LoggerAwareInterface
         $accessRequest = $xml->appendChild($xml->createElement('AccessRequest'));
         $accessRequest->setAttribute('xml:lang', 'en-US');
 
-        $accessRequest->appendChild($xml->createElement('AccessLicenseNumber', $this->accessKey));
-        $accessRequest->appendChild($xml->createElement('UserId', $this->userId));
+        $accessRequest->appendChild($xml->createElement('AccessLicenseNumber', ($this->accessKey) !== null ? htmlspecialchars($this->accessKey) : null));
+        $accessRequest->appendChild($xml->createElement('UserId', ($this->userId) !== null ? htmlspecialchars($this->userId) : null));
         
         $p = $accessRequest->appendChild($xml->createElement('Password'));
         $p->appendChild($xml->createTextNode($this->password));
@@ -159,7 +159,7 @@ abstract class Ups implements LoggerAwareInterface
         $trxRef = $xml->appendChild($xml->createElement('TransactionReference'));
 
         if (null !== $this->context) {
-            $trxRef->appendChild($xml->createElement('CustomerContext', $this->context));
+            $trxRef->appendChild($xml->createElement('CustomerContext', ($this->context) !== null ? htmlspecialchars($this->context) : null));
         }
 
         return $trxRef->cloneNode(true);

@@ -18,8 +18,8 @@ class GeoCode implements NodeInterface
 
         $node = $document->createElement('Geocode');
 
-        $node->appendChild($document->createElement('Latitude', $this->getLatitude()));
-        $node->appendChild($document->createElement('Longitude', $this->getLongitude()));
+        $node->appendChild($document->createElement('Latitude', ($this->getLatitude()) !== null ? htmlspecialchars($this->getLatitude()) : null));
+        $node->appendChild($document->createElement('Longitude', ($this->getLongitude()) !== null ? htmlspecialchars($this->getLongitude()) : null));
 
         return $node;
     }

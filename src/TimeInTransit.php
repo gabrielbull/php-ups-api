@@ -119,7 +119,7 @@ class TimeInTransit extends Ups
 
         $packages = $timeInTransitRequest->getTotalPackagesInShipment();
         if (isset($packages)) {
-            $trackRequest->appendChild($xml->createElement('TotalPackagesInShipment', $packages));
+            $trackRequest->appendChild($xml->createElement('TotalPackagesInShipment', ($packages) !== null ? htmlspecialchars($packages) : null));
         }
 
         $invoiceLineTotal = $timeInTransitRequest->getInvoiceLineTotal();
@@ -129,7 +129,7 @@ class TimeInTransit extends Ups
 
         $pickupDate = $timeInTransitRequest->getPickupDate();
         if ($pickupDate) {
-            $trackRequest->appendChild($xml->createElement('PickupDate', $pickupDate->format('Ymd')));
+            $trackRequest->appendChild($xml->createElement('PickupDate', ($pickupDate->format('Ymd')) !== null ? htmlspecialchars($pickupDate->format('Ymd')) : null));
         }
 
         $indicator = $timeInTransitRequest->getDocumentsOnlyIndicator();

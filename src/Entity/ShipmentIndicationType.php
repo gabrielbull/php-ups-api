@@ -37,10 +37,10 @@ class ShipmentIndicationType implements NodeInterface
 
         $node = $document->createElement('ShipmentIndicationType');
 
-        $node->appendChild($document->createElement('Code', $this->getCode()));
+        $node->appendChild($document->createElement('Code', ($this->getCode()) !== null ? htmlspecialchars($this->getCode()) : null));
 
         if ($this->getDescription()) {
-            $node->appendChild($document->createElement('Description', $this->getDescription()));
+            $node->appendChild($document->createElement('Description', ($this->getDescription()) !== null ? htmlspecialchars($this->getDescription()) : null));
         }
 
         return $node;

@@ -35,10 +35,10 @@ class CODAmount implements NodeInterface
         }
         $node = $document->createElement('CODAmount');
         if ($this->CurrencyCode) {
-            $node->appendChild($document->createElement('CurrencyCode', $this->CurrencyCode));
+            $node->appendChild($document->createElement('CurrencyCode', ($this->CurrencyCode) !== null ? htmlspecialchars($this->CurrencyCode) : null));
         }
         if ($this->MonetaryValue) {
-            $node->appendChild($document->createElement('MonetaryValue', $this->MonetaryValue));
+            $node->appendChild($document->createElement('MonetaryValue', ($this->MonetaryValue) !== null ? htmlspecialchars($this->MonetaryValue) : null));
         }
         return $node;
     }

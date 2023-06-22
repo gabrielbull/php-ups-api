@@ -105,7 +105,7 @@ class Utilities
     public static function appendChild(stdClass $object, $propertyName, DOMNode $node)
     {
         if (isset($object->{$propertyName})) {
-            $node->appendChild($node->ownerDocument->createElement($propertyName, $object->{$propertyName}));
+            $node->appendChild($node->ownerDocument->createElement($propertyName, ($object->{$propertyName}) !== null ? htmlspecialchars($object->{$propertyName}) : null));
         }
     }
 }

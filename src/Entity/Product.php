@@ -82,20 +82,20 @@ class Product implements NodeInterface
         for ($i = 1; $i <= 3; $i++) {
             $desc = $this->{'getDescription'.$i}();
             if ($desc !== null) {
-                $node->appendChild($document->createElement('Description', $desc));
+                $node->appendChild($document->createElement('Description', ($desc) !== null ? htmlspecialchars($desc) : null));
             }
         }
         if ($this->getUnit() !== null) {
             $node->appendChild($this->getUnit()->toNode($document));
         }
         if ($this->getCommodityCode() !== null) {
-            $node->appendChild($document->createElement('CommodityCode', $this->getCommodityCode()));
+            $node->appendChild($document->createElement('CommodityCode', ($this->getCommodityCode()) !== null ? htmlspecialchars($this->getCommodityCode()) : null));
         }
         if ($this->getPartNumber() !== null) {
-            $node->appendChild($document->createElement('PartNumber', $this->getPartNumber()));
+            $node->appendChild($document->createElement('PartNumber', ($this->getPartNumber()) !== null ? htmlspecialchars($this->getPartNumber()) : null));
         }
         if ($this->getOriginCountryCode() !== null) {
-            $node->appendChild($document->createElement('OriginCountryCode', $this->getOriginCountryCode()));
+            $node->appendChild($document->createElement('OriginCountryCode', ($this->getOriginCountryCode()) !== null ? htmlspecialchars($this->getOriginCountryCode()) : null));
         }
 
         return $node;

@@ -309,31 +309,31 @@ class InternationalForms implements NodeInterface
         $node = $document->createElement('InternationalForms');
 
         foreach ($this->getTypes() as $type) {
-            $node->appendChild($document->createElement('FormType', $type));
+            $node->appendChild($document->createElement('FormType', ($type) !== null ? htmlspecialchars($type) : null));
         }
         if ($this->getInvoiceNumber() !== null) {
-            $node->appendChild($document->createElement('InvoiceNumber', $this->getInvoiceNumber()));
+            $node->appendChild($document->createElement('InvoiceNumber', ($this->getInvoiceNumber()) !== null ? htmlspecialchars($this->getInvoiceNumber()) : null));
         }
         if ($this->getInvoiceDate() !== null) {
-            $node->appendChild($document->createElement('InvoiceDate', $this->getInvoiceDate()->format('Ymd')));
+            $node->appendChild($document->createElement('InvoiceDate', ($this->getInvoiceDate()->format('Ymd')) !== null ? htmlspecialchars($this->getInvoiceDate()->format('Ymd')) : null));
         }
         if ($this->getPurchaseOrderNumber() !== null) {
-            $node->appendChild($document->createElement('PurchaseOrderNumber', $this->getPurchaseOrderNumber()));
+            $node->appendChild($document->createElement('PurchaseOrderNumber', ($this->getPurchaseOrderNumber()) !== null ? htmlspecialchars($this->getPurchaseOrderNumber()) : null));
         }
         if ($this->getTermsOfShipment() !== null) {
-            $node->appendChild($document->createElement('TermsOfShipment', $this->getTermsOfShipment()));
+            $node->appendChild($document->createElement('TermsOfShipment', ($this->getTermsOfShipment()) !== null ? htmlspecialchars($this->getTermsOfShipment()) : null));
         }
         if ($this->getReasonForExport() !== null) {
-            $node->appendChild($document->createElement('ReasonForExport', $this->getReasonForExport()));
+            $node->appendChild($document->createElement('ReasonForExport', ($this->getReasonForExport()) !== null ? htmlspecialchars($this->getReasonForExport()) : null));
         }
         if ($this->getComments() !== null) {
-            $node->appendChild($document->createElement('Comments', $this->getComments()));
+            $node->appendChild($document->createElement('Comments', ($this->getComments()) !== null ? htmlspecialchars($this->getComments()) : null));
         }
         if ($this->getDeclarationStatement() !== null) {
-            $node->appendChild($document->createElement('DeclarationStatement', $this->getDeclarationStatement()));
+            $node->appendChild($document->createElement('DeclarationStatement', ($this->getDeclarationStatement()) !== null ? htmlspecialchars($this->getDeclarationStatement()) : null));
         }
         if ($this->getCurrencyCode() !== null) {
-            $node->appendChild($document->createElement('CurrencyCode', $this->getCurrencyCode()));
+            $node->appendChild($document->createElement('CurrencyCode', ($this->getCurrencyCode()) !== null ? htmlspecialchars($this->getCurrencyCode()) : null));
         }
         if ($this->getDiscount() !== null) {
             $node->appendChild($this->getDiscount()->toNode($document));

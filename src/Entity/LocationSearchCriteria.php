@@ -53,7 +53,7 @@ class LocationSearchCriteria implements NodeInterface
         }
 
         if ($this->getMaximumListSize()) {
-            $node->appendChild($document->createElement('MaximumListSize', $this->getMaximumListSize()));
+            $node->appendChild($document->createElement('MaximumListSize', ($this->getMaximumListSize()) !== null ? htmlspecialchars($this->getMaximumListSize()) : null));
         }
 
         return $node;

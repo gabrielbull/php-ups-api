@@ -86,37 +86,39 @@ class Shipment implements NodeInterface
         }
 
         // Then the required values
-        $node->appendChild($document->createElement('OriginCountryCode', $this->getOriginCountryCode()));
-        $node->appendChild($document->createElement('DestinationCountryCode', $this->getDestinationCountryCode()));
+        $node->appendChild($document->createElement('OriginCountryCode', ($this->getOriginCountryCode()) !== null ? htmlspecialchars($this->getOriginCountryCode()) : null));
+        $node->appendChild($document->createElement('DestinationCountryCode', ($this->getDestinationCountryCode()) !== null ? htmlspecialchars($this->getDestinationCountryCode()) : null));
 
         // Then the optional values
         if ($this->getOriginStateProvinceCode() !== null) {
             $node->appendChild(
                 $document->createElement(
                     'OriginStateProvinceCode',
-                    $this->getOriginStateProvinceCode()
-                )
+                    ($this->getOriginStateProvinceCode()
+                ) !== null ? htmlspecialchars($this->getOriginStateProvinceCode()
+                ) : null)
             );
         }
         if ($this->getDestinationStateProvinceCode() !== null) {
             $node->appendChild(
                 $document->createElement(
                     'DestinationStateProvinceCode',
-                    $this->getDestinationStateProvinceCode()
-                )
+                    ($this->getDestinationStateProvinceCode()
+                ) !== null ? htmlspecialchars($this->getDestinationStateProvinceCode()
+                ) : null)
             );
         }
         if ($this->getTransportationMode() !== null) {
-            $node->appendChild($document->createElement('TransportationMode', $this->getTransportationMode()));
+            $node->appendChild($document->createElement('TransportationMode', ($this->getTransportationMode()) !== null ? htmlspecialchars($this->getTransportationMode()) : null));
         }
         if ($this->getResultCurrencyCode() !== null) {
-            $node->appendChild($document->createElement('ResultCurrencyCode', $this->getResultCurrencyCode()));
+            $node->appendChild($document->createElement('ResultCurrencyCode', ($this->getResultCurrencyCode()) !== null ? htmlspecialchars($this->getResultCurrencyCode()) : null));
         }
         if ($this->getTariffCodeAlert() !== null) {
-            $node->appendChild($document->createElement('TariffCodeAlert', $this->getTariffCodeAlert()));
+            $node->appendChild($document->createElement('TariffCodeAlert', ($this->getTariffCodeAlert()) !== null ? htmlspecialchars($this->getTariffCodeAlert()) : null));
         }
         if ($this->getTransactionReferenceId() !== null) {
-            $node->appendChild($document->createElement('TransactionReferenceID', $this->getTransactionReferenceId()));
+            $node->appendChild($document->createElement('TransactionReferenceID', ($this->getTransactionReferenceId()) !== null ? htmlspecialchars($this->getTransactionReferenceId()) : null));
         }
 
         // Then products array

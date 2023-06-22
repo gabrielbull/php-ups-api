@@ -48,8 +48,8 @@ class Pickup implements NodeInterface
         }
 
         $node = $document->createElement('Pickup');
-        $node->appendChild($document->createElement('Date', $this->getDate()));
-        $node->appendChild($document->createElement('Time', $this->getTime()));
+        $node->appendChild($document->createElement('Date', ($this->getDate()) !== null ? htmlspecialchars($this->getDate()) : null));
+        $node->appendChild($document->createElement('Time', ($this->getTime()) !== null ? htmlspecialchars($this->getTime()) : null));
 
         return $node;
     }

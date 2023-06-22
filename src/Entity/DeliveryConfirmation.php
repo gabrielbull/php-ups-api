@@ -36,7 +36,7 @@ class DeliveryConfirmation implements NodeInterface
 
         $node = $document->createElement('DeliveryConfirmation');
 
-        $node->appendChild($document->createElement('DCISType', $this->getDcisType()));
+        $node->appendChild($document->createElement('DCISType', ($this->getDcisType()) !== null ? htmlspecialchars($this->getDcisType()) : null));
 
         return $node;
     }

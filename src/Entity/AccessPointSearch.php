@@ -43,15 +43,15 @@ class AccessPointSearch implements NodeInterface
         $node = $document->createElement('AccessPointSearch');
 
         if ($this->getAccessPointStatus()) {
-            $node->appendChild($document->createElement('AccessPointStatus', $this->getAccessPointStatus()));
+            $node->appendChild($document->createElement('AccessPointStatus', ($this->getAccessPointStatus()) !== null ? htmlspecialchars($this->getAccessPointStatus()) : null));
         }
 
         if ($this->getPublicAccessPointId()) {
-            $node->appendChild($document->createElement('PublicAccessPointID', $this->getPublicAccessPointId()));
+            $node->appendChild($document->createElement('PublicAccessPointID', ($this->getPublicAccessPointId()) !== null ? htmlspecialchars($this->getPublicAccessPointId()) : null));
         }
 
         if ($this->getAccountNumber()) {
-            $node->appendChild($document->createElement('AccountNumber', $this->getAccountNumber()));
+            $node->appendChild($document->createElement('AccountNumber', ($this->getAccountNumber()) !== null ? htmlspecialchars($this->getAccountNumber()) : null));
         }
 
         return $node;

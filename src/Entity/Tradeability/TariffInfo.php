@@ -50,17 +50,17 @@ class TariffInfo implements NodeInterface
         $node = $document->createElement('TariffInfo');
 
         // Required
-        $node->appendChild($document->createElement('TariffCode', $this->getTariffCode()));
+        $node->appendChild($document->createElement('TariffCode', ($this->getTariffCode()) !== null ? htmlspecialchars($this->getTariffCode()) : null));
 
         // Optional
         if ($this->getDetailId() !== null) {
-            $node->appendChild($document->createElement('DetailId', $this->getDetailId()));
+            $node->appendChild($document->createElement('DetailId', ($this->getDetailId()) !== null ? htmlspecialchars($this->getDetailId()) : null));
         }
         if ($this->getSecondaryTariffCode() !== null) {
-            $node->appendChild($document->createElement('SecondaryTariffCode', $this->getSecondaryTariffCode()));
+            $node->appendChild($document->createElement('SecondaryTariffCode', ($this->getSecondaryTariffCode()) !== null ? htmlspecialchars($this->getSecondaryTariffCode()) : null));
         }
         if ($this->getSecondaryDetailId() !== null) {
-            $node->appendChild($document->createElement('SecondaryDetailId', $this->getSecondaryDetailId()));
+            $node->appendChild($document->createElement('SecondaryDetailId', ($this->getSecondaryDetailId()) !== null ? htmlspecialchars($this->getSecondaryDetailId()) : null));
         }
 
         return $node;

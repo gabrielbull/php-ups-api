@@ -31,7 +31,7 @@ class Discount implements NodeInterface
         }
 
         $node = $document->createElement('Discount');
-        $node->appendChild($document->createElement('MonetaryValue', $this->getMonetaryValue()));
+        $node->appendChild($document->createElement('MonetaryValue', ($this->getMonetaryValue()) !== null ? htmlspecialchars($this->getMonetaryValue()) : null));
 
         return $node;
     }

@@ -32,7 +32,7 @@ class CustomerClassification implements NodeInterface
         }
 
         $node = $document->createElement('CustomerClassification');
-        $node->appendChild($document->createElement('Code', $this->getCode()));
+        $node->appendChild($document->createElement('Code', ($this->getCode()) !== null ? htmlspecialchars($this->getCode()) : null));
 
         return $node;
     }

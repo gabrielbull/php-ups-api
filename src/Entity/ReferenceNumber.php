@@ -131,8 +131,8 @@ class ReferenceNumber implements NodeInterface
         if ($this->getBarCodeIndicator()) {
             $node->appendChild($document->createElement('BarCodeIndicator'));
         }
-        $node->appendChild($document->createElement('Code', $this->getCode()));
-        $node->appendChild($document->createElement('Value', $this->getValue()));
+        $node->appendChild($document->createElement('Code', ($this->getCode()) !== null ? htmlspecialchars($this->getCode()) : null));
+        $node->appendChild($document->createElement('Value', ($this->getValue()) !== null ? htmlspecialchars($this->getValue()) : null));
 
         return $node;
     }

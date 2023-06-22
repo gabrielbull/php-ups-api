@@ -36,7 +36,7 @@ class Quantity implements NodeInterface
         $node = $document->createElement('Quantity');
 
         // Required
-        $node->appendChild($document->createElement('Value', $this->getValue()));
+        $node->appendChild($document->createElement('Value', ($this->getValue()) !== null ? htmlspecialchars($this->getValue()) : null));
 
         // Optional
         if ($this->getUnitOfMeasurement() instanceof UnitOfMeasurement) {

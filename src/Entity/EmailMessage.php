@@ -66,31 +66,31 @@ class EmailMessage implements NodeInterface
         $node = $document->createElement('EMailMessage');
 
         foreach ($this->getEmailAddresses() as $email) {
-            $node->appendChild($document->createElement('EMailAddress', $email));
+            $node->appendChild($document->createElement('EMailAddress', ($email) !== null ? htmlspecialchars($email) : null));
         }
 
         if ($this->getUndeliverableEmailAddress() !== null) {
-            $node->appendChild($document->createElement('UndeliverableEMailAddress', $this->getUndeliverableEmailAddress()));
+            $node->appendChild($document->createElement('UndeliverableEMailAddress', ($this->getUndeliverableEmailAddress()) !== null ? htmlspecialchars($this->getUndeliverableEmailAddress()) : null));
         }
 
         if ($this->getFromEmailAddress() !== null) {
-            $node->appendChild($document->createElement('FromEMailAddress', $this->getFromEmailAddress()));
+            $node->appendChild($document->createElement('FromEMailAddress', ($this->getFromEmailAddress()) !== null ? htmlspecialchars($this->getFromEmailAddress()) : null));
         }
 
         if ($this->getFromName() !== null) {
-            $node->appendChild($document->createElement('FromName', $this->getFromName()));
+            $node->appendChild($document->createElement('FromName', ($this->getFromName()) !== null ? htmlspecialchars($this->getFromName()) : null));
         }
 
         if ($this->getMemo() !== null) {
-            $node->appendChild($document->createElement('Memo', $this->getMemo()));
+            $node->appendChild($document->createElement('Memo', ($this->getMemo()) !== null ? htmlspecialchars($this->getMemo()) : null));
         }
 
         if ($this->getSubject() !== null) {
-            $node->appendChild($document->createElement('Subject', $this->getSubject()));
+            $node->appendChild($document->createElement('Subject', ($this->getSubject()) !== null ? htmlspecialchars($this->getSubject()) : null));
         }
 
         if ($this->getSubjectCode() !== null) {
-            $node->appendChild($document->createElement('SubjectCode', $this->getSubjectCode()));
+            $node->appendChild($document->createElement('SubjectCode', ($this->getSubjectCode()) !== null ? htmlspecialchars($this->getSubjectCode()) : null));
         }
 
         return $node;
