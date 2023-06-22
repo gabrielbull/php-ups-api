@@ -31,8 +31,8 @@ class Locale implements NodeInterface
 
         $node = $document->createElement('Locale');
 
-        $node->appendChild($document->createElement('Language', $this->getLanguage()));
-        $node->appendChild($document->createElement('Dialect', $this->getDialect()));
+        $node->appendChild($document->createElement('Language', ($this->getLanguage()) !== null ? htmlspecialchars($this->getLanguage()) : null));
+        $node->appendChild($document->createElement('Dialect', ($this->getDialect()) !== null ? htmlspecialchars($this->getDialect()) : null));
 
         return $node;
     }

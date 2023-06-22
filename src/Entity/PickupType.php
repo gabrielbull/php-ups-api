@@ -42,8 +42,8 @@ class PickupType implements NodeInterface
         }
 
         $node = $document->createElement('PickupType');
-        $node->appendChild($document->createElement('Code', $this->getCode()));
-        $node->appendChild($document->createElement('Description', $this->getDescription()));
+        $node->appendChild($document->createElement('Code', ($this->getCode()) !== null ? htmlspecialchars($this->getCode()) : null));
+        $node->appendChild($document->createElement('Description', ($this->getDescription()) !== null ? htmlspecialchars($this->getDescription()) : null));
 
         return $node;
     }

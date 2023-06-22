@@ -267,26 +267,26 @@ class Address implements NodeInterface
 
         $node = $document->createElement('Address');
         if ($this->getAddressLine1()) {
-            $node->appendChild($document->createElement('AddressLine1', $this->getAddressLine1()));
+            $node->appendChild($document->createElement('AddressLine1', ($this->getAddressLine1()) !== null ? htmlspecialchars($this->getAddressLine1()) : null));
         }
 
         if ($this->getAddressLine2()) {
-            $node->appendChild($document->createElement('AddressLine2', $this->getAddressLine2()));
+            $node->appendChild($document->createElement('AddressLine2', ($this->getAddressLine2()) !== null ? htmlspecialchars($this->getAddressLine2()) : null));
         }
         if ($this->getAddressLine3()) {
-            $node->appendChild($document->createElement('AddressLine3', $this->getAddressLine3()));
+            $node->appendChild($document->createElement('AddressLine3', ($this->getAddressLine3()) !== null ? htmlspecialchars($this->getAddressLine3()) : null));
         }
         if ($this->getCity()) {
-            $node->appendChild($document->createElement('City', $this->getCity()));
+            $node->appendChild($document->createElement('City', ($this->getCity()) !== null ? htmlspecialchars($this->getCity()) : null));
         }
         if ($this->getStateProvinceCode()) {
-            $node->appendChild($document->createElement('StateProvinceCode', $this->getStateProvinceCode()));
+            $node->appendChild($document->createElement('StateProvinceCode', ($this->getStateProvinceCode()) !== null ? htmlspecialchars($this->getStateProvinceCode()) : null));
         }
         if ($this->getPostalCode()) {
-            $node->appendChild($document->createElement('PostalCode', $this->getPostalCode()));
+            $node->appendChild($document->createElement('PostalCode', ($this->getPostalCode()) !== null ? htmlspecialchars($this->getPostalCode()) : null));
         }
         if ($this->getCountryCode()) {
-            $node->appendChild($document->createElement('CountryCode', $this->getCountryCode()));
+            $node->appendChild($document->createElement('CountryCode', ($this->getCountryCode()) !== null ? htmlspecialchars($this->getCountryCode()) : null));
         }
         if ($this->getResidentialAddressIndicator()) {
             $node->appendChild($document->createElement('ResidentialAddressIndicator'));

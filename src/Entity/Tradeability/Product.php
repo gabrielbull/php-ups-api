@@ -78,24 +78,25 @@ class Product implements NodeInterface
 
         // Optional
         if ($this->getProductName() !== null) {
-            $node->appendChild($document->createElement('ProductName', $this->getProductName()));
+            $node->appendChild($document->createElement('ProductName', ($this->getProductName()) !== null ? htmlspecialchars($this->getProductName()) : null));
         }
         if ($this->getProductDescription() !== null) {
-            $node->appendChild($document->createElement('ProductDescription', $this->getProductDescription()));
+            $node->appendChild($document->createElement('ProductDescription', ($this->getProductDescription()) !== null ? htmlspecialchars($this->getProductDescription()) : null));
         }
         if ($this->getProductCountryCodeOfOrigin() !== null) {
             $node->appendChild(
                 $document->createElement(
                     'ProductCountryCodeOfOrigin',
-                    $this->getProductCountryCodeOfOrigin()
-                )
+                    ($this->getProductCountryCodeOfOrigin()
+                ) !== null ? htmlspecialchars($this->getProductCountryCodeOfOrigin()
+                ) : null)
             );
         }
         if ($this->getWeight() instanceof Weight) {
             $node->appendChild($this->getWeight()->toNode($document));
         }
         if ($this->getTariffCodeAlert() !== null) {
-            $node->appendChild($document->createElement('TariffCodeAlert', $this->getTariffCodeAlert()));
+            $node->appendChild($document->createElement('TariffCodeAlert', ($this->getTariffCodeAlert()) !== null ? htmlspecialchars($this->getTariffCodeAlert()) : null));
         }
 
         return $node;

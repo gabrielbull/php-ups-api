@@ -166,45 +166,46 @@ class AddressValidation extends Ups
         $request->appendChild($xml->createElement('RequestAction', 'XAV'));
 
         if (null !== $this->requestOption) {
-            $request->appendChild($xml->createElement('RequestOption', $this->requestOption));
+            $request->appendChild($xml->createElement('RequestOption', ($this->requestOption) !== null ? htmlspecialchars($this->requestOption) : null));
         }
 
         if (null !== $this->maxSuggestion) {
-            $avRequest->appendChild($xml->createElement('MaximumListSize', $this->maxSuggestion));
+            $avRequest->appendChild($xml->createElement('MaximumListSize', ($this->maxSuggestion) !== null ? htmlspecialchars($this->maxSuggestion) : null));
         }
 
         if (null !== $this->address) {
             $addressNode = $avRequest->appendChild($xml->createElement('AddressKeyFormat'));
 
             if ($this->address->getAttentionName()) {
-                $addressNode->appendChild($xml->createElement('ConsigneeName', $this->address->getAttentionName()));
+                $addressNode->appendChild($xml->createElement('ConsigneeName', ($this->address->getAttentionName()) !== null ? htmlspecialchars($this->address->getAttentionName()) : null));
             }
             if ($this->address->getBuildingName()) {
-                $addressNode->appendChild($xml->createElement('BuildingName', $this->address->getBuildingName()));
+                $addressNode->appendChild($xml->createElement('BuildingName', ($this->address->getBuildingName()) !== null ? htmlspecialchars($this->address->getBuildingName()) : null));
             }
             if ($this->address->getAddressLine1()) {
-                $addressNode->appendChild($xml->createElement('AddressLine', $this->address->getAddressLine1()));
+                $addressNode->appendChild($xml->createElement('AddressLine', ($this->address->getAddressLine1()) !== null ? htmlspecialchars($this->address->getAddressLine1()) : null));
             }
             if ($this->address->getAddressLine2()) {
-                $addressNode->appendChild($xml->createElement('AddressLine', $this->address->getAddressLine2()));
+                $addressNode->appendChild($xml->createElement('AddressLine', ($this->address->getAddressLine2()) !== null ? htmlspecialchars($this->address->getAddressLine2()) : null));
             }
             if ($this->address->getAddressLine3()) {
-                $addressNode->appendChild($xml->createElement('AddressLine', $this->address->getAddressLine3()));
+                $addressNode->appendChild($xml->createElement('AddressLine', ($this->address->getAddressLine3()) !== null ? htmlspecialchars($this->address->getAddressLine3()) : null));
             }
             if ($this->address->getStateProvinceCode()) {
                 $addressNode->appendChild($xml->createElement(
                     'PoliticalDivision1',
-                    $this->address->getStateProvinceCode()
-                ));
+                    ($this->address->getStateProvinceCode()
+                ) !== null ? htmlspecialchars($this->address->getStateProvinceCode()
+                ) : null));
             }
             if ($this->address->getCity()) {
-                $addressNode->appendChild($xml->createElement('PoliticalDivision2', $this->address->getCity()));
+                $addressNode->appendChild($xml->createElement('PoliticalDivision2', ($this->address->getCity()) !== null ? htmlspecialchars($this->address->getCity()) : null));
             }
             if ($this->address->getCountryCode()) {
-                $addressNode->appendChild($xml->createElement('CountryCode', $this->address->getCountryCode()));
+                $addressNode->appendChild($xml->createElement('CountryCode', ($this->address->getCountryCode()) !== null ? htmlspecialchars($this->address->getCountryCode()) : null));
             }
             if ($this->address->getPostalCode()) {
-                $addressNode->appendChild($xml->createElement('PostcodePrimaryLow', $this->address->getPostalCode()));
+                $addressNode->appendChild($xml->createElement('PostcodePrimaryLow', ($this->address->getPostalCode()) !== null ? htmlspecialchars($this->address->getPostalCode()) : null));
             }
         }
 

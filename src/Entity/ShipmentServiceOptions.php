@@ -194,12 +194,12 @@ class ShipmentServiceOptions implements NodeInterface
             $labelDelivery = $this->getLabelDelivery();
             foreach ($labelDelivery as $key => $value) {
                 if ($key == 'LabelLinkIndicator') {
-                    $labelDeliveryNode->appendChild($document->createElement($key, $value));
+                    $labelDeliveryNode->appendChild($document->createElement($key, ($value) !== null ? htmlspecialchars($value) : null));
                 } elseif ($key == 'SubjectCode') {
                     $SubjectNode = $emailMessageNode->appendChild($document->createElement('Subject'));
-                    $SubjectNode->appendChild($document->createElement($key, $value));
+                    $SubjectNode->appendChild($document->createElement($key, ($value) !== null ? htmlspecialchars($value) : null));
                 } else {
-                    $emailMessageNode->appendChild($document->createElement($key, $value));
+                    $emailMessageNode->appendChild($document->createElement($key, ($value) !== null ? htmlspecialchars($value) : null));
                 }
             }
         }

@@ -57,11 +57,11 @@ class COD implements NodeInterface
         $node = $document->createElement('COD');
 
         if ($this->getCODCode()) {
-            $node->appendChild($document->createElement('CODCode', $this->getCODCode()));
+            $node->appendChild($document->createElement('CODCode', ($this->getCODCode()) !== null ? htmlspecialchars($this->getCODCode()) : null));
         }
 
         if ($this->getCODFundsCode()) {
-            $node->appendChild($document->createElement('CODFundsCode', $this->getCODFundsCode()));
+            $node->appendChild($document->createElement('CODFundsCode', ($this->getCODFundsCode()) !== null ? htmlspecialchars($this->getCODFundsCode()) : null));
         }
 
         if ($this->getCODAmount()) {

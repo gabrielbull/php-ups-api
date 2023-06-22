@@ -61,9 +61,9 @@ class Dimensions implements NodeInterface
         }
 
         $node = $document->createElement('Dimensions');
-        $node->appendChild($document->createElement('Length', $this->getLength()));
-        $node->appendChild($document->createElement('Height', $this->getHeight()));
-        $node->appendChild($document->createElement('Width', $this->getWidth()));
+        $node->appendChild($document->createElement('Length', ($this->getLength()) !== null ? htmlspecialchars($this->getLength()) : null));
+        $node->appendChild($document->createElement('Height', ($this->getHeight()) !== null ? htmlspecialchars($this->getHeight()) : null));
+        $node->appendChild($document->createElement('Width', ($this->getWidth()) !== null ? htmlspecialchars($this->getWidth()) : null));
         $node->appendChild($this->getUnitOfMeasurement()->toNode($document));
 
         return $node;

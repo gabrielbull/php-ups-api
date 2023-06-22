@@ -54,14 +54,14 @@ class VendorInfo implements NodeInterface
 
         $node = $document->createElement('VendorInfo');
         if ($this->getVendorCollectIDTypeCode()) {
-            $node->appendChild($document->createElement('VendorCollectIDTypeCode', $this->getVendorCollectIDTypeCode()));
+            $node->appendChild($document->createElement('VendorCollectIDTypeCode', ($this->getVendorCollectIDTypeCode()) !== null ? htmlspecialchars($this->getVendorCollectIDTypeCode()) : null));
         }
 
         if ($this->getVendorCollectIDNumber()) {
-            $node->appendChild($document->createElement('VendorCollectIDNumber', $this->getVendorCollectIDNumber()));
+            $node->appendChild($document->createElement('VendorCollectIDNumber', ($this->getVendorCollectIDNumber()) !== null ? htmlspecialchars($this->getVendorCollectIDNumber()) : null));
         }
         if ($this->getConsigneeType()) {
-            $node->appendChild($document->createElement('ConsigneeType', $this->getConsigneeType()));
+            $node->appendChild($document->createElement('ConsigneeType', ($this->getConsigneeType()) !== null ? htmlspecialchars($this->getConsigneeType()) : null));
         }
 
         return $node;

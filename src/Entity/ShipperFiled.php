@@ -70,22 +70,22 @@ class ShipperFiled implements NodeInterface
 
         $code = $this->getCode();
         if (isset($code)) {
-            $node->appendChild($document->createElement('Code', $code));
+            $node->appendChild($document->createElement('Code', ($code) !== null ? htmlspecialchars($code) : null));
         }
 
         $description = $this->getDescription();
         if (isset($description)) {
-            $node->appendChild($document->createElement('Description', $description));
+            $node->appendChild($document->createElement('Description', ($description) !== null ? htmlspecialchars($description) : null));
         }
 
         $preDepartureITNNumber = $this->getPreDepartureITNNumber();
         if (isset($code)) {
-            $node->appendChild($document->createElement('PreDepartureITNNumber', $preDepartureITNNumber));
+            $node->appendChild($document->createElement('PreDepartureITNNumber', ($preDepartureITNNumber) !== null ? htmlspecialchars($preDepartureITNNumber) : null));
         }
 
         $exemptionLegend = $this->getExemptionLegend();
         if (isset($exemptionLegend)) {
-            $node->appendChild($document->createElement('ExemptionLegend', $exemptionLegend));
+            $node->appendChild($document->createElement('ExemptionLegend', ($exemptionLegend) !== null ? htmlspecialchars($exemptionLegend) : null));
         }
 
         return $node;

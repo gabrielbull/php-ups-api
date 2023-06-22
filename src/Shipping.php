@@ -124,20 +124,20 @@ class Shipping extends Ups
         $request->appendChild($node);
 
         $request->appendChild($xml->createElement('RequestAction', 'ShipConfirm'));
-        $request->appendChild($xml->createElement('RequestOption', $validation ?: 'nonvalidate'));
+        $request->appendChild($xml->createElement('RequestOption', ($validation ?: 'nonvalidate') !== null ? htmlspecialchars($validation ?: 'nonvalidate') : null));
 
         // Page 47
         $shipmentNode = $container->appendChild($xml->createElement('Shipment'));
 
         if ($shipment->getDescription()) {
-            $shipmentNode->appendChild($xml->createElement('Description', $shipment->getDescription()));
+            $shipmentNode->appendChild($xml->createElement('Description', ($shipment->getDescription()) !== null ? htmlspecialchars($shipment->getDescription()) : null));
         }
 
         $returnService = $shipment->getReturnService();
         if (isset($returnService)) {
             $node = $shipmentNode->appendChild($xml->createElement('ReturnService'));
 
-            $node->appendChild($xml->createElement('Code', $returnService->getCode()));
+            $node->appendChild($xml->createElement('Code', ($returnService->getCode()) !== null ? htmlspecialchars($returnService->getCode()) : null));
         }
 
         if ($shipment->getDocumentsOnly()) {
@@ -146,54 +146,54 @@ class Shipping extends Ups
 
         $shipperNode = $shipmentNode->appendChild($xml->createElement('Shipper'));
 
-        $shipperNode->appendChild($xml->createElement('Name', $shipment->getShipper()->getName()));
+        $shipperNode->appendChild($xml->createElement('Name', ($shipment->getShipper()->getName()) !== null ? htmlspecialchars($shipment->getShipper()->getName()) : null));
 
         if ($shipment->getShipper()->getAttentionName()) {
-            $shipperNode->appendChild($xml->createElement('AttentionName', $shipment->getShipper()->getAttentionName()));
+            $shipperNode->appendChild($xml->createElement('AttentionName', ($shipment->getShipper()->getAttentionName()) !== null ? htmlspecialchars($shipment->getShipper()->getAttentionName()) : null));
         }
 
         if ($shipment->getShipper()->getCompanyName()) {
-            $shipperNode->appendChild($xml->createElement('CompanyDisplayableName', $shipment->getShipper()->getCompanyName()));
+            $shipperNode->appendChild($xml->createElement('CompanyDisplayableName', ($shipment->getShipper()->getCompanyName()) !== null ? htmlspecialchars($shipment->getShipper()->getCompanyName()) : null));
         }
 
-        $shipperNode->appendChild($xml->createElement('ShipperNumber', $shipment->getShipper()->getShipperNumber()));
+        $shipperNode->appendChild($xml->createElement('ShipperNumber', ($shipment->getShipper()->getShipperNumber()) !== null ? htmlspecialchars($shipment->getShipper()->getShipperNumber()) : null));
 
         if ($shipment->getShipper()->getTaxIdentificationNumber()) {
-            $shipperNode->appendChild($xml->createElement('TaxIdentificationNumber', $shipment->getShipper()->getTaxIdentificationNumber()));
+            $shipperNode->appendChild($xml->createElement('TaxIdentificationNumber', ($shipment->getShipper()->getTaxIdentificationNumber()) !== null ? htmlspecialchars($shipment->getShipper()->getTaxIdentificationNumber()) : null));
         }
 
         if ($shipment->getShipper()->getPhoneNumber()) {
-            $shipperNode->appendChild($xml->createElement('PhoneNumber', $shipment->getShipper()->getPhoneNumber()));
+            $shipperNode->appendChild($xml->createElement('PhoneNumber', ($shipment->getShipper()->getPhoneNumber()) !== null ? htmlspecialchars($shipment->getShipper()->getPhoneNumber()) : null));
         }
 
         if ($shipment->getShipper()->getFaxNumber()) {
-            $shipperNode->appendChild($xml->createElement('FaxNumber', $shipment->getShipper()->getFaxNumber()));
+            $shipperNode->appendChild($xml->createElement('FaxNumber', ($shipment->getShipper()->getFaxNumber()) !== null ? htmlspecialchars($shipment->getShipper()->getFaxNumber()) : null));
         }
 
         if ($shipment->getShipper()->getEMailAddress()) {
-            $shipperNode->appendChild($xml->createElement('EMailAddress', $shipment->getShipper()->getEMailAddress()));
+            $shipperNode->appendChild($xml->createElement('EMailAddress', ($shipment->getShipper()->getEMailAddress()) !== null ? htmlspecialchars($shipment->getShipper()->getEMailAddress()) : null));
         }
 
         $shipperNode->appendChild($shipment->getShipper()->getAddress()->toNode($xml));
 
         $shipToNode = $shipmentNode->appendChild($xml->createElement('ShipTo'));
 
-        $shipToNode->appendChild($xml->createElement('CompanyName', $shipment->getShipTo()->getCompanyName()));
+        $shipToNode->appendChild($xml->createElement('CompanyName', ($shipment->getShipTo()->getCompanyName()) !== null ? htmlspecialchars($shipment->getShipTo()->getCompanyName()) : null));
 
         if ($shipment->getShipTo()->getAttentionName()) {
-            $shipToNode->appendChild($xml->createElement('AttentionName', $shipment->getShipTo()->getAttentionName()));
+            $shipToNode->appendChild($xml->createElement('AttentionName', ($shipment->getShipTo()->getAttentionName()) !== null ? htmlspecialchars($shipment->getShipTo()->getAttentionName()) : null));
         }
 
         if ($shipment->getShipTo()->getPhoneNumber()) {
-            $shipToNode->appendChild($xml->createElement('PhoneNumber', $shipment->getShipTo()->getPhoneNumber()));
+            $shipToNode->appendChild($xml->createElement('PhoneNumber', ($shipment->getShipTo()->getPhoneNumber()) !== null ? htmlspecialchars($shipment->getShipTo()->getPhoneNumber()) : null));
         }
 
         if ($shipment->getShipTo()->getFaxNumber()) {
-            $shipToNode->appendChild($xml->createElement('FaxNumber', $shipment->getShipTo()->getFaxNumber()));
+            $shipToNode->appendChild($xml->createElement('FaxNumber', ($shipment->getShipTo()->getFaxNumber()) !== null ? htmlspecialchars($shipment->getShipTo()->getFaxNumber()) : null));
         }
 
         if ($shipment->getShipTo()->getEMailAddress()) {
-            $shipToNode->appendChild($xml->createElement('EMailAddress', $shipment->getShipTo()->getEMailAddress()));
+            $shipToNode->appendChild($xml->createElement('EMailAddress', ($shipment->getShipTo()->getEMailAddress()) !== null ? htmlspecialchars($shipment->getShipTo()->getEMailAddress()) : null));
         }
 
         $addressNode = $shipment->getShipTo()->getAddress()->toNode($xml);
@@ -207,18 +207,18 @@ class Shipping extends Ups
         if ($shipment->getShipFrom()) {
             $shipFromNode = $shipmentNode->appendChild($xml->createElement('ShipFrom'));
 
-            $shipFromNode->appendChild($xml->createElement('CompanyName', $shipment->getShipFrom()->getCompanyName()));
+            $shipFromNode->appendChild($xml->createElement('CompanyName', ($shipment->getShipFrom()->getCompanyName()) !== null ? htmlspecialchars($shipment->getShipFrom()->getCompanyName()) : null));
 
             if ($shipment->getShipFrom()->getAttentionName()) {
-                $shipFromNode->appendChild($xml->createElement('AttentionName', $shipment->getShipFrom()->getAttentionName()));
+                $shipFromNode->appendChild($xml->createElement('AttentionName', ($shipment->getShipFrom()->getAttentionName()) !== null ? htmlspecialchars($shipment->getShipFrom()->getAttentionName()) : null));
             }
 
             if ($shipment->getShipFrom()->getPhoneNumber()) {
-                $shipFromNode->appendChild($xml->createElement('PhoneNumber', $shipment->getShipFrom()->getPhoneNumber()));
+                $shipFromNode->appendChild($xml->createElement('PhoneNumber', ($shipment->getShipFrom()->getPhoneNumber()) !== null ? htmlspecialchars($shipment->getShipFrom()->getPhoneNumber()) : null));
             }
 
             if ($shipment->getShipFrom()->getFaxNumber()) {
-                $shipFromNode->appendChild($xml->createElement('FaxNumber', $shipment->getShipFrom()->getFaxNumber()));
+                $shipFromNode->appendChild($xml->createElement('FaxNumber', ($shipment->getShipFrom()->getFaxNumber()) !== null ? htmlspecialchars($shipment->getShipFrom()->getFaxNumber()) : null));
             }
 
             if (!empty($shipment->getShipFrom()->getVendorInfo())) {
@@ -232,21 +232,21 @@ class Shipping extends Ups
             $soldToNode = $shipmentNode->appendChild($xml->createElement('SoldTo'));
 
             if ($shipment->getSoldTo()->getOption()) {
-                $soldToNode->appendChild($xml->createElement('Option', $shipment->getSoldTo()->getOption()));
+                $soldToNode->appendChild($xml->createElement('Option', ($shipment->getSoldTo()->getOption()) !== null ? htmlspecialchars($shipment->getSoldTo()->getOption()) : null));
             }
 
-            $soldToNode->appendChild($xml->createElement('CompanyName', $shipment->getSoldTo()->getCompanyName()));
+            $soldToNode->appendChild($xml->createElement('CompanyName', ($shipment->getSoldTo()->getCompanyName()) !== null ? htmlspecialchars($shipment->getSoldTo()->getCompanyName()) : null));
 
             if ($shipment->getSoldTo()->getAttentionName()) {
-                $soldToNode->appendChild($xml->createElement('AttentionName', $shipment->getSoldTo()->getAttentionName()));
+                $soldToNode->appendChild($xml->createElement('AttentionName', ($shipment->getSoldTo()->getAttentionName()) !== null ? htmlspecialchars($shipment->getSoldTo()->getAttentionName()) : null));
             }
 
             if ($shipment->getSoldTo()->getPhoneNumber()) {
-                $soldToNode->appendChild($xml->createElement('PhoneNumber', $shipment->getSoldTo()->getPhoneNumber()));
+                $soldToNode->appendChild($xml->createElement('PhoneNumber', ($shipment->getSoldTo()->getPhoneNumber()) !== null ? htmlspecialchars($shipment->getSoldTo()->getPhoneNumber()) : null));
             }
 
             if ($shipment->getSoldTo()->getFaxNumber()) {
-                $soldToNode->appendChild($xml->createElement('FaxNumber', $shipment->getSoldTo()->getFaxNumber()));
+                $soldToNode->appendChild($xml->createElement('FaxNumber', ($shipment->getSoldTo()->getFaxNumber()) !== null ? htmlspecialchars($shipment->getSoldTo()->getFaxNumber()) : null));
             }
 
             if ($shipment->getSoldTo()->getAddress()) {
@@ -268,15 +268,15 @@ class Shipping extends Ups
 
                 $billShipper = $shipment->getPaymentInformation()->getPrepaid()->getBillShipper();
                 if (isset($billShipper) && $shipment->getPaymentInformation()->getPrepaid()->getBillShipper()->getAccountNumber()) {
-                    $node->appendChild($xml->createElement('AccountNumber', $shipment->getPaymentInformation()->getPrepaid()->getBillShipper()->getAccountNumber()));
+                    $node->appendChild($xml->createElement('AccountNumber', ($shipment->getPaymentInformation()->getPrepaid()->getBillShipper()->getAccountNumber()) !== null ? htmlspecialchars($shipment->getPaymentInformation()->getPrepaid()->getBillShipper()->getAccountNumber()) : null));
                 } elseif (isset($billShipper) && $shipment->getPaymentInformation()->getPrepaid()->getBillShipper()->getCreditCard()) {
                     $ccNode = $node->appendChild($xml->createElement('CreditCard'));
-                    $ccNode->appendChild($xml->createElement('Type', $shipment->getPaymentInformation()->getPrepaid()->getBillShipper()->getCreditCard()->getType()));
-                    $ccNode->appendChild($xml->createElement('Number', $shipment->getPaymentInformation()->getPrepaid()->getBillShipper()->getCreditCard()->getNumber()));
-                    $ccNode->appendChild($xml->createElement('ExpirationDate', $shipment->getPaymentInformation()->getPrepaid()->getBillShipper()->getCreditCard()->getExpirationDate()));
+                    $ccNode->appendChild($xml->createElement('Type', ($shipment->getPaymentInformation()->getPrepaid()->getBillShipper()->getCreditCard()->getType()) !== null ? htmlspecialchars($shipment->getPaymentInformation()->getPrepaid()->getBillShipper()->getCreditCard()->getType()) : null));
+                    $ccNode->appendChild($xml->createElement('Number', ($shipment->getPaymentInformation()->getPrepaid()->getBillShipper()->getCreditCard()->getNumber()) !== null ? htmlspecialchars($shipment->getPaymentInformation()->getPrepaid()->getBillShipper()->getCreditCard()->getNumber()) : null));
+                    $ccNode->appendChild($xml->createElement('ExpirationDate', ($shipment->getPaymentInformation()->getPrepaid()->getBillShipper()->getCreditCard()->getExpirationDate()) !== null ? htmlspecialchars($shipment->getPaymentInformation()->getPrepaid()->getBillShipper()->getCreditCard()->getExpirationDate()) : null));
 
                     if ($shipment->getPaymentInformation()->getPrepaid()->getBillShipper()->getCreditCard()->getSecurityCode()) {
-                        $ccNode->appendChild($xml->createElement('SecurityCode', $shipment->getPaymentInformation()->getPrepaid()->getBillShipper()->getCreditCard()->getSecurityCode()));
+                        $ccNode->appendChild($xml->createElement('SecurityCode', ($shipment->getPaymentInformation()->getPrepaid()->getBillShipper()->getCreditCard()->getSecurityCode()) !== null ? htmlspecialchars($shipment->getPaymentInformation()->getPrepaid()->getBillShipper()->getCreditCard()->getSecurityCode()) : null));
                     }
 
                     if ($shipment->getPaymentInformation()->getPrepaid()->getBillShipper()->getCreditCard()->getAddress()) {
@@ -286,25 +286,25 @@ class Shipping extends Ups
             } elseif ($shipment->getPaymentInformation()->getBillThirdParty()) {
                 $node = $paymentNode->appendChild($xml->createElement('BillThirdParty'));
                 $btpNode = $node->appendChild($xml->createElement('BillThirdPartyShipper'));
-                $btpNode->appendChild($xml->createElement('AccountNumber', $shipment->getPaymentInformation()->getBillThirdParty()->getAccountNumber()));
+                $btpNode->appendChild($xml->createElement('AccountNumber', ($shipment->getPaymentInformation()->getBillThirdParty()->getAccountNumber()) !== null ? htmlspecialchars($shipment->getPaymentInformation()->getBillThirdParty()->getAccountNumber()) : null));
 
                 $tpNode = $btpNode->appendChild($xml->createElement('ThirdParty'));
                 $addressNode = $tpNode->appendChild($xml->createElement('Address'));
 
                 $thirdPartAddress = $shipment->getPaymentInformation()->getBillThirdParty()->getThirdPartyAddress();
                 if (isset($thirdPartAddress) && $shipment->getPaymentInformation()->getBillThirdParty()->getThirdPartyAddress()->getPostalCode()) {
-                    $addressNode->appendChild($xml->createElement('PostalCode', $shipment->getPaymentInformation()->getBillThirdParty()->getThirdPartyAddress()->getPostalCode()));
+                    $addressNode->appendChild($xml->createElement('PostalCode', ($shipment->getPaymentInformation()->getBillThirdParty()->getThirdPartyAddress()->getPostalCode()) !== null ? htmlspecialchars($shipment->getPaymentInformation()->getBillThirdParty()->getThirdPartyAddress()->getPostalCode()) : null));
                 }
 
-                $addressNode->appendChild($xml->createElement('CountryCode', $shipment->getPaymentInformation()->getBillThirdParty()->getThirdPartyAddress()->getCountryCode()));
+                $addressNode->appendChild($xml->createElement('CountryCode', ($shipment->getPaymentInformation()->getBillThirdParty()->getThirdPartyAddress()->getCountryCode()) !== null ? htmlspecialchars($shipment->getPaymentInformation()->getBillThirdParty()->getThirdPartyAddress()->getCountryCode()) : null));
             } elseif ($shipment->getPaymentInformation()->getFreightCollect()) {
                 $node = $paymentNode->appendChild($xml->createElement('FreightCollect'));
                 $brNode = $node->appendChild($xml->createElement('BillReceiver'));
-                $brNode->appendChild($xml->createElement('AccountNumber', $shipment->getPaymentInformation()->getFreightCollect()->getAccountNumber()));
+                $brNode->appendChild($xml->createElement('AccountNumber', ($shipment->getPaymentInformation()->getFreightCollect()->getAccountNumber()) !== null ? htmlspecialchars($shipment->getPaymentInformation()->getFreightCollect()->getAccountNumber()) : null));
 
                 if ($shipment->getPaymentInformation()->getFreightCollect()->getBillReceiverAddress()) {
                     $addressNode = $brNode->appendChild($xml->createElement('Address'));
-                    $addressNode->appendChild($xml->createElement('PostalCode', $shipment->getPaymentInformation()->getFreightCollect()->getBillReceiverAddress()->getPostalCode()));
+                    $addressNode->appendChild($xml->createElement('PostalCode', ($shipment->getPaymentInformation()->getFreightCollect()->getBillReceiverAddress()->getPostalCode()) !== null ? htmlspecialchars($shipment->getPaymentInformation()->getFreightCollect()->getBillReceiverAddress()->getPostalCode()) : null));
                 }
             } elseif ($shipment->getPaymentInformation()->getConsigneeBilled()) {
                 $paymentNode->appendChild($xml->createElement('ConsigneeBilled'));
@@ -334,15 +334,15 @@ class Shipping extends Ups
     
                     $billShipper = $rec->getBillShipper();
                     if (isset($billShipper) && $rec->getBillShipper()->getAccountNumber()) {
-                        $node->appendChild($xml->createElement('AccountNumber', $rec->getBillShipper()->getAccountNumber()));
+                        $node->appendChild($xml->createElement('AccountNumber', ($rec->getBillShipper()->getAccountNumber()) !== null ? htmlspecialchars($rec->getBillShipper()->getAccountNumber()) : null));
                     } elseif (isset($billShipper) && $rec->getBillShipper()->getCreditCard()) {
                         $ccNode = $node->appendChild($xml->createElement('CreditCard'));
-                        $ccNode->appendChild($xml->createElement('Type', $rec->getBillShipper()->getCreditCard()->getType()));
-                        $ccNode->appendChild($xml->createElement('Number', $rec->getBillShipper()->getCreditCard()->getNumber()));
-                        $ccNode->appendChild($xml->createElement('ExpirationDate', $rec->getBillShipper()->getCreditCard()->getExpirationDate()));
+                        $ccNode->appendChild($xml->createElement('Type', ($rec->getBillShipper()->getCreditCard()->getType()) !== null ? htmlspecialchars($rec->getBillShipper()->getCreditCard()->getType()) : null));
+                        $ccNode->appendChild($xml->createElement('Number', ($rec->getBillShipper()->getCreditCard()->getNumber()) !== null ? htmlspecialchars($rec->getBillShipper()->getCreditCard()->getNumber()) : null));
+                        $ccNode->appendChild($xml->createElement('ExpirationDate', ($rec->getBillShipper()->getCreditCard()->getExpirationDate()) !== null ? htmlspecialchars($rec->getBillShipper()->getCreditCard()->getExpirationDate()) : null));
     
                         if ($rec->getBillShipper()->getCreditCard()->getSecurityCode()) {
-                            $ccNode->appendChild($xml->createElement('SecurityCode', $rec->getBillShipper()->getCreditCard()->getSecurityCode()));
+                            $ccNode->appendChild($xml->createElement('SecurityCode', ($rec->getBillShipper()->getCreditCard()->getSecurityCode()) !== null ? htmlspecialchars($rec->getBillShipper()->getCreditCard()->getSecurityCode()) : null));
                         }
     
                         if ($rec->getBillShipper()->getCreditCard()->getAddress()) {
@@ -354,17 +354,17 @@ class Shipping extends Ups
                 } elseif ($rec->getBillThirdParty()) {
                     $node = $node->appendChild($xml->createElement('BillThirdParty'));
                     $btpNode = $node->appendChild($xml->createElement('BillThirdPartyShipper'));
-                    $btpNode->appendChild($xml->createElement('AccountNumber', $rec->getBillThirdParty()->getAccountNumber()));
+                    $btpNode->appendChild($xml->createElement('AccountNumber', ($rec->getBillThirdParty()->getAccountNumber()) !== null ? htmlspecialchars($rec->getBillThirdParty()->getAccountNumber()) : null));
     
                     $tpNode = $btpNode->appendChild($xml->createElement('ThirdParty'));
                     $addressNode = $tpNode->appendChild($xml->createElement('Address'));
     
                     $thirdPartAddress = $rec->getBillThirdParty()->getThirdPartyAddress();
                     if (isset($thirdPartAddress) && $rec->getBillThirdParty()->getThirdPartyAddress()->getPostalCode()) {
-                        $addressNode->appendChild($xml->createElement('PostalCode', $rec->getBillThirdParty()->getThirdPartyAddress()->getPostalCode()));
+                        $addressNode->appendChild($xml->createElement('PostalCode', ($rec->getBillThirdParty()->getThirdPartyAddress()->getPostalCode()) !== null ? htmlspecialchars($rec->getBillThirdParty()->getThirdPartyAddress()->getPostalCode()) : null));
                     }
     
-                    $addressNode->appendChild($xml->createElement('CountryCode', $rec->getBillThirdParty()->getThirdPartyAddress()->getCountryCode()));
+                    $addressNode->appendChild($xml->createElement('CountryCode', ($rec->getBillThirdParty()->getThirdPartyAddress()->getCountryCode()) !== null ? htmlspecialchars($rec->getBillThirdParty()->getThirdPartyAddress()->getCountryCode()) : null));
                 } elseif ($rec->getConsigneeBilled()) {
                     $node->appendChild($xml->createElement('ConsigneeBilled'));
                 }
@@ -379,14 +379,14 @@ class Shipping extends Ups
         }
 
         if ($shipment->getMovementReferenceNumber()) {
-            $shipmentNode->appendChild($xml->createElement('MovementReferenceNumber', $shipment->getMovementReferenceNumber()));
+            $shipmentNode->appendChild($xml->createElement('MovementReferenceNumber', ($shipment->getMovementReferenceNumber()) !== null ? htmlspecialchars($shipment->getMovementReferenceNumber()) : null));
         }
 
         $serviceNode = $shipmentNode->appendChild($xml->createElement('Service'));
-        $serviceNode->appendChild($xml->createElement('Code', $shipment->getService()->getCode()));
+        $serviceNode->appendChild($xml->createElement('Code', ($shipment->getService()->getCode()) !== null ? htmlspecialchars($shipment->getService()->getCode()) : null));
 
         if ($shipment->getService()->getDescription()) {
-            $serviceNode->appendChild($xml->createElement('Description', $shipment->getService()->getDescription()));
+            $serviceNode->appendChild($xml->createElement('Description', ($shipment->getService()->getDescription()) !== null ? htmlspecialchars($shipment->getService()->getDescription()) : null));
         }
 
         if ($shipment->getInvoiceLineTotal()) {
@@ -394,7 +394,7 @@ class Shipping extends Ups
         }
 
         if ($shipment->getNumOfPiecesInShipment()) {
-            $shipmentNode->appendChild($xml->createElement('NumOfPiecesInShipment', $shipment->getNumOfPiecesInShipment()));
+            $shipmentNode->appendChild($xml->createElement('NumOfPiecesInShipment', ($shipment->getNumOfPiecesInShipment()) !== null ? htmlspecialchars($shipment->getNumOfPiecesInShipment()) : null));
         }
 
         if ($shipment->getRateInformation()) {
@@ -435,7 +435,7 @@ class Shipping extends Ups
         }
 
         if ($shipment->getLocale()) {
-            $shipmentNode->appendChild($xml->createElement('Locale', $shipment->getLocale()));
+            $shipmentNode->appendChild($xml->createElement('Locale', ($shipment->getLocale()) !== null ? htmlspecialchars($shipment->getLocale()) : null));
         }
         return $xml->saveXML();
     }
@@ -488,7 +488,7 @@ class Shipping extends Ups
         $request->appendChild($node);
 
         $request->appendChild($xml->createElement('RequestAction', 'ShipAccept'));
-        $container->appendChild($xml->createElement('ShipmentDigest', $shipmentDigest));
+        $container->appendChild($xml->createElement('ShipmentDigest', ($shipmentDigest) !== null ? htmlspecialchars($shipmentDigest) : null));
 
         return $xml->saveXML();
     }
@@ -636,35 +636,35 @@ class Shipping extends Ups
         $request->appendChild($xml->createElement('RequestAction', 'LabelRecovery'));
 
         if (is_string($trackingData)) {
-            $container->appendChild($xml->createElement('TrackingNumber', $trackingData));
+            $container->appendChild($xml->createElement('TrackingNumber', ($trackingData) !== null ? htmlspecialchars($trackingData) : null));
         } elseif (is_array($trackingData)) {
             $referenceNumber = $container->appendChild($xml->createElement('ReferenceNumber'));
-            $referenceNumber->appendChild($xml->createElement('Value', $trackingData['value']));
-            $container->appendChild($xml->createElement('ShipperNumber', $trackingData['shipperNumber']));
+            $referenceNumber->appendChild($xml->createElement('Value', ($trackingData['value']) !== null ? htmlspecialchars($trackingData['value']) : null));
+            $container->appendChild($xml->createElement('ShipperNumber', ($trackingData['shipperNumber']) !== null ? htmlspecialchars($trackingData['shipperNumber']) : null));
         }
 
         if (!empty($labelSpecificationOpts)) {
             $labelSpec = $container->appendChild($xml->createElement('LabelSpecification'));
 
             if (isset($labelSpecificationOpts['userAgent'])) {
-                $labelSpec->appendChild($xml->createElement('HTTPUserAgent', $labelSpecificationOpts['userAgent']));
+                $labelSpec->appendChild($xml->createElement('HTTPUserAgent', ($labelSpecificationOpts['userAgent']) !== null ? htmlspecialchars($labelSpecificationOpts['userAgent']) : null));
             }
 
             if (isset($labelSpecificationOpts['imageFormat'])) {
                 $format = $labelSpec->appendChild($xml->createElement('LabelImageFormat'));
-                $format->appendChild($xml->createElement('Code', $labelSpecificationOpts['imageFormat']));
+                $format->appendChild($xml->createElement('Code', ($labelSpecificationOpts['imageFormat']) !== null ? htmlspecialchars($labelSpecificationOpts['imageFormat']) : null));
             }
         }
 
         if (!empty($labelDeliveryOpts)) {
             $labelDelivery = $container->appendChild($xml->createElement('LabelDelivery'));
-            $labelDelivery->appendChild($xml->createElement('LabelLinkIndicator', $labelDeliveryOpts['link']));
+            $labelDelivery->appendChild($xml->createElement('LabelLinkIndicator', ($labelDeliveryOpts['link']) !== null ? htmlspecialchars($labelDeliveryOpts['link']) : null));
         }
 
         if (!empty($translateOpts)) {
             $translate = $container->appendChild($xml->createElement('Translate'));
-            $translate->appendChild($xml->createElement('LanguageCode', $translateOpts['language']));
-            $translate->appendChild($xml->createElement('DialectCode', $translateOpts['dialect']));
+            $translate->appendChild($xml->createElement('LanguageCode', ($translateOpts['language']) !== null ? htmlspecialchars($translateOpts['language']) : null));
+            $translate->appendChild($xml->createElement('DialectCode', ($translateOpts['dialect']) !== null ? htmlspecialchars($translateOpts['dialect']) : null));
             $translate->appendChild($xml->createElement('Code', '01'));
         }
 
@@ -739,10 +739,10 @@ class Shipping extends Ups
         $receiptSpecNode = $xml->appendChild($xml->createElement('ReceiptSpecification'));
 
         $imageFormatNode = $receiptSpecNode->appendChild($xml->createElement('ImageFormat'));
-        $imageFormatNode->appendChild($xml->createElement('Code', $receiptSpec->getImageFormatCode()));
+        $imageFormatNode->appendChild($xml->createElement('Code', ($receiptSpec->getImageFormatCode()) !== null ? htmlspecialchars($receiptSpec->getImageFormatCode()) : null));
 
         if ($receiptSpec->getImageFormatDescription()) {
-            $imageFormatNode->appendChild($xml->createElement('Description', $receiptSpec->getImageFormatDescription()));
+            $imageFormatNode->appendChild($xml->createElement('Description', ($receiptSpec->getImageFormatDescription()) !== null ? htmlspecialchars($receiptSpec->getImageFormatDescription()) : null));
         }
 
         return $receiptSpecNode->cloneNode(true);
@@ -760,43 +760,43 @@ class Shipping extends Ups
         $labelSpecNode = $xml->appendChild($xml->createElement('LabelSpecification'));
 
         $printMethodNode = $labelSpecNode->appendChild($xml->createElement('LabelPrintMethod'));
-        $printMethodNode->appendChild($xml->createElement('Code', $labelSpec->getPrintMethodCode()));
+        $printMethodNode->appendChild($xml->createElement('Code', ($labelSpec->getPrintMethodCode()) !== null ? htmlspecialchars($labelSpec->getPrintMethodCode()) : null));
 
         if ($labelSpec->getPrintMethodDescription()) {
-            $printMethodNode->appendChild($xml->createElement('Description', $labelSpec->getPrintMethodDescription()));
+            $printMethodNode->appendChild($xml->createElement('Description', ($labelSpec->getPrintMethodDescription()) !== null ? htmlspecialchars($labelSpec->getPrintMethodDescription()) : null));
         }
 
         if ($labelSpec->getHttpUserAgent()) {
-            $labelSpecNode->appendChild($xml->createElement('HTTPUserAgent', $labelSpec->getHttpUserAgent()));
+            $labelSpecNode->appendChild($xml->createElement('HTTPUserAgent', ($labelSpec->getHttpUserAgent()) !== null ? htmlspecialchars($labelSpec->getHttpUserAgent()) : null));
         }
 
         //Label print method is required only for GIF|PNG label formats
         if (!empty($labelSpec->getImageFormatCode())) {
             $imageFormatNode = $labelSpecNode->appendChild($xml->createElement('LabelImageFormat'));
-            $imageFormatNode->appendChild($xml->createElement('Code', $labelSpec->getImageFormatCode()));
+            $imageFormatNode->appendChild($xml->createElement('Code', ($labelSpec->getImageFormatCode()) !== null ? htmlspecialchars($labelSpec->getImageFormatCode()) : null));
 
             if ($labelSpec->getImageFormatDescription()) {
-                $imageFormatNode->appendChild($xml->createElement('Description', $labelSpec->getImageFormatDescription()));
+                $imageFormatNode->appendChild($xml->createElement('Description', ($labelSpec->getImageFormatDescription()) !== null ? htmlspecialchars($labelSpec->getImageFormatDescription()) : null));
             }
         } else {
             //Label stock size is required only for non-IMAGE label formats
             $stockSizeNode = $labelSpecNode->appendChild($xml->createElement('LabelStockSize'));
 
-            $stockSizeNode->appendChild($xml->createElement('Height', $labelSpec->getStockSizeHeight()));
-            $stockSizeNode->appendChild($xml->createElement('Width', $labelSpec->getStockSizeWidth()));
+            $stockSizeNode->appendChild($xml->createElement('Height', ($labelSpec->getStockSizeHeight()) !== null ? htmlspecialchars($labelSpec->getStockSizeHeight()) : null));
+            $stockSizeNode->appendChild($xml->createElement('Width', ($labelSpec->getStockSizeWidth()) !== null ? htmlspecialchars($labelSpec->getStockSizeWidth()) : null));
         }
 
         if ($labelSpec->getInstructionCode()) {
             $instructionNode = $labelSpecNode->appendChild($xml->createElement('Instruction'));
-            $instructionNode->appendChild($xml->createElement('Code', $labelSpec->getInstructionCode()));
+            $instructionNode->appendChild($xml->createElement('Code', ($labelSpec->getInstructionCode()) !== null ? htmlspecialchars($labelSpec->getInstructionCode()) : null));
 
             if ($labelSpec->getInstructionDescription()) {
-                $instructionNode->appendChild($xml->createElement('Description', $labelSpec->getInstructionDescription()));
+                $instructionNode->appendChild($xml->createElement('Description', ($labelSpec->getInstructionDescription()) !== null ? htmlspecialchars($labelSpec->getInstructionDescription()) : null));
             }
         }
         
         if ($labelSpec->getCharacterSet()) {
-            $labelSpecNode->appendChild($xml->createElement('CharacterSet', $labelSpec->getCharacterSet()));
+            $labelSpecNode->appendChild($xml->createElement('CharacterSet', ($labelSpec->getCharacterSet()) !== null ? htmlspecialchars($labelSpec->getCharacterSet()) : null));
         }
 
         return $labelSpecNode->cloneNode(true);

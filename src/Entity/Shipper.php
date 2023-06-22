@@ -114,12 +114,12 @@ class Shipper implements NodeInterface
 
         $shipperName = $this->getName();
         if (isset($shipperName)) {
-            $node->appendChild($document->createElement('Name', $shipperName));
+            $node->appendChild($document->createElement('Name', ($shipperName) !== null ? htmlspecialchars($shipperName) : null));
         }
 
         $shipperNumber = $this->getShipperNumber();
         if (isset($shipperNumber)) {
-            $node->appendChild($document->createElement('ShipperNumber', $shipperNumber));
+            $node->appendChild($document->createElement('ShipperNumber', ($shipperNumber) !== null ? htmlspecialchars($shipperNumber) : null));
         }
 
         $address = $this->getAddress();

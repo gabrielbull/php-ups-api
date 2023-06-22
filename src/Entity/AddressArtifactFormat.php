@@ -42,21 +42,21 @@ class AddressArtifactFormat extends Address
         for ($i = 1; $i <= 3; $i++) {
             $line = $this->{'getPoliticalDivision'.$i}();
             if ($line) {
-                $node->appendChild($document->createElement('PoliticalDivision'.$i, $line));
+                $node->appendChild($document->createElement('PoliticalDivision'.$i, ($line) !== null ? htmlspecialchars($line) : null));
             }
         }
 
         if ($this->getCountryCode()) {
-            $node->appendChild($document->createElement('CountryCode', $this->getCountryCode()));
+            $node->appendChild($document->createElement('CountryCode', ($this->getCountryCode()) !== null ? htmlspecialchars($this->getCountryCode()) : null));
         }
         if ($this->getCountry()) {
-            $node->appendChild($document->createElement('Country', $this->getCountry()));
+            $node->appendChild($document->createElement('Country', ($this->getCountry()) !== null ? htmlspecialchars($this->getCountry()) : null));
         }
         if ($this->getPostcodePrimaryHigh()) {
-            $node->appendChild($document->createElement('PostcodePrimaryHigh', $this->getPostcodePrimaryHigh()));
+            $node->appendChild($document->createElement('PostcodePrimaryHigh', ($this->getPostcodePrimaryHigh()) !== null ? htmlspecialchars($this->getPostcodePrimaryHigh()) : null));
         }
         if ($this->getPostcodePrimaryLow()) {
-            $node->appendChild($document->createElement('PostcodePrimaryLow', $this->getPostcodePrimaryLow()));
+            $node->appendChild($document->createElement('PostcodePrimaryLow', ($this->getPostcodePrimaryLow()) !== null ? htmlspecialchars($this->getPostcodePrimaryLow()) : null));
         }
 
         return $node;

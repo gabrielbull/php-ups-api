@@ -81,7 +81,7 @@ class ReturnService implements NodeInterface
         }
 
         $node = $document->createElement('ReturnService');
-        $node->appendChild($document->createElement('Code', $this->getCode()));
+        $node->appendChild($document->createElement('Code', ($this->getCode()) !== null ? htmlspecialchars($this->getCode()) : null));
 
         return $node;
     }

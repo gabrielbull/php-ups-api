@@ -32,8 +32,8 @@ class FreightCharges extends \Ups\Entity\FreightCharges
         }
 
         $node = $document->createElement('FreightCharges');
-        $node->appendChild($document->createElement('MonetaryValue', $this->getMonetaryValue()));
-        $node->appendChild($document->createElement('CurrencyCode', $this->getCurrencyCode()));
+        $node->appendChild($document->createElement('MonetaryValue', ($this->getMonetaryValue()) !== null ? htmlspecialchars($this->getMonetaryValue()) : null));
+        $node->appendChild($document->createElement('CurrencyCode', ($this->getCurrencyCode()) !== null ? htmlspecialchars($this->getCurrencyCode()) : null));
 
         return $node;
     }

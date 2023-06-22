@@ -56,7 +56,7 @@ class AddressKeyFormat extends Address
         $node = $document->createElement('AddressKeyFormat');
 
         if ($this->getConsigneeName()) {
-            $node->appendChild($document->createElement('ConsigneeName', $this->getConsigneeName()));
+            $node->appendChild($document->createElement('ConsigneeName', ($this->getConsigneeName()) !== null ? htmlspecialchars($this->getConsigneeName()) : null));
         }
 
         for ($i = 1; $i <= 3; $i++) {
@@ -69,23 +69,23 @@ class AddressKeyFormat extends Address
         for ($i = 1; $i <= 3; $i++) {
             $line = $this->{'getPoliticalDivision'.$i}();
             if ($line) {
-                $node->appendChild($document->createElement('PoliticalDivision'.$i, $line));
+                $node->appendChild($document->createElement('PoliticalDivision'.$i, ($line) !== null ? htmlspecialchars($line) : null));
             }
         }
 
         if ($this->getPostcodePrimaryLow()) {
-            $node->appendChild($document->createElement('PostcodePrimaryLow', $this->getPostcodePrimaryLow()));
+            $node->appendChild($document->createElement('PostcodePrimaryLow', ($this->getPostcodePrimaryLow()) !== null ? htmlspecialchars($this->getPostcodePrimaryLow()) : null));
         }
         if ($this->getPostcodeExtendedLow()) {
-            $node->appendChild($document->createElement('PostcodeExtendedLow', $this->getPostcodeExtendedLow()));
+            $node->appendChild($document->createElement('PostcodeExtendedLow', ($this->getPostcodeExtendedLow()) !== null ? htmlspecialchars($this->getPostcodeExtendedLow()) : null));
         }
 
         if ($this->getCountryCode()) {
-            $node->appendChild($document->createElement('CountryCode', $this->getCountryCode()));
+            $node->appendChild($document->createElement('CountryCode', ($this->getCountryCode()) !== null ? htmlspecialchars($this->getCountryCode()) : null));
         }
 
         if ($this->getSingleLineAddress()) {
-            $node->appendChild($document->createElement('SingleLineAddress', $this->getSingleLineAddress()));
+            $node->appendChild($document->createElement('SingleLineAddress', ($this->getSingleLineAddress()) !== null ? htmlspecialchars($this->getSingleLineAddress()) : null));
         }
 
         return $node;

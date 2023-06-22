@@ -103,35 +103,35 @@ class LabelDelivery implements NodeInterface
         $node = $document->createElement('LabelDelivery');
 
         if (isset($this->LabelLinkIndicator)) {
-            $node->appendChild($document->createElement('LabelLinkIndicator', $this->LabelLinkIndicator));
+            $node->appendChild($document->createElement('LabelLinkIndicator', ($this->LabelLinkIndicator) !== null ? htmlspecialchars($this->LabelLinkIndicator) : null));
         }
 
         if (isset($this->EMailAddress)) {
-            $node->appendChild($document->createElement('EMailAddress', $this->EMailAddress));
+            $node->appendChild($document->createElement('EMailAddress', ($this->EMailAddress) !== null ? htmlspecialchars($this->EMailAddress) : null));
         }
 
         if (isset($this->UndeliverableEMailAddress)) {
-            $node->appendChild($document->createElement('UndeliverableEMailAddress', $this->UndeliverableEMailAddress));
+            $node->appendChild($document->createElement('UndeliverableEMailAddress', ($this->UndeliverableEMailAddress) !== null ? htmlspecialchars($this->UndeliverableEMailAddress) : null));
         }
 
         if (isset($this->FromEMailAddress)) {
-            $node->appendChild($document->createElement('FromEMailAddress', $this->FromEMailAddress));
+            $node->appendChild($document->createElement('FromEMailAddress', ($this->FromEMailAddress) !== null ? htmlspecialchars($this->FromEMailAddress) : null));
         }
 
         if (isset($this->FromName)) {
-            $node->appendChild($document->createElement('FromName', $this->FromName));
+            $node->appendChild($document->createElement('FromName', ($this->FromName) !== null ? htmlspecialchars($this->FromName) : null));
         }
 
         if (isset($this->Subject)) {
-            $node->appendChild($document->createElement('Subject', $this->Subject));
+            $node->appendChild($document->createElement('Subject', ($this->Subject) !== null ? htmlspecialchars($this->Subject) : null));
         }
 
         if (isset($this->Memo)) {
-            $node->appendChild($document->createElement('Memo', $this->Memo));
+            $node->appendChild($document->createElement('Memo', ($this->Memo) !== null ? htmlspecialchars($this->Memo) : null));
         }
 
         if (isset($this->SubjectCode)) {
-            $node->appendChild($document->createElement('SubjectCode', $this->SubjectCode));
+            $node->appendChild($document->createElement('SubjectCode', ($this->SubjectCode) !== null ? htmlspecialchars($this->SubjectCode) : null));
         }
 
         return $node;

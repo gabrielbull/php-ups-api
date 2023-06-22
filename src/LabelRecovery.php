@@ -78,16 +78,16 @@ class LabelRecovery extends Ups
 
         $labelSpecificationNode = $trackRequest->appendChild($xml->createElement('LabelSpecification'));
         if (isset($labelRecoveryRequest->LabelSpecification)) {
-            $labelSpecificationNode->appendChild($xml->createElement('HTTPUserAgent', $labelRecoveryRequest->LabelSpecification->HTTPUserAgent));
+            $labelSpecificationNode->appendChild($xml->createElement('HTTPUserAgent', ($labelRecoveryRequest->LabelSpecification->HTTPUserAgent) !== null ? htmlspecialchars($labelRecoveryRequest->LabelSpecification->HTTPUserAgent) : null));
             $labelImageFormatNode = $labelSpecificationNode->appendChild($xml->createElement('LabelImageFormat'));
-            $labelImageFormatNode->appendChild($xml->createElement('Code', $labelRecoveryRequest->LabelSpecification->LabelImageFormat->Code));
+            $labelImageFormatNode->appendChild($xml->createElement('Code', ($labelRecoveryRequest->LabelSpecification->LabelImageFormat->Code) !== null ? htmlspecialchars($labelRecoveryRequest->LabelSpecification->LabelImageFormat->Code) : null));
         }
 
         if (isset($labelRecoveryRequest->Translate)) {
             $translateNode = $trackRequest->appendChild($xml->createElement('Translate'));
-            $translateNode->appendChild($xml->createElement('LanguageCode', $labelRecoveryRequest->Translate->LanguageCode));
-            $translateNode->appendChild($xml->createElement('DialectCode', $labelRecoveryRequest->Translate->DialectCode));
-            $translateNode->appendChild($xml->createElement('Code', $labelRecoveryRequest->Translate->Code));
+            $translateNode->appendChild($xml->createElement('LanguageCode', ($labelRecoveryRequest->Translate->LanguageCode) !== null ? htmlspecialchars($labelRecoveryRequest->Translate->LanguageCode) : null));
+            $translateNode->appendChild($xml->createElement('DialectCode', ($labelRecoveryRequest->Translate->DialectCode) !== null ? htmlspecialchars($labelRecoveryRequest->Translate->DialectCode) : null));
+            $translateNode->appendChild($xml->createElement('Code', ($labelRecoveryRequest->Translate->Code) !== null ? htmlspecialchars($labelRecoveryRequest->Translate->Code) : null));
         }
 
         if (isset($labelRecoveryRequest->LabelLinkIndicator)) {
@@ -96,16 +96,16 @@ class LabelRecovery extends Ups
         }
 
         if (isset($labelRecoveryRequest->TrackingNumber)) {
-            $trackRequest->appendChild($xml->createElement('TrackingNumber', $labelRecoveryRequest->TrackingNumber));
+            $trackRequest->appendChild($xml->createElement('TrackingNumber', ($labelRecoveryRequest->TrackingNumber) !== null ? htmlspecialchars($labelRecoveryRequest->TrackingNumber) : null));
         }
 
         if (isset($labelRecoveryRequest->ReferenceNumber)) {
             $referenceNumberNode = $trackRequest->appendChild($xml->createElement('ReferenceNumber'));
-            $referenceNumberNode->appendChild($xml->createElement('Value', $labelRecoveryRequest->ReferenceNumber->getValue()));
+            $referenceNumberNode->appendChild($xml->createElement('Value', ($labelRecoveryRequest->ReferenceNumber->getValue()) !== null ? htmlspecialchars($labelRecoveryRequest->ReferenceNumber->getValue()) : null));
         }
 
         if (isset($labelRecoveryRequest->ShipperNumber)) {
-            $trackRequest->appendChild($xml->createElement('ShipperNumber', $labelRecoveryRequest->ShipperNumber));
+            $trackRequest->appendChild($xml->createElement('ShipperNumber', ($labelRecoveryRequest->ShipperNumber) !== null ? htmlspecialchars($labelRecoveryRequest->ShipperNumber) : null));
         }
 
         return $xml->saveXML();

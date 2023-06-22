@@ -30,11 +30,11 @@ class AlternateDeliveryAddress extends ShipTo
         $node = $document->createElement('AlternateDeliveryAddress');
 
         if ($this->getName()) {
-            $node->appendChild($document->createElement('Name', $this->getName()));
+            $node->appendChild($document->createElement('Name', ($this->getName()) !== null ? htmlspecialchars($this->getName()) : null));
         }
 
         if ($this->getUpsAccessPointId()) {
-            $node->appendChild($document->createElement('UPSAccessPointID', $this->getUpsAccessPointId()));
+            $node->appendChild($document->createElement('UPSAccessPointID', ($this->getUpsAccessPointId()) !== null ? htmlspecialchars($this->getUpsAccessPointId()) : null));
         }
 
         $address = $this->getAddress();

@@ -75,17 +75,17 @@ class EEIFilingOption implements NodeInterface
 
         $code = $this->getCode();
         if (isset($code)) {
-            $node->appendChild($document->createElement('Code', $code));
+            $node->appendChild($document->createElement('Code', ($code) !== null ? htmlspecialchars($code) : null));
         }
 
         $emailAddress = $this->getEmailAddress();
         if (isset($emailAddress)) {
-            $node->appendChild($document->createElement('EMailAdress', $emailAddress));
+            $node->appendChild($document->createElement('EMailAdress', ($emailAddress) !== null ? htmlspecialchars($emailAddress) : null));
         }
 
         $description = $this->getDescription();
         if (isset($description)) {
-            $node->appendChild($document->createElement('Description', $description));
+            $node->appendChild($document->createElement('Description', ($description) !== null ? htmlspecialchars($description) : null));
         }
 
         $upsFiled = $this->getUPSFiled();

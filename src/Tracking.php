@@ -264,11 +264,11 @@ class Tracking extends Ups
         $request->appendChild($xml->createElement('RequestAction', 'Track'));
 
         if (null !== $this->requestOption) {
-            $request->appendChild($xml->createElement('RequestOption', $this->requestOption));
+            $request->appendChild($xml->createElement('RequestOption', ($this->requestOption) !== null ? htmlspecialchars($this->requestOption) : null));
         }
 
         if (null !== $this->trackingNumber) {
-            $trackRequest->appendChild($xml->createElement('TrackingNumber', $this->trackingNumber));
+            $trackRequest->appendChild($xml->createElement('TrackingNumber', ($this->trackingNumber) !== null ? htmlspecialchars($this->trackingNumber) : null));
         }
 
         if ($this->isMailInnovations()) {
@@ -276,11 +276,11 @@ class Tracking extends Ups
         }
 
         if (null !== $this->referenceNumber) {
-            $trackRequest->appendChild($xml->createElement('ReferenceNumber'))->appendChild($xml->createElement('Value', $this->referenceNumber));
+            $trackRequest->appendChild($xml->createElement('ReferenceNumber'))->appendChild($xml->createElement('Value', ($this->referenceNumber) !== null ? htmlspecialchars($this->referenceNumber) : null));
         }
 
         if (null !== $this->shipperNumber) {
-            $trackRequest->appendChild($xml->createElement('ShipperNumber', $this->shipperNumber));
+            $trackRequest->appendChild($xml->createElement('ShipperNumber', ($this->shipperNumber) !== null ? htmlspecialchars($this->shipperNumber) : null));
         }
 
         if (null !== $this->beginDate || null !== $this->endDate) {
@@ -288,12 +288,12 @@ class Tracking extends Ups
 
             if (null !== $this->beginDate) {
                 $beginDate = $this->beginDate->format('Ymd');
-                $DateRange->appendChild($xml->createElement('BeginDate', $beginDate));
+                $DateRange->appendChild($xml->createElement('BeginDate', ($beginDate) !== null ? htmlspecialchars($beginDate) : null));
             }
 
             if (null !== $this->endDate) {
                 $endDate = $this->endDate->format('Ymd');
-                $DateRange->appendChild($xml->createElement('EndDate', $endDate));
+                $DateRange->appendChild($xml->createElement('EndDate', ($endDate) !== null ? htmlspecialchars($endDate) : null));
             }
 
             $trackRequest->appendChild($DateRange);

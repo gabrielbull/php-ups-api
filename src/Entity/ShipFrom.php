@@ -22,11 +22,11 @@ class ShipFrom extends Shipper implements NodeInterface
         $node = $document->createElement('ShipFrom');
 
         if ($this->getCompanyName()) {
-            $node->appendChild($document->createElement('CompanyName', $this->getCompanyName()));
+            $node->appendChild($document->createElement('CompanyName', ($this->getCompanyName()) !== null ? htmlspecialchars($this->getCompanyName()) : null));
         }
 
         if ($this->getAttentionName()) {
-            $node->appendChild($document->createElement('AttentionName', $this->getAttentionName()));
+            $node->appendChild($document->createElement('AttentionName', ($this->getAttentionName()) !== null ? htmlspecialchars($this->getAttentionName()) : null));
         }
 
         $address = $this->getAddress();

@@ -56,8 +56,8 @@ class Unit implements NodeInterface
         }
 
         $node = $document->createElement('Unit');
-        $node->appendChild($document->createElement('Number', $this->getNumber()));
-        $node->appendChild($document->createElement('Value', $this->getValue()));
+        $node->appendChild($document->createElement('Number', ($this->getNumber()) !== null ? htmlspecialchars($this->getNumber()) : null));
+        $node->appendChild($document->createElement('Value', ($this->getValue()) !== null ? htmlspecialchars($this->getValue()) : null));
         if ($this->getUnitOfMeasurement() !== null) {
             $node->appendChild($this->getUnitOfMeasurement()->toNode($document));
         }

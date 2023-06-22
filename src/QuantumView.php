@@ -149,24 +149,24 @@ class QuantumView extends Ups
 
             // Subscription name
             if (null !== $this->name) {
-                $subscriptionRequest->appendChild($xml->createElement('Name', $this->name));
+                $subscriptionRequest->appendChild($xml->createElement('Name', ($this->name) !== null ? htmlspecialchars($this->name) : null));
             }
 
             // Date Time Range
             if (null !== $this->beginDateTime) {
                 $dateTimeRange = $subscriptionRequest->appendChild($xml->createElement('DateTimeRange'));
-                $dateTimeRange->appendChild($xml->createElement('BeginDateTime', $this->beginDateTime));
-                $dateTimeRange->appendChild($xml->createElement('EndDateTime', $this->endDateTime));
+                $dateTimeRange->appendChild($xml->createElement('BeginDateTime', ($this->beginDateTime) !== null ? htmlspecialchars($this->beginDateTime) : null));
+                $dateTimeRange->appendChild($xml->createElement('EndDateTime', ($this->endDateTime) !== null ? htmlspecialchars($this->endDateTime) : null));
 
             // File name
             } elseif (null !== $this->fileName) {
-                $subscriptionRequest->appendChild($xml->createElement('FileName', $this->fileName));
+                $subscriptionRequest->appendChild($xml->createElement('FileName', ($this->fileName) !== null ? htmlspecialchars($this->fileName) : null));
             }
         }
 
         // Create the Bookmark element
         if (null !== $this->bookmark) {
-            $quantumViewRequest->appendChild($xml->createElement('Bookmark', $this->bookmark));
+            $quantumViewRequest->appendChild($xml->createElement('Bookmark', ($this->bookmark) !== null ? htmlspecialchars($this->bookmark) : null));
         }
 
         // Create the Request element

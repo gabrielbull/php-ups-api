@@ -48,7 +48,7 @@ class HazMatPackageInformation implements NodeInterface
             $node->appendChild($document->createElement('OverPackedIndicator'));
         }
         if ($this->getQValue() !== null) {
-            $node->appendChild($document->createElement('QValue', $this->getQValue()));
+            $node->appendChild($document->createElement('QValue', ($this->getQValue()) !== null ? htmlspecialchars($this->getQValue()) : null));
         }
 
         return $node;

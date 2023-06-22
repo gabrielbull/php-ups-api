@@ -54,12 +54,12 @@ class LabelMethod implements NodeInterface
 
         $code = $this->getCode();
         if (isset($code)) {
-            $node->appendChild($document->createElement('Code', $code));
+            $node->appendChild($document->createElement('Code', ($code) !== null ? htmlspecialchars($code) : null));
         }
 
         $description = $this->getDescription();
         if (isset($description)) {
-            $node->appendChild($document->createElement('Description', $description));
+            $node->appendChild($document->createElement('Description', ($description) !== null ? htmlspecialchars($description) : null));
         }
 
         return $node;

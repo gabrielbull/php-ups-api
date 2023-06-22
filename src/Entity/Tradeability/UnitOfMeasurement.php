@@ -20,10 +20,10 @@ class UnitOfMeasurement extends \Ups\Entity\UnitOfMeasurement
     {
         if (null !== $document) {
             $node = $document->createElement('UnitOfMeasure');
-            $node->appendChild($document->createElement('UnitCode', $this->getCode()));
+            $node->appendChild($document->createElement('UnitCode', ($this->getCode()) !== null ? htmlspecialchars($this->getCode()) : null));
 
             if ($this->getDescription() !== null) {
-                $node->appendChild($document->createElement('UnitDescription', $this->getDescription()));
+                $node->appendChild($document->createElement('UnitDescription', ($this->getDescription()) !== null ? htmlspecialchars($this->getDescription()) : null));
             }
 
             return $node;

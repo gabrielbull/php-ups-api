@@ -103,7 +103,7 @@ class Locator extends Ups
         $request->appendChild($node);
 
         $request->appendChild($xml->createElement('RequestAction', 'Locator'));
-        $request->appendChild($xml->createElement('RequestOption', $requestOption));
+        $request->appendChild($xml->createElement('RequestOption', ($requestOption) !== null ? htmlspecialchars($requestOption) : null));
 
         // Origin Address
         $trackRequest->appendChild($locatorRequest->getOriginAddress()->toNode($xml));

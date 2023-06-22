@@ -31,7 +31,7 @@ class FreightCharges implements NodeInterface
         }
 
         $node = $document->createElement('FreightCharges');
-        $node->appendChild($document->createElement('MonetaryValue', $this->getMonetaryValue()));
+        $node->appendChild($document->createElement('MonetaryValue', ($this->getMonetaryValue()) !== null ? htmlspecialchars($this->getMonetaryValue()) : null));
 
         return $node;
     }

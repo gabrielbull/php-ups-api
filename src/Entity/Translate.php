@@ -79,18 +79,18 @@ class Translate implements NodeInterface
 
         $node = $document->createElement('Translate');
 
-        $node->appendChild($document->createElement('LanguageCode', $this->getLanguageCode()));
+        $node->appendChild($document->createElement('LanguageCode', ($this->getLanguageCode()) !== null ? htmlspecialchars($this->getLanguageCode()) : null));
 
         if ($this->getCode()) {
-            $node->appendChild($document->createElement('Code', $this->getCode()));
+            $node->appendChild($document->createElement('Code', ($this->getCode()) !== null ? htmlspecialchars($this->getCode()) : null));
         }
 
         if ($this->getDialectCode()) {
-            $node->appendChild($document->createElement('DialectCode', $this->getDialectCode()));
+            $node->appendChild($document->createElement('DialectCode', ($this->getDialectCode()) !== null ? htmlspecialchars($this->getDialectCode()) : null));
         }
 
         if ($this->getLocale()) {
-            $node->appendChild($document->createElement('Locale', $this->getLocale()));
+            $node->appendChild($document->createElement('Locale', ($this->getLocale()) !== null ? htmlspecialchars($this->getLocale()) : null));
         }
 
         return $node;

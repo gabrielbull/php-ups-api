@@ -151,79 +151,79 @@ class HazMat implements NodeInterface
 
 
         if ($this->getPackagingTypeQuantity()) {
-            $node->appendChild($document->createElement('PackagingTypeQuantity', $this->getPackagingTypeQuantity()));
+            $node->appendChild($document->createElement('PackagingTypeQuantity', ($this->getPackagingTypeQuantity()) !== null ? htmlspecialchars($this->getPackagingTypeQuantity()) : null));
         }
         if ($this->getSubRiskClass()) {
-            $node->appendChild($document->createElement('SubRiskClass', $this->getSubRiskClass()));
+            $node->appendChild($document->createElement('SubRiskClass', ($this->getSubRiskClass()) !== null ? htmlspecialchars($this->getSubRiskClass()) : null));
         }
         if ($this->getAdrItemNumber()) {
-            $node->appendChild($document->createElement('aDRItemNumber', $this->getAdrItemNumber()));
+            $node->appendChild($document->createElement('aDRItemNumber', ($this->getAdrItemNumber()) !== null ? htmlspecialchars($this->getAdrItemNumber()) : null));
         }
         if ($this->getAdrPackingGroupLetter()) {
-            $node->appendChild($document->createElement('aDRPackingGroupLetter', $this->getAdrPackingGroupLetter()));
+            $node->appendChild($document->createElement('aDRPackingGroupLetter', ($this->getAdrPackingGroupLetter()) !== null ? htmlspecialchars($this->getAdrPackingGroupLetter()) : null));
         }
         if ($this->getTechnicalName()) {
-            $node->appendChild($document->createElement('TechnicalName', $this->getTechnicalName()));
+            $node->appendChild($document->createElement('TechnicalName', ($this->getTechnicalName()) !== null ? htmlspecialchars($this->getTechnicalName()) : null));
         }
         if ($this->getHazardLabelRequired()) {
-            $node->appendChild($document->createElement('HazardLabelRequired', $this->getHazardLabelRequired()));
+            $node->appendChild($document->createElement('HazardLabelRequired', ($this->getHazardLabelRequired()) !== null ? htmlspecialchars($this->getHazardLabelRequired()) : null));
         }
         if ($this->getReferenceNumber()) {
-            $node->appendChild($document->createElement('ReferenceNumber', $this->getReferenceNumber()));
+            $node->appendChild($document->createElement('ReferenceNumber', ($this->getReferenceNumber()) !== null ? htmlspecialchars($this->getReferenceNumber()) : null));
         }
         if ($this->getQuantity()) {
-            $node->appendChild($document->createElement('Quantity', $this->getQuantity()));
+            $node->appendChild($document->createElement('Quantity', ($this->getQuantity()) !== null ? htmlspecialchars($this->getQuantity()) : null));
         }
         if ($this->getClassDivisionNumber()) {
-            $node->appendChild($document->createElement('ClassDivisionNumber', $this->getClassDivisionNumber()));
+            $node->appendChild($document->createElement('ClassDivisionNumber', ($this->getClassDivisionNumber()) !== null ? htmlspecialchars($this->getClassDivisionNumber()) : null));
         }
         if ($this->getUom()) {
-            $node->appendChild($document->createElement('UOM', $this->getUom()));
+            $node->appendChild($document->createElement('UOM', ($this->getUom()) !== null ? htmlspecialchars($this->getUom()) : null));
         }
         if ($this->getPackagingType()) {
-            $node->appendChild($document->createElement('PackagingType', $this->getPackagingType()));
+            $node->appendChild($document->createElement('PackagingType', ($this->getPackagingType()) !== null ? htmlspecialchars($this->getPackagingType()) : null));
         }
         if ($this->getIdNumber()) {
-            $node->appendChild($document->createElement('IDNumber', $this->getIdNumber()));
+            $node->appendChild($document->createElement('IDNumber', ($this->getIdNumber()) !== null ? htmlspecialchars($this->getIdNumber()) : null));
         }
         if ($this->getProperShippingName()) {
-            $node->appendChild($document->createElement('ProperShippingName', $this->getProperShippingName()));
+            $node->appendChild($document->createElement('ProperShippingName', ($this->getProperShippingName()) !== null ? htmlspecialchars($this->getProperShippingName()) : null));
         }
         if ($this->getAdditionalDescription()) {
-            $node->appendChild($document->createElement('AdditionalDescription', $this->getAdditionalDescription()));
+            $node->appendChild($document->createElement('AdditionalDescription', ($this->getAdditionalDescription()) !== null ? htmlspecialchars($this->getAdditionalDescription()) : null));
         }
         if ($this->getPackagingGroupType()) {
-            $node->appendChild($document->createElement('PackagingGroupType', $this->getPackagingGroupType()));
+            $node->appendChild($document->createElement('PackagingGroupType', ($this->getPackagingGroupType()) !== null ? htmlspecialchars($this->getPackagingGroupType()) : null));
         }
         if ($this->getPackagingInstructionCode()) {
-            $node->appendChild($document->createElement('PackagingInstructionCode', $this->getPackagingInstructionCode()));
+            $node->appendChild($document->createElement('PackagingInstructionCode', ($this->getPackagingInstructionCode()) !== null ? htmlspecialchars($this->getPackagingInstructionCode()) : null));
         }
         if ($this->getEmergencyPhone()) {
-            $node->appendChild($document->createElement('EmergencyPhone', $this->getEmergencyPhone()));
+            $node->appendChild($document->createElement('EmergencyPhone', ($this->getEmergencyPhone()) !== null ? htmlspecialchars($this->getEmergencyPhone()) : null));
         }
         if ($this->getEmergencyContact()) {
-            $node->appendChild($document->createElement('EmergencyContact', $this->getEmergencyContact()));
+            $node->appendChild($document->createElement('EmergencyContact', ($this->getEmergencyContact()) !== null ? htmlspecialchars($this->getEmergencyContact()) : null));
         }
         if ($this->getReportableQuantity()) {
-            $node->appendChild($document->createElement('ReportableQuantity', $this->getReportableQuantity()));
+            $node->appendChild($document->createElement('ReportableQuantity', ($this->getReportableQuantity()) !== null ? htmlspecialchars($this->getReportableQuantity()) : null));
         }
         if ($this->getRegulationSet()) {
-            $node->appendChild($document->createElement('RegulationSet', $this->getRegulationSet()));
+            $node->appendChild($document->createElement('RegulationSet', ($this->getRegulationSet()) !== null ? htmlspecialchars($this->getRegulationSet()) : null));
         }
         if ($this->getTransportationMode()) {
-            $node->appendChild($document->createElement('TransportationMode', $this->getTransportationMode()));
+            $node->appendChild($document->createElement('TransportationMode', ($this->getTransportationMode()) !== null ? htmlspecialchars($this->getTransportationMode()) : null));
         }
         if ($this->getCommodityRegulatedLevelCode()) {
-            $node->appendChild($document->createElement('CommodityRegulatedLevelCode', $this->getCommodityRegulatedLevelCode()));
+            $node->appendChild($document->createElement('CommodityRegulatedLevelCode', ($this->getCommodityRegulatedLevelCode()) !== null ? htmlspecialchars($this->getCommodityRegulatedLevelCode()) : null));
         }
         if ($this->getTransportCategory()) {
-            $node->appendChild($document->createElement('TransportCategory', $this->getTransportCategory()));
+            $node->appendChild($document->createElement('TransportCategory', ($this->getTransportCategory()) !== null ? htmlspecialchars($this->getTransportCategory()) : null));
         }
         if ($this->getTunnelRestrictionCode()) {
-            $node->appendChild($document->createElement('TunnelRestrictionCode', $this->getTunnelRestrictionCode()));
+            $node->appendChild($document->createElement('TunnelRestrictionCode', ($this->getTunnelRestrictionCode()) !== null ? htmlspecialchars($this->getTunnelRestrictionCode()) : null));
         }
         if ($this->getChemicalRecordIdentifier()) {
-            $node->appendChild($document->createElement('ChemicalRecordIdentifier', $this->getChemicalRecordIdentifier()));
+            $node->appendChild($document->createElement('ChemicalRecordIdentifier', ($this->getChemicalRecordIdentifier()) !== null ? htmlspecialchars($this->getChemicalRecordIdentifier()) : null));
         }
 
         return $node;

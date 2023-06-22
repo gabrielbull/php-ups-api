@@ -21,7 +21,7 @@ class OriginAddress implements NodeInterface
 
         $node = $document->createElement('OriginAddress');
         if ($this->getPhoneNumber()) {
-            $node->appendChild($document->createElement('AddressLine1', $this->getPhoneNumber()));
+            $node->appendChild($document->createElement('AddressLine1', ($this->getPhoneNumber()) !== null ? htmlspecialchars($this->getPhoneNumber()) : null));
         }
 
         if ($this->getGeoCode()) {
@@ -33,7 +33,7 @@ class OriginAddress implements NodeInterface
         }
 
         if ($this->getMaximumListSize()) {
-            $node->appendChild($document->createElement('MaximumListSize', $this->getMaximumListSize()));
+            $node->appendChild($document->createElement('MaximumListSize', ($this->getMaximumListSize()) !== null ? htmlspecialchars($this->getMaximumListSize()) : null));
         }
 
         return $node;
