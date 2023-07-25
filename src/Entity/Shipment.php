@@ -618,19 +618,6 @@ class Shipment
     public function setUSPSEndorsement($uspsEndorsement)
     {
         $this->USPSEndorsement = $uspsEndorsement;
-    }
-
-    public function getTaxInformationIndicator(): bool
-    {
-        return $this->taxInformationIndicator;
-    }
-
-    /**
-     * If called, returned prices will include Tax Information
-     */
-    public function setTaxInformationIndicator(bool $taxInformationIndicator): self
-    {
-        $this->taxInformationIndicator = $taxInformationIndicator;
 
         return $this;
     }
@@ -660,6 +647,21 @@ class Shipment
     public function getPackageID()
     {
         return $this->PackageID;
+    }
+
+    public function getTaxInformationIndicator(): bool
+    {
+        return $this->taxInformationIndicator;
+    }
+
+    /**
+     * If called, returned prices will include Tax Information
+     */
+    public function setTaxInformationIndicator(bool $taxInformationIndicator): self
+    {
+        $this->taxInformationIndicator = $taxInformationIndicator;
+
+        return $this;
     }
 
     public function getLocale()
