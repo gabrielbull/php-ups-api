@@ -221,6 +221,10 @@ class Shipping extends Ups
                 $shipFromNode->appendChild($xml->createElement('FaxNumber', $shipment->getShipFrom()->getFaxNumber()));
             }
 
+            if (!empty($shipment->getShipFrom()->getVendorInfo())) {
+                $shipFromNode->appendChild($shipment->getShipFrom()->getVendorInfo()->toNode($xml));
+            }
+
             $shipFromNode->appendChild($shipment->getShipFrom()->getAddress()->toNode($xml));
         }
 
@@ -437,6 +441,10 @@ class Shipping extends Ups
         if ($receiptSpec) {
             $container->appendChild($xml->importNode($this->compileReceiptSpecificationNode($receiptSpec), true));
         }
+
+        if ($shipment->getLocale()) {
+            $shipmentNode->appendChild($xml->createElement('Locale', $shipment->getLocale()));
+        }
         return $xml->saveXML();
     }
 
@@ -644,7 +652,7 @@ class Shipping extends Ups
         }
 
         if (!empty($labelSpecificationOpts)) {
-            $labelSpec = $request->appendChild($xml->createElement('LabelSpecification'));
+            $labelSpec = $container->appendChild($xml->createElement('LabelSpecification'));
 
             if (isset($labelSpecificationOpts['userAgent'])) {
                 $labelSpec->appendChild($xml->createElement('HTTPUserAgent', $labelSpecificationOpts['userAgent']));
@@ -657,12 +665,12 @@ class Shipping extends Ups
         }
 
         if (!empty($labelDeliveryOpts)) {
-            $labelDelivery = $request->appendChild($xml->createElement('LabelDelivery'));
+            $labelDelivery = $container->appendChild($xml->createElement('LabelDelivery'));
             $labelDelivery->appendChild($xml->createElement('LabelLinkIndicator', $labelDeliveryOpts['link']));
         }
 
         if (!empty($translateOpts)) {
-            $translate = $request->appendChild($xml->createElement('Translate'));
+            $translate = $container->appendChild($xml->createElement('Translate'));
             $translate->appendChild($xml->createElement('LanguageCode', $translateOpts['language']));
             $translate->appendChild($xml->createElement('DialectCode', $translateOpts['dialect']));
             $translate->appendChild($xml->createElement('Code', '01'));
@@ -770,8 +778,8 @@ class Shipping extends Ups
             $labelSpecNode->appendChild($xml->createElement('HTTPUserAgent', $labelSpec->getHttpUserAgent()));
         }
 
-        //Label print method is required only for GIF label formats
-        if ($labelSpec->getPrintMethodCode() == ShipmentRequestLabelSpecification::IMG_FORMAT_CODE_GIF) {
+        //Label print method is required only for GIF|PNG label formats
+        if (!empty($labelSpec->getImageFormatCode())) {
             $imageFormatNode = $labelSpecNode->appendChild($xml->createElement('LabelImageFormat'));
             $imageFormatNode->appendChild($xml->createElement('Code', $labelSpec->getImageFormatCode()));
 
@@ -779,7 +787,7 @@ class Shipping extends Ups
                 $imageFormatNode->appendChild($xml->createElement('Description', $labelSpec->getImageFormatDescription()));
             }
         } else {
-            //Label stock size is required only for non-GIF label formats
+            //Label stock size is required only for non-IMAGE label formats
             $stockSizeNode = $labelSpecNode->appendChild($xml->createElement('LabelStockSize'));
 
             $stockSizeNode->appendChild($xml->createElement('Height', $labelSpec->getStockSizeHeight()));

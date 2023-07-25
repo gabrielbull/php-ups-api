@@ -51,6 +51,11 @@ class ShipmentServiceOptions implements NodeInterface
     /**
      * @var
      */
+    public $UPScarbonneutralIndicator;
+
+    /**
+     * @var
+     */
     private $internationalForms;
 
     /**
@@ -126,9 +131,6 @@ class ShipmentServiceOptions implements NodeInterface
             }
             if (isset($response->LabelMethod)) {
                 $this->setLabelMethod(new LabelMethod($response->LabelMethod));
-            }
-            if (isset($response->EMailMessage)) {
-                $this->setEMailMessage(new EMailMessage($response->EMailMessage));
             }
         }
     }
@@ -206,6 +208,10 @@ class ShipmentServiceOptions implements NodeInterface
             foreach ($this->notifications as $notification) {
                 $node->appendChild($notification->toNode($document));
             }
+        }
+
+        if (isset($this->UPScarbonneutralIndicator)) {
+            $node->appendChild($document->createElement('UPScarbonneutralIndicator'));
         }
 
         return $node;
@@ -470,5 +476,21 @@ class ShipmentServiceOptions implements NodeInterface
     {
         $this->DeliverToAddresseeOnlyIndicator = $DeliverToAddresseeOnlyIndicator;
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUPScarbonneutralIndicator()
+    {
+        return $this->UPScarbonneutralIndicator;
+    }
+
+    /**
+     * @param mixed $UPScarbonneutralIndicator
+     */
+    public function setUPScarbonneutralIndicator(): void
+    {
+        $this->UPScarbonneutralIndicator = true;
     }
 }

@@ -47,8 +47,10 @@ Tracking API, Shipping API, Rating API and Time in Transit API. Feel free to con
 12. [Shipping Class](#shipping-class)
     * [Example](#shipping-class-example)
     * [Parameters](#shipping-class-parameters)
-13. [Logging](#logging)
-14. [License](#license-section)
+12. [Shipment Service Options](#shipment-service-options)
+    * [Example](#shipment-service-options-example)
+14. [Logging](#logging)
+15. [License](#license-section)
 
 <a name="requirements"></a>
 ## Requirements
@@ -793,7 +795,7 @@ if ($return) {
 $shipment->setReferenceNumber($referenceNumber);
 
 // Set payment information
-$shipment->setPaymentInformation(new \Ups\Entity\PaymentInformation('prepaid', (object)array('AccountNumber' => 'XX')));
+$shipment->setPaymentInformation(new \Ups\Entity\PaymentInformation('prepaid', (object) ['AccountNumber' => $shipper->getShipperNumber()]));
 
 // Ask for negotiated rates (optional)
 $rateInformation = new \Ups\Entity\RateInformation;
@@ -839,6 +841,35 @@ For the Shipping `confirm` call, the parameters are:
 For the Shipping `accept` call, the parameters are: 
 
  * $shipmentDigest The UPS Shipment Digest received from a ShipConfirm request. Required
+
+
+<a name="shipment-service-options"></a>
+## Shipment Service Options
+
+The Shipment Service Options class allows you to register shipments additional options. This also includes.
+
+
+* Add or Modify email notifications: Manage updates for this shipment.
+* Saturday Commericial: Get weekend delivery of your shipment.
+* Deliver only to receiver's address: Do not reroute for customer pickup at a UPS location.
+* UPS Carbon Neutral Shipments Thanks for offsetting the environmental impact of your shipment! : at a nominal fee for domestic and international shipments.
+
+
+In the example ShipmentServiceOptions class is used to show how a Shipment Additional Option can be added to Shipment. 
+<a name="shipment-service-options-example"></a>
+### Shipment Service Options Example
+
+```php
+// Start shipment
+$shipment = new Ups\Entity\Shipment;
+
+// Create Shipment Service Options Class
+    $shipmentOptions = new Ups\Entity\ShipmentServiceOptions;
+    // Setting the Carbon Neutral Additional Option, you can set your desired one.
+    $shipmentOptions->setUPScarbonneutralIndicator();
+// Set Shipment Service Options Class
+    $shipment->setShipmentServiceOptions($shipmentOptions);
+```
 
 <a name="logging"></a>
 ## Logging

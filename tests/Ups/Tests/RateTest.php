@@ -61,6 +61,7 @@ class RateTest extends TestCase
     // fixme
     public function testGetRate()
     {
+        $this->markTestSkipped();
         /*$shipment = new \stdClass();
         $shipment->Shipper = new \stdClass();
         $shipment->Shipper->Name = 'Test Shipper';

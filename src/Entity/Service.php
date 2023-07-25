@@ -105,6 +105,7 @@ class Service implements NodeInterface
         '86' => 'UPS Today Express Saver',
         '96' => 'UPS Worldwide Express Freight',
         '93' => 'UPS Sure Post',
+
         'M4' => 'UPS Expedited Mail',
         'M5' => 'UPS Priority Mail Innovations',
         'M6' => 'UPS Economy Mail Innovations',

@@ -24,6 +24,21 @@ class AccessPointCOD implements NodeInterface
     private $monetaryValue;
 
     /**
+     * @param \stdClass|null $response
+     */
+    public function __construct(\stdClass $response = null)
+    {
+        if (null !== $response) {
+            if (isset($response->CurrencyCode)) {
+                $this->setCurrencyCode($response->CurrencyCode);
+            }
+            if (isset($response->MonetaryValue)) {
+                $this->setMonetaryValue($response->MonetaryValue);
+            }
+        }
+    }
+
+    /**
      * @param null|DOMDocument $document
      *
      * @return DOMElement

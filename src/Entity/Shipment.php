@@ -118,6 +118,15 @@ class Shipment
      * @var DeliveryTimeInformation
      */
     private $deliveryTimeInformation;
+    /**
+     * @var bool
+     */
+    private $taxInformationIndicator;
+
+    /**
+     * @var string
+     */
+    private $locale;
 
     /**
      * @var string
@@ -136,6 +145,7 @@ class Shipment
         $this->setShipmentServiceOptions(new ShipmentServiceOptions());
         $this->setService(new Service());
         $this->rateInformation = null;
+        $this->taxInformationIndicator = false;
     }
 
     /**
@@ -608,6 +618,19 @@ class Shipment
     public function setUSPSEndorsement($uspsEndorsement)
     {
         $this->USPSEndorsement = $uspsEndorsement;
+    }
+
+    public function getTaxInformationIndicator(): bool
+    {
+        return $this->taxInformationIndicator;
+    }
+
+    /**
+     * If called, returned prices will include Tax Information
+     */
+    public function setTaxInformationIndicator(bool $taxInformationIndicator): self
+    {
+        $this->taxInformationIndicator = $taxInformationIndicator;
 
         return $this;
     }
@@ -638,4 +661,22 @@ class Shipment
     {
         return $this->PackageID;
     }
+
+    public function getLocale()
+    {
+        return $this->locale;
+    }
+
+    /**
+     * @param string $locale
+     *
+     * @return Shipment
+     */
+    public function setLocale($locale)
+    {
+        $this->locale = $locale;
+
+        return $this;
+    }
+
 }
