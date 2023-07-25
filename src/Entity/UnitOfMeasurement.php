@@ -11,6 +11,7 @@ class UnitOfMeasurement implements NodeInterface
     // PackageWeight
     const UOM_LBS = 'LBS'; // Pounds (defalut)
     const UOM_KGS = 'KGS'; // Kilograms
+    const UOM_OZS = 'OZS'; // Ounces
 
     // Dimensions
     const UOM_IN = 'IN'; // Inches

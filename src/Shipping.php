@@ -382,6 +382,14 @@ class Shipping extends Ups
             $shipmentNode->appendChild($xml->createElement('MovementReferenceNumber', $shipment->getMovementReferenceNumber()));
         }
 
+        if ($shipment->getUSPSEndorsement()) {
+            $shipmentNode->appendChild($xml->createElement('USPSEndorsement', $shipment->getUSPSEndorsement()));
+        }
+
+        if ($shipment->getPackageID()) {
+            $shipmentNode->appendChild($xml->createElement('PackageID', $shipment->getPackageID()));
+        }
+
         $serviceNode = $shipmentNode->appendChild($xml->createElement('Service'));
         $serviceNode->appendChild($xml->createElement('Code', $shipment->getService()->getCode()));
 

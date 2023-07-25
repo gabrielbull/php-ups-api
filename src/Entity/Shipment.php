@@ -128,6 +128,16 @@ class Shipment
      */
     private $locale;
 
+    /**
+     * @var string
+     */
+    private $USPSEndorsement;
+
+    /**
+     * @var string
+     */
+    private $PackageID;
+
     public function __construct()
     {
         $this->setShipper(new Shipper());
@@ -601,6 +611,44 @@ class Shipment
         $this->shipmentTotalWeight = $shipmentTotalWeight;
     }
 
+    /**
+     * @param string $uspsEndorsement
+     * @return Shipment
+     */
+    public function setUSPSEndorsement($uspsEndorsement)
+    {
+        $this->USPSEndorsement = $uspsEndorsement;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUSPSEndorsement()
+    {
+        return $this->USPSEndorsement;
+    }
+
+    /**
+     * @param string $PackageID
+     * @return Shipment
+     */
+    public function setPackageID($PackageID)
+    {
+        $this->PackageID = $PackageID;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPackageID()
+    {
+        return $this->PackageID;
+    }
+
     public function getTaxInformationIndicator(): bool
     {
         return $this->taxInformationIndicator;
@@ -612,13 +660,10 @@ class Shipment
     public function setTaxInformationIndicator(bool $taxInformationIndicator): self
     {
         $this->taxInformationIndicator = $taxInformationIndicator;
-        
+
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getLocale()
     {
         return $this->locale;
@@ -635,4 +680,5 @@ class Shipment
 
         return $this;
     }
+
 }
