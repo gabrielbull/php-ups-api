@@ -78,7 +78,7 @@ class Shipment
      * @var ReferenceNumber
      */
     private $referenceNumber;
-    
+
     /**
      * @var ReferenceNumber
      */
@@ -103,7 +103,7 @@ class Shipment
      * @var InvoiceLineTotal
      */
     private $invoiceLineTotal;
-    
+
     /**
      * @var ShipmentTotalWeight
      */
@@ -118,6 +118,16 @@ class Shipment
      * @var DeliveryTimeInformation
      */
     private $deliveryTimeInformation;
+
+    /**
+     * @var string
+     */
+    private $USPSEndorsement;
+
+    /**
+     * @var string
+     */
+    private $PackageID;
 
     public function __construct()
     {
@@ -205,7 +215,7 @@ class Shipment
 
         return $this;
     }
-    
+
     /**
      * @param ReferenceNumber $referenceNumber
      *
@@ -225,7 +235,7 @@ class Shipment
     {
         return $this->referenceNumber;
     }
-    
+
     /**
      * @return ReferenceNumber
      */
@@ -574,7 +584,7 @@ class Shipment
     {
         $this->deliveryTimeInformation = $deliveryTimeInformation;
     }
-    
+
     /**
      * @return ShipmentTotalWeight
      */
@@ -589,5 +599,43 @@ class Shipment
     public function setShipmentTotalWeight(ShipmentTotalWeight $shipmentTotalWeight)
     {
         $this->shipmentTotalWeight = $shipmentTotalWeight;
+    }
+
+    /**
+     * @param string $uspsEndorsement
+     * @return Shipment
+     */
+    public function setUSPSEndorsement($uspsEndorsement)
+    {
+        $this->USPSEndorsement = $uspsEndorsement;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUSPSEndorsement()
+    {
+        return $this->USPSEndorsement;
+    }
+
+    /**
+     * @param string $PackageID
+     * @return Shipment
+     */
+    public function setPackageID($PackageID)
+    {
+        $this->PackageID = $PackageID;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPackageID()
+    {
+        return $this->PackageID;
     }
 }
